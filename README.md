@@ -32,10 +32,6 @@ To run all checks (including unit tests) please execute the following command:
     ./gradlew check
 ```
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning.
-For the versions available, see the tags on this repository.
 
 ## License
 
