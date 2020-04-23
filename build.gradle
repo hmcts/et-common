@@ -102,8 +102,8 @@ publishing {
 }
 
 bintray {
-    user = 'jacarrete'
-    key = 'Enerieivaj201006'
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
     publications = ['Main']
     publish = true
     pkg {
