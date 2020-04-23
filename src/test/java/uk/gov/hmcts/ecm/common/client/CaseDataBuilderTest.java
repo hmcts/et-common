@@ -1,15 +1,23 @@
 package uk.gov.hmcts.ecm.common.client;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import uk.gov.hmcts.ecm.common.bulk.BulkData;
 import uk.gov.hmcts.ecm.common.bulk.BulkDetails;
 import uk.gov.hmcts.ecm.common.ccd.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CaseDataBuilderTest {
@@ -20,6 +28,9 @@ public class CaseDataBuilderTest {
     @InjectMocks
     private CaseDataBuilder caseDataBuilder;
 
+    @Mock
+    private ObjectMapper objectMapper;
+    private Map<String, JsonNode> data;
     private CaseDetails caseDetails;
     private CCDRequest ccdRequest;
     private CaseData caseData;
@@ -36,6 +47,7 @@ public class CaseDataBuilderTest {
         caseDetails.setCaseTypeId("Type1");
         caseData = new CaseData();
         caseDetails.setCaseData(caseData);
+        data = new HashMap<>();
         bulkDetails = new BulkDetails();
         bulkDetails.setJurisdiction("TRIBUNALS");
         bulkDetails.setCaseTypeId("Type1");
@@ -45,6 +57,7 @@ public class CaseDataBuilderTest {
 
     @Test
     public void buildCaseDataContent() {
+       // when(objectMapper.convertValue(caseDetails.getCaseData(), new TypeReference<Map<String, JsonNode>>(){})).thenReturn(data);
         CaseDataContent caseDataContent = CaseDataContent.builder()
                 .event(Event.builder().eventId(ccdRequest.getEventId()).summary(CREATION_EVENT_SUMMARY).build())
                 .ignoreWarning(false)
@@ -55,6 +68,7 @@ public class CaseDataBuilderTest {
 
     @Test
     public void buildBulkDataContent() {
+        //when(objectMapper.convertValue(bulkDetails.getCaseData(), new TypeReference<Map<String, JsonNode>>(){})).thenReturn(data);
         CaseDataContent caseDataContent = CaseDataContent.builder()
                 .event(Event.builder().eventId(ccdRequest.getEventId()).summary(UPDATE_BULK_EVENT_SUMMARY).build())
                 .ignoreWarning(false)
