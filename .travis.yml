@@ -15,6 +15,7 @@ cache:
 
 script:
   - ./gradlew test
+  - ./gradlew bintrayUpload
 
 after_success:
   - ./gradlew jacocoTestReport
