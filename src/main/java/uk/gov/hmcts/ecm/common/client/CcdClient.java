@@ -1,13 +1,11 @@
 package uk.gov.hmcts.ecm.common.client;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.hmcts.ecm.common.helpers.ESHelper;
 import uk.gov.hmcts.ecm.common.model.bulk.BulkCaseSearchResult;
@@ -27,14 +25,11 @@ import java.util.concurrent.TimeUnit;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
 
 @Slf4j
-@Service
 public class CcdClient {
 
     private RestTemplate restTemplate;
     private UserService userService;
     private CcdClientConfig ccdClientConfig;
-
-    @Autowired
     private CaseDataBuilder caseDataBuilder;
 
     private AuthTokenGenerator authTokenGenerator;
@@ -44,12 +39,13 @@ public class CcdClient {
     private static final String UPDATE_EVENT_SUMMARY = "Case updated by bulk";
     static final String UPDATE_BULK_EVENT_SUMMARY = "Bulk case updated by bulk";
 
-    public CcdClient(RestTemplate restTemplate, UserService userService,
+    public CcdClient(RestTemplate restTemplate, UserService userService, CaseDataBuilder caseDataBuilder,
                      CcdClientConfig ccdClientConfig, AuthTokenGenerator authTokenGenerator) {
         this.restTemplate = restTemplate;
         this.userService = userService;
         this.ccdClientConfig = ccdClientConfig;
         this.authTokenGenerator = authTokenGenerator;
+        this.caseDataBuilder = caseDataBuilder;
     }
 
     public CCDRequest startCaseCreation(String authToken, CaseDetails caseDetails) throws IOException {

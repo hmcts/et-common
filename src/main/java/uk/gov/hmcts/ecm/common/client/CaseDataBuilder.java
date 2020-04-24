@@ -3,9 +3,6 @@ package uk.gov.hmcts.ecm.common.client;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import uk.gov.hmcts.ecm.common.model.bulk.BulkData;
 import uk.gov.hmcts.ecm.common.model.ccd.CCDRequest;
 import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
@@ -14,14 +11,11 @@ import uk.gov.hmcts.ecm.common.model.ccd.Event;
 
 import java.util.Map;
 
-@Slf4j
-@Service
 public class CaseDataBuilder {
 
     private final ObjectMapper objectMapper ;
     private static final Boolean IGNORE_WARNING = Boolean.FALSE;
 
-    @Autowired
     public CaseDataBuilder(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
