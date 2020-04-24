@@ -6,11 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.gov.hmcts.ecm.common.bulk.BulkData;
-import uk.gov.hmcts.ecm.common.ccd.CCDRequest;
-import uk.gov.hmcts.ecm.common.ccd.CaseData;
-import uk.gov.hmcts.ecm.common.ccd.CaseDataContent;
-import uk.gov.hmcts.ecm.common.ccd.Event;
+import uk.gov.hmcts.ecm.common.model.bulk.BulkData;
+import uk.gov.hmcts.ecm.common.model.ccd.CCDRequest;
+import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
+import uk.gov.hmcts.ecm.common.model.ccd.CaseDataContent;
+import uk.gov.hmcts.ecm.common.model.ccd.Event;
 
 import java.util.Map;
 
@@ -26,11 +26,11 @@ public class CaseDataBuilder {
         this.objectMapper = objectMapper;
     }
 
-    CaseDataContent buildCaseDataContent(CaseData caseData, CCDRequest req, String eventSummary) {
+    public CaseDataContent buildCaseDataContent(CaseData caseData, CCDRequest req, String eventSummary) {
         return getCaseDataContent(req, objectMapper.convertValue(caseData, new TypeReference<Map<String, JsonNode>>(){}), eventSummary);
     }
 
-    CaseDataContent buildBulkDataContent(BulkData bulkData, CCDRequest req, String eventSummary) {
+    public CaseDataContent buildBulkDataContent(BulkData bulkData, CCDRequest req, String eventSummary) {
         return getCaseDataContent(req, objectMapper.convertValue(bulkData, new TypeReference<Map<String, JsonNode>>(){}), eventSummary);
     }
 
