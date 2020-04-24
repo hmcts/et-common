@@ -21,15 +21,15 @@ public class UtilHelper {
         return !isNullOrEmpty(date) ? LocalDateTime.parse(date, OLD_DATE_TIME_PATTERN).format(NEW_DATE_TIME_PATTERN) : "";
     }
 
-    static String formatLocalTime(String date) {
+    public static String formatLocalTime(String date) {
         return !isNullOrEmpty(date) ? LocalDateTime.parse(date, OLD_DATE_TIME_PATTERN).format(NEW_TIME_PATTERN) : "";
     }
 
-    static String formatCurrentDatePlusDays(LocalDate date, long days) {
+    public static String formatCurrentDatePlusDays(LocalDate date, long days) {
         return !isNullOrEmpty(date.toString()) ? date.plusDays(days).format(NEW_DATE_PATTERN) : "";
     }
 
-    static String formatCurrentDate(LocalDate date) {
+    public static String formatCurrentDate(LocalDate date) {
         return !isNullOrEmpty(date.toString()) ? date.format(NEW_DATE_PATTERN) : "";
     }
 

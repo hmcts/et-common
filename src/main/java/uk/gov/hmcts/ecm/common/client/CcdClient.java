@@ -253,7 +253,7 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitBulkEvent.class).getBody();
     }
 
-    private HttpHeaders buildHeaders(String authToken) throws IOException {
+    HttpHeaders buildHeaders(String authToken) throws IOException {
         HttpHeaders headers = new HttpHeaders();
         if (!authToken.matches("[a-zA-Z0-9._\\s\\S]+$")) {
             throw new IOException("authToken regex exception");
