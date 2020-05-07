@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class CaseDataBuilder {
 
-    private final ObjectMapper objectMapper ;
+    private final ObjectMapper objectMapper;
     private static final Boolean IGNORE_WARNING = Boolean.FALSE;
 
     public CaseDataBuilder(ObjectMapper objectMapper) {

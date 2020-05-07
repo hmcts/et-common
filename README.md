@@ -32,6 +32,9 @@ To run all checks (including unit tests) please execute the following command:
     ./gradlew check
 ```
 
+## Repository
+
+[ECM-Common](https://dl.bintray.com/hmcts/hmcts-maven/uk/gov/hmcts/reform/ecm-common/)
 
 ## License
 

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class CaseDataTest {
@@ -29,12 +29,12 @@ public class CaseDataTest {
 
     @Test
     public void shouldCreateCaseDataFromJson() {
-        assertThat(caseData.getCaseNotes(), is("1111"));
-        assertThat(caseData.getPositionType(), is("Single"));
-        assertThat(caseData.getReceiptDate(), is("20 Jan 2019"));
-        assertThat(caseData.getUserLocation(), is("Bath"));
-        assertThat(caseData.getFileLocation(), is("City"));
-        assertThat(caseData.getCaseType(), is("Single"));
-        assertThat(caseData.getFeeGroupReference(), is("1212"));
+        assertEquals(caseData.getCaseNotes(), "1111");
+        assertEquals(caseData.getPositionType(), "Single");
+        assertEquals(caseData.getReceiptDate(), "20 Jan 2019");
+        assertEquals(caseData.getUserLocation(), "Bath");
+        assertEquals(caseData.getFileLocation(), "City");
+        assertEquals(caseData.getCaseType(), "Single");
+        assertEquals(caseData.getFeeGroupReference(), "1212");
     }
 }
