@@ -166,4 +166,81 @@ public class CaseData {
     @JsonProperty("ccdID")
     private String ccdID;
 
+    // add hearing - page1
+    @JsonProperty("hearingNumbers")
+    private String hearingNumbers;
+    @JsonProperty("hearingTypes")
+    private String hearingTypes;
+    @JsonProperty("hearingPublicPrivate")
+    private String hearingPublicPrivate;
+    @JsonProperty("hearingVenue")
+    private DynamicFixedListType hearingVenue;
+    @JsonProperty("hearingEstLengthNum")
+    private String hearingEstLengthNum;
+    @JsonProperty("hearingEstLengthNumType")
+    private String hearingEstLengthNumType;
+    @JsonProperty("hearingSitAlone")
+    private String hearingSitAlone;
+    @JsonProperty("Hearing_stage")
+    private String hearingStage;
+    @JsonProperty("listedDate")
+    private String listedDate;
+    @JsonProperty("Hearing_notes")
+    private String hearingNotes;
+    // amend hearing - page1
+    @JsonProperty("hearingSelection")
+    private DynamicFixedListType hearingSelection;
+    // amend hearing - page2
+    @JsonProperty("hearingActions")
+    private String hearingActions;
+    // amend hearing - page3
+    @JsonProperty("hearingERMember")
+    private String hearingERMember;
+    @JsonProperty("hearingEEMember")
+    private String hearingEEMember;
+    @JsonProperty("hearingDatesRequireAmending")
+    private String hearingDatesRequireAmending;
+    @JsonProperty("hearingDateSelection")
+    private DynamicFixedListType hearingDateSelection;
+    // amend hearing - page4
+    @JsonProperty("hearingDateActions")
+    private String hearingDateActions;
+    // amend hearing - page5
+    @JsonProperty("hearingStatus")
+    private String hearingStatus;
+    @JsonProperty("Postponed_by")
+    private String Postponed_by;
+    @JsonProperty("hearingRoom")
+    private DynamicFixedListType hearingRoom;
+    @JsonProperty("hearingClerk")
+    private DynamicFixedListType hearingClerk;
+    @JsonProperty("hearingJudge")
+    private DynamicFixedListType hearingJudge;
+    // amend hearing - page6
+    @JsonProperty("hearingCaseDisposed")
+    private String hearingCaseDisposed;
+    @JsonProperty("Hearing_part_heard")
+    private String hearingPartHeard;
+    @JsonProperty("Hearing_reserved_judgement")
+    private String hearingReservedJudgement;
+    @JsonProperty("attendee_claimant")
+    private String attendeeClaimant;
+    @JsonProperty("attendee_non_attendees")
+    private String attendeeNonAttendees;
+    @JsonProperty("attendee_resp_no_rep")
+    private String attendeeRespNoRep;
+    @JsonProperty("attendee_resp_&_rep")
+    private String attendeeRespAndRep;
+    @JsonProperty("attendee_rep_only")
+    private String attendeeRepOnly;
+    @JsonProperty("hearingTimingStart")
+    private String hearingTimingStart;
+    @JsonProperty("hearingTimingBreak")
+    private String hearingTimingBreak;
+    @JsonProperty("hearingTimingResume")
+    private String hearingTimingResume;
+    @JsonProperty("hearingTimingFinish")
+    private String hearingTimingFinish;
+    @JsonProperty("hearingTimingDuration")
+    private String hearingTimingDuration;
 }
