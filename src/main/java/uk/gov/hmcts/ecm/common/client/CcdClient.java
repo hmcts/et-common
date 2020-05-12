@@ -13,6 +13,8 @@ import uk.gov.hmcts.ecm.common.model.bulk.BulkData;
 import uk.gov.hmcts.ecm.common.model.bulk.BulkRequest;
 import uk.gov.hmcts.ecm.common.model.bulk.SubmitBulkEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.*;
+import uk.gov.hmcts.ecm.common.model.reference.ReferenceRequest;
+import uk.gov.hmcts.ecm.common.model.reference.ReferenceSubmitEvent;
 import uk.gov.hmcts.ecm.common.service.UserService;
 import uk.gov.hmcts.reform.authorisation.generators.AuthTokenGenerator;
 
@@ -102,6 +104,20 @@ public class CcdClient {
             }
         }
         return submitEvents;
+    }
+
+    public List<ReferenceSubmitEvent> retrieveReferenceDataCases(String authToken, String caseTypeId, String jurisdiction) throws IOException {
+        HttpEntity<ReferenceRequest> request =
+                new HttpEntity<>(buildHeaders(authToken));
+        List<ReferenceSubmitEvent> referenceSubmitEvents = new ArrayList<>();
+        for (int page = 1; page <= getTotalPagesCount(authToken, caseTypeId, jurisdiction); page++) {
+            List<ReferenceSubmitEvent> submitEventAux = restTemplate.exchange(ccdClientConfig.buildRetrieveCasesUrl(userService.getUserDetails(authToken).getUid(), jurisdiction,
+                    caseTypeId, String.valueOf(page)), HttpMethod.GET, request, new ParameterizedTypeReference<List<ReferenceSubmitEvent>>(){}).getBody();
+            if (submitEventAux != null) {
+                referenceSubmitEvents.addAll(submitEventAux);
+            }
+        }
+        return referenceSubmitEvents;
     }
 
     private String getListingQuery(String from, String to, String venue, String mapping) {
