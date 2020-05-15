@@ -274,9 +274,13 @@ public class CcdClient {
         if (!authToken.matches("[a-zA-Z0-9._\\s\\S]+$")) {
             throw new IOException("authToken regex exception");
         }
+        log.info("AuthToken: " + authToken);
         headers.add(HttpHeaders.AUTHORIZATION, authToken);
-        headers.add(SERVICE_AUTHORIZATION, authTokenGenerator.generate());
+        String serviceToken = authTokenGenerator.generate();
+        log.info("ServiceToken: " + serviceToken);
+        headers.add(SERVICE_AUTHORIZATION, serviceToken);
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
+        log.info("Headers: " + headers.toString());
         return headers;
     }
 
