@@ -159,16 +159,18 @@ public class CcdClient {
         HttpEntity<String> request = new HttpEntity<>(query, buildHeaders(authToken));
         String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
         CaseSearchResult caseSearchResult;
+        int retries = 1;
         do {
-            log.info("Retry");
+            log.info("Retry: " + retries);
             caseSearchResult = restTemplate.exchange(url, HttpMethod.POST, request, CaseSearchResult.class).getBody();
             try {
                 TimeUnit.SECONDS.sleep(3);
+                retries = retries + 1;
             } catch (InterruptedException e) {
                 log.error("Error sleeping the thread");
                 Thread.currentThread().interrupt();
             }
-        } while (caseSearchResult == null || caseSearchResult.getTotal() != size);
+        } while (caseSearchResult == null || caseSearchResult.getTotal() != size || retries <= 10);
         return new ArrayList<>(caseSearchResult.getCases());
     }
 
