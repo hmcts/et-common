@@ -164,14 +164,23 @@ public class CcdClient {
             log.info("Retry: " + retries);
             caseSearchResult = restTemplate.exchange(url, HttpMethod.POST, request, CaseSearchResult.class).getBody();
             try {
+                if (caseSearchResult != null) {
+                    log.info("Checking size found: " + caseSearchResult.getTotal());
+                }
                 TimeUnit.SECONDS.sleep(3);
-                retries = retries + 1;
+                retries++;
+                if (retries == 10) {
+                    break;
+                }
             } catch (InterruptedException e) {
                 log.error("Error sleeping the thread");
                 Thread.currentThread().interrupt();
             }
-        } while (caseSearchResult == null || caseSearchResult.getTotal() != size || retries <= 10);
-        return new ArrayList<>(caseSearchResult.getCases());
+        } while (caseSearchResult == null || caseSearchResult.getTotal() != size);
+
+        return caseSearchResult != null
+                ? new ArrayList<>(caseSearchResult.getCases())
+                : new ArrayList<>();
     }
 
     public List<SubmitEvent> retrieveCasesElasticSearchForCreation(String authToken, String caseTypeId, List<String> caseIds, String multipleSource) throws IOException {
