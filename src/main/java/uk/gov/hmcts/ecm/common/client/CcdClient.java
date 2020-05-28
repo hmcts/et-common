@@ -1,6 +1,7 @@
 package uk.gov.hmcts.ecm.common.client;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -21,8 +22,10 @@ import uk.gov.hmcts.reform.authorisation.generators.AuthTokenGenerator;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
 
@@ -155,7 +158,7 @@ public class CcdClient {
         return submitEvents;
     }
 
-    private List<SubmitEvent> buildAndGetElasticSearchRequestWithRetries(String authToken, String caseTypeId, String query, int size) throws IOException {
+    private List<SubmitEvent> buildAndGetElasticSearchRequestWithRetries(String authToken, String caseTypeId, String query, int size, List<String> caseIds) throws IOException {
         HttpEntity<String> request = new HttpEntity<>(query, buildHeaders(authToken));
         String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
         CaseSearchResult caseSearchResult;
@@ -167,9 +170,9 @@ public class CcdClient {
                 if (caseSearchResult != null) {
                     log.info("Checking size found: " + caseSearchResult.getTotal());
                 }
-                TimeUnit.SECONDS.sleep(3);
+                TimeUnit.SECONDS.sleep(5);
                 retries++;
-                if (retries == 10) {
+                if (retries == 7) {
                     break;
                 }
             } catch (InterruptedException e) {
@@ -178,9 +181,20 @@ public class CcdClient {
             }
         } while (caseSearchResult == null || caseSearchResult.getTotal() != size);
 
+        if (caseSearchResult != null) {
+            generateCasesNotFound(caseIds, caseSearchResult);
+        }
         return caseSearchResult != null
                 ? new ArrayList<>(caseSearchResult.getCases())
                 : new ArrayList<>();
+    }
+
+    public static void generateCasesNotFound(List<String> caseIds, CaseSearchResult caseSearchResult) {
+        List<String> casesFound = caseSearchResult.getCases()
+                .stream()
+                .map(caseSearched -> caseSearched.getCaseData().getEthosCaseReference())
+                .collect(Collectors.toList());
+        log.info("Cases not found: " + new ArrayList<>(CollectionUtils.subtract(caseIds, casesFound)).toString());
     }
 
     public List<SubmitEvent> retrieveCasesElasticSearchForCreation(String authToken, String caseTypeId, List<String> caseIds, String multipleSource) throws IOException {
@@ -193,7 +207,7 @@ public class CcdClient {
 
     private List<SubmitEvent> retrieveCasesElasticSearchWithRetries(String authToken, String caseTypeId, List<String> caseIds) throws IOException {
         log.info("QUERY WITH RETRIES: " + ESHelper.getSearchQuery(caseIds));
-        return buildAndGetElasticSearchRequestWithRetries(authToken, caseTypeId, ESHelper.getSearchQuery(caseIds), caseIds.size());
+        return buildAndGetElasticSearchRequestWithRetries(authToken, caseTypeId, ESHelper.getSearchQuery(caseIds), caseIds.size(), caseIds);
     }
 
     public List<SubmitEvent> retrieveCasesElasticSearch(String authToken, String caseTypeId, List<String> caseIds) throws IOException {

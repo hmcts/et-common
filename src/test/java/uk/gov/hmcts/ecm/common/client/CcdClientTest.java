@@ -155,7 +155,15 @@ public class CcdClientTest {
     public void retrieveCasesElasticSearchForCreationETOnline() throws IOException {
         String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
-        CaseSearchResult caseSearchResult = new CaseSearchResult(2L, Arrays.asList(new SubmitEvent(), new SubmitEvent()));
+        SubmitEvent submitEvent = new SubmitEvent();
+        CaseData caseData = new CaseData();
+        caseData.setEthosCaseReference("2420117/2019");
+        submitEvent.setCaseData(caseData);
+        SubmitEvent submitEvent1 = new SubmitEvent();
+        CaseData caseData1 = new CaseData();
+        caseData1.setEthosCaseReference("2420118/2019");
+        submitEvent1.setCaseData(caseData1);
+        CaseSearchResult caseSearchResult = new CaseSearchResult(2L, Arrays.asList(submitEvent, submitEvent1));
         ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class))).thenReturn(responseEntity);

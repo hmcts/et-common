@@ -223,5 +223,5 @@ public class Constants {
     public static final String ABOUT_TO_SUBMIT_EVENT_CALLBACK = "About to Submit Callback";
     public static final String SUBMITTED_CALLBACK = "Submitted Callback";
 
-    public static final int NUMBER_THREADS = 50;
+    public static final int NUMBER_THREADS = 20;
 }
