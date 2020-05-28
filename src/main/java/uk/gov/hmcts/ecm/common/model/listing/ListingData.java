@@ -51,5 +51,7 @@ public class ListingData {
     private List<BFDateTypeItem> bfDateCollection;
     @JsonProperty("clerkResponsible")
     private String clerkResponsible;
+    @JsonProperty("reportType")
+    private String reportType;
 }
 
