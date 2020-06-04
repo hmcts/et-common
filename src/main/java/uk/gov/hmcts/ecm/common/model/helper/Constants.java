@@ -206,6 +206,8 @@ public class Constants {
 
     public static final String FILE_EXTENSION = ".docx";
 
+    public static final String BROUGHT_FORWARD_REPORT = "Brought Forward Report";
+
     public static final String FUTURE_RECEIPT_DATE_ERROR_MESSAGE = "Receipt date should not be a date in the future";
     public static final String EMPTY_RESPONDENT_COLLECTION_ERROR_MESSAGE = "At least one active respondent is required";
     public static final String EARLY_DATE_RETURNED_FROM_JUDGE_ERROR_MESSAGE = "Date returned from judge can not be earlier than Date referred to judge";
