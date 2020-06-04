@@ -147,6 +147,27 @@ public class CcdClient {
         }
     }
 
+    public List<SubmitEvent> retrieveCasesGenericReportElasticSearch(String authToken, String caseTypeId, String dateToSearchFrom, String dateToSearchTo,
+                                                                    String reportType) throws IOException {
+        String from = LocalDate.parse(dateToSearchFrom).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
+        if (dateToSearchTo.equals(dateToSearchFrom)) {
+            String to = LocalDate.parse(dateToSearchFrom).atStartOfDay().plusDays(1).minusSeconds(1).format(OLD_DATE_TIME_PATTERN);
+            log.info("FROM AND TO DATES FOR REPORT TYPE: " + reportType + " - " + from + " - " + to);
+            return buildAndGetElasticSearchRequest(authToken, caseTypeId,
+                    getReportRangeDateQuery(from, to, reportType));
+        } else {
+            String to = LocalDate.parse(dateToSearchTo).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
+            log.info("FROM AND TO DATES FOR REPORT TYPE: " + reportType + " - " + from + " - " + to);
+            return buildAndGetElasticSearchRequest(authToken, caseTypeId,
+                    getReportRangeDateQuery(from, to, reportType));
+        }
+    }
+
+    private String getReportRangeDateQuery(String from, String to, String reportType) {
+        log.info("REPORT QUERY DATE: " + ESHelper.getReportRangeDateSearchQuery(from, to, reportType));
+        return ESHelper.getReportRangeDateSearchQuery(from, to, reportType);
+    }
+
     private List<SubmitEvent> buildAndGetElasticSearchRequest(String authToken, String caseTypeId, String query) throws IOException {
         List<SubmitEvent> submitEvents = new ArrayList<>();
         HttpEntity<String> request = new HttpEntity<>(query, buildHeaders(authToken));
