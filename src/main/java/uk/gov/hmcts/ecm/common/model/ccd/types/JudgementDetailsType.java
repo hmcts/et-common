@@ -10,8 +10,6 @@ public class JudgementDetailsType {
 
     @JsonProperty("folio_number")
     private String folioNumber;
-    @JsonProperty("reconsideration")
-    private String reconsideration;
     @JsonProperty("reasons_given")
     private String reasonsGiven;
     @JsonProperty("date_reasons_issued")

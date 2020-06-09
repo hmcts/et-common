@@ -27,6 +27,8 @@ public class JudgementType {
     private Document judgementOutcomeDoc;
     @JsonProperty("judgement_details")
     private JudgementDetailsType judgementDetails;
+    @JsonProperty("reconsiderations")
+    private JudgmentReconsiderationType judgementReconsiderations;
     @JsonProperty("Judgement_costs")
     private CostsType judgementCosts;
 }
