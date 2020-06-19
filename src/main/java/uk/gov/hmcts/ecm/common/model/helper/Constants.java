@@ -226,4 +226,7 @@ public class Constants {
     public static final String SUBMITTED_CALLBACK = "Submitted Callback";
 
     public static final int NUMBER_THREADS = 20;
+
+    public static final int CHUNK_MESSAGE_SIZE = 2;
+
 }
