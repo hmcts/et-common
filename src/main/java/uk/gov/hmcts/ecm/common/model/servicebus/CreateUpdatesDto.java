@@ -7,7 +7,6 @@ import java.util.List;
 @Data
 public class CreateUpdatesDto {
 
-    private String updateType;
     private String jurisdiction;
     private String multipleRef;
     private String username;

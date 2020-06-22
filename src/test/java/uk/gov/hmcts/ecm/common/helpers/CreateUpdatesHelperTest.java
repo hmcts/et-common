@@ -10,7 +10,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_BULK_CASE_TYPE_ID;
-import static uk.gov.hmcts.ecm.common.model.servicebus.UpdateType.CREATION;
 
 public class CreateUpdatesHelperTest {
 
@@ -38,7 +37,6 @@ public class CreateUpdatesHelperTest {
             .jurisdiction("EMPLOYMENT")
             .multipleRef("4150001")
             .username("testEmail@hotmail.com")
-            .updateType(CREATION.name())
             .ethosCaseRefCollection(ethosCaseRefCollection)
             .build();
     }

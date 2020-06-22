@@ -68,7 +68,7 @@ public class ServiceBusSender implements AutoCloseable {
         busMessage.setContentType("application/json");
         busMessage.setMessageId(msg.getMsgId());
         busMessage.setMessageBody(getMsgBodyInBytes(msg));
-        busMessage.setLabel(msg.getUpdateType());
+        busMessage.setLabel(msg.getJurisdiction());
 
         return busMessage;
     }

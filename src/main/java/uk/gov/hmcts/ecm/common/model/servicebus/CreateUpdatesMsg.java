@@ -31,7 +31,6 @@ public class CreateUpdatesMsg extends Msg {
             ", multipleRef='" + multipleRef + '\'' +
             ", totalCases='" + totalCases + '\'' +
             ", username='" + username + '\'' +
-            ", updateType='" + updateType + '\'' +
             ", dataModel=" + dataModelParent +
             '}';
     }

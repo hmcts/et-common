@@ -24,7 +24,6 @@ public class CreateUpdatesHelper {
 
         return CreateUpdatesMsg.builder()
             .msgId(UUID.randomUUID().toString())
-            .updateType(createUpdatesDto.getUpdateType())
             .jurisdiction(createUpdatesDto.getJurisdiction())
             .caseTypeId(createUpdatesDto.getCaseTypeId())
             .multipleRef(createUpdatesDto.getMultipleRef())

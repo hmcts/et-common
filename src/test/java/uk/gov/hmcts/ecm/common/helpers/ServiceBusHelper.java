@@ -16,14 +16,12 @@ import java.util.Collections;
 import java.util.List;
 
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_BULK_CASE_TYPE_ID;
-import static uk.gov.hmcts.ecm.common.model.servicebus.UpdateType.CREATION;
 
 public class ServiceBusHelper {
 
     public static UpdateCaseMsg generateUpdateCaseMsg(DataModelParent dataModelParent) {
         return UpdateCaseMsg.builder()
                 .msgId("1")
-                .updateType(CREATION.name())
                 .jurisdiction("EMPLOYMENT")
                 .caseTypeId(SCOTLAND_BULK_CASE_TYPE_ID)
                 .multipleRef("4150001")
