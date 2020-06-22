@@ -32,7 +32,7 @@ public class CreateUpdatesMsg extends Msg {
             ", totalCases='" + totalCases + '\'' +
             ", username='" + username + '\'' +
             ", updateType='" + updateType + '\'' +
-            ", updateData=" + updateData +
+            ", dataModel=" + dataModelParent +
             '}';
     }
 }

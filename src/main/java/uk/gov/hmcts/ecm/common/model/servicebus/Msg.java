@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
 
 @Data
 @NoArgsConstructor
@@ -36,6 +37,6 @@ public class Msg {
     String updateType;
 
     @JsonProperty("updateData")
-    UpdateData updateData;
+    DataModelParent dataModelParent;
 
 }

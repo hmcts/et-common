@@ -14,6 +14,7 @@ import uk.gov.hmcts.ecm.common.exceptions.InvalidMessageException;
 import uk.gov.hmcts.ecm.common.exceptions.ServiceBusConnectionTimeoutException;
 import uk.gov.hmcts.ecm.common.helpers.ServiceBusHelper;
 import uk.gov.hmcts.ecm.common.model.servicebus.UpdateCaseMsg;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.CreationDataModel;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
@@ -33,7 +34,8 @@ public class ServiceBusSenderTest {
     @Before
     public void setUp() {
         serviceBusSender = new ServiceBusSender(sendClient, objectMapper);
-        updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg();
+        CreationDataModel creationDataModel = ServiceBusHelper.getCreationDataModel("4150002/2020");
+        updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(creationDataModel);
     }
 
     @Test
@@ -63,7 +65,7 @@ public class ServiceBusSenderTest {
         serviceBusSender.sendMessage(updateCaseMsg);
     }
 
-        @Test(expected = InvalidMessageException.class)
+    @Test(expected = InvalidMessageException.class)
     public void sendMessageInterruptedException() throws ServiceBusException, InterruptedException {
         doThrow(new InterruptedException()).when(sendClient).send(any());
         serviceBusSender.sendMessage(updateCaseMsg);

@@ -7,6 +7,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import lombok.extern.slf4j.Slf4j;
+import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.CreationDataModel;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DetachDataModel;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.UpdateDataModel;
+import uk.gov.hmcts.ecm.common.model.servicebus.tasks.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -14,6 +20,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Slf4j
 public class UpdateCaseMsg extends Msg {
 
     @JsonProperty("ethosCaseReference")
@@ -30,7 +37,25 @@ public class UpdateCaseMsg extends Msg {
             ", totalCases='" + totalCases + '\'' +
             ", username='" + username + '\'' +
             ", updateType='" + updateType + '\'' +
-            ", updateData=" + updateData +
+            ", dataModel=" + dataModelParent +
             '}';
+    }
+
+    public void runTask(SubmitEvent submitEvent) {
+
+        DataTaskParent dataTaskParent;
+
+        if (dataModelParent instanceof CreationDataModel) {
+            dataTaskParent = new CreationDataTask(dataModelParent);
+        } else if (dataModelParent instanceof UpdateDataModel) {
+            dataTaskParent = new UpdateDataTask(dataModelParent);
+        } else if (dataModelParent instanceof DetachDataModel) {
+            dataTaskParent = new DetachDataTask(dataModelParent);
+        } else {
+            dataTaskParent = new PreAcceptDataTask(dataModelParent);
+        }
+
+        dataTaskParent.run(submitEvent);
+
     }
 }

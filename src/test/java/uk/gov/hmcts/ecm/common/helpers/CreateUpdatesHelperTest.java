@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import uk.gov.hmcts.ecm.common.model.servicebus.CreateUpdatesDto;
 import uk.gov.hmcts.ecm.common.model.servicebus.CreateUpdatesMsg;
-
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.CreationDataModel;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,19 +15,22 @@ import static uk.gov.hmcts.ecm.common.model.servicebus.UpdateType.CREATION;
 public class CreateUpdatesHelperTest {
 
     private CreateUpdatesDto createUpdatesDto;
+    private CreationDataModel creationDataModel;
 
     @Before
     public void setUp() {
         List<String> ethosCaseRefCollection = Arrays.asList("4150001/2020", "4150002/2020", "4150003/2020", "4150004/2020", "4150005/2020");
         createUpdatesDto = getCreateUpdatesDto(ethosCaseRefCollection);
+        creationDataModel = ServiceBusHelper.getCreationDataModel(ethosCaseRefCollection.get(0));
     }
 
     @Test
-    public void generateUpdateCaseMsg() {
+    public void generateUpdateCaseMsgForCreation() {
         List<CreateUpdatesMsg> createUpdatesMsgList = CreateUpdatesHelper.getCreateUpdatesMessagesCollection(
-                createUpdatesDto, 2);
+                createUpdatesDto, creationDataModel, 2);
         assertEquals(3, createUpdatesMsgList.size());
     }
+
 
     private CreateUpdatesDto getCreateUpdatesDto(List<String> ethosCaseRefCollection) {
         return CreateUpdatesDto.builder()
@@ -39,4 +42,5 @@ public class CreateUpdatesHelperTest {
             .ethosCaseRefCollection(ethosCaseRefCollection)
             .build();
     }
+
 }
