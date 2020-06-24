@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
-import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.CreationDataModel;
-import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DetachDataModel;
-import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.UpdateDataModel;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelFactory;
 import uk.gov.hmcts.ecm.common.model.servicebus.tasks.*;
 
 @EqualsAndHashCode(callSuper = true)
@@ -42,17 +40,7 @@ public class UpdateCaseMsg extends Msg {
 
     public void runTask(SubmitEvent submitEvent) {
 
-        DataTaskParent dataTaskParent;
-
-        if (dataModelParent instanceof CreationDataModel) {
-            dataTaskParent = new CreationDataTask(dataModelParent);
-        } else if (dataModelParent instanceof UpdateDataModel) {
-            dataTaskParent = new UpdateDataTask(dataModelParent);
-        } else if (dataModelParent instanceof DetachDataModel) {
-            dataTaskParent = new DetachDataTask(dataModelParent);
-        } else {
-            dataTaskParent = new PreAcceptDataTask(dataModelParent);
-        }
+        DataTaskParent dataTaskParent = DataModelFactory.getDataModelType(dataModelParent);
 
         dataTaskParent.run(submitEvent);
 
