@@ -1,6 +1,8 @@
 package uk.gov.hmcts.ecm.common.model.servicebus.datamodel;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -9,6 +11,15 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = CreationDataModel.class, name = "creationDataModel"),
+        @JsonSubTypes.Type(value = DetachDataModel.class, name = "detachDataModel"),
+        @JsonSubTypes.Type(value = UpdateDataModel.class, name = "updateDataModel"),
+        @JsonSubTypes.Type(value = PreAcceptDataModel.class, name = "preAcceptDataModel")
+})
 public class DataModelParent {
 
 }
