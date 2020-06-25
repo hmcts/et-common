@@ -53,5 +53,7 @@ public class ListingData {
     private String clerkResponsible;
     @JsonProperty("reportType")
     private String reportType;
+    @JsonProperty("documentName")
+    private String documentName;
 }
 
