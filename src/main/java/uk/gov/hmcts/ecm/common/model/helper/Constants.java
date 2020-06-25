@@ -183,6 +183,12 @@ public class Constants {
     public static final String PRESS_LIST_CAUSE_LIST_RANGE_TEMPLATE = "EM-TRB-SCO-ENG-00216";
     public static final String PRESS_LIST_CAUSE_LIST_SINGLE_TEMPLATE = "EM-TRB-SCO-ENG-00217";
 
+    public static final String HEARING_STATUS_SETTLED = "Settled";
+    public static final String HEARING_STATUS_WITHDRAWN = "Withdrawn";
+    public static final String HEARING_STATUS_POSTPONED = "Postponed";
+
+    public static final String BROUGHT_FORWARD_REPORT = "Brought Forward Report";
+
     public static final String HEARING_DOC_ETCL = "ETCL";
     public static final String HEARING_DOC_IT56 = "IT56";
     public static final String HEARING_DOC_IT57 = "IT57";
@@ -205,8 +211,6 @@ public class Constants {
     public static final String MULTIPLE_SCHEDULE_DETAILED_CONFIG = "Multiple Schedule (Detailed)";
 
     public static final String FILE_EXTENSION = ".docx";
-
-    public static final String BROUGHT_FORWARD_REPORT = "Brought Forward Report";
 
     public static final String FUTURE_RECEIPT_DATE_ERROR_MESSAGE = "Receipt date should not be a date in the future";
     public static final String EMPTY_RESPONDENT_COLLECTION_ERROR_MESSAGE = "At least one active respondent is required";
