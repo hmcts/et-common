@@ -70,6 +70,10 @@ public class CcdClientConfig {
         return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, cid, UPDATE_BULK_EVENT_TRIGGER_ID);
     }
 
+    String buildStartEventForBulkAmendCaseUrl(String uid, String jid, String ctid, String cid) {
+        return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, cid, AMEND_MULTIPLE_EVENT_TRIGGER_ID);
+    }
+
     String buildSubmitEventForCaseUrl(String uid, String jid, String ctid, String cid) {
         return String.format(SUBMIT_EVENT_FOR_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, cid);
     }
