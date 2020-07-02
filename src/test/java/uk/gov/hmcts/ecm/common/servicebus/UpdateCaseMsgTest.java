@@ -73,8 +73,8 @@ public class UpdateCaseMsgTest {
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(detachDataModel);
         updateCaseMsg.runTask(submitEventAccepted);
         assertEquals(SINGLE_CASE_TYPE, submitEventAccepted.getCaseData().getCaseType());
-        assertEquals("", submitEventAccepted.getCaseData().getMultipleReference());
-        assertEquals("", submitEventAccepted.getCaseData().getLeadClaimant());
+        assertEquals(" ", submitEventAccepted.getCaseData().getMultipleReference());
+        assertEquals(NO, submitEventAccepted.getCaseData().getLeadClaimant());
     }
 
     @Test
