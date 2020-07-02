@@ -11,16 +11,18 @@ public class CreateUpdatesHelper {
 
     public static List<CreateUpdatesMsg> getCreateUpdatesMessagesCollection(CreateUpdatesDto createUpdatesDto,
                                                                             DataModelParent dataModelParent,
-                                                                            int chunkSize) {
+                                                                            int chunkSize,
+                                                                            String updateSize) {
 
         return Partition.ofSize(createUpdatesDto.getEthosCaseRefCollection(), chunkSize).stream()
-            .map(ethosCasesChunked -> createUpdatesMsg(ethosCasesChunked, createUpdatesDto, dataModelParent))
+            .map(ethosCasesChunked -> createUpdatesMsg(ethosCasesChunked, createUpdatesDto, dataModelParent, updateSize))
             .collect(Collectors.toList());
     }
 
     private static CreateUpdatesMsg createUpdatesMsg(List<String> ethosCasesChunked,
                                                      CreateUpdatesDto createUpdatesDto,
-                                                     DataModelParent dataModelParent) {
+                                                     DataModelParent dataModelParent,
+                                                     String updateSize) {
 
         return CreateUpdatesMsg.builder()
             .msgId(UUID.randomUUID().toString())
@@ -28,7 +30,7 @@ public class CreateUpdatesHelper {
             .caseTypeId(createUpdatesDto.getCaseTypeId())
             .multipleRef(createUpdatesDto.getMultipleRef())
             .ethosCaseRefCollection(ethosCasesChunked)
-            .totalCases(String.valueOf(createUpdatesDto.getEthosCaseRefCollection().size()))
+            .totalCases(updateSize)
             .username(createUpdatesDto.getUsername())
             .dataModelParent(dataModelParent)
             .build();

@@ -15,10 +15,11 @@ public class CreateUpdatesHelperTest {
 
     private CreateUpdatesDto createUpdatesDto;
     private CreationDataModel creationDataModel;
+    private List<String> ethosCaseRefCollection;
 
     @Before
     public void setUp() {
-        List<String> ethosCaseRefCollection = Arrays.asList("4150001/2020", "4150002/2020", "4150003/2020", "4150004/2020", "4150005/2020");
+        ethosCaseRefCollection = Arrays.asList("4150001/2020", "4150002/2020", "4150003/2020", "4150004/2020", "4150005/2020");
         createUpdatesDto = getCreateUpdatesDto(ethosCaseRefCollection);
         creationDataModel = ServiceBusHelper.getCreationDataModel(ethosCaseRefCollection.get(0));
     }
@@ -26,7 +27,7 @@ public class CreateUpdatesHelperTest {
     @Test
     public void generateUpdateCaseMsgForCreation() {
         List<CreateUpdatesMsg> createUpdatesMsgList = CreateUpdatesHelper.getCreateUpdatesMessagesCollection(
-                createUpdatesDto, creationDataModel, 2);
+                createUpdatesDto, creationDataModel, 2, String.valueOf(ethosCaseRefCollection.size()));
         assertEquals(3, createUpdatesMsgList.size());
     }
 
