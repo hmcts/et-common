@@ -14,4 +14,6 @@ public class AdditionalCaseInfoType {
     private String additionalSensitive;
     @JsonProperty("additional_ind_expert")
     private String additionalIndExpert;
+    @JsonProperty("doNotPostpone")
+    private String doNotPostpone;
 }

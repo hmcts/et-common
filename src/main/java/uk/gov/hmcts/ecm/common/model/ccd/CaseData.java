@@ -166,6 +166,9 @@ public class CaseData {
     @JsonProperty("ccdID")
     private String ccdID;
 
+    @JsonProperty("flagsImageFileName")
+    private String flagsImageFileName;
+
     // add hearing - page1
     @JsonProperty("hearingNumbers")
     private String hearingNumbers;
