@@ -11,6 +11,8 @@ public class DepositType {
 
     @JsonProperty("Deposit_amount")
     private String depositAmount;
+    @JsonProperty("depositOrderAgainst")
+    private String depositOrderAgainst;
     @JsonProperty("deposit_requested_by")
     private String depositRequestedBy;
     @JsonProperty("deposit_covers")
@@ -21,6 +23,8 @@ public class DepositType {
     private String depositDue;
     @JsonProperty("deposit_received")
     private String depositReceived;
+    @JsonProperty("depositReceivedDate")
+    private String depositReceivedDate;
     @JsonProperty("deposit_time_ext")
     private String depositTimeExt;
     @JsonProperty("deposit_time_ext_due")
@@ -29,6 +33,8 @@ public class DepositType {
     private String depositRefund;
     @JsonProperty("deposit_refund_date")
     private String depositRefundDate;
+    @JsonProperty("depositRefundedTo")
+    private String depositRefundedTo;
     @JsonProperty("depositNotes")
     private String depositNotes;
     @JsonProperty("depositDoc")
