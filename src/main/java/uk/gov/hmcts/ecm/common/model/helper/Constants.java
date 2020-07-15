@@ -11,7 +11,7 @@ public class Constants {
     public static final DateTimeFormatter NEW_TIME_PATTERN = DateTimeFormatter.ofPattern("HH:mm");
     public static final String NEW_LINE = "\",\n";
     public static final String OUTPUT_FILE_NAME = "document.docx";
-    public static final String DEFAULT_FLAGS_IMAGE_FILE_NAME = "0000000.png";
+    public static final String DEFAULT_FLAGS_IMAGE_FILE_NAME = "EMP-TRIB-0000000.jpg";
 
     public static final String PRE_DEFAULT_XLSX_FILE_PATH = "preDefaultValues.xlsx";
     public static final String POST_DEFAULT_XLSX_FILE_PATH = "postDefaultValues.xlsx";
@@ -100,6 +100,14 @@ public class Constants {
 
     public static final String YES = "Yes";
     public static final String NO = "No";
+
+    public static final String FLAG_SENSITIVE = "SENSITIVE";
+    public static final String FLAG_REPORTING = "REPORTING";
+    public static final String FLAG_RULE_503B = "RULE 50(3)b";
+    public static final String FLAG_RESERVED = "RESERVED";
+    public static final String FLAG_EMP_CONT_CLAIM = "EMP CONT CLAIM";
+    public static final String FLAG_LIVE_APPEAL = "LIVE APPEAL";
+    public static final String FLAG_DO_NOT_POSTPONE = "DO NOT POSTPONE";
 
     public static final String ONE = "1";
     public static final String ZERO = "0";
@@ -216,7 +224,8 @@ public class Constants {
     public static final String MULTIPLE_SCHEDULE_DETAILED_CONFIG = "Multiple Schedule (Detailed)";
 
     public static final String FILE_EXTENSION = ".docx";
-    public static final String IMAGE_FILE_EXTENSION = ".png";
+    public static final String IMAGE_FILE_EXTENSION = ".jpg";
+    public static final String IMAGE_FILE_PRECEDING = "EMP-TRIB-";
 
     public static final String FUTURE_RECEIPT_DATE_ERROR_MESSAGE = "Receipt date should not be a date in the future";
     public static final String EMPTY_RESPONDENT_COLLECTION_ERROR_MESSAGE = "At least one active respondent is required";

@@ -168,6 +168,8 @@ public class CaseData {
 
     @JsonProperty("flagsImageFileName")
     private String flagsImageFileName;
+    @JsonProperty("flagsImageAltText")
+    private String flagsImageAltText;
 
     // add hearing - page1
     @JsonProperty("hearingNumbers")
