@@ -79,7 +79,7 @@ public class CaseData {
     @JsonProperty("hearingCollection")
     private List<HearingTypeItem> hearingCollection;
     @JsonProperty("depositType")
-    private DepositType depositType;
+    private List<DepositTypeItem> depositCollection;
     @JsonProperty("judgementCollection")
     private List<JudgementTypeItem> judgementCollection;
     @JsonProperty("judgementDetailsCollection")
