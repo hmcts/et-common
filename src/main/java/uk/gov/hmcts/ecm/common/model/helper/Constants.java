@@ -202,9 +202,9 @@ public class Constants {
 
     public static final String BROUGHT_FORWARD_REPORT = "Brought Forward Report";
 
-    public static final String HEARING_DOC_ETCL = "ETCL";
-    public static final String HEARING_DOC_IT56 = "IT56";
-    public static final String HEARING_DOC_IT57 = "IT57";
+    public static final String HEARING_DOC_ETCL = "ETCL - Cause List";
+    public static final String HEARING_DOC_IT56 = "IT56 - List of Exhibits";
+    public static final String HEARING_DOC_IT57 = "ETRP - ET recording of proceeding";
 
     public static final String HEARING_ETCL_PUBLIC = "Public";
     public static final String HEARING_ETCL_STAFF = "Staff";
