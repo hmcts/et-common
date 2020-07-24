@@ -97,6 +97,9 @@ public class Constants {
     public static final String ACCEPTED_STATE = "Accepted";
     public static final String REJECTED_STATE = "Rejected";
     public static final String CLOSED_STATE = "Closed";
+    public static final String OPEN_STATE = "Open";
+    public static final String ERRORED_STATE = "Errored";
+    public static final String UPDATING_STATE = "Updating";
 
     public static final String YES = "Yes";
     public static final String NO = "No";
