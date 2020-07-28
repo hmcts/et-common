@@ -142,6 +142,10 @@ public class CaseData {
     private ListingData printHearingCollection;
     @JsonProperty("targetHearingDate")
     private String targetHearingDate;
+    @JsonProperty("claimant")
+    private String claimant;
+    @JsonProperty("respondent")
+    private String respondent;
 
     @JsonProperty("EQP")
     private String EQP;
