@@ -163,6 +163,34 @@ public class UtilHelperTest {
     }
 
     @Test
+    public void getSingleCaseTypeFromMultiple() {
+        String office = "Manchester";
+        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("Manchester_Multiple"));
+        office = "Scotland";
+        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("Scotland_Multiple"));
+        office = "Bristol";
+        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("Bristol_Multiple"));
+        office = "Leeds";
+        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("Leeds_Multiple"));
+        office = "LondonCentral";
+        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("LondonCentral_Multiple"));
+        office = "LondonEast";
+        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("LondonEast_Multiple"));
+        office = "LondonSouth";
+        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("LondonSouth_Multiple"));
+        office = "MidlandsEast";
+        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("MidlandsEast_Multiple"));
+        office = "MidlandsWest";
+        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("MidlandsWest_Multiple"));
+        office = "Newcastle";
+        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("Newcastle_Multiple"));
+        office = "Wales";
+        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("Wales_Multiple"));
+        office = "Watford";
+        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("Watford_Multiple"));
+    }
+
+    @Test
     public void formatLocalDate() {
         assertEquals("2 February 2020", UtilHelper.formatLocalDate("2020-02-02T11:02:11.000"));
     }
