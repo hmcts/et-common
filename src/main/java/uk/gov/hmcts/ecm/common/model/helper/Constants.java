@@ -98,8 +98,15 @@ public class Constants {
     public static final String REJECTED_STATE = "Rejected";
     public static final String CLOSED_STATE = "Closed";
     public static final String OPEN_STATE = "Open";
-    public static final String ERRORED_STATE = "Errored";
+    public static final String ERRORED_STATE = "Error";
     public static final String UPDATING_STATE = "Updating";
+
+    public static final String MULTIPLES_DEV = "_Multiples_Dev";
+    public static final String MULTIPLES_USER = "_Multiples_User";
+    public static final String MULTIPLES = "_Multiples";
+    public static final String MULTIPLE = "_Multiple";
+    public static final String DEV = "_Dev";
+    public static final String USER = "_User";
 
     public static final String YES = "Yes";
     public static final String NO = "No";
