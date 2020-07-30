@@ -28,6 +28,13 @@ public class MultipleData {
     @JsonProperty("multipleSource")
     private String multipleSource;
 
+    @JsonProperty("flag1")
+    private String flag1;
+    @JsonProperty("flag2")
+    private String flag2;
+    @JsonProperty("EQP")
+    private String EQP;
+
 }
 
 

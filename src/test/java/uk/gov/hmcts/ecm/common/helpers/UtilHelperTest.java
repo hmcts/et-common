@@ -163,31 +163,31 @@ public class UtilHelperTest {
     }
 
     @Test
-    public void getSingleCaseTypeFromMultiple() {
+    public void getCaseTypeIdForMultiple() {
         String office = "Manchester";
-        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("Manchester_Multiple"));
+        assertEquals(office, UtilHelper.getCaseTypeId("Manchester_Multiple"));
         office = "Scotland";
-        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("Scotland_Multiple"));
+        assertEquals(office, UtilHelper.getCaseTypeId("Scotland_Multiple"));
         office = "Bristol";
-        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("Bristol_Multiple"));
+        assertEquals(office, UtilHelper.getCaseTypeId("Bristol_Multiple"));
         office = "Leeds";
-        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("Leeds_Multiple"));
+        assertEquals(office, UtilHelper.getCaseTypeId("Leeds_Multiple"));
         office = "LondonCentral";
-        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("LondonCentral_Multiple"));
+        assertEquals(office, UtilHelper.getCaseTypeId("LondonCentral_Multiple"));
         office = "LondonEast";
-        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("LondonEast_Multiple"));
+        assertEquals(office, UtilHelper.getCaseTypeId("LondonEast_Multiple"));
         office = "LondonSouth";
-        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("LondonSouth_Multiple"));
+        assertEquals(office, UtilHelper.getCaseTypeId("LondonSouth_Multiple"));
         office = "MidlandsEast";
-        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("MidlandsEast_Multiple"));
+        assertEquals(office, UtilHelper.getCaseTypeId("MidlandsEast_Multiple"));
         office = "MidlandsWest";
-        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("MidlandsWest_Multiple"));
+        assertEquals(office, UtilHelper.getCaseTypeId("MidlandsWest_Multiple"));
         office = "Newcastle";
-        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("Newcastle_Multiple"));
+        assertEquals(office, UtilHelper.getCaseTypeId("Newcastle_Multiple"));
         office = "Wales";
-        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("Wales_Multiple"));
+        assertEquals(office, UtilHelper.getCaseTypeId("Wales_Multiple"));
         office = "Watford";
-        assertEquals(office, UtilHelper.getSingleCaseTypeFromMultiple("Watford_Multiple"));
+        assertEquals(office, UtilHelper.getCaseTypeId("Watford_Multiple"));
     }
 
     @Test

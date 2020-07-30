@@ -47,7 +47,11 @@ public class UtilHelper {
                 office = caseTypeId.substring(0, caseTypeId.lastIndexOf(MULTIPLES_USER));
                 return office + USER;
             } else {
-                return caseTypeId.substring(0, caseTypeId.lastIndexOf(MULTIPLES));
+                if (caseTypeId.contains(MULTIPLES)) {
+                    return caseTypeId.substring(0, caseTypeId.lastIndexOf(MULTIPLES));
+                } else {
+                    return caseTypeId.substring(0, caseTypeId.lastIndexOf(MULTIPLE));
+                }
             }
         }
     }
@@ -67,8 +71,4 @@ public class UtilHelper {
         }
     }
 
-    public static String getSingleCaseTypeFromMultiple(String multipleCaseTypeId) {
-        int lastIndex = multipleCaseTypeId.lastIndexOf(MULTIPLE);
-        return multipleCaseTypeId.substring(0, lastIndex);
-    }
 }
