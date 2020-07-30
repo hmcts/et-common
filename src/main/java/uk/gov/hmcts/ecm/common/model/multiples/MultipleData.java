@@ -35,6 +35,11 @@ public class MultipleData {
     @JsonProperty("EQP")
     private String EQP;
 
+    @JsonProperty("scheduleDocName")
+    private String scheduleDocName;
+    @JsonProperty("docMarkUp")
+    private String docMarkUp;
+
 }
 
 
