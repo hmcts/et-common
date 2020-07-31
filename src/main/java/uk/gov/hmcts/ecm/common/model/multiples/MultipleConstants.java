@@ -14,6 +14,7 @@ public class MultipleConstants {
     public static final String HEADER_2 = "SubMultiple";
     public static final String HEADER_3 = "Flag1";
     public static final String HEADER_4 = "Flag2";
-    public static final int MAX_COLUMN_SIZE_XSLX = 4;
+    public static final String HEADER_5 = "EQP";
+    public static final int MAX_COLUMN_SIZE_XSLX = 5;
 
 }
