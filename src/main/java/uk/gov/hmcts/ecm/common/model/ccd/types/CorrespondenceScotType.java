@@ -10,6 +10,8 @@ public class CorrespondenceScotType {
 
     @JsonProperty("topLevel_Scot_Documents")
     private String topLevelScotDocuments;
+    @JsonProperty("part_0_Scot_Documents")
+    private String part0ScotDocuments;
     @JsonProperty("part_1_Scot_Documents")
     private String part1ScotDocuments;
     @JsonProperty("part_2_Scot_Documents")
