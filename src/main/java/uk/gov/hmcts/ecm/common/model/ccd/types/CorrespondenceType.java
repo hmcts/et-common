@@ -10,6 +10,8 @@ public class CorrespondenceType {
 
     @JsonProperty("topLevel_Documents")
     private String topLevelDocuments;
+    @JsonProperty("part_0_Documents")
+    private String part0Documents;
     @JsonProperty("part_1_Documents")
     private String part1Documents;
     @JsonProperty("part_2_Documents")

@@ -110,6 +110,12 @@ public class CaseData {
     private CorrespondenceScotType correspondenceScotType;
     @JsonProperty("correspondenceType")
     private CorrespondenceType correspondenceType;
+    @JsonProperty("addressLabelsSelectionType")
+    private AddressLabelsSelectionType addressLabelsSelectionType;
+    @JsonProperty("addressLabelCollection")
+    private List<AddressLabelTypeItem> addressLabelCollection;
+    @JsonProperty("addressLabelsAttributesType")
+    private AddressLabelsAttributesType addressLabelsAttributesType;
     @JsonProperty("caseNotes")
     private String caseNotes;
     @JsonProperty("claimantWorkAddress")
