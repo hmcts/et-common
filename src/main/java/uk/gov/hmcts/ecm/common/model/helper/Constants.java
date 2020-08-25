@@ -12,8 +12,8 @@ public class Constants {
     public static final String NEW_LINE = "\",\n";
     public static final String OUTPUT_FILE_NAME = "document.docx";
     public static final String DEFAULT_FLAGS_IMAGE_FILE_NAME = "EMP-TRIB-0000000.jpg";
-    private static final String ADDRESS_LABELS_TEMPLATE = "EM-TRB-LBL-ENG-00000";
-    private static final int ADDRESS_LABELS_PAGE_SIZE = 14;
+    public static final String ADDRESS_LABELS_TEMPLATE = "EM-TRB-LBL-ENG-00000";
+    public static final int ADDRESS_LABELS_PAGE_SIZE = 14;
 
     public static final String PRE_DEFAULT_XLSX_FILE_PATH = "preDefaultValues.xlsx";
     public static final String POST_DEFAULT_XLSX_FILE_PATH = "postDefaultValues.xlsx";
@@ -113,28 +113,28 @@ public class Constants {
     public static final String YES = "Yes";
     public static final String NO = "No";
 
-    private static final String CUSTOMISE_SELECTED_ADDRESSES = "0.1";
-    private static final String ALL_AVAILABLE_ADDRESSES = "0.2";
-    private static final String CLAIMANT_ADDRESS = "0.3";
-    private static final String CLAIMANT_REP_ADDRESS = "0.4";
-    private static final String CLAIMANT_AND_CLAIMANT_REP_ADDRESSES = "0.5";
-    private static final String RESPONDENTS_ADDRESSES = "0.6";
-    private static final String RESPONDENTS_REPS_ADDRESSES = "0.7";
-    private static final String RESPONDENTS_AND_RESPONDENTS_REPS_ADDRESSES = "0.8";
-    private static final String CLAIMANT_AND_RESPONDENTS_ADDRESSES = "0.9";
-    private static final String CLAIMANT_REP_AND_RESPONDENTS_REPS_ADDRESSES = "0.10";
-    private static final String CLAIMANT_AND_RESPONDENTS_REPS_ADDRESSES = "0.11";
-    private static final String CLAIMANT_REP_AND_RESPONDENTS_ADDRESSES = "0.12";
+    public static final String CUSTOMISE_SELECTED_ADDRESSES = "0.1";
+    public static final String ALL_AVAILABLE_ADDRESSES = "0.2";
+    public static final String CLAIMANT_ADDRESS = "0.3";
+    public static final String CLAIMANT_REP_ADDRESS = "0.4";
+    public static final String CLAIMANT_AND_CLAIMANT_REP_ADDRESSES = "0.5";
+    public static final String RESPONDENTS_ADDRESSES = "0.6";
+    public static final String RESPONDENTS_REPS_ADDRESSES = "0.7";
+    public static final String RESPONDENTS_AND_RESPONDENTS_REPS_ADDRESSES = "0.8";
+    public static final String CLAIMANT_AND_RESPONDENTS_ADDRESSES = "0.9";
+    public static final String CLAIMANT_REP_AND_RESPONDENTS_REPS_ADDRESSES = "0.10";
+    public static final String CLAIMANT_AND_RESPONDENTS_REPS_ADDRESSES = "0.11";
+    public static final String CLAIMANT_REP_AND_RESPONDENTS_ADDRESSES = "0.12";
 
-    private static final String CLAIMANT = "CLAIMANT : ";
-    private static final String CLAIMANT_REP = "CLAIMANT REP : ";
-    private static final String RESPONDENT = "RESPONDENT : ";
-    private static final String RESPONDENT_REP = "RESPONDENT REP : ";
-    private static final String TEL = "Tel: ";
-    private static final String REF = "Ref: ";
+    public static final String CLAIMANT = "CLAIMANT : ";
+    public static final String CLAIMANT_REP = "CLAIMANT REP : ";
+    public static final String RESPONDENT = "RESPONDENT : ";
+    public static final String RESPONDENT_REP = "RESPONDENT REP : ";
+    public static final String TEL = "Tel: ";
+    public static final String REF = "Ref: ";
 
-    private static final String LABEL = "Label_";
-    private static final String LBL = "lbl_";
+    public static final String LABEL = "Label_";
+    public static final String LBL = "lbl_";
 
     public static final String FLAG_SENSITIVE = "SENSITIVE";
     public static final String FLAG_REPORTING = "REPORTING";
@@ -270,9 +270,9 @@ public class Constants {
     public static final String HEARING_NUMBER_MISMATCH_ERROR_MESSAGE = "The hearing number provided did not match with any of the hearing numbers contained within this case";
     public static final String DUPLICATE_JURISDICTION_CODE_ERROR_MESSAGE = "Duplicate Jurisdiction Code(s) : ";
     public static final String MISSING_JURISDICTION_OUTCOME_ERROR_MESSAGE = "A Jurisdiction outcome is required before the case can be closed";
-    private static final String ADDRESS_LABELS_EMPTY_ERROR = "No addresses were found for you selection";
-    private static final String ADDRESS_LABELS_SELECT_ERROR = "You need to select at least one address label before printing";
-    private static final String ADDRESS_LABELS_COPIES_ERROR = "You need to use a whole number for the number of copies field";
+    public static final String ADDRESS_LABELS_EMPTY_ERROR = "No addresses were found for you selection";
+    public static final String ADDRESS_LABELS_SELECT_ERROR = "You need to select at least one address label before printing";
+    public static final String ADDRESS_LABELS_COPIES_ERROR = "You need to use a whole number for the number of copies field";
 
     public static final int TARGET_HEARING_DATE_INCREMENT = 181;
 
