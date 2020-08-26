@@ -12,7 +12,7 @@ public class Constants {
     public static final String NEW_LINE = "\",\n";
     public static final String OUTPUT_FILE_NAME = "document.docx";
     public static final String DEFAULT_FLAGS_IMAGE_FILE_NAME = "EMP-TRIB-0000000.jpg";
-    public static final String ADDRESS_LABELS_TEMPLATE = "EM-TRB-LBL-ENG-00000";
+    public static final String ADDRESS_LABELS_TEMPLATE = "EM-TRB-LET-ENG-00544";
     public static final int ADDRESS_LABELS_PAGE_SIZE = 14;
 
     public static final String PRE_DEFAULT_XLSX_FILE_PATH = "preDefaultValues.xlsx";
