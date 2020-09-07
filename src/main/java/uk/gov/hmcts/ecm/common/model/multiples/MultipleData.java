@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import uk.gov.hmcts.ecm.common.model.bulk.items.CaseIdTypeItem;
-import uk.gov.hmcts.ecm.common.model.ccd.items.DocumentTypeItem;
 
 import java.util.List;
 
@@ -20,8 +19,8 @@ public class MultipleData {
     @JsonProperty("multipleReference")
     private String multipleReference;
 
-    @JsonProperty("documentCollection")
-    private List<DocumentTypeItem> documentCollection;
+    @JsonProperty("caseImporterFile")
+    private CaseImporterFile caseImporterFile;
 
     @JsonProperty("state")
     private String state;
@@ -34,6 +33,10 @@ public class MultipleData {
     private String flag2;
     @JsonProperty("EQP")
     private String EQP;
+//    @JsonProperty("flag3")
+//    private String flag3;
+//    @JsonProperty("flag4")
+//    private String flag4;
 
     @JsonProperty("scheduleDocName")
     private String scheduleDocName;
