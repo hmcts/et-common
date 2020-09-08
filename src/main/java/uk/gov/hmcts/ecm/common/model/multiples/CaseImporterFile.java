@@ -11,8 +11,8 @@ public class CaseImporterFile {
 
     @JsonProperty("uploadedDocument")
     private UploadedDocumentType uploadedDocument;
-    @JsonProperty("uploadDateTime")
-    private String uploadDateTime;
+    @JsonProperty("uploadedDateTime")
+    private String uploadedDateTime;
     @JsonProperty("uploadUser")
     private String uploadUser;
 }

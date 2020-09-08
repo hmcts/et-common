@@ -109,7 +109,8 @@ public class ServiceBusHelper {
                 .positionType("PositionType")
                 .flag1("Flag1")
                 .flag2("Flag2")
-                .EQP("EQP")
+                .flag3("Flag3")
+                .flag4("Flag4")
                 .jurisdictionCode("ECM")
                 .outcomeUpdate("OutcomeUpdate")
                 .build();

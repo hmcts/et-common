@@ -94,9 +94,6 @@ public class UpdateCaseMsgTest {
         assertEquals("2440001", submitEventAccepted.getCaseData().getMultipleReference());
         assertEquals("ClerkResponsible", submitEventAccepted.getCaseData().getClerkResponsible());
         assertEquals("PositionType", submitEventAccepted.getCaseData().getPositionType());
-        assertEquals("Flag1", submitEventAccepted.getCaseData().getFlag1());
-        assertEquals("Flag2", submitEventAccepted.getCaseData().getFlag2());
-        assertEquals("EQP", submitEventAccepted.getCaseData().getEQP());
         assertEquals("ECM", submitEventAccepted.getCaseData().getJurCodesCollection().get(0).getValue().getJuridictionCodesList());
         assertEquals("OutcomeUpdate", submitEventAccepted.getCaseData().getJurCodesCollection().get(0).getValue().getJudgmentOutcome());
     }
@@ -118,9 +115,6 @@ public class UpdateCaseMsgTest {
         assertEquals("2440001", submitEventDetailed.getCaseData().getMultipleReference());
         assertEquals("ClerkResponsible", submitEventDetailed.getCaseData().getClerkResponsible());
         assertEquals("PositionType", submitEventDetailed.getCaseData().getPositionType());
-        assertEquals("Flag1", submitEventDetailed.getCaseData().getFlag1());
-        assertEquals("Flag2", submitEventDetailed.getCaseData().getFlag2());
-        assertEquals("EQP", submitEventDetailed.getCaseData().getEQP());
         assertEquals("ECM", submitEventDetailed.getCaseData().getJurCodesCollection().get(0).getValue().getJuridictionCodesList());
         assertEquals("OutcomeUpdate", submitEventDetailed.getCaseData().getJurCodesCollection().get(0).getValue().getJudgmentOutcome());
     }

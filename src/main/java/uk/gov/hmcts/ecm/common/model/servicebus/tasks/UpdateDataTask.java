@@ -69,7 +69,6 @@ public class UpdateDataTask extends DataTaskParent {
 
         updateManagingOffice(submitEvent, updateDataModel);
 
-        updateFlags(submitEvent, updateDataModel);
     }
 
     private void updateClaimantName(SubmitEvent submitEvent, String claimantNameNewValue) {
@@ -140,19 +139,6 @@ public class UpdateDataTask extends DataTaskParent {
         }
         if (!isNullOrEmpty(updateDataModel.getFileLocationEdinburgh())) {
             submitEvent.getCaseData().setFileLocationEdinburgh(updateDataModel.getFileLocationEdinburgh());
-        }
-    }
-
-    private void updateFlags(SubmitEvent submitEvent, UpdateDataModel updateDataModel) {
-
-        if (!isNullOrEmpty(updateDataModel.getFlag1())) {
-            submitEvent.getCaseData().setFlag1(updateDataModel.getFlag1());
-        }
-        if (!isNullOrEmpty(updateDataModel.getFlag2())) {
-            submitEvent.getCaseData().setFlag2(updateDataModel.getFlag2());
-        }
-        if (!isNullOrEmpty(updateDataModel.getEQP())) {
-            submitEvent.getCaseData().setEQP(updateDataModel.getEQP());
         }
     }
 

@@ -31,12 +31,10 @@ public class MultipleData {
     private String flag1;
     @JsonProperty("flag2")
     private String flag2;
-    @JsonProperty("EQP")
-    private String EQP;
-//    @JsonProperty("flag3")
-//    private String flag3;
-//    @JsonProperty("flag4")
-//    private String flag4;
+    @JsonProperty("flag3")
+    private String flag3;
+    @JsonProperty("flag4")
+    private String flag4;
 
     @JsonProperty("scheduleDocName")
     private String scheduleDocName;

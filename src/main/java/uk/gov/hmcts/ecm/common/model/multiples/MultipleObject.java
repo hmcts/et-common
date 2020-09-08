@@ -11,6 +11,7 @@ public class MultipleObject {
     private String subMultiple;
     private String flag1;
     private String flag2;
-    private String EQP;
+    private String flag3;
+    private String flag4;
 
 }

@@ -141,7 +141,8 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesElasticSearchForCreationManuallyCreated() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}}";
+        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
+                "\"_source\":{\"includes\":[\"data\"],\"excludes\":[]}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery,creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L, Arrays.asList(new SubmitEvent(), new SubmitEvent()));
         ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
@@ -154,7 +155,8 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesElasticSearchForCreationETOnline() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}}";
+        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
+                "\"_source\":{\"includes\":[\"data\"],\"excludes\":[]}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         SubmitEvent submitEvent = new SubmitEvent();
         CaseData caseData = new CaseData();
