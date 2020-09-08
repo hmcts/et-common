@@ -94,6 +94,8 @@ public class UpdateCaseMsgTest {
         assertEquals("2440001", submitEventAccepted.getCaseData().getMultipleReference());
         assertEquals("ClerkResponsible", submitEventAccepted.getCaseData().getClerkResponsible());
         assertEquals("PositionType", submitEventAccepted.getCaseData().getPositionType());
+        assertEquals("25/08/1999", submitEventAccepted.getCaseData().getReceiptDate());
+        assertEquals("HearingStage", submitEventAccepted.getCaseData().getHearingStage());
         assertEquals("ECM", submitEventAccepted.getCaseData().getJurCodesCollection().get(0).getValue().getJuridictionCodesList());
         assertEquals("OutcomeUpdate", submitEventAccepted.getCaseData().getJurCodesCollection().get(0).getValue().getJudgmentOutcome());
     }

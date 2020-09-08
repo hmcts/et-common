@@ -107,11 +107,9 @@ public class ServiceBusHelper {
                 .newMultipleReference("2440001")
                 .clerkResponsible("ClerkResponsible")
                 .positionType("PositionType")
-                .flag1("Flag1")
-                .flag2("Flag2")
-                .flag3("Flag3")
-                .flag4("Flag4")
                 .jurisdictionCode("ECM")
+                .receiptDate("25/08/1999")
+                .hearingStage("HearingStage")
                 .outcomeUpdate("OutcomeUpdate")
                 .build();
     }

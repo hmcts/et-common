@@ -49,17 +49,11 @@ public class UpdateDataModel extends DataModelParent {
     @JsonProperty("positionType")
     private String positionType;
 
-    @JsonProperty("flag1")
-    private String flag1;
+    @JsonProperty("receiptDate")
+    private String receiptDate;
 
-    @JsonProperty("flag2")
-    private String flag2;
-
-    @JsonProperty("flag3")
-    private String flag3;
-
-    @JsonProperty("flag4")
-    private String flag4;
+    @JsonProperty("hearingStage")
+    private String hearingStage;
 
     @JsonProperty("jurisdictionCode")
     private String jurisdictionCode;

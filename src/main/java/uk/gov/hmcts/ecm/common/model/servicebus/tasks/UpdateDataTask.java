@@ -60,6 +60,12 @@ public class UpdateDataTask extends DataTaskParent {
         if (!isNullOrEmpty(updateDataModel.getPositionType())) {
             submitEvent.getCaseData().setPositionType(updateDataModel.getPositionType());
         }
+        if (!isNullOrEmpty(updateDataModel.getReceiptDate())) {
+            submitEvent.getCaseData().setReceiptDate(updateDataModel.getReceiptDate());
+        }
+        if (!isNullOrEmpty(updateDataModel.getHearingStage())) {
+            submitEvent.getCaseData().setHearingStage(updateDataModel.getHearingStage());
+        }
 
         if (!isNullOrEmpty(updateDataModel.getJurisdictionCode())
                 && !updateDataModel.getJurisdictionCode().equals(SELECT_NONE_VALUE)
