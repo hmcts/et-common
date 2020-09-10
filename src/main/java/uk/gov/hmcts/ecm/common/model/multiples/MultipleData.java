@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import uk.gov.hmcts.ecm.common.model.bulk.items.CaseIdTypeItem;
 import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
+import uk.gov.hmcts.ecm.common.model.multiples.items.SubMultipleTypeItem;
+import uk.gov.hmcts.ecm.common.model.multiples.types.MoveCasesType;
 
 import java.util.List;
 
@@ -68,12 +70,11 @@ public class MultipleData {
     @JsonProperty("hearingStageEQP")
     private String hearingStage;
 
-    @JsonProperty("convertToSingle")
-    private String convertToSingle;
-    @JsonProperty("updatedMultipleRef")
-    private String updatedMultipleRef;
-    @JsonProperty("updatedSubMultipleRef")
-    private String updatedSubMultipleRef;
+    @JsonProperty("moveCases")
+    private MoveCasesType moveCases;
+
+    @JsonProperty("subMultipleCollection")
+    private List<SubMultipleTypeItem> subMultipleCollection;
 
 }
 
