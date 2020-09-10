@@ -15,6 +15,10 @@ import uk.gov.hmcts.ecm.common.model.bulk.BulkData;
 import uk.gov.hmcts.ecm.common.model.bulk.BulkDetails;
 import uk.gov.hmcts.ecm.common.model.bulk.SubmitBulkEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.*;
+import uk.gov.hmcts.ecm.common.model.multiples.MultipleCaseSearchResult;
+import uk.gov.hmcts.ecm.common.model.multiples.MultipleData;
+import uk.gov.hmcts.ecm.common.model.multiples.MultipleDetails;
+import uk.gov.hmcts.ecm.common.model.multiples.SubmitMultipleEvent;
 import uk.gov.hmcts.ecm.common.service.UserService;
 import uk.gov.hmcts.reform.authorisation.generators.AuthTokenGenerator;
 
@@ -51,8 +55,10 @@ public class CcdClientTest {
     private UserDetails userDetails;
     private CaseDetails caseDetails;
     private BulkDetails bulkDetails;
+    private MultipleDetails multipleDetails;
     private CaseData caseData;
     private BulkData bulkData;
+    private MultipleData multipleData;
     private CCDRequest ccdRequest;
     private String uri = "http://example.com";
 
@@ -65,16 +71,24 @@ public class CcdClientTest {
         ccdRequest.setEventId("1111");
         ccdRequest.setToken("Token");
         userDetails = getUserDetails();
+
         caseDetails = new CaseDetails();
         caseDetails.setJurisdiction("TRIBUNALS");
         caseDetails.setCaseTypeId("Type1");
         caseData = new CaseData();
         caseDetails.setCaseData(caseData);
+
         bulkDetails = new BulkDetails();
         bulkDetails.setJurisdiction("TRIBUNALS");
         bulkDetails.setCaseTypeId("Type1");
         bulkData = new BulkData();
         bulkDetails.setCaseData(bulkData);
+
+        multipleDetails = new MultipleDetails();
+        multipleDetails.setJurisdiction("TRIBUNALS");
+        multipleDetails.setCaseTypeId("Type1");
+        multipleData = new MultipleData();
+        multipleDetails.setCaseData(multipleData);
     }
 
     private HttpHeaders creatBuildHeaders() {
@@ -141,8 +155,9 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesElasticSearchForCreationManuallyCreated() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
-                "\"_source\":{\"includes\":[\"data\"],\"excludes\":[]}}";
+        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}}";
+//        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
+//                "\"_source\":{\"includes\":[\"data\"],\"excludes\":[]}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery,creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L, Arrays.asList(new SubmitEvent(), new SubmitEvent()));
         ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
@@ -155,8 +170,9 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesElasticSearchForCreationETOnline() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
-                "\"_source\":{\"includes\":[\"data\"],\"excludes\":[]}}";
+        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}}";
+//        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
+//                "\"_source\":{\"includes\":[\"data\"],\"excludes\":[]}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         SubmitEvent submitEvent = new SubmitEvent();
         CaseData caseData = new CaseData();
@@ -185,6 +201,19 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(BulkCaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveBulkCasesElasticSearch("authToken", caseDetails.getCaseTypeId(), "2400001/2020");
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(BulkCaseSearchResult.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    public void retrieveMultipleCasesElasticSearch() throws IOException {
+        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.multipleReference.keyword\":[\"2400001/2020\"],\"boost\":1.0}}}";
+        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
+        MultipleCaseSearchResult multipleCaseSearchResult = new MultipleCaseSearchResult(2L, Arrays.asList(new SubmitMultipleEvent(), new SubmitMultipleEvent()));
+        ResponseEntity<MultipleCaseSearchResult> responseEntity = new ResponseEntity<>(multipleCaseSearchResult, HttpStatus.OK);
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(MultipleCaseSearchResult.class))).thenReturn(responseEntity);
+        ccdClient.retrieveMultipleCasesElasticSearch("authToken", caseDetails.getCaseTypeId(), "2400001/2020");
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(MultipleCaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
     }
 
@@ -354,6 +383,19 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitBulkEvent.class))).thenReturn(responseEntity);
         ccdClient.submitBulkEventForCase("authToken", bulkData, bulkDetails.getCaseTypeId(), bulkDetails.getJurisdiction(), ccdRequest, "111111");
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitBulkEvent.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    public void submitMultipleEventForCase() throws IOException {
+        HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(), creatBuildHeaders());
+        ResponseEntity<SubmitMultipleEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        when(caseDataBuilder.buildMultipleDataContent(eq(multipleData), eq(ccdRequest), anyString())).thenReturn(CaseDataContent.builder().build());
+        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
+        when(ccdClientConfig.buildSubmitEventForCaseUrl(any(), any(), any(), any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitMultipleEvent.class))).thenReturn(responseEntity);
+        ccdClient.submitMultipleEventForCase("authToken", multipleData, multipleDetails.getCaseTypeId(), multipleDetails.getJurisdiction(), ccdRequest, "111111");
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitMultipleEvent.class));
         verifyNoMoreInteractions(restTemplate);
     }
 

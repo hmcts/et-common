@@ -41,6 +41,49 @@ public class UpdateDataTask extends DataTaskParent {
 
         UpdateDataModel updateDataModel = ((UpdateDataModel) dataModelParent);
 
+        batchUpdate1(submitEvent, updateDataModel);
+
+        batchUpdate2(submitEvent, updateDataModel);
+
+        batchUpdate3(submitEvent, updateDataModel);
+
+    }
+
+    private void batchUpdate1(SubmitEvent submitEvent, UpdateDataModel updateDataModel) {
+
+        if (!isNullOrEmpty(updateDataModel.getPositionType())) {
+            submitEvent.getCaseData().setPositionType(updateDataModel.getPositionType());
+        }
+
+        if (!isNullOrEmpty(updateDataModel.getClerkResponsible())) {
+            submitEvent.getCaseData().setClerkResponsible(updateDataModel.getClerkResponsible());
+        }
+
+        if (!isNullOrEmpty(updateDataModel.getHearingStage())) {
+            submitEvent.getCaseData().setHearingStage(updateDataModel.getHearingStage());
+        }
+
+        if (!isNullOrEmpty(updateDataModel.getReceiptDate())) {
+            submitEvent.getCaseData().setReceiptDate(updateDataModel.getReceiptDate());
+        }
+
+        updateManagingOffice(submitEvent, updateDataModel);
+
+    }
+
+    private void batchUpdate2(SubmitEvent submitEvent, UpdateDataModel updateDataModel) {
+
+        if (!isNullOrEmpty(updateDataModel.getNewMultipleReference())) {
+            submitEvent.getCaseData().setMultipleReference(updateDataModel.getNewMultipleReference());
+        }
+
+        // check if Batch update 2 then if empty update the single and multipleRef = ""
+        //Check if LEAD????
+
+    }
+
+    private void batchUpdate3(SubmitEvent submitEvent, UpdateDataModel updateDataModel) {
+
         if (!isNullOrEmpty(updateDataModel.getClaimantName())) {
             updateClaimantName(submitEvent, updateDataModel.getClaimantName());
         }
@@ -51,29 +94,11 @@ public class UpdateDataTask extends DataTaskParent {
             updateRespondentRep(submitEvent, updateDataModel.getRespondentRep());
         }
 
-        if (!isNullOrEmpty(updateDataModel.getNewMultipleReference())) {
-            submitEvent.getCaseData().setMultipleReference(updateDataModel.getNewMultipleReference());
-        }
-        if (!isNullOrEmpty(updateDataModel.getClerkResponsible())) {
-            submitEvent.getCaseData().setClerkResponsible(updateDataModel.getClerkResponsible());
-        }
-        if (!isNullOrEmpty(updateDataModel.getPositionType())) {
-            submitEvent.getCaseData().setPositionType(updateDataModel.getPositionType());
-        }
-        if (!isNullOrEmpty(updateDataModel.getReceiptDate())) {
-            submitEvent.getCaseData().setReceiptDate(updateDataModel.getReceiptDate());
-        }
-        if (!isNullOrEmpty(updateDataModel.getHearingStage())) {
-            submitEvent.getCaseData().setHearingStage(updateDataModel.getHearingStage());
-        }
-
         if (!isNullOrEmpty(updateDataModel.getJurisdictionCode())
                 && !updateDataModel.getJurisdictionCode().equals(SELECT_NONE_VALUE)
                 && !isNullOrEmpty(updateDataModel.getOutcomeUpdate())) {
             updateJurisdictionCode(submitEvent, updateDataModel.getJurisdictionCode(), updateDataModel.getOutcomeUpdate());
         }
-
-        updateManagingOffice(submitEvent, updateDataModel);
 
     }
 

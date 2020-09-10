@@ -285,6 +285,11 @@ public class Constants {
 
     public static final int NUMBER_THREADS = 20;
 
-    public static final int CHUNK_MESSAGE_SIZE = 2;
+    public static final int CHUNK_MESSAGE_SIZE = 10;
+
+    public static final String BATCH_UPDATE_TYPE_1 = "batchUpdateType1";
+    public static final String BATCH_UPDATE_TYPE_2 = "batchUpdateType2";
+    public static final String BATCH_UPDATE_TYPE_3 = "batchUpdateType3";
+
 
 }

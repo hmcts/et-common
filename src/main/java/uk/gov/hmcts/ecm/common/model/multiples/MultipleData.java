@@ -42,6 +42,11 @@ public class MultipleData {
     @JsonProperty("docMarkUp")
     private String docMarkUp;
 
+    @JsonProperty("batchUpdateType")
+    private String batchUpdateType;
+    @JsonProperty("batchUpdateCase")
+    private String batchUpdateCase;
+
     @JsonProperty("managingOffice")
     private String managingOffice;
     @JsonProperty("fileLocation")
@@ -60,8 +65,15 @@ public class MultipleData {
     private String clerkResponsible;
     @JsonProperty("receiptDate")
     private String receiptDate;
-    @JsonProperty("hearingStage")
+    @JsonProperty("hearingStageEQP")
     private String hearingStage;
+
+    @JsonProperty("convertToSingle")
+    private String convertToSingle;
+    @JsonProperty("updatedMultipleRef")
+    private String updatedMultipleRef;
+    @JsonProperty("updatedSubMultipleRef")
+    private String updatedSubMultipleRef;
 
 }
 

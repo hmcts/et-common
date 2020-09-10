@@ -14,6 +14,9 @@ import uk.gov.hmcts.ecm.common.model.bulk.BulkData;
 import uk.gov.hmcts.ecm.common.model.bulk.BulkRequest;
 import uk.gov.hmcts.ecm.common.model.bulk.SubmitBulkEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.*;
+import uk.gov.hmcts.ecm.common.model.multiples.MultipleCaseSearchResult;
+import uk.gov.hmcts.ecm.common.model.multiples.MultipleData;
+import uk.gov.hmcts.ecm.common.model.multiples.SubmitMultipleEvent;
 import uk.gov.hmcts.ecm.common.model.reference.ReferenceRequest;
 import uk.gov.hmcts.ecm.common.model.reference.ReferenceSubmitEvent;
 import uk.gov.hmcts.ecm.common.service.UserService;
@@ -22,7 +25,6 @@ import uk.gov.hmcts.reform.authorisation.generators.AuthTokenGenerator;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -265,6 +267,20 @@ public class CcdClient {
         return submitBulkEvents;
     }
 
+    public List<SubmitMultipleEvent> retrieveMultipleCasesElasticSearch(String authToken, String caseTypeId, String multipleReference) throws IOException {
+        List<SubmitMultipleEvent> submitMultipleEvents = new ArrayList<>();
+        log.info("QUERY: " + ESHelper.getBulkSearchQuery(multipleReference));
+        HttpEntity<String> request =
+                new HttpEntity<>(ESHelper.getBulkSearchQuery(multipleReference), buildHeaders(authToken));
+        String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
+        MultipleCaseSearchResult multipleCaseSearchResult = restTemplate.exchange(
+                url, HttpMethod.POST, request, MultipleCaseSearchResult.class).getBody();
+        if (multipleCaseSearchResult != null && multipleCaseSearchResult.getCases() != null) {
+            submitMultipleEvents.addAll(multipleCaseSearchResult.getCases());
+        }
+        return submitMultipleEvents;
+    }
+
     public CCDRequest startEventForCase(String authToken, String caseTypeId, String jurisdiction, String cid) throws IOException {
         HttpEntity<String> request =
                 new HttpEntity<>(buildHeaders(authToken));
@@ -321,6 +337,15 @@ public class CcdClient {
         String uri = ccdClientConfig.buildSubmitEventForCaseUrl(userService.getUserDetails(authToken).getUid(), jurisdiction,
                 caseTypeId, cid);
         return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitBulkEvent.class).getBody();
+    }
+
+    public SubmitMultipleEvent submitMultipleEventForCase(String authToken, MultipleData multipleData, String caseTypeId, String jurisdiction, CCDRequest req, String cid)
+            throws IOException {
+        HttpEntity<CaseDataContent> request =
+                new HttpEntity<>(caseDataBuilder.buildMultipleDataContent(multipleData, req, UPDATE_BULK_EVENT_SUMMARY), buildHeaders(authToken));
+        String uri = ccdClientConfig.buildSubmitEventForCaseUrl(userService.getUserDetails(authToken).getUid(), jurisdiction,
+                caseTypeId, cid);
+        return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitMultipleEvent.class).getBody();
     }
 
     HttpHeaders buildHeaders(String authToken) throws IOException {

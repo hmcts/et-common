@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import uk.gov.hmcts.ecm.common.model.bulk.BulkData;
 import uk.gov.hmcts.ecm.common.model.ccd.*;
+import uk.gov.hmcts.ecm.common.model.multiples.MultipleData;
 
 import static org.junit.Assert.assertEquals;
 
@@ -26,6 +27,7 @@ public class CaseDataBuilderTest {
     private CCDRequest ccdRequest;
     private CaseData caseData;
     private BulkData bulkData;
+    private MultipleData multipleData;
 
     @Before
     public void setUp() {
@@ -34,6 +36,7 @@ public class CaseDataBuilderTest {
         ccdRequest.setToken("Token");
         caseData = new CaseData();
         bulkData = new BulkData();
+        multipleData = new MultipleData();
     }
 
     @Test
@@ -54,5 +57,15 @@ public class CaseDataBuilderTest {
                 .token(ccdRequest.getToken())
                 .build();
         assertEquals(caseDataContent, caseDataBuilder.buildBulkDataContent(bulkData, ccdRequest, UPDATE_BULK_EVENT_SUMMARY));
+    }
+
+    @Test
+    public void buildMultipleDataContent() {
+        CaseDataContent caseDataContent = CaseDataContent.builder()
+                .event(Event.builder().eventId(ccdRequest.getEventId()).summary(UPDATE_BULK_EVENT_SUMMARY).build())
+                .ignoreWarning(false)
+                .token(ccdRequest.getToken())
+                .build();
+        assertEquals(caseDataContent, caseDataBuilder.buildMultipleDataContent(multipleData, ccdRequest, UPDATE_BULK_EVENT_SUMMARY));
     }
 }

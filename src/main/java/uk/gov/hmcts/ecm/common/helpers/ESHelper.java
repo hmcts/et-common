@@ -28,7 +28,7 @@ public class ESHelper {
         TermsQueryBuilder termsQueryBuilder = termsQuery(ETHOS_CASE_REFERENCE_KEYWORD, caseIds);
         return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
-                .fetchSource(new String[]{"data"}, null)
+                //.fetchSource(new String[]{"data"}, null)
                 .query(termsQueryBuilder).toString();
     }
 
