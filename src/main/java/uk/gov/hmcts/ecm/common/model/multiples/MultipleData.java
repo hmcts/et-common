@@ -7,6 +7,7 @@ import uk.gov.hmcts.ecm.common.model.bulk.items.CaseIdTypeItem;
 import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
 import uk.gov.hmcts.ecm.common.model.multiples.items.SubMultipleTypeItem;
 import uk.gov.hmcts.ecm.common.model.multiples.types.MoveCasesType;
+import uk.gov.hmcts.ecm.common.model.multiples.types.SubMultipleActionType;
 
 import java.util.List;
 
@@ -75,7 +76,8 @@ public class MultipleData {
 
     @JsonProperty("subMultipleCollection")
     private List<SubMultipleTypeItem> subMultipleCollection;
-
+    @JsonProperty("subMultipleAction")
+    private SubMultipleActionType subMultipleAction;
 }
 
 

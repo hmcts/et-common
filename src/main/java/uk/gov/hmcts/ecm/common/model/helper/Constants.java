@@ -291,5 +291,8 @@ public class Constants {
     public static final String BATCH_UPDATE_TYPE_2 = "batchUpdateType2";
     public static final String BATCH_UPDATE_TYPE_3 = "batchUpdateType3";
 
+    public static final String CREATE_ACTION = "Create";
+    public static final String AMEND_ACTION = "Amend";
+    public static final String DELETE_ACTION = "Delete";
 
 }
