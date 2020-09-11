@@ -181,6 +181,35 @@ public class CcdClient {
         return submitEvents;
     }
 
+    public List<SubmitMultipleEvent> buildAndGetElasticSearchRequestWithRetriesMultiples(String authToken, String caseTypeId, String query) throws IOException {
+        HttpEntity<String> request = new HttpEntity<>(query, buildHeaders(authToken));
+        String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
+        MultipleCaseSearchResult multipleCaseSearchResult;
+        int retries = 1;
+        do {
+            log.info("Retry: " + retries);
+            multipleCaseSearchResult = restTemplate.exchange(url, HttpMethod.POST, request, MultipleCaseSearchResult.class).getBody();
+            try {
+                if (multipleCaseSearchResult != null) {
+                    log.info("Checking size found: " + multipleCaseSearchResult.getTotal());
+                }
+                TimeUnit.SECONDS.sleep(5);
+                retries++;
+                if (retries == 7) {
+                    break;
+                }
+            } catch (InterruptedException e) {
+                log.error("Error sleeping the thread");
+                Thread.currentThread().interrupt();
+            }
+        } while (multipleCaseSearchResult == null || multipleCaseSearchResult.getTotal() != 1);
+
+        return multipleCaseSearchResult != null
+                ? new ArrayList<>(multipleCaseSearchResult.getCases())
+                : new ArrayList<>();
+
+    }
+
     private List<SubmitEvent> buildAndGetElasticSearchRequestWithRetries(String authToken, String caseTypeId, String query, int size, List<String> caseIds) throws IOException {
         HttpEntity<String> request = new HttpEntity<>(query, buildHeaders(authToken));
         String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
@@ -265,6 +294,11 @@ public class CcdClient {
             submitBulkEvents.addAll(bulkCaseSearchResult.getCases());
         }
         return submitBulkEvents;
+    }
+
+    public List<SubmitMultipleEvent> retrieveMultipleCasesElasticSearchWithRetries(String authToken, String caseTypeId, String multipleReference) throws IOException {
+        log.info("QUERY WITH RETRIES: " + ESHelper.getBulkSearchQuery(multipleReference));
+        return buildAndGetElasticSearchRequestWithRetriesMultiples(authToken, caseTypeId, ESHelper.getBulkSearchQuery(multipleReference));
     }
 
     public List<SubmitMultipleEvent> retrieveMultipleCasesElasticSearch(String authToken, String caseTypeId, String multipleReference) throws IOException {

@@ -70,7 +70,7 @@ public class MultipleData {
     @JsonProperty("hearingStageEQP")
     private String hearingStage;
 
-    @JsonProperty("moveCases")
+    @JsonProperty("batchMoveCases")
     private MoveCasesType moveCases;
 
     @JsonProperty("subMultipleCollection")

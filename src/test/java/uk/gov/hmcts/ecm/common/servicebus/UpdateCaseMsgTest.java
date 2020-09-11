@@ -91,7 +91,6 @@ public class UpdateCaseMsgTest {
         assertEquals("FileLocationAberdeen", submitEventAccepted.getCaseData().getFileLocationAberdeen());
         assertEquals("FileLocationDundee", submitEventAccepted.getCaseData().getFileLocationDundee());
         assertEquals("FileLocationEdinburgh", submitEventAccepted.getCaseData().getFileLocationEdinburgh());
-        assertEquals("2440001", submitEventAccepted.getCaseData().getMultipleReference());
         assertEquals("ClerkResponsible", submitEventAccepted.getCaseData().getClerkResponsible());
         assertEquals("PositionType", submitEventAccepted.getCaseData().getPositionType());
         assertEquals("25/08/1999", submitEventAccepted.getCaseData().getReceiptDate());
@@ -114,7 +113,6 @@ public class UpdateCaseMsgTest {
         assertEquals("FileLocationAberdeen", submitEventDetailed.getCaseData().getFileLocationAberdeen());
         assertEquals("FileLocationDundee", submitEventDetailed.getCaseData().getFileLocationDundee());
         assertEquals("FileLocationEdinburgh", submitEventDetailed.getCaseData().getFileLocationEdinburgh());
-        assertEquals("2440001", submitEventDetailed.getCaseData().getMultipleReference());
         assertEquals("ClerkResponsible", submitEventDetailed.getCaseData().getClerkResponsible());
         assertEquals("PositionType", submitEventDetailed.getCaseData().getPositionType());
         assertEquals("ECM", submitEventDetailed.getCaseData().getJurCodesCollection().get(0).getValue().getJuridictionCodesList());

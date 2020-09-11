@@ -104,7 +104,6 @@ public class ServiceBusHelper {
                 .fileLocationAberdeen("FileLocationAberdeen")
                 .fileLocationDundee("FileLocationDundee")
                 .fileLocationEdinburgh("FileLocationEdinburgh")
-                .newMultipleReference("2440001")
                 .clerkResponsible("ClerkResponsible")
                 .positionType("PositionType")
                 .jurisdictionCode("ECM")

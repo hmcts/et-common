@@ -40,9 +40,6 @@ public class UpdateDataModel extends DataModelParent {
     @JsonProperty("fileLocationEdinburgh")
     private String fileLocationEdinburgh;
 
-    @JsonProperty("newMultipleReference")
-    private String newMultipleReference;
-
     @JsonProperty("clerkResponsible")
     private String clerkResponsible;
 

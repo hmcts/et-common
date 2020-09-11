@@ -43,8 +43,6 @@ public class UpdateDataTask extends DataTaskParent {
 
         batchUpdate1(submitEvent, updateDataModel);
 
-        batchUpdate2(submitEvent, updateDataModel);
-
         batchUpdate3(submitEvent, updateDataModel);
 
     }
@@ -68,17 +66,6 @@ public class UpdateDataTask extends DataTaskParent {
         }
 
         updateManagingOffice(submitEvent, updateDataModel);
-
-    }
-
-    private void batchUpdate2(SubmitEvent submitEvent, UpdateDataModel updateDataModel) {
-
-        if (!isNullOrEmpty(updateDataModel.getNewMultipleReference())) {
-            submitEvent.getCaseData().setMultipleReference(updateDataModel.getNewMultipleReference());
-        }
-
-        // check if Batch update 2 then if empty update the single and multipleRef = ""
-        //Check if LEAD????
 
     }
 

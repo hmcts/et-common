@@ -208,7 +208,8 @@ public class CcdClientTest {
     public void retrieveMultipleCasesElasticSearch() throws IOException {
         String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.multipleReference.keyword\":[\"2400001/2020\"],\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
-        MultipleCaseSearchResult multipleCaseSearchResult = new MultipleCaseSearchResult(2L, Arrays.asList(new SubmitMultipleEvent(), new SubmitMultipleEvent()));
+        MultipleCaseSearchResult multipleCaseSearchResult =
+                new MultipleCaseSearchResult(2L, Arrays.asList(new SubmitMultipleEvent(), new SubmitMultipleEvent()));
         ResponseEntity<MultipleCaseSearchResult> responseEntity = new ResponseEntity<>(multipleCaseSearchResult, HttpStatus.OK);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(MultipleCaseSearchResult.class))).thenReturn(responseEntity);
@@ -416,4 +417,23 @@ public class CcdClientTest {
         userDetails.setRoles(Collections.singletonList("role"));
         return userDetails;
     }
+
+    @Test
+    public void retrieveMultipleCasesElasticSearchWithRetries() throws IOException {
+        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.multipleReference.keyword\":[\"2400001/2020\"],\"boost\":1.0}}}";
+        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
+        SubmitMultipleEvent submitMultipleEvent = new SubmitMultipleEvent();
+        MultipleData multipleData = new MultipleData();
+        multipleData.setMultipleReference("2400001/2020");
+        submitMultipleEvent.setCaseData(multipleData);
+        MultipleCaseSearchResult multipleCaseSearchResult =
+                new MultipleCaseSearchResult(1L, Collections.singletonList(submitMultipleEvent));
+        ResponseEntity<MultipleCaseSearchResult> responseEntity = new ResponseEntity<>(multipleCaseSearchResult, HttpStatus.OK);
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(MultipleCaseSearchResult.class))).thenReturn(responseEntity);
+        ccdClient.retrieveMultipleCasesElasticSearchWithRetries("authToken", caseDetails.getCaseTypeId(), "2400001/2020");
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(MultipleCaseSearchResult.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
 }
