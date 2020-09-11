@@ -10,5 +10,13 @@ public class SubMultipleActionType {
 
     @JsonProperty("actionType")
     private String actionType;
+    @JsonProperty("createSubMultipleName")
+    private String createSubMultipleName;
+    @JsonProperty("amendSubMultipleNameExisting")
+    private String amendSubMultipleNameExisting;
+    @JsonProperty("amendSubMultipleNameNew")
+    private String amendSubMultipleNameNew;
+    @JsonProperty("deleteSubMultipleName")
+    private String deleteSubMultipleName;
 
 }
