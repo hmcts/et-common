@@ -28,6 +28,11 @@ public class ClaimantIndType {
     @JsonProperty("claimant_gender")
     private String claimantGender;
 
+    public String claimantFullNames() {
+        return String.join(" ", notNullOrEmptyAtt(new ArrayList<>(), Arrays.asList(claimantTitle,
+                claimantTitleOther, claimantFirstNames, claimantLastName)));
+    }
+
     public String claimantFullName() {
         return String.join(" ", notNullOrEmptyAtt(new ArrayList<>(), Arrays.asList(claimantTitle,
                 claimantTitleOther, getInitials(), claimantLastName)));
