@@ -31,7 +31,7 @@ public class MultipleData {
     private String state;
     @JsonProperty("multipleSource")
     private String multipleSource;
-    @JsonProperty("leadCase")
+    @JsonProperty("leadCaseLink")
     private CaseLinkType leadCase;
 
     @JsonProperty("flag1")
