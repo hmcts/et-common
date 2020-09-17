@@ -33,6 +33,9 @@ public class Msg {
     @JsonProperty("username")
     String username;
 
+    @JsonProperty("confirmation")
+    String confirmation;
+
     @JsonProperty("updateData")
     DataModelParent dataModelParent;
 

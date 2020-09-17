@@ -35,8 +35,8 @@ public class UpdateCaseMsgTest {
         CreationDataModel creationDataModel = ServiceBusHelper.getCreationDataModel("4150002/2020");
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(creationDataModel);
         assertEquals("UpdateCaseMsg{ethosCaseReference='4150002/2020', msgId='1', jurisdiction='EMPLOYMENT', " +
-                "caseTypeId='Scotland_Multiples', multipleRef='4150001', totalCases='1', username='eric.ccdcooper@gmail.com', " +
-                "dataModel=CreationDataModel(lead=4150002/2020, multipleRef=4150001)}",
+                        "caseTypeId='Scotland_Multiples', multipleRef='4150001', totalCases='1', username='eric.ccdcooper@gmail.com', " +
+                        "confirmation='YES', dataModel=CreationDataModel(lead=4150002/2020, multipleRef=4150001)}",
                 updateCaseMsg.toString());
     }
 

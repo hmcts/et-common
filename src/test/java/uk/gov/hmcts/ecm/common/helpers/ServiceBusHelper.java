@@ -28,6 +28,7 @@ public class ServiceBusHelper {
                 .ethosCaseReference("4150002/2020")
                 .totalCases("1")
                 .username("eric.ccdcooper@gmail.com")
+                .confirmation("YES")
                 .dataModelParent(dataModelParent)
                 .build();
     }

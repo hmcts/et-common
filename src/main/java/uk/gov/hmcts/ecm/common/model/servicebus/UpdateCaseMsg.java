@@ -27,15 +27,16 @@ public class UpdateCaseMsg extends Msg {
     @Override
     public String toString() {
         return "UpdateCaseMsg{" +
-            "ethosCaseReference='" + ethosCaseReference + '\'' +
-            ", msgId='" + msgId + '\'' +
-            ", jurisdiction='" + jurisdiction + '\'' +
-            ", caseTypeId='" + caseTypeId + '\'' +
-            ", multipleRef='" + multipleRef + '\'' +
-            ", totalCases='" + totalCases + '\'' +
-            ", username='" + username + '\'' +
-            ", dataModel=" + dataModelParent +
-            '}';
+                "ethosCaseReference='" + ethosCaseReference + '\'' +
+                ", msgId='" + msgId + '\'' +
+                ", jurisdiction='" + jurisdiction + '\'' +
+                ", caseTypeId='" + caseTypeId + '\'' +
+                ", multipleRef='" + multipleRef + '\'' +
+                ", totalCases='" + totalCases + '\'' +
+                ", username='" + username + '\'' +
+                ", confirmation='" + confirmation + '\'' +
+                ", dataModel=" + dataModelParent +
+                '}';
     }
 
     public void runTask(SubmitEvent submitEvent) {
