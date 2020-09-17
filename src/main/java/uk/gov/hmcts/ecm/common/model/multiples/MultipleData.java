@@ -6,7 +6,6 @@ import lombok.Data;
 import uk.gov.hmcts.ecm.common.model.bulk.items.CaseIdTypeItem;
 import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
 import uk.gov.hmcts.ecm.common.model.multiples.items.SubMultipleTypeItem;
-import uk.gov.hmcts.ecm.common.model.multiples.types.CaseLinkType;
 import uk.gov.hmcts.ecm.common.model.multiples.types.MoveCasesType;
 import uk.gov.hmcts.ecm.common.model.multiples.types.SubMultipleActionType;
 
@@ -31,8 +30,8 @@ public class MultipleData {
     private String state;
     @JsonProperty("multipleSource")
     private String multipleSource;
-    @JsonProperty("leadCaseLink")
-    private CaseLinkType leadCase;
+    @JsonProperty("leadCase")
+    private String leadCase;
 
     @JsonProperty("flag1")
     private DynamicFixedListType flag1;

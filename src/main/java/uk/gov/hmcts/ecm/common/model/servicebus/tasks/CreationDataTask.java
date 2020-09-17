@@ -38,6 +38,8 @@ public class CreationDataTask extends DataTaskParent {
                 .equals(((CreationDataModel)dataModelParent).getLead())) {
             log.info("Adding lead");
             submitEvent.getCaseData().setLeadClaimant(YES);
+        } else {
+            submitEvent.getCaseData().setLeadClaimant(NO);
         }
 
     }
