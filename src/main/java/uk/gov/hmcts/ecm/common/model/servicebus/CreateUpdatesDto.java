@@ -11,6 +11,7 @@ public class CreateUpdatesDto {
     private String multipleRef;
     private String username;
     private String caseTypeId;
+    private String confirmation;
     private List<String> ethosCaseRefCollection;
 
 }

@@ -25,15 +25,16 @@ public class CreateUpdatesHelper {
                                                      String updateSize) {
 
         return CreateUpdatesMsg.builder()
-            .msgId(UUID.randomUUID().toString())
-            .jurisdiction(createUpdatesDto.getJurisdiction())
-            .caseTypeId(createUpdatesDto.getCaseTypeId())
-            .multipleRef(createUpdatesDto.getMultipleRef())
-            .ethosCaseRefCollection(ethosCasesChunked)
-            .totalCases(updateSize)
-            .username(createUpdatesDto.getUsername())
-            .dataModelParent(dataModelParent)
-            .build();
+                .msgId(UUID.randomUUID().toString())
+                .jurisdiction(createUpdatesDto.getJurisdiction())
+                .caseTypeId(createUpdatesDto.getCaseTypeId())
+                .multipleRef(createUpdatesDto.getMultipleRef())
+                .ethosCaseRefCollection(ethosCasesChunked)
+                .totalCases(updateSize)
+                .username(createUpdatesDto.getUsername())
+                .confirmation(createUpdatesDto.getConfirmation())
+                .dataModelParent(dataModelParent)
+                .build();
     }
 
 }

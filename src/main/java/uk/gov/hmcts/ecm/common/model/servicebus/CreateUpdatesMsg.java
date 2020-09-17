@@ -24,14 +24,15 @@ public class CreateUpdatesMsg extends Msg {
     @Override
     public String toString() {
         return "CreateUpdatesMsg{" +
-            "ethosCaseRefCollection=" + ethosCaseRefCollection +
-            ", msgId='" + msgId + '\'' +
-            ", jurisdiction='" + jurisdiction + '\'' +
-            ", caseTypeId='" + caseTypeId + '\'' +
-            ", multipleRef='" + multipleRef + '\'' +
-            ", totalCases='" + totalCases + '\'' +
-            ", username='" + username + '\'' +
-            ", dataModel=" + dataModelParent +
-            '}';
+                "ethosCaseRefCollection=" + ethosCaseRefCollection +
+                ", msgId='" + msgId + '\'' +
+                ", jurisdiction='" + jurisdiction + '\'' +
+                ", caseTypeId='" + caseTypeId + '\'' +
+                ", multipleRef='" + multipleRef + '\'' +
+                ", totalCases='" + totalCases + '\'' +
+                ", username='" + username + '\'' +
+                ", confirmation='" + confirmation + '\'' +
+                ", dataModel=" + dataModelParent +
+                '}';
     }
 }
