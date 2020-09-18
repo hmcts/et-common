@@ -54,10 +54,6 @@ public class CaseData {
     private DynamicFixedListType claimantWorkAddressQRespondent;
     @JsonProperty("representativeClaimantType")
     private RepresentedTypeC representativeClaimantType;
-    @JsonProperty("responseTypeCollection")
-    private List<RespondentSumTypeItem> responseTypeCollection;
-    @JsonProperty("responseType")
-    private RespondentSumType responseType;
     @JsonProperty("respondentCollection")
     private List<RespondentSumTypeItem> respondentCollection;
     @JsonProperty("repCollection")
@@ -74,8 +70,6 @@ public class CaseData {
     private String fileLocationDundee;
     @JsonProperty("fileLocationEdinburgh")
     private String fileLocationEdinburgh;
-    @JsonProperty("hearingType")
-    private HearingType hearingType;
     @JsonProperty("hearingCollection")
     private List<HearingTypeItem> hearingCollection;
     @JsonProperty("depositType")
