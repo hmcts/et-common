@@ -253,7 +253,7 @@ public class CaseData {
     @JsonProperty("hearingTimingDuration")
     private String hearingTimingDuration;
 
-    @JsonProperty("batchMoveCases")
+    @JsonProperty("singleMoveCases")
     private SingleMoveCasesType moveCases;
 
 }
