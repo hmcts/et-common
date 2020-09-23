@@ -4,10 +4,7 @@ import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.RepresentedTypeRItem;
-import uk.gov.hmcts.ecm.common.model.ccd.types.ClaimantIndType;
-import uk.gov.hmcts.ecm.common.model.ccd.types.JurCodesType;
-import uk.gov.hmcts.ecm.common.model.ccd.types.RepresentedTypeC;
-import uk.gov.hmcts.ecm.common.model.ccd.types.RepresentedTypeR;
+import uk.gov.hmcts.ecm.common.model.ccd.types.*;
 import uk.gov.hmcts.ecm.common.model.servicebus.UpdateCaseMsg;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.*;
 
@@ -96,9 +93,6 @@ public class ServiceBusHelper {
 
     public static UpdateDataModel getUpdateDataModel() {
         return UpdateDataModel.builder()
-                .claimantName("ClaimantName")
-                .claimantRep("ClaimantRep")
-                .respondentRep("RespondentRep")
                 .managingOffice("ManagingOffice")
                 .fileLocation("FileLocation")
                 .fileLocationGlasgow("FileLocationGlasgow")
@@ -107,10 +101,47 @@ public class ServiceBusHelper {
                 .fileLocationEdinburgh("FileLocationEdinburgh")
                 .clerkResponsible("ClerkResponsible")
                 .positionType("PositionType")
-                .jurisdictionCode("ECM")
                 .receiptDate("25/08/1999")
                 .hearingStage("HearingStage")
-                .outcomeUpdate("OutcomeUpdate")
+                .representativeClaimantType(getRepresentativeClaimant())
+                .jurCodesType(getJurCodesType())
+                .respondentSumType(getRespondentSubType())
                 .build();
     }
+
+    public static RepresentedTypeC getRepresentativeClaimant() {
+
+        RepresentedTypeC representedTypeC = new RepresentedTypeC();
+
+        representedTypeC.setNameOfRepresentative("RepName");
+        representedTypeC.setRepresentativeEmailAddress("repEmail@hotmail.com");
+        representedTypeC.setRepresentativePhoneNumber("072224232");
+
+        return representedTypeC;
+
+    }
+
+    public static JurCodesType getJurCodesType() {
+
+        JurCodesType jurCodesType = new JurCodesType();
+
+        jurCodesType.setJuridictionCodesList("AC");
+        jurCodesType.setJudgmentOutcome("outcome");
+
+        return jurCodesType;
+
+    }
+
+    public static RespondentSumType getRespondentSubType() {
+
+        RespondentSumType respondentSumType = new RespondentSumType();
+
+        respondentSumType.setRespondentName("RespondentName");
+        respondentSumType.setRespondentEmail("respondentEmail@hotmail.com");
+        respondentSumType.setRespondentPhone1("072323232");
+
+        return respondentSumType;
+
+    }
+
 }

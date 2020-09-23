@@ -6,18 +6,17 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
+import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
-import uk.gov.hmcts.ecm.common.model.ccd.items.RepresentedTypeRItem;
+import uk.gov.hmcts.ecm.common.model.ccd.items.RespondentSumTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.types.*;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.UpdateDataModel;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -41,145 +40,123 @@ public class UpdateDataTask extends DataTaskParent {
 
         UpdateDataModel updateDataModel = ((UpdateDataModel) dataModelParent);
 
-        batchUpdate1(submitEvent, updateDataModel);
+        batchUpdate1(submitEvent.getCaseData(), updateDataModel);
 
-        batchUpdate3(submitEvent, updateDataModel);
+        batchUpdate3(submitEvent.getCaseData(), updateDataModel);
 
     }
 
-    private void batchUpdate1(SubmitEvent submitEvent, UpdateDataModel updateDataModel) {
+    private void batchUpdate1(CaseData caseData, UpdateDataModel updateDataModel) {
 
         if (!isNullOrEmpty(updateDataModel.getPositionType())) {
-            submitEvent.getCaseData().setPositionType(updateDataModel.getPositionType());
+            caseData.setPositionType(updateDataModel.getPositionType());
         }
 
         if (!isNullOrEmpty(updateDataModel.getClerkResponsible())) {
-            submitEvent.getCaseData().setClerkResponsible(updateDataModel.getClerkResponsible());
+            caseData.setClerkResponsible(updateDataModel.getClerkResponsible());
         }
 
         if (!isNullOrEmpty(updateDataModel.getHearingStage())) {
-            submitEvent.getCaseData().setHearingStage(updateDataModel.getHearingStage());
+            caseData.setHearingStage(updateDataModel.getHearingStage());
         }
 
         if (!isNullOrEmpty(updateDataModel.getReceiptDate())) {
-            submitEvent.getCaseData().setReceiptDate(updateDataModel.getReceiptDate());
+            caseData.setReceiptDate(updateDataModel.getReceiptDate());
         }
 
-        updateManagingOffice(submitEvent, updateDataModel);
+        updateManagingOffice(caseData, updateDataModel);
 
     }
 
-    private void batchUpdate3(SubmitEvent submitEvent, UpdateDataModel updateDataModel) {
-
-        if (!isNullOrEmpty(updateDataModel.getClaimantName())) {
-            updateClaimantName(submitEvent, updateDataModel.getClaimantName());
-        }
-        if (!isNullOrEmpty(updateDataModel.getClaimantRep())) {
-            updateClaimantRep(submitEvent, updateDataModel.getClaimantRep());
-        }
-        if (!isNullOrEmpty(updateDataModel.getRespondentRep())) {
-            updateRespondentRep(submitEvent, updateDataModel.getRespondentRep());
-        }
-
-        if (!isNullOrEmpty(updateDataModel.getJurisdictionCode())
-                && !updateDataModel.getJurisdictionCode().equals(SELECT_NONE_VALUE)
-                && !isNullOrEmpty(updateDataModel.getOutcomeUpdate())) {
-            updateJurisdictionCode(submitEvent, updateDataModel.getJurisdictionCode(), updateDataModel.getOutcomeUpdate());
-        }
-
-    }
-
-    private void updateClaimantName(SubmitEvent submitEvent, String claimantNameNewValue) {
-
-        ClaimantIndType claimantIndType;
-        if (submitEvent.getCaseData().getClaimantIndType() != null) {
-            claimantIndType = submitEvent.getCaseData().getClaimantIndType();
-        } else {
-            claimantIndType = new ClaimantIndType();
-        }
-        claimantIndType.setClaimantFirstNames(claimantNameNewValue);
-        submitEvent.getCaseData().setClaimantIndType(claimantIndType);
-    }
-
-    private void updateClaimantRep(SubmitEvent submitEvent, String claimantRepNewValue) {
-
-        RepresentedTypeC representedTypeC;
-        if (submitEvent.getCaseData().getRepresentativeClaimantType() != null) {
-            representedTypeC = submitEvent.getCaseData().getRepresentativeClaimantType();
-        } else {
-            representedTypeC = new RepresentedTypeC();
-            submitEvent.getCaseData().setClaimantRepresentedQuestion(YES);
-        }
-        representedTypeC.setNameOfRepresentative(claimantRepNewValue);
-        submitEvent.getCaseData().setRepresentativeClaimantType(representedTypeC);
-    }
-
-    private void updateRespondentRep(SubmitEvent submitEvent, String respondentRepNewValue) {
-
-        if (submitEvent.getCaseData().getRepCollection() != null && !submitEvent.getCaseData().getRepCollection().isEmpty()) {
-            RepresentedTypeRItem representedTypeRItem = submitEvent.getCaseData().getRepCollection().get(0);
-            RepresentedTypeR representedTypeR;
-            if (representedTypeRItem != null) {
-                representedTypeR = representedTypeRItem.getValue();
-            } else {
-                representedTypeRItem = new RepresentedTypeRItem();
-                representedTypeR = new RepresentedTypeR();
-            }
-            representedTypeR.setNameOfRepresentative(respondentRepNewValue);
-            representedTypeRItem.setValue(representedTypeR);
-            submitEvent.getCaseData().getRepCollection().set(0, representedTypeRItem);
-        } else {
-            RepresentedTypeRItem representedTypeRItem = new RepresentedTypeRItem();
-            RepresentedTypeR representedTypeR = new RepresentedTypeR();
-            representedTypeR.setNameOfRepresentative(respondentRepNewValue);
-            representedTypeRItem.setValue(representedTypeR);
-            List<RepresentedTypeRItem> repCollection = new ArrayList<>(Collections.singletonList(representedTypeRItem));
-            submitEvent.getCaseData().setRepCollection(repCollection);
-        }
-    }
-
-    private void updateManagingOffice(SubmitEvent submitEvent, UpdateDataModel updateDataModel) {
+    private void updateManagingOffice(CaseData caseData, UpdateDataModel updateDataModel) {
 
         if (!isNullOrEmpty(updateDataModel.getManagingOffice())) {
-            submitEvent.getCaseData().setManagingOffice(updateDataModel.getManagingOffice());
+            caseData.setManagingOffice(updateDataModel.getManagingOffice());
         }
+
         if (!isNullOrEmpty(updateDataModel.getFileLocation())) {
-            submitEvent.getCaseData().setFileLocation(updateDataModel.getFileLocation());
+            caseData.setFileLocation(updateDataModel.getFileLocation());
         }
+
         if (!isNullOrEmpty(updateDataModel.getFileLocationGlasgow())) {
-            submitEvent.getCaseData().setFileLocationGlasgow(updateDataModel.getFileLocationGlasgow());
+            caseData.setFileLocationGlasgow(updateDataModel.getFileLocationGlasgow());
         }
+
         if (!isNullOrEmpty(updateDataModel.getFileLocationAberdeen())) {
-            submitEvent.getCaseData().setFileLocationAberdeen(updateDataModel.getFileLocationAberdeen());
+            caseData.setFileLocationAberdeen(updateDataModel.getFileLocationAberdeen());
         }
+
         if (!isNullOrEmpty(updateDataModel.getFileLocationDundee())) {
-            submitEvent.getCaseData().setFileLocationDundee(updateDataModel.getFileLocationDundee());
+            caseData.setFileLocationDundee(updateDataModel.getFileLocationDundee());
         }
+
         if (!isNullOrEmpty(updateDataModel.getFileLocationEdinburgh())) {
-            submitEvent.getCaseData().setFileLocationEdinburgh(updateDataModel.getFileLocationEdinburgh());
+            caseData.setFileLocationEdinburgh(updateDataModel.getFileLocationEdinburgh());
         }
+
     }
 
-    private void updateJurisdictionCode(SubmitEvent submitEvent, String jurisdictionCode, String outcome) {
+    private void batchUpdate3(CaseData caseData, UpdateDataModel updateDataModel) {
 
-        List<JurCodesTypeItem> jurCodesTypeItems = new ArrayList<>();
-
-        if (submitEvent.getCaseData().getJurCodesCollection() != null
-                && !submitEvent.getCaseData().getJurCodesCollection().isEmpty()) {
-
-            for (JurCodesTypeItem jurCodesTypeItem : submitEvent.getCaseData().getJurCodesCollection()) {
-
-                if (jurCodesTypeItem.getValue().getJuridictionCodesList().equals(jurisdictionCode)) {
-                    JurCodesType jurCodesType = jurCodesTypeItem.getValue();
-                    jurCodesType.setJudgmentOutcome(outcome);
-                    jurCodesTypeItem.setValue(jurCodesType);
-                }
-
-                jurCodesTypeItems.add(jurCodesTypeItem);
-            }
+        if (updateDataModel.getRepresentativeClaimantType() != null) {
+            caseData.setRepresentativeClaimantType(updateDataModel.getRepresentativeClaimantType());
         }
 
-        submitEvent.getCaseData().setJurCodesCollection(jurCodesTypeItems);
+        if (updateDataModel.getJurCodesType() != null) {
+            updateJurisdictionCode(caseData, updateDataModel.getJurCodesType());
+        }
+
+        if (updateDataModel.getRespondentSumType() != null) {
+            updateRespondentSumType(caseData, updateDataModel.getRespondentSumType());
+        }
+
+    }
+
+    private void updateRespondentSumType(CaseData caseData, RespondentSumType respondentSumType) {
+
+        if (caseData.getRespondentCollection() != null) {
+            caseData.getRespondentCollection().add(createRespondentSumTypeItem(respondentSumType));
+
+        } else {
+            caseData.setRespondentCollection(
+                    new ArrayList<>(Collections.singletonList(createRespondentSumTypeItem(respondentSumType))));
+        }
+
+    }
+
+    private RespondentSumTypeItem createRespondentSumTypeItem(RespondentSumType respondentSumType) {
+
+        RespondentSumTypeItem respondentSumTypeItem = new RespondentSumTypeItem();
+
+        respondentSumTypeItem.setId(respondentSumType.getRespondentName());
+        respondentSumTypeItem.setValue(respondentSumType);
+
+        return respondentSumTypeItem;
+
+    }
+
+    private void updateJurisdictionCode(CaseData caseData, JurCodesType jurCodesType) {
+
+        if (caseData.getJurCodesCollection() != null) {
+
+            caseData.getJurCodesCollection().add(createJurCodesTypeItem(jurCodesType));
+
+        } else {
+            caseData.setJurCodesCollection(
+                    new ArrayList<>(Collections.singletonList(createJurCodesTypeItem(jurCodesType))));
+        }
+
+    }
+
+    private JurCodesTypeItem createJurCodesTypeItem(JurCodesType jurCodesType) {
+
+        JurCodesTypeItem jurCodesTypeItem = new JurCodesTypeItem();
+
+        jurCodesTypeItem.setId(jurCodesType.getJuridictionCodesList());
+        jurCodesTypeItem.setValue(jurCodesType);
+
+        return jurCodesTypeItem;
+
     }
 
 }

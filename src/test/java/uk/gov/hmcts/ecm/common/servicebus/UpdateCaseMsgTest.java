@@ -82,9 +82,6 @@ public class UpdateCaseMsgTest {
         UpdateDataModel updateDataModel = ServiceBusHelper.getUpdateDataModel();
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(updateDataModel);
         updateCaseMsg.runTask(submitEventAccepted);
-        assertEquals("ClaimantName", submitEventAccepted.getCaseData().getClaimantIndType().getClaimantFirstNames());
-        assertEquals("ClaimantRep", submitEventAccepted.getCaseData().getRepresentativeClaimantType().getNameOfRepresentative());
-        assertEquals("RespondentRep", submitEventAccepted.getCaseData().getRepCollection().get(0).getValue().getNameOfRepresentative());
         assertEquals("ManagingOffice", submitEventAccepted.getCaseData().getManagingOffice());
         assertEquals("FileLocation", submitEventAccepted.getCaseData().getFileLocation());
         assertEquals("FileLocationGlasgow", submitEventAccepted.getCaseData().getFileLocationGlasgow());
@@ -95,8 +92,9 @@ public class UpdateCaseMsgTest {
         assertEquals("PositionType", submitEventAccepted.getCaseData().getPositionType());
         assertEquals("25/08/1999", submitEventAccepted.getCaseData().getReceiptDate());
         assertEquals("HearingStage", submitEventAccepted.getCaseData().getHearingStage());
-        assertEquals("ECM", submitEventAccepted.getCaseData().getJurCodesCollection().get(0).getValue().getJuridictionCodesList());
-        assertEquals("OutcomeUpdate", submitEventAccepted.getCaseData().getJurCodesCollection().get(0).getValue().getJudgmentOutcome());
+        assertEquals("RepName", submitEventAccepted.getCaseData().getRepresentativeClaimantType().getNameOfRepresentative());
+        assertEquals("AC", submitEventAccepted.getCaseData().getJurCodesCollection().get(1).getValue().getJuridictionCodesList());
+        assertEquals("RespondentName", submitEventAccepted.getCaseData().getRespondentCollection().get(0).getValue().getRespondentName());
     }
 
     @Test
@@ -104,9 +102,6 @@ public class UpdateCaseMsgTest {
         UpdateDataModel updateDataModel = ServiceBusHelper.getUpdateDataModel();
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(updateDataModel);
         updateCaseMsg.runTask(submitEventDetailed);
-        assertEquals("ClaimantName", submitEventDetailed.getCaseData().getClaimantIndType().getClaimantFirstNames());
-        assertEquals("ClaimantRep", submitEventDetailed.getCaseData().getRepresentativeClaimantType().getNameOfRepresentative());
-        assertEquals("RespondentRep", submitEventDetailed.getCaseData().getRepCollection().get(0).getValue().getNameOfRepresentative());
         assertEquals("ManagingOffice", submitEventDetailed.getCaseData().getManagingOffice());
         assertEquals("FileLocation", submitEventDetailed.getCaseData().getFileLocation());
         assertEquals("FileLocationGlasgow", submitEventDetailed.getCaseData().getFileLocationGlasgow());
@@ -115,7 +110,8 @@ public class UpdateCaseMsgTest {
         assertEquals("FileLocationEdinburgh", submitEventDetailed.getCaseData().getFileLocationEdinburgh());
         assertEquals("ClerkResponsible", submitEventDetailed.getCaseData().getClerkResponsible());
         assertEquals("PositionType", submitEventDetailed.getCaseData().getPositionType());
-        assertEquals("ECM", submitEventDetailed.getCaseData().getJurCodesCollection().get(0).getValue().getJuridictionCodesList());
-        assertEquals("OutcomeUpdate", submitEventDetailed.getCaseData().getJurCodesCollection().get(0).getValue().getJudgmentOutcome());
+        assertEquals("RepName", submitEventDetailed.getCaseData().getRepresentativeClaimantType().getNameOfRepresentative());
+        assertEquals("AC", submitEventDetailed.getCaseData().getJurCodesCollection().get(1).getValue().getJuridictionCodesList());
+        assertEquals("RespondentName", submitEventDetailed.getCaseData().getRespondentCollection().get(0).getValue().getRespondentName());
     }
 }

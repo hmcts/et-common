@@ -26,12 +26,18 @@ public class CaseData {
     private String tribunalCorrespondenceEmail;
     @JsonProperty("ethosCaseReference")
     private String ethosCaseReference;
+
     @JsonProperty("caseType")
     private String caseType;
     @JsonProperty("multipleReference")
     private String multipleReference;
-    @JsonProperty("leadClaimant1")
+    @JsonProperty("subMultipleName")
+    private String subMultipleName;
+    @JsonProperty("leadClaimant")
     private String leadClaimant;
+    @JsonProperty("checkMultiple")
+    private String checkMultiple;
+
     @JsonProperty("claimant_TypeOfClaimant")
     private String claimantTypeOfClaimant;
     @JsonProperty("claimant_Company")
@@ -88,14 +94,8 @@ public class CaseData {
     private String clerkResponsible;
     @JsonProperty("userLocation")
     private String userLocation;
-    @JsonProperty("subMultipleReference")
-    private String subMultipleReference;
-    @JsonProperty("addSubMultipleComment")
-    private String addSubMultipleComment;
     @JsonProperty("documentCollection")
     private List<DocumentTypeItem> documentCollection;
-    @JsonProperty("referredToJudge")
-    private String referredToJudge;
     @JsonProperty("backFromJudge")
     private String backFromJudge;
     @JsonProperty("additionalCaseInfo")
@@ -116,8 +116,6 @@ public class CaseData {
     private ClaimantWorkAddressType claimantWorkAddress;
     @JsonProperty("claimantRepresentedQuestion")
     private String claimantRepresentedQuestion;
-    @JsonProperty("bulkCaseReferenceNumber")
-    private String bulkCaseReferenceNumber;
     @JsonProperty("managingOffice")
     private String managingOffice;
     @JsonProperty("allocatedOffice")
@@ -126,8 +124,6 @@ public class CaseData {
     private String caseSource;
     @JsonProperty("state")
     private String state;
-    @JsonProperty("stateAPI")
-    private String stateAPI;
     @JsonProperty("et3Received")
     private String et3Received;
     @JsonProperty("conciliationTrack")
@@ -252,8 +248,5 @@ public class CaseData {
     private String hearingTimingFinish;
     @JsonProperty("hearingTimingDuration")
     private String hearingTimingDuration;
-
-    @JsonProperty("singleMoveCases")
-    private SingleMoveCasesType moveCases;
 
 }
