@@ -13,7 +13,6 @@ import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.PreAcceptDataModel;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.UpdateDataModel;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -74,7 +73,7 @@ public class UpdateCaseMsgTest {
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(detachDataModel);
         updateCaseMsg.runTask(submitEventAccepted);
         assertEquals(SINGLE_CASE_TYPE, submitEventAccepted.getCaseData().getCaseType());
-        assertNull(submitEventAccepted.getCaseData().getMultipleReference());
+        assertEquals(" ", submitEventAccepted.getCaseData().getMultipleReference());
         assertEquals(NO, submitEventAccepted.getCaseData().getLeadClaimant());
     }
 

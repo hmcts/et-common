@@ -52,6 +52,13 @@ public class MultipleData {
     @JsonProperty("batchUpdateCase")
     private String batchUpdateCase;
 
+    @JsonProperty("batchUpdateClaimantRep")
+    private DynamicFixedListType batchUpdateClaimantRep;
+    @JsonProperty("batchUpdateJurisdiction")
+    private DynamicFixedListType batchUpdateJurisdiction;
+    @JsonProperty("batchUpdateRespondent")
+    private DynamicFixedListType batchUpdateRespondent;
+
     @JsonProperty("managingOffice")
     private String managingOffice;
     @JsonProperty("fileLocation")
