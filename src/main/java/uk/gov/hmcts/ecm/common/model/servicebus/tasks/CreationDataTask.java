@@ -49,7 +49,7 @@ public class CreationDataTask extends DataTaskParent {
         log.info("Moving case to Multiples case type");
         submitEvent.getCaseData().setMultipleReference(((CreationDataModel) dataModelParent).getMultipleRef());
         submitEvent.getCaseData().setCaseType(MULTIPLE_CASE_TYPE);
-        submitEvent.getCaseData().setCheckMultiple(YES);
+        submitEvent.getCaseData().setMultipleFlag(YES);
 
     }
 

@@ -35,8 +35,8 @@ public class CaseData {
     private String subMultipleName;
     @JsonProperty("leadClaimant")
     private String leadClaimant;
-    @JsonProperty("checkMultiple")
-    private String checkMultiple;
+    @JsonProperty("multipleFlag")
+    private String multipleFlag;
 
     @JsonProperty("claimant_TypeOfClaimant")
     private String claimantTypeOfClaimant;
