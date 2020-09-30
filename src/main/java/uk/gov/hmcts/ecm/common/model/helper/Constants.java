@@ -161,6 +161,7 @@ public class Constants {
     public static final String UPDATE_BULK_EVENT_TRIGGER_ID = "updateBulkAction";
     public static final String AMEND_MULTIPLE_EVENT_TRIGGER_ID = "amendMultipleDetails";
     public static final String AMEND_SINGLE_EVENT_TRIGGER_ID = "amendSingle";
+    public static final String UPDATE_EVENT_TRIGGER_ID = "amendCaseDetails";
 
     public static final String GLASGOW_OFFICE = "Glasgow";
     public static final String ABERDEEN_OFFICE = "Aberdeen";

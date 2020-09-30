@@ -314,6 +314,18 @@ public class CcdClientTest {
     }
 
     @Test
+    public void startEventForCaseAPIRole() throws IOException {
+        HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
+        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
+        when(ccdClientConfig.buildStartEventForCaseUrlAPIRole(any(), any(), any(), any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class))).thenReturn(responseEntity);
+        ccdClient.startEventForCaseAPIRole("authToken", caseDetails.getCaseTypeId(), caseDetails.getJurisdiction(), "1111");
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
     public void startEventForCaseBulkSingle() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
         ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
