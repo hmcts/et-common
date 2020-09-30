@@ -137,13 +137,13 @@ public class Constants {
     public static final String LABEL = "Label_";
     public static final String LBL = "lbl_";
 
-    public static final String FLAG_SENSITIVE = "SENSITIVE";
-    public static final String FLAG_REPORTING = "REPORTING";
-    public static final String FLAG_RULE_503B = "RULE 50(3)b";
-    public static final String FLAG_RESERVED = "RESERVED";
-    public static final String FLAG_EMP_CONT_CLAIM = "EMP CONT CLAIM";
-    public static final String FLAG_LIVE_APPEAL = "LIVE APPEAL";
     public static final String FLAG_DO_NOT_POSTPONE = "DO NOT POSTPONE";
+    public static final String FLAG_LIVE_APPEAL = "LIVE APPEAL";
+    public static final String FLAG_RULE_503B = "RULE 50(3)b";
+    public static final String FLAG_REPORTING = "REPORTING";
+    public static final String FLAG_SENSITIVE = "SENSITIVE";
+    public static final String FLAG_RESERVED = "RESERVED";
+    public static final String FLAG_ECC = "ECC";
 
     public static final String ONE = "1";
     public static final String ZERO = "0";
