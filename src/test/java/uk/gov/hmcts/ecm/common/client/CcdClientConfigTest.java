@@ -70,7 +70,7 @@ public class CcdClientConfigTest {
     @Test
     public void buildStartEventForBulkAmendCaseUrl() {
         String uri = ccdClientConfig.buildStartEventForBulkAmendCaseUrl("1123", "TRIBUNALS", "BULK_03", "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/BULK_03/cases/1222222/event-triggers/amendMultiple/token", uri);
+        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/BULK_03/cases/1222222/event-triggers/amendMultipleDetails/token", uri);
     }
 
     @Test
