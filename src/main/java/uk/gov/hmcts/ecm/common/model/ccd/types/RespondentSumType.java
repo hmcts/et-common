@@ -65,6 +65,8 @@ public class RespondentSumType {
     private String responseRespondentEmail;
     @JsonProperty("responseRespondentContactPreference")
     private String responseRespondentContactPreference;
+    @JsonProperty("responseReceived")
+    private String responseReceived;
     @JsonProperty("responseReceivedDate")
     private String responseReceivedDate;
     @JsonProperty("responseRespondentNameQuestion")
