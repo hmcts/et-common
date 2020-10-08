@@ -268,6 +268,7 @@ public class Constants {
     public static final String EMPTY_RESPONDENT_COLLECTION_ERROR_MESSAGE = "At least one active respondent is required";
     public static final String EARLY_DATE_RETURNED_FROM_JUDGE_ERROR_MESSAGE = "Date returned from judge can not be earlier than Date referred to judge";
     public static final String FUTURE_RESPONSE_RECEIVED_DATE_ERROR_MESSAGE = "Response received date should not be a date in the future";
+    public static final String RESP_REP_NAME_MISMATCH_ERROR_MESSAGE = "The respondent name does not match any of the available respondents for representative";
     public static final String EMPTY_HEARING_COLLECTION_ERROR_MESSAGE = "Hearings could not be found for this case, the hearing collection is empty";
     public static final String HEARING_NUMBER_MISMATCH_ERROR_MESSAGE = "The hearing number provided did not match with any of the hearing numbers contained within this case";
     public static final String DUPLICATE_JURISDICTION_CODE_ERROR_MESSAGE = "Duplicate Jurisdiction Code(s) : ";
