@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -100,6 +101,7 @@ public class UpdateDataTask extends DataTaskParent {
 
         if (updateDataModel.getRepresentativeClaimantType() != null) {
             caseData.setRepresentativeClaimantType(updateDataModel.getRepresentativeClaimantType());
+            caseData.setClaimantRepresentedQuestion(YES);
         }
 
         if (updateDataModel.getJurCodesType() != null) {
