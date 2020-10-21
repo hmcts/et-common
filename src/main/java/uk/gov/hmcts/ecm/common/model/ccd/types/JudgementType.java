@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import uk.gov.hmcts.ecm.common.model.ccd.Document;
+import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
+
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
@@ -17,6 +20,8 @@ public class JudgementType {
     private String judgementType;
     @JsonProperty("liability_optional")
     private String liabilityOptional;
+    @JsonProperty("jurisdictionCodes")
+    private List<JurCodesTypeItem> jurisdictionCodes;
     @JsonProperty("date_judgment_made")
     private String dateJudgmentMade;
     @JsonProperty("date_judgment_sent")
