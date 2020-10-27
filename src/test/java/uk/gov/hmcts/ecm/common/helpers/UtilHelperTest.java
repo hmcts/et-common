@@ -191,6 +191,34 @@ public class UtilHelperTest {
     }
 
     @Test
+    public void getCaseTypeIdForMultipleUser() {
+        String office = "Manchester_User";
+        assertEquals(office, UtilHelper.getCaseTypeId("Manchester_Multiple_User"));
+        office = "Scotland_User";
+        assertEquals(office, UtilHelper.getCaseTypeId("Scotland_Multiple_User"));
+        office = "Bristol_User";
+        assertEquals(office, UtilHelper.getCaseTypeId("Bristol_Multiple_User"));
+        office = "Leeds_User";
+        assertEquals(office, UtilHelper.getCaseTypeId("Leeds_Multiple_User"));
+        office = "LondonCentral_User";
+        assertEquals(office, UtilHelper.getCaseTypeId("LondonCentral_Multiple_User"));
+    }
+
+    @Test
+    public void getCaseTypeIdForMultipleDev() {
+        String office = "Manchester_Dev";
+        assertEquals(office, UtilHelper.getCaseTypeId("Manchester_Multiple_Dev"));
+        office = "Scotland_Dev";
+        assertEquals(office, UtilHelper.getCaseTypeId("Scotland_Multiple_Dev"));
+        office = "Bristol_Dev";
+        assertEquals(office, UtilHelper.getCaseTypeId("Bristol_Multiple_Dev"));
+        office = "Leeds_Dev";
+        assertEquals(office, UtilHelper.getCaseTypeId("Leeds_Multiple_Dev"));
+        office = "LondonCentral_Dev";
+        assertEquals(office, UtilHelper.getCaseTypeId("LondonCentral_Multiple_Dev"));
+    }
+
+    @Test
     public void formatLocalDate() {
         assertEquals("2 February 2020", UtilHelper.formatLocalDate("2020-02-02T11:02:11.000"));
     }

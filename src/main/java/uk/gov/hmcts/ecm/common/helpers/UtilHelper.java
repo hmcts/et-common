@@ -38,35 +38,45 @@ public class UtilHelper {
     }
 
     public static String getCaseTypeId(String caseTypeId) {
-        String office;
         if (caseTypeId.contains(MULTIPLES_DEV)) {
-            office = caseTypeId.substring(0, caseTypeId.lastIndexOf(MULTIPLES_DEV));
-            return office + DEV;
+            return getSingleOffice(caseTypeId, MULTIPLES_DEV, DEV);
         } else {
-            if (caseTypeId.contains(MULTIPLES_USER)) {
-                office = caseTypeId.substring(0, caseTypeId.lastIndexOf(MULTIPLES_USER));
-                return office + USER;
+            if (caseTypeId.contains(MULTIPLE_DEV)) {
+                return getSingleOffice(caseTypeId, MULTIPLE_DEV, DEV);
             } else {
-                if (caseTypeId.contains(MULTIPLES)) {
-                    return caseTypeId.substring(0, caseTypeId.lastIndexOf(MULTIPLES));
+                if (caseTypeId.contains(MULTIPLES_USER)) {
+                    return getSingleOffice(caseTypeId, MULTIPLES_USER, USER);
                 } else {
-                    return caseTypeId.substring(0, caseTypeId.lastIndexOf(MULTIPLE));
+                    if (caseTypeId.contains(MULTIPLE_USER)) {
+                        return getSingleOffice(caseTypeId, MULTIPLE_USER, USER);
+                    } else {
+                        if (caseTypeId.contains(MULTIPLES)) {
+                            return getSingleOffice(caseTypeId, MULTIPLES, "");
+                        } else {
+                            return getSingleOffice(caseTypeId, MULTIPLE, "");
+                        }
+                    }
                 }
             }
         }
+    }
+
+    private static String getSingleOffice(String caseTypeId, String caseTypeIdSearch, String user) {
+        String office = caseTypeId.substring(0, caseTypeId.lastIndexOf(caseTypeIdSearch));
+        return office + user;
     }
 
     public static String getBulkCaseTypeId(String caseTypeId) {
         String office;
         if (caseTypeId.contains(DEV)) {
             office = caseTypeId.substring(0, caseTypeId.lastIndexOf(DEV));
-            return office + MULTIPLES_DEV;
+            return office + MULTIPLE_DEV;
         } else {
             if (caseTypeId.contains(USER)) {
                 office = caseTypeId.substring(0, caseTypeId.lastIndexOf(USER));
-                return office + MULTIPLES_USER;
+                return office + MULTIPLE_USER;
             } else {
-                return caseTypeId + MULTIPLES;
+                return caseTypeId + MULTIPLE;
             }
         }
     }

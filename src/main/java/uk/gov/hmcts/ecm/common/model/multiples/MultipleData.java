@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import uk.gov.hmcts.ecm.common.model.bulk.items.CaseIdTypeItem;
 import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
+import uk.gov.hmcts.ecm.common.model.multiples.items.CaseMultipleTypeItem;
 import uk.gov.hmcts.ecm.common.model.multiples.items.SubMultipleTypeItem;
 import uk.gov.hmcts.ecm.common.model.multiples.types.MoveCasesType;
 import uk.gov.hmcts.ecm.common.model.multiples.types.SubMultipleActionType;
@@ -17,6 +18,9 @@ public class MultipleData {
 
     @JsonProperty("caseIdCollection")
     private List<CaseIdTypeItem> caseIdCollection;
+
+    @JsonProperty("caseMultipleCollection")
+    private List<CaseMultipleTypeItem> caseMultipleCollection;
 
     @JsonProperty("multipleName")
     private String multipleName;
