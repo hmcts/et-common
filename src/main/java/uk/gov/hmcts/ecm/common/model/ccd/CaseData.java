@@ -66,6 +66,10 @@ public class CaseData {
     private List<RepresentedTypeRItem> repCollection;
     @JsonProperty("positionType")
     private String positionType;
+    @JsonProperty("dateToPosition")
+    private String dateToPosition;
+    @JsonProperty("currentPosition")
+    private String currentPosition;
     @JsonProperty("fileLocation")
     private String fileLocation;
     @JsonProperty("fileLocationGlasgow")
