@@ -13,6 +13,8 @@ import uk.gov.hmcts.ecm.common.model.ccd.items.RespondentSumTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.types.*;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.UpdateDataModel;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -51,6 +53,7 @@ public class UpdateDataTask extends DataTaskParent {
 
         if (!isNullOrEmpty(updateDataModel.getPositionType())) {
             caseData.setPositionType(updateDataModel.getPositionType());
+            dateToCurrentPosition(caseData);
         }
 
         if (!isNullOrEmpty(updateDataModel.getClerkResponsible())) {
@@ -67,6 +70,13 @@ public class UpdateDataTask extends DataTaskParent {
 
         updateManagingOffice(caseData, updateDataModel);
 
+    }
+
+    private void dateToCurrentPosition(CaseData caseData) {
+        if (isNullOrEmpty(caseData.getCurrentPosition()) || !caseData.getPositionType().equals(caseData.getCurrentPosition())) {
+            caseData.setDateToPosition(LocalDate.now().toString());
+            caseData.setCurrentPosition(caseData.getPositionType());
+        }
     }
 
     private void updateManagingOffice(CaseData caseData, UpdateDataModel updateDataModel) {
