@@ -9,6 +9,7 @@ import java.util.List;
 import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
 import static org.elasticsearch.index.query.QueryBuilders.termsQuery;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.BROUGHT_FORWARD_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.CLAIMS_ACCEPTED_REPORT;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.MAX_ES_SIZE;
 
 @Slf4j
@@ -19,6 +20,7 @@ public class ESHelper {
     private static final String LISTING_DATE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.listedDate";
     public static final String LISTING_VENUE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.hearingVenueDay.keyword";
     public static final String BROUGHT_FORWARD_DATE_FIELD_NAME = "data.broughtForwardCollection.value.broughtForwardDate";
+    public static final String CLAIMS_ACCEPTED_DATE_FIELD_NAME = "data.preAcceptCase.dateAccepted";
     public static final String LISTING_GLASGOW_VENUE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.Hearing_Glasgow.keyword";
     public static final String LISTING_ABERDEEN_VENUE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.Hearing_Aberdeen.keyword";
 
@@ -72,6 +74,8 @@ public class ESHelper {
         switch (reportType) {
             case BROUGHT_FORWARD_REPORT:
                 return BROUGHT_FORWARD_DATE_FIELD_NAME;
+            case CLAIMS_ACCEPTED_REPORT:
+                return CLAIMS_ACCEPTED_DATE_FIELD_NAME;
             default:
                 return REPORT_TYPE_NOT_FOUND;
         }

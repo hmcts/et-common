@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import uk.gov.hmcts.ecm.common.model.ccd.Address;
+import uk.gov.hmcts.ecm.common.model.listing.items.AdhocReportTypeItem;
 import uk.gov.hmcts.ecm.common.model.listing.items.BFDateTypeItem;
 import uk.gov.hmcts.ecm.common.model.listing.items.ListingTypeItem;
+import uk.gov.hmcts.ecm.common.model.listing.types.AdhocReportType;
 
 import java.util.List;
 
@@ -55,5 +57,18 @@ public class ListingData {
     private String reportType;
     @JsonProperty("documentName")
     private String documentName;
+
+    @JsonProperty("localReportsSummaryHdr")
+    private AdhocReportType localReportsSummaryHdr;
+    @JsonProperty("localReportsSummary")
+    private List<AdhocReportTypeItem> localReportsSummary;
+    @JsonProperty("localReportsSummaryHdr2")
+    private AdhocReportType localReportsSummaryHdr2;
+    @JsonProperty("localReportsSummary2")
+    private List<AdhocReportTypeItem> localReportsSummary2;
+    @JsonProperty("localReportsDetailHdr")
+    private AdhocReportType localReportsDetailHdr;
+    @JsonProperty("localReportsDetail")
+    private List<AdhocReportTypeItem> localReportsDetail;
 }
 
