@@ -242,6 +242,7 @@ public class Constants {
     public static final String HEARING_STATUS_POSTPONED = "Postponed";
 
     public static final String BROUGHT_FORWARD_REPORT = "Brought Forward Report";
+    public static final String CLAIMS_ACCEPTED_REPORT = "Claims Accepted";
 
     public static final String HEARING_DOC_ETCL = "ETCL - Cause List";
     public static final String HEARING_DOC_IT56 = "IT56 - List of Exhibits";
