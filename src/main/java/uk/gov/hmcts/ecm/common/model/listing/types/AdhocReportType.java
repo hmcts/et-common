@@ -163,10 +163,10 @@ public class AdhocReportType {
     private String judicialMediation;
     @JsonProperty("caseType")
     private String caseType;
-    @JsonProperty("multiples")
-    private String multiples;
-    @JsonProperty("singles")
-    private String singles;
+    @JsonProperty("singlesTotal")
+    private String singlesTotal;
+    @JsonProperty("multiplesTotal")
+    private String multiplesTotal;
     @JsonProperty("dateOfAcceptance")
     private String dateOfAcceptance;
     @JsonProperty("respondentET3")
