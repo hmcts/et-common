@@ -49,9 +49,9 @@ public class CcdClientConfig {
     }
 
     String buildRetrieveCasesUrlElasticSearch(String ctid) {
-        String param = "ctid=" + ctid;
-        log.info("Format: " + String.format(SEARCH_CASES_FORMAT, ccdDataStoreApiBaseUrl, param));
-        return String.format(SEARCH_CASES_FORMAT, ccdDataStoreApiBaseUrl, param);
+        String format = String.format(SEARCH_CASES_FORMAT, ccdDataStoreApiBaseUrl, "ctid=" + ctid);
+        log.info("Format: " + format);
+        return format;
     }
 
     String buildStartEventForCaseUrlAPIRole(String uid, String jid, String ctid, String cid) {

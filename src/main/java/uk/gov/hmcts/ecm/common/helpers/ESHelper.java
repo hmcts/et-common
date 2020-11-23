@@ -34,6 +34,24 @@ public class ESHelper {
                 .query(termsQueryBuilder).toString();
     }
 
+    public static String getSearchQuerySchedule(List<String> caseIds) {
+        TermsQueryBuilder termsQueryBuilder = termsQuery(ETHOS_CASE_REFERENCE_KEYWORD, caseIds);
+        return new SearchSourceBuilder()
+                .size(MAX_ES_SIZE)
+                .fetchSource(new String[]{
+                        "data.claimantIndType.*",
+                        "data.claimantType.claimant_addressUK.AddressLine1",
+                        "data.claimantType.claimant_addressUK.PostCode",
+                        "data.claimant_Company",
+                        "data.positionType",
+                        "data.ethosCaseReference",
+                        "data.respondentCollection.value.respondent_name",
+                        "data.respondentCollection.value.respondent_address.AddressLine1",
+                        "data.respondentCollection.value.respondent_address.PostCode"
+                }, null)
+                .query(termsQueryBuilder).toString();
+    }
+
     public static String getBulkSearchQuery(String multipleReference) {
         TermsQueryBuilder termsQueryBuilder = termsQuery(MULTIPLE_CASE_REFERENCE_KEYWORD, multipleReference);
         return new SearchSourceBuilder()

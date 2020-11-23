@@ -19,6 +19,8 @@ import uk.gov.hmcts.ecm.common.model.multiples.MultipleData;
 import uk.gov.hmcts.ecm.common.model.multiples.SubmitMultipleEvent;
 import uk.gov.hmcts.ecm.common.model.reference.ReferenceRequest;
 import uk.gov.hmcts.ecm.common.model.reference.ReferenceSubmitEvent;
+import uk.gov.hmcts.ecm.common.model.schedule.ScheduleCaseSearchResult;
+import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadES;
 import uk.gov.hmcts.ecm.common.service.UserService;
 import uk.gov.hmcts.reform.authorisation.generators.AuthTokenGenerator;
 
@@ -181,6 +183,18 @@ public class CcdClient {
         return submitEvents;
     }
 
+    private List<SchedulePayloadES> buildAndGetElasticSearchScheduleRequest(String authToken, String caseTypeId, String query) throws IOException {
+        List<SchedulePayloadES> submitEventsES = new ArrayList<>();
+        HttpEntity<String> request = new HttpEntity<>(query, buildHeaders(authToken));
+        String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
+        ScheduleCaseSearchResult scheduleCaseSearchResult =
+                restTemplate.exchange(url, HttpMethod.POST, request, ScheduleCaseSearchResult.class).getBody();
+        if (scheduleCaseSearchResult != null && scheduleCaseSearchResult.getCases() != null) {
+            submitEventsES.addAll(scheduleCaseSearchResult.getCases());
+        }
+        return submitEventsES;
+    }
+
     public List<SubmitMultipleEvent> buildAndGetElasticSearchRequestWithRetriesMultiples(String authToken, String caseTypeId, String query) throws IOException {
         HttpEntity<String> request = new HttpEntity<>(query, buildHeaders(authToken));
         String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
@@ -258,13 +272,21 @@ public class CcdClient {
     }
 
     private List<SubmitEvent> retrieveCasesElasticSearchWithRetries(String authToken, String caseTypeId, List<String> caseIds) throws IOException {
-        log.info("QUERY WITH RETRIES: " + ESHelper.getSearchQuery(caseIds));
-        return buildAndGetElasticSearchRequestWithRetries(authToken, caseTypeId, ESHelper.getSearchQuery(caseIds), caseIds.size(), caseIds);
+        String query = ESHelper.getSearchQuery(caseIds);
+        log.info("QUERY WITH RETRIES: " + query);
+        return buildAndGetElasticSearchRequestWithRetries(authToken, caseTypeId, query, caseIds.size(), caseIds);
     }
 
     public List<SubmitEvent> retrieveCasesElasticSearch(String authToken, String caseTypeId, List<String> caseIds) throws IOException {
-        log.info("QUERY: " + ESHelper.getSearchQuery(caseIds));
-        return buildAndGetElasticSearchRequest(authToken, caseTypeId, ESHelper.getSearchQuery(caseIds));
+        String query = ESHelper.getSearchQuery(caseIds);
+        log.info("QUERY: " + query);
+        return buildAndGetElasticSearchRequest(authToken, caseTypeId, query);
+    }
+
+    public List<SchedulePayloadES> retrieveCasesElasticSearchSchedule(String authToken, String caseTypeId, List<String> caseIds) throws IOException {
+        String query = ESHelper.getSearchQuerySchedule(caseIds);
+        log.info("QUERY Schedule: " + query);
+        return buildAndGetElasticSearchScheduleRequest(authToken, caseTypeId, query);
     }
 
     public List<SubmitBulkEvent> retrieveBulkCases(String authToken, String caseTypeId, String jurisdiction) throws IOException {
