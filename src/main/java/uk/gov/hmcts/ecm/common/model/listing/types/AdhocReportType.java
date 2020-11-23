@@ -167,6 +167,8 @@ public class AdhocReportType {
     private String multiples;
     @JsonProperty("singles")
     private String singles;
+    @JsonProperty("dateOfAcceptance")
+    private String dateOfAcceptance;
     @JsonProperty("respondentET3")
     private List<ReportRespondentTypeItem> respondentET3;
     @JsonProperty("respondentET4")
