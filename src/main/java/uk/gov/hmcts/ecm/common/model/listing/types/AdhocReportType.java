@@ -67,6 +67,14 @@ public class AdhocReportType {
     private String dateToPosition;
     @JsonProperty("fileLocation")
     private String fileLocation;
+    @JsonProperty("fileLocationGlasgow")
+    private String fileLocationGlasgow;
+    @JsonProperty("fileLocationAberdeen")
+    private String fileLocationAberdeen;
+    @JsonProperty("fileLocationDundee")
+    private String fileLocationDundee;
+    @JsonProperty("fileLocationEdinburgh")
+    private String fileLocationEdinburgh;
     @JsonProperty("casesCompletedHearingTotal")
     private String casesCompletedHearingTotal;
     @JsonProperty("casesCompletedHearing")
