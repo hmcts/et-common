@@ -37,7 +37,7 @@ public class ESHelper {
     public static String getSearchQuerySchedule(List<String> caseIds) {
         TermsQueryBuilder termsQueryBuilder = termsQuery(ETHOS_CASE_REFERENCE_KEYWORD, caseIds);
         return new SearchSourceBuilder()
-                .size(MAX_ES_SIZE)
+                .size(MAX_ES_SIZE/2)
                 .fetchSource(new String[]{
                         "data.claimantIndType.*",
                         "data.claimantType.claimant_addressUK.AddressLine1",
