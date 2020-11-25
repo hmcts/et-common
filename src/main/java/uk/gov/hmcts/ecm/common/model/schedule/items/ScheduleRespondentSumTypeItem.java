@@ -9,6 +9,8 @@ import uk.gov.hmcts.ecm.common.model.schedule.types.ScheduleRespondentSumType;
 @Data
 public class ScheduleRespondentSumTypeItem {
 
+    @JsonProperty("id")
+    private String id;
     @JsonProperty("value")
     private ScheduleRespondentSumType value;
 }
