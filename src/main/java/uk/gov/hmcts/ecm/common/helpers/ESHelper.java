@@ -5,6 +5,7 @@ import org.elasticsearch.index.query.*;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
 import static org.elasticsearch.index.query.QueryBuilders.termsQuery;
@@ -34,22 +35,33 @@ public class ESHelper {
                 .query(termsQueryBuilder).toString();
     }
 
+//    public static String getSearchQuerySchedule(List<String> caseIds) {
+//        TermsQueryBuilder termsQueryBuilder = termsQuery(ETHOS_CASE_REFERENCE_KEYWORD, caseIds);
+//        return new SearchSourceBuilder()
+//                .size(MAX_ES_SIZE/2)
+//                .fetchSource(new String[]{
+//                        "data.claimantIndType.*",
+//                        "data.claimantType.claimant_addressUK.AddressLine1",
+//                        "data.claimantType.claimant_addressUK.PostCode",
+//                        "data.claimant_Company",
+//                        "data.positionType",
+//                        "data.ethosCaseReference",
+//                        "data.respondentCollection.value.respondent_name",
+//                        "data.respondentCollection.value.respondent_address.AddressLine1",
+//                        "data.respondentCollection.value.respondent_address.PostCode"
+//                }, null)
+//                .query(termsQueryBuilder).toString();
+//    }
+
     public static String getSearchQuerySchedule(List<String> caseIds) {
-        TermsQueryBuilder termsQueryBuilder = termsQuery(ETHOS_CASE_REFERENCE_KEYWORD, caseIds);
-        return new SearchSourceBuilder()
-                .size(MAX_ES_SIZE/2)
-                .fetchSource(new String[]{
-                        "data.claimantIndType.*",
-                        "data.claimantType.claimant_addressUK.AddressLine1",
-                        "data.claimantType.claimant_addressUK.PostCode",
-                        "data.claimant_Company",
-                        "data.positionType",
-                        "data.ethosCaseReference",
-                        "data.respondentCollection.value.respondent_name",
-                        "data.respondentCollection.value.respondent_address.AddressLine1",
-                        "data.respondentCollection.value.respondent_address.PostCode"
-                }, null)
-                .query(termsQueryBuilder).toString();
+        String cases = caseIds.stream()
+                .map(s -> "\"" + s + "\"")
+                .collect(Collectors.joining(","));
+
+        return String.format("{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[%s],\"boost\":1.0}}," +
+                "\"_source\":[\"data.claimantIndType.*\",\"data.claimantType.claimant_addressUK.AddressLine1\",\"data.claimantType.claimant_addressUK.PostCode\",\"data" +
+                ".claimant_Company\",\"data.positionType\",\"data.ethosCaseReference\",\"data.respondentCollection.value.respondent_name\",\"data.respondentCollection" +
+                ".value.respondent_address.AddressLine1\",\"data.respondentCollection.value.respondent_address.PostCode\"]}", cases);
     }
 
     public static String getBulkSearchQuery(String multipleReference) {

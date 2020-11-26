@@ -195,10 +195,10 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesElasticSearchSchedule() throws IOException {
-        String jsonQuery = "{\"size\":5000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
-                "\"_source\":{\"includes\":[\"data.claimantIndType.*\",\"data.claimantType.claimant_addressUK.AddressLine1\",\"data.claimantType.claimant_addressUK" +
-                ".PostCode\",\"data.claimant_Company\",\"data.positionType\",\"data.ethosCaseReference\",\"data.respondentCollection.value.respondent_name\",\"data" +
-                ".respondentCollection.value.respondent_address.AddressLine1\",\"data.respondentCollection.value.respondent_address.PostCode\"],\"excludes\":[]}}";
+        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
+                "\"_source\":[\"data.claimantIndType.*\",\"data.claimantType.claimant_addressUK.AddressLine1\",\"data.claimantType.claimant_addressUK.PostCode\",\"data" +
+                ".claimant_Company\",\"data.positionType\",\"data.ethosCaseReference\",\"data.respondentCollection.value.respondent_name\",\"data.respondentCollection" +
+                ".value.respondent_address.AddressLine1\",\"data.respondentCollection.value.respondent_address.PostCode\"]}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery,creatBuildHeaders());
         ScheduleCaseSearchResult scheduleCaseSearchResult =
                 new ScheduleCaseSearchResult(2L, Arrays.asList(new SchedulePayloadES(), new SchedulePayloadES()));
