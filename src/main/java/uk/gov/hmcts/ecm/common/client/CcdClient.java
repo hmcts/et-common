@@ -283,12 +283,6 @@ public class CcdClient {
         return buildAndGetElasticSearchRequest(authToken, caseTypeId, query);
     }
 
-    public List<SubmitEvent> retrieveCasesElasticSearchScheduleQuery(String authToken, String caseTypeId, List<String> caseIds) throws IOException {
-        String query = ESHelper.getSearchQuerySchedule(caseIds);
-        log.info("QUERY: " + query);
-        return buildAndGetElasticSearchRequest(authToken, caseTypeId, query);
-    }
-
     public List<SchedulePayloadES> retrieveCasesElasticSearchSchedule(String authToken, String caseTypeId, List<String> caseIds) throws IOException {
         String query = ESHelper.getSearchQuerySchedule(caseIds);
         log.info("QUERY Schedule: " + query);
