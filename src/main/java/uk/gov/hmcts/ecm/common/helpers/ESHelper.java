@@ -40,18 +40,27 @@ public class ESHelper {
                 .map(s -> "\"" + s + "\"")
                 .collect(Collectors.joining(","));
 
+//        return String.format("{\"size\":%s," +
+//                        "\"query\":{\"terms\":{\"%s\":[%s],\"boost\":1.0}}," +
+//                        "\"_source\":[" +
+//                        "\"data.claimantIndType.*\"," +
+//                        "\"data.claimantType.claimant_addressUK.AddressLine1\"," +
+//                        "\"data.claimantType.claimant_addressUK.PostCode\"," +
+//                        "\"data.claimant_Company\"," +
+//                        "\"data.positionType\"," +
+//                        "\"data.ethosCaseReference\"," +
+//                        "\"data.respondentCollection.value.respondent_name\"," +
+//                        "\"data.respondentCollection.value.respondent_address.AddressLine1\"," +
+//                        "\"data.respondentCollection.value.respondent_address.PostCode\"]}",
+//                MAX_ES_SIZE/2, ETHOS_CASE_REFERENCE_KEYWORD, cases);
         return String.format("{\"size\":%s," +
                         "\"query\":{\"terms\":{\"%s\":[%s],\"boost\":1.0}}," +
                         "\"_source\":[" +
-                        "\"data.claimantIndType.*\"," +
                         "\"data.claimantType.claimant_addressUK.AddressLine1\"," +
                         "\"data.claimantType.claimant_addressUK.PostCode\"," +
                         "\"data.claimant_Company\"," +
                         "\"data.positionType\"," +
-                        "\"data.ethosCaseReference\"," +
-                        "\"data.respondentCollection.value.respondent_name\"," +
-                        "\"data.respondentCollection.value.respondent_address.AddressLine1\"," +
-                        "\"data.respondentCollection.value.respondent_address.PostCode\"]}",
+                        "\"data.ethosCaseReference\"]}",
                 MAX_ES_SIZE/2, ETHOS_CASE_REFERENCE_KEYWORD, cases);
     }
 

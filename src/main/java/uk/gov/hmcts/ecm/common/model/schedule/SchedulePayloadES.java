@@ -13,8 +13,8 @@ import java.util.List;
 @Data
 public class SchedulePayloadES {
 
-    @JsonProperty("claimantIndType")
-    private ScheduleClaimantIndType claimantIndType;
+//    @JsonProperty("claimantIndType")
+   // private ScheduleClaimantIndType claimantIndType;
     @JsonProperty("claimantType")
     private ScheduleClaimantType claimantType;
     @JsonProperty("claimant_Company")
@@ -25,7 +25,7 @@ public class SchedulePayloadES {
     @JsonProperty("ethosCaseReference")
     private String ethosCaseReference;
 
-    @JsonProperty("respondentCollection")
-    private List<ScheduleRespondentSumTypeItem> respondentCollection;
+//    @JsonProperty("respondentCollection")
+//    private List<ScheduleRespondentSumTypeItem> respondentCollection;
 }
 
