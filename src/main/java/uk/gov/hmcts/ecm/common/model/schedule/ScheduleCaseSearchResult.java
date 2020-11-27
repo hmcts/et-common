@@ -5,17 +5,17 @@ import java.util.List;
 public class ScheduleCaseSearchResult {
 
     private Long total;
-    private List<SchedulePayloadES> cases;
+    private List<SchedulePayloadEvent> cases;
 
     public ScheduleCaseSearchResult() {
     }
 
-    public ScheduleCaseSearchResult(Long total, List<SchedulePayloadES> cases) {
+    public ScheduleCaseSearchResult(Long total, List<SchedulePayloadEvent> cases) {
         this.cases = cases;
         this.total = total;
     }
 
-    public List<SchedulePayloadES> getCases() {
+    public List<SchedulePayloadEvent> getCases() {
         return cases;
     }
 

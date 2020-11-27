@@ -20,7 +20,7 @@ import uk.gov.hmcts.ecm.common.model.multiples.MultipleData;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleDetails;
 import uk.gov.hmcts.ecm.common.model.multiples.SubmitMultipleEvent;
 import uk.gov.hmcts.ecm.common.model.schedule.ScheduleCaseSearchResult;
-import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadES;
+import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadEvent;
 import uk.gov.hmcts.ecm.common.service.UserService;
 import uk.gov.hmcts.reform.authorisation.generators.AuthTokenGenerator;
 
@@ -193,10 +193,10 @@ public class CcdClientTest {
         verifyNoMoreInteractions(restTemplate);
     }
 
-    //@Test
+    @Test
     public void retrieveCasesElasticSearchSchedule() throws IOException {
         String jsonQuery = "{\"size\":5000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
-                "\"_source\":[\"data.claimantType.claimant_addressUK.AddressLine1\",\"data.claimantType.claimant_addressUK.PostCode\",\"data" +
+                "\"_source\":[\"data.claimantIndType.*\",\"data.claimantType.claimant_addressUK.AddressLine1\",\"data.claimantType.claimant_addressUK.PostCode\",\"data" +
                 ".claimant_Company\",\"data.positionType\",\"data.ethosCaseReference\"]}";
 //        String jsonQuery = "{\"size\":5000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
 //                "\"_source\":[\"data.claimantIndType.*\",\"data.claimantType.claimant_addressUK.AddressLine1\",\"data.claimantType.claimant_addressUK.PostCode\",\"data" +
@@ -204,7 +204,7 @@ public class CcdClientTest {
 //                ".value.respondent_address.AddressLine1\",\"data.respondentCollection.value.respondent_address.PostCode\"]}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery,creatBuildHeaders());
         ScheduleCaseSearchResult scheduleCaseSearchResult =
-                new ScheduleCaseSearchResult(2L, Arrays.asList(new SchedulePayloadES(), new SchedulePayloadES()));
+                new ScheduleCaseSearchResult(2L, Arrays.asList(new SchedulePayloadEvent(), new SchedulePayloadEvent()));
         ResponseEntity<ScheduleCaseSearchResult> responseEntity = new ResponseEntity<>(scheduleCaseSearchResult, HttpStatus.OK);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(ScheduleCaseSearchResult.class))).thenReturn(responseEntity);

@@ -20,7 +20,7 @@ import uk.gov.hmcts.ecm.common.model.multiples.SubmitMultipleEvent;
 import uk.gov.hmcts.ecm.common.model.reference.ReferenceRequest;
 import uk.gov.hmcts.ecm.common.model.reference.ReferenceSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.schedule.ScheduleCaseSearchResult;
-import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadES;
+import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadEvent;
 import uk.gov.hmcts.ecm.common.service.UserService;
 import uk.gov.hmcts.reform.authorisation.generators.AuthTokenGenerator;
 
@@ -183,21 +183,16 @@ public class CcdClient {
         return submitEvents;
     }
 
-    private List<SchedulePayloadES> buildAndGetElasticSearchScheduleRequest(String authToken, String caseTypeId, String query) throws IOException {
-        List<SchedulePayloadES> submitEventsES = new ArrayList<>();
+    private List<SchedulePayloadEvent> buildAndGetElasticSearchScheduleRequest(String authToken, String caseTypeId, String query) throws IOException {
+        List<SchedulePayloadEvent> schedulePayloadEvents = new ArrayList<>();
         HttpEntity<String> request = new HttpEntity<>(query, buildHeaders(authToken));
         String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
-        log.info("First: " + restTemplate.exchange(url, HttpMethod.POST, request, ScheduleCaseSearchResult.class));
-        log.info("Second: " + restTemplate.exchange(url, HttpMethod.POST, request, ScheduleCaseSearchResult.class).getBody());
         ScheduleCaseSearchResult scheduleCaseSearchResult =
                 restTemplate.exchange(url, HttpMethod.POST, request, ScheduleCaseSearchResult.class).getBody();
-        log.info("Three: " + scheduleCaseSearchResult);
         if (scheduleCaseSearchResult != null && scheduleCaseSearchResult.getCases() != null) {
-            submitEventsES.addAll(scheduleCaseSearchResult.getCases());
+            schedulePayloadEvents.addAll(scheduleCaseSearchResult.getCases());
         }
-        log.info("Four: " + submitEventsES);
-        log.info("Fifth: " + restTemplate.exchange(url, HttpMethod.POST, request, String.class).getBody());
-        return submitEventsES;
+        return schedulePayloadEvents;
     }
 
     public List<SubmitMultipleEvent> buildAndGetElasticSearchRequestWithRetriesMultiples(String authToken, String caseTypeId, String query) throws IOException {
@@ -288,7 +283,7 @@ public class CcdClient {
         return buildAndGetElasticSearchRequest(authToken, caseTypeId, query);
     }
 
-    public List<SchedulePayloadES> retrieveCasesElasticSearchSchedule(String authToken, String caseTypeId, List<String> caseIds) throws IOException {
+    public List<SchedulePayloadEvent> retrieveCasesElasticSearchSchedule(String authToken, String caseTypeId, List<String> caseIds) throws IOException {
         String query = ESHelper.getSearchQuerySchedule(caseIds);
         log.info("QUERY Schedule: " + query);
         return buildAndGetElasticSearchScheduleRequest(authToken, caseTypeId, query);

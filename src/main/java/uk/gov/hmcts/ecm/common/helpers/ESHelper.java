@@ -56,6 +56,7 @@ public class ESHelper {
         return String.format("{\"size\":%s," +
                         "\"query\":{\"terms\":{\"%s\":[%s],\"boost\":1.0}}," +
                         "\"_source\":[" +
+                        "\"data.claimantIndType.*\"," +
                         "\"data.claimantType.claimant_addressUK.AddressLine1\"," +
                         "\"data.claimantType.claimant_addressUK.PostCode\"," +
                         "\"data.claimant_Company\"," +
