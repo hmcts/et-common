@@ -187,11 +187,16 @@ public class CcdClient {
         List<SchedulePayloadES> submitEventsES = new ArrayList<>();
         HttpEntity<String> request = new HttpEntity<>(query, buildHeaders(authToken));
         String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
+        log.info("First: " + restTemplate.exchange(url, HttpMethod.POST, request, ScheduleCaseSearchResult.class));
+        log.info("Second: " + restTemplate.exchange(url, HttpMethod.POST, request, ScheduleCaseSearchResult.class).getBody());
         ScheduleCaseSearchResult scheduleCaseSearchResult =
                 restTemplate.exchange(url, HttpMethod.POST, request, ScheduleCaseSearchResult.class).getBody();
+        log.info("Three: " + scheduleCaseSearchResult);
         if (scheduleCaseSearchResult != null && scheduleCaseSearchResult.getCases() != null) {
             submitEventsES.addAll(scheduleCaseSearchResult.getCases());
         }
+        log.info("Four: " + submitEventsES);
+        log.info("Fifth: " + restTemplate.exchange(url, HttpMethod.POST, request, String.class).getBody());
         return submitEventsES;
     }
 
