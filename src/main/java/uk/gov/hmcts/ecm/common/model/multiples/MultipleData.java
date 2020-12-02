@@ -38,6 +38,8 @@ public class MultipleData {
     private String leadCase;
     @JsonProperty("caseCounter")
     private String caseCounter;
+    @JsonProperty("preAcceptDone")
+    private String preAcceptDone;
 
     @JsonProperty("flag1")
     private DynamicFixedListType flag1;
