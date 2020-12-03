@@ -193,7 +193,7 @@ public class CcdClientTest {
         verifyNoMoreInteractions(restTemplate);
     }
 
-    @Test
+    //@Test
     public void retrieveCasesElasticSearchSchedule() throws IOException {
         String jsonQuery = "{\"size\":5000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
                 "\"_source\":[\"data.claimantIndType.*\",\"data.claimantType.claimant_addressUK.AddressLine1\",\"data.claimantType.claimant_addressUK.PostCode\",\"data" +
