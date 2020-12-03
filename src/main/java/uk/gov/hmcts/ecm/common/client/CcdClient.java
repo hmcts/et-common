@@ -180,6 +180,7 @@ public class CcdClient {
         if (caseSearchResult != null && caseSearchResult.getCases() != null) {
             submitEvents.addAll(caseSearchResult.getCases());
         }
+        log.info("ESTest: " + restTemplate.exchange(url, HttpMethod.POST, request, String.class).getBody());
         return submitEvents;
     }
 

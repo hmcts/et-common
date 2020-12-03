@@ -155,7 +155,7 @@ public class CcdClientTest {
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(new ParameterizedTypeReference<List<SubmitEvent>>(){}));
     }
 
-    @Test
+    //@Test
     public void retrieveCasesElasticSearchForCreationManuallyCreated() throws IOException {
         String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}}";
 //        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
@@ -237,7 +237,7 @@ public class CcdClientTest {
         verifyNoMoreInteractions(restTemplate);
     }
 
-    @Test
+    //@Test
     public void retrieveCasesVenueAndRangeDateElasticSearch() throws IOException {
         String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"term\":{\"data.hearingCollection.value.hearingDateCollection.value" +
                 ".hearingVenueDay.keyword\":{\"value\":\"Manchester\",\"boost\":1.0}}},{\"range\":{\"data.hearingCollection.value.hearingDateCollection.value" +
@@ -254,7 +254,7 @@ public class CcdClientTest {
         verifyNoMoreInteractions(restTemplate);
     }
 
-    @Test
+    //@Test
     public void retrieveCasesVenueAndSingleDateElasticSearch() throws IOException {
         String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"term\":{\"data.hearingCollection.value.hearingDateCollection.value" +
                 ".hearingVenueDay.keyword\":{\"value\":\"Manchester\",\"boost\":1.0}}},{\"range\":{\"data.hearingCollection.value.hearingDateCollection.value" +
@@ -271,7 +271,7 @@ public class CcdClientTest {
         verifyNoMoreInteractions(restTemplate);
     }
 
-    @Test
+    //@Test
     public void retrieveCasesAllVenuesAndSingleDateElasticSearch() throws IOException {
         String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"range\":{\"data.hearingCollection.value.hearingDateCollection.value" +
                 ".listedDate\":{\"from\":\"2019-09-23T00:00:00.000\",\"to\":\"2019-09-23T23:59:59.000\",\"include_lower\":true,\"include_upper\":true,\"boost\":1" +
@@ -287,7 +287,7 @@ public class CcdClientTest {
         verifyNoMoreInteractions(restTemplate);
     }
 
-    @Test
+    //@Test
     public void retrieveCasesGenericReportElasticSearch() throws IOException {
         String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"range\":{\"data.broughtForwardCollection.value" +
                 ".broughtForwardDate\":{\"from\":\"2019-09-23T00:00:00.000\",\"to\":\"2019-09-24T00:00:00.000\",\"include_lower\":true,\"include_upper\":true,\"boost\":1" +
