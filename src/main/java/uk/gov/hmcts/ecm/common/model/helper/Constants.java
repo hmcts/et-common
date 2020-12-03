@@ -237,12 +237,39 @@ public class Constants {
     public static final String PRESS_LIST_CAUSE_LIST_RANGE_TEMPLATE = "EM-TRB-SCO-ENG-00216";
     public static final String PRESS_LIST_CAUSE_LIST_SINGLE_TEMPLATE = "EM-TRB-SCO-ENG-00217";
 
+    public static final String POSITION_TYPE_REJECTED = "REJECTED";
+    public static final String POSITION_TYPE_CASE_CLOSED = "Case closed";
+    public static final String POSITION_TYPE_CASE_INPUT_IN_ERROR = "Case input in error";
+    public static final String POSITION_TYPE_CASE_TRANSFERRED_SAME_COUNTRY = "Case transferred - same country";
+    public static final String POSITION_TYPE_CASE_TRANSFERRED_OTHER_COUNTRY = "Case transferred - other country";
+
+    public static final String HEARING_TYPE_PRIVATE = "Private";
+    public static final String HEARING_TYPE_PUBLIC = "Public";
+
+    public static final String HEARING_TYPE_JUDICIAL_COSTS_HEARING = "Costs Hearing";
+    public static final String HEARING_TYPE_JUDICIAL_HEARING = "Hearing";
+    public static final String HEARING_TYPE_JUDICIAL_MEDIATION = "Judicial Mediation";
+    public static final String HEARING_TYPE_JUDICIAL_MEDIATION_TCC = "Judicial Mediation - TCC";
+    public static final String HEARING_TYPE_PERLIMINARY_HEARING = "Preliminary Hearing";
+    public static final String HEARING_TYPE_PERLIMINARY_HEARING_CM = "Preliminary Hearing(CM)";
+    public static final String HEARING_TYPE_PERLIMINARY_HEARING_CM_TCC = "Preliminary Hearing (CM) - TCC";
+    public static final String HEARING_TYPE_JUDICIAL_RECONSIDERATION = "Reconsideration";
+    public static final String HEARING_TYPE_JUDICIAL_REMEDY = "Remedy";
+
     public static final String HEARING_STATUS_SETTLED = "Settled";
     public static final String HEARING_STATUS_WITHDRAWN = "Withdrawn";
     public static final String HEARING_STATUS_POSTPONED = "Postponed";
 
     public static final String BROUGHT_FORWARD_REPORT = "Brought Forward Report";
     public static final String CLAIMS_ACCEPTED_REPORT = "Claims Accepted";
+    public static final String LIVE_CASELOAD_REPORT = "Live Caseload";
+    public static final String MEMBER_DAYS_REPORT = "Member Days";
+    public static final String SERVING_CLAIMS_REPORT = "Serving Claims";
+    public static final String CASES_COMPLETED_REPORT = "Cases Completed";
+    public static final String TIME_TO_FIRST_HEARING_REPORT = "Time To First Hearing";
+    public static final String HEARINGS_TO_JUDGEMENTS_REPORT = "Hearings To Judgments";
+    public static final String HEARINGS_BY_HEARING_TYPE_REPORT = "Hearings By Hearing Type";
+    public static final String NO_CHNAGE_INCURRENT_POSITION_REPORT = "No Change In Current Position";
 
     public static final String HEARING_DOC_ETCL = "ETCL - Cause List";
     public static final String HEARING_DOC_IT56 = "IT56 - List of Exhibits";
