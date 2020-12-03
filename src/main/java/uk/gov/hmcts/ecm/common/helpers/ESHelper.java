@@ -11,6 +11,7 @@ import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
 import static org.elasticsearch.index.query.QueryBuilders.termsQuery;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.BROUGHT_FORWARD_REPORT;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.CLAIMS_ACCEPTED_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.LIVE_CASELOAD_REPORT;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.MAX_ES_SIZE;
 
 @Slf4j
@@ -96,6 +97,7 @@ public class ESHelper {
             case BROUGHT_FORWARD_REPORT:
                 return BROUGHT_FORWARD_DATE_FIELD_NAME;
             case CLAIMS_ACCEPTED_REPORT:
+            case LIVE_CASELOAD_REPORT:
                 return CLAIMS_ACCEPTED_DATE_FIELD_NAME;
             default:
                 return REPORT_TYPE_NOT_FOUND;
