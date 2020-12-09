@@ -256,9 +256,15 @@ public class Constants {
     public static final String HEARING_TYPE_JUDICIAL_RECONSIDERATION = "Reconsideration";
     public static final String HEARING_TYPE_JUDICIAL_REMEDY = "Remedy";
 
+    public static final String HEARING_STATUS_HEARD = "Heard";
+    public static final String HEARING_STATUS_LISTED = "Listed";
     public static final String HEARING_STATUS_SETTLED = "Settled";
     public static final String HEARING_STATUS_WITHDRAWN = "Withdrawn";
     public static final String HEARING_STATUS_POSTPONED = "Postponed";
+
+    public static final String JURISDICTION_OUTCOME_SUCCESSFUL_AT_HEARING = "Successful at hearing";
+    public static final String JURISDICTION_OUTCOME_UNSUCCESSFUL_AT_HEARING = "Unsuccessful at hearing";
+    public static final String JURISDICTION_OUTCOME_DISMISSED_AT_HEARING = "Dismissed at hearing - out of scope";
 
     public static final String BROUGHT_FORWARD_REPORT = "Brought Forward Report";
     public static final String CLAIMS_ACCEPTED_REPORT = "Claims Accepted";

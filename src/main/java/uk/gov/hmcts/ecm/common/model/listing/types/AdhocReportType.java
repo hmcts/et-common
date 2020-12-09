@@ -109,6 +109,30 @@ public class AdhocReportType {
     private String conciliationTrack;
     @JsonProperty("conciliationTrackNo")
     private String conciliationTrackNo;
+    @JsonProperty("ConNoneCasesCompletedHearing")
+    private String ConNoneCasesCompletedHearing;
+    @JsonProperty("ConNoneSessionDays")
+    private String ConNoneSessionDays;
+    @JsonProperty("ConNoneCompletedPerSession")
+    private String ConNoneCompletedPerSession;
+    @JsonProperty("ConFastCasesCompletedHearing")
+    private String ConFastCasesCompletedHearing;
+    @JsonProperty("ConFastSessionDays")
+    private String ConFastSessionDays;
+    @JsonProperty("ConFastCompletedPerSession")
+    private String ConFastCompletedPerSession;
+    @JsonProperty("ConStdCasesCompletedHearing")
+    private String ConStdCasesCompletedHearing;
+    @JsonProperty("ConStdSessionDays")
+    private String ConStdSessionDays;
+    @JsonProperty("ConStdCompletedPerSession")
+    private String ConStdCompletedPerSession;
+    @JsonProperty("ConOpenCasesCompletedHearing")
+    private String ConOpenCasesCompletedHearing;
+    @JsonProperty("ConOpenSessionDays")
+    private String ConOpenSessionDays;
+    @JsonProperty("ConOpenCompletedPerSession")
+    private String ConOpenCompletedPerSession;
     @JsonProperty("totalCases")
     private String totalCases;
     @JsonProperty("Total26wk")
