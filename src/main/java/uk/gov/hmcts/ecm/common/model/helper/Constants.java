@@ -237,14 +237,14 @@ public class Constants {
     public static final String PRESS_LIST_CAUSE_LIST_RANGE_TEMPLATE = "EM-TRB-SCO-ENG-00216";
     public static final String PRESS_LIST_CAUSE_LIST_SINGLE_TEMPLATE = "EM-TRB-SCO-ENG-00217";
 
-    public static final String CONCILIATION_TACK_NUMBER_ONE = "1";
-    public static final String CONCILIATION_TACK_NO_CONCILIATION = "No Conciliation";
-    public static final String CONCILIATION_TACK_NUMBER_TWO = "2";
-    public static final String CONCILIATION_TACK_FAST_TRACK = "Fast Track";
-    public static final String CONCILIATION_TACK_NUMBER_THREE = "3";
-    public static final String CONCILIATION_TACK_STANDARD_TRACK = "Standard Track";
-    public static final String CONCILIATION_TACK_NUMBER_FOUR = "4";
-    public static final String CONCILIATION_TACK_OPEN_TRACK = "Open Track";
+    public static final String CONCILIATION_TRACK_NUMBER_ONE = "1";
+    public static final String CONCILIATION_TRACK_NO_CONCILIATION = "No Conciliation";
+    public static final String CONCILIATION_TRACK_NUMBER_TWO = "2";
+    public static final String CONCILIATION_TRACK_FAST_TRACK = "Fast Track";
+    public static final String CONCILIATION_TRACK_NUMBER_THREE = "3";
+    public static final String CONCILIATION_TRACK_STANDARD_TRACK = "Standard Track";
+    public static final String CONCILIATION_TRACK_NUMBER_FOUR = "4";
+    public static final String CONCILIATION_TRACK_OPEN_TRACK = "Open Track";
 
     public static final String POSITION_TYPE_REJECTED = "REJECTED";
     public static final String POSITION_TYPE_CASE_CLOSED = "Case closed";
