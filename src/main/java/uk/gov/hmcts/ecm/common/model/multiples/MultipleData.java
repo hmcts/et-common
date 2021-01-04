@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import uk.gov.hmcts.ecm.common.model.bulk.items.CaseIdTypeItem;
 import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.CorrespondenceScotType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.CorrespondenceType;
 import uk.gov.hmcts.ecm.common.model.multiples.items.CaseMultipleTypeItem;
 import uk.gov.hmcts.ecm.common.model.multiples.items.SubMultipleTypeItem;
 import uk.gov.hmcts.ecm.common.model.multiples.types.MoveCasesType;
@@ -95,6 +97,11 @@ public class MultipleData {
     private List<SubMultipleTypeItem> subMultipleCollection;
     @JsonProperty("subMultipleAction")
     private SubMultipleActionType subMultipleAction;
+
+    @JsonProperty("correspondenceScotType")
+    private CorrespondenceScotType correspondenceScotType;
+    @JsonProperty("correspondenceType")
+    private CorrespondenceType correspondenceType;
 }
 
 
