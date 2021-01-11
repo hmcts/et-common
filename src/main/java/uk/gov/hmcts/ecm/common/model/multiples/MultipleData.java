@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import uk.gov.hmcts.ecm.common.model.bulk.items.CaseIdTypeItem;
 import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
+import uk.gov.hmcts.ecm.common.model.ccd.items.AddressLabelTypeItem;
+import uk.gov.hmcts.ecm.common.model.ccd.types.AddressLabelsAttributesType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.AddressLabelsSelectionType;
 import uk.gov.hmcts.ecm.common.model.ccd.types.CorrespondenceScotType;
 import uk.gov.hmcts.ecm.common.model.ccd.types.CorrespondenceType;
 import uk.gov.hmcts.ecm.common.model.multiples.items.CaseMultipleTypeItem;
@@ -102,6 +105,13 @@ public class MultipleData {
     private CorrespondenceScotType correspondenceScotType;
     @JsonProperty("correspondenceType")
     private CorrespondenceType correspondenceType;
+    @JsonProperty("addressLabelsSelectionType")
+    private AddressLabelsSelectionType addressLabelsSelectionType;
+    @JsonProperty("addressLabelCollection")
+    private List<AddressLabelTypeItem> addressLabelCollection;
+    @JsonProperty("addressLabelsAttributesType")
+    private AddressLabelsAttributesType addressLabelsAttributesType;
+
 }
 
 
