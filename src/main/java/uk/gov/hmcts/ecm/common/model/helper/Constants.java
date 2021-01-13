@@ -324,6 +324,11 @@ public class Constants {
     public static final String ADDRESS_LABELS_SELECT_ERROR = "You need to select at least one address label before printing";
     public static final String ADDRESS_LABELS_COPIES_ERROR = "You need to use a whole number for the number of copies field";
 
+    public static final String CLAIMANT_ADDRESS_LABEL = "claimantAddressLabel";
+    public static final String CLAIMANT_REP_ADDRESS_LABEL = "claimantRepAddressLabel";
+    public static final String RESPONDENTS_ADDRESS__LABEL = "respondentsAddressLabel";
+    public static final String RESPONDENTS_REPS_ADDRESS__LABEL = "respondentsRepsAddressLabel";
+
     public static final int TARGET_HEARING_DATE_INCREMENT = 181;
 
     public static final int MAX_ES_SIZE = 10000;

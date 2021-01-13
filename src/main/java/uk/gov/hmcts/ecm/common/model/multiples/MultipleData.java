@@ -105,8 +105,8 @@ public class MultipleData {
     private CorrespondenceScotType correspondenceScotType;
     @JsonProperty("correspondenceType")
     private CorrespondenceType correspondenceType;
-    @JsonProperty("addressLabelsSelectionType")
-    private AddressLabelsSelectionType addressLabelsSelectionType;
+    @JsonProperty("addressLabelsSelectionTypeMSL")
+    private List<String> addressLabelsSelectionTypeMSL;
     @JsonProperty("addressLabelCollection")
     private List<AddressLabelTypeItem> addressLabelCollection;
     @JsonProperty("addressLabelsAttributesType")
