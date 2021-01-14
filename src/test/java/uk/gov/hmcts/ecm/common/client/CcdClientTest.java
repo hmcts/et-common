@@ -15,6 +15,8 @@ import uk.gov.hmcts.ecm.common.model.bulk.BulkData;
 import uk.gov.hmcts.ecm.common.model.bulk.BulkDetails;
 import uk.gov.hmcts.ecm.common.model.bulk.SubmitBulkEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.*;
+import uk.gov.hmcts.ecm.common.model.labels.LabelCaseSearchResult;
+import uk.gov.hmcts.ecm.common.model.labels.LabelPayloadEvent;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleData;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleDetails;
@@ -207,6 +209,23 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(ScheduleCaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesElasticSearchSchedule("authToken", caseDetails.getCaseTypeId(), new ArrayList<>(Arrays.asList("2420117/2019", "2420118/2019")));
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(ScheduleCaseSearchResult.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    //@Test
+    public void retrieveCasesElasticSearchLabels() throws IOException {
+        String jsonQuery = "{\"size\":5000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
+                "\"_source\":[\"data.claimantIndType.*\",\"data.claimantType.*\",\"data.claimant_TypeOfClaimant\",\"data.claimant_Company\",\"data" +
+                ".representativeClaimantType.*\",\"data.claimantRepresentedQuestion\",\"data.respondentCollection.*\",\"data.repCollection.*\",\"data" +
+                ".ethosCaseReference\"]}";
+        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery,creatBuildHeaders());
+        LabelCaseSearchResult labelCaseSearchResult =
+                new LabelCaseSearchResult(2L, Arrays.asList(new LabelPayloadEvent(), new LabelPayloadEvent()));
+        ResponseEntity<LabelCaseSearchResult> responseEntity = new ResponseEntity<>(labelCaseSearchResult, HttpStatus.OK);
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(LabelCaseSearchResult.class))).thenReturn(responseEntity);
+        ccdClient.retrieveCasesElasticSearchLabels("authToken", caseDetails.getCaseTypeId(), new ArrayList<>(Arrays.asList("2420117/2019", "2420118/2019")));
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(LabelCaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
     }
 

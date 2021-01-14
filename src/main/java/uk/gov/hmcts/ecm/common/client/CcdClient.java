@@ -14,6 +14,8 @@ import uk.gov.hmcts.ecm.common.model.bulk.BulkData;
 import uk.gov.hmcts.ecm.common.model.bulk.BulkRequest;
 import uk.gov.hmcts.ecm.common.model.bulk.SubmitBulkEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.*;
+import uk.gov.hmcts.ecm.common.model.labels.LabelCaseSearchResult;
+import uk.gov.hmcts.ecm.common.model.labels.LabelPayloadEvent;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleData;
 import uk.gov.hmcts.ecm.common.model.multiples.SubmitMultipleEvent;
@@ -197,6 +199,19 @@ public class CcdClient {
         return schedulePayloadEvents;
     }
 
+    private List<LabelPayloadEvent> buildAndGetElasticSearchLabelRequest(String authToken, String caseTypeId, String query) throws IOException {
+        List<LabelPayloadEvent> labelPayloadEvents = new ArrayList<>();
+        HttpEntity<String> request = new HttpEntity<>(query, buildHeaders(authToken));
+        String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
+        LabelCaseSearchResult labelCaseSearchResult =
+                restTemplate.exchange(url, HttpMethod.POST, request, LabelCaseSearchResult.class).getBody();
+        if (labelCaseSearchResult != null && labelCaseSearchResult.getCases() != null) {
+            labelPayloadEvents.addAll(labelCaseSearchResult.getCases());
+        }
+        log.info("LabelTest: " + restTemplate.exchange(url, HttpMethod.POST, request, String.class).getBody());
+        return labelPayloadEvents;
+    }
+
     public List<SubmitMultipleEvent> buildAndGetElasticSearchRequestWithRetriesMultiples(String authToken, String caseTypeId, String query) throws IOException {
         HttpEntity<String> request = new HttpEntity<>(query, buildHeaders(authToken));
         String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
@@ -289,6 +304,12 @@ public class CcdClient {
         String query = ESHelper.getSearchQuerySchedule(caseIds);
         log.info("QUERY Schedule: " + query);
         return buildAndGetElasticSearchScheduleRequest(authToken, caseTypeId, query);
+    }
+
+    public List<LabelPayloadEvent> retrieveCasesElasticSearchLabels(String authToken, String caseTypeId, List<String> caseIds) throws IOException {
+        String query = ESHelper.getSearchQueryLabels(caseIds);
+        log.info("QUERY Labels: " + query);
+        return buildAndGetElasticSearchLabelRequest(authToken, caseTypeId, query);
     }
 
     public List<SubmitBulkEvent> retrieveBulkCases(String authToken, String caseTypeId, String jurisdiction) throws IOException {
