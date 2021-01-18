@@ -86,10 +86,6 @@ public class CaseData {
     private List<DepositTypeItem> depositCollection;
     @JsonProperty("judgementCollection")
     private List<JudgementTypeItem> judgementCollection;
-    @JsonProperty("judgementDetailsCollection")
-    private List<JudgementDetailsTypeItem> judgementDetailsCollection;
-    @JsonProperty("costsCollection")
-    private List<CostsTypeItem> costsCollection;
     @JsonProperty("jurCodesCollection")
     private List<JurCodesTypeItem> jurCodesCollection;
     @JsonProperty("broughtForwardCollection")
@@ -100,8 +96,6 @@ public class CaseData {
     private String userLocation;
     @JsonProperty("documentCollection")
     private List<DocumentTypeItem> documentCollection;
-    @JsonProperty("backFromJudge")
-    private String backFromJudge;
     @JsonProperty("additionalCaseInfo")
     private AdditionalCaseInfoType additionalCaseInfoType;
     @JsonProperty("correspondenceScotType")

@@ -9,8 +9,6 @@ import uk.gov.hmcts.ecm.common.model.ccd.Document;
 @Data
 public class CasePreAcceptType {
 
-    @JsonProperty("caseReferred")
-    private String caseReferred;
     @JsonProperty("caseJudge")
     private String caseJudge;
     @JsonProperty("caseEJReferredDate")
