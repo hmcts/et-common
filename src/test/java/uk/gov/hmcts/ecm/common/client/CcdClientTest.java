@@ -157,7 +157,7 @@ public class CcdClientTest {
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(new ParameterizedTypeReference<List<SubmitEvent>>(){}));
     }
 
-    //@Test
+    @Test
     public void retrieveCasesElasticSearchForCreationManuallyCreated() throws IOException {
         String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}}";
 //        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
@@ -212,7 +212,7 @@ public class CcdClientTest {
         verifyNoMoreInteractions(restTemplate);
     }
 
-    //@Test
+    @Test
     public void retrieveCasesElasticSearchLabels() throws IOException {
         String jsonQuery = "{\"size\":5000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
                 "\"_source\":[\"data.claimantIndType.*\",\"data.claimantType.*\",\"data.claimant_TypeOfClaimant\",\"data.claimant_Company\",\"data" +

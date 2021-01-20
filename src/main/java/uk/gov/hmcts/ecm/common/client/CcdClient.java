@@ -182,7 +182,6 @@ public class CcdClient {
         if (caseSearchResult != null && caseSearchResult.getCases() != null) {
             submitEvents.addAll(caseSearchResult.getCases());
         }
-        log.info("ESTest: " + restTemplate.exchange(url, HttpMethod.POST, request, String.class).getBody());
         return submitEvents;
     }
 
@@ -208,7 +207,6 @@ public class CcdClient {
         if (labelCaseSearchResult != null && labelCaseSearchResult.getCases() != null) {
             labelPayloadEvents.addAll(labelCaseSearchResult.getCases());
         }
-        log.info("LabelTest: " + restTemplate.exchange(url, HttpMethod.POST, request, String.class).getBody());
         return labelPayloadEvents;
     }
 
