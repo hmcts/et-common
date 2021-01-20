@@ -194,7 +194,7 @@ public class CcdClient {
         if (scheduleCaseSearchResult != null && scheduleCaseSearchResult.getCases() != null) {
             schedulePayloadEvents.addAll(scheduleCaseSearchResult.getCases());
         }
-        log.info("ScheduleTest: " + restTemplate.exchange(url, HttpMethod.POST, request, String.class).getBody());
+        //log.info("ScheduleTest: " + restTemplate.exchange(url, HttpMethod.POST, request, String.class).getBody());
         return schedulePayloadEvents;
     }
 

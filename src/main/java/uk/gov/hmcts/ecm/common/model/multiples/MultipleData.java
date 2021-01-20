@@ -46,6 +46,8 @@ public class MultipleData {
     @JsonProperty("preAcceptDone")
     private String preAcceptDone;
 
+    @JsonProperty("subMultiple")
+    private DynamicFixedListType subMultiple;
     @JsonProperty("flag1")
     private DynamicFixedListType flag1;
     @JsonProperty("flag2")
