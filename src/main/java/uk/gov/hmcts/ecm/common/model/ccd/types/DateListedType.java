@@ -72,6 +72,8 @@ public class DateListedType {
     private String hearingRoomBrighton;
     @JsonProperty("hearingRoomBrightonCC")
     private String hearingRoomBrightonCC;
+    @JsonProperty("hearingRoomBristol")
+    private String hearingRoomBristol;
     @JsonProperty("hearingRoomBristol1")
     private String hearingRoomBristol1;
     @JsonProperty("hearingRoomBristol2")
@@ -274,8 +276,8 @@ public class DateListedType {
     private String hearingRoomNewcastleCFT;
     @JsonProperty("hearingRoomNewcastleET")
     private String hearingRoomNewcastleET;
-    @JsonProperty("hearingRoomTeesideMags")
-    private String hearingRoomTeesideMags;
+    @JsonProperty("hearingRoomTeessideMags")
+    private String hearingRoomTeessideMags;
     @JsonProperty("hearingRoomWhitby")
     private String hearingRoomWhitby;
 
