@@ -88,8 +88,10 @@ public class CaseData {
     private List<JudgementTypeItem> judgementCollection;
     @JsonProperty("jurCodesCollection")
     private List<JurCodesTypeItem> jurCodesCollection;
-    @JsonProperty("broughtForwardCollection")
-    private List<BroughtForwardDatesTypeItem> broughtForwardCollection;
+    @JsonProperty("bfActionsCW")
+    private List<BFActionTypeItem> bfActionsCW;
+    @JsonProperty("bfActionsAll")
+    private List<BFActionTypeItem> bfActionsAll;
     @JsonProperty("clerkResponsible")
     private String clerkResponsible;
     @JsonProperty("userLocation")

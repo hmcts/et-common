@@ -13,4 +13,5 @@ public class BFDateTypeItem {
     private String id;
     @JsonProperty("value")
     private BFDateType value;
+
 }

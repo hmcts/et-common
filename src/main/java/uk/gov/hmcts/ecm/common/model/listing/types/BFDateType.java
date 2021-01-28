@@ -10,11 +10,13 @@ public class BFDateType {
 
     @JsonProperty("caseReference")
     private String caseReference;
-
+    @JsonProperty("broughtForwardAction")
+    private String broughtForwardAction;
     @JsonProperty("broughtForwardDate")
     private String broughtForwardDate;
-    @JsonProperty("broughtForwardDateReason")
-    private String broughtForwardDateReason;
     @JsonProperty("broughtForwardDateCleared")
     private String broughtForwardDateCleared;
+    @JsonProperty("broughtForwardDateReason")
+    private String broughtForwardDateReason;
+
 }
