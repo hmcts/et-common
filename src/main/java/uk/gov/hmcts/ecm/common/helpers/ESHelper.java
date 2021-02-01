@@ -122,7 +122,6 @@ public class ESHelper {
 
     public static String getReportRangeDateSearchQuery(String dateToSearchFrom, String dateToSearchTo, String reportType) {
         String dateFieldName = getDateFieldName(reportType);
-        log.info("DATE FIELD NAME: " + dateFieldName);
         BoolQueryBuilder boolQueryBuilder = boolQuery()
                 .filter(new RangeQueryBuilder(dateFieldName).gte(dateToSearchFrom).lte(dateToSearchTo));
         return new SearchSourceBuilder()

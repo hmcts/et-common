@@ -313,7 +313,7 @@ public class Constants {
 
     public static final String FUTURE_RECEIPT_DATE_ERROR_MESSAGE = "Receipt date should not be a date in the future";
     public static final String EMPTY_RESPONDENT_COLLECTION_ERROR_MESSAGE = "At least one active respondent is required";
-    public static final String EARLY_DATE_RETURNED_FROM_JUDGE_ERROR_MESSAGE = "Date returned from judge can not be earlier than Date referred to judge";
+    public static final String EARLY_DATE_RETURNED_FROM_JUDGE_ERROR_MESSAGE = "Date returned from judge cannot be earlier than Date referred to judge";
     public static final String FUTURE_RESPONSE_RECEIVED_DATE_ERROR_MESSAGE = "Response received date should not be a date in the future";
     public static final String RESP_REP_NAME_MISMATCH_ERROR_MESSAGE = "The respondent name does not match any of the available respondents for representative";
     public static final String EMPTY_HEARING_COLLECTION_ERROR_MESSAGE = "Hearings could not be found for this case, the hearing collection is empty";
@@ -331,7 +331,7 @@ public class Constants {
     public static final String RESPONDENTS_ADDRESS__LABEL = "respondentsAddressLabel";
     public static final String RESPONDENTS_REPS_ADDRESS__LABEL = "respondentsRepsAddressLabel";
 
-    public static final int TARGET_HEARING_DATE_INCREMENT = 181;
+    public static final int TARGET_HEARING_DATE_INCREMENT = 180;
 
     public static final int MAX_ES_SIZE = 10000;
 
