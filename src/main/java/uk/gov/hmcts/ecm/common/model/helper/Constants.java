@@ -312,6 +312,7 @@ public class Constants {
     public static final String IMAGE_FILE_PRECEDING = "EMP-TRIB-";
 
     public static final String FUTURE_RECEIPT_DATE_ERROR_MESSAGE = "Receipt date should not be a date in the future";
+    public static final String RECEIPT_DATE_LATER_THAN_ACCEPTED_ERROR_MESSAGE = "Receipt date should not be later than accepted date";
     public static final String EMPTY_RESPONDENT_COLLECTION_ERROR_MESSAGE = "At least one active respondent is required";
     public static final String EARLY_DATE_RETURNED_FROM_JUDGE_ERROR_MESSAGE = "Date returned from judge cannot be earlier than Date referred to judge";
     public static final String FUTURE_RESPONSE_RECEIVED_DATE_ERROR_MESSAGE = "Response received date should not be a date in the future";
