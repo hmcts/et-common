@@ -326,6 +326,8 @@ public class Constants {
     public static final String ADDRESS_LABELS_COPIES_ERROR = "You need to use a whole number for the number of copies field";
     public static final String ADDRESS_LABELS_COPIES_LESS_10_ERROR = "Number of copies should be less than or equal to 10";
     public static final String ADDRESS_LABELS_LABELS_LIMIT_ERROR = "Number of labels to be printed reached the limit";
+    public static final String JURISDICTION_CODES_EXISTENCE_ERROR = "The following jurisdiction codes do not exist for this case: ";
+    public static final String DUPLICATED_JURISDICTION_CODES_JUDGEMENT_ERROR = "The following jurisdiction codes have been selected more than once for a judgment: ";
 
     public static final String CLAIMANT_ADDRESS_LABEL = "claimantAddressLabel";
     public static final String CLAIMANT_REP_ADDRESS_LABEL = "claimantRepAddressLabel";
