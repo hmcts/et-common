@@ -41,6 +41,8 @@ public class MultipleData {
     private String multipleSource;
     @JsonProperty("leadCase")
     private String leadCase;
+    @JsonProperty("amendLeadCase")
+    private String amendLeadCase;
     @JsonProperty("caseCounter")
     private String caseCounter;
     @JsonProperty("preAcceptDone")
