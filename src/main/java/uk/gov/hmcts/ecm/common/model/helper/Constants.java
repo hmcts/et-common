@@ -328,6 +328,11 @@ public class Constants {
     public static final String ADDRESS_LABELS_LABELS_LIMIT_ERROR = "Number of labels to be printed reached the limit";
     public static final String JURISDICTION_CODES_EXISTENCE_ERROR = "The following jurisdiction codes do not exist for this case: ";
     public static final String DUPLICATED_JURISDICTION_CODES_JUDGEMENT_ERROR = "The following jurisdiction codes have been selected more than once for a judgment: ";
+    public static final String JURISDICTION_CODES_DELETED_ERROR = "The following jurisdiction codes cannot be deleted as " +
+            "they have been selected in judgements: ";
+
+    public static final String NO_CASES_SEARCHED = "No cases searched";
+    public static final String CASE_IS_NOT_IN_MULTIPLE_ERROR = "Case is not part of the multiple or is already the lead case";
 
     public static final String CLAIMANT_ADDRESS_LABEL = "claimantAddressLabel";
     public static final String CLAIMANT_REP_ADDRESS_LABEL = "claimantRepAddressLabel";

@@ -39,4 +39,6 @@ public class DepositType {
     private String depositNotes;
     @JsonProperty("depositDoc")
     private Document depositDoc;
+    @JsonProperty("depositAmountRefunded")
+    private String depositAmountRefunded;
 }
