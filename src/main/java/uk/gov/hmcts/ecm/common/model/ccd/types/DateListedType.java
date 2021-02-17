@@ -26,8 +26,6 @@ public class DateListedType {
     private String hearingDundee;
     @JsonProperty("Hearing_Edinburgh")
     private String hearingEdinburgh;
-    @JsonProperty("Hearing_judge_name")
-    private String hearingJudgeName;
     @JsonProperty("Hearing_clerk")
     private String hearingClerk;
     @JsonProperty("hearingCaseDisposed")

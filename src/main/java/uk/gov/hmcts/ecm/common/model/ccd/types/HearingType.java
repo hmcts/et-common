@@ -33,6 +33,12 @@ public class HearingType {
     private String hearingStage;
     @JsonProperty("Hearing_notes")
     private String hearingNotes;
+    @JsonProperty("judge")
+    private String judge;
+    @JsonProperty("Hearing_Glasgow")
+    private String hearingGlasgow;
+    @JsonProperty("Hearing_Aberdeen")
+    private String hearingAberdeen;
     @JsonProperty("hearingDateCollection")
     private List<DateListedTypeItem> hearingDateCollection;
 
