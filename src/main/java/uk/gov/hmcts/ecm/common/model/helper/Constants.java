@@ -165,7 +165,7 @@ public class Constants {
     public static final String UPDATE_EVENT_TRIGGER_ID_BULK = "amendCaseDetailsBulk";
     public static final String PRE_ACCEPT_CASE_TRIGGER_ID_BULK = "preAcceptanceCase";
     public static final String UPDATE_BULK_EVENT_TRIGGER_ID = "updateBulkAction";
-    public static final String AMEND_MULTIPLE_EVENT_TRIGGER_ID = "amendMultipleDetails";
+    public static final String AMEND_MULTIPLE_EVENT_TRIGGER_ID = "amendMultipleAPI";
     public static final String AMEND_SINGLE_EVENT_TRIGGER_ID = "amendSingle";
     public static final String UPDATE_EVENT_TRIGGER_ID = "amendCaseDetails";
 
@@ -332,6 +332,8 @@ public class Constants {
     public static final String DUPLICATED_JURISDICTION_CODES_JUDGEMENT_ERROR = "The following jurisdiction codes have been selected more than once for a judgment: ";
     public static final String JURISDICTION_CODES_DELETED_ERROR = "The following jurisdiction codes cannot be deleted as " +
             "they have been selected in judgements: ";
+    public static final String DEPOSIT_REFUNDED_GREATER_DEPOSIT_ERROR = "The amount entered for the refund " +
+            "cannot be more than the amount that was deposited";
 
     public static final String NO_CASES_SEARCHED = "No cases searched";
     public static final String CASE_IS_NOT_IN_MULTIPLE_ERROR = "Case is not part of the multiple or is already the lead case";
