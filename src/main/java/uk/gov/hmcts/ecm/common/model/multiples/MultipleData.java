@@ -41,7 +41,7 @@ public class MultipleData {
     private String multipleSource;
     @JsonProperty("leadCase")
     private String leadCase;
-    @JsonProperty("amendLeadCase")
+    @JsonProperty("newLeadCase")
     private String amendLeadCase;
     @JsonProperty("caseCounter")
     private String caseCounter;
@@ -115,6 +115,15 @@ public class MultipleData {
     private List<AddressLabelTypeItem> addressLabelCollection;
     @JsonProperty("addressLabelsAttributesType")
     private AddressLabelsAttributesType addressLabelsAttributesType;
+
+    @JsonProperty("typeOfAmendment")
+    private List<String> typeOfAmendmentMSL;
+    @JsonProperty("officeCT_temp")
+    private String officeCTTemp;
+    @JsonProperty("reasonForCT")
+    private String reasonForCT;
+    @JsonProperty("relatedMultipleCT")
+    private String relatedMultipleCT;
 
 }
 
