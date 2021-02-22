@@ -288,6 +288,8 @@ public class DateListedType {
     private String hearingRoomEdinburgh;
     @JsonProperty("Hearing_room_Glasgow")
     private String hearingRoomGlasgow;
+    @JsonProperty("Hearing_room_GTC")
+    private String hearingRoomGTC;
     @JsonProperty("Hearing_room_Cambeltown")
     private String hearingRoomCambeltown;
     @JsonProperty("Hearing_room_Dumfries")
@@ -318,6 +320,8 @@ public class DateListedType {
     private String hearingRoomStornoway;
     @JsonProperty("Hearing_room_Wick")
     private String hearingRoomWick;
+    @JsonProperty("Hearing_room_IJC")
+    private String hearingRoomIJC;
     @JsonProperty("Hearing_room_Inverness")
     private String hearingRoomInverness;
     @JsonProperty("Hearing_room_Kirkwall")
