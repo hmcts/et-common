@@ -41,5 +41,8 @@ public class HearingType {
     private String hearingAberdeen;
     @JsonProperty("hearingDateCollection")
     private List<DateListedTypeItem> hearingDateCollection;
-
+    @JsonProperty("hearingFormat")
+    private String hearingFormat;
+    @JsonProperty("judicialMediation")
+    private String judicialMediation;
 }
