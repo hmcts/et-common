@@ -367,4 +367,9 @@ public class Constants {
     public static final String AMEND_ACTION = "Amend";
     public static final String DELETE_ACTION = "Delete";
 
+    public static final String MSL_HEARING_FORMAT_PERSON = "In person";
+    public static final String MSL_HEARING_FORMAT_TELEPHONE = "Telephone";
+    public static final String MSL_HEARING_FORMAT_VIDEO = "Video";
+    public static final String MSL_HEARING_FORMAT_HYBRID = "Hybrid";
+
 }

@@ -39,10 +39,14 @@ public class HearingType {
     private String hearingGlasgow;
     @JsonProperty("Hearing_Aberdeen")
     private String hearingAberdeen;
+    @JsonProperty("Hearing_Dundee")
+    private String hearingDundee;
+    @JsonProperty("Hearing_Edinburgh")
+    private String hearingEdinburgh;
     @JsonProperty("hearingDateCollection")
     private List<DateListedTypeItem> hearingDateCollection;
     @JsonProperty("hearingFormat")
-    private String hearingFormat;
+    private List<String> hearingFormat;
     @JsonProperty("judicialMediation")
     private String judicialMediation;
 }
