@@ -249,4 +249,7 @@ public class CaseData {
     @JsonProperty("hearingTimingDuration")
     private String hearingTimingDuration;
 
+    @JsonProperty("companyPremises")
+    private CompanyPremisesType companyPremises;
+
 }
