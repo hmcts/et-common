@@ -372,4 +372,20 @@ public class Constants {
     public static final String MSL_HEARING_FORMAT_VIDEO = "Video";
     public static final String MSL_HEARING_FORMAT_HYBRID = "Hybrid";
 
+    public static final String BF_ACTION_ACAS = "Application of letter to ACAS/RPO";
+    public static final String BF_ACTION_CASE_LISTED = "Case listed";
+    public static final String BF_ACTION_CASE_PAPERS = "Case papers prepared";
+    public static final String BF_ACTION_CASE_TRANSFERRED = "Case transferred";
+    public static final String BF_ACTION_DRAFT = "Draft to members";
+    public static final String BF_ACTION_ENQUIRY_ISSUED = "Enquiry letter issued";
+    public static final String BF_ACTION_ENQUIRY_RECEIVED = "Enquiry letter received";
+    public static final String BF_ACTION_EXHIBITS = "Exhibits returned";
+    public static final String BF_ACTION_INTERLOCUTORY = "Interlocutory order requested";
+    public static final String BF_ACTION_IT3_RECEIVED = "IT3 received";
+    public static final String BF_ACTION_OTHER_ACTION = "Other action";
+    public static final String BF_ACTION_POSTPONEMENT_REQUESTED = "Postponement requested";
+    public static final String BF_ACTION_REFER_CHAIRMAN = "Refer to chairman for listing instructions";
+    public static final String BF_ACTION_REPLY_TO_ENQUIRY = "Reply to enquiry letter sent";
+    public static final String BF_ACTION_STRIKING_OUT_WARNING = "Striking out warning issued";
+
 }
