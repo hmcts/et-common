@@ -11,8 +11,16 @@ public class BFActionType {
 
     @JsonProperty("action")
     private DynamicFixedListType action;
+    @JsonProperty("cwActions")
+    private String cwActions;
     @JsonProperty("dateEntered")
     private String dateEntered;
+    @JsonProperty("imported")
+    private String imported;
+    @JsonProperty("letters")
+    private String letters;
+    @JsonProperty("allActions")
+    private String allActions;
     @JsonProperty("bfDate")
     private String bfDate;
     @JsonProperty("cleared")
