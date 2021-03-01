@@ -158,6 +158,7 @@ public class Constants {
     public static final String INDIVIDUAL_TYPE_CLAIMANT = "Individual";
     public static final String COMPANY_TYPE_CLAIMANT = "Company";
     public static final String MANUALLY_CREATED_POSITION = "Manually Created";
+    public static final String CASE_CLOSED_POSITION = "Case closed";
     public static final String ET1_ONLINE_CASE_SOURCE = "ET1 Online";
     public static final String MIGRATION_CASE_SOURCE = "Migration";
 
