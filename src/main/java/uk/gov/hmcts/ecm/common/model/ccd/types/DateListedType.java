@@ -56,6 +56,8 @@ public class DateListedType {
     private String hearingTimingDuration;
     @JsonProperty("HearingNotes2")
     private String hearingNotes2;
+    @JsonProperty("postponedDate")
+    private String postponedDate;
 
     //BRISTOL
     @JsonProperty("hearingRoomBarnstaple")
@@ -156,6 +158,8 @@ public class DateListedType {
     private String hearingRoomTeesside;
     @JsonProperty("hearingRoomWakefield")
     private String hearingRoomWakefield;
+    @JsonProperty("hearingRoomHullCombined")
+    private String hearingRoomHullCombined;
 
     //LONDON CENTRAL
     @JsonProperty("hearingRoomFieldHouse")
@@ -426,6 +430,8 @@ public class DateListedType {
     private String hearingRoomWrexhamCourts;
     @JsonProperty("hearingRoomWrexham_SSCSA")
     private String hearingRoomWrexhamSSCSA;
+    @JsonProperty("hearingRoomCardiffSSCS")
+    private String hearingRoomCardiffSSCS;
 
     //WATFORD
     @JsonProperty("hearingRoomAmersham")
