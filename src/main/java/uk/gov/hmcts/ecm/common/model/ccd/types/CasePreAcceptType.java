@@ -23,6 +23,8 @@ public class CasePreAcceptType {
     private String caseAccepted;
     @JsonProperty("dateAccepted")
     private String dateAccepted;
+    @JsonProperty("dateRejected")
+    private String dateRejected;
     @JsonProperty("partRejected")
     private String partRejected;
     @JsonProperty("rejectReason")

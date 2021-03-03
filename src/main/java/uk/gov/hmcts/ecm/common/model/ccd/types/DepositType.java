@@ -21,7 +21,7 @@ public class DepositType {
     private String depositOrderSent;
     @JsonProperty("deposit_due")
     private String depositDue;
-    @JsonProperty("deposit_received")
+    @JsonProperty("depositReceived")
     private String depositReceived;
     @JsonProperty("depositReceivedDate")
     private String depositReceivedDate;
