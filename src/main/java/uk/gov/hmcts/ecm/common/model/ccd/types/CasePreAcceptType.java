@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import uk.gov.hmcts.ecm.common.model.ccd.Document;
 
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 public class CasePreAcceptType {
@@ -28,6 +30,6 @@ public class CasePreAcceptType {
     @JsonProperty("partRejected")
     private String partRejected;
     @JsonProperty("rejectReason")
-    private String[] rejectReason;
+    private List<String> rejectReason;
 
 }

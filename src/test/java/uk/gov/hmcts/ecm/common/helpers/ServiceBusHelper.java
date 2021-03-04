@@ -9,6 +9,7 @@ import uk.gov.hmcts.ecm.common.model.servicebus.UpdateCaseMsg;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -83,6 +84,12 @@ public class ServiceBusHelper {
 
     public static PreAcceptDataModel getPreAcceptDataModel() {
         return PreAcceptDataModel.builder()
+                .build();
+    }
+
+    public static RejectDataModel getRejectDataModel() {
+        return RejectDataModel.builder()
+                .rejectReason(new ArrayList<>(Arrays.asList("RejectionReason1", "RejectionReason2")))
                 .build();
     }
 

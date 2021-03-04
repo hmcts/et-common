@@ -12,6 +12,8 @@ public class DataModelFactory {
             return new UpdateDataTask(dataModelParent);
         } else if (dataModelParent instanceof DetachDataModel) {
             return new DetachDataTask(dataModelParent);
+        } else if (dataModelParent instanceof RejectDataModel) {
+            return new RejectDataTask(dataModelParent);
         } else {
             return new PreAcceptDataTask(dataModelParent);
         }

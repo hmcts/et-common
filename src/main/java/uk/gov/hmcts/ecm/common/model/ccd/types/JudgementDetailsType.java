@@ -36,4 +36,6 @@ public class JudgementDetailsType {
     private String adjustment;
     @JsonProperty("adjustmentPercentage")
     private String adjustmentPercentage;
+    @JsonProperty("certificateOfCorrection")
+    private String certificateOfCorrection;
 }

@@ -7,10 +7,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 import uk.gov.hmcts.ecm.common.helpers.ServiceBusHelper;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.servicebus.UpdateCaseMsg;
-import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.CreationDataModel;
-import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DetachDataModel;
-import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.PreAcceptDataModel;
-import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.UpdateDataModel;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
@@ -65,6 +66,17 @@ public class UpdateCaseMsgTest {
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(preAcceptDataModel);
         updateCaseMsg.runTask(submitEventAccepted);
         assertEquals(ACCEPTED_STATE, submitEventAccepted.getCaseData().getState());
+    }
+
+    @Test
+    public void runTaskReject() {
+        List<String> reasons = new ArrayList<>(Arrays.asList("RejectionReason1", "RejectionReason2"));
+        RejectDataModel rejectDataModel = ServiceBusHelper.getRejectDataModel();
+        updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(rejectDataModel);
+        updateCaseMsg.runTask(submitEventSubmitted);
+        assertEquals(REJECTED_STATE, submitEventSubmitted.getCaseData().getState());
+        assertEquals(NO, submitEventSubmitted.getCaseData().getPreAcceptCase().getCaseAccepted());
+        assertEquals(reasons, submitEventSubmitted.getCaseData().getPreAcceptCase().getRejectReason());
     }
 
     @Test

@@ -18,7 +18,8 @@ import lombok.experimental.SuperBuilder;
         @JsonSubTypes.Type(value = CreationDataModel.class, name = "creationDataModel"),
         @JsonSubTypes.Type(value = DetachDataModel.class, name = "detachDataModel"),
         @JsonSubTypes.Type(value = UpdateDataModel.class, name = "updateDataModel"),
-        @JsonSubTypes.Type(value = PreAcceptDataModel.class, name = "preAcceptDataModel")
+        @JsonSubTypes.Type(value = PreAcceptDataModel.class, name = "preAcceptDataModel"),
+        @JsonSubTypes.Type(value = RejectDataModel.class, name = "rejectDataModel")
 })
 public class DataModelParent {
 
