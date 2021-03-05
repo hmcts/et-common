@@ -6,10 +6,7 @@ import lombok.Data;
 import uk.gov.hmcts.ecm.common.model.bulk.items.CaseIdTypeItem;
 import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
 import uk.gov.hmcts.ecm.common.model.ccd.items.AddressLabelTypeItem;
-import uk.gov.hmcts.ecm.common.model.ccd.types.AddressLabelsAttributesType;
-import uk.gov.hmcts.ecm.common.model.ccd.types.AddressLabelsSelectionType;
-import uk.gov.hmcts.ecm.common.model.ccd.types.CorrespondenceScotType;
-import uk.gov.hmcts.ecm.common.model.ccd.types.CorrespondenceType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.*;
 import uk.gov.hmcts.ecm.common.model.multiples.items.CaseMultipleTypeItem;
 import uk.gov.hmcts.ecm.common.model.multiples.items.SubMultipleTypeItem;
 import uk.gov.hmcts.ecm.common.model.multiples.types.MoveCasesType;
@@ -124,6 +121,11 @@ public class MultipleData {
     private String reasonForCT;
     @JsonProperty("relatedMultipleCT")
     private String relatedMultipleCT;
+
+    @JsonProperty("preAcceptMultiple")
+    private CasePreAcceptType preAcceptCase;
+    @JsonProperty("notes")
+    private String notes;
 
 }
 

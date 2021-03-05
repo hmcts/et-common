@@ -84,12 +84,22 @@ public class ServiceBusHelper {
 
     public static PreAcceptDataModel getPreAcceptDataModel() {
         return PreAcceptDataModel.builder()
+                .dateAccepted(("25-10-2020"))
                 .build();
     }
 
     public static RejectDataModel getRejectDataModel() {
         return RejectDataModel.builder()
+                .dateRejected("25-10-2020")
                 .rejectReason(new ArrayList<>(Arrays.asList("RejectionReason1", "RejectionReason2")))
+                .build();
+    }
+
+    public static CloseDataModel getCloseDataModel() {
+        return CloseDataModel.builder()
+                .clerkResponsible("ClerkResponsible")
+                .fileLocation("FileLocation")
+                .notes("Notes")
                 .build();
     }
 

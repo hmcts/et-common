@@ -57,6 +57,7 @@ public class UpdateCaseMsgTest {
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(preAcceptDataModel);
         updateCaseMsg.runTask(submitEventSubmitted);
         assertEquals(ACCEPTED_STATE, submitEventSubmitted.getCaseData().getState());
+        assertEquals("25-10-2020", submitEventSubmitted.getCaseData().getPreAcceptCase().getCaseAccepted());
         assertEquals(YES, submitEventSubmitted.getCaseData().getPreAcceptCase().getCaseAccepted());
     }
 
@@ -76,7 +77,20 @@ public class UpdateCaseMsgTest {
         updateCaseMsg.runTask(submitEventSubmitted);
         assertEquals(REJECTED_STATE, submitEventSubmitted.getCaseData().getState());
         assertEquals(NO, submitEventSubmitted.getCaseData().getPreAcceptCase().getCaseAccepted());
+        assertEquals("25-10-2020", submitEventSubmitted.getCaseData().getPreAcceptCase().getDateRejected());
         assertEquals(reasons, submitEventSubmitted.getCaseData().getPreAcceptCase().getRejectReason());
+    }
+
+    @Test
+    public void runTaskClose() {
+        CloseDataModel closeDataModel = ServiceBusHelper.getCloseDataModel();
+        updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(closeDataModel);
+        updateCaseMsg.runTask(submitEventSubmitted);
+        assertEquals(CLOSED_STATE, submitEventSubmitted.getCaseData().getState());
+        assertEquals(CLOSED_STATE, submitEventSubmitted.getCaseData().getPositionType());
+        assertEquals("FileLocation", submitEventSubmitted.getCaseData().getFileLocation());
+        assertEquals("ClerkResponsible", submitEventSubmitted.getCaseData().getClerkResponsible());
+        assertEquals("Notes", submitEventSubmitted.getCaseData().getCaseNotes());
     }
 
     @Test

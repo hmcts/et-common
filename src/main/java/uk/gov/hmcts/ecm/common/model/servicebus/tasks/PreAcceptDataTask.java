@@ -6,11 +6,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
-import uk.gov.hmcts.ecm.common.helpers.UtilHelper;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.types.CasePreAcceptType;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
-import java.time.LocalDate;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.PreAcceptDataModel;
 
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
 
@@ -42,7 +41,7 @@ public class PreAcceptDataTask extends DataTaskParent {
         submitEvent.getCaseData().setState(ACCEPTED_STATE);
         CasePreAcceptType casePreAcceptType = new CasePreAcceptType();
         casePreAcceptType.setCaseAccepted(YES);
-        casePreAcceptType.setDateAccepted(UtilHelper.formatCurrentDate2(LocalDate.now()));
+        casePreAcceptType.setDateAccepted(((PreAcceptDataModel)dataModelParent).getDateAccepted());
         submitEvent.getCaseData().setPreAcceptCase(casePreAcceptType);
 
     }

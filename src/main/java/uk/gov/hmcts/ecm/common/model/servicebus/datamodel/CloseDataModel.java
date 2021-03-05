@@ -8,20 +8,21 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
-
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RejectDataModel extends DataModelParent {
+public class CloseDataModel extends DataModelParent {
 
-    @JsonProperty("dateRejected")
-    private String dateRejected;
+    @JsonProperty("clerkResponsible")
+    private String clerkResponsible;
 
-    @JsonProperty("rejectReason")
-    private List<String> rejectReason;
+    @JsonProperty("fileLocation")
+    private String fileLocation;
+
+    @JsonProperty("notes")
+    private String notes;
 
 }
