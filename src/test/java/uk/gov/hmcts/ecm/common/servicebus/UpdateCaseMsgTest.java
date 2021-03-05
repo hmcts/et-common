@@ -57,7 +57,7 @@ public class UpdateCaseMsgTest {
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(preAcceptDataModel);
         updateCaseMsg.runTask(submitEventSubmitted);
         assertEquals(ACCEPTED_STATE, submitEventSubmitted.getCaseData().getState());
-        assertEquals("25-10-2020", submitEventSubmitted.getCaseData().getPreAcceptCase().getCaseAccepted());
+        assertEquals("25-10-2020", submitEventSubmitted.getCaseData().getPreAcceptCase().getDateAccepted());
         assertEquals(YES, submitEventSubmitted.getCaseData().getPreAcceptCase().getCaseAccepted());
     }
 
