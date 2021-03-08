@@ -46,4 +46,6 @@ public class CorrespondenceScotType {
     private String claimantOrRespondent;
     @JsonProperty("hearingNumber")
     private String hearingNumber;
+    @JsonProperty("letterAddress")
+    private String letterAddress;
 }

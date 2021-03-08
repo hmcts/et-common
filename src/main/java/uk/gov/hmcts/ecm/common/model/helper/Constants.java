@@ -390,4 +390,7 @@ public class Constants {
     public static final String BF_ACTION_REPLY_TO_ENQUIRY = "Reply to enquiry letter sent";
     public static final String BF_ACTION_STRIKING_OUT_WARNING = "Striking out warning issued";
 
+    public static final String LETTER_ADDRESS_MANAGING_OFFICE = "Managing Office";
+    public static final String LETTER_ADDRESS_ALLOCATED_OFFICE = "Allocated Office ";
+
 }
