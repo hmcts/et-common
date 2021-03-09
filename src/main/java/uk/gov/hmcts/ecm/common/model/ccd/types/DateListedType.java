@@ -330,6 +330,8 @@ public class DateListedType {
     private String hearingRoomInverness;
     @JsonProperty("Hearing_room_Kirkwall")
     private String hearingRoomKirkawall;
+    @JsonProperty("roomDundeeTribunal")
+    private String roomDundeeTribunal;
 
     //WALES
     @JsonProperty("hearingRoomAbergele")
