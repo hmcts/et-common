@@ -87,7 +87,7 @@ public class UpdateCaseMsgTest {
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(closeDataModel);
         updateCaseMsg.runTask(submitEventSubmitted);
         assertEquals(CLOSED_STATE, submitEventSubmitted.getCaseData().getState());
-        assertEquals(CLOSED_STATE, submitEventSubmitted.getCaseData().getPositionType());
+        assertEquals(CASE_CLOSED_POSITION, submitEventSubmitted.getCaseData().getPositionType());
         assertEquals("FileLocation", submitEventSubmitted.getCaseData().getFileLocation());
         assertEquals("ClerkResponsible", submitEventSubmitted.getCaseData().getClerkResponsible());
         assertEquals("Notes", submitEventSubmitted.getCaseData().getCaseNotes());
