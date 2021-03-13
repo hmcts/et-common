@@ -104,6 +104,14 @@ public class UpdateCaseMsgTest {
     }
 
     @Test
+    public void runTaskResetState() {
+        ResetStateDataModel resetStateDataModel = ServiceBusHelper.getResetStateDataModel();
+        updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(resetStateDataModel);
+        updateCaseMsg.runTask(submitEventAccepted);
+        assertEquals(ACCEPTED_STATE, submitEventAccepted.getState());
+    }
+
+    @Test
     public void runTaskUpdate() {
         UpdateDataModel updateDataModel = ServiceBusHelper.getUpdateDataModel();
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(updateDataModel);

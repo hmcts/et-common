@@ -108,6 +108,11 @@ public class ServiceBusHelper {
                 .build();
     }
 
+    public static ResetStateDataModel getResetStateDataModel() {
+        return ResetStateDataModel.builder()
+                .build();
+    }
+
     public static UpdateDataModel getUpdateDataModel() {
         return UpdateDataModel.builder()
                 .managingOffice("ManagingOffice")
