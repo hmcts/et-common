@@ -41,6 +41,14 @@ public class ListingData {
     private String listingVenueOfficeGlas;
     @JsonProperty("listingVenueOfficeAber")
     private String listingVenueOfficeAber;
+    @JsonProperty("venueGlasgow")
+    private String venueGlasgow;
+    @JsonProperty("venueAberdeen")
+    private String venueAberdeen;
+    @JsonProperty("venueDundee")
+    private String venueDundee;
+    @JsonProperty("venueEdinburgh")
+    private String venueEdinburgh;
     @JsonProperty("hearingDocType")
     private String hearingDocType;
     @JsonProperty("hearingDocETCL")
