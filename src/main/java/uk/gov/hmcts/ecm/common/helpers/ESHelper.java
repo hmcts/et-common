@@ -26,6 +26,8 @@ public class ESHelper {
     public static final String CLAIMS_ACCEPTED_DATE_FIELD_NAME = "data.preAcceptCase.dateAccepted";
     public static final String LISTING_GLASGOW_VENUE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.Hearing_Glasgow.keyword";
     public static final String LISTING_ABERDEEN_VENUE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.Hearing_Aberdeen.keyword";
+    public static final String LISTING_DUNDEE_VENUE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.Hearing_Dundee.keyword";
+    public static final String LISTING_EDINBURGH_VENUE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.Hearing_Edinburgh.keyword";
 
     private static final String REPORT_TYPE_NOT_FOUND = "Report type not found";
 
