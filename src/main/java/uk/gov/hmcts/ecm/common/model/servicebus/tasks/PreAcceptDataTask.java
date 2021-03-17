@@ -38,7 +38,6 @@ public class PreAcceptDataTask extends DataTaskParent {
     private void preAcceptLogic(SubmitEvent submitEvent) {
 
         log.info("Moving to accepted state");
-        submitEvent.getCaseData().setState(ACCEPTED_STATE);
         CasePreAcceptType casePreAcceptType = new CasePreAcceptType();
         casePreAcceptType.setCaseAccepted(YES);
         casePreAcceptType.setDateAccepted(((PreAcceptDataModel)dataModelParent).getDateAccepted());

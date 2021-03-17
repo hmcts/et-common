@@ -56,7 +56,6 @@ public class UpdateCaseMsgTest {
         PreAcceptDataModel preAcceptDataModel = ServiceBusHelper.getPreAcceptDataModel();
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(preAcceptDataModel);
         updateCaseMsg.runTask(submitEventSubmitted);
-        assertEquals(ACCEPTED_STATE, submitEventSubmitted.getCaseData().getState());
         assertEquals("25-10-2020", submitEventSubmitted.getCaseData().getPreAcceptCase().getDateAccepted());
         assertEquals(YES, submitEventSubmitted.getCaseData().getPreAcceptCase().getCaseAccepted());
     }
@@ -66,7 +65,7 @@ public class UpdateCaseMsgTest {
         PreAcceptDataModel preAcceptDataModel = ServiceBusHelper.getPreAcceptDataModel();
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(preAcceptDataModel);
         updateCaseMsg.runTask(submitEventAccepted);
-        assertEquals(ACCEPTED_STATE, submitEventAccepted.getCaseData().getState());
+        assertEquals(ACCEPTED_STATE, submitEventAccepted.getState());
     }
 
     @Test
@@ -75,7 +74,6 @@ public class UpdateCaseMsgTest {
         RejectDataModel rejectDataModel = ServiceBusHelper.getRejectDataModel();
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(rejectDataModel);
         updateCaseMsg.runTask(submitEventSubmitted);
-        assertEquals(REJECTED_STATE, submitEventSubmitted.getCaseData().getState());
         assertEquals(NO, submitEventSubmitted.getCaseData().getPreAcceptCase().getCaseAccepted());
         assertEquals("25-10-2020", submitEventSubmitted.getCaseData().getPreAcceptCase().getDateRejected());
         assertEquals(reasons, submitEventSubmitted.getCaseData().getPreAcceptCase().getRejectReason());
@@ -86,7 +84,6 @@ public class UpdateCaseMsgTest {
         CloseDataModel closeDataModel = ServiceBusHelper.getCloseDataModel();
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(closeDataModel);
         updateCaseMsg.runTask(submitEventSubmitted);
-        assertEquals(CLOSED_STATE, submitEventSubmitted.getCaseData().getState());
         assertEquals(CASE_CLOSED_POSITION, submitEventSubmitted.getCaseData().getPositionType());
         assertEquals("FileLocation", submitEventSubmitted.getCaseData().getFileLocation());
         assertEquals("ClerkResponsible", submitEventSubmitted.getCaseData().getClerkResponsible());

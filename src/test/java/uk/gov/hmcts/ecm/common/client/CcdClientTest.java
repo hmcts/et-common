@@ -305,8 +305,8 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesGenericReportElasticSearch() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"range\":{\"data.broughtForwardCollection.value" +
-                ".broughtForwardDate\":{\"from\":\"2019-09-23T00:00:00.000\",\"to\":\"2019-09-24T00:00:00.000\",\"include_lower\":true,\"include_upper\":true,\"boost\":1" +
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"range\":{\"data.bfActions.value" +
+                ".bfDate\":{\"from\":\"2019-09-23T00:00:00.000\",\"to\":\"2019-09-24T00:00:00.000\",\"include_lower\":true,\"include_upper\":true,\"boost\":1" +
                 ".0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L, Arrays.asList(new SubmitEvent(), new SubmitEvent()));

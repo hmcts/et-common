@@ -37,7 +37,6 @@ public class CloseDataTask extends DataTaskParent {
     private void closeLogic(SubmitEvent submitEvent) {
 
         log.info("Moving to close state");
-        submitEvent.getCaseData().setState(CLOSED_STATE);
         submitEvent.getCaseData().setPositionType(CASE_CLOSED_POSITION);
         submitEvent.getCaseData().setClerkResponsible(((CloseDataModel)dataModelParent).getClerkResponsible());
         submitEvent.getCaseData().setFileLocation(((CloseDataModel)dataModelParent).getFileLocation());

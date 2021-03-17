@@ -20,5 +20,6 @@ public class GenericCallbackResponse {
     private List<String> warnings;
     private String confirmation_header;
     private SignificantItem significant_item;
+    private String state;
 }
 

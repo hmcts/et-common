@@ -22,7 +22,7 @@ public class ESHelper {
     private static final String MULTIPLE_CASE_REFERENCE_KEYWORD = "data.multipleReference.keyword";
     private static final String LISTING_DATE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.listedDate";
     public static final String LISTING_VENUE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.hearingVenueDay.keyword";
-    public static final String BROUGHT_FORWARD_DATE_FIELD_NAME = "data.broughtForwardCollection.value.broughtForwardDate";
+    public static final String BROUGHT_FORWARD_DATE_FIELD_NAME = "data.bfActions.value.bfDate";
     public static final String CLAIMS_ACCEPTED_DATE_FIELD_NAME = "data.preAcceptCase.dateAccepted";
     public static final String LISTING_GLASGOW_VENUE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.Hearing_Glasgow.keyword";
     public static final String LISTING_ABERDEEN_VENUE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.Hearing_Aberdeen.keyword";

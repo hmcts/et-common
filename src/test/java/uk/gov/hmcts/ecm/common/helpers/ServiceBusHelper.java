@@ -36,7 +36,6 @@ public class ServiceBusHelper {
         submitEvent.setState(state);
         CaseData caseData = new CaseData();
         caseData.setEthosCaseReference("4150002/2020");
-        caseData.setState(state);
         JurCodesType jurCodesType = new JurCodesType();
         jurCodesType.setJuridictionCodesList("ECM");
         JurCodesTypeItem jurCodesTypeItem = new JurCodesTypeItem();
@@ -52,7 +51,6 @@ public class ServiceBusHelper {
         submitEvent.setState(state);
         CaseData caseData = new CaseData();
         caseData.setEthosCaseReference("4150002/2020");
-        caseData.setState(state);
         JurCodesType jurCodesType = new JurCodesType();
         jurCodesType.setJuridictionCodesList("ECM");
         JurCodesTypeItem jurCodesTypeItem = new JurCodesTypeItem();

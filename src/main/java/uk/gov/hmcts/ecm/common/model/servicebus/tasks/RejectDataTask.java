@@ -38,7 +38,6 @@ public class RejectDataTask extends DataTaskParent {
     private void rejectLogic(SubmitEvent submitEvent) {
 
         log.info("Moving to rejected state");
-        submitEvent.getCaseData().setState(REJECTED_STATE);
         CasePreAcceptType casePreAcceptType = new CasePreAcceptType();
         casePreAcceptType.setCaseAccepted(NO);
         casePreAcceptType.setDateRejected(((RejectDataModel)dataModelParent).getDateRejected());

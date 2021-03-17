@@ -120,8 +120,6 @@ public class CaseData {
     private String allocatedOffice;
     @JsonProperty("caseSource")
     private String caseSource;
-    @JsonProperty("state")
-    private String state;
     @JsonProperty("et3Received")
     private String et3Received;
     @JsonProperty("conciliationTrack")
