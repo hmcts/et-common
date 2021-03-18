@@ -25,4 +25,7 @@ public class CloseDataModel extends DataModelParent {
     @JsonProperty("notes")
     private String notes;
 
+    @JsonProperty("managingOffice")
+    private String managingOffice;
+
 }

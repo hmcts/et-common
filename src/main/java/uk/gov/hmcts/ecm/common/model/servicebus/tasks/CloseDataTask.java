@@ -41,6 +41,7 @@ public class CloseDataTask extends DataTaskParent {
         submitEvent.getCaseData().setClerkResponsible(((CloseDataModel)dataModelParent).getClerkResponsible());
         submitEvent.getCaseData().setFileLocation(((CloseDataModel)dataModelParent).getFileLocation());
         submitEvent.getCaseData().setCaseNotes(((CloseDataModel)dataModelParent).getNotes());
+        submitEvent.getCaseData().setManagingOffice(((CloseDataModel)dataModelParent).getManagingOffice());
 
     }
 

@@ -98,6 +98,7 @@ public class ServiceBusHelper {
                 .clerkResponsible("ClerkResponsible")
                 .fileLocation("FileLocation")
                 .notes("Notes")
+                .managingOffice("ManagingOffice")
                 .build();
     }
 

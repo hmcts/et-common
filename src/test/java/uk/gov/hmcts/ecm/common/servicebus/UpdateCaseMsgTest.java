@@ -88,6 +88,7 @@ public class UpdateCaseMsgTest {
         assertEquals("FileLocation", submitEventSubmitted.getCaseData().getFileLocation());
         assertEquals("ClerkResponsible", submitEventSubmitted.getCaseData().getClerkResponsible());
         assertEquals("Notes", submitEventSubmitted.getCaseData().getCaseNotes());
+        assertEquals("ManagingOffice", submitEventSubmitted.getCaseData().getManagingOffice());
     }
 
     @Test

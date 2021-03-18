@@ -248,4 +248,11 @@ public class CaseData {
     @JsonProperty("companyPremises")
     private CompanyPremisesType companyPremises;
 
+    @JsonProperty("officeCT")
+    private DynamicFixedListType officeCT;
+    @JsonProperty("reasonForCT")
+    private String reasonForCT;
+    @JsonProperty("relatedCaseCT")
+    private String relatedCaseCT;
+
 }
