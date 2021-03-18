@@ -99,6 +99,10 @@ public class ServiceBusHelper {
                 .fileLocation("FileLocation")
                 .notes("Notes")
                 .managingOffice("ManagingOffice")
+                .fileLocationGlasgow("FileLocationGlasgow")
+                .fileLocationAberdeen("FileLocationAberdeen")
+                .fileLocationDundee("FileLocationDundee")
+                .fileLocationEdinburgh("FileLocationEdinburgh")
                 .build();
     }
 

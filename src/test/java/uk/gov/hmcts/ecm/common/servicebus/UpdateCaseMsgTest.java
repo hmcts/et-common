@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -89,6 +90,10 @@ public class UpdateCaseMsgTest {
         assertEquals("ClerkResponsible", submitEventSubmitted.getCaseData().getClerkResponsible());
         assertEquals("Notes", submitEventSubmitted.getCaseData().getCaseNotes());
         assertEquals("ManagingOffice", submitEventSubmitted.getCaseData().getManagingOffice());
+        assertEquals("FileLocationGlasgow", submitEventSubmitted.getCaseData().getFileLocationGlasgow());
+        assertEquals("FileLocationAberdeen", submitEventSubmitted.getCaseData().getFileLocationAberdeen());
+        assertEquals("FileLocationDundee", submitEventSubmitted.getCaseData().getFileLocationDundee());
+        assertEquals("FileLocationEdinburgh", submitEventSubmitted.getCaseData().getFileLocationEdinburgh());
     }
 
     @Test

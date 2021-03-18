@@ -22,6 +22,18 @@ public class CloseDataModel extends DataModelParent {
     @JsonProperty("fileLocation")
     private String fileLocation;
 
+    @JsonProperty("fileLocationEdinburgh")
+    private String fileLocationEdinburgh;
+
+    @JsonProperty("fileLocationDundee")
+    private String fileLocationDundee;
+
+    @JsonProperty("fileLocationAberdeen")
+    private String fileLocationAberdeen;
+
+    @JsonProperty("fileLocationGlasgow")
+    private String fileLocationGlasgow;
+
     @JsonProperty("notes")
     private String notes;
 
