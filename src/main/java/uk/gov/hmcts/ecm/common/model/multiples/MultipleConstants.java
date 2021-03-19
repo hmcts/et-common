@@ -5,6 +5,7 @@ public class MultipleConstants {
     public static final String CONSTRAINT_KEY = "qwer%yuiop_1234567890";
 
     public static final String SHEET_NAME = "Multiples";
+    public static final String HIDDEN_SHEET_NAME = "Hidden";
 
     public static final String HEADER_1 = "Case Ref";
     public static final String HEADER_2 = "SubMultiple";

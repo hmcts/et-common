@@ -22,15 +22,18 @@ public class CaseDataBuilder {
     }
 
     public CaseDataContent buildCaseDataContent(CaseData caseData, CCDRequest req, String eventSummary) {
-        return getCaseDataContent(req, objectMapper.convertValue(caseData, new TypeReference<Map<String, JsonNode>>(){}), eventSummary);
+        return getCaseDataContent(req, objectMapper.convertValue(caseData, new TypeReference<>() {
+        }), eventSummary);
     }
 
     public CaseDataContent buildBulkDataContent(BulkData bulkData, CCDRequest req, String eventSummary) {
-        return getCaseDataContent(req, objectMapper.convertValue(bulkData, new TypeReference<Map<String, JsonNode>>(){}), eventSummary);
+        return getCaseDataContent(req, objectMapper.convertValue(bulkData, new TypeReference<>() {
+        }), eventSummary);
     }
 
     public CaseDataContent buildMultipleDataContent(MultipleData multipleData, CCDRequest req, String eventSummary) {
-        return getCaseDataContent(req, objectMapper.convertValue(multipleData, new TypeReference<Map<String, JsonNode>>(){}), eventSummary);
+        return getCaseDataContent(req, objectMapper.convertValue(multipleData, new TypeReference<>() {
+        }), eventSummary);
     }
 
     private CaseDataContent getCaseDataContent(CCDRequest req, Map<String, JsonNode> data, String eventSummary) {
