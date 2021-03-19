@@ -254,5 +254,9 @@ public class CaseData {
     private String reasonForCT;
     @JsonProperty("relatedCaseCT")
     private String relatedCaseCT;
+    @JsonProperty("positionTypeCT")
+    private String positionTypeCT;
+    @JsonProperty("linkedCaseCT")
+    private String linkedCaseCT;
 
 }
