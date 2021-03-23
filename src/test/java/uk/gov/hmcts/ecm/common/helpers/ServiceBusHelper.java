@@ -121,6 +121,7 @@ public class ServiceBusHelper {
                 .ethosCaseReference("2512345/2020")
                 .officeCT("Manchester")
                 .positionTypeCT("PositionType")
+                .ccdGatewayBaseUrl("ccdGatewayBaseUrl")
                 .build();
     }
 

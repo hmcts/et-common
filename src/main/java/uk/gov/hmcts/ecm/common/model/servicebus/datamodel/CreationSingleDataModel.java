@@ -25,4 +25,7 @@ public class CreationSingleDataModel extends DataModelParent {
     @JsonProperty("positionTypeCT")
     private String positionTypeCT;
 
+    @JsonProperty("ccdGatewayBaseUrl")
+    private String ccdGatewayBaseUrl;
+
 }
