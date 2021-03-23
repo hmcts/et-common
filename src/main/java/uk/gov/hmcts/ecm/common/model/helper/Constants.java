@@ -115,6 +115,9 @@ public class Constants {
     public static final String MULTIPLE = "_Multiple";
     public static final String DEV = "_Dev";
     public static final String USER = "_User";
+    public static final String LISTINGS_DEV = "_Listings_Dev";
+    public static final String LISTINGS_USER = "_Listings_User";
+    public static final String LISTINGS = "_Listings";
 
     public static final String YES = "Yes";
     public static final String NO = "No";

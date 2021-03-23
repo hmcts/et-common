@@ -18,6 +18,8 @@ public class DataModelFactory {
             return new CloseDataTask(dataModelParent);
         } else if (dataModelParent instanceof ResetStateDataModel) {
             return new ResetStateDataTask(dataModelParent);
+        } else if (dataModelParent instanceof CreationSingleDataModel) {
+            return new CreationSingleDataTask(dataModelParent);
         } else {
             return new PreAcceptDataTask(dataModelParent);
         }

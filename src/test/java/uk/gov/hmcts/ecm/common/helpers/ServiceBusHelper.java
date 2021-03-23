@@ -116,6 +116,14 @@ public class ServiceBusHelper {
                 .build();
     }
 
+    public static CreationSingleDataModel getCreationSingleDataModel() {
+        return CreationSingleDataModel.builder()
+                .ethosCaseReference("2512345/2020")
+                .officeCT("Manchester")
+                .positionTypeCT("PositionType")
+                .build();
+    }
+
     public static UpdateDataModel getUpdateDataModel() {
         return UpdateDataModel.builder()
                 .managingOffice("ManagingOffice")

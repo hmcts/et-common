@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -111,6 +110,16 @@ public class UpdateCaseMsgTest {
         ResetStateDataModel resetStateDataModel = ServiceBusHelper.getResetStateDataModel();
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(resetStateDataModel);
         updateCaseMsg.runTask(submitEventAccepted);
+        assertEquals(ACCEPTED_STATE, submitEventAccepted.getState());
+    }
+
+    @Test
+    public void runTaskCreationSingle() {
+        CreationSingleDataModel creationSingleDataModel = ServiceBusHelper.getCreationSingleDataModel();
+        updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(creationSingleDataModel);
+        updateCaseMsg.runTask(submitEventAccepted);
+        assertEquals("2512345/2020", submitEventAccepted.getCaseData().getEthosCaseReference());
+        assertEquals("PositionType", submitEventAccepted.getCaseData().getPositionType());
         assertEquals(ACCEPTED_STATE, submitEventAccepted.getState());
     }
 

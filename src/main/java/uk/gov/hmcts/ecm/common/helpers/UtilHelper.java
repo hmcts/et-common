@@ -81,4 +81,16 @@ public class UtilHelper {
         }
     }
 
+    public static String getListingCaseTypeId(String caseTypeId) {
+        if (caseTypeId.contains(LISTINGS_DEV)) {
+            return getSingleOffice(caseTypeId, LISTINGS_DEV, DEV);
+        } else {
+            if (caseTypeId.contains(LISTINGS_USER)) {
+                return getSingleOffice(caseTypeId, LISTINGS_USER, USER);
+            } else {
+                return getSingleOffice(caseTypeId, LISTINGS, "");
+            }
+        }
+    }
+
 }
