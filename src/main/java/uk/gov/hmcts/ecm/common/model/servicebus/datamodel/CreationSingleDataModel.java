@@ -16,9 +16,6 @@ import lombok.experimental.SuperBuilder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreationSingleDataModel extends DataModelParent {
 
-    @JsonProperty("ethosCaseReference")
-    private String ethosCaseReference;
-
     @JsonProperty("officeCT")
     private String officeCT;
 

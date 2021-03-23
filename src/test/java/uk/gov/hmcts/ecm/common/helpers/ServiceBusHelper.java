@@ -118,7 +118,6 @@ public class ServiceBusHelper {
 
     public static CreationSingleDataModel getCreationSingleDataModel() {
         return CreationSingleDataModel.builder()
-                .ethosCaseReference("2512345/2020")
                 .officeCT("Manchester")
                 .positionTypeCT("PositionType")
                 .ccdGatewayBaseUrl("ccdGatewayBaseUrl")

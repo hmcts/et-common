@@ -118,8 +118,6 @@ public class UpdateCaseMsgTest {
         CreationSingleDataModel creationSingleDataModel = ServiceBusHelper.getCreationSingleDataModel();
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(creationSingleDataModel);
         updateCaseMsg.runTask(submitEventAccepted);
-        assertEquals("2512345/2020", submitEventAccepted.getCaseData().getEthosCaseReference());
-        assertEquals("PositionType", submitEventAccepted.getCaseData().getPositionType());
         assertEquals(ACCEPTED_STATE, submitEventAccepted.getState());
     }
 

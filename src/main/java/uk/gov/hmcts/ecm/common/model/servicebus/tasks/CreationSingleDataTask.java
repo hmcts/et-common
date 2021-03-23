@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
-import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.CreationSingleDataModel;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
 
 @EqualsAndHashCode(callSuper = true)
@@ -23,9 +22,6 @@ public class CreationSingleDataTask extends DataTaskParent {
     }
 
     public void run(SubmitEvent submitEvent) {
-
-        submitEvent.getCaseData().setEthosCaseReference(((CreationSingleDataModel) dataModelParent).getEthosCaseReference());
-        submitEvent.getCaseData().setPositionType(((CreationSingleDataModel) dataModelParent).getPositionTypeCT());
 
     }
 
