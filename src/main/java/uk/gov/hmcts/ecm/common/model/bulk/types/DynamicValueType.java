@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class DynamicValueType {
 
-    private String code;
-    private String label;
+    private transient String code;
+    private transient String label;
 
     DynamicValueType(String code, String label) {
         this.code = code;

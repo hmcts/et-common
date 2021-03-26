@@ -4,8 +4,8 @@ import java.util.List;
 
 public class BulkCaseSearchResult {
 
-    private Long total;
-    private List<SubmitBulkEvent> cases;
+    private transient Long total;
+    private transient List<SubmitBulkEvent> cases;
 
     public BulkCaseSearchResult() {
     }

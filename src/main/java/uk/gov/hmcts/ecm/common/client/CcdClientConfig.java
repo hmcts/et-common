@@ -22,7 +22,7 @@ public class CcdClientConfig {
             "%s/caseworkers/%s/jurisdictions/%s/case-types/%s/cases/pagination_metadata";
     private static final String SEARCH_CASES_FORMAT = "%s/searchCases?%s";
 
-    private String ccdDataStoreApiBaseUrl;
+    private transient String ccdDataStoreApiBaseUrl;
 
 
     public CcdClientConfig(String ccdDataStoreApiBaseUrl) {

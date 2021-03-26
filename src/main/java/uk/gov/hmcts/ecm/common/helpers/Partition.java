@@ -6,8 +6,8 @@ import java.util.List;
 
 public final class Partition<T> extends AbstractList<List<T>> {
 
-    private final List<T> list;
-    private final int chunkSize;
+    private final transient List<T> list;
+    private final transient int chunkSize;
 
     public Partition(List<T> list, int chunkSize) {
         this.list = new ArrayList<>(list);

@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class DynamicFixedListType {
 
-    private DynamicValueType value;
+    private transient DynamicValueType value;
     @JsonProperty("list_items")
     private List<DynamicValueType> listItems;
 

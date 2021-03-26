@@ -11,7 +11,6 @@ import org.springframework.web.client.RestTemplate;
 import uk.gov.hmcts.ecm.common.helpers.ESHelper;
 import uk.gov.hmcts.ecm.common.model.bulk.BulkCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.bulk.BulkData;
-import uk.gov.hmcts.ecm.common.model.bulk.BulkRequest;
 import uk.gov.hmcts.ecm.common.model.bulk.SubmitBulkEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.*;
 import uk.gov.hmcts.ecm.common.model.labels.LabelCaseSearchResult;
@@ -19,7 +18,6 @@ import uk.gov.hmcts.ecm.common.model.labels.LabelPayloadEvent;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleData;
 import uk.gov.hmcts.ecm.common.model.multiples.SubmitMultipleEvent;
-import uk.gov.hmcts.ecm.common.model.reference.ReferenceRequest;
 import uk.gov.hmcts.ecm.common.model.reference.ReferenceSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.schedule.ScheduleCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadEvent;
@@ -38,17 +36,18 @@ import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
 @Slf4j
 public class CcdClient {
 
-    private RestTemplate restTemplate;
-    private UserService userService;
-    private CcdClientConfig ccdClientConfig;
-    private CaseDataBuilder caseDataBuilder;
+    private transient RestTemplate restTemplate;
+    private transient UserService userService;
+    private transient CcdClientConfig ccdClientConfig;
+    private transient CaseDataBuilder caseDataBuilder;
+    private transient AuthTokenGenerator authTokenGenerator;
 
-    private AuthTokenGenerator authTokenGenerator;
     private static final String SERVICE_AUTHORIZATION = "ServiceAuthorization";
 
     static final String CREATION_EVENT_SUMMARY = "Case created automatically";
     private static final String UPDATE_EVENT_SUMMARY = "Case updated by bulk";
     static final String UPDATE_BULK_EVENT_SUMMARY = "Bulk case updated by bulk";
+    private static final int MAX_RETRIES = 7;
 
     public CcdClient(RestTemplate restTemplate, UserService userService, CaseDataBuilder caseDataBuilder,
                      CcdClientConfig ccdClientConfig, AuthTokenGenerator authTokenGenerator) {
@@ -118,12 +117,10 @@ public class CcdClient {
     }
 
     public List<SubmitEvent> retrieveCases(String authToken, String caseTypeId, String jurisdiction) throws IOException {
-        HttpEntity<CCDRequest> request =
-                new HttpEntity<>(buildHeaders(authToken));
         List<SubmitEvent> submitEvents = new ArrayList<>();
         for (int page = 1; page <= getTotalPagesCount(authToken, caseTypeId, jurisdiction); page++) {
             List<SubmitEvent> submitEventAux = restTemplate.exchange(ccdClientConfig.buildRetrieveCasesUrl(userService.getUserDetails(authToken).getUid(), jurisdiction,
-                caseTypeId, String.valueOf(page)), HttpMethod.GET, request, new ParameterizedTypeReference<List<SubmitEvent>>(){}).getBody();
+                caseTypeId, String.valueOf(page)), HttpMethod.GET, new HttpEntity<>(buildHeaders(authToken)), new ParameterizedTypeReference<List<SubmitEvent>>(){}).getBody();
             if (submitEventAux != null) {
                 submitEvents.addAll(submitEventAux);
             }
@@ -132,12 +129,10 @@ public class CcdClient {
     }
 
     public List<ReferenceSubmitEvent> retrieveReferenceDataCases(String authToken, String caseTypeId, String jurisdiction) throws IOException {
-        HttpEntity<ReferenceRequest> request =
-                new HttpEntity<>(buildHeaders(authToken));
         List<ReferenceSubmitEvent> referenceSubmitEvents = new ArrayList<>();
         for (int page = 1; page <= getTotalPagesCount(authToken, caseTypeId, jurisdiction); page++) {
             List<ReferenceSubmitEvent> submitEventAux = restTemplate.exchange(ccdClientConfig.buildRetrieveCasesUrl(userService.getUserDetails(authToken).getUid(), jurisdiction,
-                    caseTypeId, String.valueOf(page)), HttpMethod.GET, request, new ParameterizedTypeReference<List<ReferenceSubmitEvent>>(){}).getBody();
+                    caseTypeId, String.valueOf(page)), HttpMethod.GET, new HttpEntity<>(buildHeaders(authToken)), new ParameterizedTypeReference<List<ReferenceSubmitEvent>>(){}).getBody();
             if (submitEventAux != null) {
                 referenceSubmitEvents.addAll(submitEventAux);
             }
@@ -174,12 +169,12 @@ public class CcdClient {
         String from = LocalDate.parse(dateToSearchFrom).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
         if (dateToSearchTo.equals(dateToSearchFrom)) {
             String to = LocalDate.parse(dateToSearchFrom).atStartOfDay().plusDays(1).minusSeconds(1).format(OLD_DATE_TIME_PATTERN);
-            log.info("FROM AND TO DATES FOR REPORT TYPE: " + reportType + " - " + from + " - " + to);
+            log.info(reportType + " - " + from + " - " + to);
             return buildAndGetElasticSearchRequest(authToken, caseTypeId,
                     getReportRangeDateQuery(from, to, reportType));
         } else {
             String to = LocalDate.parse(dateToSearchTo).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
-            log.info("FROM AND TO DATES FOR REPORT TYPE: " + reportType + " - " + from + " - " + to);
+            log.info(reportType + " - " + from + " - " + to);
             return buildAndGetElasticSearchRequest(authToken, caseTypeId,
                     getReportRangeDateQuery(from, to, reportType));
         }
@@ -240,7 +235,7 @@ public class CcdClient {
                 }
                 TimeUnit.SECONDS.sleep(5);
                 retries++;
-                if (retries == 7) {
+                if (retries == MAX_RETRIES) {
                     break;
                 }
             } catch (InterruptedException e) {
@@ -269,7 +264,7 @@ public class CcdClient {
                 }
                 TimeUnit.SECONDS.sleep(5);
                 retries++;
-                if (retries == 7) {
+                if (retries == MAX_RETRIES) {
                     break;
                 }
             } catch (InterruptedException e) {
@@ -327,13 +322,11 @@ public class CcdClient {
     }
 
     public List<SubmitBulkEvent> retrieveBulkCases(String authToken, String caseTypeId, String jurisdiction) throws IOException {
-        HttpEntity<BulkRequest> request =
-                new HttpEntity<>(buildHeaders(authToken));
         List<SubmitBulkEvent> submitBulkEvents = new ArrayList<>();
         int totalNumberPages = getTotalPagesCount(authToken, caseTypeId, jurisdiction);
         for (int page = 1; page <= totalNumberPages; page++) {
-            List<SubmitBulkEvent> submitBulkEventAux = restTemplate.exchange(getURI(authToken, caseTypeId, jurisdiction, String.valueOf(page)), HttpMethod.GET, request,
-                    new ParameterizedTypeReference<List<SubmitBulkEvent>>(){}).getBody();
+            List<SubmitBulkEvent> submitBulkEventAux = restTemplate.exchange(getURI(authToken, caseTypeId, jurisdiction, String.valueOf(page)), HttpMethod.GET,
+                    new HttpEntity<>(buildHeaders(authToken)), new ParameterizedTypeReference<List<SubmitBulkEvent>>(){}).getBody();
             if (submitBulkEventAux != null) {
                 submitBulkEvents.addAll(submitBulkEventAux);
             }
@@ -450,10 +443,10 @@ public class CcdClient {
     }
 
     HttpHeaders buildHeaders(String authToken) throws IOException {
-        HttpHeaders headers = new HttpHeaders();
         if (!authToken.matches("[a-zA-Z0-9._\\s\\S]+$")) {
             throw new IOException("authToken regex exception");
         }
+        HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, authToken);
         headers.add(SERVICE_AUTHORIZATION, authTokenGenerator.generate());
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
