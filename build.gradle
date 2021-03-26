@@ -2,19 +2,24 @@ plugins {
     id 'java'
     id 'java-library'
     id 'maven-publish'
-    id 'com.jfrog.bintray' version '1.8.5'
+    id 'pmd'
     id 'jacoco'
-    id 'maven'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.owasp.dependencycheck' version '6.1.2'
+    id 'com.github.ben-manes.versions' version '0.36.0'
+    id 'com.jfrog.bintray' version '1.8.5'
 }
 
 group 'uk.gov.hmcts.reform'
-version '0.1.52'
+version '0.1.53'
 
 sourceCompatibility = '11.0'
 
 repositories {
 
     mavenLocal()
+    jcenter()
+    mavenCentral()
     maven {
         url "https://dl.bintray.com/hmcts/hmcts-maven"
     }
@@ -23,12 +28,6 @@ repositories {
         url 'https://repo.spring.io/libs-milestone'
     }
 
-    jcenter()
-    mavenCentral()
-
-    // jitpack should be last resort
-    // see: https://github.com/jitpack/jitpack.io/issues/1939
-    maven { url 'https://jitpack.io' }
 }
 
 // region test coverage
@@ -94,6 +93,12 @@ bintray {
     }
 }
 
+def versions = [
+        reformLogging   : '5.1.6'
+]
+
+ext["rest-assured.version"] = '4.2.0'
+
 // endregion
 
 
@@ -101,35 +106,33 @@ dependencies {
 
     compile group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
-    compile group: 'uk.gov.hmcts.reform', name: 'java-logging', version: '5.0.1'
-    compile group: 'uk.gov.hmcts.reform', name: 'service-auth-provider-client', version: '3.1.2'
+
+    compile group: 'uk.gov.hmcts.reform', name: 'logging', version: versions.reformLogging
+    compile group: 'uk.gov.hmcts.reform', name: 'logging-appinsights', version: versions.reformLogging
+    compile group: 'uk.gov.hmcts.reform', name: 'service-auth-provider-client', version: '4.0.0'
 
     compile group: 'com.github.sps.junidecode', name: 'junidecode', version: '0.3'
-    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '5.0.0'
 
     compile group: 'commons-io', name: 'commons-io', version: '2.8.0'
 
     compile group: 'com.google.guava', name: 'guava', version: '23.0'
 
-    compile group: 'org.elasticsearch', name: 'elasticsearch', version: '7.9.3'
+    compile group: 'org.elasticsearch', name: 'elasticsearch', version: '7.12.0'
 
-    compile group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.4.0', {
-        exclude group: 'javax.mail', module: 'mail'
-        exclude group: 'net.minidev', module: 'json-smart'
-    }
+    compile group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.6.1'
+    compileOnly 'org.projectlombok:lombok:1.18.18'
+    annotationProcessor 'org.projectlombok:lombok:1.18.18'
 
-    compileOnly 'org.projectlombok:lombok:1.18.16'
-    annotationProcessor 'org.projectlombok:lombok:1.18.16'
-
-    testCompile group: 'io.rest-assured', name: 'rest-assured', version: '4.3.1'
-    testCompile group: 'junit', name: 'junit', version: '4.13.1'
-    testCompile group: 'org.mockito', name: 'mockito-core', version: '3.6.0'
-    testCompile group: 'org.springframework', name: 'spring-test', version: '5.2.9.RELEASE'
-    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.18.0'
+    testCompile group: 'io.rest-assured', name: 'rest-assured', version: '4.3.3'
+    testCompile group: 'junit', name: 'junit', version: '4.13.2'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '3.8.0'
+    testCompile group: 'org.springframework', name: 'spring-test', version: '5.3.5'
+    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.19.0'
     testCompile 'pl.pragmatists:JUnitParams:1.1.1'
 
-    testCompileOnly 'org.projectlombok:lombok:1.18.16'
-    testAnnotationProcessor "org.projectlombok:lombok:1.18.16"
+    testCompileOnly 'org.projectlombok:lombok:1.18.18'
+    testAnnotationProcessor "org.projectlombok:lombok:1.18.18"
 }
 
 jar {
