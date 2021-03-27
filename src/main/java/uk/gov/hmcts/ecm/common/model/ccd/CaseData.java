@@ -259,4 +259,6 @@ public class CaseData {
     @JsonProperty("linkedCaseCT")
     private String linkedCaseCT;
 
+    @JsonProperty("stateAPI")
+    private String stateAPI;
 }
