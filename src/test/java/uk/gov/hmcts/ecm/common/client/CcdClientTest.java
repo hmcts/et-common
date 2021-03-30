@@ -118,21 +118,9 @@ public class CcdClientTest {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
         ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
-        when(ccdClientConfig.buildStartCaseCreationAcceptedUrl(any(), any(), any())).thenReturn(uri);
+        when(ccdClientConfig.buildStartCaseCreationTransferUrl(any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class))).thenReturn(responseEntity);
-        ccdClient.startCaseCreationAccepted("authToken", caseDetails);
-        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class));
-        verifyNoMoreInteractions(restTemplate);
-    }
-
-    @Test
-    public void startCaseCreationSubmitted() throws IOException {
-        HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
-        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
-        when(ccdClientConfig.buildStartCaseCreationSubmittedUrl(any(), any(), any())).thenReturn(uri);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class))).thenReturn(responseEntity);
-        ccdClient.startCaseCreationSubmitted("authToken", caseDetails);
+        ccdClient.startCaseCreationTransfer("authToken", caseDetails);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class));
         verifyNoMoreInteractions(restTemplate);
     }

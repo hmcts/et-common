@@ -173,8 +173,7 @@ public class Constants {
     public static final String AMEND_MULTIPLE_EVENT_TRIGGER_ID = "amendMultipleAPI";
     public static final String AMEND_SINGLE_EVENT_TRIGGER_ID = "amendSingle";
     public static final String UPDATE_EVENT_TRIGGER_ID = "amendCaseDetails";
-    public static final String CREATION_EVENT_ACCEPTED_TRIGGER_ID = "processCaseTransferAccepted";
-    public static final String CREATION_EVENT_SUBMITTED_TRIGGER_ID = "processCaseTransferSubmitted";
+    public static final String CREATION_TRANSFER_EVENT_TRIGGER_ID = "processCaseTransfer";
 
     public static final String GLASGOW_OFFICE = "Glasgow";
     public static final String ABERDEEN_OFFICE = "Aberdeen";

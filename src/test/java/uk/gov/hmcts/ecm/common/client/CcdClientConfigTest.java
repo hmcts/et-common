@@ -20,17 +20,10 @@ public class CcdClientConfigTest {
     }
 
     @Test
-    public void buildStartCaseCreationAcceptedUrl() {
-        String uri = ccdClientConfig.buildStartCaseCreationAcceptedUrl("1123", "TRIBUNALS", "TRIB_03");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/event-triggers/" +
-                "processCaseTransferAccepted/token?ignore-warning=true", uri);
-    }
-
-    @Test
-    public void buildStartCaseCreationSubmittedUrl() {
-        String uri = ccdClientConfig.buildStartCaseCreationSubmittedUrl("1123", "TRIBUNALS", "TRIB_03");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/event-triggers/" +
-                "processCaseTransferSubmitted/token?ignore-warning=true", uri);
+    public void buildStartCaseCreationTransferUrl() {
+        String uri = ccdClientConfig.buildStartCaseCreationTransferUrl("1123", "TRIBUNALS", "TRIB_03");
+        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/event-triggers/"
+                + "processCaseTransfer/token?ignore-warning=true", uri);
     }
 
     @Test

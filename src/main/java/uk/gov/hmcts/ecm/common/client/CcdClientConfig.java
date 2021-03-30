@@ -33,12 +33,8 @@ public class CcdClientConfig {
         return String.format(START_CASE_CREATION_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, CREATION_EVENT_TRIGGER_ID);
     }
 
-    String buildStartCaseCreationAcceptedUrl(String uid, String jid, String ctid) {
-        return String.format(START_CASE_CREATION_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, CREATION_EVENT_ACCEPTED_TRIGGER_ID);
-    }
-
-    String buildStartCaseCreationSubmittedUrl(String uid, String jid, String ctid) {
-        return String.format(START_CASE_CREATION_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, CREATION_EVENT_SUBMITTED_TRIGGER_ID);
+    String buildStartCaseCreationTransferUrl(String uid, String jid, String ctid) {
+        return String.format(START_CASE_CREATION_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, CREATION_TRANSFER_EVENT_TRIGGER_ID);
     }
 
     String buildSubmitCaseCreationUrl(String uid, String jid, String ctid) {
