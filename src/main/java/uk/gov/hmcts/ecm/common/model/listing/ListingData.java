@@ -65,6 +65,8 @@ public class ListingData {
     private String reportType;
     @JsonProperty("documentName")
     private String documentName;
+    @JsonProperty("showAll")
+    private String showAll;
 
     @JsonProperty("localReportsSummaryHdr")
     private AdhocReportType localReportsSummaryHdr;
