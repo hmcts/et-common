@@ -74,11 +74,12 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.GET, request, CCDRequest.class).getBody();
     }
 
-    public CCDRequest returnCaseCreationTransfer(String authToken, CaseDetails caseDetails) throws IOException {
+    public CCDRequest returnCaseCreationTransfer(String authToken, String caseTypeId, String jurisdiction)
+            throws IOException {
         HttpEntity<String> request =
                 new HttpEntity<>(buildHeaders(authToken));
         String uri = ccdClientConfig.buildReturnCaseCreationTransferUrl(userService.getUserDetails(authToken).getUid(),
-                caseDetails.getJurisdiction(), caseDetails.getCaseTypeId());
+                jurisdiction, caseTypeId);
         return restTemplate.exchange(uri, HttpMethod.GET, request, CCDRequest.class).getBody();
     }
 
