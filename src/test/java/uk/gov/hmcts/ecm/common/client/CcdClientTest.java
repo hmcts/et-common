@@ -132,7 +132,7 @@ public class CcdClientTest {
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildReturnCaseCreationTransferUrl(any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class))).thenReturn(responseEntity);
-        ccdClient.returnCaseCreationTransfer("authToken", caseDetails);
+        ccdClient.returnCaseCreationTransfer("authToken",  caseDetails.getCaseTypeId(), caseDetails.getJurisdiction());
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class));
         verifyNoMoreInteractions(restTemplate);
     }
