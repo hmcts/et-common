@@ -12,9 +12,16 @@ public class SchedulePayload {
     private String respondentName;
     private String positionType;
     private String ethosCaseRef;
+
     private String claimantAddressLine1;
+    private String claimantAddressLine2;
+    private String claimantAddressLine3;
+    private String claimantTown;
     private String claimantPostCode;
+
     private String respondentAddressLine1;
+    private String respondentAddressLine2;
+    private String respondentAddressLine3;
+    private String respondentTown;
     private String respondentPostCode;
 }
-

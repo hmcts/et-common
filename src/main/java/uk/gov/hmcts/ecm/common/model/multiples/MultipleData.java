@@ -115,12 +115,14 @@ public class MultipleData {
 
     @JsonProperty("typeOfAmendment")
     private List<String> typeOfAmendmentMSL;
-    @JsonProperty("officeCT_temp")
-    private String officeCTTemp;
+    @JsonProperty("officeCT")
+    private String officeCT;
     @JsonProperty("reasonForCT")
     private String reasonForCT;
-    @JsonProperty("relatedMultipleCT")
-    private String relatedMultipleCT;
+    @JsonProperty("linkedMultipleCT")
+    private String linkedMultipleCT;
+    @JsonProperty("positionTypeCT")
+    private String positionTypeCT;
 
     @JsonProperty("preAcceptMultiple")
     private CasePreAcceptType preAcceptCase;

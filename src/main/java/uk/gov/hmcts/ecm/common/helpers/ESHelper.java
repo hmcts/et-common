@@ -68,8 +68,7 @@ public class ESHelper {
                         "\"query\":{\"terms\":{\"%s\":[%s],\"boost\":1.0}}," +
                         "\"_source\":[" +
                         "\"data.claimantIndType.*\"," +
-                        "\"data.claimantType.claimant_addressUK.AddressLine1\"," +
-                        "\"data.claimantType.claimant_addressUK.PostCode\"," +
+                        "\"data.claimantType.claimant_addressUK.*\"," +
                         "\"data.claimant_Company\"," +
                         "\"data.positionType\"," +
                         "\"data.ethosCaseReference\"," +

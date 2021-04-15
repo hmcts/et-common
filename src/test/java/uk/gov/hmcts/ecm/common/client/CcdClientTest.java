@@ -220,7 +220,7 @@ public class CcdClientTest {
     @Test
     public void retrieveCasesElasticSearchSchedule() throws IOException {
         String jsonQuery = "{\"size\":5000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
-                "\"_source\":[\"data.claimantIndType.*\",\"data.claimantType.claimant_addressUK.AddressLine1\",\"data.claimantType.claimant_addressUK.PostCode\",\"data" +
+                "\"_source\":[\"data.claimantIndType.*\",\"data.claimantType.claimant_addressUK.*\",\"data" +
                 ".claimant_Company\",\"data.positionType\",\"data.ethosCaseReference\",\"data.respondentCollection.*\"]}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery,creatBuildHeaders());
         ScheduleCaseSearchResult scheduleCaseSearchResult =
