@@ -121,6 +121,7 @@ public class ServiceBusHelper {
                 .officeCT("Manchester")
                 .positionTypeCT("PositionType")
                 .ccdGatewayBaseUrl("ccdGatewayBaseUrl")
+                .reasonForCT("reasonForCT")
                 .build();
     }
 

@@ -115,8 +115,8 @@ public class MultipleData {
 
     @JsonProperty("typeOfAmendment")
     private List<String> typeOfAmendmentMSL;
-    @JsonProperty("officeCT")
-    private String officeCT;
+    @JsonProperty("officeMultipleCT")
+    private DynamicFixedListType officeMultipleCT;
     @JsonProperty("reasonForCT")
     private String reasonForCT;
     @JsonProperty("linkedMultipleCT")
