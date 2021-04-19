@@ -30,19 +30,28 @@ public class CcdClientConfig {
     }
 
     String buildStartCaseCreationUrl(String uid, String jid, String ctid) {
-        return String.format(START_CASE_CREATION_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, CREATION_EVENT_TRIGGER_ID);
+        return String.format(START_CASE_CREATION_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid,
+                CREATION_EVENT_TRIGGER_ID);
     }
 
     String buildStartCaseCreationTransferUrl(String uid, String jid, String ctid) {
-        return String.format(START_CASE_CREATION_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, CREATION_TRANSFER_EVENT_TRIGGER_ID);
+        return String.format(START_CASE_CREATION_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid,
+                CREATION_TRANSFER_EVENT_TRIGGER_ID);
     }
 
     String buildStartCaseTransferUrl(String uid, String jid, String ctid) {
-        return String.format(START_CASE_CREATION_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, CASE_TRANSFER_EVENT_TRIGGER_ID);
+        return String.format(START_CASE_CREATION_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid,
+                CASE_TRANSFER_EVENT_TRIGGER_ID);
     }
 
     String buildReturnCaseCreationTransferUrl(String uid, String jid, String ctid) {
-        return String.format(START_CASE_CREATION_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, RETURN_TRANSFER_EVENT_TRIGGER_ID);
+        return String.format(START_CASE_CREATION_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid,
+                RETURN_TRANSFER_EVENT_TRIGGER_ID);
+    }
+
+    String buildStartCaseMultipleCreationUrl(String uid, String jid, String ctid) {
+        return String.format(START_CASE_CREATION_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid,
+                CREATE_MULTIPLE_EVENT_TRIGGER_ID);
     }
 
     String buildSubmitCaseCreationUrl(String uid, String jid, String ctid) {
@@ -56,7 +65,8 @@ public class CcdClientConfig {
     String buildRetrieveCasesUrl(String uid, String jid, String ctid, String page) {
         String param = "page=" + page;
         log.info("Looking cases by: uid: " + uid + " jid: " + jid + " ctid: " + ctid + " param: " + param);
-        log.info("Format: " + String.format(RETRIEVE_CASES_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, param));
+        log.info("Format: " + String.format(RETRIEVE_CASES_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid,
+                jid, ctid, param));
         return String.format(RETRIEVE_CASES_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, param);
     }
 
@@ -77,19 +87,23 @@ public class CcdClientConfig {
     }
 
     String buildStartEventForCaseUrlBulkSingle(String uid, String jid, String ctid, String cid) {
-        return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, cid, UPDATE_EVENT_TRIGGER_ID_BULK);
+        return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid,
+                ctid, cid, UPDATE_EVENT_TRIGGER_ID_BULK);
     }
 
     String buildStartEventForCaseUrlPreAcceptBulkSingle(String uid, String jid, String ctid, String cid) {
-        return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, cid, PRE_ACCEPT_CASE_TRIGGER_ID_BULK);
+        return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid,
+                ctid, cid, PRE_ACCEPT_CASE_TRIGGER_ID_BULK);
     }
 
     String buildStartEventForBulkCaseUrl(String uid, String jid, String ctid, String cid) {
-        return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, cid, UPDATE_BULK_EVENT_TRIGGER_ID);
+        return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid,
+                ctid, cid, UPDATE_BULK_EVENT_TRIGGER_ID);
     }
 
     String buildStartEventForBulkAmendCaseUrl(String uid, String jid, String ctid, String cid) {
-        return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, cid, AMEND_MULTIPLE_EVENT_TRIGGER_ID);
+        return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid,
+                ctid, cid, AMEND_MULTIPLE_EVENT_TRIGGER_ID);
     }
 
     String buildSubmitEventForCaseUrl(String uid, String jid, String ctid, String cid) {

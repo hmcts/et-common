@@ -176,6 +176,7 @@ public class Constants {
     public static final String CREATION_TRANSFER_EVENT_TRIGGER_ID = "processCaseTransfer";
     public static final String CASE_TRANSFER_EVENT_TRIGGER_ID = "caseTransfer";
     public static final String RETURN_TRANSFER_EVENT_TRIGGER_ID = "returnCaseTransfer";
+    public static final String CREATE_MULTIPLE_EVENT_TRIGGER_ID = "createMultiple";
 
     public static final String GLASGOW_OFFICE = "Glasgow";
     public static final String ABERDEEN_OFFICE = "Aberdeen";
