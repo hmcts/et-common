@@ -131,7 +131,8 @@ public class CcdClientTest {
         ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartCaseTransferUrl(any(), any(), any())).thenReturn(uri);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class))).thenReturn(responseEntity);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class)))
+                .thenReturn(responseEntity);
         ccdClient.startCaseTransfer("authToken", caseDetails.getCaseTypeId(), caseDetails.getJurisdiction());
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class));
         verifyNoMoreInteractions(restTemplate);
@@ -142,9 +143,11 @@ public class CcdClientTest {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
         ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
-        when(ccdClientConfig.buildReturnCaseCreationTransferUrl(any(), any(), any())).thenReturn(uri);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class))).thenReturn(responseEntity);
-        ccdClient.returnCaseCreationTransfer("authToken",  caseDetails.getCaseTypeId(), caseDetails.getJurisdiction());
+        when(ccdClientConfig.buildReturnCaseCreationTransferUrl(any(), any(), any(), any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class)))
+                .thenReturn(responseEntity);
+        ccdClient.returnCaseCreationTransfer("authToken",  caseDetails.getCaseTypeId(),
+                caseDetails.getJurisdiction(), caseDetails.getCaseId());
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class));
         verifyNoMoreInteractions(restTemplate);
     }
@@ -155,20 +158,25 @@ public class CcdClientTest {
         ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartCaseMultipleCreationUrl(any(), any(), any())).thenReturn(uri);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class))).thenReturn(responseEntity);
-        ccdClient.startCaseMultipleCreation("authToken",  caseDetails.getCaseTypeId(), caseDetails.getJurisdiction());
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class)))
+                .thenReturn(responseEntity);
+        ccdClient.startCaseMultipleCreation("authToken",  caseDetails.getCaseTypeId(),
+                caseDetails.getJurisdiction());
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class));
         verifyNoMoreInteractions(restTemplate);
     }
 
     @Test
     public void submitCaseCreation() throws IOException {
-        HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(), creatBuildHeaders());
+        HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
+                creatBuildHeaders());
         ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
-        when(caseDataBuilder.buildCaseDataContent(eq(caseData), eq(ccdRequest), anyString())).thenReturn(CaseDataContent.builder().build());
+        when(caseDataBuilder.buildCaseDataContent(eq(caseData), eq(ccdRequest), anyString()))
+                .thenReturn(CaseDataContent.builder().build());
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildSubmitCaseCreationUrl(any(), any(), any())).thenReturn(uri);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class))).thenReturn(responseEntity);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class)))
+                .thenReturn(responseEntity);
         ccdClient.submitCaseCreation("authToken", caseDetails, ccdRequest);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class));
         verifyNoMoreInteractions(restTemplate);
@@ -180,8 +188,10 @@ public class CcdClientTest {
         ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildRetrieveCaseUrl(any(), any(), any(), any())).thenReturn(uri);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(SubmitEvent.class))).thenReturn(responseEntity);
-        ccdClient.retrieveCase("authToken", caseDetails.getCaseTypeId(), caseDetails.getJurisdiction(), "111111");
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(SubmitEvent.class)))
+                .thenReturn(responseEntity);
+        ccdClient.retrieveCase("authToken", caseDetails.getCaseTypeId(), caseDetails.getJurisdiction(),
+                "111111");
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(SubmitEvent.class));
         verifyNoMoreInteractions(restTemplate);
     }
@@ -197,10 +207,13 @@ public class CcdClientTest {
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildRetrieveCasesUrl(any(), any(), any(), any())).thenReturn(uri);
         when(ccdClientConfig.buildPaginationMetadataCaseUrl(any(), any(), any())).thenReturn(uri);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(new ParameterizedTypeReference<List<SubmitEvent>>(){}))).thenReturn(responseEntity);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(PaginatedSearchMetadata.class))).thenReturn(paginatedSearchMetadata);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
+                eq(new ParameterizedTypeReference<List<SubmitEvent>>(){}))).thenReturn(responseEntity);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(PaginatedSearchMetadata.class)))
+                .thenReturn(paginatedSearchMetadata);
         ccdClient.retrieveCases("authToken", caseDetails.getCaseTypeId(), caseDetails.getJurisdiction());
-        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(new ParameterizedTypeReference<List<SubmitEvent>>(){}));
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
+                eq(new ParameterizedTypeReference<List<SubmitEvent>>(){}));
     }
 
     @Test

@@ -35,9 +35,10 @@ public class CcdClientConfigTest {
 
     @Test
     public void buildReturnCaseCreationTransferUrl() {
-        String uri = ccdClientConfig.buildReturnCaseCreationTransferUrl("1123", "TRIBUNALS", "TRIB_03");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/event-triggers/"
-                + "returnCaseTransfer/token?ignore-warning=true", uri);
+        String uri = ccdClientConfig.buildReturnCaseCreationTransferUrl("1123", "TRIBUNALS", "TRIB_03",
+                "233");
+        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/233/"
+                + "event-triggers/returnCaseTransfer/token", uri);
     }
 
     @Test
@@ -73,50 +74,65 @@ public class CcdClientConfigTest {
 
     @Test
     public void buildStartEventForCaseUrl() {
-        String uri = ccdClientConfig.buildStartEventForCaseUrl("1123", "TRIBUNALS", "TRIB_03", "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222/event-triggers/amendCaseDetails/token", uri);
+        String uri = ccdClientConfig.buildStartEventForCaseUrl("1123", "TRIBUNALS", "TRIB_03",
+                "1222222");
+        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
+                + "/event-triggers/amendCaseDetails/token", uri);
     }
 
     @Test
     public void buildStartEventForCaseUrlAPIRole() {
-        String uri = ccdClientConfig.buildStartEventForCaseUrlAPIRole("1123", "TRIBUNALS", "TRIB_03", "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222/event-triggers/amendSingle/token", uri);
+        String uri = ccdClientConfig.buildStartEventForCaseUrlAPIRole("1123", "TRIBUNALS", "TRIB_03",
+                "1222222");
+        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
+                + "/event-triggers/amendSingle/token", uri);
     }
 
     @Test
     public void buildStartEventForCaseUrlBulkSingle() {
-        String uri = ccdClientConfig.buildStartEventForCaseUrlBulkSingle("1123", "TRIBUNALS", "TRIB_03", "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222/event-triggers/amendCaseDetailsBulk/token", uri);
+        String uri = ccdClientConfig.buildStartEventForCaseUrlBulkSingle("1123", "TRIBUNALS", "TRIB_03",
+                "1222222");
+        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
+                + "/event-triggers/amendCaseDetailsBulk/token", uri);
     }
 
     @Test
     public void buildStartEventForCaseUrlPreAcceptBulkSingle() {
-        String uri = ccdClientConfig.buildStartEventForCaseUrlPreAcceptBulkSingle("1123", "TRIBUNALS", "TRIB_03", "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222/event-triggers/preAcceptanceCase/token", uri);
+        String uri = ccdClientConfig.buildStartEventForCaseUrlPreAcceptBulkSingle("1123", "TRIBUNALS",
+                "TRIB_03", "1222222");
+        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
+                + "/event-triggers/preAcceptanceCase/token", uri);
     }
 
     @Test
     public void buildStartEventForBulkCaseUrl() {
-        String uri = ccdClientConfig.buildStartEventForBulkCaseUrl("1123", "TRIBUNALS", "BULK_03", "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/BULK_03/cases/1222222/event-triggers/updateBulkAction/token", uri);
+        String uri = ccdClientConfig.buildStartEventForBulkCaseUrl("1123", "TRIBUNALS", "BULK_03",
+                "1222222");
+        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/BULK_03/cases/1222222"
+                + "/event-triggers/updateBulkAction/token", uri);
     }
 
     @Test
     public void buildStartEventForBulkAmendCaseUrl() {
-        String uri = ccdClientConfig.buildStartEventForBulkAmendCaseUrl("1123", "TRIBUNALS", "BULK_03", "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/BULK_03/cases/1222222/event-triggers/amendMultipleAPI/token", uri);
+        String uri = ccdClientConfig.buildStartEventForBulkAmendCaseUrl("1123", "TRIBUNALS", "BULK_03",
+                "1222222");
+        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/BULK_03/cases/1222222"
+                + "/event-triggers/amendMultipleAPI/token", uri);
     }
 
     @Test
     public void buildSubmitEventForCaseUrl() {
-        String uri = ccdClientConfig.buildSubmitEventForCaseUrl("1123", "TRIBUNALS", "TRIB_03", "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222/events", uri);
+        String uri = ccdClientConfig.buildSubmitEventForCaseUrl("1123", "TRIBUNALS", "TRIB_03",
+                "1222222");
+        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03"
+                + "/cases/1222222/events", uri);
     }
 
     @Test
     public void buildPaginationMetadataCaseUrl() {
         String uri = ccdClientConfig.buildPaginationMetadataCaseUrl("1123", "TRIBUNALS", "TRIB_03");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/pagination_metadata", uri);
+        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03"
+                + "/cases/pagination_metadata", uri);
     }
 
 }

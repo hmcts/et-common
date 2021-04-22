@@ -44,8 +44,8 @@ public class CcdClientConfig {
                 CASE_TRANSFER_EVENT_TRIGGER_ID);
     }
 
-    String buildReturnCaseCreationTransferUrl(String uid, String jid, String ctid) {
-        return String.format(START_CASE_CREATION_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid,
+    String buildReturnCaseCreationTransferUrl(String uid, String jid, String ctid, String cid) {
+        return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, cid,
                 RETURN_TRANSFER_EVENT_TRIGGER_ID);
     }
 
