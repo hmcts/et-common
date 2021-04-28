@@ -28,9 +28,10 @@ public class CcdClientConfigTest {
 
     @Test
     public void buildStartCaseTransferUrl() {
-        String uri = ccdClientConfig.buildStartCaseTransferUrl("1123", "TRIBUNALS", "TRIB_03");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/event-triggers/"
-                + "caseTransfer/token?ignore-warning=true", uri);
+        String uri = ccdClientConfig.buildStartCaseTransferUrl("1123", "TRIBUNALS", "TRIB_03",
+                "223");
+        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/223/"
+                + "event-triggers/caseTransferMultiple/token", uri);
     }
 
     @Test

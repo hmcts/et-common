@@ -39,8 +39,8 @@ public class CcdClientConfig {
                 CREATION_TRANSFER_EVENT_TRIGGER_ID);
     }
 
-    String buildStartCaseTransferUrl(String uid, String jid, String ctid) {
-        return String.format(START_CASE_CREATION_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid,
+    String buildStartCaseTransferUrl(String uid, String jid, String ctid, String cid) {
+        return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, cid,
                 CASE_TRANSFER_EVENT_TRIGGER_ID);
     }
 

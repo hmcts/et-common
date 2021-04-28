@@ -174,7 +174,7 @@ public class Constants {
     public static final String AMEND_SINGLE_EVENT_TRIGGER_ID = "amendSingle";
     public static final String UPDATE_EVENT_TRIGGER_ID = "amendCaseDetails";
     public static final String CREATION_TRANSFER_EVENT_TRIGGER_ID = "processCaseTransfer";
-    public static final String CASE_TRANSFER_EVENT_TRIGGER_ID = "caseTransfer";
+    public static final String CASE_TRANSFER_EVENT_TRIGGER_ID = "caseTransferMultiple";
     public static final String RETURN_TRANSFER_EVENT_TRIGGER_ID = "returnCaseTransfer";
     public static final String CREATE_MULTIPLE_EVENT_TRIGGER_ID = "createMultiple";
 

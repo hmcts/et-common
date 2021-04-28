@@ -130,10 +130,11 @@ public class CcdClientTest {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
         ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
-        when(ccdClientConfig.buildStartCaseTransferUrl(any(), any(), any())).thenReturn(uri);
+        when(ccdClientConfig.buildStartCaseTransferUrl(any(), any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class)))
                 .thenReturn(responseEntity);
-        ccdClient.startCaseTransfer("authToken", caseDetails.getCaseTypeId(), caseDetails.getJurisdiction());
+        ccdClient.startCaseTransfer("authToken", caseDetails.getCaseTypeId(),
+                caseDetails.getJurisdiction(), caseDetails.getCaseId());
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class));
         verifyNoMoreInteractions(restTemplate);
     }
