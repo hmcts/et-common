@@ -27,6 +27,7 @@ repositories {
         url 'https://repo.spring.io/libs-milestone'
     }
 
+    maven { url 'https://jitpack.io' }
 }
 
 // region test coverage
