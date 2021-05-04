@@ -452,12 +452,14 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitBulkEvent.class).getBody();
     }
 
-    public SubmitMultipleEvent submitMultipleEventForCase(String authToken, MultipleData multipleData, String caseTypeId, String jurisdiction, CCDRequest req, String cid)
-            throws IOException {
+    public SubmitMultipleEvent submitMultipleCreation(String authToken, MultipleData multipleData,
+                                                      String caseTypeId, String jurisdiction,
+                                                      CCDRequest req) throws IOException {
         HttpEntity<CaseDataContent> request =
-                new HttpEntity<>(caseDataBuilder.buildMultipleDataContent(multipleData, req, UPDATE_BULK_EVENT_SUMMARY), buildHeaders(authToken));
-        String uri = ccdClientConfig.buildSubmitEventForCaseUrl(userService.getUserDetails(authToken).getUid(), jurisdiction,
-                caseTypeId, cid);
+                new HttpEntity<>(caseDataBuilder.buildMultipleDataContent(multipleData, req, CREATION_EVENT_SUMMARY),
+                        buildHeaders(authToken));
+        String uri = ccdClientConfig.buildSubmitCaseCreationUrl(userService.getUserDetails(authToken).getUid(),
+                jurisdiction, caseTypeId);
         return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitMultipleEvent.class).getBody();
     }
 

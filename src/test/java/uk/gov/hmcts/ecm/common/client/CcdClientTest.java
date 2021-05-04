@@ -533,9 +533,10 @@ public class CcdClientTest {
         ResponseEntity<SubmitMultipleEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
         when(caseDataBuilder.buildMultipleDataContent(eq(multipleData), eq(ccdRequest), anyString())).thenReturn(CaseDataContent.builder().build());
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
-        when(ccdClientConfig.buildSubmitEventForCaseUrl(any(), any(), any(), any())).thenReturn(uri);
+        when(ccdClientConfig.buildSubmitCaseCreationUrl(any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitMultipleEvent.class))).thenReturn(responseEntity);
-        ccdClient.submitMultipleEventForCase("authToken", multipleData, multipleDetails.getCaseTypeId(), multipleDetails.getJurisdiction(), ccdRequest, "111111");
+        ccdClient.submitMultipleCreation("authToken", multipleData, multipleDetails.getCaseTypeId(),
+                multipleDetails.getJurisdiction(), ccdRequest);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitMultipleEvent.class));
         verifyNoMoreInteractions(restTemplate);
     }
