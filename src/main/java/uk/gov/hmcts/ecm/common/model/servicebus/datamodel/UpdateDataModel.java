@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import uk.gov.hmcts.ecm.common.model.ccd.types.JudgementType;
 import uk.gov.hmcts.ecm.common.model.ccd.types.JurCodesType;
 import uk.gov.hmcts.ecm.common.model.ccd.types.RepresentedTypeC;
+import uk.gov.hmcts.ecm.common.model.ccd.types.RepresentedTypeR;
 import uk.gov.hmcts.ecm.common.model.ccd.types.RespondentSumType;
 
 @EqualsAndHashCode(callSuper = true)
@@ -54,5 +56,11 @@ public class UpdateDataModel extends DataModelParent {
 
     @JsonProperty("outcomeUpdate")
     private RespondentSumType respondentSumType;
+
+    @JsonProperty("judgementType")
+    private JudgementType judgementType;
+
+    @JsonProperty("representedType")
+    private RepresentedTypeR representedType;
 
 }

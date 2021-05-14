@@ -2,6 +2,7 @@ package uk.gov.hmcts.ecm.common.helpers;
 
 import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
+import uk.gov.hmcts.ecm.common.model.ccd.items.JudgementTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.RepresentedTypeRItem;
 import uk.gov.hmcts.ecm.common.model.ccd.types.*;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_BULK_CASE_TYPE_ID;
 
@@ -57,6 +59,13 @@ public class ServiceBusHelper {
         jurCodesTypeItem.setValue(jurCodesType);
         List<JurCodesTypeItem> jurCodesCollection = new ArrayList<>(Collections.singletonList(jurCodesTypeItem));
         caseData.setJurCodesCollection(jurCodesCollection);
+        JudgementType judgementType = new JudgementType();
+        judgementType.setJudgementType("Judgementtype");
+        judgementType.setJurisdictionCodes(jurCodesCollection);
+        JudgementTypeItem judgementTypeItem = new JudgementTypeItem();
+        judgementTypeItem.setValue(judgementType);
+        List<JudgementTypeItem> judgementTypeCollection = new ArrayList<>(Collections.singletonList(judgementTypeItem));
+        caseData.setJudgementCollection(judgementTypeCollection);
         ClaimantIndType claimantIndType = new ClaimantIndType();
         claimantIndType.setClaimantFirstNames("ClaimantName");
         caseData.setClaimantIndType(claimantIndType);
@@ -140,6 +149,7 @@ public class ServiceBusHelper {
                 .representativeClaimantType(getRepresentativeClaimant())
                 .jurCodesType(getJurCodesType())
                 .respondentSumType(getRespondentSubType())
+                .judgementType(getJudgementType())
                 .build();
     }
 
@@ -175,6 +185,20 @@ public class ServiceBusHelper {
         respondentSumType.setRespondentPhone1("072323232");
 
         return respondentSumType;
+
+    }
+
+    public static JudgementType getJudgementType() {
+
+        JudgementType judgementType = new JudgementType();
+
+        judgementType.setJudgementType("JudgementType");
+        JurCodesTypeItem jurCodesTypeItem = new JurCodesTypeItem();
+        jurCodesTypeItem.setId(UUID.randomUUID().toString());
+        jurCodesTypeItem.setValue(getJurCodesType());
+        judgementType.setJurisdictionCodes(new ArrayList<>(Collections.singletonList(jurCodesTypeItem)));
+
+        return judgementType;
 
     }
 
