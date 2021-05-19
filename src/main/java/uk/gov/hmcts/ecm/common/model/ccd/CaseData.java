@@ -124,6 +124,8 @@ public class CaseData {
     private String conciliationTrack;
     @JsonProperty("counterClaim")
     private String counterClaim;
+    @JsonProperty("eccCases")
+    private List<String> eccCases;
     @JsonProperty("restrictedReporting")
     private RestrictedReportingType restrictedReporting;
     @JsonProperty("printHearingDetails")
