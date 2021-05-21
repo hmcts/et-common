@@ -10,6 +10,7 @@ import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JudgementTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
+import uk.gov.hmcts.ecm.common.model.ccd.items.RepresentedTypeRItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.RespondentSumTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.types.*;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
@@ -132,6 +133,10 @@ public class UpdateDataTask extends DataTaskParent {
             updateJudgement(caseData, updateDataModel.getJudgementType());
         }
 
+        if (updateDataModel.getRepresentedType() != null) {
+            updateRespondentRep(caseData, updateDataModel.getRepresentedType());
+        }
+
     }
 
     private void updateRespondentSumType(CaseData caseData, RespondentSumType respondentSumType) {
@@ -230,4 +235,59 @@ public class UpdateDataTask extends DataTaskParent {
         return judgementTypeItem;
 
     }
+
+    private void updateRespondentRep(CaseData caseData, RepresentedTypeR representedType) {
+
+        if (caseData.getRespondentCollection() != null) {
+            Optional<RespondentSumTypeItem> respondentSumTypeItemOptional =
+                    caseData.getRespondentCollection().stream()
+                            .filter(respondentSumTypeItem ->
+                                    respondentSumTypeItem.getValue().getRespondentName()
+                                            .equals(representedType.getRespRepName()))
+                            .findAny();
+
+            if (respondentSumTypeItemOptional.isPresent()) {
+
+                if (caseData.getRepCollection() != null) {
+
+                    boolean found = false;
+
+                    for (RepresentedTypeRItem representedTypeRItem : caseData.getRepCollection()) {
+
+                        if (representedTypeRItem.getValue().getRespRepName()
+                                .equals(representedType.getRespRepName())) {
+
+                            representedTypeRItem.setValue(representedType);
+                            found = true;
+                        }
+                    }
+
+                    if (!found) {
+
+                        caseData.getRepCollection().add(createRespondentRepTypeItem(representedType));
+
+                    }
+
+                } else {
+
+                    caseData.setRepCollection(
+                            new ArrayList<>(Collections.singletonList(createRespondentRepTypeItem(representedType))));
+                }
+
+            }
+        }
+
+    }
+
+    private RepresentedTypeRItem createRespondentRepTypeItem(RepresentedTypeR representedType) {
+
+        RepresentedTypeRItem representedTypeRItem = new RepresentedTypeRItem();
+
+        representedTypeRItem.setId(UUID.randomUUID().toString());
+        representedTypeRItem.setValue(representedType);
+
+        return representedTypeRItem;
+
+    }
+
 }
