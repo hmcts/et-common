@@ -154,8 +154,13 @@ public class UpdateCaseMsgTest {
         assertEquals("FileLocationEdinburgh", submitEventDetailed.getCaseData().getFileLocationEdinburgh());
         assertEquals("ClerkResponsible", submitEventDetailed.getCaseData().getClerkResponsible());
         assertEquals("PositionType", submitEventDetailed.getCaseData().getPositionType());
-        assertEquals("RepName", submitEventDetailed.getCaseData().getRepresentativeClaimantType().getNameOfRepresentative());
-        assertEquals("AC", submitEventDetailed.getCaseData().getJurCodesCollection().get(1).getValue().getJuridictionCodesList());
-        assertEquals("RespondentName", submitEventDetailed.getCaseData().getRespondentCollection().get(0).getValue().getRespondentName());
+        assertEquals("RepName", submitEventDetailed
+                .getCaseData().getRepresentativeClaimantType().getNameOfRepresentative());
+        assertEquals("AC", submitEventDetailed
+                .getCaseData().getJurCodesCollection().get(1).getValue().getJuridictionCodesList());
+        assertEquals("RespondentName", submitEventDetailed
+                .getCaseData().getRespondentCollection().get(0).getValue().getRespondentName());
+        assertEquals("RespondentName", submitEventDetailed
+                .getCaseData().getRepCollection().get(0).getValue().getRespRepName());
     }
 }
