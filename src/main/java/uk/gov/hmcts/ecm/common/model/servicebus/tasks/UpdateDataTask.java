@@ -155,7 +155,7 @@ public class UpdateDataTask extends DataTaskParent {
 
         RespondentSumTypeItem respondentSumTypeItem = new RespondentSumTypeItem();
 
-        respondentSumTypeItem.setId(respondentSumType.getRespondentName());
+        respondentSumTypeItem.setId(UUID.randomUUID().toString());
         respondentSumTypeItem.setValue(respondentSumType);
 
         return respondentSumTypeItem;
@@ -166,6 +166,8 @@ public class UpdateDataTask extends DataTaskParent {
 
         if (caseData.getJurCodesCollection() != null) {
 
+            log.info("JurCodesCollection: " + caseData.getJurCodesCollection());
+            log.info("JurCodesType: " + jurCodesType);
             Optional<JurCodesTypeItem> jurCodesTypeItemOptional =
                     caseData.getJurCodesCollection().stream()
                             .filter(jurCodesTypeItem ->
@@ -174,7 +176,10 @@ public class UpdateDataTask extends DataTaskParent {
                             .findAny();
 
             if (jurCodesTypeItemOptional.isEmpty()) {
+                log.info("JurCodes Empty");
                 caseData.getJurCodesCollection().add(createJurCodesTypeItem(jurCodesType));
+            } else {
+                log.info("JurCodes Not Empty");
             }
 
         } else {
@@ -188,7 +193,7 @@ public class UpdateDataTask extends DataTaskParent {
 
         JurCodesTypeItem jurCodesTypeItem = new JurCodesTypeItem();
 
-        jurCodesTypeItem.setId(jurCodesType.getJuridictionCodesList());
+        jurCodesTypeItem.setId(UUID.randomUUID().toString());
         jurCodesTypeItem.setValue(jurCodesType);
 
         return jurCodesTypeItem;
