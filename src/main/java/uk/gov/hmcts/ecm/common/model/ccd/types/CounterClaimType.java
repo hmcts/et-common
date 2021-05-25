@@ -14,4 +14,6 @@ public class CounterClaimType {
     private String counterClaimDate;
     @JsonProperty("counterClaimDetails")
     private String counterClaimDetails;
+    @JsonProperty("counterClaim")
+    private String counterClaim;
 }
