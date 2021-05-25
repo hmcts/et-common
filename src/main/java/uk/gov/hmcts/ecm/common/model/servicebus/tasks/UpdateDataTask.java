@@ -10,6 +10,7 @@ import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JudgementTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
+import uk.gov.hmcts.ecm.common.model.ccd.items.RepresentedTypeRItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.RespondentSumTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.types.*;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
@@ -132,6 +133,10 @@ public class UpdateDataTask extends DataTaskParent {
             updateJudgement(caseData, updateDataModel.getJudgementType());
         }
 
+        if (updateDataModel.getRepresentedType() != null) {
+            updateRespondentRep(caseData, updateDataModel.getRepresentedType());
+        }
+
     }
 
     private void updateRespondentSumType(CaseData caseData, RespondentSumType respondentSumType) {
@@ -150,7 +155,7 @@ public class UpdateDataTask extends DataTaskParent {
 
         RespondentSumTypeItem respondentSumTypeItem = new RespondentSumTypeItem();
 
-        respondentSumTypeItem.setId(respondentSumType.getRespondentName());
+        respondentSumTypeItem.setId(UUID.randomUUID().toString());
         respondentSumTypeItem.setValue(respondentSumType);
 
         return respondentSumTypeItem;
@@ -161,6 +166,8 @@ public class UpdateDataTask extends DataTaskParent {
 
         if (caseData.getJurCodesCollection() != null) {
 
+            log.info("JurCodesCollection: " + caseData.getJurCodesCollection());
+            log.info("JurCodesType: " + jurCodesType);
             Optional<JurCodesTypeItem> jurCodesTypeItemOptional =
                     caseData.getJurCodesCollection().stream()
                             .filter(jurCodesTypeItem ->
@@ -169,7 +176,10 @@ public class UpdateDataTask extends DataTaskParent {
                             .findAny();
 
             if (jurCodesTypeItemOptional.isEmpty()) {
+                log.info("JurCodes Empty");
                 caseData.getJurCodesCollection().add(createJurCodesTypeItem(jurCodesType));
+            } else {
+                log.info("JurCodes Not Empty");
             }
 
         } else {
@@ -183,7 +193,7 @@ public class UpdateDataTask extends DataTaskParent {
 
         JurCodesTypeItem jurCodesTypeItem = new JurCodesTypeItem();
 
-        jurCodesTypeItem.setId(jurCodesType.getJuridictionCodesList());
+        jurCodesTypeItem.setId(UUID.randomUUID().toString());
         jurCodesTypeItem.setValue(jurCodesType);
 
         return jurCodesTypeItem;
@@ -230,4 +240,59 @@ public class UpdateDataTask extends DataTaskParent {
         return judgementTypeItem;
 
     }
+
+    private void updateRespondentRep(CaseData caseData, RepresentedTypeR representedType) {
+
+        if (caseData.getRespondentCollection() != null) {
+            Optional<RespondentSumTypeItem> respondentSumTypeItemOptional =
+                    caseData.getRespondentCollection().stream()
+                            .filter(respondentSumTypeItem ->
+                                    respondentSumTypeItem.getValue().getRespondentName()
+                                            .equals(representedType.getRespRepName()))
+                            .findAny();
+
+            if (respondentSumTypeItemOptional.isPresent()) {
+
+                if (caseData.getRepCollection() != null) {
+
+                    boolean found = false;
+
+                    for (RepresentedTypeRItem representedTypeRItem : caseData.getRepCollection()) {
+
+                        if (representedTypeRItem.getValue().getRespRepName()
+                                .equals(representedType.getRespRepName())) {
+
+                            representedTypeRItem.setValue(representedType);
+                            found = true;
+                        }
+                    }
+
+                    if (!found) {
+
+                        caseData.getRepCollection().add(createRespondentRepTypeItem(representedType));
+
+                    }
+
+                } else {
+
+                    caseData.setRepCollection(
+                            new ArrayList<>(Collections.singletonList(createRespondentRepTypeItem(representedType))));
+                }
+
+            }
+        }
+
+    }
+
+    private RepresentedTypeRItem createRespondentRepTypeItem(RepresentedTypeR representedType) {
+
+        RepresentedTypeRItem representedTypeRItem = new RepresentedTypeRItem();
+
+        representedTypeRItem.setId(UUID.randomUUID().toString());
+        representedTypeRItem.setValue(representedType);
+
+        return representedTypeRItem;
+
+    }
+
 }

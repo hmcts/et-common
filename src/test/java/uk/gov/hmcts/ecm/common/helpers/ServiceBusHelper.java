@@ -5,6 +5,7 @@ import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JudgementTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.RepresentedTypeRItem;
+import uk.gov.hmcts.ecm.common.model.ccd.items.RespondentSumTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.types.*;
 import uk.gov.hmcts.ecm.common.model.servicebus.UpdateCaseMsg;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.*;
@@ -74,10 +75,17 @@ public class ServiceBusHelper {
         caseData.setRepresentativeClaimantType(representedTypeC);
         RepresentedTypeRItem representedTypeRItem = new RepresentedTypeRItem();
         RepresentedTypeR representedTypeR = new RepresentedTypeR();
-        representedTypeR.setNameOfRepresentative("RespondentRepName");
+        representedTypeR.setNameOfRepresentative("Rep Name");
+        representedTypeR.setRespRepName("RespondentName");
         representedTypeRItem.setValue(representedTypeR);
         List<RepresentedTypeRItem> repCollection = new ArrayList<>(Collections.singletonList(representedTypeRItem));
         caseData.setRepCollection(repCollection);
+        RespondentSumTypeItem respondentSumTypeItem = new RespondentSumTypeItem();
+        RespondentSumType respondentSumType = new RespondentSumType();
+        respondentSumType.setRespondentName("RespondentName");
+        respondentSumTypeItem.setId(UUID.randomUUID().toString());
+        respondentSumTypeItem.setValue(respondentSumType);
+        caseData.setRespondentCollection(new ArrayList<>(Collections.singletonList(respondentSumTypeItem)));
         submitEvent.setCaseData(caseData);
         return submitEvent;
     }
@@ -150,6 +158,7 @@ public class ServiceBusHelper {
                 .jurCodesType(getJurCodesType())
                 .respondentSumType(getRespondentSubType())
                 .judgementType(getJudgementType())
+                .representedType(getRepresentedType())
                 .build();
     }
 
@@ -199,6 +208,16 @@ public class ServiceBusHelper {
         judgementType.setJurisdictionCodes(new ArrayList<>(Collections.singletonList(jurCodesTypeItem)));
 
         return judgementType;
+
+    }
+
+    public static RepresentedTypeR getRepresentedType() {
+
+        RepresentedTypeR representedTypeR = new RepresentedTypeR();
+        representedTypeR.setRespRepName("RespondentName");
+        representedTypeR.setNameOfRepresentative("Rep Name");
+
+        return representedTypeR;
 
     }
 
