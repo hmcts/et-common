@@ -8,17 +8,15 @@ import lombok.Data;
 @Data
 public class BFDateType {
 
-    @JsonProperty("caseNumber")
-    private String caseNumber;
-    @JsonProperty("action")
-    private String action;
-    @JsonProperty("dateEntered")
-    private String dateEntered;
-    @JsonProperty("bfDate")
-    private String bfDate;
-    @JsonProperty("cleared")
-    private String cleared;
-    @JsonProperty("notes")
-    private String notes;
+    @JsonProperty("caseReference")
+    private String caseReference;
+    @JsonProperty("broughtForwardAction")
+    private String broughtForwardAction;
+    @JsonProperty("broughtForwardDate")
+    private String broughtForwardDate;
+    @JsonProperty("broughtForwardDateCleared")
+    private String broughtForwardDateCleared;
+    @JsonProperty("broughtForwardDateReason")
+    private String broughtForwardDateReason;
 
 }
