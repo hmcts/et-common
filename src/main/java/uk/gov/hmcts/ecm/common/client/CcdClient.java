@@ -171,16 +171,8 @@ public class CcdClient {
 
     public List<SubmitEvent> retrieveCasesVenueAndDateElasticSearch(String authToken, String caseTypeId, String dateToSearchFrom, String dateToSearchTo,
                                                                  String venueToSearch, String venueToSearchMapping) throws IOException {
-        String from = LocalDate.parse(dateToSearchFrom).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
-        if (dateToSearchTo.equals(dateToSearchFrom)) {
-            String to = LocalDate.parse(dateToSearchFrom).atStartOfDay().plusDays(1).minusSeconds(1).format(OLD_DATE_TIME_PATTERN);
-            return buildAndGetElasticSearchRequest(authToken, caseTypeId,
-                    getListingQuery(from, to, venueToSearch, venueToSearchMapping));
-        } else {
-            String to = LocalDate.parse(dateToSearchTo).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
-            return buildAndGetElasticSearchRequest(authToken, caseTypeId,
-                    getListingQuery(from, to, venueToSearch, venueToSearchMapping));
-        }
+        return buildAndGetElasticSearchRequest(authToken, caseTypeId,
+                getListingQuery(dateToSearchFrom, dateToSearchTo, venueToSearch, venueToSearchMapping));
     }
 
     public List<SubmitEvent> retrieveCasesGenericReportElasticSearch(String authToken, String caseTypeId, String dateToSearchFrom, String dateToSearchTo,
@@ -224,7 +216,6 @@ public class CcdClient {
         if (scheduleCaseSearchResult != null && scheduleCaseSearchResult.getCases() != null) {
             schedulePayloadEvents.addAll(scheduleCaseSearchResult.getCases());
         }
-        //log.info("ScheduleTest: " + restTemplate.exchange(url, HttpMethod.POST, request, String.class).getBody());
         return schedulePayloadEvents;
     }
 
@@ -358,7 +349,6 @@ public class CcdClient {
         log.info("QUERY: " + ESHelper.getBulkSearchQuery(multipleReference));
         HttpEntity<String> request =
                 new HttpEntity<>(ESHelper.getBulkSearchQuery(multipleReference), buildHeaders(authToken));
-        //log.info("REQUEST: " + request);
         String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
         BulkCaseSearchResult bulkCaseSearchResult = restTemplate.exchange(url, HttpMethod.POST, request, BulkCaseSearchResult.class).getBody();
         if (bulkCaseSearchResult != null && bulkCaseSearchResult.getCases() != null) {
