@@ -39,7 +39,6 @@ public class CreationDataTask extends DataTaskParent {
             log.info("Adding lead");
             submitEvent.getCaseData().setLeadClaimant(YES);
         } else {
-            log.info("setLeadClaimant is set to No");
             submitEvent.getCaseData().setLeadClaimant(NO);
         }
 
