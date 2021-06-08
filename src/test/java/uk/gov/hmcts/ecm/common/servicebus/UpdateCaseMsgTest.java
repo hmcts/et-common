@@ -102,7 +102,6 @@ public class UpdateCaseMsgTest {
         updateCaseMsg.runTask(submitEventAccepted);
         assertEquals(SINGLE_CASE_TYPE, submitEventAccepted.getCaseData().getCaseType());
         assertEquals(" ", submitEventAccepted.getCaseData().getMultipleReference());
-        assertEquals(NO, submitEventAccepted.getCaseData().getLeadClaimant());
     }
 
     @Test
