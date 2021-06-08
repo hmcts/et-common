@@ -33,7 +33,7 @@ public class DetachDataTask extends DataTaskParent {
 
         log.info("Detaching case from the Multiples");
         submitEvent.getCaseData().setMultipleReference(" ");
-        submitEvent.getCaseData().setLeadClaimant(NO);
+        submitEvent.getCaseData().setLeadClaimant(null);
         submitEvent.getCaseData().setCaseType(SINGLE_CASE_TYPE);
         submitEvent.getCaseData().setMultipleFlag(NO);
 
