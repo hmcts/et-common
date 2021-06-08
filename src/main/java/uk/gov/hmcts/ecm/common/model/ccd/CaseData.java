@@ -1,6 +1,7 @@
 package uk.gov.hmcts.ecm.common.model.ccd;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
@@ -33,6 +34,7 @@ public class CaseData {
     private String multipleReference;
     @JsonProperty("subMultipleName")
     private String subMultipleName;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty("leadClaimant")
     private String leadClaimant;
     @JsonProperty("multipleFlag")
