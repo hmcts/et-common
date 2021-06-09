@@ -34,7 +34,6 @@ public class CaseData {
     private String multipleReference;
     @JsonProperty("subMultipleName")
     private String subMultipleName;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty("leadClaimant")
     private String leadClaimant;
     @JsonProperty("multipleFlag")
