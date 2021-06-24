@@ -10,7 +10,7 @@ plugins {
 }
 
 group 'uk.gov.hmcts.reform'
-version '0.1.89'
+version '0.1.90'
 
 
 sourceCompatibility = '11.0'
@@ -92,6 +92,10 @@ dependencies {
     implementation group: 'com.github.sps.junidecode', name: 'junidecode', version: '0.3'
     implementation group: 'commons-io', name: 'commons-io', version: '2.10.0'
     implementation group: 'com.google.guava', name: 'guava', version: '30.1.1-jre'
+    // CVE-2020-11987, CVE-2020-11988 (batik-1.13)
+    // Can be removed when we upgrade poi-ooxml to 6.0
+    // https://bz.apache.org/bugzilla/show_bug.cgi?id=65166
+    api group: 'org.apache.xmlgraphics', name: 'batik-all', version: '1.14'
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
