@@ -8,21 +8,21 @@ import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
-import uk.gov.hmcts.ecm.common.model.ccd.items.JudgementTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.RepresentedTypeRItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.RespondentSumTypeItem;
-import uk.gov.hmcts.ecm.common.model.ccd.types.*;
+import uk.gov.hmcts.ecm.common.model.ccd.types.JudgementType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.JurCodesType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.RepresentedTypeR;
+import uk.gov.hmcts.ecm.common.model.ccd.types.RespondentSumType;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.UpdateDataModel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
@@ -200,45 +200,8 @@ public class UpdateDataTask extends DataTaskParent {
 
     }
 
-    private List<JurCodesTypeItem> filterJurCodesForJudgement(CaseData caseData,
-                                                              List<JurCodesTypeItem> jurisdictionCodes) {
-
-        List<String> existingJurisdictionCodes =
-                caseData.getJurCodesCollection().stream()
-                        .map(jurCodesTypeItem -> jurCodesTypeItem.getValue().getJuridictionCodesList())
-                        .collect(Collectors.toList());
-
-        return jurisdictionCodes.stream()
-                .filter(jurCodesTypeItem -> existingJurisdictionCodes
-                        .contains(jurCodesTypeItem.getValue().getJuridictionCodesList()))
-                .collect(Collectors.toList());
-    }
-
     private void updateJudgement(CaseData caseData, JudgementType judgementType) {
-
-        judgementType.setJurisdictionCodes(filterJurCodesForJudgement(caseData, judgementType.getJurisdictionCodes()));
-
-        if (caseData.getJudgementCollection() != null) {
-            if (!judgementType.getJurisdictionCodes().isEmpty()) {
-                caseData.getJudgementCollection().add(createJudgementTypeItem(judgementType));
-            }
-
-        } else {
-            caseData.setJudgementCollection(
-                    new ArrayList<>(Collections.singletonList(createJudgementTypeItem(judgementType))));
-        }
-
-    }
-
-    private JudgementTypeItem createJudgementTypeItem(JudgementType judgementType) {
-
-        JudgementTypeItem judgementTypeItem = new JudgementTypeItem();
-
-        judgementTypeItem.setId(UUID.randomUUID().toString());
-        judgementTypeItem.setValue(judgementType);
-
-        return judgementTypeItem;
-
+        CaseJudgementUpdate.updateCaseWithJudgement(caseData, judgementType);
     }
 
     private void updateRespondentRep(CaseData caseData, RepresentedTypeR representedType) {
