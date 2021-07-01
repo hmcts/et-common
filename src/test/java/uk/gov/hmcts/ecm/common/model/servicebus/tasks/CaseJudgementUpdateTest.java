@@ -1,0 +1,178 @@
+package uk.gov.hmcts.ecm.common.model.servicebus.tasks;
+
+import org.junit.Test;
+import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
+import uk.gov.hmcts.ecm.common.model.ccd.items.JudgementTypeItem;
+import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
+import uk.gov.hmcts.ecm.common.model.ccd.types.JudgementType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.JurCodesType;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
+public class CaseJudgementUpdateTest {
+
+    private static final String JUDGEMENT_NOTES = "This is a test judgement";
+
+    @Test
+    public void shouldNotAddJudgementIfNoJurisdictionCodeExists() {
+        // given source case has a judgement for a single jurisdiction
+        // given target case has no jurisdictions
+        // when we batch update judgements
+        // then target case is not updated with judgement
+
+        JudgementType sourceJudgementType = createJudgementType("ADT");
+        CaseData caseData = new CaseData();
+
+        CaseJudgementUpdate.updateCaseWithJudgement(caseData, sourceJudgementType);
+
+        assertNull(caseData.getJudgementCollection());
+    }
+
+    @Test
+    public void shouldNotAddJudgementIfJurisdictionCodeDoesNotMatch() {
+        // given source case has a judgement for a jurisdiction
+        // given target case has a different jurisdiction
+        // when we batch update judgements
+        // then target case is not updated with judgement
+
+        JudgementType sourceJudgementType = createJudgementType("ADT");
+        CaseData caseData = createCaseData("CCP");
+
+        CaseJudgementUpdate.updateCaseWithJudgement(caseData, sourceJudgementType);
+
+        assertNull(caseData.getJudgementCollection());
+    }
+
+    @Test
+    public void shouldNotAddJudgementIfMultipleJurisdictionCodeDontMatch() {
+        // given source case has a judgement for a jurisdiction
+        // given target case has multiple different jurisdictions
+        // when we batch update judgements
+        // then target case is not updated with judgement
+
+        JudgementType sourceJudgementType = createJudgementType("ADT", "DSO");
+        CaseData caseData = createCaseData("CCP", "DRB");
+
+        CaseJudgementUpdate.updateCaseWithJudgement(caseData, sourceJudgementType);
+
+        assertNull(caseData.getJudgementCollection());
+    }
+
+    @Test
+    public void shouldAddJudgementWhenSingleJurisdictionCodeMatches() {
+        // given source case has a judgement for a jurisdiction
+        // given target case has the same jurisdiction
+        // when we batch update judgements
+        // then target case has judgement with jurisdiction
+
+        String jurisdictionCode = "ADT";
+
+        JudgementType sourceJudgementType = createJudgementType(jurisdictionCode);
+        CaseData caseData = createCaseData(jurisdictionCode);
+
+        CaseJudgementUpdate.updateCaseWithJudgement(caseData, sourceJudgementType);
+
+        assertEquals(1, caseData.getJudgementCollection().size());
+        JudgementType judgementType = caseData.getJudgementCollection().get(0).getValue();
+        assertEquals(JUDGEMENT_NOTES, judgementType.getJudgmentNotes());
+        assertEquals(1, judgementType.getJurisdictionCodes().size());
+        assertEquals(jurisdictionCode, judgementType.getJurisdictionCodes().get(0).getValue().getJuridictionCodesList());
+    }
+
+    @Test
+    public void shouldAddJudgementWhenMultipleJurisdictionCodesMatch() {
+        // given source case has a judgement for multiple jurisdictions
+        // given target case has one matching jurisdiction
+        // when we batch update judgements
+        // then target case has judgement with only matching jurisdiction
+
+        JudgementType sourceJudgementType = createJudgementType("ADT", "DSO", "CCP");
+        CaseData caseData = createCaseData("ADT", "CCP");
+
+        CaseJudgementUpdate.updateCaseWithJudgement(caseData, sourceJudgementType);
+
+        assertEquals(1, caseData.getJudgementCollection().size());
+        JudgementType judgementType = caseData.getJudgementCollection().get(0).getValue();
+        assertEquals(JUDGEMENT_NOTES, judgementType.getJudgmentNotes());
+        assertEquals(2, judgementType.getJurisdictionCodes().size());
+        assertEquals("ADT", judgementType.getJurisdictionCodes().get(0).getValue().getJuridictionCodesList());
+        assertEquals("CCP", judgementType.getJurisdictionCodes().get(1).getValue().getJuridictionCodesList());
+    }
+
+    @Test
+    public void shouldAddJudgementToExistingJudgementCollection() {
+        // given source case has a judgement
+        // given target case has a judgement
+        // given target jurisdiction matches source case judgement jurisdiction
+        // when we batch update judgements
+        // then target case has 2 judgements
+
+        JudgementType sourceJudgementType = createJudgementType("DSO", "CCP");
+        CaseData caseData = createCaseData("ADT", "CCP");
+        caseData.setJudgementCollection(new ArrayList<>());
+        addCaseJudgement(caseData, "ADT");
+
+        CaseJudgementUpdate.updateCaseWithJudgement(caseData, sourceJudgementType);
+
+        assertEquals(2, caseData.getJudgementCollection().size());
+
+        // Check existing judgement
+        JudgementType judgementType = caseData.getJudgementCollection().get(0).getValue();
+        assertEquals(JUDGEMENT_NOTES, judgementType.getJudgmentNotes());
+        assertEquals(1, judgementType.getJurisdictionCodes().size());
+        assertEquals("ADT", judgementType.getJurisdictionCodes().get(0).getValue().getJuridictionCodesList());
+
+        // Check new judgement
+        judgementType = caseData.getJudgementCollection().get(1).getValue();
+        assertEquals(JUDGEMENT_NOTES, judgementType.getJudgmentNotes());
+        assertEquals(1, judgementType.getJurisdictionCodes().size());
+        assertEquals("CCP", judgementType.getJurisdictionCodes().get(0).getValue().getJuridictionCodesList());
+    }
+
+    private void addCaseJudgement(CaseData caseData, String... jurisdictionCodes) {
+        JudgementType judgementType = createJudgementType(jurisdictionCodes);
+        JudgementTypeItem judgementTypeItem = new JudgementTypeItem();
+        judgementTypeItem.setValue(judgementType);
+        caseData.getJudgementCollection().add(judgementTypeItem);
+    }
+
+    private JudgementType createJudgementType(String... jurisdictionCodes) {
+        List<JurCodesTypeItem> jurCodesTypeItems = new ArrayList<>();
+
+        for (String jurisdictionCode : jurisdictionCodes) {
+            JurCodesType jurCodesType = new JurCodesType();
+            jurCodesType.setJuridictionCodesList(jurisdictionCode);
+            JurCodesTypeItem jurCodesTypeItem = new JurCodesTypeItem();
+            jurCodesTypeItem.setValue(jurCodesType);
+
+            jurCodesTypeItems.add(jurCodesTypeItem);
+        }
+
+        JudgementType judgementType = new JudgementType();
+        judgementType.setJudgmentNotes(JUDGEMENT_NOTES);
+        judgementType.setJurisdictionCodes(jurCodesTypeItems);
+
+        return judgementType;
+    }
+
+    private CaseData createCaseData(String... jurisdictionCodes) {
+        CaseData caseData = new CaseData();
+
+        List<JurCodesTypeItem> jurCodesCollection = new ArrayList<>();
+        for (String jurisdictionCode : jurisdictionCodes) {
+            JurCodesType jurCodesType = new JurCodesType();
+            jurCodesType.setJuridictionCodesList(jurisdictionCode);
+            JurCodesTypeItem jurCodesTypeItem = new JurCodesTypeItem();
+            jurCodesTypeItem.setValue(jurCodesType);
+
+            jurCodesCollection.add(jurCodesTypeItem);
+        }
+        caseData.setJurCodesCollection(jurCodesCollection);
+
+        return caseData;
+    }
+}
