@@ -206,6 +206,10 @@ public class UpdateDataTask extends DataTaskParent {
 
     private void updateRespondentRep(CaseData caseData, RepresentedTypeR representedType) {
 
+        //case 1: update is adding
+
+        //case 2: update is removing
+
         if (caseData.getRespondentCollection() != null) {
             Optional<RespondentSumTypeItem> respondentSumTypeItemOptional =
                     caseData.getRespondentCollection().stream()
