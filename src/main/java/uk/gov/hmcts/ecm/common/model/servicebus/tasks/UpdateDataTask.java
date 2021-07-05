@@ -206,10 +206,11 @@ public class UpdateDataTask extends DataTaskParent {
     }
 
     private void updateRespondentRep(CaseData caseData, UpdateDataModel updateDataModel) {
-        RepresentedTypeR representedType = updateDataModel.getRepresentedType();
-        String isRespondentRepRemovalUpdate = updateDataModel.getIsRespondentRepRemovalUpdate();
 
         if (caseData.getRespondentCollection() != null) {
+
+            RepresentedTypeR representedType = updateDataModel.getRepresentedType();
+            String isRespondentRepRemovalUpdate = updateDataModel.getIsRespondentRepRemovalUpdate();
             boolean respondentRepRemovalUpdate = isRespondentRepRemovalUpdate.equals(YES);
 
             Optional<RespondentSumTypeItem> respondentSumTypeItemOptional =
@@ -219,9 +220,7 @@ public class UpdateDataTask extends DataTaskParent {
                                             .equals(representedType.getRespRepName()))
                             .findAny();
 
-            boolean respondentSumTypeIsPresent = respondentSumTypeItemOptional.isPresent();
-
-            if(respondentSumTypeIsPresent){
+            if(respondentSumTypeItemOptional.isPresent()){
                 if (!respondentRepRemovalUpdate) {
                     addRespondentRepUpdates(caseData, updateDataModel);
                 }else {
@@ -246,7 +245,10 @@ public class UpdateDataTask extends DataTaskParent {
             if(representedTypeRItemExists(caseData, representedType)){
                 RepresentedTypeRItem representedTypeRItem = getExistingRepresentedTypeRItem(caseData,
                         representedType);
-                representedTypeRItem.setValue(representedType);
+                if(representedTypeRItem != null)
+                {
+                    representedTypeRItem.setValue(representedType);
+                }
             }
             else{
                 caseData.getRepCollection().add(createRespondentRepTypeItem(representedType));
@@ -260,17 +262,15 @@ public class UpdateDataTask extends DataTaskParent {
     }
 
     private RepresentedTypeRItem getExistingRepresentedTypeRItem(CaseData caseData, RepresentedTypeR representedType){
-        RepresentedTypeRItem item = new RepresentedTypeRItem();
-
         for (RepresentedTypeRItem representedTypeRItem : caseData.getRepCollection()) {
 
             if (representedTypeRItem.getValue().getRespRepName() != null &&
                     (representedTypeRItem.getValue().getRespRepName()
                     .equals(representedType.getRespRepName()))) {
-                item = representedTypeRItem;
+               return representedTypeRItem;
             }
         }
-        return item;
+        return null;
     }
 
     private boolean representedTypeRItemExists(CaseData caseData, RepresentedTypeR representedType) {
