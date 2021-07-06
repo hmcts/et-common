@@ -231,7 +231,12 @@ public class UpdateDataTask extends DataTaskParent {
     private void addRespondentRepRemovalUpdate(CaseData caseData, RepresentedTypeR representedType) {
 
         if (representedTypeRItemExists(caseData, representedType)) {
-            getExistingRepresentedTypeRItem(caseData, representedType).setValue(new RepresentedTypeR());
+
+            var representedTypeRItem = getExistingRepresentedTypeRItem(caseData, representedType);
+
+            if (representedTypeRItem != null) {
+                caseData.getRepCollection().remove(representedTypeRItem);
+            }
         }
 
     }
