@@ -1,5 +1,6 @@
 package uk.gov.hmcts.ecm.common.model.servicebus.tasks;
 
+import org.apache.commons.collections4.CollectionUtils;
 import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JudgementTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
@@ -16,22 +17,25 @@ public class CaseJudgementUpdate {
     }
 
     /**
-     * Updates a case with the judgement only if the case has at least one jurisdiction that matches the judgement.
+     * Updates a case with the judgement only if the case has at least one jurisdiction that matches the judgement or
+     * the judgement contains no jurisdictions
      * <p>The judgement is updated to include only those jurisdictions that are also in the case</p>
      * @param caseData the case to be updated
      * @param judgementType the judgement to add to the case
      */
     public static void updateCaseWithJudgement(CaseData caseData, JudgementType judgementType) {
-        if (!isCaseWithJurisdiction(caseData)) {
+        if (!isValidForUpdate(caseData, judgementType)) {
             return;
         }
 
-        List<JurCodesTypeItem> jurCodesTypeItems = filterJurCodesForJudgement(caseData, judgementType.getJurisdictionCodes());
-        if (jurCodesTypeItems.isEmpty()) {
-            return;
+        if (isJudgementWithJurisdiction(judgementType)) {
+            List<JurCodesTypeItem> jurCodesTypeItems = filterJurCodesForJudgement(caseData, judgementType.getJurisdictionCodes());
+            if (jurCodesTypeItems.isEmpty()) {
+                return;
+            } else {
+                judgementType.setJurisdictionCodes(jurCodesTypeItems);
+            }
         }
-
-        judgementType.setJurisdictionCodes(jurCodesTypeItems);
 
         if (caseData.getJudgementCollection() == null) {
             caseData.setJudgementCollection(new ArrayList<>());
@@ -40,8 +44,21 @@ public class CaseJudgementUpdate {
         caseData.getJudgementCollection().add(JudgementTypeItem.from(judgementType));
     }
 
+    private static boolean isValidForUpdate(CaseData caseData, JudgementType judgementType) {
+        // If the judgement has jurisdictions then the case must have some also
+        if (CollectionUtils.isNotEmpty(judgementType.getJurisdictionCodes())) {
+            return isCaseWithJurisdiction(caseData);
+        } else {
+            return true;
+        }
+    }
+
     private static boolean isCaseWithJurisdiction(CaseData caseData) {
-        return caseData.getJurCodesCollection() != null && !caseData.getJurCodesCollection().isEmpty();
+        return CollectionUtils.isNotEmpty(caseData.getJurCodesCollection());
+    }
+
+    private static boolean isJudgementWithJurisdiction(JudgementType judgementType) {
+        return CollectionUtils.isNotEmpty(judgementType.getJurisdictionCodes());
     }
 
     private static List<JurCodesTypeItem> filterJurCodesForJudgement(CaseData caseData,
