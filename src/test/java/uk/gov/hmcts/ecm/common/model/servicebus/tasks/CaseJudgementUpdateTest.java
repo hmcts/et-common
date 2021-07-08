@@ -133,6 +133,42 @@ public class CaseJudgementUpdateTest {
         assertEquals("CCP", judgementType.getJurisdictionCodes().get(0).getValue().getJuridictionCodesList());
     }
 
+    @Test
+    public void shouldAddJudgementIfItHasNoJurisdiction() {
+        // given source case has a judgement for no jurisdictions
+        // given target case has no jurisdictions
+        // when we batch update judgements
+        // then target case is updated with a judgement with no jurisdictions
+
+        JudgementType sourceJudgementType = createJudgementType();
+        CaseData caseData = createCaseData();
+
+        CaseJudgementUpdate.updateCaseWithJudgement(caseData, sourceJudgementType);
+
+        assertEquals(1, caseData.getJudgementCollection().size());
+        JudgementType judgementType = caseData.getJudgementCollection().get(0).getValue();
+        assertEquals(JUDGEMENT_NOTES, judgementType.getJudgmentNotes());
+        assertNull(judgementType.getJurisdictionCodes());
+    }
+
+    @Test
+    public void shouldAddJudgementIfBothCaseAndJudgementHaveNoJurisdiction() {
+        // given source case has a judgement for no jurisdictions
+        // given target case has jurisdictions
+        // when we batch update judgements
+        // then target case is updated with a judgement with no jurisdictions
+
+        JudgementType sourceJudgementType = createJudgementType();
+        CaseData caseData = createCaseData("ADT", "CCP");
+
+        CaseJudgementUpdate.updateCaseWithJudgement(caseData, sourceJudgementType);
+
+        assertEquals(1, caseData.getJudgementCollection().size());
+        JudgementType judgementType = caseData.getJudgementCollection().get(0).getValue();
+        assertEquals(JUDGEMENT_NOTES, judgementType.getJudgmentNotes());
+        assertNull(judgementType.getJurisdictionCodes());
+    }
+
     private void addCaseJudgement(CaseData caseData, String... jurisdictionCodes) {
         JudgementType judgementType = createJudgementType(jurisdictionCodes);
         JudgementTypeItem judgementTypeItem = new JudgementTypeItem();
@@ -141,20 +177,23 @@ public class CaseJudgementUpdateTest {
     }
 
     private JudgementType createJudgementType(String... jurisdictionCodes) {
-        List<JurCodesTypeItem> jurCodesTypeItems = new ArrayList<>();
-
-        for (String jurisdictionCode : jurisdictionCodes) {
-            JurCodesType jurCodesType = new JurCodesType();
-            jurCodesType.setJuridictionCodesList(jurisdictionCode);
-            JurCodesTypeItem jurCodesTypeItem = new JurCodesTypeItem();
-            jurCodesTypeItem.setValue(jurCodesType);
-
-            jurCodesTypeItems.add(jurCodesTypeItem);
-        }
-
         JudgementType judgementType = new JudgementType();
         judgementType.setJudgmentNotes(JUDGEMENT_NOTES);
-        judgementType.setJurisdictionCodes(jurCodesTypeItems);
+
+        if (jurisdictionCodes.length > 0) {
+            List<JurCodesTypeItem> jurCodesTypeItems = new ArrayList<>();
+
+            for (String jurisdictionCode : jurisdictionCodes) {
+                JurCodesType jurCodesType = new JurCodesType();
+                jurCodesType.setJuridictionCodesList(jurisdictionCode);
+                JurCodesTypeItem jurCodesTypeItem = new JurCodesTypeItem();
+                jurCodesTypeItem.setValue(jurCodesType);
+
+                jurCodesTypeItems.add(jurCodesTypeItem);
+            }
+
+            judgementType.setJurisdictionCodes(jurCodesTypeItems);
+        }
 
         return judgementType;
     }
@@ -162,16 +201,18 @@ public class CaseJudgementUpdateTest {
     private CaseData createCaseData(String... jurisdictionCodes) {
         CaseData caseData = new CaseData();
 
-        List<JurCodesTypeItem> jurCodesCollection = new ArrayList<>();
-        for (String jurisdictionCode : jurisdictionCodes) {
-            JurCodesType jurCodesType = new JurCodesType();
-            jurCodesType.setJuridictionCodesList(jurisdictionCode);
-            JurCodesTypeItem jurCodesTypeItem = new JurCodesTypeItem();
-            jurCodesTypeItem.setValue(jurCodesType);
+        if (jurisdictionCodes.length > 0) {
+            List<JurCodesTypeItem> jurCodesCollection = new ArrayList<>();
+            for (String jurisdictionCode : jurisdictionCodes) {
+                JurCodesType jurCodesType = new JurCodesType();
+                jurCodesType.setJuridictionCodesList(jurisdictionCode);
+                JurCodesTypeItem jurCodesTypeItem = new JurCodesTypeItem();
+                jurCodesTypeItem.setValue(jurCodesType);
 
-            jurCodesCollection.add(jurCodesTypeItem);
+                jurCodesCollection.add(jurCodesTypeItem);
+            }
+            caseData.setJurCodesCollection(jurCodesCollection);
         }
-        caseData.setJurCodesCollection(jurCodesCollection);
 
         return caseData;
     }

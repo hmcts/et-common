@@ -116,11 +116,27 @@ public class UpdateDataTask extends DataTaskParent {
 
     }
 
+    private boolean shouldRepresentativeCBeRemoved(CaseData caseData, UpdateDataModel updateDataModel) {
+        if (Strings.isNullOrEmpty(updateDataModel.getIsClaimantRepRemovalUpdate()) || updateDataModel.getIsClaimantRepRemovalUpdate().equals(NO)) {
+            return false;
+        }
+       else if (!Strings.isNullOrEmpty(updateDataModel.getIsClaimantRepRemovalUpdate())
+                && updateDataModel.getIsClaimantRepRemovalUpdate().equals(YES)
+                && updateDataModel.getRepresentativeClaimantType().getNameOfRepresentative().equals(caseData.getRepresentativeClaimantType().getNameOfRepresentative())
+                && updateDataModel.getRepresentativeClaimantType().getNameOfOrganisation().equals(caseData.getRepresentativeClaimantType().getNameOfOrganisation()))  {
+            return true;
+        }
+        return false;
+    }
     private void batchUpdate3(CaseData caseData, UpdateDataModel updateDataModel) {
-
-        if (updateDataModel.getRepresentativeClaimantType() != null) {
+        boolean shouldRepresentativeCBeRemoved = shouldRepresentativeCBeRemoved(caseData,updateDataModel);
+        if (updateDataModel.getRepresentativeClaimantType() != null && !shouldRepresentativeCBeRemoved) {
             caseData.setRepresentativeClaimantType(updateDataModel.getRepresentativeClaimantType());
             caseData.setClaimantRepresentedQuestion(YES);
+        }
+        else if (updateDataModel.getRepresentativeClaimantType() != null  && shouldRepresentativeCBeRemoved) {
+                caseData.setRepresentativeClaimantType(null);
+                caseData.setClaimantRepresentedQuestion(NO);
         }
 
         if (updateDataModel.getJurCodesType() != null) {
@@ -155,7 +171,7 @@ public class UpdateDataTask extends DataTaskParent {
 
     private RespondentSumTypeItem createRespondentSumTypeItem(RespondentSumType respondentSumType) {
 
-        RespondentSumTypeItem respondentSumTypeItem = new RespondentSumTypeItem();
+        var respondentSumTypeItem = new RespondentSumTypeItem();
 
         respondentSumTypeItem.setId(UUID.randomUUID().toString());
         respondentSumTypeItem.setValue(respondentSumType);
@@ -232,7 +248,12 @@ public class UpdateDataTask extends DataTaskParent {
     private void addRespondentRepRemovalUpdate(CaseData caseData, RepresentedTypeR representedType) {
 
         if (representedTypeRItemExists(caseData, representedType)) {
-            getExistingRepresentedTypeRItem(caseData, representedType).setValue(new RepresentedTypeR());
+
+            var representedTypeRItem = getExistingRepresentedTypeRItem(caseData, representedType);
+
+            if (representedTypeRItem != null) {
+                caseData.getRepCollection().remove(representedTypeRItem);
+            }
         }
 
     }
@@ -253,7 +274,7 @@ public class UpdateDataTask extends DataTaskParent {
     private void updateCaseDataRepCollection(CaseData caseData, RepresentedTypeR representedType) {
 
         if (representedTypeRItemExists(caseData, representedType)) {
-            RepresentedTypeRItem representedTypeRItem = getExistingRepresentedTypeRItem(caseData,
+            var representedTypeRItem = getExistingRepresentedTypeRItem(caseData,
                     representedType);
             if (representedTypeRItem != null) {
                 representedTypeRItem.setValue(representedType);
@@ -280,7 +301,7 @@ public class UpdateDataTask extends DataTaskParent {
 
     private boolean representedTypeRItemExists(CaseData caseData, RepresentedTypeR representedType) {
 
-        boolean representedTypeRItemFound = false;
+        var representedTypeRItemFound = false;
         for (RepresentedTypeRItem representedTypeRItem : caseData.getRepCollection()) {
             if (representedTypeRItem.getValue().getRespRepName()
                     .equals(representedType.getRespRepName())) {
@@ -294,7 +315,7 @@ public class UpdateDataTask extends DataTaskParent {
 
     private RepresentedTypeRItem createRespondentRepTypeItem(RepresentedTypeR representedType) {
 
-        RepresentedTypeRItem representedTypeRItem = new RepresentedTypeRItem();
+        var representedTypeRItem = new RepresentedTypeRItem();
 
         representedTypeRItem.setId(UUID.randomUUID().toString());
         representedTypeRItem.setValue(representedType);

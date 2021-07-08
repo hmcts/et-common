@@ -80,5 +80,15 @@ public class ListingData {
     private AdhocReportType localReportsDetailHdr;
     @JsonProperty("localReportsDetail")
     private List<AdhocReportTypeItem> localReportsDetail;
+
+    public void clearReportFields() {
+        listingVenueOfficeAber = null;
+        listingVenueOfficeGlas = null;
+        venueGlasgow = null;
+        venueAberdeen = null;
+        venueDundee = null;
+        venueEdinburgh = null;
+        clerkResponsible = null;
+    }
 }
 
