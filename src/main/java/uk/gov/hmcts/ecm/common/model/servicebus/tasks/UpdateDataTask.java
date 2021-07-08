@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
@@ -302,8 +303,13 @@ public class UpdateDataTask extends DataTaskParent {
     private boolean representedTypeRItemExists(CaseData caseData, RepresentedTypeR representedType) {
 
         var representedTypeRItemFound = false;
+        if (CollectionUtils.isEmpty(caseData.getRepCollection()) || representedType == null) {
+            return false;
+        }
         for (RepresentedTypeRItem representedTypeRItem : caseData.getRepCollection()) {
-            if (representedTypeRItem.getValue().getRespRepName()
+            if (representedTypeRItem.getValue() != null
+                    && !Strings.isNullOrEmpty(representedTypeRItem.getValue().getRespRepName())
+                    && representedTypeRItem.getValue().getRespRepName()
                     .equals(representedType.getRespRepName())) {
                 representedTypeRItem.setValue(new RepresentedTypeR());
                 representedTypeRItemFound = true;
