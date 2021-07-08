@@ -1,6 +1,7 @@
 package uk.gov.hmcts.ecm.common.model.servicebus.tasks;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.common.base.Strings;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -48,7 +49,7 @@ public class UpdateDataTask extends DataTaskParent {
 
     private void amendUpdateFields(SubmitEvent submitEvent) {
 
-        UpdateDataModel updateDataModel = ((UpdateDataModel) dataModelParent);
+        var updateDataModel = ((UpdateDataModel) dataModelParent);
 
         batchUpdate1(submitEvent.getCaseData(), updateDataModel);
 
@@ -192,7 +193,7 @@ public class UpdateDataTask extends DataTaskParent {
 
     private JurCodesTypeItem createJurCodesTypeItem(JurCodesType jurCodesType) {
 
-        JurCodesTypeItem jurCodesTypeItem = new JurCodesTypeItem();
+        var jurCodesTypeItem = new JurCodesTypeItem();
 
         jurCodesTypeItem.setId(UUID.randomUUID().toString());
         jurCodesTypeItem.setValue(jurCodesType);
@@ -218,9 +219,9 @@ public class UpdateDataTask extends DataTaskParent {
                             .findAny();
 
             if (respondentSumTypeItemOptional.isPresent()) {
-                if (!isRespondentRepRemovalUpdate.equals(YES)) {
+                if (Strings.isNullOrEmpty(isRespondentRepRemovalUpdate) || isRespondentRepRemovalUpdate.equals(NO)) {
                     addRespondentRepUpdates(caseData, updateDataModel);
-                } else {
+                } else if (!Strings.isNullOrEmpty(isRespondentRepRemovalUpdate) && isRespondentRepRemovalUpdate.equals(YES)) {
                     addRespondentRepRemovalUpdate(caseData, representedType);
                 }
             }
