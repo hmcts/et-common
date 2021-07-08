@@ -235,9 +235,9 @@ public class UpdateDataTask extends DataTaskParent {
                             .findAny();
 
             if (respondentSumTypeItemOptional.isPresent()) {
-                if (!isRespondentRepRemovalUpdate.equals(YES)) {
+                if (Strings.isNullOrEmpty(isRespondentRepRemovalUpdate) || isRespondentRepRemovalUpdate.equals(NO)) {
                     addRespondentRepUpdates(caseData, updateDataModel);
-                } else {
+                } else if (!Strings.isNullOrEmpty(isRespondentRepRemovalUpdate) && isRespondentRepRemovalUpdate.equals(YES)) {
                     addRespondentRepRemovalUpdate(caseData, representedType);
                 }
             }
