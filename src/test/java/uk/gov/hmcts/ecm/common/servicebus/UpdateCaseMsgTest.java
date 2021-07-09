@@ -159,8 +159,7 @@ public class UpdateCaseMsgTest {
                 .getCaseData().getJurCodesCollection().get(1).getValue().getJuridictionCodesList());
         assertEquals("RespondentName", submitEventDetailed
                 .getCaseData().getRespondentCollection().get(0).getValue().getRespondentName());
-        assertEquals("RespondentRepName", submitEventDetailed
+        assertEquals("RespondentName", submitEventDetailed
                 .getCaseData().getRepCollection().get(0).getValue().getRespRepName());
-
     }
 }
