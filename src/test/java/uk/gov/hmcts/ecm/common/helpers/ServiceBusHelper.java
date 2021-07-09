@@ -16,13 +16,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_BULK_CASE_TYPE_ID;
 
 public class ServiceBusHelper {
 
     public static UpdateCaseMsg generateUpdateCaseMsg(DataModelParent dataModelParent) {
-
         return UpdateCaseMsg.builder()
                 .msgId("1")
                 .jurisdiction("EMPLOYMENT")
@@ -56,39 +54,32 @@ public class ServiceBusHelper {
         submitEvent.setState(state);
         CaseData caseData = new CaseData();
         caseData.setEthosCaseReference("4150002/2020");
-
         JurCodesType jurCodesType = new JurCodesType();
         jurCodesType.setJuridictionCodesList("ECM");
         JurCodesTypeItem jurCodesTypeItem = new JurCodesTypeItem();
         jurCodesTypeItem.setValue(jurCodesType);
         List<JurCodesTypeItem> jurCodesCollection = new ArrayList<>(Collections.singletonList(jurCodesTypeItem));
         caseData.setJurCodesCollection(jurCodesCollection);
-
         JudgementType judgementType = new JudgementType();
         judgementType.setJudgementType("Judgementtype");
         judgementType.setJurisdictionCodes(jurCodesCollection);
         JudgementTypeItem judgementTypeItem = new JudgementTypeItem();
         judgementTypeItem.setValue(judgementType);
-
         List<JudgementTypeItem> judgementTypeCollection = new ArrayList<>(Collections.singletonList(judgementTypeItem));
         caseData.setJudgementCollection(judgementTypeCollection);
         ClaimantIndType claimantIndType = new ClaimantIndType();
         claimantIndType.setClaimantFirstNames("ClaimantName");
         caseData.setClaimantIndType(claimantIndType);
-
         RepresentedTypeC representedTypeC = new RepresentedTypeC();
         representedTypeC.setNameOfRepresentative("RepName");
         caseData.setRepresentativeClaimantType(representedTypeC);
-
         RepresentedTypeRItem representedTypeRItem = new RepresentedTypeRItem();
         RepresentedTypeR representedTypeR = new RepresentedTypeR();
         representedTypeR.setNameOfRepresentative("Rep Name");
-        representedTypeR.setRespRepName("RespondentRepName");
+        representedTypeR.setRespRepName("RespondentName");
         representedTypeRItem.setValue(representedTypeR);
-
         List<RepresentedTypeRItem> repCollection = new ArrayList<>(Collections.singletonList(representedTypeRItem));
         caseData.setRepCollection(repCollection);
-
         RespondentSumTypeItem respondentSumTypeItem = new RespondentSumTypeItem();
         RespondentSumType respondentSumType = new RespondentSumType();
         respondentSumType.setRespondentName("RespondentName");
@@ -168,8 +159,6 @@ public class ServiceBusHelper {
                 .respondentSumType(getRespondentSubType())
                 .judgementType(getJudgementType())
                 .representedType(getRepresentedType())
-                .isRespondentRepRemovalUpdate(NO)
-                .isClaimantRepRemovalUpdate(NO)
                 .build();
     }
 

@@ -68,9 +68,6 @@ public class MultipleData {
 
     @JsonProperty("batchUpdateClaimantRep")
     private DynamicFixedListType batchUpdateClaimantRep;
-    @JsonProperty("batchRemoveClaimantRep")
-    private String batchRemoveClaimantRep;
-
     @JsonProperty("batchUpdateJurisdiction")
     private DynamicFixedListType batchUpdateJurisdiction;
     @JsonProperty("batchUpdateRespondent")

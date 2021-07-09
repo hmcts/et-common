@@ -63,9 +63,4 @@ public class UpdateDataModel extends DataModelParent {
     @JsonProperty("representedType")
     private RepresentedTypeR representedType;
 
-    @JsonProperty("isRespondentRepRemovalUpdate")
-    private String isRespondentRepRemovalUpdate;
-
-    @JsonProperty("isClaimantRepRemovalUpdate")
-    private String isClaimantRepRemovalUpdate;
 }
