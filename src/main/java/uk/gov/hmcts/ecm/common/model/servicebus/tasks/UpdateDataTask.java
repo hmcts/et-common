@@ -1,6 +1,7 @@
 package uk.gov.hmcts.ecm.common.model.servicebus.tasks;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.common.base.Strings;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import uk.gov.hmcts.ecm.common.model.ccd.types.JudgementType;
 import uk.gov.hmcts.ecm.common.model.ccd.types.JurCodesType;
 import uk.gov.hmcts.ecm.common.model.ccd.types.RepresentedTypeR;
 import uk.gov.hmcts.ecm.common.model.ccd.types.RespondentSumType;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.UpdateDataModel;
 
@@ -114,11 +116,27 @@ public class UpdateDataTask extends DataTaskParent {
 
     }
 
+    private boolean shouldRepresentativeCBeRemoved(CaseData caseData, UpdateDataModel updateDataModel) {
+        if (Strings.isNullOrEmpty(updateDataModel.getIsClaimantRepRemovalUpdate()) || updateDataModel.getIsClaimantRepRemovalUpdate().equals(NO)) {
+            return false;
+        }
+        else if (!Strings.isNullOrEmpty(updateDataModel.getIsClaimantRepRemovalUpdate())
+                && updateDataModel.getIsClaimantRepRemovalUpdate().equals(YES)
+                && updateDataModel.getRepresentativeClaimantType().getNameOfRepresentative().equals(caseData.getRepresentativeClaimantType().getNameOfRepresentative())
+                && updateDataModel.getRepresentativeClaimantType().getNameOfOrganisation().equals(caseData.getRepresentativeClaimantType().getNameOfOrganisation()))  {
+            return true;
+        }
+        return false;
+    }
     private void batchUpdate3(CaseData caseData, UpdateDataModel updateDataModel) {
-
-        if (updateDataModel.getRepresentativeClaimantType() != null) {
+        boolean shouldRepresentativeCBeRemoved = shouldRepresentativeCBeRemoved(caseData,updateDataModel);
+        if (updateDataModel.getRepresentativeClaimantType() != null && !shouldRepresentativeCBeRemoved) {
             caseData.setRepresentativeClaimantType(updateDataModel.getRepresentativeClaimantType());
             caseData.setClaimantRepresentedQuestion(YES);
+        }
+        else if (updateDataModel.getRepresentativeClaimantType() != null  && shouldRepresentativeCBeRemoved) {
+            caseData.setRepresentativeClaimantType(null);
+            caseData.setClaimantRepresentedQuestion(NO);
         }
 
         if (updateDataModel.getJurCodesType() != null) {
