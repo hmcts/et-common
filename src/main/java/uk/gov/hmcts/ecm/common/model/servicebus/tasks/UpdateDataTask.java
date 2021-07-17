@@ -121,14 +121,17 @@ public class UpdateDataTask extends DataTaskParent {
                 && updateDataModel.getIsClaimantRepRemovalUpdate().equals(YES)
                 && (updateDataModel.getRepresentativeClaimantType() != null)
                 && (caseData.getRepresentativeClaimantType() != null)
-                && !Strings.isNullOrEmpty(updateDataModel.getRepresentativeClaimantType().getNameOfRepresentative())
-                && !Strings.isNullOrEmpty(updateDataModel.getRepresentativeClaimantType().getNameOfOrganisation())
                 && updateDataModel.getRepresentativeClaimantType().getNameOfRepresentative().equals(caseData.getRepresentativeClaimantType().getNameOfRepresentative())
-                && updateDataModel.getRepresentativeClaimantType().getNameOfOrganisation().equals(caseData.getRepresentativeClaimantType().getNameOfOrganisation()))  {
+                && organisationMatch(caseData, updateDataModel)) {
             log.info("Claimant representative will be removed for case: " + caseData.getEthosCaseReference());
             return true;
         }
         return false;
+    }
+    private boolean organisationMatch(CaseData caseData, UpdateDataModel updateDataModel) {
+        return Strings.isNullOrEmpty(updateDataModel.getRepresentativeClaimantType().getNameOfOrganisation())
+                ?Strings.isNullOrEmpty(caseData.getRepresentativeClaimantType().getNameOfOrganisation())
+                :updateDataModel.getRepresentativeClaimantType().getNameOfOrganisation().equals(caseData.getRepresentativeClaimantType().getNameOfOrganisation());
     }
     private void batchUpdate3(CaseData caseData, UpdateDataModel updateDataModel) {
         boolean shouldRepresentativeCBeRemoved = shouldRepresentativeCBeRemoved(caseData,updateDataModel);
