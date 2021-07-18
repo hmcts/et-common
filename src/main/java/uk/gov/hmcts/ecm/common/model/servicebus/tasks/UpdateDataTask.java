@@ -304,7 +304,9 @@ public class UpdateDataTask extends DataTaskParent {
                         log.info("Respondent representatives to be removed are: " + toBeRemoved.size());
                         for (RepresentedTypeRItem r: toBeRemoved) {
                             caseData.getRepCollection().stream().filter(a-> a.getValue().equals(r.getValue()))
-                                    .findFirst().get().setValue(new RepresentedTypeR());
+                                    .findFirst().ifPresent(representedTypeRItem -> representedTypeRItem.setId(null));
+                            caseData.getRepCollection().stream().filter(a-> a.getValue().equals(r.getValue()))
+                                    .findFirst().ifPresent(representedTypeRItem -> representedTypeRItem.setValue(null));
                         }
                    }
 
