@@ -307,6 +307,8 @@ public class UpdateDataTask extends DataTaskParent {
                                     .findFirst().ifPresent(representedTypeRItem -> representedTypeRItem.setId(null));
                             caseData.getRepCollection().stream().filter(a-> a.getValue().equals(r.getValue()))
                                     .findFirst().ifPresent(representedTypeRItem -> representedTypeRItem.setValue(null));
+                            log.info("Rep collection count: " + (
+                                    (CollectionUtils.isNotEmpty(caseData.getRepCollection()))?caseData.getRepCollection().size(): 0));
                         }
                    }
 
