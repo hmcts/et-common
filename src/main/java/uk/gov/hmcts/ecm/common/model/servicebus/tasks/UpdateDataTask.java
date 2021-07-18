@@ -301,15 +301,32 @@ public class UpdateDataTask extends DataTaskParent {
             if (respondentSumTypeItemOptional.isPresent() && CollectionUtils.isNotEmpty(caseData.getRepCollection())) {
                     List<RepresentedTypeRItem> toBeRemoved = caseData.getRepCollection().stream().filter(a-> a.getValue().getRespRepName().equals(representedType.getRespRepName())).collect(Collectors.toList());
                     if (CollectionUtils.isNotEmpty(toBeRemoved)) {
+                        List<RepresentedTypeRItem> tmp = caseData.getRepCollection();
                         log.info("Respondent representatives to be removed are: " + toBeRemoved.size());
                         for (RepresentedTypeRItem r: toBeRemoved) {
-                            caseData.getRepCollection().stream().filter(a-> a.getValue().equals(r.getValue()))
-                                    .findFirst().ifPresent(representedTypeRItem -> representedTypeRItem.setId(null));
-                            caseData.getRepCollection().stream().filter(a-> a.getValue().equals(r.getValue()))
-                                    .findFirst().ifPresent(representedTypeRItem -> representedTypeRItem.setValue(null));
-                            log.info("Rep collection count: " + (
-                                    (CollectionUtils.isNotEmpty(caseData.getRepCollection()))?caseData.getRepCollection().size(): 0));
+                            tmp.stream().filter(a-> a.getValue().equals(r.getValue()))
+                                    .findFirst().ifPresent(tmp::remove);
                         }
+                        caseData.setRepCollection(tmp);
+                        log.info("Rep collection count after replacement: " + (
+                                (CollectionUtils.isNotEmpty(caseData.getRepCollection()))?caseData.getRepCollection().size(): 0));
+                        log.info("Tmp collection count: " + (
+                                (CollectionUtils.isNotEmpty(tmp))?tmp.size(): 0));
+                        for (RepresentedTypeRItem r: toBeRemoved) {
+                            if (CollectionUtils.isNotEmpty(caseData.getRepCollection())) {
+                                caseData.getRepCollection().stream().filter(a-> a.getValue().equals(r.getValue()))
+                                        .findFirst().ifPresent(representedTypeRItem -> representedTypeRItem.setId(null));
+                                caseData.getRepCollection().stream().filter(a-> a.getValue().equals(r.getValue()))
+                                        .findFirst().ifPresent(representedTypeRItem -> representedTypeRItem.setValue(null));
+                            }
+
+                        }
+                       if (CollectionUtils.isNotEmpty(caseData.getRepCollection())
+                               && caseData.getRepCollection().size() == 1
+                               && caseData.getRepCollection().get(0).getValue() == null) {
+                           caseData.getRepCollection().set(0, null);
+                       }
+
                    }
 
             }
