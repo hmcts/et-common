@@ -2,11 +2,14 @@ package uk.gov.hmcts.ecm.common.model.servicebus.tasks;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.base.Strings;
+import java.util.*;
+import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
@@ -18,10 +21,6 @@ import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.UpdateDataModel;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.UUID;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
@@ -113,7 +112,7 @@ public class UpdateDataTask extends DataTaskParent {
 
     }
 
-    private boolean shouldRepresentativeCBeRemoved(CaseData caseData, UpdateDataModel updateDataModel) {
+    private boolean shouldClaimantRepresentativeBeRemoved(CaseData caseData, UpdateDataModel updateDataModel) {
         if (Strings.isNullOrEmpty(updateDataModel.getIsClaimantRepRemovalUpdate()) || updateDataModel.getIsClaimantRepRemovalUpdate().equals(NO)) {
             return false;
         }
@@ -128,13 +127,29 @@ public class UpdateDataTask extends DataTaskParent {
         }
         return false;
     }
+    private boolean shouldRespondentRepresentativeBeRemoved(CaseData caseData, UpdateDataModel updateDataModel) {
+        if (Strings.isNullOrEmpty(updateDataModel.getIsRespondentRepRemovalUpdate()) || updateDataModel.getIsRespondentRepRemovalUpdate().equals(NO)) {
+            return false;
+        }
+        else if (!Strings.isNullOrEmpty(updateDataModel.getIsRespondentRepRemovalUpdate())
+                && updateDataModel.getIsRespondentRepRemovalUpdate().equals(YES)
+                && (updateDataModel.getRepresentedType() != null)
+                &&  CollectionUtils.isNotEmpty(caseData.getRepCollection())
+                &&  CollectionUtils.isNotEmpty(caseData.getRepCollection()
+                .stream().filter(a-> a.getValue().getRespRepName()
+                        .equals(updateDataModel.getRepresentedType().getRespRepName())).collect(Collectors.toList()))) {
+            log.info("Respondent representative will be removed for case: " + caseData.getEthosCaseReference());
+            return true;
+        }
+        return false;
+    }
     private boolean organisationMatch(CaseData caseData, UpdateDataModel updateDataModel) {
         return Strings.isNullOrEmpty(updateDataModel.getRepresentativeClaimantType().getNameOfOrganisation())
                 ?Strings.isNullOrEmpty(caseData.getRepresentativeClaimantType().getNameOfOrganisation())
                 :updateDataModel.getRepresentativeClaimantType().getNameOfOrganisation().equals(caseData.getRepresentativeClaimantType().getNameOfOrganisation());
     }
     private void batchUpdate3(CaseData caseData, UpdateDataModel updateDataModel) {
-        boolean shouldRepresentativeCBeRemoved = shouldRepresentativeCBeRemoved(caseData,updateDataModel);
+        boolean shouldRepresentativeCBeRemoved = shouldClaimantRepresentativeBeRemoved(caseData,updateDataModel);
         if (updateDataModel.getRepresentativeClaimantType() != null && !shouldRepresentativeCBeRemoved) {
             caseData.setRepresentativeClaimantType(updateDataModel.getRepresentativeClaimantType());
             caseData.setClaimantRepresentedQuestion(YES);
@@ -156,8 +171,11 @@ public class UpdateDataTask extends DataTaskParent {
             updateJudgement(caseData, updateDataModel.getJudgementType());
         }
 
-        if (updateDataModel.getRepresentedType() != null) {
-            updateRespondentRep(caseData, updateDataModel.getRepresentedType());
+        if (updateDataModel.getRepresentedType() != null && !shouldRespondentRepresentativeBeRemoved(caseData, updateDataModel)) {
+            addRespondentRep(caseData, updateDataModel.getRepresentedType());
+        }
+        else if (updateDataModel.getRepresentedType() != null) {
+            removeRespondentRep(caseData, updateDataModel.getRepresentedType());
         }
 
     }
@@ -227,7 +245,7 @@ public class UpdateDataTask extends DataTaskParent {
         CaseJudgementUpdate.updateCaseWithJudgement(caseData, judgementType);
     }
 
-    private void updateRespondentRep(CaseData caseData, RepresentedTypeR representedType) {
+    private void addRespondentRep(CaseData caseData, RepresentedTypeR representedType) {
 
         if (caseData.getRespondentCollection() != null) {
             Optional<RespondentSumTypeItem> respondentSumTypeItemOptional =
@@ -268,6 +286,27 @@ public class UpdateDataTask extends DataTaskParent {
             }
         }
 
+    }
+
+    private void removeRespondentRep(CaseData caseData, RepresentedTypeR representedType) {
+
+        if (caseData.getRespondentCollection() != null) {
+            Optional<RespondentSumTypeItem> respondentSumTypeItemOptional =
+                    caseData.getRespondentCollection().stream()
+                            .filter(respondentSumTypeItem ->
+                                    respondentSumTypeItem.getValue().getRespondentName()
+                                            .equals(representedType.getRespRepName()))
+                            .findAny();
+
+            if (respondentSumTypeItemOptional.isPresent() && CollectionUtils.isNotEmpty(caseData.getRepCollection())) {
+                    List<RepresentedTypeRItem> toBeRemoved = caseData.getRepCollection().stream().filter(a-> a.getValue().getRespRepName().equals(representedType.getRespRepName())).collect(Collectors.toList());
+                    if (CollectionUtils.isNotEmpty(toBeRemoved)) {
+                        log.info("Respondent representatives to be removed are: " + toBeRemoved.size());
+                        caseData.getRepCollection().removeAll(toBeRemoved);
+                   }
+
+            }
+        }
     }
 
     private RepresentedTypeRItem createRespondentRepTypeItem(RepresentedTypeR representedType) {
