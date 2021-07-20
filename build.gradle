@@ -10,7 +10,7 @@ plugins {
 }
 
 group 'uk.gov.hmcts.reform'
-version '0.1.115'
+version '0.1.116'
 
 sourceCompatibility = '11.0'
 
@@ -18,9 +18,6 @@ repositories {
     mavenLocal()
     jcenter()
     mavenCentral()
-    maven {
-        url "https://dl.bintray.com/hmcts/hmcts-maven"
-    }
     maven {
         url 'https://repo.spring.io/libs-milestone'
     }
