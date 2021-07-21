@@ -12,6 +12,8 @@ public class JurCodesType {
     private String juridictionCodesList;
     @JsonProperty("judgmentOutcome")
     private String judgmentOutcome;
+    @JsonProperty("dateNotified")
+    private String dateNotified;
     @JsonProperty("juridictionCodesSubList1")
     private String juridictionCodesSubList1;
 }
