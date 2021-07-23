@@ -32,6 +32,9 @@ public class CaseData {
     private String caseType;
     @JsonProperty("multipleReference")
     private String multipleReference;
+    @JsonProperty("multipleReferenceLink")
+    private String multipleReferenceLink;
+
     @JsonProperty("subMultipleName")
     private String subMultipleName;
     @JsonProperty("leadClaimant")
