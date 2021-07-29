@@ -296,6 +296,7 @@ public class Constants {
     public static final String HEARINGS_TO_JUDGEMENTS_REPORT = "Hearings To Judgments";
     public static final String HEARINGS_BY_HEARING_TYPE_REPORT = "Hearings By Hearing Type";
     public static final String NO_CHNAGE_INCURRENT_POSITION_REPORT = "No Change In Current Position";
+    public static final String CASES_AWAITING_JUDGMENT_REPORT = "Cases Awaiting Judgment";
 
     public static final String HEARING_DOC_ETCL = "ETCL - Cause List";
     public static final String HEARING_DOC_IT56 = "IT56 - List of Exhibits";

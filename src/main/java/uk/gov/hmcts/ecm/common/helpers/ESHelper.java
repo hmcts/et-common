@@ -1,7 +1,11 @@
 package uk.gov.hmcts.ecm.common.helpers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.elasticsearch.index.query.*;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MatchQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.RangeQueryBuilder;
+import org.elasticsearch.index.query.TermsQueryBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import java.util.List;
@@ -125,6 +129,15 @@ public class ESHelper {
         String dateFieldName = getDateFieldName(reportType);
         BoolQueryBuilder boolQueryBuilder = boolQuery()
                 .filter(new RangeQueryBuilder(dateFieldName).gte(dateToSearchFrom).lte(dateToSearchTo));
+        return new SearchSourceBuilder()
+                .size(MAX_ES_SIZE)
+                .query(boolQueryBuilder).toString();
+    }
+
+    public static String getNotMatchQuery(String fieldName, String value) {
+        var boolQueryBuilder = boolQuery()
+                .mustNot(new MatchQueryBuilder(fieldName, value));
+
         return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
                 .query(boolQueryBuilder).toString();
