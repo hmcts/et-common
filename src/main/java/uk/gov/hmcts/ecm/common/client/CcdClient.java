@@ -117,6 +117,18 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.GET, request, SubmitEvent.class).getBody();
     }
 
+    public List<SubmitEvent> executeElasticSearch(String authToken, String caseTypeId, String query) throws IOException {
+        var submitEvents = new ArrayList<SubmitEvent>();
+        var request = new HttpEntity<String>(query, buildHeaders(authToken));
+        var url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
+
+        var caseSearchResult = restTemplate.exchange(url, HttpMethod.POST, request, CaseSearchResult.class).getBody();
+        if (caseSearchResult != null && caseSearchResult.getCases() != null) {
+            submitEvents.addAll(caseSearchResult.getCases());
+        }
+        return submitEvents;
+    }
+
     private PaginatedSearchMetadata searchMetadata(String authToken, String caseTypeId, String jurisdiction) throws IOException {
         HttpEntity<CCDRequest> request =
                 new HttpEntity<>(buildHeaders(authToken));
