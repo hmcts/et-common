@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'java-library'
     id 'maven-publish'
+    id 'checkstyle'
     id 'jacoco'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'org.owasp.dependencycheck' version '6.2.2'
@@ -35,6 +36,10 @@ jacocoTestReport {
 
 // endregion
 
+checkstyle {
+    maxWarnings = 267
+    toolVersion = '8.29'
+}
 
 // region publishing
 
