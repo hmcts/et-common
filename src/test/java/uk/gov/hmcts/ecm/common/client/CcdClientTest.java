@@ -7,20 +7,33 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.hmcts.ecm.common.idam.models.UserDetails;
 import uk.gov.hmcts.ecm.common.model.bulk.BulkCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.bulk.BulkData;
 import uk.gov.hmcts.ecm.common.model.bulk.BulkDetails;
 import uk.gov.hmcts.ecm.common.model.bulk.SubmitBulkEvent;
-import uk.gov.hmcts.ecm.common.model.ccd.*;
+import uk.gov.hmcts.ecm.common.model.ccd.CCDRequest;
+import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
+import uk.gov.hmcts.ecm.common.model.ccd.CaseDataContent;
+import uk.gov.hmcts.ecm.common.model.ccd.CaseDetails;
+import uk.gov.hmcts.ecm.common.model.ccd.CaseSearchResult;
+import uk.gov.hmcts.ecm.common.model.ccd.PaginatedSearchMetadata;
+import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.labels.LabelCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.labels.LabelPayloadEvent;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleData;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleDetails;
 import uk.gov.hmcts.ecm.common.model.multiples.SubmitMultipleEvent;
+import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSearchResult;
+import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.schedule.ScheduleCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadEvent;
 import uk.gov.hmcts.ecm.common.service.UserService;
@@ -33,10 +46,18 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 import static uk.gov.hmcts.ecm.common.helpers.ESHelper.LISTING_VENUE_FIELD_NAME;
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.ALL_VENUES;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.BROUGHT_FORWARD_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.CASES_COMPLETED_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.LIVE_CASELOAD_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.MANUALLY_CREATED_POSITION;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CcdClientTest {
@@ -233,8 +254,6 @@ public class CcdClientTest {
     @Test
     public void retrieveCasesElasticSearchForCreationETOnline() throws IOException {
         String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}}";
-//        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":[\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}," +
-//                "\"_source\":{\"includes\":[\"data\"],\"excludes\":[]}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         SubmitEvent submitEvent = new SubmitEvent();
         CaseData caseData = new CaseData();
@@ -601,4 +620,18 @@ public class CcdClientTest {
         verifyNoMoreInteractions(restTemplate);
     }
 
+    @Test
+    public void testCasesAwaitingJudgmentSearch() throws IOException {
+        var elasticSearchQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must_not\":[{\"match\":{\"state\":{\"query\":\"Closed\",\"operator\":\"OR\",\"prefix_length\":0,\"max_expansions\":50,\"fuzzy_transpositions\":true,\"lenient\":false,\"zero_terms_query\":\"NONE\",\"auto_generate_synonyms_phrase_query\":true,\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
+        var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
+        var searchResult = new CasesAwaitingJudgmentSearchResult(2L,
+                Arrays.asList(new CasesAwaitingJudgmentSubmitEvent(), new CasesAwaitingJudgmentSubmitEvent()));
+        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CasesAwaitingJudgmentSearchResult.class))).thenReturn(responseEntity);
+        var results = ccdClient.casesAwaitingJudgmentSearch("authToken", caseDetails.getCaseTypeId());
+        assertEquals(2, results.size());
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CasesAwaitingJudgmentSearchResult.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
 }
