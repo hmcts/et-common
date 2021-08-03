@@ -1,6 +1,5 @@
 package uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import uk.gov.hmcts.ecm.common.model.ccd.items.HearingTypeItem;
@@ -9,7 +8,6 @@ import uk.gov.hmcts.ecm.common.model.ccd.items.JudgementTypeItem;
 import java.util.List;
 
 @Data
-@JsonIgnoreProperties
 public class CaseData {
     @JsonProperty("caseType")
     private String caseType;
