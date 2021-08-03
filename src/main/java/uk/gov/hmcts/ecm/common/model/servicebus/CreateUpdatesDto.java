@@ -9,6 +9,7 @@ public class CreateUpdatesDto {
 
     private String jurisdiction;
     private String multipleRef;
+    private String parentMultipleCaseId;
     private String username;
     private String caseTypeId;
     private String confirmation;
