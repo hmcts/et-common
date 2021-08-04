@@ -2,7 +2,6 @@ package uk.gov.hmcts.ecm.common.helpers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.index.query.TermsQueryBuilder;
@@ -24,16 +23,26 @@ public class ESHelper {
 
     private static final String ETHOS_CASE_REFERENCE_KEYWORD = "data.ethosCaseReference.keyword";
     private static final String MULTIPLE_CASE_REFERENCE_KEYWORD = "data.multipleReference.keyword";
-    private static final String LISTING_DATE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.listedDate";
-    public static final String LISTING_VENUE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.hearingVenueDay.keyword";
+    private static final String LISTING_DATE_FIELD_NAME =
+            "data.hearingCollection.value.hearingDateCollection.value.listedDate";
+    public static final String LISTING_VENUE_FIELD_NAME =
+            "data.hearingCollection.value.hearingDateCollection.value.hearingVenueDay.keyword";
     public static final String BROUGHT_FORWARD_DATE_FIELD_NAME = "data.bfActions.value.bfDate";
     public static final String CLAIMS_ACCEPTED_DATE_FIELD_NAME = "data.preAcceptCase.dateAccepted";
-    public static final String LISTING_GLASGOW_VENUE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.Hearing_Glasgow.keyword";
-    public static final String LISTING_ABERDEEN_VENUE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.Hearing_Aberdeen.keyword";
-    public static final String LISTING_DUNDEE_VENUE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.Hearing_Dundee.keyword";
-    public static final String LISTING_EDINBURGH_VENUE_FIELD_NAME = "data.hearingCollection.value.hearingDateCollection.value.Hearing_Edinburgh.keyword";
+    public static final String LISTING_GLASGOW_VENUE_FIELD_NAME =
+            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Glasgow.keyword";
+    public static final String LISTING_ABERDEEN_VENUE_FIELD_NAME =
+            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Aberdeen.keyword";
+    public static final String LISTING_DUNDEE_VENUE_FIELD_NAME =
+            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Dundee.keyword";
+    public static final String LISTING_EDINBURGH_VENUE_FIELD_NAME =
+            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Edinburgh.keyword";
 
     private static final String REPORT_TYPE_NOT_FOUND = "Report type not found";
+
+    private ESHelper() {
+        // All access through static methods
+    }
 
     public static String getSearchQuery(List<String> caseIds) {
         TermsQueryBuilder termsQueryBuilder = termsQuery(ETHOS_CASE_REFERENCE_KEYWORD, caseIds);
@@ -43,41 +52,21 @@ public class ESHelper {
                 .query(termsQueryBuilder).toString();
     }
 
-//    public static String getSearchQuerySchedule(List<String> caseIds) {
-//        String cases = caseIds.stream()
-//                .map(s -> "\"" + s + "\"")
-//                .collect(Collectors.joining(","));
-//
-//        return String.format("{\"size\":%s," +
-//                        "\"query\":{\"terms\":{\"%s\":[%s],\"boost\":1.0}}," +
-//                        "\"_source\":[" +
-//                        "\"data.claimantIndType.*\"," +
-//                        "\"data.claimantType.claimant_addressUK.AddressLine1\"," +
-//                        "\"data.claimantType.claimant_addressUK.PostCode\"," +
-//                        "\"data.claimant_Company\"," +
-//                        "\"data.positionType\"," +
-//                        "\"data.ethosCaseReference\"," +
-//                        "\"data.respondentCollection.value.respondent_name\"," +
-//                        "\"data.respondentCollection.value.respondent_address.AddressLine1\"," +
-//                        "\"data.respondentCollection.value.respondent_address.PostCode\"]}",
-//                MAX_ES_SIZE/2, ETHOS_CASE_REFERENCE_KEYWORD, cases);
-//    }
-
     public static String getSearchQuerySchedule(List<String> caseIds) {
         String cases = caseIds.stream()
                 .map(s -> "\"" + s + "\"")
                 .collect(Collectors.joining(","));
 
-        return String.format("{\"size\":%s," +
-                        "\"query\":{\"terms\":{\"%s\":[%s],\"boost\":1.0}}," +
-                        "\"_source\":[" +
-                        "\"data.claimantIndType.*\"," +
-                        "\"data.claimantType.claimant_addressUK.*\"," +
-                        "\"data.claimant_Company\"," +
-                        "\"data.positionType\"," +
-                        "\"data.ethosCaseReference\"," +
-                        "\"data.respondentCollection.*\"]}",
-                MAX_ES_SIZE/2, ETHOS_CASE_REFERENCE_KEYWORD, cases);
+        return String.format("{\"size\":%s,"
+                        + "\"query\":{\"terms\":{\"%s\":[%s],\"boost\":1.0}},"
+                        + "\"_source\":["
+                        + "\"data.claimantIndType.*\","
+                        + "\"data.claimantType.claimant_addressUK.*\","
+                        + "\"data.claimant_Company\","
+                        + "\"data.positionType\","
+                        + "\"data.ethosCaseReference\","
+                        + "\"data.respondentCollection.*\"]}",
+                MAX_ES_SIZE / 2, ETHOS_CASE_REFERENCE_KEYWORD, cases);
     }
 
     public static String getSearchQueryLabels(List<String> caseIds) {
@@ -85,19 +74,19 @@ public class ESHelper {
                 .map(s -> "\"" + s + "\"")
                 .collect(Collectors.joining(","));
 
-        return String.format("{\"size\":%s," +
-                        "\"query\":{\"terms\":{\"%s\":[%s],\"boost\":1.0}}," +
-                        "\"_source\":[" +
-                        "\"data.claimantIndType.*\"," +
-                        "\"data.claimantType.*\"," +
-                        "\"data.claimant_TypeOfClaimant\"," +
-                        "\"data.claimant_Company\"," +
-                        "\"data.representativeClaimantType.*\"," +
-                        "\"data.claimantRepresentedQuestion\"," +
-                        "\"data.respondentCollection.*\"," +
-                        "\"data.repCollection.*\"," +
-                        "\"data.ethosCaseReference\"]}",
-                MAX_ES_SIZE/2, ETHOS_CASE_REFERENCE_KEYWORD, cases);
+        return String.format("{\"size\":%s,"
+                        + "\"query\":{\"terms\":{\"%s\":[%s],\"boost\":1.0}},"
+                        + "\"_source\":["
+                        + "\"data.claimantIndType.*\","
+                        + "\"data.claimantType.*\","
+                        + "\"data.claimant_TypeOfClaimant\","
+                        + "\"data.claimant_Company\","
+                        + "\"data.representativeClaimantType.*\","
+                        + "\"data.claimantRepresentedQuestion\","
+                        + "\"data.respondentCollection.*\","
+                        + "\"data.repCollection.*\","
+                        + "\"data.ethosCaseReference\"]}",
+                MAX_ES_SIZE / 2, ETHOS_CASE_REFERENCE_KEYWORD, cases);
     }
 
     public static String getBulkSearchQuery(String multipleReference) {
@@ -125,19 +114,11 @@ public class ESHelper {
                 .query(boolQueryBuilder).toString();
     }
 
-    public static String getReportRangeDateSearchQuery(String dateToSearchFrom, String dateToSearchTo, String reportType) {
+    public static String getReportRangeDateSearchQuery(String dateToSearchFrom, String dateToSearchTo,
+                                                       String reportType) {
         String dateFieldName = getDateFieldName(reportType);
         BoolQueryBuilder boolQueryBuilder = boolQuery()
                 .filter(new RangeQueryBuilder(dateFieldName).gte(dateToSearchFrom).lte(dateToSearchTo));
-        return new SearchSourceBuilder()
-                .size(MAX_ES_SIZE)
-                .query(boolQueryBuilder).toString();
-    }
-
-    public static String getNotMatchQuery(String fieldName, String value) {
-        var boolQueryBuilder = boolQuery()
-                .mustNot(new MatchQueryBuilder(fieldName, value));
-
         return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
                 .query(boolQueryBuilder).toString();

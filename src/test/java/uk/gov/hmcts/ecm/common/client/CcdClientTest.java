@@ -622,16 +622,19 @@ public class CcdClientTest {
 
     @Test
     public void testCasesAwaitingJudgmentSearch() throws IOException {
-        var elasticSearchQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must_not\":[{\"match\":{\"state\":{\"query\":\"Closed\",\"operator\":\"OR\",\"prefix_length\":0,\"max_expansions\":50,\"fuzzy_transpositions\":true,\"lenient\":false,\"zero_terms_query\":\"NONE\",\"auto_generate_synonyms_phrase_query\":true,\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
+        var elasticSearchQuery = "{\"size\":10000,\"query\": {\"match_all\":{} }}";
         var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
         var searchResult = new CasesAwaitingJudgmentSearchResult(2L,
                 Arrays.asList(new CasesAwaitingJudgmentSubmitEvent(), new CasesAwaitingJudgmentSubmitEvent()));
         var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CasesAwaitingJudgmentSearchResult.class))).thenReturn(responseEntity);
-        var results = ccdClient.casesAwaitingJudgmentSearch("authToken", caseDetails.getCaseTypeId());
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
+                eq(CasesAwaitingJudgmentSearchResult.class))).thenReturn(responseEntity);
+        var results = ccdClient.casesAwaitingJudgmentSearch("authToken",
+                caseDetails.getCaseTypeId(), elasticSearchQuery);
         assertEquals(2, results.size());
-        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CasesAwaitingJudgmentSearchResult.class));
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
+                eq(CasesAwaitingJudgmentSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
     }
 }
