@@ -147,11 +147,10 @@ public class CcdClient {
         return submitEvents;
     }
 
-    public List<CasesAwaitingJudgmentSubmitEvent> casesAwaitingJudgmentSearch(String authToken, String caseTypeId)
-            throws IOException {
-        var query = ESHelper.getNotMatchQuery("state", "Closed");
+    public List<CasesAwaitingJudgmentSubmitEvent> casesAwaitingJudgmentSearch(String authToken, String caseTypeId,
+                                                                              String query) throws IOException {
         var submitEvents = new ArrayList<CasesAwaitingJudgmentSubmitEvent>();
-        var request = new HttpEntity<String>(query, buildHeaders(authToken));
+        var request = new HttpEntity<>(query, buildHeaders(authToken));
         var url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
 
         var searchResult = restTemplate.exchange(url, HttpMethod.POST, request,
