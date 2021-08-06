@@ -35,7 +35,8 @@ public class UpdateCaseMsg extends Msg {
                 ", totalCases='" + totalCases + '\'' +
                 ", username='" + username + '\'' +
                 ", confirmation='" + confirmation + '\'' +
-                ", dataModel=" + dataModelParent +
+                ", dataModel=" + dataModelParent + '\'' +
+                ", parentMultipleCaseId=" + parentMultipleCaseId +
                 '}';
     }
 

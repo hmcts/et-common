@@ -33,6 +33,7 @@ public class CreateUpdatesMsg extends Msg {
                 ", username='" + username + '\'' +
                 ", confirmation='" + confirmation + '\'' +
                 ", dataModel=" + dataModelParent +
+                ", parentMultipleCaseId='" + parentMultipleCaseId + '\'' +
                 '}';
     }
 }

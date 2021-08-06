@@ -35,9 +35,12 @@ public class UpdateCaseMsgTest {
     public void toStringMethod() {
         CreationDataModel creationDataModel = ServiceBusHelper.getCreationDataModel("4150002/2020");
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(creationDataModel);
-        assertEquals("UpdateCaseMsg{ethosCaseReference='4150002/2020', msgId='1', jurisdiction='EMPLOYMENT', " +
-                        "caseTypeId='Scotland_Multiple', multipleRef='4150001', totalCases='1', username='eric.ccdcooper@gmail.com', " +
-                        "confirmation='YES', dataModel=CreationDataModel(lead=4150002/2020, multipleRef=4150001)}",
+        assertEquals(
+                "UpdateCaseMsg{ethosCaseReference='4150002/2020', msgId='1', jurisdiction='EMPLOYMENT', " +
+                        "caseTypeId='Scotland_Multiple', multipleRef='4150001', totalCases='1', " +
+                        "username='eric.ccdcooper@gmail.com', confirmation='YES', " +
+                        "dataModel=CreationDataModel(lead=4150002/2020, multipleRef=4150001)', " +
+                        "parentMultipleCaseId=1591184523086531}",
                 updateCaseMsg.toString());
     }
 
@@ -135,9 +138,12 @@ public class UpdateCaseMsgTest {
         assertEquals("PositionType", submitEventAccepted.getCaseData().getPositionType());
         assertEquals("25/08/1999", submitEventAccepted.getCaseData().getReceiptDate());
         assertEquals("HearingStage", submitEventAccepted.getCaseData().getHearingStage());
-        assertEquals("RepName", submitEventAccepted.getCaseData().getRepresentativeClaimantType().getNameOfRepresentative());
-        assertEquals("AC", submitEventAccepted.getCaseData().getJurCodesCollection().get(1).getValue().getJuridictionCodesList());
-        assertEquals("RespondentName", submitEventAccepted.getCaseData().getRespondentCollection().get(0).getValue().getRespondentName());
+        assertEquals("RepName", submitEventAccepted.getCaseData()
+                .getRepresentativeClaimantType().getNameOfRepresentative());
+        assertEquals("AC", submitEventAccepted.getCaseData()
+                .getJurCodesCollection().get(1).getValue().getJuridictionCodesList());
+        assertEquals("RespondentName", submitEventAccepted.getCaseData()
+                .getRespondentCollection().get(0).getValue().getRespondentName());
     }
 
     @Test
