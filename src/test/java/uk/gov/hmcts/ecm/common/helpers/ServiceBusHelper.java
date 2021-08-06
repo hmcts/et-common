@@ -95,6 +95,7 @@ public class ServiceBusHelper {
         return CreationDataModel.builder()
                 .lead(leadRef)
                 .multipleRef("4150001")
+                .parentMultipleCaseId("1591184523086531")
                 .build();
     }
 

@@ -48,7 +48,8 @@ public class AddressTest {
 
     @Test
     public void shouldReturnAddressAllFields() {
-        assertThat(address.toString(), is("Unit 14, 3 Edgar Buildings, George Street, Bath, Somerset, BA1 2FJ, England"));
+        assertThat(address.toString(), is("Unit 14, 3 Edgar Buildings, George Street, "
+                + "Bath, Somerset, BA1 2FJ, England"));
     }
 
     @Test

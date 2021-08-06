@@ -36,11 +36,12 @@ public class UpdateCaseMsgTest {
         CreationDataModel creationDataModel = ServiceBusHelper.getCreationDataModel("4150002/2020");
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(creationDataModel);
         assertEquals(
-                "UpdateCaseMsg{ethosCaseReference='4150002/2020', msgId='1', jurisdiction='EMPLOYMENT', " +
-                        "caseTypeId='Scotland_Multiple', multipleRef='4150001', totalCases='1', " +
-                        "username='eric.ccdcooper@gmail.com', confirmation='YES', " +
-                        "dataModel=CreationDataModel(lead=4150002/2020, multipleRef=4150001)', " +
-                        "parentMultipleCaseId=1591184523086531}",
+                "UpdateCaseMsg{ethosCaseReference='4150002/2020', msgId='1', jurisdiction='EMPLOYMENT', "
+                        + "caseTypeId='Scotland_Multiple', multipleRef='4150001', totalCases='1', "
+                        + "username='eric.ccdcooper@gmail.com', confirmation='YES', "
+                        + "dataModel=CreationDataModel(lead=4150002/2020, multipleRef=4150001, "
+                        + "parentMultipleCaseId=1591184523086531)',"
+                        + " parentMultipleCaseId=1591184523086531}",
                 updateCaseMsg.toString());
     }
 
@@ -73,10 +74,10 @@ public class UpdateCaseMsgTest {
 
     @Test
     public void runTaskReject() {
-        List<String> reasons = new ArrayList<>(Arrays.asList("RejectionReason1", "RejectionReason2"));
         RejectDataModel rejectDataModel = ServiceBusHelper.getRejectDataModel();
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(rejectDataModel);
         updateCaseMsg.runTask(submitEventSubmitted);
+        List<String> reasons = new ArrayList<>(Arrays.asList("RejectionReason1", "RejectionReason2"));
         assertEquals(NO, submitEventSubmitted.getCaseData().getPreAcceptCase().getCaseAccepted());
         assertEquals("25-10-2020", submitEventSubmitted.getCaseData().getPreAcceptCase().getDateRejected());
         assertEquals(reasons, submitEventSubmitted.getCaseData().getPreAcceptCase().getRejectReason());

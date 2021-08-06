@@ -89,7 +89,8 @@ public class UtilHelperTest {
     @Test
     public void getListingCaseTypeId() {
         assertEquals(MANCHESTER_DEV_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(MANCHESTER_DEV_LISTING_CASE_TYPE_ID));
-        assertEquals(MANCHESTER_USERS_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(MANCHESTER_USERS_LISTING_CASE_TYPE_ID));
+        assertEquals(MANCHESTER_USERS_CASE_TYPE_ID,
+                UtilHelper.getListingCaseTypeId(MANCHESTER_USERS_LISTING_CASE_TYPE_ID));
         assertEquals(MANCHESTER_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(MANCHESTER_LISTING_CASE_TYPE_ID));
         assertEquals(LEEDS_DEV_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(LEEDS_DEV_LISTING_CASE_TYPE_ID));
         assertEquals(LEEDS_USERS_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(LEEDS_USERS_LISTING_CASE_TYPE_ID));
@@ -100,23 +101,34 @@ public class UtilHelperTest {
         assertEquals(BRISTOL_DEV_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(BRISTOL_DEV_LISTING_CASE_TYPE_ID));
         assertEquals(BRISTOL_USERS_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(BRISTOL_USERS_LISTING_CASE_TYPE_ID));
         assertEquals(BRISTOL_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(BRISTOL_LISTING_CASE_TYPE_ID));
-        assertEquals(LONDON_CENTRAL_DEV_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(LONDON_CENTRAL_DEV_LISTING_CASE_TYPE_ID));
-        assertEquals(LONDON_CENTRAL_USERS_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(LONDON_CENTRAL_USERS_LISTING_CASE_TYPE_ID));
+        assertEquals(LONDON_CENTRAL_DEV_CASE_TYPE_ID,
+                UtilHelper.getListingCaseTypeId(LONDON_CENTRAL_DEV_LISTING_CASE_TYPE_ID));
+        assertEquals(LONDON_CENTRAL_USERS_CASE_TYPE_ID,
+                UtilHelper.getListingCaseTypeId(LONDON_CENTRAL_USERS_LISTING_CASE_TYPE_ID));
         assertEquals(LONDON_CENTRAL_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(LONDON_CENTRAL_LISTING_CASE_TYPE_ID));
-        assertEquals(LONDON_EAST_DEV_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(LONDON_EAST_DEV_LISTING_CASE_TYPE_ID));
-        assertEquals(LONDON_EAST_USERS_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(LONDON_EAST_USERS_LISTING_CASE_TYPE_ID));
+        assertEquals(LONDON_EAST_DEV_CASE_TYPE_ID,
+                UtilHelper.getListingCaseTypeId(LONDON_EAST_DEV_LISTING_CASE_TYPE_ID));
+        assertEquals(LONDON_EAST_USERS_CASE_TYPE_ID,
+                UtilHelper.getListingCaseTypeId(LONDON_EAST_USERS_LISTING_CASE_TYPE_ID));
         assertEquals(LONDON_EAST_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(LONDON_EAST_LISTING_CASE_TYPE_ID));
-        assertEquals(LONDON_SOUTH_DEV_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(LONDON_SOUTH_DEV_LISTING_CASE_TYPE_ID));
-        assertEquals(LONDON_SOUTH_USERS_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(LONDON_SOUTH_USERS_LISTING_CASE_TYPE_ID));
+        assertEquals(LONDON_SOUTH_DEV_CASE_TYPE_ID,
+                UtilHelper.getListingCaseTypeId(LONDON_SOUTH_DEV_LISTING_CASE_TYPE_ID));
+        assertEquals(LONDON_SOUTH_USERS_CASE_TYPE_ID,
+                UtilHelper.getListingCaseTypeId(LONDON_SOUTH_USERS_LISTING_CASE_TYPE_ID));
         assertEquals(LONDON_SOUTH_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(LONDON_SOUTH_LISTING_CASE_TYPE_ID));
-        assertEquals(MIDLANDS_EAST_DEV_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(MIDLANDS_EAST_DEV_LISTING_CASE_TYPE_ID));
-        assertEquals(MIDLANDS_EAST_USERS_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(MIDLANDS_EAST_USERS_LISTING_CASE_TYPE_ID));
+        assertEquals(MIDLANDS_EAST_DEV_CASE_TYPE_ID,
+                UtilHelper.getListingCaseTypeId(MIDLANDS_EAST_DEV_LISTING_CASE_TYPE_ID));
+        assertEquals(MIDLANDS_EAST_USERS_CASE_TYPE_ID,
+                UtilHelper.getListingCaseTypeId(MIDLANDS_EAST_USERS_LISTING_CASE_TYPE_ID));
         assertEquals(MIDLANDS_EAST_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(MIDLANDS_EAST_LISTING_CASE_TYPE_ID));
-        assertEquals(MIDLANDS_WEST_DEV_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(MIDLANDS_WEST_DEV_LISTING_CASE_TYPE_ID));
-        assertEquals(MIDLANDS_WEST_USERS_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(MIDLANDS_WEST_USERS_LISTING_CASE_TYPE_ID));
+        assertEquals(MIDLANDS_WEST_DEV_CASE_TYPE_ID,
+                UtilHelper.getListingCaseTypeId(MIDLANDS_WEST_DEV_LISTING_CASE_TYPE_ID));
+        assertEquals(MIDLANDS_WEST_USERS_CASE_TYPE_ID,
+                UtilHelper.getListingCaseTypeId(MIDLANDS_WEST_USERS_LISTING_CASE_TYPE_ID));
         assertEquals(MIDLANDS_WEST_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(MIDLANDS_WEST_LISTING_CASE_TYPE_ID));
         assertEquals(NEWCASTLE_DEV_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(NEWCASTLE_DEV_LISTING_CASE_TYPE_ID));
-        assertEquals(NEWCASTLE_USERS_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(NEWCASTLE_USERS_LISTING_CASE_TYPE_ID));
+        assertEquals(NEWCASTLE_USERS_CASE_TYPE_ID,
+                UtilHelper.getListingCaseTypeId(NEWCASTLE_USERS_LISTING_CASE_TYPE_ID));
         assertEquals(NEWCASTLE_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(NEWCASTLE_LISTING_CASE_TYPE_ID));
         assertEquals(WALES_DEV_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(WALES_DEV_LISTING_CASE_TYPE_ID));
         assertEquals(WALES_USERS_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(WALES_USERS_LISTING_CASE_TYPE_ID));
@@ -280,16 +292,19 @@ public class UtilHelperTest {
 
     @Test
     public void formatCurrentDatePlusDays() {
-        assertEquals("6 February 2017", UtilHelper.formatCurrentDatePlusDays(LocalDate.of(2017, Month.FEBRUARY,3), 3));
+        assertEquals("6 February 2017",
+                UtilHelper.formatCurrentDatePlusDays(LocalDate.of(2017, Month.FEBRUARY,3), 3));
     }
 
     @Test
     public void formatCurrentDate() {
-        assertEquals("3 February 2017", UtilHelper.formatCurrentDate(LocalDate.of(2017, Month.FEBRUARY,3)));
+        assertEquals("3 February 2017",
+                UtilHelper.formatCurrentDate(LocalDate.of(2017, Month.FEBRUARY,3)));
     }
 
     @Test
     public void formatCurrentDate2() {
-        assertEquals("2017-02-03", UtilHelper.formatCurrentDate2(LocalDate.of(2017,Month.FEBRUARY,3)));
+        assertEquals("2017-02-03",
+                UtilHelper.formatCurrentDate2(LocalDate.of(2017,Month.FEBRUARY,3)));
     }
 }
