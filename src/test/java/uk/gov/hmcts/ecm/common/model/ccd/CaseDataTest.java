@@ -26,7 +26,6 @@ public class CaseDataTest {
         caseData = mapper.readValue(json, CaseData.class);
     }
 
-
     @Test
     public void shouldCreateCaseDataFromJson() {
         assertEquals(caseData.getCaseNotes(), "1111");

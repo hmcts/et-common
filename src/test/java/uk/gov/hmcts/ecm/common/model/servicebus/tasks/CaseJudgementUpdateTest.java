@@ -80,7 +80,8 @@ public class CaseJudgementUpdateTest {
         JudgementType judgementType = caseData.getJudgementCollection().get(0).getValue();
         assertEquals(JUDGEMENT_NOTES, judgementType.getJudgmentNotes());
         assertEquals(1, judgementType.getJurisdictionCodes().size());
-        assertEquals(jurisdictionCode, judgementType.getJurisdictionCodes().get(0).getValue().getJuridictionCodesList());
+        assertEquals(jurisdictionCode, judgementType.getJurisdictionCodes().get(0)
+                .getValue().getJuridictionCodesList());
     }
 
     @Test
@@ -99,8 +100,10 @@ public class CaseJudgementUpdateTest {
         JudgementType judgementType = caseData.getJudgementCollection().get(0).getValue();
         assertEquals(JUDGEMENT_NOTES, judgementType.getJudgmentNotes());
         assertEquals(2, judgementType.getJurisdictionCodes().size());
-        assertEquals("ADT", judgementType.getJurisdictionCodes().get(0).getValue().getJuridictionCodesList());
-        assertEquals("CCP", judgementType.getJurisdictionCodes().get(1).getValue().getJuridictionCodesList());
+        assertEquals("ADT", judgementType.getJurisdictionCodes().get(0).getValue()
+                .getJuridictionCodesList());
+        assertEquals("CCP", judgementType.getJurisdictionCodes().get(1).getValue()
+                .getJuridictionCodesList());
     }
 
     @Test
@@ -124,13 +127,15 @@ public class CaseJudgementUpdateTest {
         JudgementType judgementType = caseData.getJudgementCollection().get(0).getValue();
         assertEquals(JUDGEMENT_NOTES, judgementType.getJudgmentNotes());
         assertEquals(1, judgementType.getJurisdictionCodes().size());
-        assertEquals("ADT", judgementType.getJurisdictionCodes().get(0).getValue().getJuridictionCodesList());
+        assertEquals("ADT", judgementType.getJurisdictionCodes().get(0).getValue()
+                .getJuridictionCodesList());
 
         // Check new judgement
         judgementType = caseData.getJudgementCollection().get(1).getValue();
         assertEquals(JUDGEMENT_NOTES, judgementType.getJudgmentNotes());
         assertEquals(1, judgementType.getJurisdictionCodes().size());
-        assertEquals("CCP", judgementType.getJurisdictionCodes().get(0).getValue().getJuridictionCodesList());
+        assertEquals("CCP", judgementType.getJurisdictionCodes().get(0).getValue()
+                .getJuridictionCodesList());
     }
 
     @Test
