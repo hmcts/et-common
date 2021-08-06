@@ -19,7 +19,8 @@ public class CreateUpdatesHelperTest {
 
     @Before
     public void setUp() {
-        ethosCaseRefCollection = Arrays.asList("4150001/2020", "4150002/2020", "4150003/2020", "4150004/2020", "4150005/2020");
+        ethosCaseRefCollection = Arrays.asList("4150001/2020", "4150002/2020", "4150003/2020",
+                "4150004/2020", "4150005/2020");
         createUpdatesDto = getCreateUpdatesDto(ethosCaseRefCollection);
         creationDataModel = ServiceBusHelper.getCreationDataModel(ethosCaseRefCollection.get(0));
     }

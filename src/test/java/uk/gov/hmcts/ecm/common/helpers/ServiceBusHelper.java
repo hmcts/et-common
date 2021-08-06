@@ -31,6 +31,7 @@ public class ServiceBusHelper {
                 .username("eric.ccdcooper@gmail.com")
                 .confirmation("YES")
                 .dataModelParent(dataModelParent)
+                .parentMultipleCaseId("1591184523086531")
                 .build();
     }
 
