@@ -247,4 +247,6 @@ public class AdhocReportType {
     private String xConFast26wkTotalPerCent;
     @JsonProperty("xConOpen26wkTotalPerCent")
     private String xConOpen26wkTotalPerCent;
+    @JsonProperty("delayedDaysForFirstHearing")
+    private String delayedDaysForFirstHearing;
 }
