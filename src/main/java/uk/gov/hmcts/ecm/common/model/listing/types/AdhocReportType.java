@@ -207,4 +207,46 @@ public class AdhocReportType {
     private List<ReportET4TypeItem> respondentET4;
     @JsonProperty("listingHistory")
     private List<ReportListingsTypeItem> listingHistory;
+    @JsonProperty("ConNoneTotal")
+    private String ConNoneTotal;
+    @JsonProperty("ConStdTotal")
+    private String ConStdTotal;
+    @JsonProperty("ConFastTotal")
+    private String ConFastTotal;
+    @JsonProperty("ConOpenTotal")
+    private String ConOpenTotal;
+    @JsonProperty("ConNone26wkTotal")
+    private String ConNone26wkTotal;
+    @JsonProperty("ConStd26wkTotal")
+    private String ConStd26wkTotal;
+    @JsonProperty("ConFast26wkTotal")
+    private String ConFast26wkTotal;
+    @JsonProperty("ConOpen26wkTotal")
+    private String ConOpen26wkTotal;
+    @JsonProperty("ConNone26wkTotalPerCent")
+    private String ConNone26wkTotalPerCent;
+    @JsonProperty("ConStd26wkTotalPerCent")
+    private String ConStd26wkTotalPerCent;
+    @JsonProperty("ConFast26wkTotalPerCent")
+    private String ConFast26wkTotalPerCent;
+    @JsonProperty("ConOpen26wkTotalPerCent")
+    private String ConOpen26wkTotalPerCent;
+    @JsonProperty("xConNone26wkTotal")
+    private String xConNone26wkTotal;
+    @JsonProperty("xConStd26wkTotal")
+    private String xConStd26wkTotal;
+    @JsonProperty("xConFast26wkTotal")
+    private String xConFast26wkTotal;
+    @JsonProperty("xConOpen26wkTotal")
+    private String xConOpen26wkTotal;
+    @JsonProperty("xConNone26wkTotalPerCent")
+    private String xConNone26wkTotalPerCent;
+    @JsonProperty("xConStd26wkTotalPerCent")
+    private String xConStd26wkTotalPerCent;
+    @JsonProperty("xConFast26wkTotalPerCent")
+    private String xConFast26wkTotalPerCent;
+    @JsonProperty("xConOpen26wkTotalPerCent")
+    private String xConOpen26wkTotalPerCent;
+    @JsonProperty("delayedDaysForFirstHearing")
+    private String delayedDaysForFirstHearing;
 }
