@@ -21,4 +21,5 @@ public class DefaultValues {
     private String tribunalCorrespondenceEmail;
     private String managingOffice;
     private String caseType;
+    private String owningOffice;
 }
