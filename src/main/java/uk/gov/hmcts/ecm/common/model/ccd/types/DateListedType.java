@@ -3,6 +3,7 @@ package uk.gov.hmcts.ecm.common.model.ccd.types;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
@@ -14,10 +15,14 @@ public class DateListedType {
     private String hearingStatus;
     @JsonProperty("Postponed_by")
     private String postponedBy;
+    @JsonProperty("hearingVenueDay")
+    private DynamicFixedListType hearingVenueDay;
+    @JsonProperty("hearingRoom")
+    private DynamicFixedListType hearingRoom;
+    @JsonProperty("hearingClerk")
+    private DynamicFixedListType hearingClerk;
     @JsonProperty("Hearing_typeReadingDeliberation")
     private String hearingTypeReadingDeliberation;
-    @JsonProperty("hearingVenueDay")
-    private String hearingVenueDay;
     @JsonProperty("Hearing_Glasgow")
     private String hearingGlasgow;
     @JsonProperty("Hearing_Aberdeen")
@@ -26,8 +31,6 @@ public class DateListedType {
     private String hearingDundee;
     @JsonProperty("Hearing_Edinburgh")
     private String hearingEdinburgh;
-    @JsonProperty("Hearing_clerk")
-    private String hearingClerk;
     @JsonProperty("hearingCaseDisposed")
     private String hearingCaseDisposed;
     @JsonProperty("Hearing_part_heard")
@@ -58,88 +61,6 @@ public class DateListedType {
     private String hearingNotes2;
     @JsonProperty("postponedDate")
     private String postponedDate;
-
-    //BRISTOL
-    @JsonProperty("hearingRoomBarnstaple")
-    private String hearingRoomBarnstaple;
-    @JsonProperty("hearingRoomBathLawCourts")
-    private String hearingRoomBathLawCourts;
-    @JsonProperty("hearingRoomBodmin")
-    private String hearingRoomBodmin;
-    @JsonProperty("hearingRoomBournemouthMC")
-    private String hearingRoomBournemouthMC;
-    @JsonProperty("hearingRoomBrighton")
-    private String hearingRoomBrighton;
-    @JsonProperty("hearingRoomBrightonCC")
-    private String hearingRoomBrightonCC;
-    @JsonProperty("hearingRoomBristol")
-    private String hearingRoomBristol;
-    @JsonProperty("hearingRoomBristol1")
-    private String hearingRoomBristol1;
-    @JsonProperty("hearingRoomBristol2")
-    private String hearingRoomBristol2;
-    @JsonProperty("hearingRoomBristol3")
-    private String hearingRoomBristol3;
-    @JsonProperty("hearingRoomBristol4")
-    private String hearingRoomBristol4;
-    @JsonProperty("hearingRoomBristol5")
-    private String hearingRoomBristol5;
-    @JsonProperty("hearingRoomBristol6")
-    private String hearingRoomBristol6;
-    @JsonProperty("hearingRoomBristolCFJC")
-    private String hearingRoomBristolCFJC;
-    @JsonProperty("hearingRoomBristolCrown")
-    private String hearingRoomBristolCrown;
-    @JsonProperty("hearingRoomBristolMags")
-    private String hearingRoomBristolMags;
-    @JsonProperty("hearingRoomBristolTBC")
-    private String hearingRoomBristolTBC;
-    @JsonProperty("hearingRoomBristolVintry")
-    private String hearingRoomBristolVintry;
-    @JsonProperty("hearingRoomBristolCityHall")
-    private String hearingRoomBristolCityHall;
-    @JsonProperty("hearingRoomCardiffCFJC")
-    private String hearingRoomCardiffCFJC;
-    @JsonProperty("hearingRoomExeter")
-    private String hearingRoomExeter;
-    @JsonProperty("hearingRoomExeterCombined")
-    private String hearingRoomExeterCombined;
-    @JsonProperty("hearingRoomExeterMags")
-    private String hearingRoomExeterMags;
-    @JsonProperty("hearingRoomFloatingCase")
-    private String hearingRoomFloatingCase;
-    @JsonProperty("hearingRoomGloucesterCCFC")
-    private String hearingRoomGloucesterCCFC;
-    @JsonProperty("hearingRoomHavant")
-    private String hearingRoomHavant;
-    @JsonProperty("hearingRoomPlymStCathHo")
-    private String hearingRoomPlymStCathHo;
-    @JsonProperty("hearingRoomPlymouthMags")
-    private String hearingRoomPlymouthMags;
-    @JsonProperty("hearingRoomQueenswayHouse")
-    private String hearingRoomQueenswayHouse;
-    @JsonProperty("hearingRoomROIT")
-    private String hearingRoomROIT;
-    @JsonProperty("hearingRoomSouthampton")
-    private String hearingRoomSouthampton;
-    @JsonProperty("hearingRoomSwindon")
-    private String hearingRoomSwindon;
-    @JsonProperty("hearingRoomSwindon2")
-    private String hearingRoomSwindon2;
-    @JsonProperty("hearingRoomTaunton")
-    private String hearingRoomTaunton;
-    @JsonProperty("hearingRoomTruro")
-    private String hearingRoomTruro;
-    @JsonProperty("hearingRoomTruroMags")
-    private String hearingRoomTruroMags;
-    @JsonProperty("hearingRoomUWEBristol")
-    private String hearingRoomUWEBristol;
-    @JsonProperty("hearingRoomVintryHouse")
-    private String hearingRoomVintryHouse;
-    @JsonProperty("hearingRoomWorle")
-    private String hearingRoomWorle;
-    @JsonProperty("hearingRoomYeovilMags")
-    private String hearingRoomYeovilMags;
 
     //LEEDS
     @JsonProperty("hearingRoomHarrogateCJC")
@@ -455,4 +376,15 @@ public class DateListedType {
     @JsonProperty("hearingRoomWatford")
     private String hearingRoomWatford;
 
+    public boolean hasHearingVenue() {
+        return hearingVenueDay != null && hearingVenueDay.getValue() != null;
+    }
+
+    public boolean hasHearingRoom() {
+        return hearingRoom != null && hearingRoom.getValue() != null;
+    }
+
+    public boolean hasHearingClerk() {
+        return hearingClerk != null && hearingClerk.getValue() != null;
+    }
 }
