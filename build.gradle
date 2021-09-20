@@ -10,8 +10,9 @@ plugins {
     id 'com.jfrog.bintray' version '1.8.5'
 }
 
-group 'uk.gov.hmcts.reform'
-version '0.1.132'
+//group 'uk.gov.hmcts.reform'
+group 'com.github.hmcts'
+version '0.1.132-ecm-94-revised-fix'
 
 
 sourceCompatibility = '11.0'

@@ -297,6 +297,8 @@ public class Constants {
     public static final String HEARINGS_BY_HEARING_TYPE_REPORT = "Hearings By Hearing Type";
     public static final String NO_CHNAGE_INCURRENT_POSITION_REPORT = "No Change In Current Position";
     public static final String CASES_AWAITING_JUDGMENT_REPORT = "Cases Awaiting Judgment";
+    public static final String SESSION_DAYS_REPORT = "Session Days";
+
 
     public static final String HEARING_DOC_ETCL = "ETCL - Cause List";
     public static final String HEARING_DOC_IT56 = "IT56 - List of Exhibits";
@@ -369,9 +371,9 @@ public class Constants {
     public static final String BATCH_UPDATE_TYPE_2 = "batchUpdateType2";
     public static final String BATCH_UPDATE_TYPE_3 = "batchUpdateType3";
 
-    public static final String TYPE_AMENDMENT_NAME = "Amend multiple name";
-    public static final String TYPE_AMENDMENT_LEAD = "Amend lead case";
-    public static final String TYPE_AMENDMENT_ADDITION = "Add cases to multiple";
+    public static final String MULTIPLE_NAME_AMENDMENT = "Amend multiple name";
+    public static final String LEAD_CASE_AMENDMENT = "Amend lead case";
+    public static final String ADD_CASES_TO_MULTIPLE_AMENDMENT = "Add cases to multiple";
 
     public static final String CREATE_ACTION = "Create";
     public static final String AMEND_ACTION = "Amend";

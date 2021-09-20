@@ -21,6 +21,7 @@ import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_BULK_CASE_
 public class ServiceBusHelper {
 
     public static UpdateCaseMsg generateUpdateCaseMsg(DataModelParent dataModelParent) {
+        var linkMarkUp = "<a href=\""+"/cases/details/1591184523086531\""+">4150001</a>";
         return UpdateCaseMsg.builder()
                 .msgId("1")
                 .jurisdiction("EMPLOYMENT")
@@ -31,7 +32,7 @@ public class ServiceBusHelper {
                 .username("eric.ccdcooper@gmail.com")
                 .confirmation("YES")
                 .dataModelParent(dataModelParent)
-                .parentMultipleCaseId("1591184523086531")
+                .multipleReferenceLinkMarkUp(linkMarkUp)
                 .build();
     }
 
@@ -95,7 +96,6 @@ public class ServiceBusHelper {
         return CreationDataModel.builder()
                 .lead(leadRef)
                 .multipleRef("4150001")
-                .parentMultipleCaseId("1591184523086531")
                 .build();
     }
 

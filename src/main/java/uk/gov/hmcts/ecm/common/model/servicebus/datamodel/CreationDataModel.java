@@ -22,7 +22,4 @@ public class CreationDataModel extends DataModelParent {
     @JsonProperty("multipleRef")
     private String multipleRef;
 
-    @JsonProperty("parentMultipleCaseId")
-    private String parentMultipleCaseId;
-
 }
