@@ -19,6 +19,9 @@ public class BulkData {
     private String bulkCaseTitle;
     @JsonProperty("multipleReference")
     private String multipleReference;
+    @JsonProperty("multipleReferenceLinkMarkUp")
+    private String multipleReferenceLinkMarkUp;
+
     @JsonProperty("feeGroupReference")
     private String feeGroupReference;
     @JsonProperty("claimantSurname")

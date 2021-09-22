@@ -35,13 +35,14 @@ public class UpdateCaseMsgTest {
     public void toStringMethod() {
         CreationDataModel creationDataModel = ServiceBusHelper.getCreationDataModel("4150002/2020");
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(creationDataModel);
+       var linkMarkUp = "<a href=\"/cases/details/1591184523086531\""+">4150001</a>";
         assertEquals(
-                "UpdateCaseMsg{ethosCaseReference='4150002/2020', msgId='1', jurisdiction='EMPLOYMENT', "
+                "UpdateCaseMsg{"
+                        +"ethosCaseReference='4150002/2020', msgId='1', jurisdiction='EMPLOYMENT', "
                         + "caseTypeId='Scotland_Multiple', multipleRef='4150001', totalCases='1', "
                         + "username='eric.ccdcooper@gmail.com', confirmation='YES', "
-                        + "dataModel=CreationDataModel(lead=4150002/2020, multipleRef=4150001, "
-                        + "parentMultipleCaseId=1591184523086531)',"
-                        + " parentMultipleCaseId=1591184523086531}",
+                        + "dataModel=CreationDataModel(lead=4150002/2020, multipleRef=4150001)', "
+                        + "multipleReferenceLinkMarkUp='"+ linkMarkUp +"'}",
                 updateCaseMsg.toString());
     }
 

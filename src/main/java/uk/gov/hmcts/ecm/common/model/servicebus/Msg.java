@@ -39,7 +39,7 @@ public class Msg {
     @JsonProperty("updateData")
     DataModelParent dataModelParent;
 
-    @JsonProperty("parentMultipleCaseId")
-    String parentMultipleCaseId;
+    @JsonProperty("multipleReferenceLinkMarkUp")
+    String multipleReferenceLinkMarkUp;
 
 }
