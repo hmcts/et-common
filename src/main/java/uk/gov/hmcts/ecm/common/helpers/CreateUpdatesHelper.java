@@ -34,6 +34,7 @@ public class CreateUpdatesHelper {
                 .username(createUpdatesDto.getUsername())
                 .confirmation(createUpdatesDto.getConfirmation())
                 .dataModelParent(dataModelParent)
+                .multipleReferenceLinkMarkUp(createUpdatesDto.getMultipleReferenceLinkMarkUp())
                 .build();
     }
 
