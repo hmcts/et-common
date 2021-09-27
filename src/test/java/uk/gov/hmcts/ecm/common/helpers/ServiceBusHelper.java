@@ -93,9 +93,11 @@ public class ServiceBusHelper {
     }
 
     public static CreationDataModel getCreationDataModel(String leadRef) {
+        var linkMarkUp = "<a href=" + "\"" + "/cases/details/1591184523086531" + "\"" + ">4150001</a>";
         return CreationDataModel.builder()
                 .lead(leadRef)
                 .multipleRef("4150001")
+                .multipleReferenceLinkMarkUp(linkMarkUp)
                 .build();
     }
 

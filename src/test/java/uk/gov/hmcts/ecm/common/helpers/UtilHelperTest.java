@@ -293,18 +293,18 @@ public class UtilHelperTest {
     @Test
     public void formatCurrentDatePlusDays() {
         assertEquals("6 February 2017",
-                UtilHelper.formatCurrentDatePlusDays(LocalDate.of(2017, Month.FEBRUARY,3), 3));
+                UtilHelper.formatCurrentDatePlusDays(LocalDate.of(2017, Month.FEBRUARY, 3), 3));
     }
 
     @Test
     public void formatCurrentDate() {
         assertEquals("3 February 2017",
-                UtilHelper.formatCurrentDate(LocalDate.of(2017, Month.FEBRUARY,3)));
+                UtilHelper.formatCurrentDate(LocalDate.of(2017, Month.FEBRUARY, 3)));
     }
 
     @Test
     public void formatCurrentDate2() {
         assertEquals("2017-02-03",
-                UtilHelper.formatCurrentDate2(LocalDate.of(2017,Month.FEBRUARY,3)));
+                UtilHelper.formatCurrentDate2(LocalDate.of(2017,Month.FEBRUARY, 3)));
     }
 }

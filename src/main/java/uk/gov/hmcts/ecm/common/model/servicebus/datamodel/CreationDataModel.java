@@ -22,4 +22,6 @@ public class CreationDataModel extends DataModelParent {
     @JsonProperty("multipleRef")
     private String multipleRef;
 
+    @JsonProperty("multipleReferenceLinkMarkUp")
+    private String multipleReferenceLinkMarkUp;
 }
