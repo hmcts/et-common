@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicValueType;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -17,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 public class CloseDataModel extends DataModelParent {
 
     @JsonProperty("clerkResponsible")
-    private String clerkResponsible;
+    private DynamicValueType clerkResponsible;
 
     @JsonProperty("fileLocation")
     private String fileLocation;

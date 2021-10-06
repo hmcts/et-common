@@ -1,5 +1,6 @@
 package uk.gov.hmcts.ecm.common.helpers;
 
+import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicValueType;
 import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JudgementTypeItem;
@@ -116,7 +117,7 @@ public class ServiceBusHelper {
 
     public static CloseDataModel getCloseDataModel() {
         return CloseDataModel.builder()
-                .clerkResponsible("ClerkResponsible")
+                .clerkResponsible(DynamicValueType.create("ClerkResponsible", "ClerkResponsible"))
                 .fileLocation("FileLocation")
                 .notes("Notes")
                 .managingOffice("ManagingOffice")
@@ -154,7 +155,7 @@ public class ServiceBusHelper {
                 .fileLocationAberdeen("FileLocationAberdeen")
                 .fileLocationDundee("FileLocationDundee")
                 .fileLocationEdinburgh("FileLocationEdinburgh")
-                .clerkResponsible("ClerkResponsible")
+                .clerkResponsible(DynamicValueType.create("ClerkResponsible", "ClerkResponsible"))
                 .positionType("PositionType")
                 .receiptDate("25/08/1999")
                 .hearingStage("HearingStage")

@@ -1,10 +1,12 @@
 package uk.gov.hmcts.ecm.common.model.multiples;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import uk.gov.hmcts.ecm.common.model.bulk.items.CaseIdTypeItem;
 import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
+import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicValueType;
 import uk.gov.hmcts.ecm.common.model.ccd.items.AddressLabelTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.types.AddressLabelsAttributesType;
 import uk.gov.hmcts.ecm.common.model.ccd.types.CasePreAcceptType;
@@ -16,6 +18,7 @@ import uk.gov.hmcts.ecm.common.model.multiples.types.MoveCasesType;
 import uk.gov.hmcts.ecm.common.model.multiples.types.SubMultipleActionType;
 
 import java.util.List;
+import java.util.Optional;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
@@ -100,7 +103,7 @@ public class MultipleData {
     @JsonProperty("positionType")
     private String positionType;
     @JsonProperty("clerkResponsible")
-    private String clerkResponsible;
+    private DynamicFixedListType clerkResponsible;
     @JsonProperty("receiptDate")
     private String receiptDate;
     @JsonProperty("hearingStageEQP")
@@ -143,6 +146,12 @@ public class MultipleData {
 
     @JsonProperty("bulkAddSingleCasesImportFile")
     private CaseImporterFile bulkAddSingleCasesImportFile;
+
+    @JsonIgnore
+    public Optional<DynamicValueType> getClerkResponsibleSelectedValue() {
+        return clerkResponsible != null && clerkResponsible.getValue() != null
+                ? Optional.of(clerkResponsible.getValue()) : Optional.empty();
+    }
 }
 
 

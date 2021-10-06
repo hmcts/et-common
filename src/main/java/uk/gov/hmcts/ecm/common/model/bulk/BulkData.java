@@ -52,7 +52,7 @@ public class BulkData {
     @JsonProperty("multipleReference_v2")
     private String multipleReferenceV2;
     @JsonProperty("clerkResponsible_v2")
-    private String clerkResponsibleV2;
+    private DynamicFixedListType clerkResponsibleV2;
     @JsonProperty("positionType_v2")
     private String positionTypeV2;
     @JsonProperty("claimantRep_v2")

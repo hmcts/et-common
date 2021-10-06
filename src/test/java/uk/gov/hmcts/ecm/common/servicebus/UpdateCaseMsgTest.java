@@ -98,7 +98,7 @@ public class UpdateCaseMsgTest {
         updateCaseMsg.runTask(submitEventSubmitted);
         assertEquals(CASE_CLOSED_POSITION, submitEventSubmitted.getCaseData().getPositionType());
         assertEquals("FileLocation", submitEventSubmitted.getCaseData().getFileLocation());
-        assertEquals("ClerkResponsible", submitEventSubmitted.getCaseData().getClerkResponsible());
+        assertEquals("ClerkResponsible", submitEventSubmitted.getCaseData().getClerkResponsible().getSelectedCode());
         assertEquals("Notes", submitEventSubmitted.getCaseData().getCaseNotes());
         assertEquals("ManagingOffice", submitEventSubmitted.getCaseData().getManagingOffice());
         assertEquals("FileLocationGlasgow", submitEventSubmitted.getCaseData().getFileLocationGlasgow());
@@ -143,7 +143,7 @@ public class UpdateCaseMsgTest {
         assertEquals("FileLocationAberdeen", submitEventAccepted.getCaseData().getFileLocationAberdeen());
         assertEquals("FileLocationDundee", submitEventAccepted.getCaseData().getFileLocationDundee());
         assertEquals("FileLocationEdinburgh", submitEventAccepted.getCaseData().getFileLocationEdinburgh());
-        assertEquals("ClerkResponsible", submitEventAccepted.getCaseData().getClerkResponsible());
+        assertEquals("ClerkResponsible", submitEventAccepted.getCaseData().getClerkResponsible().getSelectedCode());
         assertEquals("PositionType", submitEventAccepted.getCaseData().getPositionType());
         assertEquals("25/08/1999", submitEventAccepted.getCaseData().getReceiptDate());
         assertEquals("HearingStage", submitEventAccepted.getCaseData().getHearingStage());
@@ -166,7 +166,7 @@ public class UpdateCaseMsgTest {
         assertEquals("FileLocationAberdeen", submitEventDetailed.getCaseData().getFileLocationAberdeen());
         assertEquals("FileLocationDundee", submitEventDetailed.getCaseData().getFileLocationDundee());
         assertEquals("FileLocationEdinburgh", submitEventDetailed.getCaseData().getFileLocationEdinburgh());
-        assertEquals("ClerkResponsible", submitEventDetailed.getCaseData().getClerkResponsible());
+        assertEquals("ClerkResponsible", submitEventDetailed.getCaseData().getClerkResponsible().getSelectedCode());
         assertEquals("PositionType", submitEventDetailed.getCaseData().getPositionType());
         assertEquals("RepName", submitEventDetailed
                 .getCaseData().getRepresentativeClaimantType().getNameOfRepresentative());

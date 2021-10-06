@@ -7,6 +7,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
@@ -15,6 +16,13 @@ public class DynamicFixedListType {
     private transient DynamicValueType value;
     @JsonProperty("list_items")
     private List<DynamicValueType> listItems;
+
+    public static DynamicFixedListType of(DynamicValueType value) {
+        Objects.requireNonNull(value);
+        var dynamicFixedListType = new DynamicFixedListType();
+        dynamicFixedListType.value = value;
+        return dynamicFixedListType;
+    }
 
     public DynamicFixedListType(String value) {
         this.value = new DynamicValueType(value, value);

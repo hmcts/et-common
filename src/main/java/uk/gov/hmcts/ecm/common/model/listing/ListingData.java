@@ -3,6 +3,7 @@ package uk.gov.hmcts.ecm.common.model.listing;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
 import uk.gov.hmcts.ecm.common.model.ccd.Address;
 import uk.gov.hmcts.ecm.common.model.listing.items.AdhocReportTypeItem;
 import uk.gov.hmcts.ecm.common.model.listing.items.BFDateTypeItem;
@@ -60,7 +61,7 @@ public class ListingData {
     @JsonProperty("bfDateCollection")
     private List<BFDateTypeItem> bfDateCollection;
     @JsonProperty("clerkResponsible")
-    private String clerkResponsible;
+    private DynamicFixedListType clerkResponsible;
     @JsonProperty("reportType")
     private String reportType;
     @JsonProperty("documentName")

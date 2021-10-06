@@ -115,7 +115,7 @@ public class CaseData {
     @JsonProperty("bfActions")
     private List<BFActionTypeItem> bfActions;
     @JsonProperty("clerkResponsible")
-    private String clerkResponsible;
+    private DynamicFixedListType clerkResponsible;
     @JsonProperty("userLocation")
     private String userLocation;
     @JsonProperty("documentCollection")
