@@ -153,6 +153,7 @@ public class Constants {
     public static final String FLAG_RESERVED = "RESERVED";
     public static final String FLAG_ECC = "ECC";
     public static final String FLAG_WITH_OUTSTATION = "WITH OUTSTATION";
+    public static final String FLAG_DIGITAL_FILE = "DIGITAL FILE";
 
     public static final String ONE = "1";
     public static final String ZERO = "0";
