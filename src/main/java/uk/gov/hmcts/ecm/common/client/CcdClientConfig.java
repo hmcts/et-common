@@ -1,7 +1,18 @@
 package uk.gov.hmcts.ecm.common.client;
 
 import lombok.extern.slf4j.Slf4j;
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
+
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.AMEND_MULTIPLE_EVENT_TRIGGER_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.AMEND_SINGLE_EVENT_TRIGGER_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.CASE_TRANSFER_EVENT_TRIGGER_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.CREATE_MULTIPLE_EVENT_TRIGGER_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.CREATION_EVENT_TRIGGER_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.CREATION_TRANSFER_EVENT_TRIGGER_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.PRE_ACCEPT_CASE_TRIGGER_ID_BULK;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.RETURN_TRANSFER_EVENT_TRIGGER_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.UPDATE_BULK_EVENT_TRIGGER_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.UPDATE_EVENT_TRIGGER_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.UPDATE_EVENT_TRIGGER_ID_BULK;
 
 @Slf4j
 public class CcdClientConfig {
