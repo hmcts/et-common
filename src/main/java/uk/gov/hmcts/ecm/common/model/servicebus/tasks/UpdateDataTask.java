@@ -100,10 +100,10 @@ public class UpdateDataTask extends DataTaskParent {
             caseData.setManagingOffice(updateDataModel.getManagingOffice());
         }
 
-        if (!isNullOrEmpty(updateDataModel.getFileLocation())) {
-            caseData.setFileLocation(updateDataModel.getFileLocation());
+        var fileLocation = updateDataModel.getFileLocation();
+        if (fileLocation != null) {
+            caseData.setFileLocation(DynamicFixedListType.of(fileLocation));
         }
-
         if (!isNullOrEmpty(updateDataModel.getFileLocationGlasgow())) {
             caseData.setFileLocationGlasgow(updateDataModel.getFileLocationGlasgow());
         }

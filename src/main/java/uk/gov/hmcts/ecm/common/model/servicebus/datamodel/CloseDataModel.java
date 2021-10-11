@@ -21,7 +21,7 @@ public class CloseDataModel extends DataModelParent {
     private DynamicValueType clerkResponsible;
 
     @JsonProperty("fileLocation")
-    private String fileLocation;
+    private DynamicValueType fileLocation;
 
     @JsonProperty("fileLocationEdinburgh")
     private String fileLocationEdinburgh;

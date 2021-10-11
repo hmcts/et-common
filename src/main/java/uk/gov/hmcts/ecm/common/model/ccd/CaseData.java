@@ -95,7 +95,7 @@ public class CaseData {
     @JsonProperty("currentPosition")
     private String currentPosition;
     @JsonProperty("fileLocation")
-    private String fileLocation;
+    private DynamicFixedListType fileLocation;
     @JsonProperty("fileLocationGlasgow")
     private String fileLocationGlasgow;
     @JsonProperty("fileLocationAberdeen")

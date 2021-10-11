@@ -26,7 +26,7 @@ public class UpdateDataModel extends DataModelParent {
     private String managingOffice;
 
     @JsonProperty("fileLocation")
-    private String fileLocation;
+    private DynamicValueType fileLocation;
 
     @JsonProperty("fileLocationGlasgow")
     private String fileLocationGlasgow;

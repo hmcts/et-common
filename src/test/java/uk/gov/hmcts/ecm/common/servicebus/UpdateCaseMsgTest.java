@@ -97,7 +97,7 @@ public class UpdateCaseMsgTest {
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(closeDataModel);
         updateCaseMsg.runTask(submitEventSubmitted);
         assertEquals(CASE_CLOSED_POSITION, submitEventSubmitted.getCaseData().getPositionType());
-        assertEquals("FileLocation", submitEventSubmitted.getCaseData().getFileLocation());
+        assertEquals("FileLocation", submitEventSubmitted.getCaseData().getFileLocation().getSelectedCode());
         assertEquals("ClerkResponsible", submitEventSubmitted.getCaseData().getClerkResponsible().getSelectedCode());
         assertEquals("Notes", submitEventSubmitted.getCaseData().getCaseNotes());
         assertEquals("ManagingOffice", submitEventSubmitted.getCaseData().getManagingOffice());
@@ -138,7 +138,7 @@ public class UpdateCaseMsgTest {
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(updateDataModel);
         updateCaseMsg.runTask(submitEventAccepted);
         assertEquals("ManagingOffice", submitEventAccepted.getCaseData().getManagingOffice());
-        assertEquals("FileLocation", submitEventAccepted.getCaseData().getFileLocation());
+        assertEquals("FileLocation", submitEventAccepted.getCaseData().getFileLocation().getSelectedCode());
         assertEquals("FileLocationGlasgow", submitEventAccepted.getCaseData().getFileLocationGlasgow());
         assertEquals("FileLocationAberdeen", submitEventAccepted.getCaseData().getFileLocationAberdeen());
         assertEquals("FileLocationDundee", submitEventAccepted.getCaseData().getFileLocationDundee());
@@ -161,7 +161,7 @@ public class UpdateCaseMsgTest {
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(updateDataModel);
         updateCaseMsg.runTask(submitEventDetailed);
         assertEquals("ManagingOffice", submitEventDetailed.getCaseData().getManagingOffice());
-        assertEquals("FileLocation", submitEventDetailed.getCaseData().getFileLocation());
+        assertEquals("FileLocation", submitEventDetailed.getCaseData().getFileLocation().getSelectedCode());
         assertEquals("FileLocationGlasgow", submitEventDetailed.getCaseData().getFileLocationGlasgow());
         assertEquals("FileLocationAberdeen", submitEventDetailed.getCaseData().getFileLocationAberdeen());
         assertEquals("FileLocationDundee", submitEventDetailed.getCaseData().getFileLocationDundee());

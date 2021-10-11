@@ -118,7 +118,7 @@ public class ServiceBusHelper {
     public static CloseDataModel getCloseDataModel() {
         return CloseDataModel.builder()
                 .clerkResponsible(DynamicValueType.create("ClerkResponsible", "ClerkResponsible"))
-                .fileLocation("FileLocation")
+                .fileLocation(DynamicValueType.create("FileLocation", "FileLocation"))
                 .notes("Notes")
                 .managingOffice("ManagingOffice")
                 .fileLocationGlasgow("FileLocationGlasgow")
@@ -150,7 +150,7 @@ public class ServiceBusHelper {
     public static UpdateDataModel getUpdateDataModel() {
         return UpdateDataModel.builder()
                 .managingOffice("ManagingOffice")
-                .fileLocation("FileLocation")
+                .fileLocation(DynamicValueType.create("FileLocation", "FileLocation"))
                 .fileLocationGlasgow("FileLocationGlasgow")
                 .fileLocationAberdeen("FileLocationAberdeen")
                 .fileLocationDundee("FileLocationDundee")

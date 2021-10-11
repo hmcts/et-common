@@ -45,7 +45,10 @@ public class CloseDataTask extends DataTaskParent {
         if (clerkResponsible != null) {
             caseData.setClerkResponsible(DynamicFixedListType.of(clerkResponsible));
         }
-        caseData.setFileLocation(((CloseDataModel)dataModelParent).getFileLocation());
+        var fileLocation = ((CloseDataModel)dataModelParent).getFileLocation();
+        if (fileLocation != null) {
+            caseData.setFileLocation(DynamicFixedListType.of(fileLocation));
+        }
         caseData.setCaseNotes(((CloseDataModel)dataModelParent).getNotes());
 
         managingOffice(submitEvent, ((CloseDataModel)dataModelParent));

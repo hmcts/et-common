@@ -42,7 +42,7 @@ public class BulkData {
     private List<JurCodesTypeItem> jurCodesCollection;
 
     @JsonProperty("fileLocation_v2")
-    private String fileLocationV2;
+    private DynamicFixedListType fileLocationV2;
     @JsonProperty("feeGroupReference_v2")
     private String feeGroupReferenceV2;
     @JsonProperty("claimantSurname_v2")
