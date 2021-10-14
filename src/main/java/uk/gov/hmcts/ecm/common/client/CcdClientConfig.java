@@ -110,6 +110,11 @@ public class CcdClientConfig {
         return String.format(SUBMIT_EVENT_FOR_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, cid);
     }
 
+    String buildStartDisposeEventForCaseUrl(String uid, String jid, String ctid, String cid) {
+        return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT,
+                ccdDataStoreApiBaseUrl, uid, jid, ctid, cid, DISPOSE_EVENT_TRIGGER_ID);
+    }
+
     String buildPaginationMetadataCaseUrl(String uid, String jid, String ctid) {
         return String.format(PAGINATION_METADATA_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid);
     }

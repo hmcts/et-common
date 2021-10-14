@@ -517,6 +517,16 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.GET, request, CCDRequest.class).getBody();
     }
 
+    public CCDRequest startDisposeEventForCase(String authToken, String caseTypeId, String jurisdiction, String cid)
+            throws IOException {
+        HttpEntity<String> request =
+                new HttpEntity<>(buildHeaders(authToken));
+        String uri = ccdClientConfig.buildStartDisposeEventForCaseUrl(userService.getUserDetails(authToken).getUid(),
+                jurisdiction,
+                caseTypeId, cid);
+        return restTemplate.exchange(uri, HttpMethod.GET, request, CCDRequest.class).getBody();
+    }
+
     public SubmitEvent submitEventForCase(String authToken, CaseData caseData, String caseTypeId, String jurisdiction,
                                           CCDRequest req, String cid) throws IOException {
         HttpEntity<CaseDataContent> request =
