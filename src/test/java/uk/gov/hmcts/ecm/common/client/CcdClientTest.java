@@ -96,6 +96,7 @@ public class CcdClientTest {
         caseDetails.setJurisdiction("TRIBUNALS");
         caseDetails.setCaseTypeId("Type1");
         caseData = new CaseData();
+        caseData.setOwningOffice("LEEDS");
         caseDetails.setCaseData(caseData);
 
         bulkDetails = new BulkDetails();
