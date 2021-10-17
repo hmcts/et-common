@@ -27,6 +27,7 @@ import uk.gov.hmcts.ecm.common.model.ccd.CaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.ccd.PaginatedSearchMetadata;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
+import uk.gov.hmcts.ecm.common.model.helper.TribunalOffice;
 import uk.gov.hmcts.ecm.common.model.labels.LabelCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.labels.LabelPayloadEvent;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleCaseSearchResult;
@@ -443,7 +444,7 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesGenericReportElasticSearch("authToken",
-                caseDetails.getCaseTypeId(), "2019-09-23",
+                TribunalOffice.valueOf(caseDetails.getCaseData().getOwningOffice()), "2019-09-23",
                 "2019-09-24", BROUGHT_FORWARD_REPORT);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
@@ -464,7 +465,7 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesGenericReportElasticSearch("authToken",
-                caseDetails.getCaseTypeId(), "2019-09-24",
+               TribunalOffice.valueOf(caseDetails.getCaseData().getOwningOffice()), "2019-09-24",
                 "2019-09-24", CASES_COMPLETED_REPORT);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
@@ -485,7 +486,7 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesGenericReportElasticSearch("authToken",
-                caseDetails.getCaseTypeId(), "2019-09-24",
+                TribunalOffice.valueOf(caseDetails.getCaseData().getOwningOffice()), "2019-09-24",
                 "2019-09-24", TIME_TO_FIRST_HEARING_REPORT);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
@@ -505,7 +506,7 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesGenericReportElasticSearch("authToken",
-                caseDetails.getCaseTypeId(), "2019-09-24",
+                TribunalOffice.valueOf(caseDetails.getCaseData().getOwningOffice()), "2019-09-24",
                 "2019-09-24", LIVE_CASELOAD_REPORT);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);

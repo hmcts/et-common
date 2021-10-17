@@ -19,6 +19,7 @@ import uk.gov.hmcts.ecm.common.model.ccd.CaseDetails;
 import uk.gov.hmcts.ecm.common.model.ccd.CaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.ccd.PaginatedSearchMetadata;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
+import uk.gov.hmcts.ecm.common.model.helper.TribunalOffice;
 import uk.gov.hmcts.ecm.common.model.labels.LabelCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.labels.LabelPayloadEvent;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleCaseSearchResult;
@@ -232,7 +233,7 @@ public class CcdClient {
                 getListingQuery(dateToSearchFrom, dateToSearchTo, venueToSearch, venueToSearchMapping));
     }
 
-    public List<SubmitEvent> retrieveCasesGenericReportElasticSearch(String authToken, String caseTypeId,
+    public List<SubmitEvent> retrieveCasesGenericReportElasticSearch(String authToken, TribunalOffice tribunalOffice,
                                                                      String dateToSearchFrom, String dateToSearchTo,
                                                                     String reportType) throws IOException {
         String from = LocalDate.parse(dateToSearchFrom).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
@@ -240,12 +241,12 @@ public class CcdClient {
             String to = LocalDate.parse(dateToSearchFrom)
                     .atStartOfDay().plusDays(1).minusSeconds(1).format(OLD_DATE_TIME_PATTERN);
             log.info(reportType + " - " + from + " - " + to);
-            return buildAndGetElasticSearchRequest(authToken, caseTypeId,
+            return buildAndGetElasticSearchRequest(authToken, tribunalOffice.getOfficeName(),
                     getReportRangeDateQuery(from, to, reportType));
         } else {
             String to = LocalDate.parse(dateToSearchTo).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
             log.info(reportType + " - " + from + " - " + to);
-            return buildAndGetElasticSearchRequest(authToken, caseTypeId,
+            return buildAndGetElasticSearchRequest(authToken, tribunalOffice.getOfficeName(),
                     getReportRangeDateQuery(from, to, reportType));
         }
     }
