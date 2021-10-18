@@ -81,6 +81,8 @@ public class ListingData {
     private AdhocReportType localReportsDetailHdr;
     @JsonProperty("localReportsDetail")
     private List<AdhocReportTypeItem> localReportsDetail;
+    @JsonProperty("owningOffice")
+    private String owningOffice;
 
     public void clearReportFields() {
         listingVenueOfficeAber = null;
