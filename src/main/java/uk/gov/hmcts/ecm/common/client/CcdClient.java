@@ -233,7 +233,7 @@ public class CcdClient {
                 getListingQuery(dateToSearchFrom, dateToSearchTo, venueToSearch, venueToSearchMapping));
     }
 
-    public List<SubmitEvent> retrieveCasesGenericReportElasticSearch(String authToken, TribunalOffice tribunalOffice,
+    public List<SubmitEvent> retrieveCasesGenericReportElasticSearch(String authToken, String caseTypeId, TribunalOffice tribunalOffice,
                                                                      String dateToSearchFrom, String dateToSearchTo,
                                                                     String reportType) throws IOException {
         String from = LocalDate.parse(dateToSearchFrom).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
@@ -241,19 +241,19 @@ public class CcdClient {
             String to = LocalDate.parse(dateToSearchFrom)
                     .atStartOfDay().plusDays(1).minusSeconds(1).format(OLD_DATE_TIME_PATTERN);
             log.info(reportType + " - " + from + " - " + to);
-            return buildAndGetElasticSearchRequest(authToken, tribunalOffice.getOfficeName(),
-                    getReportRangeDateQuery(from, to, reportType));
+            return buildAndGetElasticSearchRequest(authToken, caseTypeId,
+                    getReportRangeDateQuery(from, to, reportType, tribunalOffice.getOfficeName()));
         } else {
             String to = LocalDate.parse(dateToSearchTo).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
             log.info(reportType + " - " + from + " - " + to);
-            return buildAndGetElasticSearchRequest(authToken, tribunalOffice.getOfficeName(),
-                    getReportRangeDateQuery(from, to, reportType));
+            return buildAndGetElasticSearchRequest(authToken, caseTypeId,
+                    getReportRangeDateQuery(from, to, reportType, tribunalOffice.getOfficeName()));
         }
     }
 
-    private String getReportRangeDateQuery(String from, String to, String reportType) {
-        log.info("REPORT QUERY DATE: " + ESHelper.getReportRangeDateSearchQuery(from, to, reportType));
-        return ESHelper.getReportRangeDateSearchQuery(from, to, reportType);
+    private String getReportRangeDateQuery(String from, String to, String reportType, String owningOffice) {
+        log.info("REPORT QUERY DATE: " + ESHelper.getReportRangeDateSearchQuery(from, to, reportType, owningOffice));
+        return ESHelper.getReportRangeDateSearchQuery(from, to, reportType, owningOffice);
     }
 
     private List<SubmitEvent> buildAndGetElasticSearchRequest(String authToken, String caseTypeId, String query)

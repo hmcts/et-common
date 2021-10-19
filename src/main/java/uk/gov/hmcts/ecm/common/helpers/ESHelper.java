@@ -25,6 +25,7 @@ public class ESHelper {
             "data.hearingCollection.value.hearingDateCollection.value.hearingVenueDay.keyword";
     public static final String BROUGHT_FORWARD_DATE_FIELD_NAME = "data.bfActions.value.bfDate";
     public static final String CLAIMS_ACCEPTED_DATE_FIELD_NAME = "data.preAcceptCase.dateAccepted";
+    public static final String OWNING_OFFICE_FIELD_NAME = "data.owningOffice";
     public static final String LISTING_GLASGOW_VENUE_FIELD_NAME =
             "data.hearingCollection.value.hearingDateCollection.value.Hearing_Glasgow.keyword";
     public static final String LISTING_ABERDEEN_VENUE_FIELD_NAME =
@@ -111,9 +112,10 @@ public class ESHelper {
     }
 
     public static String getReportRangeDateSearchQuery(String dateToSearchFrom, String dateToSearchTo,
-                                                       String reportType) {
+                                                       String reportType, String owningOffice) {
         String dateFieldName = getDateFieldName(reportType);
         BoolQueryBuilder boolQueryBuilder = boolQuery()
+                .filter(QueryBuilders.termQuery(OWNING_OFFICE_FIELD_NAME, owningOffice))
                 .filter(new RangeQueryBuilder(dateFieldName).gte(dateToSearchFrom).lte(dateToSearchTo));
         return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
