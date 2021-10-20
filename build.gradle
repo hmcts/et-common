@@ -13,7 +13,6 @@ plugins {
 group 'uk.gov.hmcts.reform'
 version '0.1.141'
 
-
 sourceCompatibility = '11.0'
 
 repositories {
