@@ -433,12 +433,13 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesGenericReportElasticSearch() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[" +
-                "{\"term\":{\"data.owningOffice\":{\"value\":\"Leeds\",\"boost\":1.0}}}," +
-                "{\"range\":{\"data.bfActions.value"
-                + ".bfDate\":{\"from\":\"2019-09-23T00:00:00.000\",\"to\":\"2019-09-24T00:00:00.000\","
-                + "\"include_lower\":true,\"include_upper\":true,\"boost\":1"
-                + ".0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":{\"data.owningOffice\"" +
+                ":{\"query\":\"Leeds\",\"operator\":\"OR\",\"prefix_length\":0,\"max_expansions\":50," +
+                "\"fuzzy_transpositions\":true,\"lenient\":false,\"zero_terms_query\":\"NONE\"," +
+                "\"auto_generate_synonyms_phrase_query\":true,\"boost\":1.0}}}],\"filter\":[{\"range\"" +
+                ":{\"data.bfActions.value.bfDate\":{\"from\":\"2019-09-23T00:00:00.000\",\"to\":\"" +
+                "2019-09-24T00:00:00.000\",\"include_lower\":true,\"include_upper\":true,\"boost\":1.0}}}]," +
+                "\"adjust_pure_negative\":true,\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
@@ -455,13 +456,14 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesGenericReportElasticSearchCasesCompleted() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":["
-                + "{\"term\":{\"data.owningOffice\":{\"value\":\"Leeds\",\"boost\":1.0}}},"
-                + "{\"range\""
-                + ":{\"data.hearingCollection.value.hearingDateCollection.value"
-                + ".listedDate\":{\"from\":\"2019-09-24T00:00:00.000\",\"to\":\"2019-09-24T23:59:59.000\","
-                + "\"include_lower\":true,\"include_upper\":true,\"boost\":1"
-                + ".0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":" +
+                "{\"data.owningOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\",\"prefix_length\"" +
+                ":0,\"max_expansions\":50,\"fuzzy_transpositions\":true,\"lenient\":false," +
+                "\"zero_terms_query\":\"NONE\",\"auto_generate_synonyms_phrase_query\":true," +
+                "\"boost\":1.0}}}],\"filter\":[{\"range\":{\"data.hearingCollection.value." +
+                "hearingDateCollection.value.listedDate\":{\"from\":\"2019-09-24T00:00:00.000\"," +
+                "\"to\":\"2019-09-24T23:59:59.000\",\"include_lower\":true,\"include_upper\":true," +
+                "\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
@@ -478,12 +480,16 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesGenericReportElasticSearchCasesTimeToFirstHearing() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":" +
-                "[{\"term\":{\"data.owningOffice\":{\"value\":\"Leeds\",\"boost\":1.0}}}," +
-                "{\"range\":{\"data.hearingCollection.value.hearingDateCollection.value.listedDate\":" +
-                "{\"from\":\"2019-09-24T00:00:00.000\",\"to\":\"2019-09-24T23:59:59.000\"," +
-                "\"include_lower\":true,\"include_upper\":true,\"boost\":1.0}}}]," +
-                "\"adjust_pure_negative\":true,\"boost\":1.0}}}";
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":" +
+                "{\"data.owningOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\"," +
+                "\"prefix_length\":0,\"max_expansions\":50,\"fuzzy_transpositions\"" +
+                ":true,\"lenient\":false,\"zero_terms_query\":\"NONE\"," +
+                "\"auto_generate_synonyms_phrase_query\":true,\"boost\":1.0}}}]," +
+                "\"filter\":[{\"range\":{\"data.hearingCollection." +
+                "value.hearingDateCollection.value.listedDate\":" +
+                "{\"from\":\"2019-09-24T00:00:00.000\",\"to\":\"2019-09-24T23:59:59.000\"" +
+                ",\"include_lower\":true,\"include_upper\":true,\"" +
+                "boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
@@ -500,10 +506,15 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesGenericReportElasticSearchLiveCaseload() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"term\":{\"data.owningOffice\":" +
-                "{\"value\":\"Leeds\",\"boost\":1.0}}},{\"range\":{\"data.preAcceptCase.dateAccepted\":" +
-                "{\"from\":\"2019-09-24T00:00:00.000\",\"to\":\"2019-09-24T23:59:59.000\",\"include_lower\":" +
-                "true,\"include_upper\":true,\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":" +
+                "{\"data.owningOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\"" +
+                ",\"prefix_length\":0,\"max_expansions\":50," +
+                "\"fuzzy_transpositions\":true,\"lenient\":false,\"zero_terms_query\"" +
+                ":\"NONE\",\"auto_generate_synonyms_phrase_query\":true," +
+                "\"boost\":1.0}}}],\"filter\":[{\"range\":" +
+                "{\"data.preAcceptCase.dateAccepted\":{\"from\":\"2019-09-24T00:00:00.000\"," +
+                "\"to\":\"2019-09-24T23:59:59.000\",\"include_lower\":true,\"include_upper\":true," +
+                "\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
