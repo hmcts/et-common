@@ -112,7 +112,7 @@ public class ESHelper {
                                                        String reportType, String owningOffice) {
         String dateFieldName = getDateFieldName(reportType);
         BoolQueryBuilder boolQueryBuilder = boolQuery()
-                .must(new MatchQueryBuilder(OWNING_OFFICE_FIELD_NAME, owningOffice))
+                //.must(new MatchQueryBuilder(OWNING_OFFICE_FIELD_NAME, owningOffice))
                 .filter(new RangeQueryBuilder(dateFieldName).gte(dateToSearchFrom).lte(dateToSearchTo));
         return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
