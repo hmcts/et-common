@@ -252,8 +252,9 @@ public class CcdClient {
     }
 
     private String getReportRangeDateQuery(String from, String to, String reportType, String owningOffice) {
-        log.info("REPORT QUERY DATE: " + ESHelper.getReportRangeDateSearchQuery(from, to, reportType, owningOffice));
-        return ESHelper.getReportRangeDateSearchQuery(from, to, reportType, owningOffice);
+       String query = ESHelper.getReportRangeDateSearchQuery(from, to, reportType, owningOffice);
+        log.info("REPORT QUERY DATE: " + query);
+        return query;
     }
 
     private List<SubmitEvent> buildAndGetElasticSearchRequest(String authToken, String caseTypeId, String query)
