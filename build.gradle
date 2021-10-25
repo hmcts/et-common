@@ -65,7 +65,7 @@ publishing {
             artifact sourcesJar
             artifact javadocJar
             groupId project.group
-            artifactId 'ecm-common'
+            artifactId 'et-common'
             version project.version
         }
     }

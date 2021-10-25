@@ -1,11 +1,11 @@
-# ecm-common
-ECM-Common library
+# et-common
+Employment Tribunals Common library
 
-Re-usable features for all ECM Java Projects
+Re-usable features for all Employment Tribunals Java Projects
 
 ### Prerequisites
 
-- [JDK 8](https://www.oracle.com/java)
+- [JDK 11](https://www.oracle.com/java)
 
 ## Usage
 
@@ -31,10 +31,6 @@ To run all checks (including unit tests) please execute the following command:
 ```bash
     ./gradlew check
 ```
-
-## Repository
-
-[ECM-Common](https://dl.bintray.com/hmcts/hmcts-maven/uk/gov/hmcts/reform/ecm-common/)
 
 ## License
 
