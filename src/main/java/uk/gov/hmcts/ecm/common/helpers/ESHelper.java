@@ -25,6 +25,7 @@ public class ESHelper {
             "data.hearingCollection.value.hearingDateCollection.value.hearingVenueDay.keyword";
     public static final String BROUGHT_FORWARD_DATE_FIELD_NAME = "data.bfActions.value.bfDate";
     public static final String CLAIMS_ACCEPTED_DATE_FIELD_NAME = "data.preAcceptCase.dateAccepted";
+    public static final String CLAIMS_SERVED_DATE_FIELD_NAME = "data.claimServedDate";
     public static final String LISTING_GLASGOW_VENUE_FIELD_NAME =
             "data.hearingCollection.value.hearingDateCollection.value.Hearing_Glasgow.keyword";
     public static final String LISTING_ABERDEEN_VENUE_FIELD_NAME =
@@ -131,6 +132,8 @@ public class ESHelper {
             case CASES_COMPLETED_REPORT:
             case TIME_TO_FIRST_HEARING_REPORT:
                 return LISTING_DATE_FIELD_NAME;
+            case SERVING_CLAIMS_REPORT:
+                return CLAIMS_SERVED_DATE_FIELD_NAME;
             default:
                 return REPORT_TYPE_NOT_FOUND;
         }
