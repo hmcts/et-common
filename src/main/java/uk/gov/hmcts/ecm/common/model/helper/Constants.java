@@ -141,6 +141,8 @@ public class Constants {
     public static final String RESPONDENT_REP = "RESPONDENT REP : ";
     public static final String TEL = "Tel: ";
     public static final String REF = "Ref: ";
+    public static final String CLAIMANT_TITLE = "Claimant";
+    public static final String RESPONDENT_TITLE = "Respondent";
 
     public static final String LABEL = "Label_";
     public static final String LBL = "lbl_";
@@ -349,6 +351,7 @@ public class Constants {
             "they have been selected in judgements: ";
     public static final String DEPOSIT_REFUNDED_GREATER_DEPOSIT_ERROR = "The amount entered for the refund " +
             "cannot be more than the amount that was deposited";
+    public static final String UNABLE_TO_FIND_PARTY = "Unable to find correct party member";
 
     public static final String NO_CASES_SEARCHED = "No cases searched";
     public static final String CASE_IS_NOT_IN_MULTIPLE_ERROR = "Case is not part of the multiple or is already the lead case";
