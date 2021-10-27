@@ -303,7 +303,6 @@ public class Constants {
     public static final String CASES_AWAITING_JUDGMENT_REPORT = "Cases Awaiting Judgment";
     public static final String SESSION_DAYS_REPORT = "Session Days";
 
-
     public static final String HEARING_DOC_ETCL = "ETCL - Cause List";
     public static final String HEARING_DOC_IT56 = "IT56 - List of Exhibits";
     public static final String HEARING_DOC_IT57 = "ETRP - ET recording of proceeding";

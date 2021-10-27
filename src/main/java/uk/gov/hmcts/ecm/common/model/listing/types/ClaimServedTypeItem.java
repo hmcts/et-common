@@ -6,9 +6,9 @@ import lombok.Data;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
-public class ReportRespondentType {
-    @JsonProperty("et3ReceivedDate")
-    private String et3ReceivedDate;
-    @JsonProperty("respondentName")
-    private String respondentName;
+public class ClaimServedTypeItem {
+    @JsonProperty("id")
+    private String id;
+    @JsonProperty("value")
+    private ClaimServedType value;
 }
