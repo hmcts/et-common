@@ -3,6 +3,7 @@ package uk.gov.hmcts.ecm.common.model.ccd.types;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
 import uk.gov.hmcts.ecm.common.model.ccd.Document;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
 
@@ -14,6 +15,8 @@ public class JudgementType {
 
     @JsonProperty("non_hearing_judgment")
     private String nonHearingJudgment;
+    @JsonProperty("dynamicJudgementHearing")
+    private DynamicFixedListType dynamicJudgementHearing;
     @JsonProperty("judgmentHearingDate")
     private String judgmentHearingDate;
     @JsonProperty("judgement_type")
