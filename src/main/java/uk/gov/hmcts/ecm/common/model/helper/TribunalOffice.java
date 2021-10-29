@@ -1,6 +1,10 @@
 package uk.gov.hmcts.ecm.common.model.helper;
 
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_CASE_TYPE_ID;
+
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public enum TribunalOffice {
@@ -53,5 +57,23 @@ public enum TribunalOffice {
             }
         }
         throw new IllegalArgumentException(String.format("Office name %s not recognised", officeName));
+    }
+
+    public static String getCaseTypeId(String officeName) {
+        List<String> englandWalesOffices = List.of(BRISTOL.officeName, LEEDS.officeName, LONDON_CENTRAL.officeName,
+                LONDON_EAST.officeName, LONDON_SOUTH.officeName, MANCHESTER.officeName,
+                MIDLANDS_EAST.officeName, MIDLANDS_WEST.officeName, NEWCASTLE.officeName,
+                WALES.officeName, WATFORD.officeName);
+        List<String> scotlandOffices = List.of(ABERDEEN.officeName, GLASGOW.officeName, EDINBURGH.officeName, DUNDEE.officeName);
+
+        if (englandWalesOffices.contains(officeName)) {
+            return ENGLANDWALES_CASE_TYPE_ID;
+        }
+        else if (scotlandOffices.contains(officeName)) {
+            return SCOTLAND_CASE_TYPE_ID;
+        }
+        else {
+            return "";
+        }
     }
 }
