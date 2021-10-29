@@ -76,6 +76,10 @@ public class CaseData {
     private CasePreAcceptType preAcceptCase;
     @JsonProperty("receiptDate")
     private String receiptDate;
+
+    @JsonProperty("claimServedDate")
+    private String claimServedDate;
+
     @JsonProperty("feeGroupReference")
     private String feeGroupReference;
     @JsonProperty("claimantWorkAddressQuestion")

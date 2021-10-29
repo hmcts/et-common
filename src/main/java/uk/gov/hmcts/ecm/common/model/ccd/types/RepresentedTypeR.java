@@ -3,12 +3,15 @@ package uk.gov.hmcts.ecm.common.model.ccd.types;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
 import uk.gov.hmcts.ecm.common.model.ccd.Address;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 public class RepresentedTypeR {
 
+    @JsonProperty("dynamic_resp_rep_name")
+    private DynamicFixedListType dynamicRespRepName;
     @JsonProperty("resp_rep_name")
     private String respRepName;
     @JsonProperty("name_of_representative")

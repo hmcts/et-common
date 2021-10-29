@@ -14,4 +14,6 @@ public class AdditionalCaseInfoType {
     private String additionalSensitive;
     @JsonProperty("doNotPostpone")
     private String doNotPostpone;
+    @JsonProperty("digitalFile")
+    private String digitalFile;
 }

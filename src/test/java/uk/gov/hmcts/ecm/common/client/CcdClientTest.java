@@ -710,16 +710,6 @@ public class CcdClientTest {
                 "Content-Type:\"application/json;charset=UTF-8\"]", httpHeaders.toString());
     }
 
-    public static UserDetails getUserDetails() {
-        UserDetails userDetails = new UserDetails();
-        userDetails.setUid("id");
-        userDetails.setEmail("mail@mail.com");
-        userDetails.setFirstName("Mike");
-        userDetails.setLastName("Jordan");
-        userDetails.setRoles(Collections.singletonList("role"));
-        return userDetails;
-    }
-
     @Test
     public void retrieveMultipleCasesElasticSearchWithRetries() throws IOException {
         String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.multipleReference.keyword\""
@@ -778,5 +768,29 @@ public class CcdClientTest {
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CasesAwaitingJudgmentSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    public void startDisposeEventForCase() throws IOException {
+        HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
+        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
+        when(ccdClientConfig.buildStartDisposeEventForCaseUrl(any(), any(), any(), any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
+                eq(CCDRequest.class))).thenReturn(responseEntity);
+        ccdClient.startDisposeEventForCase("authToken", caseDetails.getCaseTypeId(),
+                caseDetails.getJurisdiction(), "1111");
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    public static UserDetails getUserDetails() {
+        UserDetails userDetails = new UserDetails();
+        userDetails.setUid("id");
+        userDetails.setEmail("mail@mail.com");
+        userDetails.setFirstName("Mike");
+        userDetails.setLastName("Jordan");
+        userDetails.setRoles(Collections.singletonList("role"));
+        return userDetails;
     }
 }

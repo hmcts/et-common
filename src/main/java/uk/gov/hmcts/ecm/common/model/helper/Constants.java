@@ -81,6 +81,8 @@ public class Constants {
     public static final String RESPONDENT_REP = "RESPONDENT REP : ";
     public static final String TEL = "Tel: ";
     public static final String REF = "Ref: ";
+    public static final String CLAIMANT_TITLE = "Claimant";
+    public static final String RESPONDENT_TITLE = "Respondent";
 
     public static final String LABEL = "Label_";
     public static final String LBL = "lbl_";
@@ -93,6 +95,7 @@ public class Constants {
     public static final String FLAG_RESERVED = "RESERVED";
     public static final String FLAG_ECC = "ECC";
     public static final String FLAG_WITH_OUTSTATION = "WITH OUTSTATION";
+    public static final String FLAG_DIGITAL_FILE = "DIGITAL FILE";
 
     public static final String ONE = "1";
     public static final String ZERO = "0";
@@ -113,6 +116,7 @@ public class Constants {
     public static final String AMEND_MULTIPLE_EVENT_TRIGGER_ID = "amendMultipleAPI";
     public static final String AMEND_SINGLE_EVENT_TRIGGER_ID = "amendSingle";
     public static final String UPDATE_EVENT_TRIGGER_ID = "amendCaseDetails";
+    public static final String DISPOSE_EVENT_TRIGGER_ID = "disposeCase";
     public static final String CREATION_TRANSFER_EVENT_TRIGGER_ID = "processCaseTransfer";
     public static final String CASE_TRANSFER_EVENT_TRIGGER_ID = "caseTransferMultiple";
     public static final String RETURN_TRANSFER_EVENT_TRIGGER_ID = "returnCaseTransfer";
@@ -247,6 +251,7 @@ public class Constants {
             "they have been selected in judgements: ";
     public static final String DEPOSIT_REFUNDED_GREATER_DEPOSIT_ERROR = "The amount entered for the refund " +
             "cannot be more than the amount that was deposited";
+    public static final String UNABLE_TO_FIND_PARTY = "Unable to find correct party member";
 
     public static final String NO_CASES_SEARCHED = "No cases searched";
     public static final String CASE_IS_NOT_IN_MULTIPLE_ERROR = "Case is not part of the multiple or is already the lead case";
