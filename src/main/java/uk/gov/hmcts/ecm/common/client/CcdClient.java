@@ -257,7 +257,7 @@ public class CcdClient {
         return query;
     }
 
-    private List<SubmitEvent> buildAndGetElasticSearchRequest(String authToken, String caseTypeId, String query)
+    public List<SubmitEvent> buildAndGetElasticSearchRequest(String authToken, String caseTypeId, String query)
             throws IOException {
         List<SubmitEvent> submitEvents = new ArrayList<>();
         HttpEntity<String> request = new HttpEntity<>(query, buildHeaders(authToken));
