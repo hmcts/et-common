@@ -22,7 +22,8 @@ public enum TribunalOffice {
     MIDLANDS_WEST("Midlands West", "13"),
     NEWCASTLE("Newcastle", "25"),
     WALES("Wales", "16"),
-    WATFORD("Watford", "33");
+    WATFORD("Watford", "33"),
+    SCOTLAND("Scotland");
 
     private final String officeName;
     private final String officeNumber;
@@ -64,7 +65,8 @@ public enum TribunalOffice {
                 LONDON_EAST.officeName, LONDON_SOUTH.officeName, MANCHESTER.officeName,
                 MIDLANDS_EAST.officeName, MIDLANDS_WEST.officeName, NEWCASTLE.officeName,
                 WALES.officeName, WATFORD.officeName);
-        List<String> scotlandOffices = List.of(ABERDEEN.officeName, GLASGOW.officeName, EDINBURGH.officeName, DUNDEE.officeName);
+        List<String> scotlandOffices = List.of(ABERDEEN.officeName, GLASGOW.officeName,
+                EDINBURGH.officeName, DUNDEE.officeName, SCOTLAND.officeName);
 
         if (englandWalesOffices.contains(officeName)) {
             return ENGLANDWALES_CASE_TYPE_ID;
