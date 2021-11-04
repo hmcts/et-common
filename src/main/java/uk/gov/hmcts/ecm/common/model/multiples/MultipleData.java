@@ -143,9 +143,6 @@ public class MultipleData {
 
     @JsonProperty("bulkAddSingleCasesImportFile")
     private CaseImporterFile bulkAddSingleCasesImportFile;
-
-    @JsonProperty("owningOffice")
-    private String owningOffice;
 }
 
 

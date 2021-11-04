@@ -290,9 +290,6 @@ public class CaseData {
     @JsonProperty("stateAPI")
     private String stateAPI;
 
-    @JsonProperty("owningOffice")
-    private String owningOffice;
-
     // Allocate Hearing fields
     @JsonProperty("allocateHearingHearing")
     private DynamicFixedListType allocateHearingHearing;
