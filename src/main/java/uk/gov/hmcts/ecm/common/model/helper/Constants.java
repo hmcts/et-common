@@ -261,6 +261,9 @@ public class Constants {
     public static final String RESPONDENTS_ADDRESS__LABEL = "respondentsAddressLabel";
     public static final String RESPONDENTS_REPS_ADDRESS__LABEL = "respondentsRepsAddressLabel";
 
+    public static final String SCOPE_OF_TRANSFER_INTRA_COUNTRY = "ScopeOfTransferIntraCountry";
+    public static final String SCOPE_OF_TRANSFER_INTER_COUNTRY = "ScopeOfTransferInterCountry";
+
     public static final int TARGET_HEARING_DATE_INCREMENT = 180;
 
     public static final int MAX_ES_SIZE = 10000;
