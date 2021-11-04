@@ -96,7 +96,7 @@ public class CcdClientTest {
         caseDetails.setJurisdiction("TRIBUNALS");
         caseDetails.setCaseTypeId("EnglandWales");
         caseData = new CaseData();
-        caseData.setOwningOffice("LEEDS");
+        caseData.setManagingOffice("LEEDS");
         caseDetails.setCaseData(caseData);
 
         bulkDetails = new BulkDetails();
@@ -434,7 +434,7 @@ public class CcdClientTest {
     @Test
     public void retrieveCasesGenericReportElasticSearch() throws IOException {
 
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":{\"data.owningOffice\"" +
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":{\"data.managingOffice\"" +
                 ":{\"query\":\"Leeds\",\"operator\":\"OR\",\"prefix_length\":0,\"max_expansions\":50," +
                 "\"fuzzy_transpositions\":true,\"lenient\":false,\"zero_terms_query\":\"NONE\"," +
                 "\"auto_generate_synonyms_phrase_query\":true,\"boost\":1.0}}}],\"filter\":[{\"range\"" +
@@ -449,7 +449,7 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesGenericReportElasticSearch("authToken", caseDetails.getCaseTypeId(),
-                TribunalOffice.valueOf(caseDetails.getCaseData().getOwningOffice()), "2019-09-23",
+                TribunalOffice.valueOf(caseDetails.getCaseData().getManagingOffice()), "2019-09-23",
                 "2019-09-24", BROUGHT_FORWARD_REPORT);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
@@ -459,7 +459,7 @@ public class CcdClientTest {
     public void retrieveCasesGenericReportElasticSearchCasesCompleted() throws IOException {
 
        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":" +
-                "{\"data.owningOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\",\"prefix_length\"" +
+                "{\"data.managingOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\",\"prefix_length\"" +
                 ":0,\"max_expansions\":50,\"fuzzy_transpositions\":true,\"lenient\":false," +
                 "\"zero_terms_query\":\"NONE\",\"auto_generate_synonyms_phrase_query\":true," +
                 "\"boost\":1.0}}}],\"filter\":[{\"range\":{\"data.hearingCollection.value." +
@@ -474,7 +474,7 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesGenericReportElasticSearch("authToken", caseDetails.getCaseTypeId(),
-               TribunalOffice.valueOf(caseDetails.getCaseData().getOwningOffice()), "2019-09-24",
+               TribunalOffice.valueOf(caseDetails.getCaseData().getManagingOffice()), "2019-09-24",
                 "2019-09-24", CASES_COMPLETED_REPORT);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
@@ -483,7 +483,7 @@ public class CcdClientTest {
     @Test
     public void retrieveCasesGenericReportElasticSearchCasesTimeToFirstHearing() throws IOException {
         String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":" +
-                "{\"data.owningOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\"," +
+                "{\"data.managingOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\"," +
                 "\"prefix_length\":0,\"max_expansions\":50,\"fuzzy_transpositions\"" +
                 ":true,\"lenient\":false,\"zero_terms_query\":\"NONE\"," +
                 "\"auto_generate_synonyms_phrase_query\":true,\"boost\":1.0}}}]," +
@@ -500,7 +500,7 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesGenericReportElasticSearch("authToken", caseDetails.getCaseTypeId(),
-                TribunalOffice.valueOf(caseDetails.getCaseData().getOwningOffice()), "2019-09-24",
+                TribunalOffice.valueOf(caseDetails.getCaseData().getManagingOffice()), "2019-09-24",
                 "2019-09-24", TIME_TO_FIRST_HEARING_REPORT);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
@@ -509,7 +509,7 @@ public class CcdClientTest {
     @Test
     public void retrieveCasesGenericReportElasticSearchLiveCaseload() throws IOException {
        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":" +
-                "{\"data.owningOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\"" +
+                "{\"data.managingOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\"" +
                 ",\"prefix_length\":0,\"max_expansions\":50," +
                 "\"fuzzy_transpositions\":true,\"lenient\":false,\"zero_terms_query\"" +
                 ":\"NONE\",\"auto_generate_synonyms_phrase_query\":true," +
@@ -525,7 +525,7 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesGenericReportElasticSearch("authToken", caseDetails.getCaseTypeId(),
-                TribunalOffice.valueOf(caseDetails.getCaseData().getOwningOffice()), "2019-09-24",
+                TribunalOffice.valueOf(caseDetails.getCaseData().getManagingOffice()), "2019-09-24",
                 "2019-09-24", LIVE_CASELOAD_REPORT);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);

@@ -251,8 +251,8 @@ public class CcdClient {
         }
     }
 
-    private String getReportRangeDateQuery(String from, String to, String reportType, String owningOffice) {
-       String query = ESHelper.getReportRangeDateSearchQuery(from, to, reportType, owningOffice);
+    private String getReportRangeDateQuery(String from, String to, String reportType, String managingOffice) {
+       String query = ESHelper.getReportRangeDateSearchQuery(from, to, reportType, managingOffice);
         log.info("REPORT QUERY DATE: " + query);
         return query;
     }
