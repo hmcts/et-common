@@ -45,7 +45,7 @@ public class UpdateCaseMsgTest {
         assertEquals(
                 "UpdateCaseMsg{"
                         + "ethosCaseReference='4150002/2020', msgId='1', jurisdiction='EMPLOYMENT', "
-                        + "caseTypeId='Scotland_Multiple', multipleRef='4150001', totalCases='1', "
+                        + "caseTypeId='ET_Scotland_Multiple', multipleRef='4150001', totalCases='1', "
                         + "username='eric.ccdcooper@gmail.com', confirmation='YES', "
                         + "dataModel=CreationDataModel(lead=4150002/2020, multipleRef=4150001, "
                         + "multipleReferenceLinkMarkUp=" + linkMarkUp +")', "
