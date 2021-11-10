@@ -340,6 +340,7 @@ public class Constants {
     public static final String HEARING_NUMBER_MISMATCH_ERROR_MESSAGE = "The hearing number provided did not match with any of the hearing numbers contained within this case";
     public static final String DUPLICATE_JURISDICTION_CODE_ERROR_MESSAGE = "Duplicate Jurisdiction Code(s) : ";
     public static final String MISSING_JURISDICTION_OUTCOME_ERROR_MESSAGE = "A Jurisdiction outcome is required before the case can be closed";
+    public static final String MISSING_JUDGEMENT_JURISDICTION_MESSAGE = "This case contains a Judgment which does not have a jurisdiction attached to it. To enable this case to be closed, please ensure the relevant jurisdiction(s) has been linked to the Judgment.";
     public static final String MISSING_JURISDICTION_MESSAGE = "You cannot close this case as there is currently no jurisdiction and no jurisdiction outcome associated with it";
     public static final String ADDRESS_LABELS_EMPTY_ERROR = "No addresses were found for you selection";
     public static final String ADDRESS_LABELS_SELECT_ERROR = "You need to select at least one address label before printing";
