@@ -141,7 +141,7 @@ public class CcdClient {
         var submitEvents = new ArrayList<SubmitEvent>();
         var searchResult = runElasticSearch(authToken, caseTypeId, query,
                 CaseSearchResult.class);
-        if (searchResult != null && searchResult.getCases() != null) {
+        if (searchResult != null && !CollectionUtils.isEmpty(searchResult.getCases())) {
             submitEvents.addAll(searchResult.getCases());
         }
 
@@ -153,7 +153,7 @@ public class CcdClient {
         var submitEvents = new ArrayList<CasesAwaitingJudgmentSubmitEvent>();
         var searchResult = runElasticSearch(authToken, caseTypeId, query,
                 CasesAwaitingJudgmentSearchResult.class);
-        if (searchResult != null && searchResult.getCases() != null) {
+        if (searchResult != null && !CollectionUtils.isEmpty(searchResult.getCases())) {
             submitEvents.addAll(searchResult.getCases());
         }
 
@@ -165,7 +165,7 @@ public class CcdClient {
         var submitEvents = new ArrayList<HearingsToJudgmentsSubmitEvent>();
         var searchResult = runElasticSearch(authToken, caseTypeId, query,
                 HearingsToJudgmentsSearchResult.class);
-        if (searchResult != null && searchResult.getCases() != null) {
+        if (searchResult != null && !CollectionUtils.isEmpty(searchResult.getCases())) {
             submitEvents.addAll(searchResult.getCases());
         }
 
