@@ -20,6 +20,8 @@ public class HearingType {
     private String hearingNumber;
     @JsonProperty("Hearing_venue")
     private DynamicFixedListType hearingVenue;
+    @JsonProperty("Hearing_venue_Scotland")
+    private String hearingVenueScotland;
     @JsonProperty("hearingEstLengthNum")
     private String hearingEstLengthNum;
     @JsonProperty("hearingEstLengthNumType")
@@ -37,13 +39,13 @@ public class HearingType {
     @JsonProperty("judge")
     private DynamicFixedListType judge;
     @JsonProperty("Hearing_Glasgow")
-    private String hearingGlasgow;
+    private DynamicFixedListType hearingGlasgow;
     @JsonProperty("Hearing_Aberdeen")
-    private String hearingAberdeen;
+    private DynamicFixedListType hearingAberdeen;
     @JsonProperty("Hearing_Dundee")
-    private String hearingDundee;
+    private DynamicFixedListType hearingDundee;
     @JsonProperty("Hearing_Edinburgh")
-    private String hearingEdinburgh;
+    private DynamicFixedListType hearingEdinburgh;
     @JsonProperty("hearingDateCollection")
     private List<DateListedTypeItem> hearingDateCollection;
     @JsonProperty("hearingFormat")
@@ -61,5 +63,21 @@ public class HearingType {
 
     public boolean hasHearingEmployeeMember() {
         return hearingEEMember != null && hearingEEMember.getValue() != null;
+    }
+
+    public boolean hasHearingGlasgow() {
+        return hearingGlasgow != null && hearingGlasgow.getValue() != null;
+    }
+
+    public boolean hasHearingAberdeen() {
+        return hearingAberdeen != null && hearingAberdeen.getValue() != null;
+    }
+
+    public boolean hasHearingDundee() {
+        return hearingDundee != null && hearingDundee.getValue() != null;
+    }
+
+    public boolean hasHearingEdinburgh() {
+        return hearingEdinburgh != null && hearingEdinburgh.getValue() != null;
     }
 }

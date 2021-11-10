@@ -25,9 +25,14 @@ public class DynamicFixedListType {
         return dynamicFixedListType;
     }
 
-    public static DynamicFixedListType from(List<DynamicValueType> listItems, DynamicFixedListType original) {
+    public static DynamicFixedListType from(List<DynamicValueType> listItems) {
         var dynamicFixedListType = new DynamicFixedListType();
         dynamicFixedListType.listItems = listItems;
+        return dynamicFixedListType;
+    }
+
+    public static DynamicFixedListType from(List<DynamicValueType> listItems, DynamicFixedListType original) {
+        var dynamicFixedListType = DynamicFixedListType.from(listItems);
 
         var selectedValue = DynamicFixedListType.getSelectedValue(original);
         if (selectedValue.isPresent()) {

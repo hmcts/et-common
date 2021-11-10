@@ -25,6 +25,10 @@ public enum TribunalOffice {
     WATFORD("Watford", "33"),
     SCOTLAND("Scotland");
 
+    public static final TribunalOffice[] SCOTTISH_OFFICES = {
+            ABERDEEN, DUNDEE, EDINBURGH, GLASGOW
+    };
+
     private final String officeName;
     private final String officeNumber;
 
@@ -70,12 +74,10 @@ public enum TribunalOffice {
 
         if (englandWalesOffices.contains(officeName)) {
             return ENGLANDWALES_CASE_TYPE_ID;
-        }
-        else if (scotlandOffices.contains(officeName)) {
+        } else if (scotlandOffices.contains(officeName)) {
             return SCOTLAND_CASE_TYPE_ID;
-        }
-        else {
-            return "";
+        } else {
+            throw new IllegalArgumentException("Unexpected office " + officeName);
         }
     }
 }

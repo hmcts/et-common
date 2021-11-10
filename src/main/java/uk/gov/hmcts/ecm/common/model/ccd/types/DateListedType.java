@@ -17,6 +17,8 @@ public class DateListedType {
     private String postponedBy;
     @JsonProperty("hearingVenueDay")
     private DynamicFixedListType hearingVenueDay;
+    @JsonProperty("hearingVenueDayScotland")
+    private String hearingVenueDayScotland;
     @JsonProperty("hearingRoom")
     private DynamicFixedListType hearingRoom;
     @JsonProperty("hearingClerk")
@@ -24,13 +26,13 @@ public class DateListedType {
     @JsonProperty("Hearing_typeReadingDeliberation")
     private String hearingTypeReadingDeliberation;
     @JsonProperty("Hearing_Glasgow")
-    private String hearingGlasgow;
+    private DynamicFixedListType hearingGlasgow;
     @JsonProperty("Hearing_Aberdeen")
-    private String hearingAberdeen;
+    private DynamicFixedListType hearingAberdeen;
     @JsonProperty("Hearing_Dundee")
-    private String hearingDundee;
+    private DynamicFixedListType hearingDundee;
     @JsonProperty("Hearing_Edinburgh")
-    private String hearingEdinburgh;
+    private DynamicFixedListType hearingEdinburgh;
     @JsonProperty("hearingCaseDisposed")
     private String hearingCaseDisposed;
     @JsonProperty("Hearing_part_heard")
@@ -62,54 +64,6 @@ public class DateListedType {
     @JsonProperty("postponedDate")
     private String postponedDate;
 
-    //SCOTLAND
-    @JsonProperty("Hearing_room_Dundee")
-    private String HearingRoomDundee;
-    @JsonProperty("Hearing_room_Edinburgh")
-    private String hearingRoomEdinburgh;
-    @JsonProperty("Hearing_room_Glasgow")
-    private String hearingRoomGlasgow;
-    @JsonProperty("Hearing_room_GTC")
-    private String hearingRoomGTC;
-    @JsonProperty("Hearing_room_Cambeltown")
-    private String hearingRoomCambeltown;
-    @JsonProperty("Hearing_room_Dumfries")
-    private String hearingRoomDumfries;
-    @JsonProperty("Hearing_room_Oban")
-    private String hearingRoomOban;
-    @JsonProperty("Hearing_room_FortWilliam")
-    private String hearingRoomFortWilliam;
-    @JsonProperty("Hearing_room_Kirkcudbright")
-    private String hearingRoomKirkcubright;
-    @JsonProperty("Hearing_room_Lochmaddy")
-    private String hearingRoomLockmaddy;
-    @JsonProperty("Hearing_room_Portree")
-    private String hearingRoomPortree;
-    @JsonProperty("Hearing_room_Stirling")
-    private String hearingRoomStirling;
-    @JsonProperty("Hearing_room_StornowaySC")
-    private String hearingRoomStornowaySC;
-    @JsonProperty("Hearing_room_Stranraer")
-    private String hearingRoomStranraer;
-    @JsonProperty("Hearing_room_Aberdeen")
-    private String hearingRoomAberdeen;
-    @JsonProperty("Hearing_room_Lerwick")
-    private String hearingRoomLerwick;
-    @JsonProperty("Hearing_room_RRShetland")
-    private String hearingRoomRRShetland;
-    @JsonProperty("Hearing_room_Stornoway")
-    private String hearingRoomStornoway;
-    @JsonProperty("Hearing_room_Wick")
-    private String hearingRoomWick;
-    @JsonProperty("Hearing_room_IJC")
-    private String hearingRoomIJC;
-    @JsonProperty("Hearing_room_Inverness")
-    private String hearingRoomInverness;
-    @JsonProperty("Hearing_room_Kirkwall")
-    private String hearingRoomKirkawall;
-    @JsonProperty("roomDundeeTribunal")
-    private String roomDundeeTribunal;
-
     public boolean hasHearingVenue() {
         return hearingVenueDay != null && hearingVenueDay.getValue() != null;
     }
@@ -120,5 +74,21 @@ public class DateListedType {
 
     public boolean hasHearingClerk() {
         return hearingClerk != null && hearingClerk.getValue() != null;
+    }
+
+    public boolean hasHearingGlasgow() {
+        return hearingGlasgow != null && hearingGlasgow.getValue() != null;
+    }
+
+    public boolean hasHearingAberdeen() {
+        return hearingAberdeen != null && hearingAberdeen.getValue() != null;
+    }
+
+    public boolean hasHearingDundee() {
+        return hearingDundee != null && hearingDundee.getValue() != null;
+    }
+
+    public boolean hasHearingEdinburgh() {
+        return hearingEdinburgh != null && hearingEdinburgh.getValue() != null;
     }
 }
