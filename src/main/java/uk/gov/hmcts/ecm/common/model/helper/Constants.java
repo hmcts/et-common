@@ -1,5 +1,7 @@
 package uk.gov.hmcts.ecm.common.model.helper;
 
+import org.checkerframework.common.returnsreceiver.qual.This;
+
 import java.time.format.DateTimeFormatter;
 
 public class Constants {
@@ -329,32 +331,49 @@ public class Constants {
     public static final String IMAGE_FILE_PRECEDING = "EMP-TRIB-";
 
     public static final String FUTURE_RECEIPT_DATE_ERROR_MESSAGE = "Receipt date should not be a date in the future";
-    public static final String RECEIPT_DATE_LATER_THAN_ACCEPTED_ERROR_MESSAGE = "Receipt date should not be later than accepted date";
+    public static final String RECEIPT_DATE_LATER_THAN_ACCEPTED_ERROR_MESSAGE =
+        "Receipt date should not be later than accepted date";
     public static final String EMPTY_RESPONDENT_COLLECTION_ERROR_MESSAGE = "At least one active respondent is required";
-    public static final String EARLY_DATE_RETURNED_FROM_JUDGE_ERROR_MESSAGE = "Date returned from judge cannot be earlier than Date referred to judge";
-    public static final String FUTURE_RESPONSE_RECEIVED_DATE_ERROR_MESSAGE = "Response received date should not be a date in the future";
-    public static final String RESP_REP_NAME_MISMATCH_ERROR_MESSAGE = "The respondent name does not match any of the available respondents for representative";
-    public static final String EMPTY_HEARING_COLLECTION_ERROR_MESSAGE = "Hearings could not be found for this case, the hearing collection is empty";
-    public static final String HEARING_NUMBER_MISMATCH_ERROR_MESSAGE = "The hearing number provided did not match with any of the hearing numbers contained within this case";
+    public static final String EARLY_DATE_RETURNED_FROM_JUDGE_ERROR_MESSAGE = "Date returned from judge cannot be "
+    + "earlier than Date referred to judge";
+    public static final String FUTURE_RESPONSE_RECEIVED_DATE_ERROR_MESSAGE = "Response received date should not be a "
+    + "date in the future";
+    public static final String RESP_REP_NAME_MISMATCH_ERROR_MESSAGE = "The respondent name does not match any of the "
+    + "available respondents for representative";
+    public static final String EMPTY_HEARING_COLLECTION_ERROR_MESSAGE = "Hearings could not be found for this case, "
+    + "the hearing collection is empty";
+    public static final String HEARING_NUMBER_MISMATCH_ERROR_MESSAGE = "The hearing number provided did not match with "
+    + "any of the hearing numbers contained within this case";
     public static final String DUPLICATE_JURISDICTION_CODE_ERROR_MESSAGE = "Duplicate Jurisdiction Code(s) : ";
-    public static final String MISSING_JURISDICTION_OUTCOME_ERROR_MESSAGE = "A Jurisdiction outcome is required before the case can be closed";
-    public static final String MISSING_JURISDICTION_MESSAGE = "You cannot close this case as there is currently no jurisdiction and no jurisdiction outcome associated with it";
+    public static final String MISSING_JURISDICTION_OUTCOME_ERROR_MESSAGE = "A Jurisdiction outcome is required before "
+    + "the case can be closed";
+    public static final String MISSING_JUDGEMENT_JURISDICTION_MESSAGE = "This case contains a Judgment which does not "
+    + "have a jurisdiction attached to it. To enable this case to be closed, please ensure the relevant jurisdiction(s)"
+    + " has been linked to the Judgment.";
+    public static final String MISSING_JURISDICTION_MESSAGE = "You cannot close this case as there is currently no "
+    + "jurisdiction and no jurisdiction outcome associated with it";
     public static final String ADDRESS_LABELS_EMPTY_ERROR = "No addresses were found for you selection";
     public static final String ADDRESS_LABELS_SELECT_ERROR = "You need to select at least one address label before printing";
     public static final String ADDRESS_LABELS_COPIES_ERROR = "You need to use a whole number for the number of copies field";
     public static final String ADDRESS_LABELS_COPIES_LESS_10_ERROR = "Number of copies should be less than or equal to 10";
     public static final String ADDRESS_LABELS_LABELS_LIMIT_ERROR = "Number of labels to be printed reached the limit";
-    public static final String JURISDICTION_CODES_EXISTENCE_ERROR = "The following jurisdiction codes do not exist for this case: ";
-    public static final String DUPLICATED_JURISDICTION_CODES_JUDGEMENT_ERROR = "The following jurisdiction codes have been selected more than once for a judgment: ";
-    public static final String JURISDICTION_CODES_DELETED_ERROR = "The following jurisdiction codes cannot be deleted as " +
-            "they have been selected in judgements: ";
-    public static final String DEPOSIT_REFUNDED_GREATER_DEPOSIT_ERROR = "The amount entered for the refund " +
-            "cannot be more than the amount that was deposited";
+    public static final String JURISDICTION_CODES_EXISTENCE_ERROR =
+        "The following jurisdiction codes do not exist for this case: ";
+    public static final String DUPLICATED_JURISDICTION_CODES_JUDGEMENT_ERROR = "The following jurisdiction codes have"
+    + " been selected more than once for a judgment: ";
+    public static final String JURISDICTION_CODES_DELETED_ERROR = "The following jurisdiction codes cannot be deleted"
+            + " as they have been selected in judgements: ";
+    public static final String DEPOSIT_REFUNDED_GREATER_DEPOSIT_ERROR = "The amount entered for the refund "
+            + "cannot be more than the amount that was deposited";
+    public static final String CLOSING_LISTED_CASE_ERROR = "This case contains a hearing which has a 'Listed' status. "
+            + "This status must be updated to enable the case to be closed.";
+    public static final String CLOSING_HEARD_CASE_WITH_NO_JUDGE_ERROR = "This case contains a hearing which has a "
+        +"'Heard' status and does not have an Employment Judge allocated to it. "
+        + "To enable this case to be closed, please allocate the Judge to the hearing.";
     public static final String UNABLE_TO_FIND_PARTY = "Unable to find correct party member";
-
     public static final String NO_CASES_SEARCHED = "No cases searched";
-    public static final String CASE_IS_NOT_IN_MULTIPLE_ERROR = "Case is not part of the multiple or is already the lead case";
-
+    public static final String CASE_IS_NOT_IN_MULTIPLE_ERROR =
+        "Case is not part of the multiple or is already the lead case";
     public static final String CLAIMANT_ADDRESS_LABEL = "claimantAddressLabel";
     public static final String CLAIMANT_REP_ADDRESS_LABEL = "claimantRepAddressLabel";
     public static final String RESPONDENTS_ADDRESS__LABEL = "respondentsAddressLabel";
