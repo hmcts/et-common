@@ -10,8 +10,7 @@ plugins {
     id 'com.jfrog.bintray' version '1.8.5'
 }
 
-//group 'uk.gov.hmcts.reform'
-group 'com.github.hmcts'
+group 'uk.gov.hmcts.reform'
 version '0.1.144'
 
 
