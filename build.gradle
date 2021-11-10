@@ -9,8 +9,11 @@ plugins {
     id 'com.github.ben-manes.versions' version '0.39.0'
     id 'com.jfrog.bintray' version '1.8.5'
 }
-group 'uk.gov.hmcts.reform'
-version '0.1.143'
+
+//group 'uk.gov.hmcts.reform'
+group 'com.github.hmcts'
+version '0.1.144'
+
 
 sourceCompatibility = '11.0'
 
