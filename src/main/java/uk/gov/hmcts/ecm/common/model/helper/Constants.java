@@ -339,6 +339,7 @@ public class Constants {
     public static final String DUPLICATE_JURISDICTION_CODE_ERROR_MESSAGE = "Duplicate Jurisdiction Code(s) : ";
     public static final String MISSING_JURISDICTION_OUTCOME_ERROR_MESSAGE = "A Jurisdiction outcome is required before the case can be closed";
     public static final String MISSING_JURISDICTION_MESSAGE = "You cannot close this case as there is currently no jurisdiction and no jurisdiction outcome associated with it";
+    public static final String MISSING_JUDGEMENT_JURISDICTION_MESSAGE = "This case contains a Judgment which does not have a jurisdiction attached to it. To enable this case to be closed, please ensure the relevant jurisdiction(s) has been linked to the Judgment.";
     public static final String ADDRESS_LABELS_EMPTY_ERROR = "No addresses were found for you selection";
     public static final String ADDRESS_LABELS_SELECT_ERROR = "You need to select at least one address label before printing";
     public static final String ADDRESS_LABELS_COPIES_ERROR = "You need to use a whole number for the number of copies field";
@@ -346,10 +347,8 @@ public class Constants {
     public static final String ADDRESS_LABELS_LABELS_LIMIT_ERROR = "Number of labels to be printed reached the limit";
     public static final String JURISDICTION_CODES_EXISTENCE_ERROR = "The following jurisdiction codes do not exist for this case: ";
     public static final String DUPLICATED_JURISDICTION_CODES_JUDGEMENT_ERROR = "The following jurisdiction codes have been selected more than once for a judgment: ";
-    public static final String JURISDICTION_CODES_DELETED_ERROR = "The following jurisdiction codes cannot be deleted as " +
-            "they have been selected in judgements: ";
-    public static final String DEPOSIT_REFUNDED_GREATER_DEPOSIT_ERROR = "The amount entered for the refund " +
-            "cannot be more than the amount that was deposited";
+    public static final String JURISDICTION_CODES_DELETED_ERROR = "The following jurisdiction codes cannot be deleted as they have been selected in judgements: ";
+    public static final String DEPOSIT_REFUNDED_GREATER_DEPOSIT_ERROR = "The amount entered for the refund cannot be more than the amount that was deposited";
     public static final String UNABLE_TO_FIND_PARTY = "Unable to find correct party member";
 
     public static final String NO_CASES_SEARCHED = "No cases searched";
