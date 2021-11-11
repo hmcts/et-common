@@ -29,18 +29,14 @@ public class ClaimantIndType {
     private String claimantGender;
 
     public String claimantFullNames() {
-        var fullNameList = Arrays.asList(claimantTitle, claimantFirstNames, claimantLastName);
-        if (claimantTitle != null && claimantTitle.trim().equals("Other")) {
-            fullNameList = Arrays.asList(claimantTitleOther, claimantFirstNames, claimantLastName);
-        }
+        var title = claimantTitle != null && claimantTitle.trim().equals("Other") ? claimantTitleOther : claimantTitle;
+        var fullNameList = List.of(title, claimantFirstNames, claimantLastName);
         return String.join(" ", notNullOrEmptyAtt(new ArrayList<>(), fullNameList));
     }
 
     public String claimantFullName() {
-        var fullNameList = Arrays.asList(claimantTitle, getInitials(), claimantLastName);
-        if (claimantTitle != null && claimantTitle.trim().equals("Other")) {
-            fullNameList = Arrays.asList(claimantTitleOther, getInitials(), claimantLastName);
-        }
+        var title = claimantTitle != null && claimantTitle.trim().equals("Other") ? claimantTitleOther : claimantTitle;
+        var fullNameList = List.of(title, getInitials(), claimantLastName);
         return String.join(" ", notNullOrEmptyAtt(new ArrayList<>(), fullNameList));
     }
 
