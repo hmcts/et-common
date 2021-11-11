@@ -30,7 +30,7 @@ public class ClaimantIndType {
 
     public String claimantFullNames() {
         var fullNameList = Arrays.asList(claimantTitle, claimantFirstNames, claimantLastName);
-        if (claimantTitle.trim().equals("Other")) {
+        if (claimantTitle != null && claimantTitle.trim().equals("Other")) {
             fullNameList = Arrays.asList(claimantTitleOther, claimantFirstNames, claimantLastName);
         }
         return String.join(" ", notNullOrEmptyAtt(new ArrayList<>(), fullNameList));
@@ -38,7 +38,7 @@ public class ClaimantIndType {
 
     public String claimantFullName() {
         var fullNameList = Arrays.asList(claimantTitle, getInitials(), claimantLastName);
-        if (claimantTitle.trim().equals("Other")) {
+        if (claimantTitle != null && claimantTitle.trim().equals("Other")) {
             fullNameList = Arrays.asList(claimantTitleOther, getInitials(), claimantLastName);
         }
         return String.join(" ", notNullOrEmptyAtt(new ArrayList<>(), fullNameList));
