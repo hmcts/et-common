@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import uk.gov.hmcts.ecm.common.model.ccd.types.ClaimantIndType;
 
 public class CaseDataTest {
 
@@ -35,5 +36,25 @@ public class CaseDataTest {
         assertEquals(caseData.getFileLocation(), "City");
         assertEquals(caseData.getCaseType(), "Single");
         assertEquals(caseData.getFeeGroupReference(), "1212");
+    }
+    @Test
+    public void claimantFullNamesOthersTest() {
+        var claimantIndType = new ClaimantIndType();
+        claimantIndType.setClaimantTitle("Other");
+        claimantIndType.setClaimantTitleOther("Mx");
+        claimantIndType.setClaimantFirstNames("A");
+        claimantIndType.setClaimantLastName("B");
+        caseData.setClaimantIndType(claimantIndType);
+        assertEquals(caseData.getClaimantIndType().claimantFullName(), "Mx A B");
+    }
+    @Test
+    public void claimantFullNamesTest() {
+        var claimantIndType = new ClaimantIndType();
+        claimantIndType.setClaimantTitle("Mr");
+        claimantIndType.setClaimantTitleOther("Mx");
+        claimantIndType.setClaimantFirstNames("A");
+        claimantIndType.setClaimantLastName("B");
+        caseData.setClaimantIndType(claimantIndType);
+        assertEquals(caseData.getClaimantIndType().claimantFullName(), "Mr A B");
     }
 }
