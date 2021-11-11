@@ -60,13 +60,13 @@ public class BulkData {
     @JsonProperty("respondentRep_v2")
     private String respondentRepV2;
     @JsonProperty("fileLocationGlasgow")
-    private String fileLocationGlasgow;
+    private DynamicFixedListType fileLocationGlasgow;
     @JsonProperty("fileLocationAberdeen")
-    private String fileLocationAberdeen;
+    private DynamicFixedListType fileLocationAberdeen;
     @JsonProperty("fileLocationDundee")
-    private String fileLocationDundee;
+    private DynamicFixedListType fileLocationDundee;
     @JsonProperty("fileLocationEdinburgh")
-    private String fileLocationEdinburgh;
+    private DynamicFixedListType fileLocationEdinburgh;
     @JsonProperty("managingOffice")
     private String managingOffice;
     @JsonProperty("subMultipleName")

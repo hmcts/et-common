@@ -101,13 +101,13 @@ public class CaseData {
     @JsonProperty("fileLocation")
     private DynamicFixedListType fileLocation;
     @JsonProperty("fileLocationGlasgow")
-    private String fileLocationGlasgow;
+    private DynamicFixedListType fileLocationGlasgow;
     @JsonProperty("fileLocationAberdeen")
-    private String fileLocationAberdeen;
+    private DynamicFixedListType fileLocationAberdeen;
     @JsonProperty("fileLocationDundee")
-    private String fileLocationDundee;
+    private DynamicFixedListType fileLocationDundee;
     @JsonProperty("fileLocationEdinburgh")
-    private String fileLocationEdinburgh;
+    private DynamicFixedListType fileLocationEdinburgh;
     @JsonProperty("hearingCollection")
     private List<HearingTypeItem> hearingCollection;
     @JsonProperty("depositType")
