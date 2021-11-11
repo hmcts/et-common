@@ -29,13 +29,19 @@ public class ClaimantIndType {
     private String claimantGender;
 
     public String claimantFullNames() {
-        return String.join(" ", notNullOrEmptyAtt(new ArrayList<>(), Arrays.asList(claimantTitle,
-                claimantTitleOther, claimantFirstNames, claimantLastName)));
+        var fullNameList = Arrays.asList(claimantTitle, claimantFirstNames, claimantLastName);
+        if (claimantTitle.trim().equals("Other")) {
+            fullNameList = Arrays.asList(claimantTitleOther, claimantFirstNames, claimantLastName);
+        }
+        return String.join(" ", notNullOrEmptyAtt(new ArrayList<>(), fullNameList));
     }
 
     public String claimantFullName() {
-        return String.join(" ", notNullOrEmptyAtt(new ArrayList<>(), Arrays.asList(claimantTitle,
-                claimantTitleOther, getInitials(), claimantLastName)));
+        var fullNameList = Arrays.asList(claimantTitle, getInitials(), claimantLastName);
+        if (claimantTitle.trim().equals("Other")) {
+            fullNameList = Arrays.asList(claimantTitleOther, getInitials(), claimantLastName);
+        }
+        return String.join(" ", notNullOrEmptyAtt(new ArrayList<>(), fullNameList));
     }
 
     private String getInitials() {
