@@ -25,9 +25,14 @@ public enum TribunalOffice {
     WATFORD("Watford", "33"),
     SCOTLAND("Scotland");
 
-    public static final TribunalOffice[] SCOTTISH_OFFICES = {
+    public static final List<TribunalOffice> ENGLANDWALES_OFFICES = List.of(
+            BRISTOL, LEEDS, LONDON_CENTRAL, LONDON_EAST, LONDON_SOUTH, MANCHESTER, MIDLANDS_EAST, MIDLANDS_WEST,
+            NEWCASTLE, WALES, WATFORD
+    );
+
+    public static final List<TribunalOffice> SCOTLAND_OFFICES = List.of(
             ABERDEEN, DUNDEE, EDINBURGH, GLASGOW
-    };
+    );
 
     private final String officeName;
     private final String officeNumber;
@@ -65,16 +70,10 @@ public enum TribunalOffice {
     }
 
     public static String getCaseTypeId(String officeName) {
-        List<String> englandWalesOffices = List.of(BRISTOL.officeName, LEEDS.officeName, LONDON_CENTRAL.officeName,
-                LONDON_EAST.officeName, LONDON_SOUTH.officeName, MANCHESTER.officeName,
-                MIDLANDS_EAST.officeName, MIDLANDS_WEST.officeName, NEWCASTLE.officeName,
-                WALES.officeName, WATFORD.officeName);
-        List<String> scotlandOffices = List.of(ABERDEEN.officeName, GLASGOW.officeName,
-                EDINBURGH.officeName, DUNDEE.officeName, SCOTLAND.officeName);
-
-        if (englandWalesOffices.contains(officeName)) {
+        TribunalOffice tribunalOffice = TribunalOffice.valueOfOfficeName(officeName);
+        if (ENGLANDWALES_OFFICES.contains(tribunalOffice)) {
             return ENGLANDWALES_CASE_TYPE_ID;
-        } else if (scotlandOffices.contains(officeName)) {
+        } else if (SCOTLAND_OFFICES.contains(tribunalOffice)) {
             return SCOTLAND_CASE_TYPE_ID;
         } else {
             throw new IllegalArgumentException("Unexpected office " + officeName);
