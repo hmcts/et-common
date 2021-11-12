@@ -24,16 +24,16 @@ public class CloseDataModel extends DataModelParent {
     private DynamicValueType fileLocation;
 
     @JsonProperty("fileLocationEdinburgh")
-    private String fileLocationEdinburgh;
+    private DynamicValueType fileLocationEdinburgh;
 
     @JsonProperty("fileLocationDundee")
-    private String fileLocationDundee;
+    private DynamicValueType fileLocationDundee;
 
     @JsonProperty("fileLocationAberdeen")
-    private String fileLocationAberdeen;
+    private DynamicValueType fileLocationAberdeen;
 
     @JsonProperty("fileLocationGlasgow")
-    private String fileLocationGlasgow;
+    private DynamicValueType fileLocationGlasgow;
 
     @JsonProperty("notes")
     private String notes;

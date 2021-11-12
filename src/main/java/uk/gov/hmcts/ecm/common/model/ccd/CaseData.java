@@ -101,13 +101,13 @@ public class CaseData {
     @JsonProperty("fileLocation")
     private DynamicFixedListType fileLocation;
     @JsonProperty("fileLocationGlasgow")
-    private String fileLocationGlasgow;
+    private DynamicFixedListType fileLocationGlasgow;
     @JsonProperty("fileLocationAberdeen")
-    private String fileLocationAberdeen;
+    private DynamicFixedListType fileLocationAberdeen;
     @JsonProperty("fileLocationDundee")
-    private String fileLocationDundee;
+    private DynamicFixedListType fileLocationDundee;
     @JsonProperty("fileLocationEdinburgh")
-    private String fileLocationEdinburgh;
+    private DynamicFixedListType fileLocationEdinburgh;
     @JsonProperty("hearingCollection")
     private List<HearingTypeItem> hearingCollection;
     @JsonProperty("depositType")
@@ -293,6 +293,8 @@ public class CaseData {
     // Allocate Hearing fields
     @JsonProperty("allocateHearingHearing")
     private DynamicFixedListType allocateHearingHearing;
+    @JsonProperty("allocateHearingManagingOffice")
+    private String allocateHearingManagingOffice;
     @JsonProperty("allocateHearingVenue")
     private DynamicFixedListType allocateHearingVenue;
     @JsonProperty("allocateHearingRoom")
@@ -311,6 +313,8 @@ public class CaseData {
     private String allocateHearingPostponedBy;
     @JsonProperty("allocateHearingStatus")
     private String allocateHearingStatus;
+    @JsonProperty("allocateHearingReadingDeliberation")
+    private String allocateHearingReadingDeliberation;
 
     // Hearing Details fields
     @JsonProperty("hearingDetailsHearing")

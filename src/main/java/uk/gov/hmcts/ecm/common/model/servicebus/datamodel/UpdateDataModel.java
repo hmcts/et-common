@@ -29,16 +29,16 @@ public class UpdateDataModel extends DataModelParent {
     private DynamicValueType fileLocation;
 
     @JsonProperty("fileLocationGlasgow")
-    private String fileLocationGlasgow;
+    private DynamicValueType fileLocationGlasgow;
 
     @JsonProperty("fileLocationAberdeen")
-    private String fileLocationAberdeen;
+    private DynamicValueType fileLocationAberdeen;
 
     @JsonProperty("fileLocationDundee")
-    private String fileLocationDundee;
+    private DynamicValueType fileLocationDundee;
 
     @JsonProperty("fileLocationEdinburgh")
-    private String fileLocationEdinburgh;
+    private DynamicValueType fileLocationEdinburgh;
 
     @JsonProperty("clerkResponsible")
     private DynamicValueType clerkResponsible;

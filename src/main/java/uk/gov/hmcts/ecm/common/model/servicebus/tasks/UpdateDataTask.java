@@ -104,20 +104,20 @@ public class UpdateDataTask extends DataTaskParent {
         if (fileLocation != null) {
             caseData.setFileLocation(DynamicFixedListType.of(fileLocation));
         }
-        if (!isNullOrEmpty(updateDataModel.getFileLocationGlasgow())) {
-            caseData.setFileLocationGlasgow(updateDataModel.getFileLocationGlasgow());
+        if (updateDataModel.getFileLocationGlasgow() != null) {
+            caseData.setFileLocationGlasgow(DynamicFixedListType.of(updateDataModel.getFileLocationGlasgow()));
         }
 
-        if (!isNullOrEmpty(updateDataModel.getFileLocationAberdeen())) {
-            caseData.setFileLocationAberdeen(updateDataModel.getFileLocationAberdeen());
+        if (updateDataModel.getFileLocationAberdeen() != null) {
+            caseData.setFileLocationAberdeen(DynamicFixedListType.of(updateDataModel.getFileLocationAberdeen()));
         }
 
-        if (!isNullOrEmpty(updateDataModel.getFileLocationDundee())) {
-            caseData.setFileLocationDundee(updateDataModel.getFileLocationDundee());
+        if (updateDataModel.getFileLocationDundee() != null) {
+            caseData.setFileLocationDundee(DynamicFixedListType.of(updateDataModel.getFileLocationDundee()));
         }
 
-        if (!isNullOrEmpty(updateDataModel.getFileLocationEdinburgh())) {
-            caseData.setFileLocationEdinburgh(updateDataModel.getFileLocationEdinburgh());
+        if (updateDataModel.getFileLocationEdinburgh() != null) {
+            caseData.setFileLocationEdinburgh(DynamicFixedListType.of(updateDataModel.getFileLocationEdinburgh()));
         }
 
     }

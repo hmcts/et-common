@@ -55,27 +55,29 @@ public class CloseDataTask extends DataTaskParent {
     }
 
     private void managingOffice(SubmitEvent submitEvent, CloseDataModel closeDataModel) {
-
         if (!isNullOrEmpty(closeDataModel.getManagingOffice())) {
             submitEvent.getCaseData().setManagingOffice(closeDataModel.getManagingOffice());
         }
 
-        if (!isNullOrEmpty(closeDataModel.getFileLocationGlasgow())) {
-            submitEvent.getCaseData().setFileLocationGlasgow(closeDataModel.getFileLocationGlasgow());
+        if (closeDataModel.getFileLocationGlasgow() != null) {
+            submitEvent.getCaseData().setFileLocationGlasgow(
+                    DynamicFixedListType.of(closeDataModel.getFileLocationGlasgow()));
         }
 
-        if (!isNullOrEmpty(closeDataModel.getFileLocationAberdeen())) {
-            submitEvent.getCaseData().setFileLocationAberdeen(closeDataModel.getFileLocationAberdeen());
+        if (closeDataModel.getFileLocationAberdeen() != null) {
+            submitEvent.getCaseData().setFileLocationAberdeen(
+                    DynamicFixedListType.of(closeDataModel.getFileLocationAberdeen()));
         }
 
-        if (!isNullOrEmpty(closeDataModel.getFileLocationDundee())) {
-            submitEvent.getCaseData().setFileLocationDundee(closeDataModel.getFileLocationDundee());
+        if (closeDataModel.getFileLocationDundee() != null) {
+            submitEvent.getCaseData().setFileLocationDundee(
+                    DynamicFixedListType.of(closeDataModel.getFileLocationDundee()));
         }
 
-        if (!isNullOrEmpty(closeDataModel.getFileLocationEdinburgh())) {
-            submitEvent.getCaseData().setFileLocationEdinburgh(closeDataModel.getFileLocationEdinburgh());
+        if (closeDataModel.getFileLocationEdinburgh() != null) {
+            submitEvent.getCaseData().setFileLocationEdinburgh(
+                    DynamicFixedListType.of(closeDataModel.getFileLocationEdinburgh()));
         }
-
     }
 
 }

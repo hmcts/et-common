@@ -22,19 +22,19 @@ public class Constants {
 
     public static final String ENGLANDWALES_DEV_BULK_CASE_TYPE_ID = "EnglandWales_Multiple_Dev";
     public static final String ENGLANDWALES_DEV_CASE_TYPE_ID = "EnglandWales_Dev";
-    public static final String SCOTLAND_DEV_BULK_CASE_TYPE_ID = "Scotland_Multiple_Dev";
-    public static final String SCOTLAND_DEV_CASE_TYPE_ID = "Scotland_Dev";
+    public static final String SCOTLAND_DEV_BULK_CASE_TYPE_ID = "ET_Scotland_Multiple_Dev";
+    public static final String SCOTLAND_DEV_CASE_TYPE_ID = "ET_Scotland_Dev";
 
     public static final String ENGLANDWALES_USERS_BULK_CASE_TYPE_ID = "EnglandWales_Multiple_User";
     public static final String ENGLANDWALES_USERS_CASE_TYPE_ID = "EnglandWales_User";
-    public static final String SCOTLAND_USERS_BULK_CASE_TYPE_ID = "Scotland_Multiple_User";
-    public static final String SCOTLAND_USERS_CASE_TYPE_ID = "Scotland_User";
+    public static final String SCOTLAND_USERS_BULK_CASE_TYPE_ID = "ET_Scotland_Multiple_User";
+    public static final String SCOTLAND_USERS_CASE_TYPE_ID = "ET_Scotland_User";
 
     public static final String ENGLANDWALES_BULK_CASE_TYPE_ID = "EnglandWales_Multiple";
-    public static final String SCOTLAND_BULK_CASE_TYPE_ID = "Scotland_Multiple";
+    public static final String SCOTLAND_BULK_CASE_TYPE_ID = "ET_Scotland_Multiple";
 
     public static final String ENGLANDWALES_CASE_TYPE_ID = "EnglandWales";
-    public static final String SCOTLAND_CASE_TYPE_ID = "Scotland";
+    public static final String SCOTLAND_CASE_TYPE_ID = "ET_Scotland";
 
     public static final String PENDING_STATE = "Pending";
     public static final String SUBMITTED_STATE = "Submitted";
@@ -135,13 +135,13 @@ public class Constants {
     public static final String SELECT_NONE_VALUE = "None";
 
     public static final String ENGLANDWALES_DEV_LISTING_CASE_TYPE_ID = "EnglandWales_Listings_Dev";
-    public static final String SCOTLAND_DEV_LISTING_CASE_TYPE_ID = "Scotland_Listings_Dev";
+    public static final String SCOTLAND_DEV_LISTING_CASE_TYPE_ID = "ET_Scotland_Listings_Dev";
 
     public static final String ENGLANDWALES_USERS_LISTING_CASE_TYPE_ID = "EnglandWales_Listings_User";
-    public static final String SCOTLAND_USERS_LISTING_CASE_TYPE_ID = "Scotland_Listings_User";
+    public static final String SCOTLAND_USERS_LISTING_CASE_TYPE_ID = "ET_Scotland_Listings_User";
 
     public static final String ENGLANDWALES_LISTING_CASE_TYPE_ID = "EnglandWales_Listings";
-    public static final String SCOTLAND_LISTING_CASE_TYPE_ID = "Scotland_Listings";
+    public static final String SCOTLAND_LISTING_CASE_TYPE_ID = "ET_Scotland_Listings";
 
     public static final String IT56_TEMPLATE = "EM-TRB-SCO-ENG-00210";
     public static final String IT57_TEMPLATE = "EM-TRB-SCO-ENG-00211";

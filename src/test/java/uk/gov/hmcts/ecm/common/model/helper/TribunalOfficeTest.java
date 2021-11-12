@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_CASE_TYPE_ID;
 
 public class TribunalOfficeTest {
 
@@ -49,5 +51,28 @@ public class TribunalOfficeTest {
     @Test(expected = IllegalArgumentException.class)
     public void testValueOfOfficeNameNotFound() {
         TribunalOffice.valueOfOfficeName("invalid-office-name");
+    }
+
+    @Test
+    public void testGetCaseTypeId() {
+        assertEquals(SCOTLAND_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Aberdeen"));
+        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Bristol"));
+        assertEquals(SCOTLAND_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Dundee"));
+        assertEquals(SCOTLAND_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Edinburgh"));
+        assertEquals(SCOTLAND_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Glasgow"));
+        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("London East"));
+        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("London Central"));
+        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("London South"));
+        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Manchester"));
+        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Midlands East"));
+        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Midlands West"));
+        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Newcastle"));
+        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Wales"));
+        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Watford"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetCaseTypeIdNotFound() {
+        TribunalOffice.getCaseTypeId("invalid-office-name");
     }
 }
