@@ -20,20 +20,20 @@ public class Constants {
     public static final String POST_DEFAULT_XLSX_FILE_PATH = "postDefaultValues.xlsx";
     public static final String VENUE_ADDRESS_VALUES_FILE_PATH = "venueAddressValues.xlsx";
 
-    public static final String ENGLANDWALES_DEV_BULK_CASE_TYPE_ID = "EnglandWales_Multiple_Dev";
-    public static final String ENGLANDWALES_DEV_CASE_TYPE_ID = "EnglandWales_Dev";
+    public static final String ENGLANDWALES_DEV_BULK_CASE_TYPE_ID = "ET_EnglandWales_Multiple_Dev";
+    public static final String ENGLANDWALES_DEV_CASE_TYPE_ID = "ET_EnglandWales_Dev";
     public static final String SCOTLAND_DEV_BULK_CASE_TYPE_ID = "ET_Scotland_Multiple_Dev";
     public static final String SCOTLAND_DEV_CASE_TYPE_ID = "ET_Scotland_Dev";
 
-    public static final String ENGLANDWALES_USERS_BULK_CASE_TYPE_ID = "EnglandWales_Multiple_User";
-    public static final String ENGLANDWALES_USERS_CASE_TYPE_ID = "EnglandWales_User";
+    public static final String ENGLANDWALES_USERS_BULK_CASE_TYPE_ID = "ET_EnglandWales_Multiple_User";
+    public static final String ENGLANDWALES_USERS_CASE_TYPE_ID = "ET_EnglandWales_User";
     public static final String SCOTLAND_USERS_BULK_CASE_TYPE_ID = "ET_Scotland_Multiple_User";
     public static final String SCOTLAND_USERS_CASE_TYPE_ID = "ET_Scotland_User";
 
-    public static final String ENGLANDWALES_BULK_CASE_TYPE_ID = "EnglandWales_Multiple";
+    public static final String ENGLANDWALES_BULK_CASE_TYPE_ID = "ET_EnglandWales_Multiple";
     public static final String SCOTLAND_BULK_CASE_TYPE_ID = "ET_Scotland_Multiple";
 
-    public static final String ENGLANDWALES_CASE_TYPE_ID = "EnglandWales";
+    public static final String ENGLANDWALES_CASE_TYPE_ID = "ET_EnglandWales";
     public static final String SCOTLAND_CASE_TYPE_ID = "ET_Scotland";
 
     public static final String PENDING_STATE = "Pending";
@@ -134,13 +134,13 @@ public class Constants {
     public static final String SELECT_ALL_VALUE = "Select All";
     public static final String SELECT_NONE_VALUE = "None";
 
-    public static final String ENGLANDWALES_DEV_LISTING_CASE_TYPE_ID = "EnglandWales_Listings_Dev";
+    public static final String ENGLANDWALES_DEV_LISTING_CASE_TYPE_ID = "ET_EnglandWales_Listings_Dev";
     public static final String SCOTLAND_DEV_LISTING_CASE_TYPE_ID = "ET_Scotland_Listings_Dev";
 
-    public static final String ENGLANDWALES_USERS_LISTING_CASE_TYPE_ID = "EnglandWales_Listings_User";
+    public static final String ENGLANDWALES_USERS_LISTING_CASE_TYPE_ID = "ET_EnglandWales_Listings_User";
     public static final String SCOTLAND_USERS_LISTING_CASE_TYPE_ID = "ET_Scotland_Listings_User";
 
-    public static final String ENGLANDWALES_LISTING_CASE_TYPE_ID = "EnglandWales_Listings";
+    public static final String ENGLANDWALES_LISTING_CASE_TYPE_ID = "ET_EnglandWales_Listings";
     public static final String SCOTLAND_LISTING_CASE_TYPE_ID = "ET_Scotland_Listings";
 
     public static final String IT56_TEMPLATE = "EM-TRB-SCO-ENG-00210";
