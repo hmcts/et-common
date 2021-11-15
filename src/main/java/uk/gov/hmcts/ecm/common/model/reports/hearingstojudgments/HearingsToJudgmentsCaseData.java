@@ -8,7 +8,7 @@ import uk.gov.hmcts.ecm.common.model.ccd.items.JudgementTypeItem;
 import java.util.List;
 
 @Data
-public class CaseData {
+public class HearingsToJudgmentsCaseData {
     @JsonProperty("ethosCaseReference")
     private String ethosCaseReference;
 

@@ -11,5 +11,5 @@ import uk.gov.hmcts.ecm.common.model.generic.GenericSubmitEvent;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class HearingsToJudgmentsSubmitEvent extends GenericSubmitEvent {
     @JsonProperty("case_data")
-    private CaseData caseData;
+    private HearingsToJudgmentsCaseData caseData;
 }
