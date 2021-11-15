@@ -764,7 +764,7 @@ public class CcdClientTest {
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, HearingsToJudgmentsSearchResult.class))
                 .thenReturn(responseEntity);
-        var results = ccdClient.hearingToJudgementsSearch("authToken",
+        var results = ccdClient.hearingsToJudgementsSearch("authToken",
                 caseDetails.getCaseTypeId(), elasticSearchQuery);
         assertEquals(2, results.size());
         verify(restTemplate).exchange(uri, HttpMethod.POST, httpEntity, HearingsToJudgmentsSearchResult.class);

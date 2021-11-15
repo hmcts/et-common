@@ -160,8 +160,8 @@ public class CcdClient {
         return submitEvents;
     }
 
-    public List<HearingsToJudgmentsSubmitEvent> hearingToJudgementsSearch(String authToken, String caseTypeId,
-                                                                          String query) throws IOException {
+    public List<HearingsToJudgmentsSubmitEvent> hearingsToJudgementsSearch(String authToken, String caseTypeId,
+                                                                           String query) throws IOException {
         var submitEvents = new ArrayList<HearingsToJudgmentsSubmitEvent>();
         var searchResult = runElasticSearch(authToken, caseTypeId, query,
                 HearingsToJudgmentsSearchResult.class);
