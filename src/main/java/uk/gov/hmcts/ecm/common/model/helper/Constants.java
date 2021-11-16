@@ -299,7 +299,7 @@ public class Constants {
     public static final String SERVING_CLAIMS_REPORT = "Serving Claims";
     public static final String CASES_COMPLETED_REPORT = "Cases Completed";
     public static final String TIME_TO_FIRST_HEARING_REPORT = "Time To First Hearing";
-    public static final String CASE_SOURCE_LOCAL_REPORT = "Local Reporting - Case Source";
+    public static final String CASE_SOURCE_LOCAL_REPORT = "Case Source";
     public static final String HEARINGS_TO_JUDGEMENTS_REPORT = "Hearings To Judgments";
     public static final String HEARINGS_BY_HEARING_TYPE_REPORT = "Hearings By Hearing Type";
     public static final String NO_CHNAGE_INCURRENT_POSITION_REPORT = "No Change In Current Position";
@@ -353,9 +353,6 @@ public class Constants {
     + " has been linked to the Judgment.";
     public static final String MISSING_JURISDICTION_MESSAGE = "You cannot close this case as there is currently no "
     + "jurisdiction and no jurisdiction outcome associated with it";
-    public static final String JURISDICTION_OUTCOME_NOT_ALLOCATED_ERROR_MESSAGE = "Jurisdiction outcome is set to"
-        + " 'Not allocated'. A Jurisdiction outcome is required before the case can be closed.";
-    public static final String NOT_ALLOCATED = "Not allocated";
     public static final String ADDRESS_LABELS_EMPTY_ERROR = "No addresses were found for you selection";
     public static final String ADDRESS_LABELS_SELECT_ERROR = "You need to select at least one address label before printing";
     public static final String ADDRESS_LABELS_COPIES_ERROR = "You need to use a whole number for the number of copies field";
