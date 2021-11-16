@@ -21,6 +21,7 @@ public class ESHelper {
     private static final String MULTIPLE_CASE_REFERENCE_KEYWORD = "data.multipleReference.keyword";
     private static final String LISTING_DATE_FIELD_NAME =
             "data.hearingCollection.value.hearingDateCollection.value.listedDate";
+    private static final String RECEIPT_DATE_FIELD_NAME = "data.receiptDate";
     public static final String LISTING_VENUE_FIELD_NAME =
             "data.hearingCollection.value.hearingDateCollection.value.hearingVenueDay.keyword";
     public static final String BROUGHT_FORWARD_DATE_FIELD_NAME = "data.bfActions.value.bfDate";
@@ -132,6 +133,8 @@ public class ESHelper {
             case CASES_COMPLETED_REPORT:
             case TIME_TO_FIRST_HEARING_REPORT:
                 return LISTING_DATE_FIELD_NAME;
+            case CASE_SOURCE_LOCAL_REPORT:
+                return RECEIPT_DATE_FIELD_NAME;
             case SERVING_CLAIMS_REPORT:
                 return CLAIMS_SERVED_DATE_FIELD_NAME;
             default:

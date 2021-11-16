@@ -286,4 +286,22 @@ public class AdhocReportType {
     @JsonProperty("claimServedItems")
     private List<ClaimServedTypeItem> claimServedItems;
 
+    @JsonProperty("manuallyCreatedTotalCases")
+    private String manuallyCreatedTotalCases;
+    @JsonProperty("et1OnlineTotalCases")
+    private String et1OnlineTotalCases;
+    @JsonProperty("eccTotalCases")
+    private String eccTotalCases;
+    @JsonProperty("migratedTotalCases")
+    private String migratedTotalCases;
+
+    @JsonProperty("manuallyCreatedTotalCasesPercent")
+    private String manuallyCreatedTotalCasesPercent;
+    @JsonProperty("et1OnlineTotalCasesPercent")
+    private String et1OnlineTotalCasesPercent;
+    @JsonProperty("eccTotalCasesPercent")
+    private String eccTotalCasesPercent;
+    @JsonProperty("migratedTotalCasesPercent")
+    private String migratedTotalCasesPercent;
+
 }
