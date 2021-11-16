@@ -299,6 +299,7 @@ public class Constants {
     public static final String SERVING_CLAIMS_REPORT = "Serving Claims";
     public static final String CASES_COMPLETED_REPORT = "Cases Completed";
     public static final String TIME_TO_FIRST_HEARING_REPORT = "Time To First Hearing";
+    public static final String CASE_SOURCE_LOCAL_REPORT = "Local Reporting - Case Source";
     public static final String HEARINGS_TO_JUDGEMENTS_REPORT = "Hearings To Judgments";
     public static final String HEARINGS_BY_HEARING_TYPE_REPORT = "Hearings By Hearing Type";
     public static final String NO_CHNAGE_INCURRENT_POSITION_REPORT = "No Change In Current Position";

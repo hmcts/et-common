@@ -494,6 +494,26 @@ public class CcdClientTest {
     }
 
     @Test
+    public void retrieveCasesGenericReportElasticSearchCasesLocalReportCaseSource() throws IOException {
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"range\":{\"data." +
+                "receiptDate\":{\"from\":\"2019-09-24T00:00:00.000\",\"to\":\"" +
+                "2019-09-24T23:59:59.000\",\"include_lower\":true,\"include_upper\"" +
+                ":true,\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
+        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
+        CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
+                Arrays.asList(new SubmitEvent(), new SubmitEvent()));
+        ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
+                eq(CaseSearchResult.class))).thenReturn(responseEntity);
+        ccdClient.retrieveCasesGenericReportElasticSearch("authToken",
+                caseDetails.getCaseTypeId(), "2019-09-24",
+                "2019-09-24", CASE_SOURCE_LOCAL_REPORT);
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
     public void retrieveCasesGenericReportElasticSearchLiveCaseload() throws IOException {
         String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"range\""
                 + ":{\"data.preAcceptCase.dateAccepted\":{\"from\":\"2019-09-24T00:00:00.000\","
