@@ -35,6 +35,8 @@ import uk.gov.hmcts.ecm.common.model.multiples.MultipleDetails;
 import uk.gov.hmcts.ecm.common.model.multiples.SubmitMultipleEvent;
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSubmitEvent;
+import uk.gov.hmcts.ecm.common.model.reports.hearingstojudgments.HearingsToJudgmentsSearchResult;
+import uk.gov.hmcts.ecm.common.model.reports.hearingstojudgments.HearingsToJudgmentsSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.schedule.ScheduleCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadEvent;
 import uk.gov.hmcts.ecm.common.service.UserService;
@@ -749,6 +751,23 @@ public class CcdClientTest {
         assertEquals(2, results.size());
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CasesAwaitingJudgmentSearchResult.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    public void testHearingsToJudgmentSearch() throws IOException {
+        var elasticSearchQuery = "{\"size\":10000,\"query\": {\"match_all\":{} }}";
+        var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
+        var searchResult = new HearingsToJudgmentsSearchResult(2L,
+                Arrays.asList(new HearingsToJudgmentsSubmitEvent(), new HearingsToJudgmentsSubmitEvent()));
+        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, HearingsToJudgmentsSearchResult.class))
+                .thenReturn(responseEntity);
+        var results = ccdClient.hearingsToJudgementsSearch("authToken",
+                caseDetails.getCaseTypeId(), elasticSearchQuery);
+        assertEquals(2, results.size());
+        verify(restTemplate).exchange(uri, HttpMethod.POST, httpEntity, HearingsToJudgmentsSearchResult.class);
         verifyNoMoreInteractions(restTemplate);
     }
 
