@@ -163,6 +163,8 @@ public class AdhocReportType {
     private String reservedHearing;
     @JsonProperty("hearingCM")
     private String hearingCM;
+    @JsonProperty("costs")
+    private String costs;
     @JsonProperty("hearingInterloc")
     private String hearingInterloc;
     @JsonProperty("hearingPH")
