@@ -230,6 +230,7 @@ public class UpdateDataTask extends DataTaskParent {
                 caseData.getJurCodesCollection().add(createJurCodesTypeItem(jurCodesType));
             } else {
                 log.info("JurCodes Not Empty");
+                jurCodesTypeItemOptional.get().setValue(jurCodesType);
             }
 
         } else {
