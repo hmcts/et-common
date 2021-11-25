@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/hmcts/ecm-common.svg)](https://jitpack.io/#hmcts/ecm-common)
+
 # ecm-common
 ECM-Common library
 
