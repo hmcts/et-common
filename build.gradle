@@ -11,7 +11,7 @@ plugins {
 }
 
 group 'uk.gov.hmcts.reform'
-version 'ret56-SNAPSHOT'
+version '0.0.1'
 
 
 sourceCompatibility = '11.0'
@@ -38,7 +38,7 @@ jacocoTestReport {
 // endregion
 
 checkstyle {
-    maxWarnings = 172
+    maxWarnings = 141
     toolVersion = '8.29'
 }
 
