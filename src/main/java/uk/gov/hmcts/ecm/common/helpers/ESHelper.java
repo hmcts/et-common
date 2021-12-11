@@ -1,7 +1,11 @@
 package uk.gov.hmcts.ecm.common.helpers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.elasticsearch.index.query.*;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MatchQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.RangeQueryBuilder;
+import org.elasticsearch.index.query.TermsQueryBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import java.util.List;
@@ -23,15 +27,6 @@ public class ESHelper {
     public static final String BROUGHT_FORWARD_DATE_FIELD_NAME = "data.bfActions.value.bfDate";
     public static final String CLAIMS_ACCEPTED_DATE_FIELD_NAME = "data.preAcceptCase.dateAccepted";
     public static final String MANAGING_OFFICE_FIELD_NAME = "data.managingOffice";
-    public static final String LISTING_GLASGOW_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Glasgow.keyword";
-    public static final String LISTING_ABERDEEN_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Aberdeen.keyword";
-    public static final String LISTING_DUNDEE_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Dundee.keyword";
-    public static final String LISTING_EDINBURGH_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Edinburgh.keyword";
-
     private static final String REPORT_TYPE_NOT_FOUND = "Report type not found";
 
     private ESHelper() {

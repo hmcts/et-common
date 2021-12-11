@@ -38,7 +38,7 @@ jacocoTestReport {
 // endregion
 
 checkstyle {
-    maxWarnings = 141
+    maxWarnings = 140
     toolVersion = '8.29'
 }
 

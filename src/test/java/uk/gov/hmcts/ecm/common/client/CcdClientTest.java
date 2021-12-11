@@ -26,7 +26,6 @@ import uk.gov.hmcts.ecm.common.model.ccd.CaseDetails;
 import uk.gov.hmcts.ecm.common.model.ccd.CaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.ccd.PaginatedSearchMetadata;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
 import uk.gov.hmcts.ecm.common.model.helper.TribunalOffice;
 import uk.gov.hmcts.ecm.common.model.labels.LabelCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.labels.LabelPayloadEvent;
@@ -55,6 +54,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static uk.gov.hmcts.ecm.common.helpers.ESHelper.LISTING_VENUE_FIELD_NAME;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.ALL_VENUES;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.BROUGHT_FORWARD_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.CASES_COMPLETED_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.LIVE_CASELOAD_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.MANUALLY_CREATED_POSITION;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.TIME_TO_FIRST_HEARING_REPORT;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CcdClientTest {
@@ -94,9 +100,9 @@ public class CcdClientTest {
 
         caseDetails = new CaseDetails();
         caseDetails.setJurisdiction("TRIBUNALS");
-        caseDetails.setCaseTypeId("EnglandWales");
+        caseDetails.setCaseTypeId(ENGLANDWALES_CASE_TYPE_ID);
         caseData = new CaseData();
-        caseData.setManagingOffice("LEEDS");
+        caseData.setManagingOffice(TribunalOffice.LEEDS.getOfficeName());
         caseDetails.setCaseData(caseData);
 
         bulkDetails = new BulkDetails();
@@ -449,7 +455,7 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesGenericReportElasticSearch("authToken", caseDetails.getCaseTypeId(),
-                TribunalOffice.valueOf(caseDetails.getCaseData().getManagingOffice()), "2019-09-23",
+                TribunalOffice.valueOfOfficeName(caseDetails.getCaseData().getManagingOffice()), "2019-09-23",
                 "2019-09-24", BROUGHT_FORWARD_REPORT);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
@@ -474,7 +480,7 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesGenericReportElasticSearch("authToken", caseDetails.getCaseTypeId(),
-               TribunalOffice.valueOf(caseDetails.getCaseData().getManagingOffice()), "2019-09-24",
+               TribunalOffice.valueOfOfficeName(caseDetails.getCaseData().getManagingOffice()), "2019-09-24",
                 "2019-09-24", CASES_COMPLETED_REPORT);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
@@ -500,7 +506,7 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesGenericReportElasticSearch("authToken", caseDetails.getCaseTypeId(),
-                TribunalOffice.valueOf(caseDetails.getCaseData().getManagingOffice()), "2019-09-24",
+                TribunalOffice.valueOfOfficeName(caseDetails.getCaseData().getManagingOffice()), "2019-09-24",
                 "2019-09-24", TIME_TO_FIRST_HEARING_REPORT);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
@@ -525,7 +531,7 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesGenericReportElasticSearch("authToken", caseDetails.getCaseTypeId(),
-                TribunalOffice.valueOf(caseDetails.getCaseData().getManagingOffice()), "2019-09-24",
+                TribunalOffice.valueOfOfficeName(caseDetails.getCaseData().getManagingOffice()), "2019-09-24",
                 "2019-09-24", LIVE_CASELOAD_REPORT);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
