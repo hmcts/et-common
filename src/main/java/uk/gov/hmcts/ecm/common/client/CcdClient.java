@@ -19,6 +19,7 @@ import uk.gov.hmcts.ecm.common.model.ccd.CaseDetails;
 import uk.gov.hmcts.ecm.common.model.ccd.CaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.ccd.PaginatedSearchMetadata;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
+import uk.gov.hmcts.ecm.common.model.helper.TribunalOffice;
 import uk.gov.hmcts.ecm.common.model.labels.LabelCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.labels.LabelPayloadEvent;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleCaseSearchResult;
@@ -232,7 +233,7 @@ public class CcdClient {
                 getListingQuery(dateToSearchFrom, dateToSearchTo, venueToSearch, venueToSearchMapping));
     }
 
-    public List<SubmitEvent> retrieveCasesGenericReportElasticSearch(String authToken, String caseTypeId,
+    public List<SubmitEvent> retrieveCasesGenericReportElasticSearch(String authToken, String caseTypeId, TribunalOffice tribunalOffice,
                                                                      String dateToSearchFrom, String dateToSearchTo,
                                                                     String reportType) throws IOException {
         String from = LocalDate.parse(dateToSearchFrom).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
@@ -241,21 +242,22 @@ public class CcdClient {
                     .atStartOfDay().plusDays(1).minusSeconds(1).format(OLD_DATE_TIME_PATTERN);
             log.info(reportType + " - " + from + " - " + to);
             return buildAndGetElasticSearchRequest(authToken, caseTypeId,
-                    getReportRangeDateQuery(from, to, reportType));
+                    getReportRangeDateQuery(from, to, reportType, tribunalOffice.getOfficeName()));
         } else {
             String to = LocalDate.parse(dateToSearchTo).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
             log.info(reportType + " - " + from + " - " + to);
             return buildAndGetElasticSearchRequest(authToken, caseTypeId,
-                    getReportRangeDateQuery(from, to, reportType));
+                    getReportRangeDateQuery(from, to, reportType, tribunalOffice.getOfficeName()));
         }
     }
 
-    private String getReportRangeDateQuery(String from, String to, String reportType) {
-        log.info("REPORT QUERY DATE: " + ESHelper.getReportRangeDateSearchQuery(from, to, reportType));
-        return ESHelper.getReportRangeDateSearchQuery(from, to, reportType);
+    private String getReportRangeDateQuery(String from, String to, String reportType, String managingOffice) {
+       String query = ESHelper.getReportRangeDateSearchQuery(from, to, reportType, managingOffice);
+        log.info("REPORT QUERY DATE: " + query);
+        return query;
     }
 
-    private List<SubmitEvent> buildAndGetElasticSearchRequest(String authToken, String caseTypeId, String query)
+    public List<SubmitEvent> buildAndGetElasticSearchRequest(String authToken, String caseTypeId, String query)
             throws IOException {
         List<SubmitEvent> submitEvents = new ArrayList<>();
         HttpEntity<String> request = new HttpEntity<>(query, buildHeaders(authToken));

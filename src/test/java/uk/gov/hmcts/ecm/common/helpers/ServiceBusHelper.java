@@ -1,5 +1,6 @@
 package uk.gov.hmcts.ecm.common.helpers;
 
+import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicValueType;
 import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JudgementTypeItem;
@@ -116,14 +117,14 @@ public class ServiceBusHelper {
 
     public static CloseDataModel getCloseDataModel() {
         return CloseDataModel.builder()
-                .clerkResponsible("ClerkResponsible")
-                .fileLocation("FileLocation")
+                .clerkResponsible(DynamicValueType.create("ClerkResponsible", "ClerkResponsible"))
+                .fileLocation(DynamicValueType.create("FileLocation", "FileLocation"))
                 .notes("Notes")
                 .managingOffice("ManagingOffice")
-                .fileLocationGlasgow("FileLocationGlasgow")
-                .fileLocationAberdeen("FileLocationAberdeen")
-                .fileLocationDundee("FileLocationDundee")
-                .fileLocationEdinburgh("FileLocationEdinburgh")
+                .fileLocationGlasgow(DynamicValueType.create("FileLocationGlasgow", "FileLocationGlasgow"))
+                .fileLocationAberdeen(DynamicValueType.create("FileLocationAberdeen", "FileLocationAberdeen"))
+                .fileLocationDundee(DynamicValueType.create("FileLocationDundee", "FileLocationDundee"))
+                .fileLocationEdinburgh(DynamicValueType.create("FileLocationEdinburgh", "FileLocationEdinburgh"))
                 .build();
     }
 
@@ -149,12 +150,12 @@ public class ServiceBusHelper {
     public static UpdateDataModel getUpdateDataModel() {
         return UpdateDataModel.builder()
                 .managingOffice("ManagingOffice")
-                .fileLocation("FileLocation")
-                .fileLocationGlasgow("FileLocationGlasgow")
-                .fileLocationAberdeen("FileLocationAberdeen")
-                .fileLocationDundee("FileLocationDundee")
-                .fileLocationEdinburgh("FileLocationEdinburgh")
-                .clerkResponsible("ClerkResponsible")
+                .fileLocation(DynamicValueType.create("FileLocation", "FileLocation"))
+                .fileLocationGlasgow(DynamicValueType.create("FileLocationGlasgow", "FileLocationGlasgow"))
+                .fileLocationAberdeen(DynamicValueType.create("FileLocationAberdeen", "FileLocationAberdeen"))
+                .fileLocationDundee(DynamicValueType.create("FileLocationDundee", "FileLocationDundee"))
+                .fileLocationEdinburgh(DynamicValueType.create("FileLocationEdinburgh", "FileLocationEdinburgh"))
+                .clerkResponsible(DynamicValueType.create("ClerkResponsible", "ClerkResponsible"))
                 .positionType("PositionType")
                 .receiptDate("25/08/1999")
                 .hearingStage("HearingStage")

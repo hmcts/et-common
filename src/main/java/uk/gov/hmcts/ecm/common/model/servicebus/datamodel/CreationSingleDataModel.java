@@ -28,4 +28,7 @@ public class CreationSingleDataModel extends DataModelParent {
     @JsonProperty("reasonForCT")
     private String reasonForCT;
 
+    @JsonProperty("scopeOfTransfer")
+    private String scopeOfTransfer;
+
 }

@@ -6,12 +6,14 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
+import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.CloseDataModel;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.CASE_CLOSED_POSITION;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.CLOSED_STATE;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -36,39 +38,46 @@ public class CloseDataTask extends DataTaskParent {
     }
 
     private void closeLogic(SubmitEvent submitEvent) {
-
         log.info("Moving to close state");
-        submitEvent.getCaseData().setPositionType(CASE_CLOSED_POSITION);
-        submitEvent.getCaseData().setClerkResponsible(((CloseDataModel)dataModelParent).getClerkResponsible());
-        submitEvent.getCaseData().setFileLocation(((CloseDataModel)dataModelParent).getFileLocation());
-        submitEvent.getCaseData().setCaseNotes(((CloseDataModel)dataModelParent).getNotes());
+        var caseData = submitEvent.getCaseData();
+        caseData.setPositionType(CASE_CLOSED_POSITION);
+        var clerkResponsible = ((CloseDataModel)dataModelParent).getClerkResponsible();
+        if (clerkResponsible != null) {
+            caseData.setClerkResponsible(DynamicFixedListType.of(clerkResponsible));
+        }
+        var fileLocation = ((CloseDataModel)dataModelParent).getFileLocation();
+        if (fileLocation != null) {
+            caseData.setFileLocation(DynamicFixedListType.of(fileLocation));
+        }
+        caseData.setCaseNotes(((CloseDataModel)dataModelParent).getNotes());
 
         managingOffice(submitEvent, ((CloseDataModel)dataModelParent));
-
     }
 
     private void managingOffice(SubmitEvent submitEvent, CloseDataModel closeDataModel) {
-
         if (!isNullOrEmpty(closeDataModel.getManagingOffice())) {
             submitEvent.getCaseData().setManagingOffice(closeDataModel.getManagingOffice());
         }
 
-        if (!isNullOrEmpty(closeDataModel.getFileLocationGlasgow())) {
-            submitEvent.getCaseData().setFileLocationGlasgow(closeDataModel.getFileLocationGlasgow());
+        if (closeDataModel.getFileLocationGlasgow() != null) {
+            submitEvent.getCaseData().setFileLocationGlasgow(
+                    DynamicFixedListType.of(closeDataModel.getFileLocationGlasgow()));
         }
 
-        if (!isNullOrEmpty(closeDataModel.getFileLocationAberdeen())) {
-            submitEvent.getCaseData().setFileLocationAberdeen(closeDataModel.getFileLocationAberdeen());
+        if (closeDataModel.getFileLocationAberdeen() != null) {
+            submitEvent.getCaseData().setFileLocationAberdeen(
+                    DynamicFixedListType.of(closeDataModel.getFileLocationAberdeen()));
         }
 
-        if (!isNullOrEmpty(closeDataModel.getFileLocationDundee())) {
-            submitEvent.getCaseData().setFileLocationDundee(closeDataModel.getFileLocationDundee());
+        if (closeDataModel.getFileLocationDundee() != null) {
+            submitEvent.getCaseData().setFileLocationDundee(
+                    DynamicFixedListType.of(closeDataModel.getFileLocationDundee()));
         }
 
-        if (!isNullOrEmpty(closeDataModel.getFileLocationEdinburgh())) {
-            submitEvent.getCaseData().setFileLocationEdinburgh(closeDataModel.getFileLocationEdinburgh());
+        if (closeDataModel.getFileLocationEdinburgh() != null) {
+            submitEvent.getCaseData().setFileLocationEdinburgh(
+                    DynamicFixedListType.of(closeDataModel.getFileLocationEdinburgh()));
         }
-
     }
 
 }

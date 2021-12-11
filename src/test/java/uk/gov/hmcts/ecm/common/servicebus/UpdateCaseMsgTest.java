@@ -45,7 +45,7 @@ public class UpdateCaseMsgTest {
         assertEquals(
                 "UpdateCaseMsg{"
                         + "ethosCaseReference='4150002/2020', msgId='1', jurisdiction='EMPLOYMENT', "
-                        + "caseTypeId='Scotland_Multiple', multipleRef='4150001', totalCases='1', "
+                        + "caseTypeId='ET_Scotland_Multiple', multipleRef='4150001', totalCases='1', "
                         + "username='eric.ccdcooper@gmail.com', confirmation='YES', "
                         + "dataModel=CreationDataModel(lead=4150002/2020, multipleRef=4150001, "
                         + "multipleReferenceLinkMarkUp=" + linkMarkUp +")', "
@@ -97,14 +97,18 @@ public class UpdateCaseMsgTest {
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(closeDataModel);
         updateCaseMsg.runTask(submitEventSubmitted);
         assertEquals(CASE_CLOSED_POSITION, submitEventSubmitted.getCaseData().getPositionType());
-        assertEquals("FileLocation", submitEventSubmitted.getCaseData().getFileLocation());
-        assertEquals("ClerkResponsible", submitEventSubmitted.getCaseData().getClerkResponsible());
+        assertEquals("FileLocation", submitEventSubmitted.getCaseData().getFileLocation().getSelectedCode());
+        assertEquals("ClerkResponsible", submitEventSubmitted.getCaseData().getClerkResponsible().getSelectedCode());
         assertEquals("Notes", submitEventSubmitted.getCaseData().getCaseNotes());
         assertEquals("ManagingOffice", submitEventSubmitted.getCaseData().getManagingOffice());
-        assertEquals("FileLocationGlasgow", submitEventSubmitted.getCaseData().getFileLocationGlasgow());
-        assertEquals("FileLocationAberdeen", submitEventSubmitted.getCaseData().getFileLocationAberdeen());
-        assertEquals("FileLocationDundee", submitEventSubmitted.getCaseData().getFileLocationDundee());
-        assertEquals("FileLocationEdinburgh", submitEventSubmitted.getCaseData().getFileLocationEdinburgh());
+        assertEquals("FileLocationGlasgow",
+                submitEventSubmitted.getCaseData().getFileLocationGlasgow().getSelectedCode());
+        assertEquals("FileLocationAberdeen",
+                submitEventSubmitted.getCaseData().getFileLocationAberdeen().getSelectedCode());
+        assertEquals("FileLocationDundee",
+                submitEventSubmitted.getCaseData().getFileLocationDundee().getSelectedCode());
+        assertEquals("FileLocationEdinburgh",
+                submitEventSubmitted.getCaseData().getFileLocationEdinburgh().getSelectedCode());
     }
 
     @Test
@@ -138,12 +142,15 @@ public class UpdateCaseMsgTest {
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(updateDataModel);
         updateCaseMsg.runTask(submitEventAccepted);
         assertEquals("ManagingOffice", submitEventAccepted.getCaseData().getManagingOffice());
-        assertEquals("FileLocation", submitEventAccepted.getCaseData().getFileLocation());
-        assertEquals("FileLocationGlasgow", submitEventAccepted.getCaseData().getFileLocationGlasgow());
-        assertEquals("FileLocationAberdeen", submitEventAccepted.getCaseData().getFileLocationAberdeen());
-        assertEquals("FileLocationDundee", submitEventAccepted.getCaseData().getFileLocationDundee());
-        assertEquals("FileLocationEdinburgh", submitEventAccepted.getCaseData().getFileLocationEdinburgh());
-        assertEquals("ClerkResponsible", submitEventAccepted.getCaseData().getClerkResponsible());
+        assertEquals("FileLocation", submitEventAccepted.getCaseData().getFileLocation().getSelectedCode());
+        assertEquals("FileLocationGlasgow",
+                submitEventAccepted.getCaseData().getFileLocationGlasgow().getSelectedCode());
+        assertEquals("FileLocationAberdeen",
+                submitEventAccepted.getCaseData().getFileLocationAberdeen().getSelectedCode());
+        assertEquals("FileLocationDundee", submitEventAccepted.getCaseData().getFileLocationDundee().getSelectedCode());
+        assertEquals("FileLocationEdinburgh",
+                submitEventAccepted.getCaseData().getFileLocationEdinburgh().getSelectedCode());
+        assertEquals("ClerkResponsible", submitEventAccepted.getCaseData().getClerkResponsible().getSelectedCode());
         assertEquals("PositionType", submitEventAccepted.getCaseData().getPositionType());
         assertEquals("25/08/1999", submitEventAccepted.getCaseData().getReceiptDate());
         assertEquals("HearingStage", submitEventAccepted.getCaseData().getHearingStage());
@@ -161,12 +168,15 @@ public class UpdateCaseMsgTest {
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(updateDataModel);
         updateCaseMsg.runTask(submitEventDetailed);
         assertEquals("ManagingOffice", submitEventDetailed.getCaseData().getManagingOffice());
-        assertEquals("FileLocation", submitEventDetailed.getCaseData().getFileLocation());
-        assertEquals("FileLocationGlasgow", submitEventDetailed.getCaseData().getFileLocationGlasgow());
-        assertEquals("FileLocationAberdeen", submitEventDetailed.getCaseData().getFileLocationAberdeen());
-        assertEquals("FileLocationDundee", submitEventDetailed.getCaseData().getFileLocationDundee());
-        assertEquals("FileLocationEdinburgh", submitEventDetailed.getCaseData().getFileLocationEdinburgh());
-        assertEquals("ClerkResponsible", submitEventDetailed.getCaseData().getClerkResponsible());
+        assertEquals("FileLocation", submitEventDetailed.getCaseData().getFileLocation().getSelectedCode());
+        assertEquals("FileLocationGlasgow",
+                submitEventDetailed.getCaseData().getFileLocationGlasgow().getSelectedCode());
+        assertEquals("FileLocationAberdeen",
+                submitEventDetailed.getCaseData().getFileLocationAberdeen().getSelectedCode());
+        assertEquals("FileLocationDundee", submitEventDetailed.getCaseData().getFileLocationDundee().getSelectedCode());
+        assertEquals("FileLocationEdinburgh",
+                submitEventDetailed.getCaseData().getFileLocationEdinburgh().getSelectedCode());
+        assertEquals("ClerkResponsible", submitEventDetailed.getCaseData().getClerkResponsible().getSelectedCode());
         assertEquals("PositionType", submitEventDetailed.getCaseData().getPositionType());
         assertEquals("RepName", submitEventDetailed
                 .getCaseData().getRepresentativeClaimantType().getNameOfRepresentative());

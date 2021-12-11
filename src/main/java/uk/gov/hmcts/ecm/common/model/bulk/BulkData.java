@@ -42,7 +42,7 @@ public class BulkData {
     private List<JurCodesTypeItem> jurCodesCollection;
 
     @JsonProperty("fileLocation_v2")
-    private String fileLocationV2;
+    private DynamicFixedListType fileLocationV2;
     @JsonProperty("feeGroupReference_v2")
     private String feeGroupReferenceV2;
     @JsonProperty("claimantSurname_v2")
@@ -52,7 +52,7 @@ public class BulkData {
     @JsonProperty("multipleReference_v2")
     private String multipleReferenceV2;
     @JsonProperty("clerkResponsible_v2")
-    private String clerkResponsibleV2;
+    private DynamicFixedListType clerkResponsibleV2;
     @JsonProperty("positionType_v2")
     private String positionTypeV2;
     @JsonProperty("claimantRep_v2")
@@ -60,13 +60,13 @@ public class BulkData {
     @JsonProperty("respondentRep_v2")
     private String respondentRepV2;
     @JsonProperty("fileLocationGlasgow")
-    private String fileLocationGlasgow;
+    private DynamicFixedListType fileLocationGlasgow;
     @JsonProperty("fileLocationAberdeen")
-    private String fileLocationAberdeen;
+    private DynamicFixedListType fileLocationAberdeen;
     @JsonProperty("fileLocationDundee")
-    private String fileLocationDundee;
+    private DynamicFixedListType fileLocationDundee;
     @JsonProperty("fileLocationEdinburgh")
-    private String fileLocationEdinburgh;
+    private DynamicFixedListType fileLocationEdinburgh;
     @JsonProperty("managingOffice")
     private String managingOffice;
     @JsonProperty("subMultipleName")

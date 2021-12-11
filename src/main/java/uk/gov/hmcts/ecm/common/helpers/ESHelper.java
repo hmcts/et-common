@@ -2,6 +2,7 @@ package uk.gov.hmcts.ecm.common.helpers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.index.query.TermsQueryBuilder;
@@ -25,15 +26,7 @@ public class ESHelper {
             "data.hearingCollection.value.hearingDateCollection.value.hearingVenueDay.keyword";
     public static final String BROUGHT_FORWARD_DATE_FIELD_NAME = "data.bfActions.value.bfDate";
     public static final String CLAIMS_ACCEPTED_DATE_FIELD_NAME = "data.preAcceptCase.dateAccepted";
-    public static final String LISTING_GLASGOW_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Glasgow.keyword";
-    public static final String LISTING_ABERDEEN_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Aberdeen.keyword";
-    public static final String LISTING_DUNDEE_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Dundee.keyword";
-    public static final String LISTING_EDINBURGH_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Edinburgh.keyword";
-
+    public static final String MANAGING_OFFICE_FIELD_NAME = "data.managingOffice";
     private static final String REPORT_TYPE_NOT_FOUND = "Report type not found";
 
     private ESHelper() {
@@ -111,9 +104,10 @@ public class ESHelper {
     }
 
     public static String getReportRangeDateSearchQuery(String dateToSearchFrom, String dateToSearchTo,
-                                                       String reportType) {
+                                                       String reportType, String managingOffice) {
         String dateFieldName = getDateFieldName(reportType);
         BoolQueryBuilder boolQueryBuilder = boolQuery()
+                 .must(new MatchQueryBuilder(MANAGING_OFFICE_FIELD_NAME, managingOffice))
                 .filter(new RangeQueryBuilder(dateFieldName).gte(dateToSearchFrom).lte(dateToSearchTo));
         return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)

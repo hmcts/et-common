@@ -1,13 +1,33 @@
 package uk.gov.hmcts.ecm.common.model.ccd;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
+import uk.gov.hmcts.ecm.common.model.ccd.items.AddressLabelTypeItem;
+import uk.gov.hmcts.ecm.common.model.ccd.items.BFActionTypeItem;
+import uk.gov.hmcts.ecm.common.model.ccd.items.DepositTypeItem;
+import uk.gov.hmcts.ecm.common.model.ccd.items.DocumentTypeItem;
+import uk.gov.hmcts.ecm.common.model.ccd.items.EccCounterClaimTypeItem;
+import uk.gov.hmcts.ecm.common.model.ccd.items.HearingTypeItem;
+import uk.gov.hmcts.ecm.common.model.ccd.items.JudgementTypeItem;
+import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
+import uk.gov.hmcts.ecm.common.model.ccd.items.RepresentedTypeRItem;
+import uk.gov.hmcts.ecm.common.model.ccd.items.RespondentSumTypeItem;
+import uk.gov.hmcts.ecm.common.model.ccd.types.AdditionalCaseInfoType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.AddressLabelsAttributesType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.AddressLabelsSelectionType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.CasePreAcceptType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.ClaimantIndType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.ClaimantOtherType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.ClaimantType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.ClaimantWorkAddressType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.CompanyPremisesType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.CorrespondenceScotType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.CorrespondenceType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.RepresentedTypeC;
+import uk.gov.hmcts.ecm.common.model.ccd.types.RestrictedReportingType;
 import uk.gov.hmcts.ecm.common.model.listing.ListingData;
-import uk.gov.hmcts.ecm.common.model.ccd.items.*;
-import uk.gov.hmcts.ecm.common.model.ccd.types.*;
 
 import java.util.List;
 
@@ -79,15 +99,15 @@ public class CaseData {
     @JsonProperty("currentPosition")
     private String currentPosition;
     @JsonProperty("fileLocation")
-    private String fileLocation;
+    private DynamicFixedListType fileLocation;
     @JsonProperty("fileLocationGlasgow")
-    private String fileLocationGlasgow;
+    private DynamicFixedListType fileLocationGlasgow;
     @JsonProperty("fileLocationAberdeen")
-    private String fileLocationAberdeen;
+    private DynamicFixedListType fileLocationAberdeen;
     @JsonProperty("fileLocationDundee")
-    private String fileLocationDundee;
+    private DynamicFixedListType fileLocationDundee;
     @JsonProperty("fileLocationEdinburgh")
-    private String fileLocationEdinburgh;
+    private DynamicFixedListType fileLocationEdinburgh;
     @JsonProperty("hearingCollection")
     private List<HearingTypeItem> hearingCollection;
     @JsonProperty("depositType")
@@ -99,7 +119,7 @@ public class CaseData {
     @JsonProperty("bfActions")
     private List<BFActionTypeItem> bfActions;
     @JsonProperty("clerkResponsible")
-    private String clerkResponsible;
+    private DynamicFixedListType clerkResponsible;
     @JsonProperty("userLocation")
     private String userLocation;
     @JsonProperty("documentCollection")
@@ -269,4 +289,66 @@ public class CaseData {
 
     @JsonProperty("stateAPI")
     private String stateAPI;
+
+    // Allocate Hearing fields
+    @JsonProperty("allocateHearingHearing")
+    private DynamicFixedListType allocateHearingHearing;
+    @JsonProperty("allocateHearingManagingOffice")
+    private String allocateHearingManagingOffice;
+    @JsonProperty("allocateHearingVenue")
+    private DynamicFixedListType allocateHearingVenue;
+    @JsonProperty("allocateHearingRoom")
+    private DynamicFixedListType allocateHearingRoom;
+    @JsonProperty("allocateHearingClerk")
+    private DynamicFixedListType allocateHearingClerk;
+    @JsonProperty("allocateHearingSitAlone")
+    private String allocateHearingSitAlone;
+    @JsonProperty("allocateHearingJudge")
+    private DynamicFixedListType allocateHearingJudge;
+    @JsonProperty("allocateHearingEmployerMember")
+    private DynamicFixedListType allocateHearingEmployerMember;
+    @JsonProperty("allocateHearingEmployeeMember")
+    private DynamicFixedListType allocateHearingEmployeeMember;
+    @JsonProperty("allocateHearingPostponedBy")
+    private String allocateHearingPostponedBy;
+    @JsonProperty("allocateHearingStatus")
+    private String allocateHearingStatus;
+    @JsonProperty("allocateHearingReadingDeliberation")
+    private String allocateHearingReadingDeliberation;
+
+    // Hearing Details fields
+    @JsonProperty("hearingDetailsHearing")
+    private DynamicFixedListType hearingDetailsHearing;
+    @JsonProperty("hearingDetailsStatus")
+    private String hearingDetailsStatus;
+    @JsonProperty("hearingDetailsPostponedBy")
+    private String hearingDetailsPostponedBy;
+    @JsonProperty("hearingDetailsCaseDisposed")
+    private String hearingDetailsCaseDisposed;
+    @JsonProperty("hearingDetailsPartHeard")
+    private String hearingDetailsPartHeard;
+    @JsonProperty("hearingDetailsReservedJudgment")
+    private String hearingDetailsReservedJudgment;
+    @JsonProperty("hearingDetailsAttendeeClaimant")
+    private String hearingDetailsAttendeeClaimant;
+    @JsonProperty("hearingDetailsAttendeeNonAttendees")
+    private String hearingDetailsAttendeeNonAttendees;
+    @JsonProperty("hearingDetailsAttendeeRespNoRep")
+    private String hearingDetailsAttendeeRespNoRep;
+    @JsonProperty("hearingDetailsAttendeeRespAndRep")
+    private String hearingDetailsAttendeeRespAndRep;
+    @JsonProperty("hearingDetailsAttendeeRepOnly")
+    private String hearingDetailsAttendeeRepOnly;
+    @JsonProperty("hearingDetailsTimingStart")
+    private String hearingDetailsTimingStart;
+    @JsonProperty("hearingDetailsTimingBreak")
+    private String hearingDetailsTimingBreak;
+    @JsonProperty("hearingDetailsTimingResume")
+    private String hearingDetailsTimingResume;
+    @JsonProperty("hearingDetailsTimingFinish")
+    private String hearingDetailsTimingFinish;
+    @JsonProperty("hearingDetailsTimingDuration")
+    private String hearingDetailsTimingDuration;
+    @JsonProperty("hearingDetailsHearingNotes2")
+    private String hearingDetailsHearingNotes2;
 }

@@ -2,31 +2,36 @@ package uk.gov.hmcts.ecm.common.model.servicebus.tasks;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.base.Strings;
-
-import java.util.*;
-import java.util.stream.Collectors;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
 import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.RepresentedTypeRItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.RespondentSumTypeItem;
-import uk.gov.hmcts.ecm.common.model.ccd.types.*;
-
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
-
+import uk.gov.hmcts.ecm.common.model.ccd.types.JudgementType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.JurCodesType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.RepresentedTypeC;
+import uk.gov.hmcts.ecm.common.model.ccd.types.RepresentedTypeR;
+import uk.gov.hmcts.ecm.common.model.ccd.types.RespondentSumType;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.UpdateDataModel;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
 @EqualsAndHashCode(callSuper = true)
@@ -64,8 +69,9 @@ public class UpdateDataTask extends DataTaskParent {
             dateToCurrentPosition(caseData);
         }
 
-        if (!isNullOrEmpty(updateDataModel.getClerkResponsible())) {
-            caseData.setClerkResponsible(updateDataModel.getClerkResponsible());
+        var clerkResponsible = updateDataModel.getClerkResponsible();
+        if (clerkResponsible != null) {
+            caseData.setClerkResponsible(DynamicFixedListType.of(clerkResponsible));
         }
 
         if (!isNullOrEmpty(updateDataModel.getHearingStage())) {
@@ -94,33 +100,33 @@ public class UpdateDataTask extends DataTaskParent {
             caseData.setManagingOffice(updateDataModel.getManagingOffice());
         }
 
-        if (!isNullOrEmpty(updateDataModel.getFileLocation())) {
-            caseData.setFileLocation(updateDataModel.getFileLocation());
+        var fileLocation = updateDataModel.getFileLocation();
+        if (fileLocation != null) {
+            caseData.setFileLocation(DynamicFixedListType.of(fileLocation));
+        }
+        if (updateDataModel.getFileLocationGlasgow() != null) {
+            caseData.setFileLocationGlasgow(DynamicFixedListType.of(updateDataModel.getFileLocationGlasgow()));
         }
 
-        if (!isNullOrEmpty(updateDataModel.getFileLocationGlasgow())) {
-            caseData.setFileLocationGlasgow(updateDataModel.getFileLocationGlasgow());
+        if (updateDataModel.getFileLocationAberdeen() != null) {
+            caseData.setFileLocationAberdeen(DynamicFixedListType.of(updateDataModel.getFileLocationAberdeen()));
         }
 
-        if (!isNullOrEmpty(updateDataModel.getFileLocationAberdeen())) {
-            caseData.setFileLocationAberdeen(updateDataModel.getFileLocationAberdeen());
+        if (updateDataModel.getFileLocationDundee() != null) {
+            caseData.setFileLocationDundee(DynamicFixedListType.of(updateDataModel.getFileLocationDundee()));
         }
 
-        if (!isNullOrEmpty(updateDataModel.getFileLocationDundee())) {
-            caseData.setFileLocationDundee(updateDataModel.getFileLocationDundee());
-        }
-
-        if (!isNullOrEmpty(updateDataModel.getFileLocationEdinburgh())) {
-            caseData.setFileLocationEdinburgh(updateDataModel.getFileLocationEdinburgh());
+        if (updateDataModel.getFileLocationEdinburgh() != null) {
+            caseData.setFileLocationEdinburgh(DynamicFixedListType.of(updateDataModel.getFileLocationEdinburgh()));
         }
 
     }
 
     private boolean shouldClaimantRepresentativeBeRemoved(CaseData caseData, UpdateDataModel updateDataModel) {
-        if (Strings.isNullOrEmpty(updateDataModel.getIsClaimantRepRemovalUpdate()) ||
+        if (isNullOrEmpty(updateDataModel.getIsClaimantRepRemovalUpdate()) ||
                 updateDataModel.getIsClaimantRepRemovalUpdate().equals(NO)) {
             return false;
-        } else if (!Strings.isNullOrEmpty(updateDataModel.getIsClaimantRepRemovalUpdate())
+        } else if (!isNullOrEmpty(updateDataModel.getIsClaimantRepRemovalUpdate())
                 && updateDataModel.getIsClaimantRepRemovalUpdate().equals(YES)
                 && (updateDataModel.getRepresentativeClaimantType() != null)
                 && (caseData.getRepresentativeClaimantType() != null)

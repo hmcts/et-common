@@ -26,7 +26,7 @@ import uk.gov.hmcts.ecm.common.model.ccd.CaseDetails;
 import uk.gov.hmcts.ecm.common.model.ccd.CaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.ccd.PaginatedSearchMetadata;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
+import uk.gov.hmcts.ecm.common.model.helper.TribunalOffice;
 import uk.gov.hmcts.ecm.common.model.labels.LabelCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.labels.LabelPayloadEvent;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleCaseSearchResult;
@@ -54,6 +54,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static uk.gov.hmcts.ecm.common.helpers.ESHelper.LISTING_VENUE_FIELD_NAME;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.ALL_VENUES;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.BROUGHT_FORWARD_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.CASES_COMPLETED_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.LIVE_CASELOAD_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.MANUALLY_CREATED_POSITION;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.TIME_TO_FIRST_HEARING_REPORT;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CcdClientTest {
@@ -93,8 +100,9 @@ public class CcdClientTest {
 
         caseDetails = new CaseDetails();
         caseDetails.setJurisdiction("TRIBUNALS");
-        caseDetails.setCaseTypeId("Type1");
+        caseDetails.setCaseTypeId(ENGLANDWALES_CASE_TYPE_ID);
         caseData = new CaseData();
+        caseData.setManagingOffice(TribunalOffice.LEEDS.getOfficeName());
         caseDetails.setCaseData(caseData);
 
         bulkDetails = new BulkDetails();
@@ -431,10 +439,14 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesGenericReportElasticSearch() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"range\":{\"data.bfActions.value"
-                + ".bfDate\":{\"from\":\"2019-09-23T00:00:00.000\",\"to\":\"2019-09-24T00:00:00.000\","
-                + "\"include_lower\":true,\"include_upper\":true,\"boost\":1"
-                + ".0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
+
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":{\"data.managingOffice\"" +
+                ":{\"query\":\"Leeds\",\"operator\":\"OR\",\"prefix_length\":0,\"max_expansions\":50," +
+                "\"fuzzy_transpositions\":true,\"lenient\":false,\"zero_terms_query\":\"NONE\"," +
+                "\"auto_generate_synonyms_phrase_query\":true,\"boost\":1.0}}}],\"filter\":[{\"range\"" +
+                ":{\"data.bfActions.value.bfDate\":{\"from\":\"2019-09-23T00:00:00.000\",\"to\":\"" +
+                "2019-09-24T00:00:00.000\",\"include_lower\":true,\"include_upper\":true,\"boost\":1.0}}}]," +
+                "\"adjust_pure_negative\":true,\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
@@ -442,8 +454,8 @@ public class CcdClientTest {
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
-        ccdClient.retrieveCasesGenericReportElasticSearch("authToken",
-                caseDetails.getCaseTypeId(), "2019-09-23",
+        ccdClient.retrieveCasesGenericReportElasticSearch("authToken", caseDetails.getCaseTypeId(),
+                TribunalOffice.valueOfOfficeName(caseDetails.getCaseData().getManagingOffice()), "2019-09-23",
                 "2019-09-24", BROUGHT_FORWARD_REPORT);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
@@ -451,11 +463,15 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesGenericReportElasticSearchCasesCompleted() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"range\""
-                + ":{\"data.hearingCollection.value.hearingDateCollection.value"
-                + ".listedDate\":{\"from\":\"2019-09-24T00:00:00.000\",\"to\":\"2019-09-24T23:59:59.000\","
-                + "\"include_lower\":true,\"include_upper\":true,\"boost\":1"
-                + ".0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
+
+       String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":" +
+                "{\"data.managingOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\",\"prefix_length\"" +
+                ":0,\"max_expansions\":50,\"fuzzy_transpositions\":true,\"lenient\":false," +
+                "\"zero_terms_query\":\"NONE\",\"auto_generate_synonyms_phrase_query\":true," +
+                "\"boost\":1.0}}}],\"filter\":[{\"range\":{\"data.hearingCollection.value." +
+                "hearingDateCollection.value.listedDate\":{\"from\":\"2019-09-24T00:00:00.000\"," +
+                "\"to\":\"2019-09-24T23:59:59.000\",\"include_lower\":true,\"include_upper\":true," +
+                "\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
@@ -463,8 +479,8 @@ public class CcdClientTest {
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
-        ccdClient.retrieveCasesGenericReportElasticSearch("authToken",
-                caseDetails.getCaseTypeId(), "2019-09-24",
+        ccdClient.retrieveCasesGenericReportElasticSearch("authToken", caseDetails.getCaseTypeId(),
+               TribunalOffice.valueOfOfficeName(caseDetails.getCaseData().getManagingOffice()), "2019-09-24",
                 "2019-09-24", CASES_COMPLETED_REPORT);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
@@ -472,11 +488,16 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesGenericReportElasticSearchCasesTimeToFirstHearing() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"range\""
-                + ":{\"data.hearingCollection.value.hearingDateCollection.value"
-                + ".listedDate\":{\"from\":\"2019-09-24T00:00:00.000\",\"to\":\"2019-09-24T23:59:59.000\","
-                + "\"include_lower\":true,\"include_upper\":true,\"boost\":1"
-                + ".0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":" +
+                "{\"data.managingOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\"," +
+                "\"prefix_length\":0,\"max_expansions\":50,\"fuzzy_transpositions\"" +
+                ":true,\"lenient\":false,\"zero_terms_query\":\"NONE\"," +
+                "\"auto_generate_synonyms_phrase_query\":true,\"boost\":1.0}}}]," +
+                "\"filter\":[{\"range\":{\"data.hearingCollection." +
+                "value.hearingDateCollection.value.listedDate\":" +
+                "{\"from\":\"2019-09-24T00:00:00.000\",\"to\":\"2019-09-24T23:59:59.000\"" +
+                ",\"include_lower\":true,\"include_upper\":true,\"" +
+                "boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
@@ -484,8 +505,8 @@ public class CcdClientTest {
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
-        ccdClient.retrieveCasesGenericReportElasticSearch("authToken",
-                caseDetails.getCaseTypeId(), "2019-09-24",
+        ccdClient.retrieveCasesGenericReportElasticSearch("authToken", caseDetails.getCaseTypeId(),
+                TribunalOffice.valueOfOfficeName(caseDetails.getCaseData().getManagingOffice()), "2019-09-24",
                 "2019-09-24", TIME_TO_FIRST_HEARING_REPORT);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
@@ -493,10 +514,15 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesGenericReportElasticSearchLiveCaseload() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"range\""
-                + ":{\"data.preAcceptCase.dateAccepted\":{\"from\":\"2019-09-24T00:00:00.000\","
-                + "\"to\":\"2019-09-24T23:59:59.000\",\"include_lower\":true,\"include_upper\":true,"
-                + "\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
+       String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":" +
+                "{\"data.managingOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\"" +
+                ",\"prefix_length\":0,\"max_expansions\":50," +
+                "\"fuzzy_transpositions\":true,\"lenient\":false,\"zero_terms_query\"" +
+                ":\"NONE\",\"auto_generate_synonyms_phrase_query\":true," +
+                "\"boost\":1.0}}}],\"filter\":[{\"range\":" +
+                "{\"data.preAcceptCase.dateAccepted\":{\"from\":\"2019-09-24T00:00:00.000\"," +
+                "\"to\":\"2019-09-24T23:59:59.000\",\"include_lower\":true,\"include_upper\":true," +
+                "\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
@@ -504,8 +530,8 @@ public class CcdClientTest {
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
-        ccdClient.retrieveCasesGenericReportElasticSearch("authToken",
-                caseDetails.getCaseTypeId(), "2019-09-24",
+        ccdClient.retrieveCasesGenericReportElasticSearch("authToken", caseDetails.getCaseTypeId(),
+                TribunalOffice.valueOfOfficeName(caseDetails.getCaseData().getManagingOffice()), "2019-09-24",
                 "2019-09-24", LIVE_CASELOAD_REPORT);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
