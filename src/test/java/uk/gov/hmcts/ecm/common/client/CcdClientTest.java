@@ -792,6 +792,25 @@ public class CcdClientTest {
     }
 
     @Test
+    public void testRunElasticSearch() throws IOException {
+        var elasticSearchQuery = "{\"size\":10000,\"query\": {\"match_all\":{} }}";
+        var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
+        var searchResult = new CaseSearchResult(2L,
+                Arrays.asList(new SubmitEvent(), new SubmitEvent()));
+        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, CaseSearchResult.class))
+                .thenReturn(responseEntity);
+
+        var results = ccdClient.runElasticSearch("authToken",
+                caseDetails.getCaseTypeId(), elasticSearchQuery, CaseSearchResult.class);
+
+        assertEquals(2, results.getCases().size());
+        verify(restTemplate).exchange(uri, HttpMethod.POST, httpEntity, CaseSearchResult.class);
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
     public void startDisposeEventForCase() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
         ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
