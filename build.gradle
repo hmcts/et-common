@@ -76,7 +76,7 @@ def versions = [
 ]
 
 ext {
-    log4JVersion = "2.15.0"
+    log4JVersion = '2.15.0'
 }
 
 // endregion
