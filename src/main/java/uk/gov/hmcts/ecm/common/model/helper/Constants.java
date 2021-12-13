@@ -302,7 +302,6 @@ public class Constants {
     public static final String CASE_SOURCE_LOCAL_REPORT = "Case Source";
     public static final String HEARINGS_TO_JUDGEMENTS_REPORT = "Hearings To Judgments";
     public static final String HEARINGS_BY_HEARING_TYPE_REPORT = "Hearings By Hearing Type";
-    public static final String NO_CHNAGE_INCURRENT_POSITION_REPORT = "No Change In Current Position";
     public static final String CASES_AWAITING_JUDGMENT_REPORT = "Cases Awaiting Judgment";
     public static final String SESSION_DAYS_REPORT = "Session Days";
 

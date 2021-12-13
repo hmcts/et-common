@@ -151,8 +151,8 @@ public class CcdClient {
     public List<CasesAwaitingJudgmentSubmitEvent> casesAwaitingJudgmentSearch(String authToken, String caseTypeId,
                                                                               String query) throws IOException {
         var submitEvents = new ArrayList<CasesAwaitingJudgmentSubmitEvent>();
-        var searchResult = runElasticSearch(authToken, caseTypeId, query,
-                CasesAwaitingJudgmentSearchResult.class);
+        var searchResult = runElasticSearch(authToken, caseTypeId, query, CasesAwaitingJudgmentSearchResult.class);
+
         if (searchResult != null && !CollectionUtils.isEmpty(searchResult.getCases())) {
             submitEvents.addAll(searchResult.getCases());
         }
@@ -163,8 +163,8 @@ public class CcdClient {
     public List<HearingsToJudgmentsSubmitEvent> hearingsToJudgementsSearch(String authToken, String caseTypeId,
                                                                            String query) throws IOException {
         var submitEvents = new ArrayList<HearingsToJudgmentsSubmitEvent>();
-        var searchResult = runElasticSearch(authToken, caseTypeId, query,
-                HearingsToJudgmentsSearchResult.class);
+        var searchResult = runElasticSearch(authToken, caseTypeId, query, HearingsToJudgmentsSearchResult.class);
+
         if (searchResult != null && !CollectionUtils.isEmpty(searchResult.getCases())) {
             submitEvents.addAll(searchResult.getCases());
         }
@@ -172,13 +172,12 @@ public class CcdClient {
         return submitEvents;
     }
 
-    private <T> T runElasticSearch(String authToken, String caseTypeId, String query,
-                                       Class<T> typeClass) throws IOException {
-
+    public <T> T runElasticSearch(String authToken, String caseTypeId, String query, Class<T> searchResultTypeClass)
+            throws IOException {
         var request = new HttpEntity<>(query, buildHeaders(authToken));
         var url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
 
-        return restTemplate.exchange(url, HttpMethod.POST, request, typeClass).getBody();
+        return restTemplate.exchange(url, HttpMethod.POST, request, searchResultTypeClass).getBody();
     }
 
     private PaginatedSearchMetadata searchMetadata(String authToken, String caseTypeId, String jurisdiction)
