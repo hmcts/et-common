@@ -11,7 +11,7 @@ plugins {
 }
 
 group 'uk.gov.hmcts.reform'
-version '0.1.160'
+version '0.1.161'
 
 sourceCompatibility = '11.0'
 
@@ -76,7 +76,7 @@ def versions = [
 ]
 
 ext {
-    log4JVersion = '2.15.0'
+    log4JVersion = '2.16.0'
 }
 
 // endregion
