@@ -34,7 +34,7 @@ public class CaseDataTest {
         assertEquals(caseData.getReceiptDate(), "20 Jan 2019");
         assertEquals(caseData.getUserLocation(), "Bath");
         assertEquals(caseData.getFileLocation(), "City");
-        assertEquals(caseData.getCaseType(), "Single");
+        assertEquals(caseData.getEcmCaseType(), "Single");
         assertEquals(caseData.getFeeGroupReference(), "1212");
     }
     @Test
