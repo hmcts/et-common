@@ -47,23 +47,17 @@ public class UpdateDataTask extends DataTaskParent {
     }
 
     public void run(SubmitEvent submitEvent) {
-
         amendUpdateFields(submitEvent);
-
     }
 
     private void amendUpdateFields(SubmitEvent submitEvent) {
-
         var updateDataModel = ((UpdateDataModel) dataModelParent);
 
         batchUpdate1(submitEvent.getCaseData(), updateDataModel);
-
         batchUpdate3(submitEvent.getCaseData(), updateDataModel);
-
     }
 
     private void batchUpdate1(CaseData caseData, UpdateDataModel updateDataModel) {
-
         if (!isNullOrEmpty(updateDataModel.getPositionType())) {
             caseData.setPositionType(updateDataModel.getPositionType());
             dateToCurrentPosition(caseData);
@@ -83,7 +77,6 @@ public class UpdateDataTask extends DataTaskParent {
         }
 
         updateManagingOffice(caseData, updateDataModel);
-
     }
 
     private void dateToCurrentPosition(CaseData caseData) {
@@ -95,7 +88,6 @@ public class UpdateDataTask extends DataTaskParent {
     }
 
     private void updateManagingOffice(CaseData caseData, UpdateDataModel updateDataModel) {
-
         if (!isNullOrEmpty(updateDataModel.getManagingOffice())) {
             caseData.setManagingOffice(updateDataModel.getManagingOffice());
         }
@@ -119,7 +111,6 @@ public class UpdateDataTask extends DataTaskParent {
         if (updateDataModel.getFileLocationEdinburgh() != null) {
             caseData.setFileLocationEdinburgh(DynamicFixedListType.of(updateDataModel.getFileLocationEdinburgh()));
         }
-
     }
 
     private boolean shouldClaimantRepresentativeBeRemoved(CaseData caseData, UpdateDataModel updateDataModel) {
@@ -192,11 +183,9 @@ public class UpdateDataTask extends DataTaskParent {
         } else if (updateDataModel.getRepresentedType() != null) {
             removeRespondentRep(caseData, updateDataModel.getRepresentedType());
         }
-
     }
 
     private void updateRespondentSumType(CaseData caseData, RespondentSumType respondentSumType) {
-
         if (caseData.getRespondentCollection() != null) {
             caseData.getRespondentCollection().add(createRespondentSumTypeItem(respondentSumType));
 
@@ -208,20 +197,16 @@ public class UpdateDataTask extends DataTaskParent {
     }
 
     private RespondentSumTypeItem createRespondentSumTypeItem(RespondentSumType respondentSumType) {
-
         var respondentSumTypeItem = new RespondentSumTypeItem();
 
         respondentSumTypeItem.setId(UUID.randomUUID().toString());
         respondentSumTypeItem.setValue(respondentSumType);
 
         return respondentSumTypeItem;
-
     }
 
     private void updateJurisdictionCode(CaseData caseData, JurCodesType jurCodesType) {
-
         if (caseData.getJurCodesCollection() != null) {
-
             log.info("JurCodesCollection: " + caseData.getJurCodesCollection());
             log.info("JurCodesType: " + jurCodesType);
             Optional<JurCodesTypeItem> jurCodesTypeItemOptional =
@@ -236,24 +221,21 @@ public class UpdateDataTask extends DataTaskParent {
                 caseData.getJurCodesCollection().add(createJurCodesTypeItem(jurCodesType));
             } else {
                 log.info("JurCodes Not Empty");
+                jurCodesTypeItemOptional.get().setValue(jurCodesType);
             }
-
         } else {
             caseData.setJurCodesCollection(
                     new ArrayList<>(Collections.singletonList(createJurCodesTypeItem(jurCodesType))));
         }
-
     }
 
     private JurCodesTypeItem createJurCodesTypeItem(JurCodesType jurCodesType) {
-
         var jurCodesTypeItem = new JurCodesTypeItem();
 
         jurCodesTypeItem.setId(UUID.randomUUID().toString());
         jurCodesTypeItem.setValue(jurCodesType);
 
         return jurCodesTypeItem;
-
     }
 
     private void updateJudgement(CaseData caseData, JudgementType judgementType) {
@@ -261,50 +243,40 @@ public class UpdateDataTask extends DataTaskParent {
     }
 
     private void addRespondentRep(CaseData caseData, RepresentedTypeR representedType) {
-
-        if (caseData.getRespondentCollection() != null) {
-            Optional<RespondentSumTypeItem> respondentSumTypeItemOptional =
-                    caseData.getRespondentCollection().stream()
-                            .filter(respondentSumTypeItem ->
-                                    respondentSumTypeItem.getValue().getRespondentName()
-                                            .equals(representedType.getRespRepName()))
-                            .findAny();
-
-            if (respondentSumTypeItemOptional.isPresent()) {
-
-                if (caseData.getRepCollection() != null) {
-
-                    var found = false;
-
-                    for (RepresentedTypeRItem representedTypeRItem : caseData.getRepCollection()) {
-
-                        if (representedTypeRItem.getValue().getRespRepName()
-                                .equals(representedType.getRespRepName())) {
-
-                            representedTypeRItem.setValue(representedType);
-                            found = true;
-                        }
-                    }
-
-                    if (!found) {
-
-                        caseData.getRepCollection().add(createRespondentRepTypeItem(representedType));
-
-                    }
-
-                } else {
-
-                    caseData.setRepCollection(
-                            new ArrayList<>(Collections.singletonList(createRespondentRepTypeItem(representedType))));
-                }
-
-            }
+        if (CollectionUtils.isEmpty(caseData.getRespondentCollection())) {
+            return;
         }
 
+        Optional<RespondentSumTypeItem> respondentSumTypeItemOptional =
+                caseData.getRespondentCollection().stream()
+                        .filter(respondentSumTypeItem ->
+                                respondentSumTypeItem.getValue().getRespondentName()
+                                        .equals(representedType.getRespRepName()))
+                        .findAny();
+
+        if (respondentSumTypeItemOptional.isEmpty()) {
+            return;
+        }
+
+        if (caseData.getRepCollection() != null) {
+            var found = false;
+            for (RepresentedTypeRItem representedTypeRItem : caseData.getRepCollection()) {
+                if (representedTypeRItem.getValue().getRespRepName().equals(representedType.getRespRepName())) {
+                    representedTypeRItem.setValue(representedType);
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                caseData.getRepCollection().add(createRespondentRepTypeItem(representedType));
+            }
+        } else {
+            caseData.setRepCollection(
+                    new ArrayList<>(Collections.singletonList(createRespondentRepTypeItem(representedType))));
+        }
     }
 
     private void removeRespondentRep(CaseData caseData, RepresentedTypeR representedType) {
-
         if (caseData.getRespondentCollection() != null) {
             Optional<RespondentSumTypeItem> respondentSumTypeItemOptional =
                     caseData.getRespondentCollection().stream()
@@ -331,14 +303,11 @@ public class UpdateDataTask extends DataTaskParent {
     }
 
     private RepresentedTypeRItem createRespondentRepTypeItem(RepresentedTypeR representedType) {
-
         var representedTypeRItem = new RepresentedTypeRItem();
 
         representedTypeRItem.setId(UUID.randomUUID().toString());
         representedTypeRItem.setValue(representedType);
 
         return representedTypeRItem;
-
     }
-
 }

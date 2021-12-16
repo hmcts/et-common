@@ -26,6 +26,8 @@ public class ListingData {
     private String tribunalCorrespondenceDX;
     @JsonProperty("tribunalCorrespondenceEmail")
     private String tribunalCorrespondenceEmail;
+    @JsonProperty("reportDate")
+    private String reportDate;
     @JsonProperty("hearingDateType")
     private String hearingDateType;
     @JsonProperty("listingDate")

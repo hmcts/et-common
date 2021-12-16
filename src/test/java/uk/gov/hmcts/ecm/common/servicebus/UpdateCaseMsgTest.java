@@ -1,5 +1,6 @@
 package uk.gov.hmcts.ecm.common.servicebus;
 
+import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -117,7 +118,7 @@ public class UpdateCaseMsgTest {
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(detachDataModel);
         updateCaseMsg.runTask(submitEventAccepted);
         assertEquals(SINGLE_CASE_TYPE, submitEventAccepted.getCaseData().getCaseType());
-        assertEquals(" ", submitEventAccepted.getCaseData().getMultipleReference());
+        assertNull(submitEventAccepted.getCaseData().getMultipleReference());
     }
 
     @Test

@@ -163,6 +163,8 @@ public class AdhocReportType {
     private String reservedHearing;
     @JsonProperty("hearingCM")
     private String hearingCM;
+    @JsonProperty("costs")
+    private String costs;
     @JsonProperty("hearingInterloc")
     private String hearingInterloc;
     @JsonProperty("hearingPH")
@@ -249,4 +251,59 @@ public class AdhocReportType {
     private String xConOpen26wkTotalPerCent;
     @JsonProperty("delayedDaysForFirstHearing")
     private String delayedDaysForFirstHearing;
+
+    @JsonProperty("claimServedDay1Total")
+    private String claimServedDay1Total;
+    @JsonProperty("claimServedDay1Percent")
+    private String claimServedDay1Percent;
+
+    @JsonProperty("claimServedDay2Total")
+    private String claimServedDay2Total;
+    @JsonProperty("claimServedDay2Percent")
+    private String claimServedDay2Percent;
+
+    @JsonProperty("claimServedDay3Total")
+    private String claimServedDay3Total;
+    @JsonProperty("claimServedDay3Percent")
+    private String claimServedDay3Percent;
+
+    @JsonProperty("claimServedDay4Total")
+    private String claimServedDay4Total;
+    @JsonProperty("claimServedDay4Percent")
+    private String claimServedDay4Percent;
+
+    @JsonProperty("claimServedDay5Total")
+    private String claimServedDay5Total;
+    @JsonProperty("claimServedDay5Percent")
+    private String claimServedDay5Percent;
+
+    @JsonProperty("claimServed6PlusDaysTotal")
+    private String claimServed6PlusDaysTotal;
+    @JsonProperty("claimServed6PlusDaysPercent")
+    private String claimServed6PlusDaysPercent;
+
+    @JsonProperty("claimServedTotal")
+    private String claimServedTotal;
+
+    @JsonProperty("claimServedItems")
+    private List<ClaimServedTypeItem> claimServedItems;
+
+    @JsonProperty("manuallyCreatedTotalCases")
+    private String manuallyCreatedTotalCases;
+    @JsonProperty("et1OnlineTotalCases")
+    private String et1OnlineTotalCases;
+    @JsonProperty("eccTotalCases")
+    private String eccTotalCases;
+    @JsonProperty("migratedTotalCases")
+    private String migratedTotalCases;
+
+    @JsonProperty("manuallyCreatedTotalCasesPercent")
+    private String manuallyCreatedTotalCasesPercent;
+    @JsonProperty("et1OnlineTotalCasesPercent")
+    private String et1OnlineTotalCasesPercent;
+    @JsonProperty("eccTotalCasesPercent")
+    private String eccTotalCasesPercent;
+    @JsonProperty("migratedTotalCasesPercent")
+    private String migratedTotalCasesPercent;
+
 }
