@@ -48,7 +48,7 @@ public class CreationDataTask extends DataTaskParent {
 
         log.info("Moving case to Multiples case type");
         submitEvent.getCaseData().setMultipleReference(((CreationDataModel) dataModelParent).getMultipleRef());
-        submitEvent.getCaseData().setCaseType(MULTIPLE_CASE_TYPE);
+        submitEvent.getCaseData().setEcmCaseType(MULTIPLE_CASE_TYPE);
         submitEvent.getCaseData().setMultipleFlag(YES);
         submitEvent.getCaseData().setMultipleReferenceLinkMarkUp(
                 ((CreationDataModel) dataModelParent).getMultipleReferenceLinkMarkUp());
