@@ -20,6 +20,7 @@ import uk.gov.hmcts.ecm.common.model.ccd.CaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.ccd.PaginatedSearchMetadata;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.helper.TribunalOffice;
+import uk.gov.hmcts.ecm.common.model.generic.GenericSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.labels.LabelCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.labels.LabelPayloadEvent;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleCaseSearchResult;
@@ -28,6 +29,8 @@ import uk.gov.hmcts.ecm.common.model.multiples.SubmitMultipleEvent;
 import uk.gov.hmcts.ecm.common.model.reference.ReferenceSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSubmitEvent;
+import uk.gov.hmcts.ecm.common.model.reports.hearingstojudgments.HearingsToJudgmentsSearchResult;
+import uk.gov.hmcts.ecm.common.model.reports.hearingstojudgments.HearingsToJudgmentsSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.schedule.ScheduleCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadEvent;
 import uk.gov.hmcts.ecm.common.service.UserService;
@@ -137,30 +140,45 @@ public class CcdClient {
     public List<SubmitEvent> executeElasticSearch(String authToken, String caseTypeId, String query)
             throws IOException {
         var submitEvents = new ArrayList<SubmitEvent>();
-        var request = new HttpEntity<String>(query, buildHeaders(authToken));
-        var url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
-
-        var caseSearchResult = restTemplate.exchange(url, HttpMethod.POST, request,
-                CaseSearchResult.class).getBody();
-        if (caseSearchResult != null && caseSearchResult.getCases() != null) {
-            submitEvents.addAll(caseSearchResult.getCases());
+        var searchResult = runElasticSearch(authToken, caseTypeId, query,
+                CaseSearchResult.class);
+        if (searchResult != null && !CollectionUtils.isEmpty(searchResult.getCases())) {
+            submitEvents.addAll(searchResult.getCases());
         }
+
         return submitEvents;
     }
 
     public List<CasesAwaitingJudgmentSubmitEvent> casesAwaitingJudgmentSearch(String authToken, String caseTypeId,
                                                                               String query) throws IOException {
         var submitEvents = new ArrayList<CasesAwaitingJudgmentSubmitEvent>();
-        var request = new HttpEntity<>(query, buildHeaders(authToken));
-        var url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
+        var searchResult = runElasticSearch(authToken, caseTypeId, query, CasesAwaitingJudgmentSearchResult.class);
 
-        var searchResult = restTemplate.exchange(url, HttpMethod.POST, request,
-                CasesAwaitingJudgmentSearchResult.class).getBody();
-        if (searchResult != null && searchResult.getCases() != null) {
+        if (searchResult != null && !CollectionUtils.isEmpty(searchResult.getCases())) {
             submitEvents.addAll(searchResult.getCases());
         }
 
         return submitEvents;
+    }
+
+    public List<HearingsToJudgmentsSubmitEvent> hearingsToJudgementsSearch(String authToken, String caseTypeId,
+                                                                           String query) throws IOException {
+        var submitEvents = new ArrayList<HearingsToJudgmentsSubmitEvent>();
+        var searchResult = runElasticSearch(authToken, caseTypeId, query, HearingsToJudgmentsSearchResult.class);
+
+        if (searchResult != null && !CollectionUtils.isEmpty(searchResult.getCases())) {
+            submitEvents.addAll(searchResult.getCases());
+        }
+
+        return submitEvents;
+    }
+
+    public <T> T runElasticSearch(String authToken, String caseTypeId, String query, Class<T> searchResultTypeClass)
+            throws IOException {
+        var request = new HttpEntity<>(query, buildHeaders(authToken));
+        var url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
+
+        return restTemplate.exchange(url, HttpMethod.POST, request, searchResultTypeClass).getBody();
     }
 
     private PaginatedSearchMetadata searchMetadata(String authToken, String caseTypeId, String jurisdiction)

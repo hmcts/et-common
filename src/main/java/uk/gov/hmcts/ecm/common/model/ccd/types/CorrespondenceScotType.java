@@ -3,6 +3,7 @@ package uk.gov.hmcts.ecm.common.model.ccd.types;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
@@ -46,6 +47,8 @@ public class CorrespondenceScotType {
     private String claimantOrRespondent;
     @JsonProperty("hearingNumber")
     private String hearingNumber;
+    @JsonProperty("dynamicHearingNumber")
+    private DynamicFixedListType dynamicHearingNumber;
     @JsonProperty("letterAddress")
     private String letterAddress;
 }

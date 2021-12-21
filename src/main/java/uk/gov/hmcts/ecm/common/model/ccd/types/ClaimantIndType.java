@@ -2,6 +2,7 @@ package uk.gov.hmcts.ecm.common.model.ccd.types;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Strings;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -29,13 +30,29 @@ public class ClaimantIndType {
     private String claimantGender;
 
     public String claimantFullNames() {
-        return String.join(" ", notNullOrEmptyAtt(new ArrayList<>(), Arrays.asList(claimantTitle,
-                claimantTitleOther, claimantFirstNames, claimantLastName)));
+        var title = "";
+        if (!Strings.isNullOrEmpty(claimantTitle)) {
+            if (claimantTitle.trim().equals("Other")) {
+                title = claimantTitleOther;
+            } else {
+                title = claimantTitle;
+            }
+        }
+        var fullNameList = List.of(title, claimantFirstNames, claimantLastName);
+        return String.join(" ", notNullOrEmptyAtt(new ArrayList<>(), fullNameList));
     }
 
     public String claimantFullName() {
-        return String.join(" ", notNullOrEmptyAtt(new ArrayList<>(), Arrays.asList(claimantTitle,
-                claimantTitleOther, getInitials(), claimantLastName)));
+        var title = "";
+        if (!Strings.isNullOrEmpty(claimantTitle)) {
+            if (claimantTitle.trim().equals("Other")) {
+                title = claimantTitleOther;
+            } else {
+                title = claimantTitle;
+            }
+        }
+        var fullNameList = List.of(title, getInitials(), claimantLastName);
+        return String.join(" ", notNullOrEmptyAtt(new ArrayList<>(), fullNameList));
     }
 
     private String getInitials() {

@@ -35,6 +35,8 @@ import uk.gov.hmcts.ecm.common.model.multiples.MultipleDetails;
 import uk.gov.hmcts.ecm.common.model.multiples.SubmitMultipleEvent;
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSubmitEvent;
+import uk.gov.hmcts.ecm.common.model.reports.hearingstojudgments.HearingsToJudgmentsSearchResult;
+import uk.gov.hmcts.ecm.common.model.reports.hearingstojudgments.HearingsToJudgmentsSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.schedule.ScheduleCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadEvent;
 import uk.gov.hmcts.ecm.common.service.UserService;
@@ -57,6 +59,7 @@ import static uk.gov.hmcts.ecm.common.helpers.ESHelper.LISTING_VENUE_FIELD_NAME;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.ALL_VENUES;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.BROUGHT_FORWARD_REPORT;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.CASES_COMPLETED_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.CASE_SOURCE_LOCAL_REPORT;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.LIVE_CASELOAD_REPORT;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.MANUALLY_CREATED_POSITION;
@@ -513,6 +516,31 @@ public class CcdClientTest {
     }
 
     @Test
+    public void retrieveCasesGenericReportElasticSearchCasesLocalReportCaseSource() throws IOException {
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":{\"data.managingOffice\":"
+                + "{\"query\":\"Leeds\",\"operator\":\"OR\",\"prefix_length\":0,\"max_expansions\":50"
+                + ",\"fuzzy_transpositions\":true,\"lenient\":false,\"zero_terms_query\":\"NONE\","
+                + "\"auto_generate_synonyms_phrase_query\":true,\"boost\":1.0}}}],\"filter\":[{\"range\":"
+                + "{\"data.receiptDate\":{\"from\":\"2019-09-24T00:00:00.000\",\"to\":\"2019-09-24T23:59:59.000\","
+                + "\"include_lower\":true,\"include_upper\":true,\"boost\":1.0}}}],\"adjust_pure_negative\":true"
+                + ",\"boost\":1.0}}}";
+
+        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
+        CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
+                Arrays.asList(new SubmitEvent(), new SubmitEvent()));
+        ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
+                eq(CaseSearchResult.class))).thenReturn(responseEntity);
+        ccdClient.retrieveCasesGenericReportElasticSearch("authToken",
+                caseDetails.getCaseTypeId(),
+                TribunalOffice.valueOfOfficeName(caseDetails.getCaseData().getManagingOffice()),
+                "2019-09-24", "2019-09-24", CASE_SOURCE_LOCAL_REPORT);
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
     public void retrieveCasesGenericReportElasticSearchLiveCaseload() throws IOException {
        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":" +
                 "{\"data.managingOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\"" +
@@ -775,6 +803,41 @@ public class CcdClientTest {
         assertEquals(2, results.size());
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CasesAwaitingJudgmentSearchResult.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    public void testHearingsToJudgmentSearch() throws IOException {
+        var elasticSearchQuery = "{\"size\":10000,\"query\": {\"match_all\":{} }}";
+        var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
+        var searchResult = new HearingsToJudgmentsSearchResult(2L,
+                Arrays.asList(new HearingsToJudgmentsSubmitEvent(), new HearingsToJudgmentsSubmitEvent()));
+        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, HearingsToJudgmentsSearchResult.class))
+                .thenReturn(responseEntity);
+        var results = ccdClient.hearingsToJudgementsSearch("authToken",
+                caseDetails.getCaseTypeId(), elasticSearchQuery);
+        assertEquals(2, results.size());
+        verify(restTemplate).exchange(uri, HttpMethod.POST, httpEntity, HearingsToJudgmentsSearchResult.class);
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    public void testRunElasticSearch() throws IOException {
+        var elasticSearchQuery = "{\"size\":10000,\"query\": {\"match_all\":{} }}";
+        var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
+        var searchResult = new CaseSearchResult(2L, Arrays.asList(new SubmitEvent(), new SubmitEvent()));
+        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, CaseSearchResult.class))
+                .thenReturn(responseEntity);
+
+        var results = ccdClient.runElasticSearch("authToken", caseDetails.getCaseTypeId(), elasticSearchQuery,
+                CaseSearchResult.class);
+
+        assertEquals(2, results.getCases().size());
+        verify(restTemplate).exchange(uri, HttpMethod.POST, httpEntity, CaseSearchResult.class);
         verifyNoMoreInteractions(restTemplate);
     }
 
