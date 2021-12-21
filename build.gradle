@@ -98,7 +98,7 @@ dependencies {
     // Can be removed when we upgrade poi-ooxml to 6.0
     // https://bz.apache.org/bugzilla/show_bug.cgi?id=65166
     api group: 'org.apache.xmlgraphics', name: 'batik-all', version: '1.14'
-    compileOnly 'org.projectlombok:lombok:1.18.20'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.4.0'
