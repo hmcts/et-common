@@ -82,7 +82,7 @@ ext {
 
 dependencies {
     api group: 'uk.gov.hmcts.reform', name: 'service-auth-provider-client', version: '4.0.0'
-    api group: 'org.apache.poi', name: 'poi-ooxml', version: '5.0.0'
+    api group: 'org.apache.poi', name: 'poi-ooxml', version: '5.1.0'
     api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.16.2'
     api group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.6.4'
 
