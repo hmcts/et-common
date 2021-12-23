@@ -1,51 +1,72 @@
 package uk.gov.hmcts.ecm.common.model.helper;
 
+
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
+import junitparams.converters.Nullable;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_CASE_TYPE_ID;
 
+@RunWith(JUnitParamsRunner.class)
 public class TribunalOfficeTest {
 
     @Test
-    public void testValueOfOfficeNumber() {
-        assertEquals(Optional.empty(), TribunalOffice.valueOfOfficeNumber(null));
-        assertEquals(Optional.empty(), TribunalOffice.valueOfOfficeNumber(""));
-        assertEquals(Optional.empty(), TribunalOffice.valueOfOfficeNumber("0"));
-        assertEquals(Optional.of(TribunalOffice.BRISTOL), TribunalOffice.valueOfOfficeNumber("14"));
-        assertEquals(Optional.of(TribunalOffice.GLASGOW), TribunalOffice.valueOfOfficeNumber("41"));
-        assertEquals(Optional.of(TribunalOffice.LEEDS), TribunalOffice.valueOfOfficeNumber("18"));
-        assertEquals(Optional.of(TribunalOffice.LONDON_CENTRAL), TribunalOffice.valueOfOfficeNumber("22"));
-        assertEquals(Optional.of(TribunalOffice.LONDON_EAST), TribunalOffice.valueOfOfficeNumber("32"));
-        assertEquals(Optional.of(TribunalOffice.LONDON_SOUTH), TribunalOffice.valueOfOfficeNumber("23"));
-        assertEquals(Optional.of(TribunalOffice.MANCHESTER), TribunalOffice.valueOfOfficeNumber("24"));
-        assertEquals(Optional.of(TribunalOffice.MIDLANDS_EAST), TribunalOffice.valueOfOfficeNumber("26"));
-        assertEquals(Optional.of(TribunalOffice.MIDLANDS_WEST), TribunalOffice.valueOfOfficeNumber("13"));
-        assertEquals(Optional.of(TribunalOffice.NEWCASTLE), TribunalOffice.valueOfOfficeNumber("25"));
-        assertEquals(Optional.of(TribunalOffice.WALES), TribunalOffice.valueOfOfficeNumber("16"));
-        assertEquals(Optional.of(TribunalOffice.WATFORD), TribunalOffice.valueOfOfficeNumber("33"));
+    @Parameters
+    public void testValueOfOfficeNumber(Optional<TribunalOffice> expected, String officeNumber) {
+        assertEquals(expected, TribunalOffice.valueOfOfficeNumber(officeNumber));
+    }
+
+    private Object[] parametersForTestValueOfOfficeNumber() {
+        return new Object[]{
+                new Object[]{Optional.empty(), null},
+                new Object[]{Optional.empty(), ""},
+                new Object[]{Optional.empty(), "0"},
+                new Object[]{Optional.of(TribunalOffice.BRISTOL), "14"},
+                new Object[]{Optional.of(TribunalOffice.GLASGOW), "41"},
+                new Object[]{Optional.of(TribunalOffice.LEEDS), "18"},
+                new Object[]{Optional.of(TribunalOffice.LONDON_CENTRAL), "22"},
+                new Object[]{Optional.of(TribunalOffice.LONDON_EAST), "32"},
+                new Object[]{Optional.of(TribunalOffice.LONDON_SOUTH), "23"},
+                new Object[]{Optional.of(TribunalOffice.MANCHESTER), "24"},
+                new Object[]{Optional.of(TribunalOffice.MIDLANDS_EAST), "26"},
+                new Object[]{Optional.of(TribunalOffice.MIDLANDS_WEST), "13"},
+                new Object[]{Optional.of(TribunalOffice.NEWCASTLE), "25"},
+                new Object[]{Optional.of(TribunalOffice.WALES), "16"},
+                new Object[]{Optional.of(TribunalOffice.WATFORD), "33"}
+        };
     }
 
     @Test
-    public void testValueOfOfficeName() {
-        assertEquals(TribunalOffice.ABERDEEN, TribunalOffice.valueOfOfficeName("Aberdeen"));
-        assertEquals(TribunalOffice.BRISTOL, TribunalOffice.valueOfOfficeName("Bristol"));
-        assertEquals(TribunalOffice.DUNDEE, TribunalOffice.valueOfOfficeName("Dundee"));
-        assertEquals(TribunalOffice.EDINBURGH, TribunalOffice.valueOfOfficeName("Edinburgh"));
-        assertEquals(TribunalOffice.GLASGOW, TribunalOffice.valueOfOfficeName("Glasgow"));
-        assertEquals(TribunalOffice.LEEDS, TribunalOffice.valueOfOfficeName("Leeds"));
-        assertEquals(TribunalOffice.LONDON_CENTRAL, TribunalOffice.valueOfOfficeName("London Central"));
-        assertEquals(TribunalOffice.LONDON_EAST, TribunalOffice.valueOfOfficeName("London East"));
-        assertEquals(TribunalOffice.LONDON_SOUTH, TribunalOffice.valueOfOfficeName("London South"));
-        assertEquals(TribunalOffice.MANCHESTER, TribunalOffice.valueOfOfficeName("Manchester"));
-        assertEquals(TribunalOffice.MIDLANDS_EAST, TribunalOffice.valueOfOfficeName("Midlands East"));
-        assertEquals(TribunalOffice.MIDLANDS_WEST, TribunalOffice.valueOfOfficeName("Midlands West"));
-        assertEquals(TribunalOffice.NEWCASTLE, TribunalOffice.valueOfOfficeName("Newcastle"));
-        assertEquals(TribunalOffice.WALES, TribunalOffice.valueOfOfficeName("Wales"));
-        assertEquals(TribunalOffice.WATFORD, TribunalOffice.valueOfOfficeName("Watford"));
+    @Parameters
+    public void testValueOfOfficeName(TribunalOffice expected, String officeName) {
+        assertEquals(expected, TribunalOffice.valueOfOfficeName(officeName));
+    }
+
+    private Object[] parametersForTestValueOfOfficeName() {
+        return new Object[]{
+                new Object[]{TribunalOffice.ABERDEEN, "Aberdeen"},
+                new Object[]{TribunalOffice.BRISTOL, "Bristol"},
+                new Object[]{TribunalOffice.DUNDEE, "Dundee"},
+                new Object[]{TribunalOffice.EDINBURGH, "Edinburgh"},
+                new Object[]{TribunalOffice.GLASGOW, "Glasgow"},
+                new Object[]{TribunalOffice.LEEDS, "Leeds"},
+                new Object[]{TribunalOffice.LONDON_CENTRAL, "London Central"},
+                new Object[]{TribunalOffice.LONDON_EAST, "London East"},
+                new Object[]{TribunalOffice.LONDON_SOUTH, "London South"},
+                new Object[]{TribunalOffice.MANCHESTER, "Manchester"},
+                new Object[]{TribunalOffice.MIDLANDS_EAST, "Midlands East"},
+                new Object[]{TribunalOffice.MIDLANDS_WEST, "Midlands West"},
+                new Object[]{TribunalOffice.NEWCASTLE, "Newcastle"},
+                new Object[]{TribunalOffice.WALES, "Wales"},
+                new Object[]{TribunalOffice.WATFORD, "Watford"}
+        };
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -54,25 +75,98 @@ public class TribunalOfficeTest {
     }
 
     @Test
-    public void testGetCaseTypeId() {
-        assertEquals(SCOTLAND_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Aberdeen"));
-        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Bristol"));
-        assertEquals(SCOTLAND_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Dundee"));
-        assertEquals(SCOTLAND_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Edinburgh"));
-        assertEquals(SCOTLAND_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Glasgow"));
-        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("London East"));
-        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("London Central"));
-        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("London South"));
-        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Manchester"));
-        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Midlands East"));
-        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Midlands West"));
-        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Newcastle"));
-        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Wales"));
-        assertEquals(ENGLANDWALES_CASE_TYPE_ID, TribunalOffice.getCaseTypeId("Watford"));
+    @Parameters
+    public void testGetCaseTypeId(String expectedCaseTypeId, String officeName) {
+        assertEquals(expectedCaseTypeId, TribunalOffice.getCaseTypeId(officeName));
+    }
+
+    private Object[] parametersForTestGetCaseTypeId() {
+        return new Object[]{
+                new Object[]{SCOTLAND_CASE_TYPE_ID, "Aberdeen"},
+                new Object[]{ENGLANDWALES_CASE_TYPE_ID, "Bristol"},
+                new Object[]{SCOTLAND_CASE_TYPE_ID, "Dundee"},
+                new Object[]{SCOTLAND_CASE_TYPE_ID, "Edinburgh"},
+                new Object[]{SCOTLAND_CASE_TYPE_ID, "Glasgow"},
+                new Object[]{ENGLANDWALES_CASE_TYPE_ID, "London East"},
+                new Object[]{ENGLANDWALES_CASE_TYPE_ID, "London Central"},
+                new Object[]{ENGLANDWALES_CASE_TYPE_ID, "London South"},
+                new Object[]{ENGLANDWALES_CASE_TYPE_ID, "Manchester"},
+                new Object[]{ENGLANDWALES_CASE_TYPE_ID, "Midlands East"},
+                new Object[]{ENGLANDWALES_CASE_TYPE_ID, "Midlands West"},
+                new Object[]{ENGLANDWALES_CASE_TYPE_ID, "Newcastle"},
+                new Object[]{ENGLANDWALES_CASE_TYPE_ID, "Wales"},
+                new Object[]{ENGLANDWALES_CASE_TYPE_ID, "Watford"}
+        };
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testGetCaseTypeIdNotFound() {
         TribunalOffice.getCaseTypeId("invalid-office-name");
+    }
+
+    @Test
+    @Parameters({
+            "Aberdeen, false",
+            "Bristol, true",
+            "Dundee, false",
+            "Edinburgh, false",
+            "Glasgow, false",
+            "London Central, true",
+            "London East, true",
+            "London South, true",
+            "Manchester, true",
+            "Midlands East, true",
+            "Midlands West, true",
+            "Newcastle, true",
+            "Wales, true",
+            "Watford, true"
+    })
+    public void testIsEnglandWalesOffice(String officeName, boolean expected) {
+        assertEquals(expected, TribunalOffice.isEnglandWalesOffice(officeName));
+    }
+
+    @Test
+    @Parameters({
+            "Aberdeen, true",
+            "Bristol, false",
+            "Dundee, true",
+            "Edinburgh, true",
+            "Glasgow, true",
+            "London Central, false",
+            "London East, false",
+            "London South, false",
+            "Manchester, false",
+            "Midlands East, false",
+            "Midlands West, false",
+            "Newcastle, false",
+            "Wales, false",
+            "Watford, false"
+    })
+    public void testIsScotlandOffice(String officeName, boolean expected) {
+        assertEquals(expected, TribunalOffice.isScotlandOffice(officeName));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    @Parameters({
+            "null",
+            "",
+            " ",
+            "invalid"
+    })
+    public void testIsEnglandWalesOfficeThrowsException(@Nullable String officeName) {
+        TribunalOffice.isEnglandWalesOffice(officeName);
+        fail(officeName + " should throw an IllegalArgumentException");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    @Parameters({
+            "null",
+            "",
+            " ",
+            "invalid"
+    })
+    public void testIsScotlandOfficeThrowsException(@Nullable String officeName) {
+        TribunalOffice.isScotlandOffice(officeName);
+        fail(officeName + " should throw an IllegalArgumentException");
     }
 }
