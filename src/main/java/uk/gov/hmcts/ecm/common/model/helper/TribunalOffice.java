@@ -1,11 +1,11 @@
 package uk.gov.hmcts.ecm.common.model.helper;
 
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_CASE_TYPE_ID;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_CASE_TYPE_ID;
 
 public enum TribunalOffice {
     ABERDEEN("Aberdeen"),
@@ -78,5 +78,13 @@ public enum TribunalOffice {
         } else {
             throw new IllegalArgumentException("Unexpected office " + officeName);
         }
+    }
+
+    public static boolean isEnglandWalesOffice(String officeName) {
+        return ENGLANDWALES_CASE_TYPE_ID.equals(getCaseTypeId(officeName));
+    }
+
+    public static boolean isScotlandOffice(String officeName) {
+        return SCOTLAND_CASE_TYPE_ID.equals(getCaseTypeId(officeName));
     }
 }
