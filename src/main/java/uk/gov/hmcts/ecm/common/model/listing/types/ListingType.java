@@ -55,5 +55,10 @@ public class ListingType {
     private String respondentOthers;
     @JsonProperty("Hearing_notes")
     private String hearingNotes;
-
+    @JsonProperty("judicialMediation")
+    private String judicialMediation;
+    @JsonProperty("hearingFormat")
+    private String hearingFormat;
+    @JsonProperty("hearingReadingDeliberationMembersChambers")
+    private String hearingReadingDeliberationMembersChambers;
 }
