@@ -20,7 +20,6 @@ import uk.gov.hmcts.ecm.common.model.ccd.CaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.ccd.PaginatedSearchMetadata;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.helper.TribunalOffice;
-import uk.gov.hmcts.ecm.common.model.generic.GenericSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.labels.LabelCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.labels.LabelPayloadEvent;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleCaseSearchResult;
@@ -50,16 +49,16 @@ import static uk.gov.hmcts.ecm.common.model.helper.Constants.OLD_DATE_TIME_PATTE
 @Slf4j
 public class CcdClient {
 
-    private transient RestTemplate restTemplate;
-    private transient UserService userService;
-    private transient CcdClientConfig ccdClientConfig;
-    private transient CaseDataBuilder caseDataBuilder;
-    private transient AuthTokenGenerator authTokenGenerator;
+    private RestTemplate restTemplate;
+    private UserService userService;
+    private CcdClientConfig ccdClientConfig;
+    private CaseDataBuilder caseDataBuilder;
+    private AuthTokenGenerator authTokenGenerator;
 
     private static final String SERVICE_AUTHORIZATION = "ServiceAuthorization";
 
     static final String CREATION_EVENT_SUMMARY = "Case created automatically";
-    private static final String UPDATE_EVENT_SUMMARY = "Case updated by bulk";
+    static final String UPDATE_EVENT_SUMMARY = "Case updated by bulk";
     static final String UPDATE_BULK_EVENT_SUMMARY = "Bulk case updated by bulk";
     private static final int MAX_RETRIES = 7;
 
@@ -96,6 +95,14 @@ public class CcdClient {
                 new HttpEntity<>(buildHeaders(authToken));
         String uri = ccdClientConfig.buildStartCaseTransferUrl(userService.getUserDetails(authToken).getUid(),
                 jurisdiction, caseTypeId, cid);
+        return restTemplate.exchange(uri, HttpMethod.GET, request, CCDRequest.class).getBody();
+    }
+
+    public CCDRequest startCaseTransferSameCountryEccLinkedCase(String authToken, String caseTypeId,
+                                                                String jurisdiction, String cid) throws IOException {
+        var request = new HttpEntity<>(buildHeaders(authToken));
+        var uid = userService.getUserDetails(authToken).getUid();
+        var uri = ccdClientConfig.buildStartCaseTransferSameCountryLinkedCaseUrl(uid, jurisdiction, caseTypeId, cid);
         return restTemplate.exchange(uri, HttpMethod.GET, request, CCDRequest.class).getBody();
     }
 
@@ -245,13 +252,14 @@ public class CcdClient {
 
     public List<SubmitEvent> retrieveCasesVenueAndDateElasticSearch(String authToken, String caseTypeId,
                                                                     String dateToSearchFrom, String dateToSearchTo,
-                                                                 String venueToSearch, String venueToSearchMapping)
+                                                                    String venueToSearch, String venueToSearchMapping)
             throws IOException {
         return buildAndGetElasticSearchRequest(authToken, caseTypeId,
                 getListingQuery(dateToSearchFrom, dateToSearchTo, venueToSearch, venueToSearchMapping));
     }
 
-    public List<SubmitEvent> retrieveCasesGenericReportElasticSearch(String authToken, String caseTypeId, TribunalOffice tribunalOffice,
+    public List<SubmitEvent> retrieveCasesGenericReportElasticSearch(String authToken, String caseTypeId,
+                                                                     TribunalOffice tribunalOffice,
                                                                      String dateToSearchFrom, String dateToSearchTo,
                                                                     String reportType) throws IOException {
         String from = LocalDate.parse(dateToSearchFrom).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
@@ -270,7 +278,7 @@ public class CcdClient {
     }
 
     private String getReportRangeDateQuery(String from, String to, String reportType, String managingOffice) {
-       String query = ESHelper.getReportRangeDateSearchQuery(from, to, reportType, managingOffice);
+        String query = ESHelper.getReportRangeDateSearchQuery(from, to, reportType, managingOffice);
         log.info("REPORT QUERY DATE: " + query);
         return query;
     }
@@ -549,11 +557,25 @@ public class CcdClient {
 
     public SubmitEvent submitEventForCase(String authToken, CaseData caseData, String caseTypeId, String jurisdiction,
                                           CCDRequest req, String cid) throws IOException {
-        HttpEntity<CaseDataContent> request =
-                new HttpEntity<>(caseDataBuilder.buildCaseDataContent(caseData, req, UPDATE_EVENT_SUMMARY),
-                        buildHeaders(authToken));
-        String uri = ccdClientConfig.buildSubmitEventForCaseUrl(userService.getUserDetails(authToken).getUid(),
-                jurisdiction, caseTypeId, cid);
+        var params = CcdSubmitEventParams.builder()
+                .authToken(authToken)
+                .ccdRequest(req)
+                .caseId(cid)
+                .caseData(caseData)
+                .caseTypeId(caseTypeId)
+                .jurisdiction(jurisdiction)
+                .eventSummary(UPDATE_EVENT_SUMMARY)
+                .build();
+
+        return submitEventForCase(params);
+    }
+
+    public SubmitEvent submitEventForCase(CcdSubmitEventParams params) throws IOException {
+        var request = new HttpEntity<>(caseDataBuilder.buildCaseDataContent(params.getCaseData(),
+                params.getCcdRequest(), params.getEventSummary(), params.getEventDescription()),
+                buildHeaders(params.getAuthToken()));
+        var uri = ccdClientConfig.buildSubmitEventForCaseUrl(userService.getUserDetails(params.getAuthToken()).getUid(),
+                params.getJurisdiction(), params.getCaseTypeId(), params.getCaseId());
         return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitEvent.class).getBody();
     }
 

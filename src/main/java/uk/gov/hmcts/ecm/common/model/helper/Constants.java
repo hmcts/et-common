@@ -1,10 +1,12 @@
 package uk.gov.hmcts.ecm.common.model.helper;
 
-import org.checkerframework.common.returnsreceiver.qual.This;
-
 import java.time.format.DateTimeFormatter;
 
 public class Constants {
+
+    private Constants() {
+        // Class only provides constant values
+    }
 
     public static final DateTimeFormatter OLD_DATE_TIME_PATTERN = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS");
     public static final DateTimeFormatter OLD_DATE_TIME_PATTERN2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -120,6 +122,8 @@ public class Constants {
     public static final String UPDATE_EVENT_TRIGGER_ID = "amendCaseDetails";
     public static final String DISPOSE_EVENT_TRIGGER_ID = "disposeCase";
     public static final String CREATION_TRANSFER_EVENT_TRIGGER_ID = "processCaseTransfer";
+    public static final String CASE_TRANSFER_SAME_COUNTRY_ECC_LINKED_CASE_EVENT_TRIGGER_ID =
+            "caseTransferSameCountryEccLinkedCase";
     public static final String CASE_TRANSFER_EVENT_TRIGGER_ID = "caseTransferMultiple";
     public static final String RETURN_TRANSFER_EVENT_TRIGGER_ID = "returnCaseTransfer";
     public static final String CREATE_MULTIPLE_EVENT_TRIGGER_ID = "createMultiple";
@@ -281,9 +285,6 @@ public class Constants {
     public static final String CLAIMANT_REP_ADDRESS_LABEL = "claimantRepAddressLabel";
     public static final String RESPONDENTS_ADDRESS__LABEL = "respondentsAddressLabel";
     public static final String RESPONDENTS_REPS_ADDRESS__LABEL = "respondentsRepsAddressLabel";
-
-    public static final String SCOPE_OF_TRANSFER_INTRA_COUNTRY = "ScopeOfTransferIntraCountry";
-    public static final String SCOPE_OF_TRANSFER_INTER_COUNTRY = "ScopeOfTransferInterCountry";
 
     public static final int TARGET_HEARING_DATE_INCREMENT = 180;
 
