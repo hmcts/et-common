@@ -236,6 +236,24 @@ public class CcdClientTest {
     }
 
     @Test
+    public void submitCaseCreationWithEventSummary() throws IOException {
+        HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
+                creatBuildHeaders());
+        ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        when(caseDataBuilder.buildCaseDataContent(eq(caseData), eq(ccdRequest), anyString()))
+                .thenReturn(CaseDataContent.builder().build());
+        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
+        when(ccdClientConfig.buildSubmitCaseCreationUrl(any(), any(), any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class)))
+                .thenReturn(responseEntity);
+
+        ccdClient.submitCaseCreation("authToken", caseDetails, ccdRequest, "Test Event Summary");
+
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
     public void retrieveCase() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
         ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
