@@ -49,12 +49,15 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
+import static uk.gov.hmcts.ecm.common.client.CcdClient.UPDATE_EVENT_SUMMARY;
 import static uk.gov.hmcts.ecm.common.helpers.ESHelper.LISTING_VENUE_FIELD_NAME;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.ALL_VENUES;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.BROUGHT_FORWARD_REPORT;
@@ -89,7 +92,7 @@ public class CcdClientTest {
     private BulkData bulkData;
     private MultipleData multipleData;
     private CCDRequest ccdRequest;
-    private String uri = "http://example.com";
+    private final String uri = "http://example.com";
 
     @Before
     public void setUp() {
@@ -170,6 +173,25 @@ public class CcdClientTest {
     }
 
     @Test
+    public void startCaseTransferSameCountryEccLinkedCase() throws IOException {
+        var caseTypeId = ENGLANDWALES_CASE_TYPE_ID;
+        var jurisdiction = "EMPLOYMENT";
+        var caseId = "123";
+        var httpEntity = new HttpEntity<>(creatBuildHeaders());
+        var responseEntity = mock(ResponseEntity.class);
+        when(responseEntity.getBody()).thenReturn(new CCDRequest());
+        when(userService.getUserDetails("authToken")).thenReturn(userDetails);
+        when(ccdClientConfig.buildStartCaseTransferSameCountryLinkedCaseUrl(userDetails.getUid(), jurisdiction,
+                caseTypeId, caseId)).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class)))
+                .thenReturn(responseEntity);
+
+        var ccdRequest = ccdClient.startCaseTransferSameCountryEccLinkedCase("authToken", caseTypeId, jurisdiction, caseId);
+
+        assertNotNull(ccdRequest);
+    }
+
+    @Test
     public void returnCaseCreation() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
         ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
@@ -209,6 +231,24 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class)))
                 .thenReturn(responseEntity);
         ccdClient.submitCaseCreation("authToken", caseDetails, ccdRequest);
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    public void submitCaseCreationWithEventSummary() throws IOException {
+        HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
+                creatBuildHeaders());
+        ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        when(caseDataBuilder.buildCaseDataContent(eq(caseData), eq(ccdRequest), anyString()))
+                .thenReturn(CaseDataContent.builder().build());
+        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
+        when(ccdClientConfig.buildSubmitCaseCreationUrl(any(), any(), any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class)))
+                .thenReturn(responseEntity);
+
+        ccdClient.submitCaseCreation("authToken", caseDetails, ccdRequest, "Test Event Summary");
+
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class));
         verifyNoMoreInteractions(restTemplate);
     }
@@ -675,14 +715,43 @@ public class CcdClientTest {
         HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
                 creatBuildHeaders());
         ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
-        when(caseDataBuilder.buildCaseDataContent(eq(caseData), eq(ccdRequest),
-                anyString())).thenReturn(CaseDataContent.builder().build());
+        when(caseDataBuilder.buildCaseDataContent(caseData, ccdRequest, UPDATE_EVENT_SUMMARY, null))
+                .thenReturn(CaseDataContent.builder().build());
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildSubmitEventForCaseUrl(any(), any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(SubmitEvent.class))).thenReturn(responseEntity);
         ccdClient.submitEventForCase("authToken", caseData, caseDetails.getCaseTypeId(),
                 caseDetails.getJurisdiction(), ccdRequest, "111111");
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    public void submitEventForCaseWithCcdSubmitEventParams() throws IOException {
+        var eventSummary = "My Event";
+        var eventDescription = "Event Description";
+        HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
+                creatBuildHeaders());
+        ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        when(caseDataBuilder.buildCaseDataContent(caseData, ccdRequest, eventSummary, eventDescription))
+                .thenReturn(CaseDataContent.builder().build());
+        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
+        when(ccdClientConfig.buildSubmitEventForCaseUrl(any(), any(), any(), any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
+                eq(SubmitEvent.class))).thenReturn(responseEntity);
+
+        var params = CcdSubmitEventParams.builder()
+                .authToken("authToken")
+                .ccdRequest(ccdRequest)
+                .caseData(caseData)
+                .eventSummary(eventSummary)
+                .eventDescription(eventDescription)
+                .jurisdiction(caseDetails.getJurisdiction())
+                .caseId("111111")
+                .build();
+
+        ccdClient.submitEventForCase(params);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class));
         verifyNoMoreInteractions(restTemplate);
     }

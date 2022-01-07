@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class CaseDataBuilder {
 
-    private final transient ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
     private static final Boolean IGNORE_WARNING = Boolean.FALSE;
 
     public CaseDataBuilder(ObjectMapper objectMapper) {
@@ -22,23 +22,34 @@ public class CaseDataBuilder {
     }
 
     public CaseDataContent buildCaseDataContent(CaseData caseData, CCDRequest req, String eventSummary) {
+        return buildCaseDataContent(caseData, req, eventSummary, null);
+    }
+
+    public CaseDataContent buildCaseDataContent(CaseData caseData, CCDRequest req, String eventSummary,
+                                                String eventDescription) {
         return getCaseDataContent(req, objectMapper.convertValue(caseData, new TypeReference<>() {
-        }), eventSummary);
+        }), eventSummary, eventDescription);
     }
 
     public CaseDataContent buildBulkDataContent(BulkData bulkData, CCDRequest req, String eventSummary) {
         return getCaseDataContent(req, objectMapper.convertValue(bulkData, new TypeReference<>() {
-        }), eventSummary);
+        }), eventSummary, null);
     }
 
     public CaseDataContent buildMultipleDataContent(MultipleData multipleData, CCDRequest req, String eventSummary) {
         return getCaseDataContent(req, objectMapper.convertValue(multipleData, new TypeReference<>() {
-        }), eventSummary);
+        }), eventSummary, null);
     }
 
-    private CaseDataContent getCaseDataContent(CCDRequest req, Map<String, JsonNode> data, String eventSummary) {
+    private CaseDataContent getCaseDataContent(CCDRequest req, Map<String, JsonNode> data, String eventSummary,
+                                               String eventDescription) {
+        var event = Event.builder()
+                .eventId(req.getEventId())
+                .summary(eventSummary)
+                .description(eventDescription)
+                .build();
         return CaseDataContent.builder()
-                .event(Event.builder().eventId(req.getEventId()).summary(eventSummary).build())
+                .event(event)
                 .data(data)
                 .token(req.getToken())
                 .ignoreWarning(IGNORE_WARNING)

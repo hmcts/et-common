@@ -28,7 +28,10 @@ public class CreationSingleDataModel extends DataModelParent {
     @JsonProperty("reasonForCT")
     private String reasonForCT;
 
-    @JsonProperty("scopeOfTransfer")
-    private String scopeOfTransfer;
+    @JsonProperty("transferSameCountry")
+    private boolean transferSameCountry;
+
+    @JsonProperty("sourceEthosCaseReference")
+    private String sourceEthosCaseReference;
 
 }
