@@ -35,7 +35,8 @@ public class ESHelper {
             "data.hearingCollection.value.hearingDateCollection.value.Hearing_Dundee.keyword";
     public static final String LISTING_EDINBURGH_VENUE_FIELD_NAME =
             "data.hearingCollection.value.hearingDateCollection.value.Hearing_Edinburgh.keyword";
-
+    public static final String MEMBER_DAYS_DATE_FIELD_NAME =
+        "data.hearingCollection.value.hearingDateCollection.value.listedDate";
     private static final String REPORT_TYPE_NOT_FOUND = "Report type not found";
 
     private ESHelper() {
@@ -138,6 +139,8 @@ public class ESHelper {
                 return RECEIPT_DATE_FIELD_NAME;
             case SERVING_CLAIMS_REPORT:
                 return CLAIMS_SERVED_DATE_FIELD_NAME;
+            case MEMBER_DAYS_REPORT:
+                return MEMBER_DAYS_DATE_FIELD_NAME;
             default:
                 return REPORT_TYPE_NOT_FOUND;
         }
