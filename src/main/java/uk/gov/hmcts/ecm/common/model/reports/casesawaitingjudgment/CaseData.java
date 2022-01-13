@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class CaseData {
     @JsonProperty("caseType")
-    private String caseType;
+    private String ecmCaseType;
 
     @JsonProperty("conciliationTrack")
     private String conciliationTrack;
