@@ -37,7 +37,7 @@ public class ListingData {
     @JsonProperty("listingDateTo")
     private String listingDateTo;
     @JsonProperty("listingVenue")
-    private String listingVenue;
+    private DynamicFixedListType listingVenue;
     @JsonProperty("listingCollection")
     private List<ListingTypeItem> listingCollection;
     @JsonProperty("listingVenueOfficeGlas")
@@ -94,6 +94,10 @@ public class ListingData {
         venueDundee = null;
         venueEdinburgh = null;
         clerkResponsible = null;
+    }
+
+    public boolean hasListingVenue() {
+        return listingVenue != null && listingVenue.getValue() != null;
     }
 }
 
