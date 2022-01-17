@@ -38,6 +38,8 @@ public class ListingData {
     private String listingDateTo;
     @JsonProperty("listingVenue")
     private DynamicFixedListType listingVenue;
+    @JsonProperty("listingVenueScotland")
+    private String listingVenueScotland;
     @JsonProperty("listingCollection")
     private List<ListingTypeItem> listingCollection;
     @JsonProperty("listingVenueOfficeGlas")
@@ -45,13 +47,13 @@ public class ListingData {
     @JsonProperty("listingVenueOfficeAber")
     private String listingVenueOfficeAber;
     @JsonProperty("venueGlasgow")
-    private String venueGlasgow;
+    private DynamicFixedListType venueGlasgow;
     @JsonProperty("venueAberdeen")
-    private String venueAberdeen;
+    private DynamicFixedListType venueAberdeen;
     @JsonProperty("venueDundee")
-    private String venueDundee;
+    private DynamicFixedListType venueDundee;
     @JsonProperty("venueEdinburgh")
-    private String venueEdinburgh;
+    private DynamicFixedListType venueEdinburgh;
     @JsonProperty("hearingDocType")
     private String hearingDocType;
     @JsonProperty("hearingDocETCL")
@@ -100,4 +102,3 @@ public class ListingData {
         return listingVenue != null && listingVenue.getValue() != null;
     }
 }
-
