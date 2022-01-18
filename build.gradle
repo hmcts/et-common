@@ -11,17 +11,13 @@ plugins {
 }
 
 group 'uk.gov.hmcts.reform'
-version '0.1.164'
+version '0.1.165'
 
 sourceCompatibility = '11.0'
 
 repositories {
     mavenLocal()
-    jcenter()
     mavenCentral()
-    maven {
-        url 'https://repo.spring.io/libs-milestone'
-    }
     maven { url 'https://jitpack.io' }
 }
 
@@ -71,36 +67,34 @@ publishing {
     }
 }
 
-def versions = [
-    reformLogging   : '5.1.6'
-]
-
 ext {
-    log4JVersion = '2.16.0'
+    reformLoggingVersion = '5.1.9'
+    log4JVersion = '2.17.0'
 }
 
 // endregion
 
 
 dependencies {
-    api group: 'uk.gov.hmcts.reform', name: 'service-auth-provider-client', version: '4.0.0'
+    api group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '4.0.2'
     api group: 'org.apache.poi', name: 'poi-ooxml', version: '5.0.0'
     api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.13.2'
     api group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.6.4'
+    // CVE-2020-11987, CVE-2020-11988 (batik-1.13)
+    // Can be removed when we upgrade poi-ooxml to 6.0
+    // https://bz.apache.org/bugzilla/show_bug.cgi?id=65166
+    api group: 'org.apache.xmlgraphics', name: 'batik-all', version: '1.14'
 
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.7'
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
-    implementation group: 'uk.gov.hmcts.reform', name: 'logging', version: versions.reformLogging
-    implementation group: 'uk.gov.hmcts.reform', name: 'logging-appinsights', version: versions.reformLogging
+    implementation group: 'com.github.hmcts.java-logging', name: 'logging', version: reformLoggingVersion
+    implementation group: 'com.github.hmcts.java-logging', name: 'logging-appinsights', version: reformLoggingVersion
     implementation group: 'com.github.sps.junidecode', name: 'junidecode', version: '0.3'
     implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
     implementation group: 'com.google.guava', name: 'guava', version: '30.1.1-jre'
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: log4JVersion
     implementation group: 'org.apache.logging.log4j', name: 'log4j-to-slf4j', version: log4JVersion
-    // CVE-2020-11987, CVE-2020-11988 (batik-1.13)
-    // Can be removed when we upgrade poi-ooxml to 6.0
-    // https://bz.apache.org/bugzilla/show_bug.cgi?id=65166
-    api group: 'org.apache.xmlgraphics', name: 'batik-all', version: '1.14'
+
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
