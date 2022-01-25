@@ -13,7 +13,16 @@ import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
 import static org.elasticsearch.index.query.QueryBuilders.termsQuery;
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.BROUGHT_FORWARD_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.CASES_COMPLETED_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.CASE_SOURCE_LOCAL_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.CLAIMS_ACCEPTED_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.HEARINGS_BY_HEARING_TYPE_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.LIVE_CASELOAD_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.MAX_ES_SIZE;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.MEMBER_DAYS_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SERVING_CLAIMS_REPORT;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.TIME_TO_FIRST_HEARING_REPORT;
 
 @Slf4j
 public class ESHelper {
@@ -38,6 +47,8 @@ public class ESHelper {
             "data.hearingCollection.value.hearingDateCollection.value.Hearing_Dundee.keyword";
     public static final String LISTING_EDINBURGH_VENUE_FIELD_NAME =
             "data.hearingCollection.value.hearingDateCollection.value.Hearing_Edinburgh.keyword";
+    public static final String MEMBER_DAYS_DATE_FIELD_NAME =
+        "data.hearingCollection.value.hearingDateCollection.value.listedDate";
 
     private ESHelper() {
         // All access through static methods
@@ -140,6 +151,8 @@ public class ESHelper {
                 return RECEIPT_DATE_FIELD_NAME;
             case SERVING_CLAIMS_REPORT:
                 return CLAIMS_SERVED_DATE_FIELD_NAME;
+            case MEMBER_DAYS_REPORT:
+                return MEMBER_DAYS_DATE_FIELD_NAME;
             default:
                 return REPORT_TYPE_NOT_FOUND;
         }

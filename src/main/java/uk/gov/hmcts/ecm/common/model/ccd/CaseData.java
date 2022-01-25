@@ -49,7 +49,7 @@ public class CaseData {
     private String ethosCaseReference;
 
     @JsonProperty("caseType")
-    private String caseType;
+    private String ecmCaseType;
     @JsonProperty("multipleReference")
     private String multipleReference;
     @JsonProperty("multipleReferenceLinkMarkUp")

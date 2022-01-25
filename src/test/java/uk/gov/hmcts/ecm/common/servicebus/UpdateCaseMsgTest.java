@@ -59,7 +59,7 @@ public class UpdateCaseMsgTest {
         CreationDataModel creationDataModel = ServiceBusHelper.getCreationDataModel("4150002/2020");
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(creationDataModel);
         updateCaseMsg.runTask(submitEventAccepted);
-        assertEquals(MULTIPLE_CASE_TYPE, submitEventAccepted.getCaseData().getCaseType());
+        assertEquals(MULTIPLE_CASE_TYPE, submitEventAccepted.getCaseData().getEcmCaseType());
         assertEquals("4150001", submitEventAccepted.getCaseData().getMultipleReference());
         assertEquals(YES, submitEventAccepted.getCaseData().getLeadClaimant());
     }
@@ -117,7 +117,7 @@ public class UpdateCaseMsgTest {
         DetachDataModel detachDataModel = ServiceBusHelper.getDetachDataModel();
         updateCaseMsg = ServiceBusHelper.generateUpdateCaseMsg(detachDataModel);
         updateCaseMsg.runTask(submitEventAccepted);
-        assertEquals(SINGLE_CASE_TYPE, submitEventAccepted.getCaseData().getCaseType());
+        assertEquals(SINGLE_CASE_TYPE, submitEventAccepted.getCaseData().getEcmCaseType());
         assertNull(submitEventAccepted.getCaseData().getMultipleReference());
     }
 

@@ -31,7 +31,7 @@ public class CaseDataTest {
         assertEquals(caseData.getPositionType(), "Single");
         assertEquals(caseData.getReceiptDate(), "20 Jan 2019");
         assertEquals(caseData.getUserLocation(), "Bath");
-        assertEquals(caseData.getCaseType(), "Single");
+        assertEquals(caseData.getEcmCaseType(), "Single");
         assertEquals(caseData.getFeeGroupReference(), "1212");
     }
     @Test
