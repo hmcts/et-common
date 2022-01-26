@@ -10,7 +10,9 @@ import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.CreationDataModel;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
 
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.MULTIPLE_CASE_TYPE;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -48,7 +50,7 @@ public class CreationDataTask extends DataTaskParent {
 
         log.info("Moving case to Multiples case type");
         submitEvent.getCaseData().setMultipleReference(((CreationDataModel) dataModelParent).getMultipleRef());
-        submitEvent.getCaseData().setCaseType(MULTIPLE_CASE_TYPE);
+        submitEvent.getCaseData().setEcmCaseType(MULTIPLE_CASE_TYPE);
         submitEvent.getCaseData().setMultipleFlag(YES);
         submitEvent.getCaseData().setMultipleReferenceLinkMarkUp(
                 ((CreationDataModel) dataModelParent).getMultipleReferenceLinkMarkUp());

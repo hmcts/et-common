@@ -9,7 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
 
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SINGLE_CASE_TYPE;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -34,7 +35,7 @@ public class DetachDataTask extends DataTaskParent {
         log.info("Detaching case from the Multiples");
         submitEvent.getCaseData().setMultipleReference(null);
         submitEvent.getCaseData().setLeadClaimant(" ");
-        submitEvent.getCaseData().setCaseType(SINGLE_CASE_TYPE);
+        submitEvent.getCaseData().setEcmCaseType(SINGLE_CASE_TYPE);
         submitEvent.getCaseData().setMultipleFlag(NO);
 
     }
