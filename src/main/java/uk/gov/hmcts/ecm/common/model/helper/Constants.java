@@ -128,11 +128,6 @@ public class Constants {
     public static final String RETURN_TRANSFER_EVENT_TRIGGER_ID = "returnCaseTransfer";
     public static final String CREATE_MULTIPLE_EVENT_TRIGGER_ID = "createMultiple";
 
-    public static final String GLASGOW_OFFICE = "Glasgow";
-    public static final String ABERDEEN_OFFICE = "Aberdeen";
-    public static final String DUNDEE_OFFICE = "Dundee";
-    public static final String EDINBURGH_OFFICE = "Edinburgh";
-
     public static final String ENGLANDWALES_OFFICE_NUMBER = "11";
     public static final String SCOTLAND_OFFICE_NUMBER = "12";
 
