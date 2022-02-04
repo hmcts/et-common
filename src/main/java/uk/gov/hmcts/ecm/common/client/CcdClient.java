@@ -266,24 +266,25 @@ public class CcdClient {
                                                                      String dateToSearchFrom, String dateToSearchTo,
                                                                     String reportType) throws IOException {
         String from = LocalDate.parse(dateToSearchFrom).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
+        String to;
         if (dateToSearchTo.equals(dateToSearchFrom)) {
-            String to = LocalDate.parse(dateToSearchFrom)
-                    .atStartOfDay().plusDays(1).minusSeconds(1).format(OLD_DATE_TIME_PATTERN);
-            log.info(reportType + " - " + from + " - " + to);
-            return buildAndGetElasticSearchRequest(authToken, caseTypeId,
-                    getReportRangeDateQuery(from, to, reportType, tribunalOffice.getOfficeName()));
+            to = LocalDate.parse(dateToSearchFrom).atStartOfDay().plusDays(1).minusSeconds(1)
+                    .format(OLD_DATE_TIME_PATTERN);
         } else {
-            String to = LocalDate.parse(dateToSearchTo).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
-            log.info(reportType + " - " + from + " - " + to);
-            return buildAndGetElasticSearchRequest(authToken, caseTypeId,
-                    getReportRangeDateQuery(from, to, reportType, tribunalOffice.getOfficeName()));
+            to = LocalDate.parse(dateToSearchTo).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
         }
+
+        log.info("Report: {} Office: {} {} - {}", reportType, tribunalOffice, from, to);
+        return buildAndGetElasticSearchRequest(authToken, caseTypeId,
+                getReportRangeDateQuery(from, to, reportType, tribunalOffice));
     }
 
-    private String getReportRangeDateQuery(String from, String to, String reportType, String managingOffice) {
-        String query = ESHelper.getReportRangeDateSearchQuery(from, to, reportType, managingOffice);
-        log.info("REPORT QUERY DATE: " + query);
-        return query;
+    private String getReportRangeDateQuery(String from, String to, String reportType, TribunalOffice tribunalOffice) {
+        if (tribunalOffice != null) {
+            return ESHelper.getReportRangeDateSearchQuery(from, to, reportType, tribunalOffice.getOfficeName());
+        } else {
+            return ESHelper.getReportRangeDateSearchQuery(from, to, reportType);
+        }
     }
 
     public List<SubmitEvent> buildAndGetElasticSearchRequest(String authToken, String caseTypeId, String query)
