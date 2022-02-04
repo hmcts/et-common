@@ -135,6 +135,16 @@ public class ESHelper {
                 .query(boolQueryBuilder).toString();
     }
 
+    public static String getReportRangeDateSearchQuery(String dateToSearchFrom, String dateToSearchTo,
+                                                       String reportType) {
+        String dateFieldName = getDateFieldName(reportType);
+        BoolQueryBuilder boolQueryBuilder = boolQuery()
+                .filter(new RangeQueryBuilder(dateFieldName).gte(dateToSearchFrom).lte(dateToSearchTo));
+        return new SearchSourceBuilder()
+                .size(MAX_ES_SIZE)
+                .query(boolQueryBuilder).toString();
+    }
+
     private static String getDateFieldName(String reportType) {
         log.info("REPORT TYPE: " + reportType);
         switch (reportType) {
