@@ -19,7 +19,6 @@ import uk.gov.hmcts.ecm.common.model.ccd.CaseDetails;
 import uk.gov.hmcts.ecm.common.model.ccd.CaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.ccd.PaginatedSearchMetadata;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
-import uk.gov.hmcts.ecm.common.model.generic.GenericSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.labels.LabelCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.labels.LabelPayloadEvent;
 import uk.gov.hmcts.ecm.common.model.multiples.MultipleCaseSearchResult;
