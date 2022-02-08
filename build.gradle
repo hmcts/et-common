@@ -77,7 +77,7 @@ ext {
 // endregion
 
 dependencies {
-    api group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '4.0.2'
+    api group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '4.0.3'
     api group: 'org.apache.poi', name: 'poi-ooxml', version: '5.0.0'
     api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.0'
     api group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.6.6'
