@@ -16,7 +16,8 @@ public class BFDateType {
     private String broughtForwardDate;
     @JsonProperty("broughtForwardDateCleared")
     private String broughtForwardDateCleared;
+    @JsonProperty("broughtForwardEnteredDate")
+    private String broughtForwardEnteredDate;
     @JsonProperty("broughtForwardDateReason")
     private String broughtForwardDateReason;
-
 }
