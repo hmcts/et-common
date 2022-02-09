@@ -37,6 +37,8 @@ import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaiting
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.hearingstojudgments.HearingsToJudgmentsSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.hearingstojudgments.HearingsToJudgmentsSubmitEvent;
+import uk.gov.hmcts.ecm.common.model.reports.respondentsreport.RespondentsReportSearchResult;
+import uk.gov.hmcts.ecm.common.model.reports.respondentsreport.RespondentsReportSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.schedule.ScheduleCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadEvent;
 import uk.gov.hmcts.ecm.common.service.UserService;
@@ -907,6 +909,23 @@ public class CcdClientTest {
                 caseDetails.getCaseTypeId(), elasticSearchQuery);
         assertEquals(2, results.size());
         verify(restTemplate).exchange(uri, HttpMethod.POST, httpEntity, HearingsToJudgmentsSearchResult.class);
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    public void testRespondentsReportSearch() throws IOException {
+        var elasticSearchQuery = "{\"size\":10000,\"query\": {\"match_all\":{} }}";
+        var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
+        var searchResult = new RespondentsReportSearchResult(2L,
+                Arrays.asList(new RespondentsReportSubmitEvent(), new RespondentsReportSubmitEvent()));
+        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, RespondentsReportSearchResult.class))
+                .thenReturn(responseEntity);
+        var results = ccdClient.respondentsReportSearch("authToken",
+                caseDetails.getCaseTypeId(), elasticSearchQuery);
+        assertEquals(2, results.size());
+        verify(restTemplate).exchange(uri, HttpMethod.POST, httpEntity, RespondentsReportSearchResult.class);
         verifyNoMoreInteractions(restTemplate);
     }
 
