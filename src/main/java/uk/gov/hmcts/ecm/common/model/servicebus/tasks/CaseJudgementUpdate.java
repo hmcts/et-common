@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
+
 public class CaseJudgementUpdate {
 
     private CaseJudgementUpdate() {
@@ -39,6 +42,12 @@ public class CaseJudgementUpdate {
 
         if (caseData.getJudgementCollection() == null) {
             caseData.setJudgementCollection(new ArrayList<>());
+        }
+
+        if (NO.equals(judgementType.getNonHearingJudgment())) {
+            judgementType.setDynamicJudgementHearing(null);
+            judgementType.setJudgmentHearingDate(null);
+            judgementType.setNonHearingJudgment(YES);
         }
 
         caseData.getJudgementCollection().add(JudgementTypeItem.from(judgementType));
