@@ -12,42 +12,21 @@ public class UtilHelperTest {
 
     @Test
     public void getCaseTypeId() {
-        String caseId = ENGLANDWALES_DEV_CASE_TYPE_ID;
-        assertEquals(caseId, UtilHelper.getCaseTypeId(ENGLANDWALES_DEV_BULK_CASE_TYPE_ID));
-        caseId = ENGLANDWALES_USERS_CASE_TYPE_ID;
-        assertEquals(caseId, UtilHelper.getCaseTypeId(ENGLANDWALES_USERS_BULK_CASE_TYPE_ID));
-        caseId = ENGLANDWALES_CASE_TYPE_ID;
+        String caseId = ENGLANDWALES_CASE_TYPE_ID;
         assertEquals(caseId, UtilHelper.getCaseTypeId(ENGLANDWALES_BULK_CASE_TYPE_ID));
-        caseId = SCOTLAND_DEV_CASE_TYPE_ID;
-        assertEquals(caseId, UtilHelper.getCaseTypeId(SCOTLAND_DEV_BULK_CASE_TYPE_ID));
-        caseId = SCOTLAND_USERS_CASE_TYPE_ID;
-        assertEquals(caseId, UtilHelper.getCaseTypeId(SCOTLAND_USERS_BULK_CASE_TYPE_ID));
         caseId = SCOTLAND_CASE_TYPE_ID;
         assertEquals(caseId, UtilHelper.getCaseTypeId(SCOTLAND_BULK_CASE_TYPE_ID));
     }
 
     @Test
     public void getListingCaseTypeId() {
-        assertEquals(ENGLANDWALES_DEV_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(ENGLANDWALES_DEV_LISTING_CASE_TYPE_ID));
-        assertEquals(ENGLANDWALES_USERS_CASE_TYPE_ID,
-                UtilHelper.getListingCaseTypeId(ENGLANDWALES_USERS_LISTING_CASE_TYPE_ID));
         assertEquals(ENGLANDWALES_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(ENGLANDWALES_LISTING_CASE_TYPE_ID));
-        assertEquals(SCOTLAND_DEV_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(SCOTLAND_DEV_LISTING_CASE_TYPE_ID));
-        assertEquals(SCOTLAND_USERS_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(SCOTLAND_USERS_LISTING_CASE_TYPE_ID));
         assertEquals(SCOTLAND_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(SCOTLAND_LISTING_CASE_TYPE_ID));
     }
 
     @Test
     public void getBulkCaseTypeId() {
-        String caseId = ENGLANDWALES_DEV_BULK_CASE_TYPE_ID;
-        assertEquals(caseId, UtilHelper.getBulkCaseTypeId(ENGLANDWALES_DEV_CASE_TYPE_ID));
-        caseId = ENGLANDWALES_USERS_BULK_CASE_TYPE_ID;
-        assertEquals(caseId, UtilHelper.getBulkCaseTypeId(ENGLANDWALES_USERS_CASE_TYPE_ID));
-        caseId = SCOTLAND_DEV_BULK_CASE_TYPE_ID;
-        assertEquals(caseId, UtilHelper.getBulkCaseTypeId(SCOTLAND_DEV_CASE_TYPE_ID));
-        caseId = SCOTLAND_USERS_BULK_CASE_TYPE_ID;
-        assertEquals(caseId, UtilHelper.getBulkCaseTypeId(SCOTLAND_USERS_CASE_TYPE_ID));
-        caseId = SCOTLAND_BULK_CASE_TYPE_ID;
+        String caseId = SCOTLAND_BULK_CASE_TYPE_ID;
         assertEquals(caseId, UtilHelper.getBulkCaseTypeId(SCOTLAND_CASE_TYPE_ID));
         caseId = ENGLANDWALES_BULK_CASE_TYPE_ID;
         assertEquals(caseId, UtilHelper.getBulkCaseTypeId(ENGLANDWALES_CASE_TYPE_ID));
