@@ -1,6 +1,7 @@
 package uk.gov.hmcts.ecm.common.model.servicebus.tasks;
 
 import org.junit.Test;
+import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicFixedListType;
 import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JudgementTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
@@ -12,6 +13,8 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
 public class CaseJudgementUpdateTest {
 
@@ -172,6 +175,26 @@ public class CaseJudgementUpdateTest {
         JudgementType judgementType = caseData.getJudgementCollection().get(0).getValue();
         assertEquals(JUDGEMENT_NOTES, judgementType.getJudgmentNotes());
         assertNull(judgementType.getJurisdictionCodes());
+    }
+
+    @Test
+    public void shouldSetNonHearingToYesIfHearingExists() {
+        // give source case has a judgment which is hearing related
+        // when we batch update judgments
+        // the target case should be set as a non hearing judgment
+        JudgementType judgementType = createJudgementType("ADT");
+        judgementType.setNonHearingJudgment(NO);
+        judgementType.setDynamicJudgementHearing(new DynamicFixedListType());
+        judgementType.setJudgmentHearingDate("2022-02-02");
+        CaseData caseData = createCaseData("ADT");
+
+        CaseJudgementUpdate.updateCaseWithJudgement(caseData, judgementType);
+
+        assertEquals(1, caseData.getJudgementCollection().size());
+        judgementType = caseData.getJudgementCollection().get(0).getValue();
+        assertEquals(YES, judgementType.getNonHearingJudgment());
+        assertNull(judgementType.getJudgmentHearingDate());
+        assertNull(judgementType.getDynamicJudgementHearing());
     }
 
     private void addCaseJudgement(CaseData caseData, String... jurisdictionCodes) {
