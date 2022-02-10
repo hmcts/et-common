@@ -8,10 +8,8 @@ import uk.gov.hmcts.ecm.common.model.listing.types.BFDateType;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 public class BFDateTypeItem {
-
     @JsonProperty("id")
     private String id;
     @JsonProperty("value")
     private BFDateType value;
-
 }
