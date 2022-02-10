@@ -2,17 +2,13 @@ package uk.gov.hmcts.ecm.common.model.listing.items;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import static org.junit.Assert.assertEquals;
-import org.junit.Before;
 import org.junit.Test;
 import uk.gov.hmcts.ecm.common.model.listing.types.BFDateType;
 
-public class BFDateTypeItemTest {
-
+public class BFDateTypeItemComparatorTest {
     @Test
     public void shouldSortBfDateTypeItemsInAscendingOrder() {
-
         List<BFDateTypeItem> bfDateTypeItems = new ArrayList<>();
         var bfDateType = new BFDateType();
         bfDateType.setBroughtForwardEnteredDate("2019-12-08");
@@ -41,14 +37,13 @@ public class BFDateTypeItemTest {
         bfDateTypeItem3.setValue(bfDateType3);
         bfDateTypeItems.add(bfDateTypeItem3);
 
-        var itemsSortedByBfDate = bfDateTypeItems.stream()
-            .sorted((BFDateTypeItem::comparedTo)).collect(Collectors.toList());
+        bfDateTypeItems.sort(new BFDateTypeItemComparator());
 
-        var firstBFDateTypeItem = itemsSortedByBfDate.get(0).getValue();
+        var firstBFDateTypeItem = bfDateTypeItems.get(0).getValue();
         assertEquals(bfDateType2.getBroughtForwardDate(), firstBFDateTypeItem.getBroughtForwardDate());
-        var secondBFDateTypeItem = itemsSortedByBfDate.get(1).getValue();
+        var secondBFDateTypeItem = bfDateTypeItems.get(1).getValue();
         assertEquals(bfDateType.getBroughtForwardDate(), secondBFDateTypeItem.getBroughtForwardDate());
-        var thirdBFDateTypeItem = itemsSortedByBfDate.get(2).getValue();
+        var thirdBFDateTypeItem = bfDateTypeItems.get(2).getValue();
         assertEquals(bfDateType3.getBroughtForwardDate(), thirdBFDateTypeItem.getBroughtForwardDate());
     }
 }
