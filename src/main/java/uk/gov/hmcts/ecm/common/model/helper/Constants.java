@@ -231,22 +231,25 @@ public class Constants {
     public static final String MISSING_JURISDICTION_OUTCOME_ERROR_MESSAGE = "A Jurisdiction outcome is required before "
         + "the case can be closed";
     public static final String MISSING_JUDGEMENT_JURISDICTION_MESSAGE = "This case contains a Judgment which does not "
-        + "have a jurisdiction attached to it. To enable this case to be closed, please ensure the relevant jurisdiction(s)"
-        + " has been linked to the Judgment.";
+        + "have a jurisdiction attached to it. To enable this case to be closed, please ensure the relevant "
+        + "jurisdiction(s) has been linked to the Judgment.";
     public static final String MISSING_JURISDICTION_MESSAGE = "You cannot close this case as there is currently no "
         + "jurisdiction and no jurisdiction outcome associated with it";
     public static final String JURISDICTION_OUTCOME_NOT_ALLOCATED_ERROR_MESSAGE = "Jurisdiction outcome is set to"
         + " 'Not allocated'. A Jurisdiction outcome is required before the case can be closed.";
     public static final String NOT_ALLOCATED = "Not allocated";
     public static final String ADDRESS_LABELS_EMPTY_ERROR = "No addresses were found for you selection";
-    public static final String ADDRESS_LABELS_SELECT_ERROR = "You need to select at least one address label before printing";
-    public static final String ADDRESS_LABELS_COPIES_ERROR = "You need to use a whole number for the number of copies field";
-    public static final String ADDRESS_LABELS_COPIES_LESS_10_ERROR = "Number of copies should be less than or equal to 10";
+    public static final String ADDRESS_LABELS_SELECT_ERROR =
+            "You need to select at least one address label before printing";
+    public static final String ADDRESS_LABELS_COPIES_ERROR =
+            "You need to use a whole number for the number of copies field";
+    public static final String ADDRESS_LABELS_COPIES_LESS_10_ERROR =
+            "Number of copies should be less than or equal to 10";
     public static final String ADDRESS_LABELS_LABELS_LIMIT_ERROR = "Number of labels to be printed reached the limit";
     public static final String JURISDICTION_CODES_EXISTENCE_ERROR =
-        "The following jurisdiction codes do not exist for this case: ";
+            "The following jurisdiction codes do not exist for this case: ";
     public static final String DUPLICATED_JURISDICTION_CODES_JUDGEMENT_ERROR = "The following jurisdiction codes have"
-    + " been selected more than once for a judgment: ";
+        + " been selected more than once for a judgment: ";
     public static final String JURISDICTION_CODES_DELETED_ERROR = "The following jurisdiction codes cannot be deleted"
             + " as they have been selected in judgements: ";
     public static final String DEPOSIT_REFUNDED_GREATER_DEPOSIT_ERROR = "The amount entered for the refund "
@@ -254,7 +257,7 @@ public class Constants {
     public static final String CLOSING_LISTED_CASE_ERROR = "This case contains a hearing which has a 'Listed' status. "
             + "This status must be updated to enable the case to be closed.";
     public static final String CLOSING_HEARD_CASE_WITH_NO_JUDGE_ERROR = "This case contains a hearing which has a "
-        +"'Heard' status and does not have an Employment Judge allocated to it. "
+        + "'Heard' status and does not have an Employment Judge allocated to it. "
         + "To enable this case to be closed, please allocate the Judge to the hearing.";
     public static final String UNABLE_TO_FIND_PARTY = "Unable to find correct party member";
     public static final String NO_CASES_SEARCHED = "No cases searched";
@@ -311,6 +314,7 @@ public class Constants {
     public static final String BF_ACTION_STRIKING_OUT_WARNING = "Striking out warning issued";
     public static final String LETTER_ADDRESS_MANAGING_OFFICE = "Managing Office";
     public static final String LETTER_ADDRESS_ALLOCATED_OFFICE = "Allocated Office";
-    public static final String INVALID_LISTING_DATE_RANGE_ERROR_MESSAGE = "Please enter a date range that does not exceed 31 days.";
+    public static final String INVALID_LISTING_DATE_RANGE_ERROR_MESSAGE =
+            "Please enter a date range that does not exceed 31 days.";
 
 }
