@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelFactory;
-import uk.gov.hmcts.ecm.common.model.servicebus.tasks.*;
+import uk.gov.hmcts.ecm.common.model.servicebus.tasks.DataTaskParent;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -26,18 +26,17 @@ public class UpdateCaseMsg extends Msg {
 
     @Override
     public String toString() {
-        return "UpdateCaseMsg{" +
-                "ethosCaseReference='" + ethosCaseReference + '\'' +
-                ", msgId='" + msgId + '\'' +
-                ", jurisdiction='" + jurisdiction + '\'' +
-                ", caseTypeId='" + caseTypeId + '\'' +
-                ", multipleRef='" + multipleRef + '\'' +
-                ", totalCases='" + totalCases + '\'' +
-                ", username='" + username + '\'' +
-                ", confirmation='" + confirmation + '\'' +
-                ", dataModel=" + dataModelParent + '\'' +
-                ", multipleReferenceLinkMarkUp='" + multipleReferenceLinkMarkUp + '\'' +
-                '}';
+        return "UpdateCaseMsg{"
+                + "ethosCaseReference='" + ethosCaseReference + '\''
+                + ", msgId='" + msgId + '\''
+                +  ", jurisdiction='" + jurisdiction + '\''
+                +  ", caseTypeId='" + caseTypeId + '\''
+                +  ", multipleRef='" + multipleRef + '\''
+                +  ", totalCases='" + totalCases + '\''
+                +  ", username='" + username + '\''
+                +  ", confirmation='" + confirmation + '\''
+                +  ", dataModel=" + dataModelParent + '\''
+                +  ", multipleReferenceLinkMarkUp='" + multipleReferenceLinkMarkUp + '\'' + '}';
     }
 
     public void runTask(SubmitEvent submitEvent) {
