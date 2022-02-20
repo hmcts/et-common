@@ -20,8 +20,4 @@ public class DynamicFixedListType {
     }
 
     public DynamicFixedListType() {}
-
-    public static Optional<DynamicValueType> getSelectedValue(DynamicFixedListType dynamicFixedListType) {
-        return dynamicFixedListType != null ? Optional.ofNullable(dynamicFixedListType.getValue()) : Optional.empty();
-    }
 }
