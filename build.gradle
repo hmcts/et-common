@@ -7,7 +7,6 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'org.owasp.dependencycheck' version '6.5.3'
     id 'com.github.ben-manes.versions' version '0.42.0'
-    id 'com.jfrog.bintray' version '1.8.5'
 }
 
 group 'uk.gov.hmcts.reform'
@@ -33,7 +32,7 @@ jacocoTestReport {
 // endregion
 
 checkstyle {
-    maxWarnings = 172
+    maxWarnings = 158
     toolVersion = '8.29'
 }
 
@@ -78,21 +77,20 @@ ext {
 
 dependencies {
     api group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '4.0.3'
-    api group: 'org.apache.poi', name: 'poi-ooxml', version: '5.0.0'
-    api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.0'
     api group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.6.6'
-    // CVE-2020-11987, CVE-2020-11988 (batik-1.13)
-    // Can be removed when we upgrade poi-ooxml to 6.0
-    // https://bz.apache.org/bugzilla/show_bug.cgi?id=65166
-    api group: 'org.apache.xmlgraphics', name: 'batik-all', version: '1.14'
+    api group: 'org.apache.poi', name: 'poi-ooxml', version: '5.0.0'
+    api('org.apache.xmlgraphics:batik-all:1.14') {
+        because 'CVE-2020-11987, CVE-2020-11988. Can be removed when we upgrade poi-ooxml. See https://bz.apache.org/bugzilla/show_bug.cgi?id=65166'
+    }
+    api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.0'
 
-    implementation group: 'com.google.code.gson', name: 'gson', version: '2.9.0'
-    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     implementation group: 'com.github.hmcts.java-logging', name: 'logging', version: reformLoggingVersion
     implementation group: 'com.github.hmcts.java-logging', name: 'logging-appinsights', version: reformLoggingVersion
     implementation group: 'com.github.sps.junidecode', name: 'junidecode', version: '0.3'
-    implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.9.0'
     implementation group: 'com.google.guava', name: 'guava', version: '31.0.1-jre'
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: log4JVersion
     implementation group: 'org.apache.logging.log4j', name: 'log4j-to-slf4j', version: log4JVersion
 
@@ -101,10 +99,11 @@ dependencies {
 
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.5.1'
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.22.0'
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.3.1'
     testImplementation group: 'org.springframework', name: 'spring-test', version: '5.3.16'
-    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.22.0'
-    testImplementation 'pl.pragmatists:JUnitParams:1.1.1'
+    testImplementation group: 'pl.pragmatists', name: 'JUnitParams', version: '1.1.1'
+
     testCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 }
