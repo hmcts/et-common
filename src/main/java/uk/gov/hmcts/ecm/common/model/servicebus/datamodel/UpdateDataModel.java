@@ -2,7 +2,10 @@ package uk.gov.hmcts.ecm.common.model.servicebus.datamodel;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import uk.gov.hmcts.ecm.common.model.ccd.types.JudgementType;
 import uk.gov.hmcts.ecm.common.model.ccd.types.JurCodesType;
@@ -68,4 +71,7 @@ public class UpdateDataModel extends DataModelParent {
 
     @JsonProperty("isClaimantRepRemovalUpdate")
     private String isClaimantRepRemovalUpdate;
+
+    @JsonProperty("isFixCase")
+    private String isFixCase;
 }

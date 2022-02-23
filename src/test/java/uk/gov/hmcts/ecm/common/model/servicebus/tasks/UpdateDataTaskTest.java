@@ -2,10 +2,15 @@ package uk.gov.hmcts.ecm.common.model.servicebus.tasks;
 
 import org.junit.Before;
 import org.junit.Test;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.UpdateDataModel;
+
+import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class UpdateDataTaskTest {
 
@@ -110,5 +115,25 @@ public class UpdateDataTaskTest {
         task.run(submitEvent);
 
         assertNull(submitEvent.getCaseData().getJurCodesCollection());
+    }
+
+    @Test
+    public void checkJurisdictionCode() {
+        var updateModel = updateDataModelBuilder.build();
+        updateModel.setIsFixCase("Yes");
+
+        var submitEvent = caseDataBuilder.withJurisdictionCode("ADT", "Outcome1")
+                .buildAsSubmitEvent("Accepted");
+        submitEvent.getCaseData().getJurCodesCollection().get(0).setId("ADT");
+
+        assertEquals("ADT", submitEvent.getCaseData().getJurCodesCollection().get(0).getId());
+
+        var task = new UpdateDataTask(updateModel);
+        task.run(submitEvent);
+
+        assertNotNull(submitEvent.getCaseData().getJurCodesCollection());
+        assertNotEquals("ADT", submitEvent.getCaseData().getJurCodesCollection().get(0).getId());
+        assertTrue(submitEvent.getCaseData().getJurCodesCollection().get(0).getId().matches(
+                "[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"));
     }
 }
