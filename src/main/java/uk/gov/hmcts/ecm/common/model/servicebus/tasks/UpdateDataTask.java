@@ -2,10 +2,6 @@ package uk.gov.hmcts.ecm.common.model.servicebus.tasks;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.base.Strings;
-
-import java.util.*;
-import java.util.stream.Collectors;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -17,16 +13,24 @@ import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.RepresentedTypeRItem;
 import uk.gov.hmcts.ecm.common.model.ccd.items.RespondentSumTypeItem;
-import uk.gov.hmcts.ecm.common.model.ccd.types.*;
-
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
-
+import uk.gov.hmcts.ecm.common.model.ccd.types.JudgementType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.JurCodesType;
+import uk.gov.hmcts.ecm.common.model.ccd.types.RepresentedTypeC;
+import uk.gov.hmcts.ecm.common.model.ccd.types.RepresentedTypeR;
+import uk.gov.hmcts.ecm.common.model.ccd.types.RespondentSumType;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.UpdateDataModel;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
 @EqualsAndHashCode(callSuper = true)
@@ -50,6 +54,20 @@ public class UpdateDataTask extends DataTaskParent {
 
         batchUpdate1(submitEvent.getCaseData(), updateDataModel);
         batchUpdate3(submitEvent.getCaseData(), updateDataModel);
+        resetJurisdictionCodes(submitEvent.getCaseData(), updateDataModel);
+    }
+
+    private void resetJurisdictionCodes(CaseData caseData, UpdateDataModel updateDataModel) {
+        if (CollectionUtils.isNotEmpty(caseData.getJurCodesCollection())
+                && YES.equals(updateDataModel.getIsFixCase())) {
+            for (var jurCodeTypeItem : caseData.getJurCodesCollection()) {
+                if (!jurCodeTypeItem.getId().matches(
+                        "[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")) {
+                    jurCodeTypeItem.setId(UUID.randomUUID().toString());
+                }
+            }
+        }
+
     }
 
     private void batchUpdate1(CaseData caseData, UpdateDataModel updateDataModel) {

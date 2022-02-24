@@ -163,6 +163,7 @@ public class ServiceBusHelper {
                 .respondentSumType(getRespondentSubType())
                 .judgementType(getJudgementType())
                 .representedType(getRepresentedType())
+                .isFixCase("No")
                 .build();
     }
 
