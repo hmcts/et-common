@@ -28,10 +28,14 @@ import uk.gov.hmcts.ecm.common.model.multiples.SubmitMultipleEvent;
 import uk.gov.hmcts.ecm.common.model.reference.ReferenceSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSubmitEvent;
+import uk.gov.hmcts.ecm.common.model.reports.eccreport.EccReportSearchResult;
+import uk.gov.hmcts.ecm.common.model.reports.eccreport.EccReportSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.hearingstojudgments.HearingsToJudgmentsSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.hearingstojudgments.HearingsToJudgmentsSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.respondentsreport.RespondentsReportSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.respondentsreport.RespondentsReportSubmitEvent;
+import uk.gov.hmcts.ecm.common.model.reports.sessiondays.SessionDaysSearchResult;
+import uk.gov.hmcts.ecm.common.model.reports.sessiondays.SessionDaysSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.schedule.ScheduleCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadEvent;
 import uk.gov.hmcts.ecm.common.service.UserService;
@@ -190,6 +194,30 @@ public class CcdClient {
         var submitEvents = new ArrayList<RespondentsReportSubmitEvent>();
         var searchResult = runElasticSearch(authToken, caseTypeId, query,
                 RespondentsReportSearchResult.class);
+        if (searchResult != null && !CollectionUtils.isEmpty(searchResult.getCases())) {
+            submitEvents.addAll(searchResult.getCases());
+        }
+
+        return submitEvents;
+    }
+
+    public List<SessionDaysSubmitEvent> sessionDaysSearch(String authToken, String caseTypeId,
+                                                                      String query) throws IOException {
+        var submitEvents = new ArrayList<SessionDaysSubmitEvent>();
+        var searchResult = runElasticSearch(authToken, caseTypeId, query,
+                SessionDaysSearchResult.class);
+        if (searchResult != null && !CollectionUtils.isEmpty(searchResult.getCases())) {
+            submitEvents.addAll(searchResult.getCases());
+        }
+
+        return submitEvents;
+    }
+
+    public List<EccReportSubmitEvent> eccReportSearch(String authToken, String caseTypeId,
+                                                                      String query) throws IOException {
+        var submitEvents = new ArrayList<EccReportSubmitEvent>();
+        var searchResult = runElasticSearch(authToken, caseTypeId, query,
+                EccReportSearchResult.class);
         if (searchResult != null && !CollectionUtils.isEmpty(searchResult.getCases())) {
             submitEvents.addAll(searchResult.getCases());
         }
