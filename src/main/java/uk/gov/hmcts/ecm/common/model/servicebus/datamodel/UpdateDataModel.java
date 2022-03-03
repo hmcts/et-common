@@ -72,4 +72,7 @@ public class UpdateDataModel extends DataModelParent {
 
     @JsonProperty("isClaimantRepRemovalUpdate")
     private String isClaimantRepRemovalUpdate;
+
+    @JsonProperty("isFixCase")
+    private String isFixCase;
 }

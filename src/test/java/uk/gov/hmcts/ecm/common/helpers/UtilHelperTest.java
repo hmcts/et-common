@@ -6,7 +6,12 @@ import java.time.LocalDate;
 import java.time.Month;
 
 import static org.junit.Assert.assertEquals;
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_BULK_CASE_TYPE_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_LISTING_CASE_TYPE_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_BULK_CASE_TYPE_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_CASE_TYPE_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_LISTING_CASE_TYPE_ID;
 
 public class UtilHelperTest {
 
@@ -38,21 +43,6 @@ public class UtilHelperTest {
         assertEquals(office, UtilHelper.getCaseTypeId("EnglandWales_Multiple"));
         office = "Scotland";
         assertEquals(office, UtilHelper.getCaseTypeId("Scotland_Multiple"));
-    }
-
-    @Test
-    public void getCaseTypeIdForMultipleUser() {
-        String office = "EnglandWales_User";
-        assertEquals(office, UtilHelper.getCaseTypeId("EnglandWales_Multiple_User"));
-        office = "Scotland_User";
-        assertEquals(office, UtilHelper.getCaseTypeId("Scotland_Multiple_User"));
-    }
-
-    @Test
-    public void getCaseTypeIdForMultipleDev() {
-        String office = "EnglandWales_Dev";
-        assertEquals(office, UtilHelper.getCaseTypeId("EnglandWales_Multiple_Dev"));
-        office = "Scotland_Dev";
     }
 
     @Test

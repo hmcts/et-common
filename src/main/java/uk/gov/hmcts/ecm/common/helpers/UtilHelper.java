@@ -3,8 +3,24 @@ package uk.gov.hmcts.ecm.common.helpers;
 import lombok.extern.slf4j.Slf4j;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 import static com.google.common.base.Strings.isNullOrEmpty;
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.DEV;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.LISTINGS;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.LISTINGS_DEV;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.LISTINGS_USER;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.MULTIPLE;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.MULTIPLES;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.MULTIPLES_DEV;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.MULTIPLES_USER;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.MULTIPLE_DEV;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.MULTIPLE_USER;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.NEW_DATE_PATTERN;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.NEW_DATE_TIME_PATTERN;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.NEW_TIME_PATTERN;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.OLD_DATE_TIME_PATTERN;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.OLD_DATE_TIME_PATTERN2;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.USER;
 
 @Slf4j
 public class UtilHelper {
@@ -18,7 +34,8 @@ public class UtilHelper {
     }
 
     public static String formatLocalDateTime(String date) {
-        return !isNullOrEmpty(date) ? LocalDateTime.parse(date, OLD_DATE_TIME_PATTERN).format(NEW_DATE_TIME_PATTERN) : "";
+        return !isNullOrEmpty(date) ?
+                LocalDateTime.parse(date, OLD_DATE_TIME_PATTERN).format(NEW_DATE_TIME_PATTERN) : "";
     }
 
     public static String formatLocalTime(String date) {

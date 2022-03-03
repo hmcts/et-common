@@ -35,10 +35,14 @@ import uk.gov.hmcts.ecm.common.model.multiples.MultipleDetails;
 import uk.gov.hmcts.ecm.common.model.multiples.SubmitMultipleEvent;
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSubmitEvent;
+import uk.gov.hmcts.ecm.common.model.reports.eccreport.EccReportSearchResult;
+import uk.gov.hmcts.ecm.common.model.reports.eccreport.EccReportSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.hearingstojudgments.HearingsToJudgmentsSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.hearingstojudgments.HearingsToJudgmentsSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.respondentsreport.RespondentsReportSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.respondentsreport.RespondentsReportSubmitEvent;
+import uk.gov.hmcts.ecm.common.model.reports.sessiondays.SessionDaysSearchResult;
+import uk.gov.hmcts.ecm.common.model.reports.sessiondays.SessionDaysSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.schedule.ScheduleCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadEvent;
 import uk.gov.hmcts.ecm.common.service.UserService;
@@ -926,6 +930,40 @@ public class CcdClientTest {
                 caseDetails.getCaseTypeId(), elasticSearchQuery);
         assertEquals(2, results.size());
         verify(restTemplate).exchange(uri, HttpMethod.POST, httpEntity, RespondentsReportSearchResult.class);
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    public void testSessionDaysSearch() throws IOException {
+        var elasticSearchQuery = "{\"size\":10000,\"query\": {\"match_all\":{} }}";
+        var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
+        var searchResult = new SessionDaysSearchResult(2L,
+                Arrays.asList(new SessionDaysSubmitEvent(), new SessionDaysSubmitEvent()));
+        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, SessionDaysSearchResult.class))
+                .thenReturn(responseEntity);
+        var results = ccdClient.sessionDaysSearch("authToken",
+                caseDetails.getCaseTypeId(), elasticSearchQuery);
+        assertEquals(2, results.size());
+        verify(restTemplate).exchange(uri, HttpMethod.POST, httpEntity, SessionDaysSearchResult.class);
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    public void testEccReportSearch() throws IOException {
+        var elasticSearchQuery = "{\"size\":10000,\"query\": {\"match_all\":{} }}";
+        var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
+        var searchResult = new EccReportSearchResult(2L,
+                Arrays.asList(new EccReportSubmitEvent(), new EccReportSubmitEvent()));
+        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, EccReportSearchResult.class))
+                .thenReturn(responseEntity);
+        var results = ccdClient.eccReportSearch("authToken",
+                caseDetails.getCaseTypeId(), elasticSearchQuery);
+        assertEquals(2, results.size());
+        verify(restTemplate).exchange(uri, HttpMethod.POST, httpEntity, EccReportSearchResult.class);
         verifyNoMoreInteractions(restTemplate);
     }
 

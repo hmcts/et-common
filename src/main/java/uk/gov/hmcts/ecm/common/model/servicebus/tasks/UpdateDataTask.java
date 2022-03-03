@@ -55,6 +55,20 @@ public class UpdateDataTask extends DataTaskParent {
 
         batchUpdate1(submitEvent.getCaseData(), updateDataModel);
         batchUpdate3(submitEvent.getCaseData(), updateDataModel);
+        resetJurisdictionCodes(submitEvent.getCaseData(), updateDataModel);
+    }
+
+    private void resetJurisdictionCodes(CaseData caseData, UpdateDataModel updateDataModel) {
+        if (CollectionUtils.isNotEmpty(caseData.getJurCodesCollection())
+                && YES.equals(updateDataModel.getIsFixCase())) {
+            for (var jurCodeTypeItem : caseData.getJurCodesCollection()) {
+                if (!jurCodeTypeItem.getId().matches(
+                        "[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")) {
+                    jurCodeTypeItem.setId(UUID.randomUUID().toString());
+                }
+            }
+        }
+
     }
 
     private void batchUpdate1(CaseData caseData, UpdateDataModel updateDataModel) {
