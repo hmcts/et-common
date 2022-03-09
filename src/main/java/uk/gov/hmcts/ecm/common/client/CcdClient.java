@@ -302,7 +302,8 @@ public class CcdClient {
             return buildAndGetElasticSearchRequest(authToken, caseTypeId,
                     getReportRangeDateQuery(from, to, reportType));
         } else {
-            String to = LocalDate.parse(dateToSearchTo).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
+            String to = LocalDate.parse(dateToSearchTo).atStartOfDay()
+                .plusDays(1).minusSeconds(1).format(OLD_DATE_TIME_PATTERN);
             log.info(reportType + " - " + from + " - " + to);
             return buildAndGetElasticSearchRequest(authToken, caseTypeId,
                     getReportRangeDateQuery(from, to, reportType));
