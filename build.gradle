@@ -101,7 +101,7 @@ dependencies {
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.5.1'
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.22.0'
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.3.1'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.4.0'
     testImplementation group: 'org.springframework', name: 'spring-test', version: '5.3.16'
     testImplementation group: 'pl.pragmatists', name: 'JUnitParams', version: '1.1.1'
 
