@@ -82,7 +82,7 @@ dependencies {
     api('org.apache.xmlgraphics:batik-all:1.14') {
         because 'CVE-2020-11987, CVE-2020-11988. Can be removed when we upgrade poi-ooxml. See https://bz.apache.org/bugzilla/show_bug.cgi?id=65166'
     }
-    api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.0'
+    api group: 'org.elasticsearch', name: 'elasticsearch', version: '8.1.0'
 
     implementation group: 'com.github.hmcts', name: 'et-data-model', version: '0.0.4'
     implementation group: 'com.github.hmcts.java-logging', name: 'logging', version: reformLoggingVersion
