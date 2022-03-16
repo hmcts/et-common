@@ -313,7 +313,8 @@ public class CcdClient {
             to = LocalDate.parse(dateToSearchFrom).atStartOfDay().plusDays(1).minusSeconds(1)
                     .format(OLD_DATE_TIME_PATTERN);
         } else {
-            to = LocalDate.parse(dateToSearchTo).atStartOfDay().format(OLD_DATE_TIME_PATTERN);
+            to = LocalDate.parse(dateToSearchTo).atStartOfDay().plusDays(1).minusSeconds(1)
+                    .format(OLD_DATE_TIME_PATTERN);
         }
 
         log.info("Report: {} Office: {} {} - {}", reportType, tribunalOffice, from, to);
