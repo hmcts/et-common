@@ -29,6 +29,8 @@ import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaiting
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.eccreport.EccReportSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.eccreport.EccReportSubmitEvent;
+import uk.gov.hmcts.ecm.common.model.reports.hearingsbyhearingtype.HearingsByHearingTypeSearchResult;
+import uk.gov.hmcts.ecm.common.model.reports.hearingsbyhearingtype.HearingsByHearingTypeSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.hearingstojudgments.HearingsToJudgmentsSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.hearingstojudgments.HearingsToJudgmentsSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.respondentsreport.RespondentsReportSearchResult;
@@ -206,6 +208,18 @@ public class CcdClient {
         var submitEvents = new ArrayList<EccReportSubmitEvent>();
         var searchResult = runElasticSearch(authToken, caseTypeId, query,
                 EccReportSearchResult.class);
+        if (searchResult != null && !CollectionUtils.isEmpty(searchResult.getCases())) {
+            submitEvents.addAll(searchResult.getCases());
+        }
+
+        return submitEvents;
+    }
+
+    public List<HearingsByHearingTypeSubmitEvent> hearingsByHearingTypeSearch(String authToken, String caseTypeId,
+                                                                              String query) throws IOException {
+        var submitEvents = new ArrayList<HearingsByHearingTypeSubmitEvent>();
+        var searchResult = runElasticSearch(authToken, caseTypeId, query,
+                HearingsByHearingTypeSearchResult.class);
         if (searchResult != null && !CollectionUtils.isEmpty(searchResult.getCases())) {
             submitEvents.addAll(searchResult.getCases());
         }
