@@ -493,7 +493,7 @@ public class CcdClientTest {
                 + "\"fuzzy_transpositions\":true,\"lenient\":false,\"zero_terms_query\":\"NONE\","
                 + "\"auto_generate_synonyms_phrase_query\":true,\"boost\":1.0}}}],\"filter\":[{\"range\""
                 + ":{\"data.bfActions.value.bfDate\":{\"from\":\"2019-09-23T00:00:00.000\",\"to\":\""
-                + "2019-09-24T00:00:00.000\",\"include_lower\":true,\"include_upper\":true,\"boost\":1.0}}}],"
+                + "2019-09-24T23:59:59.000\",\"include_lower\":true,\"include_upper\":true,\"boost\":1.0}}}],"
                 + "\"adjust_pure_negative\":true,\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
@@ -512,7 +512,7 @@ public class CcdClientTest {
     @Test
     public void testRetrieveCasesGenericReportElasticSearchNoTribunalOffice() throws IOException {
         var jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"range\":"
-            + "{\"data.bfActions.value.bfDate\":{\"from\":\"2019-09-23T00:00:00.000\",\"to\":\"2019-09-24T00:00:00.000\","
+            + "{\"data.bfActions.value.bfDate\":{\"from\":\"2019-09-23T00:00:00.000\",\"to\":\"2019-09-24T23:59:59.000\","
             + "\"include_lower\":true,\"include_upper\":true,\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":"
             + "1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
