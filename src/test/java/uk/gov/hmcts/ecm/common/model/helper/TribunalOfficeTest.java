@@ -169,4 +169,31 @@ public class TribunalOfficeTest {
         TribunalOffice.isScotlandOffice(officeName);
         fail(officeName + " should throw an IllegalArgumentException");
     }
+
+    @Test
+    @Parameters
+    public void testGetOfficeForReferenceData(TribunalOffice tribunalOffice, TribunalOffice expected) {
+        assertEquals(expected, TribunalOffice.getOfficeForReferenceData(tribunalOffice));
+    }
+
+    private Object[] parametersForTestGetOfficeForReferenceData() {
+        return new Object[]{
+                new Object[]{TribunalOffice.ABERDEEN, TribunalOffice.SCOTLAND},
+                new Object[]{TribunalOffice.BRISTOL, TribunalOffice.BRISTOL},
+                new Object[]{TribunalOffice.DUNDEE, TribunalOffice.SCOTLAND},
+                new Object[]{TribunalOffice.EDINBURGH, TribunalOffice.SCOTLAND},
+                new Object[]{TribunalOffice.GLASGOW, TribunalOffice.SCOTLAND},
+                new Object[]{TribunalOffice.LEEDS, TribunalOffice.LEEDS},
+                new Object[]{TribunalOffice.LONDON_CENTRAL, TribunalOffice.LONDON_CENTRAL},
+                new Object[]{TribunalOffice.LONDON_EAST, TribunalOffice.LONDON_EAST},
+                new Object[]{TribunalOffice.LONDON_SOUTH, TribunalOffice.LONDON_SOUTH},
+                new Object[]{TribunalOffice.MANCHESTER, TribunalOffice.MANCHESTER},
+                new Object[]{TribunalOffice.MIDLANDS_EAST, TribunalOffice.MIDLANDS_EAST},
+                new Object[]{TribunalOffice.MIDLANDS_WEST, TribunalOffice.MIDLANDS_WEST},
+                new Object[]{TribunalOffice.NEWCASTLE, TribunalOffice.NEWCASTLE},
+                new Object[]{TribunalOffice.SCOTLAND, TribunalOffice.SCOTLAND},
+                new Object[]{TribunalOffice.WALES, TribunalOffice.WALES},
+                new Object[]{TribunalOffice.WATFORD, TribunalOffice.WATFORD}
+        };
+    }
 }
