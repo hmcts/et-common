@@ -87,4 +87,8 @@ public enum TribunalOffice {
     public static boolean isScotlandOffice(String officeName) {
         return SCOTLAND_CASE_TYPE_ID.equals(getCaseTypeId(officeName));
     }
+
+    public static TribunalOffice getOfficeForReferenceData(TribunalOffice tribunalOffice) {
+        return SCOTLAND_OFFICES.contains(tribunalOffice) ? TribunalOffice.SCOTLAND : tribunalOffice;
+    }
 }
