@@ -11,7 +11,8 @@ import uk.gov.hmcts.ecm.common.model.ccd.types.CasePreAcceptType;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.RejectDataModel;
 
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SINGLE_OPEN_CASE_STATES;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -27,10 +28,10 @@ public class RejectDataTask extends DataTaskParent {
 
     public void run(SubmitEvent submitEvent) {
 
-        if (submitEvent.getState().equals(SUBMITTED_STATE)) {
+        if (SINGLE_OPEN_CASE_STATES.contains(submitEvent.getState())) {
             rejectLogic(submitEvent);
         } else {
-            log.info("The case is already accepted or not right state");
+            log.info("Case {} is not in the right state", submitEvent.getCaseData().getEthosCaseReference());
         }
 
     }
