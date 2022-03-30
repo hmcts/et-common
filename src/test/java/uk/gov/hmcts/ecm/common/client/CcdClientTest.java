@@ -37,6 +37,8 @@ import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaiting
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.eccreport.EccReportSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.eccreport.EccReportSubmitEvent;
+import uk.gov.hmcts.ecm.common.model.reports.hearingsbyhearingtype.HearingsByHearingTypeSearchResult;
+import uk.gov.hmcts.ecm.common.model.reports.hearingsbyhearingtype.HearingsByHearingTypeSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.hearingstojudgments.HearingsToJudgmentsSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.hearingstojudgments.HearingsToJudgmentsSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.respondentsreport.RespondentsReportSearchResult;
@@ -964,6 +966,23 @@ public class CcdClientTest {
                 caseDetails.getCaseTypeId(), elasticSearchQuery);
         assertEquals(2, results.size());
         verify(restTemplate).exchange(uri, HttpMethod.POST, httpEntity, EccReportSearchResult.class);
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    public void testHearingsByHearingTypeReportSearch() throws IOException {
+        var elasticSearchQuery = "{\"size\":10000,\"query\": {\"match_all\":{} }}";
+        var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
+        var searchResult = new HearingsByHearingTypeSearchResult(2L,
+                Arrays.asList(new HearingsByHearingTypeSubmitEvent(), new HearingsByHearingTypeSubmitEvent()));
+        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, HearingsByHearingTypeSearchResult.class))
+                .thenReturn(responseEntity);
+        var results = ccdClient.hearingsByHearingTypeSearch("authToken",
+                caseDetails.getCaseTypeId(), elasticSearchQuery);
+        assertEquals(2, results.size());
+        verify(restTemplate).exchange(uri, HttpMethod.POST, httpEntity, HearingsByHearingTypeSearchResult.class);
         verifyNoMoreInteractions(restTemplate);
     }
 
