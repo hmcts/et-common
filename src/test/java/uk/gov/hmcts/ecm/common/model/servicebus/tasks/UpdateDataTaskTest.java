@@ -2,9 +2,6 @@ package uk.gov.hmcts.ecm.common.model.servicebus.tasks;
 
 import org.junit.Before;
 import org.junit.Test;
-import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.UpdateDataModel;
-
-import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
