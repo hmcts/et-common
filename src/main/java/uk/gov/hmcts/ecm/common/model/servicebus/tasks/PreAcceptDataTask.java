@@ -11,6 +11,7 @@ import uk.gov.hmcts.ecm.common.model.ccd.types.CasePreAcceptType;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.PreAcceptDataModel;
 
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.SINGLE_OPEN_CASE_STATES;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
@@ -37,12 +38,14 @@ public class PreAcceptDataTask extends DataTaskParent {
     }
 
     private void preAcceptLogic(SubmitEvent submitEvent) {
-
+        var caseData = submitEvent.getCaseData();
         log.info("Moving to accepted state");
-        CasePreAcceptType casePreAcceptType = new CasePreAcceptType();
-        casePreAcceptType.setCaseAccepted(YES);
-        casePreAcceptType.setDateAccepted(((PreAcceptDataModel)dataModelParent).getDateAccepted());
-        submitEvent.getCaseData().setPreAcceptCase(casePreAcceptType);
+        if (caseData.getPreAcceptCase() == null || NO.equals(caseData.getPreAcceptCase().getCaseAccepted())) {
+            var casePreAcceptType = new CasePreAcceptType();
+            casePreAcceptType.setCaseAccepted(YES);
+            casePreAcceptType.setDateAccepted(((PreAcceptDataModel)dataModelParent).getDateAccepted());
+            submitEvent.getCaseData().setPreAcceptCase(casePreAcceptType);
+        }
 
     }
 

@@ -13,6 +13,7 @@ import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.RejectDataModel;
 
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.SINGLE_OPEN_CASE_STATES;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -37,14 +38,15 @@ public class RejectDataTask extends DataTaskParent {
     }
 
     private void rejectLogic(SubmitEvent submitEvent) {
-
-        log.info("Moving to rejected state");
-        CasePreAcceptType casePreAcceptType = new CasePreAcceptType();
-        casePreAcceptType.setCaseAccepted(NO);
-        casePreAcceptType.setDateRejected(((RejectDataModel)dataModelParent).getDateRejected());
-        casePreAcceptType.setRejectReason(((RejectDataModel)dataModelParent).getRejectReason());
-        submitEvent.getCaseData().setPreAcceptCase(casePreAcceptType);
-
+        var caseData = submitEvent.getCaseData();
+        if (caseData.getPreAcceptCase() == null || YES.equals(caseData.getPreAcceptCase().getCaseAccepted())) {
+            log.info("Moving to rejected state");
+            CasePreAcceptType casePreAcceptType = new CasePreAcceptType();
+            casePreAcceptType.setCaseAccepted(NO);
+            casePreAcceptType.setDateRejected(((RejectDataModel) dataModelParent).getDateRejected());
+            casePreAcceptType.setRejectReason(((RejectDataModel) dataModelParent).getRejectReason());
+            submitEvent.getCaseData().setPreAcceptCase(casePreAcceptType);
+        }
     }
 
 }
