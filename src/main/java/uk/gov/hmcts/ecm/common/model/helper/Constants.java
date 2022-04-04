@@ -301,6 +301,7 @@ public class Constants {
     public static final String LIVE_CASELOAD_REPORT = "Live Caseload";
     public static final String MEMBER_DAYS_REPORT = "Member Days";
     public static final String SERVING_CLAIMS_REPORT = "Serving Claims";
+    public static final String CLAIMS_BY_HEARING_VENUE_REPORT = "Claims By Hearing Venue";
     public static final String CASES_COMPLETED_REPORT = "Cases Completed";
     public static final String TIME_TO_FIRST_HEARING_REPORT = "Time To First Hearing";
     public static final String CASE_SOURCE_LOCAL_REPORT = "Case Source";

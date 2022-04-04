@@ -27,6 +27,8 @@ import uk.gov.hmcts.ecm.common.model.multiples.SubmitMultipleEvent;
 import uk.gov.hmcts.ecm.common.model.reference.ReferenceSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSubmitEvent;
+import uk.gov.hmcts.ecm.common.model.reports.claimsbyhearingvenue.ClaimsByHearingVenueSearchResult;
+import uk.gov.hmcts.ecm.common.model.reports.claimsbyhearingvenue.ClaimsByHearingVenueSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.eccreport.EccReportSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.eccreport.EccReportSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.hearingsbyhearingtype.HearingsByHearingTypeSearchResult;
@@ -196,6 +198,18 @@ public class CcdClient {
         var submitEvents = new ArrayList<SessionDaysSubmitEvent>();
         var searchResult = runElasticSearch(authToken, caseTypeId, query,
                 SessionDaysSearchResult.class);
+        if (searchResult != null && !CollectionUtils.isEmpty(searchResult.getCases())) {
+            submitEvents.addAll(searchResult.getCases());
+        }
+
+        return submitEvents;
+    }
+
+    public List<ClaimsByHearingVenueSubmitEvent> claimsByHearingVenueSearch(String authToken, String caseTypeId,
+                                                                            String query) throws IOException {
+        var submitEvents = new ArrayList<ClaimsByHearingVenueSubmitEvent>();
+        var searchResult = runElasticSearch(authToken, caseTypeId, query,
+            ClaimsByHearingVenueSearchResult.class);
         if (searchResult != null && !CollectionUtils.isEmpty(searchResult.getCases())) {
             submitEvents.addAll(searchResult.getCases());
         }
