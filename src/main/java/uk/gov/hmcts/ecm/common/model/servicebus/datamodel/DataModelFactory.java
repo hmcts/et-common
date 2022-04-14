@@ -1,8 +1,19 @@
 package uk.gov.hmcts.ecm.common.model.servicebus.datamodel;
 
-import uk.gov.hmcts.ecm.common.model.servicebus.tasks.*;
+import uk.gov.hmcts.ecm.common.model.servicebus.tasks.CloseDataTask;
+import uk.gov.hmcts.ecm.common.model.servicebus.tasks.CreationDataTask;
+import uk.gov.hmcts.ecm.common.model.servicebus.tasks.CreationSingleDataTask;
+import uk.gov.hmcts.ecm.common.model.servicebus.tasks.DataTaskParent;
+import uk.gov.hmcts.ecm.common.model.servicebus.tasks.DetachDataTask;
+import uk.gov.hmcts.ecm.common.model.servicebus.tasks.PreAcceptDataTask;
+import uk.gov.hmcts.ecm.common.model.servicebus.tasks.RejectDataTask;
+import uk.gov.hmcts.ecm.common.model.servicebus.tasks.ResetStateDataTask;
+import uk.gov.hmcts.ecm.common.model.servicebus.tasks.UpdateDataTask;
 
 public class DataModelFactory {
+
+    private DataModelFactory() {
+    }
 
     public static DataTaskParent getDataModelType(DataModelParent dataModelParent) {
 

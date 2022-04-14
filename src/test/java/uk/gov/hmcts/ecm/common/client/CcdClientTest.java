@@ -35,6 +35,9 @@ import uk.gov.hmcts.ecm.common.model.multiples.MultipleDetails;
 import uk.gov.hmcts.ecm.common.model.multiples.SubmitMultipleEvent;
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSubmitEvent;
+import uk.gov.hmcts.ecm.common.model.reports.claimsbyhearingvenue.ClaimsByHearingVenueCaseData;
+import uk.gov.hmcts.ecm.common.model.reports.claimsbyhearingvenue.ClaimsByHearingVenueSearchResult;
+import uk.gov.hmcts.ecm.common.model.reports.claimsbyhearingvenue.ClaimsByHearingVenueSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.eccreport.EccReportSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.eccreport.EccReportSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.hearingsbyhearingtype.HearingsByHearingTypeSearchResult;
@@ -949,6 +952,23 @@ public class CcdClientTest {
                 caseDetails.getCaseTypeId(), elasticSearchQuery);
         assertEquals(2, results.size());
         verify(restTemplate).exchange(uri, HttpMethod.POST, httpEntity, SessionDaysSearchResult.class);
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    public void testClaimsByHearingVenueSearch() throws IOException {
+        var elasticSearchQuery = "{\"size\":10000,\"query\": {\"match_all\":{} }}";
+        var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
+        var searchResult = new ClaimsByHearingVenueSearchResult(2L,
+            Arrays.asList(new ClaimsByHearingVenueSubmitEvent(), new ClaimsByHearingVenueSubmitEvent()));
+        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, ClaimsByHearingVenueSearchResult.class))
+            .thenReturn(responseEntity);
+        var results = ccdClient.claimsByHearingVenueSearch("authToken",
+            caseDetails.getCaseTypeId(), elasticSearchQuery);
+        assertEquals(2, results.size());
+        verify(restTemplate).exchange(uri, HttpMethod.POST, httpEntity, ClaimsByHearingVenueSearchResult.class);
         verifyNoMoreInteractions(restTemplate);
     }
 
