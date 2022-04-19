@@ -18,7 +18,7 @@ public class ClaimsByHearingVenueCaseData {
     @JsonProperty("claimantType")
     private ClaimantType claimantType;
 
-    @JsonProperty("claimantWorkAddress")
+    @JsonProperty("claimantWorkAddressType")
     private ClaimantWorkAddressType claimantWorkAddressType;
 
     @JsonProperty("respondentCollection")
