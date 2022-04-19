@@ -33,20 +33,20 @@ public class ESHelper {
             "data.hearingCollection.value.hearingDateCollection.value.listedDate";
     private static final String RECEIPT_DATE_FIELD_NAME = "data.receiptDate";
     public static final String LISTING_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.hearingVenueDay.keyword";
+            "data.hearingCollection.value.hearingDateCollection.value.hearingVenueDay.value.code.keyword";
     public static final String BROUGHT_FORWARD_DATE_FIELD_NAME = "data.bfActions.value.bfDate";
     public static final String CLAIMS_ACCEPTED_DATE_FIELD_NAME = "data.preAcceptCase.dateAccepted";
     public static final String MANAGING_OFFICE_FIELD_NAME = "data.managingOffice";
     private static final String REPORT_TYPE_NOT_FOUND = "Report type not found";
     public static final String CLAIMS_SERVED_DATE_FIELD_NAME = "data.claimServedDate";
     public static final String LISTING_GLASGOW_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Glasgow.keyword";
+            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Glasgow.value.code.keyword";
     public static final String LISTING_ABERDEEN_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Aberdeen.keyword";
+            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Aberdeen.value.code.keyword";
     public static final String LISTING_DUNDEE_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Dundee.keyword";
+            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Dundee.value.code.keyword";
     public static final String LISTING_EDINBURGH_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Edinburgh.keyword";
+            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Edinburgh.value.code.keyword";
     public static final String MEMBER_DAYS_DATE_FIELD_NAME =
         "data.hearingCollection.value.hearingDateCollection.value.listedDate";
 
