@@ -321,8 +321,4 @@ public class Constants {
 
     public static final List<String> SINGLE_OPEN_CASE_STATES = List.of(ACCEPTED_STATE, REJECTED_STATE, SUBMITTED_STATE);
 
-    public static final String ABERDEEN_OFFICE = "Aberdeen";
-    public static final String DUNDEE_OFFICE = "Dundee";
-    public static final String EDINBURGH_OFFICE = "Edinburgh";
-    public static final String GLASGOW_OFFICE = "Glasgow";
 }
