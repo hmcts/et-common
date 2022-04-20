@@ -321,5 +321,4 @@ public class Constants {
 
     public static final List<String> SINGLE_OPEN_CASE_STATES = List.of(ACCEPTED_STATE, REJECTED_STATE, SUBMITTED_STATE);
 
-
 }

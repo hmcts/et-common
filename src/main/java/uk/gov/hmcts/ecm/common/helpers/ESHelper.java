@@ -33,20 +33,20 @@ public class ESHelper {
             "data.hearingCollection.value.hearingDateCollection.value.listedDate";
     private static final String RECEIPT_DATE_FIELD_NAME = "data.receiptDate";
     public static final String LISTING_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.hearingVenueDay.keyword";
+            "data.hearingCollection.value.hearingDateCollection.value.hearingVenueDay.value.code.keyword";
     public static final String BROUGHT_FORWARD_DATE_FIELD_NAME = "data.bfActions.value.bfDate";
     public static final String CLAIMS_ACCEPTED_DATE_FIELD_NAME = "data.preAcceptCase.dateAccepted";
     public static final String MANAGING_OFFICE_FIELD_NAME = "data.managingOffice";
     private static final String REPORT_TYPE_NOT_FOUND = "Report type not found";
     public static final String CLAIMS_SERVED_DATE_FIELD_NAME = "data.claimServedDate";
     public static final String LISTING_GLASGOW_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Glasgow.keyword";
+            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Glasgow.value.code.keyword";
     public static final String LISTING_ABERDEEN_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Aberdeen.keyword";
+            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Aberdeen.value.code.keyword";
     public static final String LISTING_DUNDEE_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Dundee.keyword";
+            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Dundee.value.code.keyword";
     public static final String LISTING_EDINBURGH_VENUE_FIELD_NAME =
-            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Edinburgh.keyword";
+            "data.hearingCollection.value.hearingDateCollection.value.Hearing_Edinburgh.value.code.keyword";
     public static final String MEMBER_DAYS_DATE_FIELD_NAME =
         "data.hearingCollection.value.hearingDateCollection.value.listedDate";
 
@@ -107,18 +107,21 @@ public class ESHelper {
     }
 
     public static String getListingVenueAndRangeDateSearchQuery(String dateToSearchFrom, String dateToSearchTo,
-                                                                String venueToSearch, String venueToSearchMapping) {
+                                                                String venueToSearch, String venueToSearchMapping,
+                                                                String managingOffice) {
         BoolQueryBuilder boolQueryBuilder = boolQuery()
                 .filter(QueryBuilders.termQuery(venueToSearchMapping, venueToSearch))
-                .filter(new RangeQueryBuilder(LISTING_DATE_FIELD_NAME).gte(dateToSearchFrom).lte(dateToSearchTo));
+                .filter(new RangeQueryBuilder(LISTING_DATE_FIELD_NAME).gte(dateToSearchFrom).lte(dateToSearchTo))
+                .must(new MatchQueryBuilder(MANAGING_OFFICE_FIELD_NAME, managingOffice));
         return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
                 .query(boolQueryBuilder).toString();
     }
 
-    public static String getListingRangeDateSearchQuery(String dateToSearchFrom, String dateToSearchTo) {
+    public static String getListingRangeDateSearchQuery(String dateToSearchFrom, String dateToSearchTo, String managingOffice) {
         BoolQueryBuilder boolQueryBuilder = boolQuery()
-                .filter(new RangeQueryBuilder(LISTING_DATE_FIELD_NAME).gte(dateToSearchFrom).lte(dateToSearchTo));
+                .filter(new RangeQueryBuilder(LISTING_DATE_FIELD_NAME).gte(dateToSearchFrom).lte(dateToSearchTo))
+                .must(new MatchQueryBuilder(MANAGING_OFFICE_FIELD_NAME, managingOffice));
         return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
                 .query(boolQueryBuilder).toString();
@@ -128,7 +131,7 @@ public class ESHelper {
                                                        String reportType, String managingOffice) {
         String dateFieldName = getDateFieldName(reportType);
         BoolQueryBuilder boolQueryBuilder = boolQuery()
-                 .must(new MatchQueryBuilder(MANAGING_OFFICE_FIELD_NAME, managingOffice))
+                .must(new MatchQueryBuilder(MANAGING_OFFICE_FIELD_NAME, managingOffice))
                 .filter(new RangeQueryBuilder(dateFieldName).gte(dateToSearchFrom).lte(dateToSearchTo));
         return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
