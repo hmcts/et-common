@@ -107,18 +107,21 @@ public class ESHelper {
     }
 
     public static String getListingVenueAndRangeDateSearchQuery(String dateToSearchFrom, String dateToSearchTo,
-                                                                String venueToSearch, String venueToSearchMapping) {
+                                                                String venueToSearch, String venueToSearchMapping,
+                                                                String managingOffice) {
         BoolQueryBuilder boolQueryBuilder = boolQuery()
                 .filter(QueryBuilders.termQuery(venueToSearchMapping, venueToSearch))
-                .filter(new RangeQueryBuilder(LISTING_DATE_FIELD_NAME).gte(dateToSearchFrom).lte(dateToSearchTo));
+                .filter(new RangeQueryBuilder(LISTING_DATE_FIELD_NAME).gte(dateToSearchFrom).lte(dateToSearchTo))
+                .must(new MatchQueryBuilder(MANAGING_OFFICE_FIELD_NAME, managingOffice));
         return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
                 .query(boolQueryBuilder).toString();
     }
 
-    public static String getListingRangeDateSearchQuery(String dateToSearchFrom, String dateToSearchTo) {
+    public static String getListingRangeDateSearchQuery(String dateToSearchFrom, String dateToSearchTo, String managingOffice) {
         BoolQueryBuilder boolQueryBuilder = boolQuery()
-                .filter(new RangeQueryBuilder(LISTING_DATE_FIELD_NAME).gte(dateToSearchFrom).lte(dateToSearchTo));
+                .filter(new RangeQueryBuilder(LISTING_DATE_FIELD_NAME).gte(dateToSearchFrom).lte(dateToSearchTo))
+                .must(new MatchQueryBuilder(MANAGING_OFFICE_FIELD_NAME, managingOffice));
         return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
                 .query(boolQueryBuilder).toString();
@@ -128,7 +131,7 @@ public class ESHelper {
                                                        String reportType, String managingOffice) {
         String dateFieldName = getDateFieldName(reportType);
         BoolQueryBuilder boolQueryBuilder = boolQuery()
-                 .must(new MatchQueryBuilder(MANAGING_OFFICE_FIELD_NAME, managingOffice))
+                .must(new MatchQueryBuilder(MANAGING_OFFICE_FIELD_NAME, managingOffice))
                 .filter(new RangeQueryBuilder(dateFieldName).gte(dateToSearchFrom).lte(dateToSearchTo));
         return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
