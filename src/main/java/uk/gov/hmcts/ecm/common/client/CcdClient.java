@@ -9,22 +9,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.hmcts.ecm.common.helpers.ESHelper;
-import uk.gov.hmcts.ecm.common.model.bulk.BulkCaseSearchResult;
-import uk.gov.hmcts.ecm.common.model.bulk.BulkData;
-import uk.gov.hmcts.ecm.common.model.bulk.SubmitBulkEvent;
-import uk.gov.hmcts.ecm.common.model.ccd.CCDRequest;
-import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
-import uk.gov.hmcts.ecm.common.model.ccd.CaseDataContent;
-import uk.gov.hmcts.ecm.common.model.ccd.CaseDetails;
-import uk.gov.hmcts.ecm.common.model.ccd.CaseSearchResult;
-import uk.gov.hmcts.ecm.common.model.ccd.PaginatedSearchMetadata;
-import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.ecm.common.model.helper.TribunalOffice;
 import uk.gov.hmcts.ecm.common.model.labels.LabelCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.labels.LabelPayloadEvent;
-import uk.gov.hmcts.ecm.common.model.multiples.MultipleCaseSearchResult;
-import uk.gov.hmcts.ecm.common.model.multiples.MultipleData;
-import uk.gov.hmcts.ecm.common.model.multiples.SubmitMultipleEvent;
 import uk.gov.hmcts.ecm.common.model.reference.ReferenceSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment.CasesAwaitingJudgmentSubmitEvent;
@@ -43,6 +30,19 @@ import uk.gov.hmcts.ecm.common.model.reports.sessiondays.SessionDaysSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.schedule.ScheduleCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadEvent;
 import uk.gov.hmcts.ecm.common.service.UserService;
+import uk.gov.hmcts.et.common.model.bulk.BulkCaseSearchResult;
+import uk.gov.hmcts.et.common.model.bulk.BulkData;
+import uk.gov.hmcts.et.common.model.bulk.SubmitBulkEvent;
+import uk.gov.hmcts.et.common.model.ccd.CCDRequest;
+import uk.gov.hmcts.et.common.model.ccd.CaseData;
+import uk.gov.hmcts.et.common.model.ccd.CaseDataContent;
+import uk.gov.hmcts.et.common.model.ccd.CaseDetails;
+import uk.gov.hmcts.et.common.model.ccd.CaseSearchResult;
+import uk.gov.hmcts.et.common.model.ccd.PaginatedSearchMetadata;
+import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
+import uk.gov.hmcts.et.common.model.multiples.MultipleCaseSearchResult;
+import uk.gov.hmcts.et.common.model.multiples.MultipleData;
+import uk.gov.hmcts.et.common.model.multiples.SubmitMultipleEvent;
 import uk.gov.hmcts.reform.authorisation.generators.AuthTokenGenerator;
 
 import java.io.IOException;
@@ -194,7 +194,7 @@ public class CcdClient {
     }
 
     public List<RespondentsReportSubmitEvent> respondentsReportSearch(String authToken, String caseTypeId,
-                                                                         String query) throws IOException {
+                                                                      String query) throws IOException {
         var submitEvents = new ArrayList<RespondentsReportSubmitEvent>();
         var searchResult = runElasticSearch(authToken, caseTypeId, query,
                 RespondentsReportSearchResult.class);
@@ -206,7 +206,7 @@ public class CcdClient {
     }
 
     public List<SessionDaysSubmitEvent> sessionDaysSearch(String authToken, String caseTypeId,
-                                                                      String query) throws IOException {
+                                                          String query) throws IOException {
         var submitEvents = new ArrayList<SessionDaysSubmitEvent>();
         var searchResult = runElasticSearch(authToken, caseTypeId, query,
                 SessionDaysSearchResult.class);
@@ -230,7 +230,7 @@ public class CcdClient {
     }
 
     public List<EccReportSubmitEvent> eccReportSearch(String authToken, String caseTypeId,
-                                                                      String query) throws IOException {
+                                                      String query) throws IOException {
         var submitEvents = new ArrayList<EccReportSubmitEvent>();
         var searchResult = runElasticSearch(authToken, caseTypeId, query,
                 EccReportSearchResult.class);

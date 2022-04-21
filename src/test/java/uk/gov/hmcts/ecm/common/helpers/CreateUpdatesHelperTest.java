@@ -32,7 +32,6 @@ public class CreateUpdatesHelperTest {
         assertEquals(3, createUpdatesMsgList.size());
     }
 
-
     private CreateUpdatesDto getCreateUpdatesDto(List<String> ethosCaseRefCollection) {
         return CreateUpdatesDto.builder()
             .caseTypeId(SCOTLAND_BULK_CASE_TYPE_ID)

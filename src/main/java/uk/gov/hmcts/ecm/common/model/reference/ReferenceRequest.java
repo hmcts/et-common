@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import uk.gov.hmcts.ecm.common.model.generic.GenericRequest;
+import uk.gov.hmcts.et.common.model.generic.GenericRequest;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

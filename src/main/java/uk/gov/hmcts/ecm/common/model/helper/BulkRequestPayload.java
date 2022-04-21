@@ -2,7 +2,7 @@ package uk.gov.hmcts.ecm.common.model.helper;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uk.gov.hmcts.ecm.common.model.bulk.BulkDetails;
+import uk.gov.hmcts.et.common.model.bulk.BulkDetails;
 
 import java.util.List;
 

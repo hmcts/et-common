@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import uk.gov.hmcts.ecm.common.model.generic.GenericSubmitEvent;
+import uk.gov.hmcts.et.common.model.generic.GenericSubmitEvent;
 
 @Getter
 @Setter
