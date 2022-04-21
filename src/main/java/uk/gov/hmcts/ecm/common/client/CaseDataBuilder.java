@@ -3,12 +3,12 @@ package uk.gov.hmcts.ecm.common.client;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import uk.gov.hmcts.ecm.common.model.bulk.BulkData;
-import uk.gov.hmcts.ecm.common.model.ccd.CCDRequest;
-import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
-import uk.gov.hmcts.ecm.common.model.ccd.CaseDataContent;
-import uk.gov.hmcts.ecm.common.model.ccd.Event;
-import uk.gov.hmcts.ecm.common.model.multiples.MultipleData;
+import uk.gov.hmcts.et.common.model.bulk.BulkData;
+import uk.gov.hmcts.et.common.model.ccd.CCDRequest;
+import uk.gov.hmcts.et.common.model.ccd.CaseData;
+import uk.gov.hmcts.et.common.model.ccd.CaseDataContent;
+import uk.gov.hmcts.et.common.model.ccd.Event;
+import uk.gov.hmcts.et.common.model.multiples.MultipleData;
 
 import java.util.Map;
 

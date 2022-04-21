@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import uk.gov.hmcts.ecm.common.model.ccd.types.CasePreAcceptType;
+import uk.gov.hmcts.et.common.model.ccd.types.CasePreAcceptType;
 
 import java.util.List;
 

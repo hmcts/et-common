@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicValueType;
+import uk.gov.hmcts.et.common.model.bulk.types.DynamicValueType;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

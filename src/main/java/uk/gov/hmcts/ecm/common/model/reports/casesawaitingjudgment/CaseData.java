@@ -2,8 +2,8 @@ package uk.gov.hmcts.ecm.common.model.reports.casesawaitingjudgment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import uk.gov.hmcts.ecm.common.model.ccd.items.HearingTypeItem;
-import uk.gov.hmcts.ecm.common.model.ccd.items.JudgementTypeItem;
+import uk.gov.hmcts.et.common.model.ccd.items.HearingTypeItem;
+import uk.gov.hmcts.et.common.model.ccd.items.JudgementTypeItem;
 
 import java.util.List;
 

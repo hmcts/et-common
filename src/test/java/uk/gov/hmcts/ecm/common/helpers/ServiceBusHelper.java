@@ -1,15 +1,28 @@
 package uk.gov.hmcts.ecm.common.helpers;
 
-import uk.gov.hmcts.ecm.common.model.bulk.types.DynamicValueType;
-import uk.gov.hmcts.ecm.common.model.ccd.CaseData;
-import uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent;
-import uk.gov.hmcts.ecm.common.model.ccd.items.JudgementTypeItem;
-import uk.gov.hmcts.ecm.common.model.ccd.items.JurCodesTypeItem;
-import uk.gov.hmcts.ecm.common.model.ccd.items.RepresentedTypeRItem;
-import uk.gov.hmcts.ecm.common.model.ccd.items.RespondentSumTypeItem;
-import uk.gov.hmcts.ecm.common.model.ccd.types.*;
 import uk.gov.hmcts.ecm.common.model.servicebus.UpdateCaseMsg;
-import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.*;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.CloseDataModel;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.CreationDataModel;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.CreationSingleDataModel;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DetachDataModel;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.PreAcceptDataModel;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.RejectDataModel;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.ResetStateDataModel;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.UpdateDataModel;
+import uk.gov.hmcts.et.common.model.bulk.types.DynamicValueType;
+import uk.gov.hmcts.et.common.model.ccd.CaseData;
+import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
+import uk.gov.hmcts.et.common.model.ccd.items.JudgementTypeItem;
+import uk.gov.hmcts.et.common.model.ccd.items.JurCodesTypeItem;
+import uk.gov.hmcts.et.common.model.ccd.items.RepresentedTypeRItem;
+import uk.gov.hmcts.et.common.model.ccd.items.RespondentSumTypeItem;
+import uk.gov.hmcts.et.common.model.ccd.types.ClaimantIndType;
+import uk.gov.hmcts.et.common.model.ccd.types.JudgementType;
+import uk.gov.hmcts.et.common.model.ccd.types.JurCodesType;
+import uk.gov.hmcts.et.common.model.ccd.types.RepresentedTypeC;
+import uk.gov.hmcts.et.common.model.ccd.types.RepresentedTypeR;
+import uk.gov.hmcts.et.common.model.ccd.types.RespondentSumType;
 
 import java.util.ArrayList;
 import java.util.Arrays;

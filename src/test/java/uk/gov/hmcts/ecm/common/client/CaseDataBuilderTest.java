@@ -7,9 +7,12 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import uk.gov.hmcts.ecm.common.model.bulk.BulkData;
-import uk.gov.hmcts.ecm.common.model.ccd.*;
-import uk.gov.hmcts.ecm.common.model.multiples.MultipleData;
+import uk.gov.hmcts.et.common.model.bulk.BulkData;
+import uk.gov.hmcts.et.common.model.ccd.CCDRequest;
+import uk.gov.hmcts.et.common.model.ccd.CaseData;
+import uk.gov.hmcts.et.common.model.ccd.CaseDataContent;
+import uk.gov.hmcts.et.common.model.ccd.Event;
+import uk.gov.hmcts.et.common.model.multiples.MultipleData;
 
 import static org.junit.Assert.assertEquals;
 

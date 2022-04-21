@@ -2,8 +2,8 @@ package uk.gov.hmcts.ecm.common.model.reports.eccreport;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import uk.gov.hmcts.ecm.common.model.ccd.items.EccCounterClaimTypeItem;
-import uk.gov.hmcts.ecm.common.model.ccd.items.RespondentSumTypeItem;
+import uk.gov.hmcts.et.common.model.ccd.items.EccCounterClaimTypeItem;
+import uk.gov.hmcts.et.common.model.ccd.items.RespondentSumTypeItem;
 
 import java.util.List;
 
