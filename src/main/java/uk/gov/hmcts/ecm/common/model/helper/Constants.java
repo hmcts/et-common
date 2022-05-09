@@ -122,9 +122,6 @@ public class Constants {
     public static final String RETURN_TRANSFER_EVENT_TRIGGER_ID = "returnCaseTransfer";
     public static final String CREATE_MULTIPLE_EVENT_TRIGGER_ID = "createMultiple";
 
-    public static final String ENGLANDWALES_OFFICE_NUMBER = "11";
-    public static final String SCOTLAND_OFFICE_NUMBER = "12";
-
     public static final String DEFAULT_SELECT_ALL_VALUE = "999999";
     public static final String SELECT_ALL_VALUE = "Select All";
     public static final String SELECT_NONE_VALUE = "None";
