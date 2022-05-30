@@ -74,4 +74,7 @@ public class UpdateDataModel extends DataModelParent {
 
     @JsonProperty("isFixCase")
     private String isFixCase;
+
+    @JsonProperty("subMultiple")
+    private String subMultiple;
 }
