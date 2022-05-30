@@ -10,7 +10,7 @@ plugins {
 }
 
 group 'uk.gov.hmcts.reform'
-version '0.0.33'
+version '0.0.34'
 
 sourceCompatibility = '11.0'
 
@@ -86,9 +86,9 @@ dependencies {
     api('org.apache.xmlgraphics:batik-all:1.14') {
         because 'CVE-2020-11987, CVE-2020-11988. Can be removed when we upgrade poi-ooxml. See https://bz.apache.org/bugzilla/show_bug.cgi?id=65166'
     }
-    api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.3'
+    api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.4'
 
-    implementation group: 'com.github.hmcts', name: 'et-data-model', version: '1.0.4'
+    implementation group: 'com.github.hmcts', name: 'et-data-model', version: '1.0.5'
     implementation group: 'com.github.hmcts.java-logging', name: 'logging', version: reformLoggingVersion
     implementation group: 'com.github.hmcts.java-logging', name: 'logging-appinsights', version: reformLoggingVersion
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: log4JVersion
@@ -101,7 +101,7 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: junitJupiterVersion
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junitJupiterVersion
     testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-commons', version: '1.8.2'
-    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.0.1'
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.1.0'
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.22.0'
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.5.1'
