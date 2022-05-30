@@ -53,6 +53,7 @@ public class UpdateDataTask extends DataTaskParent {
         var updateDataModel = ((UpdateDataModel) dataModelParent);
 
         batchUpdate1(submitEvent.getCaseData(), updateDataModel);
+        batchUpdate2(submitEvent.getCaseData(), updateDataModel);
         batchUpdate3(submitEvent.getCaseData(), updateDataModel);
         resetJurisdictionCodes(submitEvent.getCaseData(), updateDataModel);
     }
@@ -90,6 +91,13 @@ public class UpdateDataTask extends DataTaskParent {
 
         updateManagingOffice(caseData, updateDataModel);
     }
+
+    private void batchUpdate2(CaseData caseData, UpdateDataModel updateDataModel) {
+        if (!isNullOrEmpty(updateDataModel.getSubMultiple())) {
+            caseData.setSubMultipleName(updateDataModel.getSubMultiple());
+        }
+    }
+
 
     private void dateToCurrentPosition(CaseData caseData) {
         if (isNullOrEmpty(caseData.getCurrentPosition())
