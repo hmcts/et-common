@@ -133,4 +133,14 @@ public class UpdateDataTaskTest {
         assertTrue(submitEvent.getCaseData().getJurCodesCollection().get(0).getId().matches(
                 "[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"));
     }
+
+    @Test
+    public void checkSubMultiple() {
+        var updateModel = updateDataModelBuilder.build();
+        updateModel.setSubMultiple("SubMultiple");
+        var submitEvent = caseDataBuilder.buildAsSubmitEvent("Accepted");
+        var task = new UpdateDataTask(updateModel);
+        task.run(submitEvent);
+        assertEquals("SubMultiple", submitEvent.getCaseData().getSubMultipleName());
+    }
 }
