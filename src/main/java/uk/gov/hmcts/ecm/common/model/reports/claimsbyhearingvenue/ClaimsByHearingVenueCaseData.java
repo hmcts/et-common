@@ -19,7 +19,7 @@ public class ClaimsByHearingVenueCaseData {
     private ClaimantType claimantType;
 
     @JsonProperty("claimantWorkAddress")
-    private ClaimantWorkAddressType ClaimantWorkAddressType;
+    private ClaimantWorkAddressType claimantWorkAddressType;
 
     @JsonProperty("respondentCollection")
     private List<RespondentSumTypeItem> respondentCollection;
