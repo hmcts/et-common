@@ -34,7 +34,9 @@ public class ScheduleClaimantIndType {
 
     private List<String> notNullOrEmptyAtt(List<String> fullClaimantName, List<String> attributes) {
         for (String aux : attributes) {
-            if (!isNullOrEmpty(aux)) fullClaimantName.add(aux);
+            if (!isNullOrEmpty(aux)) {
+                fullClaimantName.add(aux);
+            }
         }
         return fullClaimantName;
     }

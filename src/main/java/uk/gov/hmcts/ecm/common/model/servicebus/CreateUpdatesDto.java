@@ -1,6 +1,8 @@
 package uk.gov.hmcts.ecm.common.model.servicebus;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+
 import java.util.List;
 
 @Builder

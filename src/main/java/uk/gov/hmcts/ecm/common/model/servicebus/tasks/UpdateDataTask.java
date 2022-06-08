@@ -136,8 +136,8 @@ public class UpdateDataTask extends DataTaskParent {
     }
 
     private boolean shouldClaimantRepresentativeBeRemoved(CaseData caseData, UpdateDataModel updateDataModel) {
-        if (isNullOrEmpty(updateDataModel.getIsClaimantRepRemovalUpdate()) ||
-                updateDataModel.getIsClaimantRepRemovalUpdate().equals(NO)) {
+        if (isNullOrEmpty(updateDataModel.getIsClaimantRepRemovalUpdate())
+                || updateDataModel.getIsClaimantRepRemovalUpdate().equals(NO)) {
             return false;
         } else if (!isNullOrEmpty(updateDataModel.getIsClaimantRepRemovalUpdate())
                 && updateDataModel.getIsClaimantRepRemovalUpdate().equals(YES)
@@ -154,8 +154,8 @@ public class UpdateDataTask extends DataTaskParent {
     }
 
     private boolean shouldRespondentRepresentativeBeRemoved(CaseData caseData, UpdateDataModel updateDataModel) {
-        if (Strings.isNullOrEmpty(updateDataModel.getIsRespondentRepRemovalUpdate()) ||
-                updateDataModel.getIsRespondentRepRemovalUpdate().equals(NO)) {
+        if (Strings.isNullOrEmpty(updateDataModel.getIsRespondentRepRemovalUpdate())
+                || updateDataModel.getIsRespondentRepRemovalUpdate().equals(NO)) {
             return false;
         } else if (!Strings.isNullOrEmpty(updateDataModel.getIsRespondentRepRemovalUpdate())
                 && updateDataModel.getIsRespondentRepRemovalUpdate().equals(YES)
