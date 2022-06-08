@@ -34,8 +34,8 @@ public class UtilHelper {
     }
 
     public static String formatLocalDateTime(String date) {
-        return !isNullOrEmpty(date) ?
-                LocalDateTime.parse(date, OLD_DATE_TIME_PATTERN).format(NEW_DATE_TIME_PATTERN) : "";
+        return !isNullOrEmpty(date) ? LocalDateTime.parse(
+                date, OLD_DATE_TIME_PATTERN).format(NEW_DATE_TIME_PATTERN) : "";
     }
 
     public static String formatLocalTime(String date) {

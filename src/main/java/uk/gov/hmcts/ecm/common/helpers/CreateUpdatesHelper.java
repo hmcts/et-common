@@ -15,7 +15,8 @@ public class CreateUpdatesHelper {
                                                                             String updateSize) {
 
         return Partition.ofSize(createUpdatesDto.getEthosCaseRefCollection(), chunkSize).stream()
-            .map(ethosCasesChunked -> createUpdatesMsg(ethosCasesChunked, createUpdatesDto, dataModelParent, updateSize))
+            .map(ethosCasesChunked -> createUpdatesMsg(
+                    ethosCasesChunked, createUpdatesDto, dataModelParent, updateSize))
             .collect(Collectors.toList());
     }
 
