@@ -28,9 +28,6 @@ public class TransferToEcmDataModel extends DataModelParent {
     @JsonProperty("reasonForCT")
     private String reasonForCT;
 
-    @JsonProperty("transferSameCountry")
-    private boolean transferSameCountry;
-
     @JsonProperty("sourceEthosCaseReference")
     private String sourceEthosCaseReference;
 
