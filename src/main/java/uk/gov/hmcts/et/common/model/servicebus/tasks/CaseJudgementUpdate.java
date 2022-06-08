@@ -32,7 +32,8 @@ public class CaseJudgementUpdate {
         }
 
         if (isJudgementWithJurisdiction(judgementType)) {
-            List<JurCodesTypeItem> jurCodesTypeItems = filterJurCodesForJudgement(caseData, judgementType.getJurisdictionCodes());
+            List<JurCodesTypeItem> jurCodesTypeItems =
+                    filterJurCodesForJudgement(caseData, judgementType.getJurisdictionCodes());
             if (jurCodesTypeItems.isEmpty()) {
                 return;
             } else {

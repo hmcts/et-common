@@ -12,20 +12,23 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 public class UtilHelper {
 
     public static String formatLocalDate(String date) {
-        return !isNullOrEmpty(date) ? LocalDate.parse(date, Constants.OLD_DATE_TIME_PATTERN).format(Constants.NEW_DATE_PATTERN) : "";
+        return !isNullOrEmpty(date) ? LocalDate.parse(
+                date, Constants.OLD_DATE_TIME_PATTERN).format(Constants.NEW_DATE_PATTERN) : "";
     }
 
     public static String listingFormatLocalDate(String date) {
-        return !isNullOrEmpty(date) ? LocalDate.parse(date, Constants.OLD_DATE_TIME_PATTERN2).format(Constants.NEW_DATE_PATTERN) : "";
+        return !isNullOrEmpty(date) ? LocalDate.parse(
+                date, Constants.OLD_DATE_TIME_PATTERN2).format(Constants.NEW_DATE_PATTERN) : "";
     }
 
     public static String formatLocalDateTime(String date) {
-        return !isNullOrEmpty(date) ?
-                LocalDateTime.parse(date, Constants.OLD_DATE_TIME_PATTERN).format(Constants.NEW_DATE_TIME_PATTERN) : "";
+        return !isNullOrEmpty(date) ? LocalDateTime.parse(
+                date, Constants.OLD_DATE_TIME_PATTERN).format(Constants.NEW_DATE_TIME_PATTERN) : "";
     }
 
     public static String formatLocalTime(String date) {
-        return !isNullOrEmpty(date) ? LocalDateTime.parse(date, Constants.OLD_DATE_TIME_PATTERN).format(Constants.NEW_TIME_PATTERN) : "";
+        return !isNullOrEmpty(date) ? LocalDateTime.parse(
+                date, Constants.OLD_DATE_TIME_PATTERN).format(Constants.NEW_TIME_PATTERN) : "";
     }
 
     public static String formatCurrentDatePlusDays(LocalDate date, long days) {

@@ -5,6 +5,7 @@ import org.junit.Test;
 import uk.gov.hmcts.et.common.model.servicebus.CreateUpdatesDto;
 import uk.gov.hmcts.et.common.model.servicebus.CreateUpdatesMsg;
 import uk.gov.hmcts.et.common.model.servicebus.datamodel.CreationDataModel;
+
 import java.util.Arrays;
 import java.util.List;
 

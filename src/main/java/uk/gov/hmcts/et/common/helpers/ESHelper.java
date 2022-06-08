@@ -109,7 +109,8 @@ public class ESHelper {
                 .query(boolQueryBuilder).toString();
     }
 
-    public static String getListingRangeDateSearchQuery(String dateToSearchFrom, String dateToSearchTo, String managingOffice) {
+    public static String getListingRangeDateSearchQuery(String dateToSearchFrom, String dateToSearchTo,
+                                                        String managingOffice) {
         BoolQueryBuilder boolQueryBuilder = boolQuery()
                 .filter(new RangeQueryBuilder(LISTING_DATE_FIELD_NAME).gte(dateToSearchFrom).lte(dateToSearchTo))
                 .must(new MatchQueryBuilder(MANAGING_OFFICE_FIELD_NAME, managingOffice));
