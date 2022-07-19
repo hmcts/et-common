@@ -80,6 +80,6 @@ public class UtilHelperTest {
     @Test
     public void formatCurrentDate2() {
         assertEquals("2017-02-03",
-                UtilHelper.formatCurrentDate2(LocalDate.of(2017,Month.FEBRUARY, 3)));
+                UtilHelper.formatCurrentDate2(LocalDate.of(2017, Month.FEBRUARY, 3)));
     }
 }

@@ -21,10 +21,10 @@ public class CaseJudgementUpdate {
 
     /**
      * Updates a case with the judgement only if the case has at least one jurisdiction that matches the judgement or
-     * the judgement contains no jurisdictions
-     * <p>The judgement is updated to include only those jurisdictions that are also in the case</p>
+     * the judgement contains no jurisdictions.
+     * <p>The judgement is updated to include only those jurisdictions that are also in the case.</p>
      * @param caseData the case to be updated
-     * @param judgementType the judgement to add to the case
+     * @param judgementType the judgement to add to the case.
      */
     public static void updateCaseWithJudgement(CaseData caseData, JudgementType judgementType) {
         if (!isValidForUpdate(caseData, judgementType)) {
@@ -32,7 +32,8 @@ public class CaseJudgementUpdate {
         }
 
         if (isJudgementWithJurisdiction(judgementType)) {
-            List<JurCodesTypeItem> jurCodesTypeItems = filterJurCodesForJudgement(caseData, judgementType.getJurisdictionCodes());
+            List<JurCodesTypeItem> jurCodesTypeItems = filterJurCodesForJudgement(caseData,
+                    judgementType.getJurisdictionCodes());
             if (jurCodesTypeItems.isEmpty()) {
                 return;
             } else {

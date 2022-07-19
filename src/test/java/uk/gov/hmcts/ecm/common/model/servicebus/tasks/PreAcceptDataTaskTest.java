@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.PreAcceptDataModel;
+import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.et.common.model.ccd.types.CasePreAcceptType;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,16 +31,14 @@ class PreAcceptDataTaskTest {
     @CsvSource({TRANSFERRED_STATE, CLOSED_STATE})
     void checkInvalidCaseStates(String state) {
         // When an invalid case state is passed through, the date's and accepted status should remain the same
-        var updateModel = preAcceptDataModelBuilder.preAcceptDataModelBuilder("2022-02-02").build();
-        var submitEvent = caseDataBuilder.buildAsSubmitEvent(state);
-        var casePreAcceptType = new CasePreAcceptType();
+        SubmitEvent submitEvent = caseDataBuilder.buildAsSubmitEvent(state);
+        CasePreAcceptType casePreAcceptType = new CasePreAcceptType();
         casePreAcceptType.setCaseAccepted(YES);
         casePreAcceptType.setDateAccepted("2021-01-01");
         submitEvent.getCaseData().setPreAcceptCase(casePreAcceptType);
-
-        var task = new PreAcceptDataTask(updateModel);
+        PreAcceptDataModel updateModel = preAcceptDataModelBuilder.preAcceptDataModelBuilder("2022-02-02").build();
+        PreAcceptDataTask task = new PreAcceptDataTask(updateModel);
         task.run(submitEvent);
-
         assertEquals("2021-01-01", submitEvent.getCaseData().getPreAcceptCase().getDateAccepted());
         assertEquals(YES, submitEvent.getCaseData().getPreAcceptCase().getCaseAccepted());
     }
@@ -63,13 +63,13 @@ class PreAcceptDataTaskTest {
     @Test
     void checkIfCaseAlreadyAccepted() {
         // If a case has already been accepted, it should not be overwritten with a new data
-        var updateModel = preAcceptDataModelBuilder.preAcceptDataModelBuilder("2022-02-02").build();
-        var submitEvent = caseDataBuilder.buildAsSubmitEvent(ACCEPTED_STATE);
-        var casePreAcceptType = new CasePreAcceptType();
+        SubmitEvent submitEvent = caseDataBuilder.buildAsSubmitEvent(ACCEPTED_STATE);
+        CasePreAcceptType casePreAcceptType = new CasePreAcceptType();
         casePreAcceptType.setCaseAccepted(YES);
         casePreAcceptType.setDateAccepted("2021-01-01");
         submitEvent.getCaseData().setPreAcceptCase(casePreAcceptType);
-        var task = new PreAcceptDataTask(updateModel);
+        PreAcceptDataModel updateModel = preAcceptDataModelBuilder.preAcceptDataModelBuilder("2022-02-02").build();
+        PreAcceptDataTask task = new PreAcceptDataTask(updateModel);
         task.run(submitEvent);
 
         assertEquals("2021-01-01", submitEvent.getCaseData().getPreAcceptCase().getDateAccepted());

@@ -7,7 +7,11 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class CreateUpdatesHelper {
+public final class CreateUpdatesHelper {
+
+    private CreateUpdatesHelper() {
+        // private constructor required for utility class
+    }
 
     public static List<CreateUpdatesMsg> getCreateUpdatesMessagesCollection(CreateUpdatesDto createUpdatesDto,
                                                                             DataModelParent dataModelParent,
