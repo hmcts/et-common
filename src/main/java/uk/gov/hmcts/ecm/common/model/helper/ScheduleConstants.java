@@ -1,6 +1,10 @@
 package uk.gov.hmcts.ecm.common.model.helper;
 
-public class ScheduleConstants {
+public final class ScheduleConstants {
+
+    private ScheduleConstants() {
+        //utility class requires private constructor
+    }
 
     public static final String SCHEDULE_SHEET_NAME = "Schedule";
 

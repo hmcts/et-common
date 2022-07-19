@@ -32,10 +32,14 @@ import java.util.UUID;
 
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_BULK_CASE_TYPE_ID;
 
-public class ServiceBusHelper {
+public final class ServiceBusHelper {
+
+    private ServiceBusHelper() {
+        // utility class requires private constructor
+    }
 
     public static UpdateCaseMsg generateUpdateCaseMsg(DataModelParent dataModelParent) {
-        var linkMarkUp = "<a href=\""+"/cases/details/1591184523086531\""+">4150001</a>";
+        var linkMarkUp = "<a href=\"" + "/cases/details/1591184523086531\"" + ">4150001</a>";
         return UpdateCaseMsg.builder()
                 .msgId("1")
                 .jurisdiction("EMPLOYMENT")

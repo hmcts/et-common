@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.RejectDataModel;
+import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.et.common.model.ccd.types.CasePreAcceptType;
 
 import java.util.List;
@@ -31,16 +33,15 @@ class RejectDataTaskTest {
     @CsvSource({TRANSFERRED_STATE, CLOSED_STATE})
     void checkInvalidCaseStates(String state) {
         // When an invalid case state is passed through, the rejected data should remain the same
-        var rejectReasons = List.of("Defect");
-        var updateModel = rejectDataModelBuilder.rejectDataModelBuilder(
-                "2022-02-02", rejectReasons).build();
-        var submitEvent = caseDataBuilder.buildAsSubmitEvent(state);
-        var casePreAcceptType = new CasePreAcceptType();
+        CasePreAcceptType casePreAcceptType = new CasePreAcceptType();
         casePreAcceptType.setCaseAccepted(NO);
         casePreAcceptType.setDateRejected("2021-01-01");
         casePreAcceptType.setRejectReason(List.of("Defect", "Not on Prescribed Form"));
+        SubmitEvent submitEvent = caseDataBuilder.buildAsSubmitEvent(state);
         submitEvent.getCaseData().setPreAcceptCase(casePreAcceptType);
-
+        List<String> rejectReasons = List.of("Defect");
+        RejectDataModel updateModel = rejectDataModelBuilder.rejectDataModelBuilder(
+                "2022-02-02", rejectReasons).build();
         var task = new RejectDataTask(updateModel);
         task.run(submitEvent);
 
@@ -72,17 +73,16 @@ class RejectDataTaskTest {
     @Test
     void checkIfCaseAlreadyRejected() {
         // If a case has already been rejected, it should not be overwritten with a new data
-        var rejectReasons = List.of("Defect", "Not on Prescribed Form");
-        var updateModel = rejectDataModelBuilder.rejectDataModelBuilder(
-                "2022-02-02", rejectReasons).build();
-        var submitEvent = caseDataBuilder.buildAsSubmitEvent(REJECTED_STATE);
-        var casePreAcceptType = new CasePreAcceptType();
+        CasePreAcceptType casePreAcceptType = new CasePreAcceptType();
         casePreAcceptType.setCaseAccepted(NO);
         casePreAcceptType.setDateRejected("2021-01-01");
         casePreAcceptType.setRejectReason(List.of("Defect"));
+        SubmitEvent submitEvent = caseDataBuilder.buildAsSubmitEvent(REJECTED_STATE);
         submitEvent.getCaseData().setPreAcceptCase(casePreAcceptType);
-
-        var task = new RejectDataTask(updateModel);
+        List<String> rejectReasons = List.of("Defect", "Not on Prescribed Form");
+        RejectDataModel updateModel = rejectDataModelBuilder.rejectDataModelBuilder(
+                "2022-02-02", rejectReasons).build();
+        RejectDataTask task = new RejectDataTask(updateModel);
         task.run(submitEvent);
 
         assertEquals(NO, submitEvent.getCaseData().getPreAcceptCase().getCaseAccepted());

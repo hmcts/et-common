@@ -196,7 +196,11 @@ public class CcdClientTest {
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class)))
                 .thenReturn(responseEntity);
 
-        var ccdRequest = ccdClient.startCaseTransferSameCountryEccLinkedCase("authToken", caseTypeId, jurisdiction, caseId);
+        var ccdRequest = ccdClient.startCaseTransferSameCountryEccLinkedCase(
+                "authToken",
+                caseTypeId,
+                jurisdiction,
+                caseId);
 
         assertNotNull(ccdRequest);
     }
@@ -279,9 +283,6 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCases() throws IOException {
-        HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        List<SubmitEvent> submitEvents = new ArrayList<>(Arrays.asList(new SubmitEvent(), new SubmitEvent()));
-        ResponseEntity<List<SubmitEvent>> responseEntity = new ResponseEntity<>(submitEvents, HttpStatus.OK);
         PaginatedSearchMetadata metadata = new PaginatedSearchMetadata();
         metadata.setTotalPagesCount(1);
         ResponseEntity<PaginatedSearchMetadata> paginatedSearchMetadata = new ResponseEntity<>(metadata,
@@ -289,6 +290,9 @@ public class CcdClientTest {
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildRetrieveCasesUrl(any(), any(), any(), any())).thenReturn(uri);
         when(ccdClientConfig.buildPaginationMetadataCaseUrl(any(), any(), any())).thenReturn(uri);
+        HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
+        List<SubmitEvent> submitEvents = new ArrayList<>(Arrays.asList(new SubmitEvent(), new SubmitEvent()));
+        ResponseEntity<List<SubmitEvent>> responseEntity = new ResponseEntity<>(submitEvents, HttpStatus.OK);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
                 eq(new ParameterizedTypeReference<List<SubmitEvent>>(){}))).thenReturn(responseEntity);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(PaginatedSearchMetadata.class)))
@@ -302,7 +306,7 @@ public class CcdClientTest {
     public void retrieveCasesElasticSearchForCreationManuallyCreated() throws IOException {
         String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":["
                 + "\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}}";
-        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery,creatBuildHeaders());
+        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L, Arrays.asList(new SubmitEvent(),
                 new SubmitEvent()));
         ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
@@ -318,9 +322,6 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesElasticSearchForCreationETOnline() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":["
-                + "\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}}";
-        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         SubmitEvent submitEvent = new SubmitEvent();
         CaseData caseData = new CaseData();
         caseData.setEthosCaseReference("2420117/2019");
@@ -332,6 +333,9 @@ public class CcdClientTest {
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L, Arrays.asList(submitEvent, submitEvent1));
         ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":["
+                + "\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}}";
+        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesElasticSearchForCreation("authToken",
@@ -348,7 +352,7 @@ public class CcdClientTest {
                 + "\"_source\":[\"data.claimantIndType.*\",\"data.claimantType.claimant_addressUK.*\",\"data"
                 + ".claimant_Company\",\"data.positionType\",\"data.ethosCaseReference\","
                 + "\"data.respondentCollection.*\"]}";
-        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery,creatBuildHeaders());
+        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         ScheduleCaseSearchResult scheduleCaseSearchResult =
                 new ScheduleCaseSearchResult(2L, Arrays.asList(new SchedulePayloadEvent(),
                         new SchedulePayloadEvent()));
@@ -372,7 +376,7 @@ public class CcdClientTest {
                 + "\"data.claimant_Company\",\"data.representativeClaimantType.*\","
                 + "\"data.claimantRepresentedQuestion\",\"data.respondentCollection.*\","
                 + "\"data.repCollection.*\",\"data.ethosCaseReference\"]}";
-        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery,creatBuildHeaders());
+        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         LabelCaseSearchResult labelCaseSearchResult =
                 new LabelCaseSearchResult(2L, Arrays.asList(new LabelPayloadEvent(),
                         new LabelPayloadEvent()));
@@ -515,10 +519,12 @@ public class CcdClientTest {
 
     @Test
     public void testRetrieveCasesGenericReportElasticSearchNoTribunalOffice() throws IOException {
-        var jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"range\":"
-            + "{\"data.bfActions.value.bfDate\":{\"from\":\"2019-09-23T00:00:00.000\",\"to\":\"2019-09-24T23:59:59.000\","
-            + "\"include_lower\":true,\"include_upper\":true,\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":"
-            + "1.0}}}";
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"range\":"
+                + "{\"data.bfActions.value.bfDate\":{\"from\":\"2019-09-23T00:00:00.000\","
+                +  "\"to\":\"2019-09-24T23:59:59.000\","
+                + "\"include_lower\":true,\"include_upper\":true,\"boost\":1.0}}}],"
+                + "\"adjust_pure_negative\":true,\"boost\":"
+                + "1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
@@ -535,14 +541,14 @@ public class CcdClientTest {
     @Test
     public void retrieveCasesGenericReportElasticSearchCasesCompleted() throws IOException {
 
-       String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":" +
-                "{\"data.managingOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\",\"prefix_length\"" +
-                ":0,\"max_expansions\":50,\"fuzzy_transpositions\":true,\"lenient\":false," +
-                "\"zero_terms_query\":\"NONE\",\"auto_generate_synonyms_phrase_query\":true," +
-                "\"boost\":1.0}}}],\"filter\":[{\"range\":{\"data.hearingCollection.value." +
-                "hearingDateCollection.value.listedDate\":{\"from\":\"2019-09-24T00:00:00.000\"," +
-                "\"to\":\"2019-09-24T23:59:59.000\",\"include_lower\":true,\"include_upper\":true," +
-                "\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":"
+                + "{\"data.managingOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\",\"prefix_length\""
+                + ":0,\"max_expansions\":50,\"fuzzy_transpositions\":true,\"lenient\":false,"
+                + "\"zero_terms_query\":\"NONE\",\"auto_generate_synonyms_phrase_query\":true,"
+                + "\"boost\":1.0}}}],\"filter\":[{\"range\":{\"data.hearingCollection.value."
+                + "hearingDateCollection.value.listedDate\":{\"from\":\"2019-09-24T00:00:00.000\","
+                + "\"to\":\"2019-09-24T23:59:59.000\",\"include_lower\":true,\"include_upper\":true,"
+                + "\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
@@ -559,16 +565,16 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesGenericReportElasticSearchCasesTimeToFirstHearing() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":" +
-                "{\"data.managingOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\"," +
-                "\"prefix_length\":0,\"max_expansions\":50,\"fuzzy_transpositions\"" +
-                ":true,\"lenient\":false,\"zero_terms_query\":\"NONE\"," +
-                "\"auto_generate_synonyms_phrase_query\":true,\"boost\":1.0}}}]," +
-                "\"filter\":[{\"range\":{\"data.hearingCollection." +
-                "value.hearingDateCollection.value.listedDate\":" +
-                "{\"from\":\"2019-09-24T00:00:00.000\",\"to\":\"2019-09-24T23:59:59.000\"" +
-                ",\"include_lower\":true,\"include_upper\":true,\"" +
-                "boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":"
+                + "{\"data.managingOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\","
+                + "\"prefix_length\":0,\"max_expansions\":50,\"fuzzy_transpositions\""
+                + ":true,\"lenient\":false,\"zero_terms_query\":\"NONE\","
+                + "\"auto_generate_synonyms_phrase_query\":true,\"boost\":1.0}}}],"
+                + "\"filter\":[{\"range\":{\"data.hearingCollection."
+                + "value.hearingDateCollection.value.listedDate\":"
+                + "{\"from\":\"2019-09-24T00:00:00.000\",\"to\":\"2019-09-24T23:59:59.000\""
+                + ",\"include_lower\":true,\"include_upper\":true,\""
+                + "boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
@@ -610,15 +616,15 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesGenericReportElasticSearchLiveCaseload() throws IOException {
-       String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":" +
-                "{\"data.managingOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\"" +
-                ",\"prefix_length\":0,\"max_expansions\":50," +
-                "\"fuzzy_transpositions\":true,\"lenient\":false,\"zero_terms_query\"" +
-                ":\"NONE\",\"auto_generate_synonyms_phrase_query\":true," +
-                "\"boost\":1.0}}}],\"filter\":[{\"range\":" +
-                "{\"data.preAcceptCase.dateAccepted\":{\"from\":\"2019-09-24T00:00:00.000\"," +
-                "\"to\":\"2019-09-24T23:59:59.000\",\"include_lower\":true,\"include_upper\":true," +
-                "\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":"
+                + "{\"data.managingOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\""
+                + ",\"prefix_length\":0,\"max_expansions\":50,"
+                + "\"fuzzy_transpositions\":true,\"lenient\":false,\"zero_terms_query\""
+                + ":\"NONE\",\"auto_generate_synonyms_phrase_query\":true,"
+                + "\"boost\":1.0}}}],\"filter\":[{\"range\":"
+                + "{\"data.preAcceptCase.dateAccepted\":{\"from\":\"2019-09-24T00:00:00.000\","
+                + "\"to\":\"2019-09-24T23:59:59.000\",\"include_lower\":true,\"include_upper\":true,"
+                + "\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
@@ -635,16 +641,16 @@ public class CcdClientTest {
 
     @Test
     public void retrieveBulkCases() throws IOException {
-        HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        List<SubmitBulkEvent> submitBulkEvents =
-                new ArrayList<>(Arrays.asList(new SubmitBulkEvent(), new SubmitBulkEvent()));
-        ResponseEntity<List<SubmitBulkEvent>> responseEntity = new ResponseEntity<>(submitBulkEvents, HttpStatus.OK);
         PaginatedSearchMetadata metadata = new PaginatedSearchMetadata();
         metadata.setTotalPagesCount(1);
         ResponseEntity<PaginatedSearchMetadata> paginatedSearchMetadata = new ResponseEntity<>(metadata, HttpStatus.OK);
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildRetrieveCasesUrl(any(), any(), any(), any())).thenReturn(uri);
         when(ccdClientConfig.buildPaginationMetadataCaseUrl(any(), any(), any())).thenReturn(uri);
+        HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
+        List<SubmitBulkEvent> submitBulkEvents =
+                new ArrayList<>(Arrays.asList(new SubmitBulkEvent(), new SubmitBulkEvent()));
+        ResponseEntity<List<SubmitBulkEvent>> responseEntity = new ResponseEntity<>(submitBulkEvents, HttpStatus.OK);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
                 eq(new ParameterizedTypeReference<List<SubmitBulkEvent>>(){}))).thenReturn(responseEntity);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
@@ -839,15 +845,12 @@ public class CcdClientTest {
     public void buildHeaders() throws IOException {
         when(authTokenGenerator.generate()).thenReturn("authString");
         HttpHeaders httpHeaders = ccdClient.buildHeaders("authString");
-        assertEquals("[Authorization:\"authString\", ServiceAuthorization:\"authString\", " +
-                "Content-Type:\"application/json;charset=UTF-8\"]", httpHeaders.toString());
+        assertEquals("[Authorization:\"authString\", ServiceAuthorization:\"authString\", "
+                + "Content-Type:\"application/json;charset=UTF-8\"]", httpHeaders.toString());
     }
 
     @Test
     public void retrieveMultipleCasesElasticSearchWithRetries() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.multipleReference.keyword\""
-                +":[\"2400001/2020\"],\"boost\":1.0}}}";
-        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         SubmitMultipleEvent submitMultipleEvent = new SubmitMultipleEvent();
         MultipleData multipleData = new MultipleData();
         multipleData.setMultipleReference("2400001/2020");
@@ -857,6 +860,9 @@ public class CcdClientTest {
         ResponseEntity<MultipleCaseSearchResult> responseEntity = new ResponseEntity<>(multipleCaseSearchResult,
                 HttpStatus.OK);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.multipleReference.keyword\""
+                + ":[\"2400001/2020\"],\"boost\":1.0}}}";
+        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(MultipleCaseSearchResult.class)))
                 .thenReturn(responseEntity);
         ccdClient.retrieveMultipleCasesElasticSearchWithRetries("authToken",

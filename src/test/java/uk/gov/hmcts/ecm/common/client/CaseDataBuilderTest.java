@@ -49,7 +49,8 @@ public class CaseDataBuilderTest {
                 .ignoreWarning(false)
                 .token(ccdRequest.getToken())
                 .build();
-        assertEquals(caseDataContent, caseDataBuilder.buildCaseDataContent(caseData, ccdRequest, CREATION_EVENT_SUMMARY));
+        assertEquals(caseDataContent, caseDataBuilder.buildCaseDataContent(caseData,
+                ccdRequest, CREATION_EVENT_SUMMARY));
     }
 
     @Test
@@ -59,7 +60,8 @@ public class CaseDataBuilderTest {
                 .ignoreWarning(false)
                 .token(ccdRequest.getToken())
                 .build();
-        assertEquals(caseDataContent, caseDataBuilder.buildBulkDataContent(bulkData, ccdRequest, UPDATE_BULK_EVENT_SUMMARY));
+        assertEquals(caseDataContent, caseDataBuilder.buildBulkDataContent(bulkData,
+                ccdRequest, UPDATE_BULK_EVENT_SUMMARY));
     }
 
     @Test
@@ -69,6 +71,7 @@ public class CaseDataBuilderTest {
                 .ignoreWarning(false)
                 .token(ccdRequest.getToken())
                 .build();
-        assertEquals(caseDataContent, caseDataBuilder.buildMultipleDataContent(multipleData, ccdRequest, UPDATE_BULK_EVENT_SUMMARY));
+        assertEquals(caseDataContent, caseDataBuilder.buildMultipleDataContent(multipleData,
+                ccdRequest, UPDATE_BULK_EVENT_SUMMARY));
     }
 }
