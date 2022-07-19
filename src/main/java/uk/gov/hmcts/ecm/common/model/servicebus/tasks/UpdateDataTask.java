@@ -100,7 +100,6 @@ public class UpdateDataTask extends DataTaskParent {
         }
     }
 
-
     private void dateToCurrentPosition(CaseData caseData) {
         if (isNullOrEmpty(caseData.getCurrentPosition())
                 || !caseData.getPositionType().equals(caseData.getCurrentPosition())) {
@@ -199,8 +198,8 @@ public class UpdateDataTask extends DataTaskParent {
             updateJudgement(caseData, updateDataModel.getJudgementType());
         }
 
-        if (updateDataModel.getRepresentedType() != null &&
-                !shouldRespondentRepresentativeBeRemoved(caseData, updateDataModel)) {
+        if (updateDataModel.getRepresentedType() != null
+                && !shouldRespondentRepresentativeBeRemoved(caseData, updateDataModel)) {
             addRespondentRep(caseData, updateDataModel.getRepresentedType());
         } else if (updateDataModel.getRepresentedType() != null) {
             removeRespondentRep(caseData, updateDataModel.getRepresentedType());

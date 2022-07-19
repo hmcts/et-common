@@ -23,7 +23,11 @@ import static uk.gov.hmcts.ecm.common.model.helper.Constants.OLD_DATE_TIME_PATTE
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.USER;
 
 @Slf4j
-public class UtilHelper {
+public final class UtilHelper {
+
+    private UtilHelper() {
+        // private constructor required for utility class
+    }
 
     public static String formatLocalDate(String date) {
         return !isNullOrEmpty(date) ? LocalDate.parse(date, OLD_DATE_TIME_PATTERN).format(NEW_DATE_PATTERN) : "";

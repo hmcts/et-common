@@ -8,6 +8,7 @@ public final class Partition<T> extends AbstractList<List<T>> {
 
     private final transient List<T> list;
     private final transient int chunkSize;
+    public static final String ERROR_MESSAGE = "Index %s is out of the list range <0,%s>";
 
     public Partition(List<T> list, int chunkSize) {
         this.list = new ArrayList<>(list);
@@ -22,11 +23,7 @@ public final class Partition<T> extends AbstractList<List<T>> {
     public List<T> get(int index) {
         int start = index * chunkSize;
         int end = Math.min(start + chunkSize, list.size());
-
-        if (start > end) {
-            throw new IndexOutOfBoundsException("Index " + index + " is out of the list range <0," + (size() - 1) + ">");
-        }
-
+        if (start > end) throw new IndexOutOfBoundsException(String.format(ERROR_MESSAGE, index, (size() - 1)));
         return new ArrayList<>(list.subList(start, end));
     }
 
