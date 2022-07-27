@@ -82,6 +82,7 @@ ext {
 dependencies {
     api group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '4.0.3'
     api group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.6.6'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
     api group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.2'
 //    api('org.apache.xmlgraphics:batik-all:1.14') {
 //        because 'CVE-2020-11987, CVE-2020-11988. Can be removed when we upgrade poi-ooxml. See https://bz.apache.org/bugzilla/show_bug.cgi?id=65166'
