@@ -86,7 +86,7 @@ dependencies {
 
     api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.5'
 
-    implementation group: 'com.github.hmcts', name: 'et-data-model', version: '1.0.45'
+    implementation group: 'com.github.hmcts', name: 'et-data-model', version: '1.0.53'
     implementation group: 'com.github.hmcts.java-logging', name: 'logging', version: reformLoggingVersion
     implementation group: 'com.github.hmcts.java-logging', name: 'logging-appinsights', version: reformLoggingVersion
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: log4JVersion
