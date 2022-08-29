@@ -6,13 +6,12 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
-import uk.gov.hmcts.et.common.model.servicebus.datamodel.CloseDataModel;
-import uk.gov.hmcts.et.common.model.servicebus.datamodel.DataModelParent;
 import uk.gov.hmcts.et.common.model.bulk.types.DynamicFixedListType;
 import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
-
-import static com.google.common.base.Strings.isNullOrEmpty;
 import uk.gov.hmcts.et.common.model.helper.Constants;
+import uk.gov.hmcts.et.common.model.servicebus.datamodel.CloseDataModel;
+import uk.gov.hmcts.et.common.model.servicebus.datamodel.DataModelParent;
+import static com.google.common.base.Strings.isNullOrEmpty;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

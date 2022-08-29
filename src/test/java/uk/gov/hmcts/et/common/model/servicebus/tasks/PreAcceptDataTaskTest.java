@@ -4,10 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import uk.gov.hmcts.et.common.model.servicebus.datamodel.PreAcceptDataModel;
 import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.et.common.model.ccd.types.CasePreAcceptType;
-
+import uk.gov.hmcts.et.common.model.servicebus.datamodel.PreAcceptDataModel;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static uk.gov.hmcts.et.common.model.helper.Constants.ACCEPTED_STATE;
 import static uk.gov.hmcts.et.common.model.helper.Constants.CLOSED_STATE;

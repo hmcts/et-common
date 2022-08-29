@@ -1,15 +1,5 @@
 package uk.gov.hmcts.et.common.helpers;
 
-import uk.gov.hmcts.et.common.model.servicebus.UpdateCaseMsg;
-import uk.gov.hmcts.et.common.model.servicebus.datamodel.CloseDataModel;
-import uk.gov.hmcts.et.common.model.servicebus.datamodel.CreationDataModel;
-import uk.gov.hmcts.et.common.model.servicebus.datamodel.CreationSingleDataModel;
-import uk.gov.hmcts.et.common.model.servicebus.datamodel.DataModelParent;
-import uk.gov.hmcts.et.common.model.servicebus.datamodel.DetachDataModel;
-import uk.gov.hmcts.et.common.model.servicebus.datamodel.PreAcceptDataModel;
-import uk.gov.hmcts.et.common.model.servicebus.datamodel.RejectDataModel;
-import uk.gov.hmcts.et.common.model.servicebus.datamodel.ResetStateDataModel;
-import uk.gov.hmcts.et.common.model.servicebus.datamodel.UpdateDataModel;
 import uk.gov.hmcts.et.common.model.bulk.types.DynamicValueType;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
@@ -23,14 +13,22 @@ import uk.gov.hmcts.et.common.model.ccd.types.JurCodesType;
 import uk.gov.hmcts.et.common.model.ccd.types.RepresentedTypeC;
 import uk.gov.hmcts.et.common.model.ccd.types.RepresentedTypeR;
 import uk.gov.hmcts.et.common.model.ccd.types.RespondentSumType;
-
+import uk.gov.hmcts.et.common.model.helper.Constants;
+import uk.gov.hmcts.et.common.model.servicebus.UpdateCaseMsg;
+import uk.gov.hmcts.et.common.model.servicebus.datamodel.CloseDataModel;
+import uk.gov.hmcts.et.common.model.servicebus.datamodel.CreationDataModel;
+import uk.gov.hmcts.et.common.model.servicebus.datamodel.CreationSingleDataModel;
+import uk.gov.hmcts.et.common.model.servicebus.datamodel.DataModelParent;
+import uk.gov.hmcts.et.common.model.servicebus.datamodel.DetachDataModel;
+import uk.gov.hmcts.et.common.model.servicebus.datamodel.PreAcceptDataModel;
+import uk.gov.hmcts.et.common.model.servicebus.datamodel.RejectDataModel;
+import uk.gov.hmcts.et.common.model.servicebus.datamodel.ResetStateDataModel;
+import uk.gov.hmcts.et.common.model.servicebus.datamodel.UpdateDataModel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-
-import uk.gov.hmcts.et.common.model.helper.Constants;
 
 public final class ServiceBusHelper {
 

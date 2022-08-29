@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
-import uk.gov.hmcts.et.common.model.servicebus.datamodel.DataModelParent;
-import uk.gov.hmcts.et.common.model.servicebus.datamodel.UpdateDataModel;
 import uk.gov.hmcts.et.common.model.bulk.types.DynamicFixedListType;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
@@ -21,7 +19,8 @@ import uk.gov.hmcts.et.common.model.ccd.types.JurCodesType;
 import uk.gov.hmcts.et.common.model.ccd.types.RepresentedTypeC;
 import uk.gov.hmcts.et.common.model.ccd.types.RepresentedTypeR;
 import uk.gov.hmcts.et.common.model.ccd.types.RespondentSumType;
-
+import uk.gov.hmcts.et.common.model.servicebus.datamodel.DataModelParent;
+import uk.gov.hmcts.et.common.model.servicebus.datamodel.UpdateDataModel;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;

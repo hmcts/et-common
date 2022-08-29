@@ -1,7 +1,6 @@
 package uk.gov.hmcts.et.common.client;
 
 import lombok.extern.slf4j.Slf4j;
-
 import uk.gov.hmcts.et.common.model.helper.Constants;
 
 @Slf4j

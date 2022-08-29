@@ -7,13 +7,11 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.index.query.TermsQueryBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-
+import uk.gov.hmcts.et.common.model.helper.Constants;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
 import static org.elasticsearch.index.query.QueryBuilders.termsQuery;
-import uk.gov.hmcts.et.common.model.helper.Constants;
 
 @Slf4j
 public class ESHelper {

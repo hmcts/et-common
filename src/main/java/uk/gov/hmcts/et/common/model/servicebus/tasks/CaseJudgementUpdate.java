@@ -5,12 +5,10 @@ import uk.gov.hmcts.et.common.model.ccd.CaseData;
 import uk.gov.hmcts.et.common.model.ccd.items.JudgementTypeItem;
 import uk.gov.hmcts.et.common.model.ccd.items.JurCodesTypeItem;
 import uk.gov.hmcts.et.common.model.ccd.types.JudgementType;
-
+import uk.gov.hmcts.et.common.model.helper.Constants;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import uk.gov.hmcts.et.common.model.helper.Constants;
 
 public class CaseJudgementUpdate {
 

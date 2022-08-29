@@ -2,14 +2,13 @@ package uk.gov.hmcts.et.common.helpers;
 
 import org.junit.Before;
 import org.junit.Test;
+import uk.gov.hmcts.et.common.model.helper.Constants;
 import uk.gov.hmcts.et.common.model.servicebus.CreateUpdatesDto;
 import uk.gov.hmcts.et.common.model.servicebus.CreateUpdatesMsg;
 import uk.gov.hmcts.et.common.model.servicebus.datamodel.CreationDataModel;
 import java.util.Arrays;
 import java.util.List;
-
 import static org.junit.Assert.assertEquals;
-import uk.gov.hmcts.et.common.model.helper.Constants;
 
 public class CreateUpdatesHelperTest {
 

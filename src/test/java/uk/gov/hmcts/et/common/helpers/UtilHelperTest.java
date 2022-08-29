@@ -2,35 +2,39 @@ package uk.gov.hmcts.et.common.helpers;
 
 import org.junit.Assert;
 import org.junit.Test;
-
+import uk.gov.hmcts.et.common.model.helper.Constants;
 import java.time.LocalDate;
 import java.time.Month;
-
 import static org.junit.Assert.assertEquals;
-import uk.gov.hmcts.et.common.model.helper.Constants;
+import static uk.gov.hmcts.et.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
+import static uk.gov.hmcts.et.common.model.helper.Constants.ENGLANDWALES_LISTING_CASE_TYPE_ID;
+import static uk.gov.hmcts.et.common.model.helper.Constants.SCOTLAND_CASE_TYPE_ID;
+import static uk.gov.hmcts.et.common.model.helper.Constants.SCOTLAND_LISTING_CASE_TYPE_ID;
 
 public class UtilHelperTest {
 
     @Test
     public void getCaseTypeId() {
-        String caseId = Constants.ENGLANDWALES_CASE_TYPE_ID;
+        String caseId = ENGLANDWALES_CASE_TYPE_ID;
         assertEquals(caseId, UtilHelper.getCaseTypeId(Constants.ENGLANDWALES_BULK_CASE_TYPE_ID));
-        caseId = Constants.SCOTLAND_CASE_TYPE_ID;
+        caseId = SCOTLAND_CASE_TYPE_ID;
         assertEquals(caseId, UtilHelper.getCaseTypeId(Constants.SCOTLAND_BULK_CASE_TYPE_ID));
     }
 
     @Test
     public void getListingCaseTypeId() {
-        Assert.assertEquals(Constants.ENGLANDWALES_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(Constants.ENGLANDWALES_LISTING_CASE_TYPE_ID));
-        Assert.assertEquals(Constants.SCOTLAND_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(Constants.SCOTLAND_LISTING_CASE_TYPE_ID));
+        Assert.assertEquals(ENGLANDWALES_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(
+                ENGLANDWALES_LISTING_CASE_TYPE_ID));
+        Assert.assertEquals(SCOTLAND_CASE_TYPE_ID, UtilHelper.getListingCaseTypeId(
+                SCOTLAND_LISTING_CASE_TYPE_ID));
     }
 
     @Test
     public void getBulkCaseTypeId() {
         String caseId = Constants.SCOTLAND_BULK_CASE_TYPE_ID;
-        assertEquals(caseId, UtilHelper.getBulkCaseTypeId(Constants.SCOTLAND_CASE_TYPE_ID));
+        assertEquals(caseId, UtilHelper.getBulkCaseTypeId(SCOTLAND_CASE_TYPE_ID));
         caseId = Constants.ENGLANDWALES_BULK_CASE_TYPE_ID;
-        assertEquals(caseId, UtilHelper.getBulkCaseTypeId(Constants.ENGLANDWALES_CASE_TYPE_ID));
+        assertEquals(caseId, UtilHelper.getBulkCaseTypeId(ENGLANDWALES_CASE_TYPE_ID));
     }
 
     @Test

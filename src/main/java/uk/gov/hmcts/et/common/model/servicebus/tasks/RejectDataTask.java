@@ -6,12 +6,13 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
-import uk.gov.hmcts.et.common.model.servicebus.datamodel.DataModelParent;
-import uk.gov.hmcts.et.common.model.servicebus.datamodel.RejectDataModel;
 import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.et.common.model.ccd.types.CasePreAcceptType;
-
-import uk.gov.hmcts.et.common.model.helper.Constants;
+import uk.gov.hmcts.et.common.model.servicebus.datamodel.DataModelParent;
+import uk.gov.hmcts.et.common.model.servicebus.datamodel.RejectDataModel;
+import static uk.gov.hmcts.et.common.model.helper.Constants.NO;
+import static uk.gov.hmcts.et.common.model.helper.Constants.SINGLE_OPEN_CASE_STATES;
+import static uk.gov.hmcts.et.common.model.helper.Constants.YES;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -27,7 +28,7 @@ public class RejectDataTask extends DataTaskParent {
 
     public void run(SubmitEvent submitEvent) {
 
-        if (Constants.SINGLE_OPEN_CASE_STATES.contains(submitEvent.getState())) {
+        if (SINGLE_OPEN_CASE_STATES.contains(submitEvent.getState())) {
             rejectLogic(submitEvent);
         } else {
             log.info("Case {} is not in the right state", submitEvent.getCaseData().getEthosCaseReference());
@@ -37,10 +38,10 @@ public class RejectDataTask extends DataTaskParent {
 
     private void rejectLogic(SubmitEvent submitEvent) {
         var caseData = submitEvent.getCaseData();
-        if (caseData.getPreAcceptCase() == null || Constants.YES.equals(caseData.getPreAcceptCase().getCaseAccepted())) {
+        if (caseData.getPreAcceptCase() == null || YES.equals(caseData.getPreAcceptCase().getCaseAccepted())) {
             log.info("Moving to rejected state");
             CasePreAcceptType casePreAcceptType = new CasePreAcceptType();
-            casePreAcceptType.setCaseAccepted(Constants.NO);
+            casePreAcceptType.setCaseAccepted(NO);
             casePreAcceptType.setDateRejected(((RejectDataModel) dataModelParent).getDateRejected());
             casePreAcceptType.setRejectReason(((RejectDataModel) dataModelParent).getRejectReason());
             submitEvent.getCaseData().setPreAcceptCase(casePreAcceptType);

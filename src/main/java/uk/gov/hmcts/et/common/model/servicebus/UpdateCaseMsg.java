@@ -8,9 +8,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
+import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.et.common.model.servicebus.datamodel.DataModelFactory;
 import uk.gov.hmcts.et.common.model.servicebus.tasks.DataTaskParent;
-import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
