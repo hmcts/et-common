@@ -166,6 +166,20 @@ public class CcdClient {
         return submitEvents;
     }
 
+    public List<uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent> executeElasticSearchEcm(String authToken,
+                                                                                       String caseTypeId,
+                                                                                       String query)
+            throws IOException {
+        var submitEvents = new ArrayList<uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent>();
+        var searchResult = runElasticSearch(authToken, caseTypeId, query,
+                uk.gov.hmcts.ecm.common.model.ccd.CaseSearchResult.class);
+        if (searchResult != null && !CollectionUtils.isEmpty(searchResult.getCases())) {
+            submitEvents.addAll(searchResult.getCases());
+        }
+
+        return submitEvents;
+    }
+
     public List<CasesAwaitingJudgmentSubmitEvent> casesAwaitingJudgmentSearch(String authToken, String caseTypeId,
                                                                               String query) throws IOException {
         var submitEvents = new ArrayList<CasesAwaitingJudgmentSubmitEvent>();
