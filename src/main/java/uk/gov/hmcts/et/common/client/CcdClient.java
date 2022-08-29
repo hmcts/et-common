@@ -657,11 +657,20 @@ public class CcdClient {
         return submitEventForCase(params);
     }
 
-    public SubmitEvent submitEventForCase(String authToken,
-                                          uk.gov.hmcts.ecm.common.model.ccd.CaseData caseData,
-                                          String caseTypeId,
-                                          String jurisdiction,
-                                          CCDRequest req, String cid) throws IOException {
+    public SubmitEvent submitEventForCase(CcdSubmitEventParams params) throws IOException {
+        var request = new HttpEntity<>(caseDataBuilder.buildCaseDataContent(params.getCaseData(),
+                params.getCcdRequest(), params.getEventSummary(), params.getEventDescription()),
+                buildHeaders(params.getAuthToken()));
+        var uri = ccdClientConfig.buildSubmitEventForCaseUrl(userService.getUserDetails(params.getAuthToken()).getUid(),
+                params.getJurisdiction(), params.getCaseTypeId(), params.getCaseId());
+        return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitEvent.class).getBody();
+    }
+
+    public SubmitEvent submitEventForCaseEcm(String authToken,
+                                             uk.gov.hmcts.ecm.common.model.ccd.CaseData caseData,
+                                             String caseTypeId,
+                                             String jurisdiction,
+                                             CCDRequest req, String cid) throws IOException {
         var params = CcdSubmitEventParamsEcm.builder()
                 .authToken(authToken)
                 .ccdRequest(req)
@@ -673,15 +682,6 @@ public class CcdClient {
                 .build();
 
         return submitEventForCaseEcm(params);
-    }
-
-    public SubmitEvent submitEventForCase(CcdSubmitEventParams params) throws IOException {
-        var request = new HttpEntity<>(caseDataBuilder.buildCaseDataContent(params.getCaseData(),
-                params.getCcdRequest(), params.getEventSummary(), params.getEventDescription()),
-                buildHeaders(params.getAuthToken()));
-        var uri = ccdClientConfig.buildSubmitEventForCaseUrl(userService.getUserDetails(params.getAuthToken()).getUid(),
-                params.getJurisdiction(), params.getCaseTypeId(), params.getCaseId());
-        return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitEvent.class).getBody();
     }
 
     public SubmitEvent submitEventForCaseEcm(CcdSubmitEventParamsEcm params) throws IOException {
