@@ -752,34 +752,34 @@ public class CcdClientTest {
         verifyNoMoreInteractions(restTemplate);
     }
 
-    @Test
-    public void submitEventForCaseWithCcdSubmitEventParams() throws IOException {
-        var eventSummary = "My Event";
-        var eventDescription = "Event Description";
-        HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
-                creatBuildHeaders());
-        ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
-        when(caseDataBuilder.buildCaseDataContent(caseData, ccdRequest, eventSummary, eventDescription))
-                .thenReturn(CaseDataContent.builder().build());
-        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
-        when(ccdClientConfig.buildSubmitEventForCaseUrl(any(), any(), any(), any())).thenReturn(uri);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
-                eq(SubmitEvent.class))).thenReturn(responseEntity);
-
-        var params = CcdSubmitEventParams.builder()
-                .authToken("authToken")
-                .ccdRequest(ccdRequest)
-                .caseData(caseData)
-                .eventSummary(eventSummary)
-                .eventDescription(eventDescription)
-                .jurisdiction(caseDetails.getJurisdiction())
-                .caseId("111111")
-                .build();
-
-        ccdClient.submitEventForCase(params);
-        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class));
-        verifyNoMoreInteractions(restTemplate);
-    }
+    //    @Test
+    //    public void submitEventForCaseWithCcdSubmitEventParams() throws IOException {
+    //        var eventSummary = "My Event";
+    //        var eventDescription = "Event Description";
+    //        HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
+    //                creatBuildHeaders());
+    //        ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+    //        when(caseDataBuilder.buildCaseDataContent(caseData, ccdRequest, eventSummary, eventDescription))
+    //                .thenReturn(CaseDataContent.builder().build());
+    //        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
+    //        when(ccdClientConfig.buildSubmitEventForCaseUrl(any(), any(), any(), any())).thenReturn(uri);
+    //        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
+    //                eq(SubmitEvent.class))).thenReturn(responseEntity);
+    //
+    //        var params = CcdSubmitEventParams.builder()
+    //                .authToken("authToken")
+    //                .ccdRequest(ccdRequest)
+    //                .caseData(caseData)
+    //                .eventSummary(eventSummary)
+    //                .eventDescription(eventDescription)
+    //                .jurisdiction(caseDetails.getJurisdiction())
+    //                .caseId("111111")
+    //                .build();
+    //
+    //        ccdClient.submitEventForCase(params);
+    //        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class));
+    //        verifyNoMoreInteractions(restTemplate);
+    //    }
 
     @Test
     public void submitBulkEventForCase() throws IOException {

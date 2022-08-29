@@ -31,6 +31,14 @@ public class CaseDataBuilder {
         }), eventSummary, eventDescription);
     }
 
+    public CaseDataContent buildCaseDataContentEcm(uk.gov.hmcts.ecm.common.model.ccd.CaseData caseData,
+                                                   CCDRequest req,
+                                                   String eventSummary,
+                                                   String eventDescription) {
+        return getCaseDataContent(req, objectMapper.convertValue(caseData, new TypeReference<>() {
+        }), eventSummary, eventDescription);
+    }
+
     public CaseDataContent buildBulkDataContent(BulkData bulkData, CCDRequest req, String eventSummary) {
         return getCaseDataContent(req, objectMapper.convertValue(bulkData, new TypeReference<>() {
         }), eventSummary, null);
