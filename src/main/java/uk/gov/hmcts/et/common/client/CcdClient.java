@@ -666,7 +666,7 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitEvent.class).getBody();
     }
 
-    public SubmitEvent submitEventForCaseEcm(String authToken,
+    public uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent submitEventForCaseEcm(String authToken,
                                              uk.gov.hmcts.ecm.common.model.ccd.CaseData caseData,
                                              String caseTypeId,
                                              String jurisdiction,
@@ -684,13 +684,16 @@ public class CcdClient {
         return submitEventForCaseEcm(params);
     }
 
-    public SubmitEvent submitEventForCaseEcm(CcdSubmitEventParamsEcm params) throws IOException {
+    public uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent submitEventForCaseEcm(CcdSubmitEventParamsEcm params)
+            throws IOException {
         var request = new HttpEntity<>(caseDataBuilder.buildCaseDataContentEcm(params.getCaseData(),
                 params.getCcdRequest(), params.getEventSummary(), params.getEventDescription()),
                 buildHeaders(params.getAuthToken()));
-        var uri = ccdClientConfig.buildSubmitEventForCaseUrl(userService.getUserDetails(params.getAuthToken()).getUid(),
+        var uri = ccdClientConfig.buildSubmitEventForCaseUrl(userService.getUserDetails(
+                params.getAuthToken()).getUid(),
                 params.getJurisdiction(), params.getCaseTypeId(), params.getCaseId());
-        return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitEvent.class).getBody();
+        return restTemplate.exchange(uri, HttpMethod.POST, request,
+                uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent.class).getBody();
     }
 
     public SubmitBulkEvent submitBulkEventForCase(String authToken, BulkData bulkData, String caseTypeId,
