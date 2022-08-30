@@ -684,7 +684,7 @@ public class CcdClient {
         return submitEventForCaseEcm(params);
     }
 
-    public uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent submitEventForCaseEcm(CcdSubmitEventParamsEcm params)
+    private uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent submitEventForCaseEcm(CcdSubmitEventParamsEcm params)
             throws IOException {
         var request = new HttpEntity<>(caseDataBuilder.buildCaseDataContentEcm(params.getCaseData(),
                 params.getCcdRequest(), params.getEventSummary(), params.getEventDescription()),
