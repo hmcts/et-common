@@ -2,7 +2,6 @@ package uk.gov.hmcts.et.common.client;
 
 import lombok.Builder;
 import lombok.Getter;
-import uk.gov.hmcts.et.common.model.ccd.CCDRequest;
 
 @Getter
 @Builder

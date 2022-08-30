@@ -32,10 +32,10 @@ public class CaseDataBuilder {
     }
 
     public CaseDataContent buildCaseDataContentEcm(uk.gov.hmcts.ecm.common.model.ccd.CaseData caseData,
-                                                   CCDRequest req,
+                                                   uk.gov.hmcts.ecm.common.model.ccd.CCDRequest req,
                                                    String eventSummary,
                                                    String eventDescription) {
-        return getCaseDataContent(req, objectMapper.convertValue(caseData, new TypeReference<>() {
+        return getCaseDataContentEcm(req, objectMapper.convertValue(caseData, new TypeReference<>() {
         }), eventSummary, eventDescription);
     }
 
@@ -50,6 +50,22 @@ public class CaseDataBuilder {
     }
 
     private CaseDataContent getCaseDataContent(CCDRequest req, Map<String, JsonNode> data, String eventSummary,
+                                               String eventDescription) {
+        var event = Event.builder()
+                .eventId(req.getEventId())
+                .summary(eventSummary)
+                .description(eventDescription)
+                .build();
+        return CaseDataContent.builder()
+                .event(event)
+                .data(data)
+                .token(req.getToken())
+                .ignoreWarning(IGNORE_WARNING)
+                .build();
+    }
+
+    private CaseDataContent getCaseDataContentEcm(uk.gov.hmcts.ecm.common.model.ccd.CCDRequest req,
+                                                  Map<String, JsonNode> data, String eventSummary,
                                                String eventDescription) {
         var event = Event.builder()
                 .eventId(req.getEventId())
