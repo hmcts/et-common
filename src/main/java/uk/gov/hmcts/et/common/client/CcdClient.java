@@ -585,6 +585,16 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.GET, request, CCDRequest.class).getBody();
     }
 
+    public uk.gov.hmcts.ecm.common.model.ccd.CCDRequest startEventForCaseEcm(String authToken, String caseTypeId, String jurisdiction, String cid)
+            throws IOException {
+        HttpEntity<String> request =
+                new HttpEntity<>(buildHeaders(authToken));
+        String uri = ccdClientConfig.buildStartEventForCaseUrl(userService.getUserDetails(authToken).getUid(),
+                jurisdiction,
+                caseTypeId, cid);
+        return restTemplate.exchange(uri, HttpMethod.GET, request, uk.gov.hmcts.ecm.common.model.ccd.CCDRequest.class).getBody();
+    }
+
     public CCDRequest startEventForCaseAPIRole(String authToken, String caseTypeId, String jurisdiction, String cid)
             throws IOException {
         HttpEntity<String> request =
@@ -670,7 +680,8 @@ public class CcdClient {
                                              uk.gov.hmcts.ecm.common.model.ccd.CaseData caseData,
                                              String caseTypeId,
                                              String jurisdiction,
-                                             CCDRequest req, String cid) throws IOException {
+                                             uk.gov.hmcts.ecm.common.model.ccd.CCDRequest req,
+                                                                               String cid) throws IOException {
         var params = CcdSubmitEventParamsEcm.builder()
                 .authToken(authToken)
                 .ccdRequest(req)

@@ -12,7 +12,7 @@ public class CcdSubmitEventParamsEcm {
     private String caseTypeId;
     private String jurisdiction;
     private uk.gov.hmcts.ecm.common.model.ccd.CaseData caseData;
-    private CCDRequest ccdRequest;
+    private uk.gov.hmcts.ecm.common.model.ccd.CCDRequest ccdRequest;
     private String eventSummary;
     private String eventDescription;
 }
