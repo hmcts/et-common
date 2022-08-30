@@ -5,7 +5,7 @@ plugins {
     id 'checkstyle'
     id 'jacoco'
     id 'io.spring.dependency-management' version '1.0.12.RELEASE'
-    id 'org.owasp.dependencycheck' version '7.1.1'
+    id 'org.owasp.dependencycheck' version '7.1.2'
     id 'com.github.ben-manes.versions' version '0.42.0'
 }
 
@@ -84,10 +84,11 @@ dependencies {
     api group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.6.6'
     api group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.2'
 
-    api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.5'
+    api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.6'
 
-    implementation group: 'com.github.hmcts', name: 'et-data-model', version: '1.0.45'
+    implementation group: 'com.github.hmcts', name: 'et-data-model', version: '1.0.58'
     implementation group: 'com.github.hmcts', name: 'ecm-data-model', version: '0.0.6'
+
     implementation group: 'com.github.hmcts.java-logging', name: 'logging', version: reformLoggingVersion
     implementation group: 'com.github.hmcts.java-logging', name: 'logging-appinsights', version: reformLoggingVersion
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: log4JVersion
@@ -103,7 +104,7 @@ dependencies {
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.1.1'
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.23.1'
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.6.1'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.7.0'
     testImplementation group: 'org.springframework', name: 'spring-test', version: '5.3.22'
     testImplementation group: 'pl.pragmatists', name: 'JUnitParams', version: '1.1.1'
 
