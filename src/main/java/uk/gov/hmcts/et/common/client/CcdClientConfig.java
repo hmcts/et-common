@@ -91,6 +91,11 @@ public class CcdClientConfig {
                 ccdDataStoreApiBaseUrl, uid, jid, ctid, cid, Constants.UPDATE_EVENT_TRIGGER_ID);
     }
 
+    String buildStartEventForEcmCaseUrl(String uid, String jid, String ctid, String cid) {
+        return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT,
+                ccdDataStoreApiBaseUrl, uid, jid, ctid, cid, Constants.UPDATE_ECM_EVENT_TRIGGER_ID);
+    }
+
     String buildStartEventForCaseUrlBulkSingle(String uid, String jid, String ctid, String cid) {
         return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid,
                 ctid, cid, Constants.UPDATE_EVENT_TRIGGER_ID_BULK);

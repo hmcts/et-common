@@ -592,7 +592,7 @@ public class CcdClient {
             throws IOException {
         HttpEntity<String> request =
                 new HttpEntity<>(buildHeaders(authToken));
-        String uri = ccdClientConfig.buildStartEventForCaseUrl(userService.getUserDetails(authToken).getUid(),
+        String uri = ccdClientConfig.buildStartEventForEcmCaseUrl(userService.getUserDetails(authToken).getUid(),
                 jurisdiction,
                 caseTypeId, cid);
         return restTemplate.exchange(uri, HttpMethod.GET, request,

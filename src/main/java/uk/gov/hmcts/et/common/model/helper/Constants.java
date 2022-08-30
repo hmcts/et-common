@@ -114,6 +114,7 @@ public class Constants {
     public static final String AMEND_MULTIPLE_EVENT_TRIGGER_ID = "amendMultipleAPI";
     public static final String AMEND_SINGLE_EVENT_TRIGGER_ID = "amendSingle";
     public static final String UPDATE_EVENT_TRIGGER_ID = "amendCaseDetails";
+    public static final String UPDATE_ECM_EVENT_TRIGGER_ID = "amendEcmCaseDetails";
     public static final String DISPOSE_EVENT_TRIGGER_ID = "disposeCase";
     public static final String CREATION_TRANSFER_EVENT_TRIGGER_ID = "processCaseTransfer";
     public static final String CASE_TRANSFER_SAME_COUNTRY_ECC_LINKED_CASE_EVENT_TRIGGER_ID =
