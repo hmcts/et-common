@@ -169,9 +169,22 @@ public class Constants {
     public static final String HEARING_STATUS_WITHDRAWN = "Withdrawn";
     public static final String HEARING_STATUS_POSTPONED = "Postponed";
 
+    public static final String JURISDICTION_OUTCOME_NOT_ALLOCATED = "Not allocated";
+    public static final String JURISDICTION_OUTCOME_ACAS_CONCILIATED_SETTLEMENT = "Acas conciliated settlement";
+    public static final String JURISDICTION_OUTCOME_WITHDRAWN = "Withdrawn or private settlement";
     public static final String JURISDICTION_OUTCOME_SUCCESSFUL_AT_HEARING = "Successful at hearing";
     public static final String JURISDICTION_OUTCOME_UNSUCCESSFUL_AT_HEARING = "Unsuccessful at hearing";
     public static final String JURISDICTION_OUTCOME_DISMISSED_AT_HEARING = "Dismissed at hearing - out of scope";
+    public static final String JURISDICTION_OUTCOME_DISPOSED_OF_OTHER = "Disposed of / other";
+    public static final String JURISDICTION_OUTCOME_INPUT_IN_ERROR = "Input in error";
+    public static final String JURISDICTION_OUTCOME_DEFAULT_JUDGMENT_SUCCESSFUL = 
+        "Default judgment, claimant successful";
+    public static final String JURISDICTION_OUTCOME_DEFAULT_JUDGMENT_UNSUCCESSFUL = 
+        "Default judgment, claimant unsuccessful";
+    public static final String JURISDICTION_OUTCOME_DISMISSED_UNDER_RULE_27 = "Dismissed under Rule 27";
+    public static final String JURISDICTION_OUTCOME_DISMISSED_ON_WITHDRAWAL = "Dismissed on withdrawal";
+    public static final String JURISDICTION_OUTCOME_CASE_DISCONTINUED = "Case discontinued";
+    public static final String JURISDICTION_OUTCOME_STRUCK_OUT = "Struck Out";
 
     public static final String BROUGHT_FORWARD_REPORT = "Brought Forward Report";
     public static final String CLAIMS_ACCEPTED_REPORT = "Claims Accepted";
