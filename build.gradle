@@ -10,7 +10,7 @@ plugins {
 }
 
 group 'uk.gov.hmcts.reform'
-version '1.0.4'
+version '1.0.5'
 
 sourceCompatibility = '11.0'
 
@@ -86,7 +86,9 @@ dependencies {
 
     api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.6'
 
-    implementation group: 'com.github.hmcts', name: 'et-data-model', version: '1.0.58'
+    implementation group: 'com.github.hmcts', name: 'et-data-model', version: '1.0.77'
+    implementation group: 'com.github.hmcts', name: 'ecm-common', version: '0.1.195'
+    implementation group: 'com.github.hmcts', name: 'ecm-data-model', version: '0.0.6'
     implementation group: 'com.github.hmcts.java-logging', name: 'logging', version: reformLoggingVersion
     implementation group: 'com.github.hmcts.java-logging', name: 'logging-appinsights', version: reformLoggingVersion
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: log4JVersion
