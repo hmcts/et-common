@@ -92,6 +92,8 @@ public class CcdClientTest {
     @Mock
     private CaseDataBuilder caseDataBuilder;
     @Mock
+    private EcmCaseDataBuilder ecmCaseDataBuilder;
+    @Mock
     private AuthTokenGenerator authTokenGenerator;
 
     private UserDetails userDetails;
@@ -99,9 +101,11 @@ public class CcdClientTest {
     private BulkDetails bulkDetails;
     private MultipleDetails multipleDetails;
     private CaseData caseData;
+    private uk.gov.hmcts.ecm.common.model.ccd.CaseData ecmCaseData;
     private BulkData bulkData;
     private MultipleData multipleData;
     private CCDRequest ccdRequest;
+    private uk.gov.hmcts.ecm.common.model.ccd.CCDRequest ecmCcdRequest;
     private final String uri = "http://example.com";
 
     @Before
@@ -132,6 +136,13 @@ public class CcdClientTest {
         multipleDetails.setCaseTypeId("Type1");
         multipleData = new MultipleData();
         multipleDetails.setCaseData(multipleData);
+
+        ecmCcdRequest = new uk.gov.hmcts.ecm.common.model.ccd.CCDRequest();
+        ecmCcdRequest.setEventId("2222");
+        ecmCcdRequest.setToken("Token");
+
+        ecmCaseData = new uk.gov.hmcts.ecm.common.model.ccd.CaseData();
+        ecmCaseData.setManagingOffice(TribunalOffice.LEEDS.getOfficeName());
     }
 
     private HttpHeaders creatBuildHeaders() {
@@ -165,6 +176,22 @@ public class CcdClientTest {
                 .thenReturn(responseEntity);
         ccdClient.startCaseCreationTransfer("authToken", caseDetails);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    public void startEcmCaseCreationTransferAccepted() throws IOException {
+        HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
+        ResponseEntity<uk.gov.hmcts.ecm.common.model.ccd.CCDRequest> responseEntity =
+            new ResponseEntity<>(HttpStatus.OK);
+        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
+        when(ccdClientConfig.buildStartCaseCreationTransferUrl(any(), any(), any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
+            eq(uk.gov.hmcts.ecm.common.model.ccd.CCDRequest.class)))
+            .thenReturn(responseEntity);
+        ccdClient.startCaseCreationTransfer("authToken", caseDetails);
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
+            eq(uk.gov.hmcts.ecm.common.model.ccd.CCDRequest.class));
         verifyNoMoreInteractions(restTemplate);
     }
 
@@ -260,6 +287,25 @@ public class CcdClientTest {
         when(ccdClientConfig.buildSubmitCaseCreationUrl(any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class)))
                 .thenReturn(responseEntity);
+
+        ccdClient.submitCaseCreation("authToken", caseDetails, ccdRequest, "Test Event Summary");
+
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    public void submitEcmCaseCreation() throws IOException {
+        HttpEntity<uk.gov.hmcts.ecm.common.model.ccd.CaseDataContent> httpEntity =
+            new HttpEntity<>(uk.gov.hmcts.ecm.common.model.ccd.CaseDataContent.builder().build(),
+            creatBuildHeaders());
+        ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        when(ecmCaseDataBuilder.buildCaseDataContent(eq(ecmCaseData), eq(ecmCcdRequest), anyString()))
+            .thenReturn(uk.gov.hmcts.ecm.common.model.ccd.CaseDataContent.builder().build());
+        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
+        when(ccdClientConfig.buildSubmitCaseCreationUrl(any(), any(), any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class)))
+            .thenReturn(responseEntity);
 
         ccdClient.submitCaseCreation("authToken", caseDetails, ccdRequest, "Test Event Summary");
 
