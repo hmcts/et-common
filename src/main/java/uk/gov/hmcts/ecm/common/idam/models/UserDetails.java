@@ -21,8 +21,10 @@ public class UserDetails {
     private String name;
 
     @JsonProperty("given_name")
+    @JsonAlias({"given_name", "forename"})
     private String firstName;
 
     @JsonProperty("family_name")
+    @JsonAlias({"family_name", "surname"})
     private String lastName;
 }

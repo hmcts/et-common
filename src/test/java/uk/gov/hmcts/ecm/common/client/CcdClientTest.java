@@ -39,6 +39,7 @@ import uk.gov.hmcts.et.common.model.bulk.BulkCaseSearchResult;
 import uk.gov.hmcts.et.common.model.bulk.BulkData;
 import uk.gov.hmcts.et.common.model.bulk.BulkDetails;
 import uk.gov.hmcts.et.common.model.bulk.SubmitBulkEvent;
+import uk.gov.hmcts.et.common.model.ccd.AuditEventsResponse;
 import uk.gov.hmcts.et.common.model.ccd.CCDRequest;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 import uk.gov.hmcts.et.common.model.ccd.CaseDataContent;
@@ -151,6 +152,12 @@ public class CcdClientTest {
         headers.add("ServiceAuthorization", null);
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
         return headers;
+    }
+
+    private HttpHeaders createHeadersWithExperimental() {
+        HttpHeaders httpHeaders = creatBuildHeaders();
+        httpHeaders.add("experimental", "true");
+        return httpHeaders;
     }
 
     @Test
@@ -1086,6 +1093,19 @@ public class CcdClientTest {
         ccdClient.startDisposeEventForCase("authToken", caseDetails.getCaseTypeId(),
                 caseDetails.getJurisdiction(), "1111");
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    public void retrieveCaseEvents() throws IOException {
+        HttpEntity<Object> httpEntity = new HttpEntity<>(createHeadersWithExperimental());
+        ResponseEntity<AuditEventsResponse> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
+        when(ccdClientConfig.buildCaseEventsUrl(any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
+            eq(AuditEventsResponse.class))).thenReturn(responseEntity);
+        ccdClient.retrieveCaseEvents("authToken", caseDetails.getCaseId());
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(AuditEventsResponse.class));
         verifyNoMoreInteractions(restTemplate);
     }
 
