@@ -33,6 +33,7 @@ import uk.gov.hmcts.ecm.common.service.UserService;
 import uk.gov.hmcts.et.common.model.bulk.BulkCaseSearchResult;
 import uk.gov.hmcts.et.common.model.bulk.BulkData;
 import uk.gov.hmcts.et.common.model.bulk.SubmitBulkEvent;
+import uk.gov.hmcts.et.common.model.ccd.AuditEventsResponse;
 import uk.gov.hmcts.et.common.model.ccd.CCDRequest;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 import uk.gov.hmcts.et.common.model.ccd.CaseDataContent;
@@ -714,6 +715,17 @@ public class CcdClient {
         String uri = ccdClientConfig.buildSubmitCaseCreationUrl(userService.getUserDetails(authToken).getUid(),
                 jurisdiction, caseTypeId);
         return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitMultipleEvent.class).getBody();
+    }
+
+    public AuditEventsResponse retrieveCaseEvents(String authToken, String cid) throws IOException {
+        String uri = ccdClientConfig.buildCaseEventsUrl(cid);
+
+        HttpHeaders httpHeaders = buildHeaders(authToken);
+        httpHeaders.add("experimental", "true");
+
+        HttpEntity<String> request = new HttpEntity<>(httpHeaders);
+
+        return restTemplate.exchange(uri, HttpMethod.GET, request, AuditEventsResponse.class).getBody();
     }
 
     HttpHeaders buildHeaders(String authToken) throws IOException {

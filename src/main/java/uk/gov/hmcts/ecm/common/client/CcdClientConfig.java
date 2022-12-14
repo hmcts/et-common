@@ -35,6 +35,8 @@ public class CcdClientConfig {
             "%s/caseworkers/%s/jurisdictions/%s/case-types/%s/cases/pagination_metadata";
     private static final String SEARCH_CASES_FORMAT = "%s/searchCases?%s";
 
+    private static final String RETRIEVE_CASE_EVENTS = "%s/cases/%s/events";
+
     private final String ccdDataStoreApiBaseUrl;
 
     public CcdClientConfig(String ccdDataStoreApiBaseUrl) {
@@ -137,4 +139,7 @@ public class CcdClientConfig {
         return String.format(PAGINATION_METADATA_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid);
     }
 
+    String buildCaseEventsUrl(String cid) {
+        return String.format(RETRIEVE_CASE_EVENTS, ccdDataStoreApiBaseUrl, cid);
+    }
 }
