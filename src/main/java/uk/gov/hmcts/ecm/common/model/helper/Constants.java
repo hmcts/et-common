@@ -168,6 +168,7 @@ public class Constants {
     public static final String HEARING_STATUS_SETTLED = "Settled";
     public static final String HEARING_STATUS_WITHDRAWN = "Withdrawn";
     public static final String HEARING_STATUS_POSTPONED = "Postponed";
+    public static final String HEARING_STATUS_VACATED = "Vacated";
 
     public static final String JURISDICTION_OUTCOME_NOT_ALLOCATED = "Not allocated";
     public static final String JURISDICTION_OUTCOME_ACAS_CONCILIATED_SETTLEMENT = "Acas conciliated settlement";
