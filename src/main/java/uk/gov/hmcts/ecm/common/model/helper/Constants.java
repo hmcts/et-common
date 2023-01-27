@@ -178,9 +178,9 @@ public class Constants {
     public static final String JURISDICTION_OUTCOME_DISMISSED_AT_HEARING = "Dismissed at hearing - out of scope";
     public static final String JURISDICTION_OUTCOME_DISPOSED_OF_OTHER = "Disposed of / other";
     public static final String JURISDICTION_OUTCOME_INPUT_IN_ERROR = "Input in error";
-    public static final String JURISDICTION_OUTCOME_DEFAULT_JUDGMENT_SUCCESSFUL = 
+    public static final String JURISDICTION_OUTCOME_DEFAULT_JUDGMENT_SUCCESSFUL =
         "Default judgment, claimant successful";
-    public static final String JURISDICTION_OUTCOME_DEFAULT_JUDGMENT_UNSUCCESSFUL = 
+    public static final String JURISDICTION_OUTCOME_DEFAULT_JUDGMENT_UNSUCCESSFUL =
         "Default judgment, claimant unsuccessful";
     public static final String JURISDICTION_OUTCOME_DISMISSED_UNDER_RULE_27 = "Dismissed under Rule 27";
     public static final String JURISDICTION_OUTCOME_DISMISSED_ON_WITHDRAWAL = "Dismissed on withdrawal";
@@ -331,5 +331,29 @@ public class Constants {
             + "exceed 31 days.";
 
     public static final List<String> SINGLE_OPEN_CASE_STATES = List.of(ACCEPTED_STATE, REJECTED_STATE, SUBMITTED_STATE);
+
+    public static final String BOTH_PARTIES = "Both parties";
+    public static final String CLAIMANT_ONLY = "Claimant only";
+    public static final String RESPONDENT_ONLY = "Respondent only";
+
+    public static final String ADMIN = "Admin";
+
+    public static final String TSE_APP_AMEND_RESPONSE = "Amend response";
+    public static final String TSE_APP_CHANGE_PERSONAL_DETAILS = "Change personal details";
+    public static final String TSE_APP_CLAIMANT_NOT_COMPLIED = "Claimant not complied";
+    public static final String TSE_APP_CONSIDER_A_DECISION_AFRESH = "Consider a decision afresh";
+    public static final String TSE_APP_CONTACT_THE_TRIBUNAL = "Contact the tribunal";
+    public static final String TSE_APP_ORDER_OTHER_PARTY = "Order other party";
+    public static final String TSE_APP_ORDER_A_WITNESS_TO_ATTEND_TO_GIVE_EVIDENCE =
+        "Order a witness to attend to give evidence";
+    public static final String TSE_APP_POSTPONE_A_HEARING = "Postpone a hearing";
+    public static final String TSE_APP_RECONSIDER_JUDGEMENT = "Reconsider judgement";
+    public static final String TSE_APP_RESTRICT_PUBLICITY = "Restrict publicity";
+    public static final String TSE_APP_STRIKE_OUT_ALL_OR_PART_OF_A_CLAIM = "Strike out all or part of a claim";
+    public static final String TSE_APP_VARY_OR_REVOKE_AN_ORDER = "Vary or revoke an order";
+
+    public static final String CASE_MANAGEMENT_ORDER = "Case management order";
+    public static final String REQUEST = "Request";
+    public static final String NEITHER = "Neither";
 
 }
