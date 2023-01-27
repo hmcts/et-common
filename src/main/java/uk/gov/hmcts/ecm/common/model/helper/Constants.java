@@ -352,6 +352,9 @@ public class Constants {
     public static final String TSE_APP_STRIKE_OUT_ALL_OR_PART_OF_A_CLAIM = "Strike out all or part of a claim";
     public static final String TSE_APP_VARY_OR_REVOKE_AN_ORDER = "Vary or revoke an order";
 
+    public static final String I_CONFIRM_I_WANT_TO_COPY = "I confirm I want to copy";
+    public static final String I_DO_NOT_WANT_TO_COPY = "I do not want to copy";
+
     public static final String CASE_MANAGEMENT_ORDER = "Case management order";
     public static final String REQUEST = "Request";
     public static final String NEITHER = "Neither";
