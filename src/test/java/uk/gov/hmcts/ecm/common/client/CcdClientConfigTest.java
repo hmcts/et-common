@@ -1,28 +1,30 @@
 package uk.gov.hmcts.ecm.common.client;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.junit.MockitoJUnitRunner;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-@RunWith(MockitoJUnitRunner.class)
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class CcdClientConfigTest {
 
-    @InjectMocks
     private CcdClientConfig ccdClientConfig;
+
+    @BeforeEach
+    void setup() {
+        ccdClientConfig = new CcdClientConfig("https://localhost:4452");
+    }
 
     @Test
     public void buildStartCaseCreationUrl() {
         String uri = ccdClientConfig.buildStartCaseCreationUrl("1123", "TRIBUNALS", "TRIB_03");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/event-triggers/"
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/event-triggers/"
                 + "initiateCase/token?ignore-warning=true", uri);
     }
 
     @Test
     public void buildStartCaseCreationTransferUrl() {
         String uri = ccdClientConfig.buildStartCaseCreationTransferUrl("1123", "TRIBUNALS", "TRIB_03");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/event-triggers/"
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/event-triggers/"
                 + "processCaseTransfer/token?ignore-warning=true", uri);
     }
 
@@ -30,7 +32,7 @@ public class CcdClientConfigTest {
     public void buildStartCaseTransferUrl() {
         String uri = ccdClientConfig.buildStartCaseTransferUrl("1123", "TRIBUNALS", "TRIB_03",
                 "223");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/223/"
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/223/"
                 + "event-triggers/caseTransferMultiple/token", uri);
     }
 
@@ -38,46 +40,46 @@ public class CcdClientConfigTest {
     public void buildReturnCaseCreationTransferUrl() {
         String uri = ccdClientConfig.buildReturnCaseCreationTransferUrl("1123", "TRIBUNALS", "TRIB_03",
                 "233");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/233/"
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/233/"
                 + "event-triggers/returnCaseTransfer/token", uri);
     }
 
     @Test
     public void buildStartCaseMultipleCreationUrl() {
         String uri = ccdClientConfig.buildStartCaseMultipleCreationUrl("1123", "TRIBUNALS", "TRIB_03");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/event-triggers/"
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/event-triggers/"
                 + "createMultiple/token?ignore-warning=true", uri);
     }
 
     @Test
     public void buildSubmitCaseCreationUrl() {
         String uri = ccdClientConfig.buildSubmitCaseCreationUrl("1123", "TRIBUNALS", "TRIB_03");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases", uri);
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases", uri);
     }
 
     @Test
     public void buildRetrieveCaseUrl() {
         String uri = ccdClientConfig.buildRetrieveCaseUrl("1123", "TRIBUNALS", "TRIB_03", "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222", uri);
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222", uri);
     }
 
     @Test
     public void buildRetrieveCasesUrl() {
         String uri = ccdClientConfig.buildRetrieveCasesUrl("1123", "TRIBUNALS", "TRIB_03", "2");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases?page=2", uri);
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases?page=2", uri);
     }
 
     @Test
     public void buildRetrieveCasesUrlElasticSearch() {
         String uri = ccdClientConfig.buildRetrieveCasesUrlElasticSearch("1123");
-        assertEquals("null/searchCases?ctid=1123", uri);
+        assertEquals("https://localhost:4452/searchCases?ctid=1123", uri);
     }
 
     @Test
     public void buildStartEventForCaseUrl() {
         String uri = ccdClientConfig.buildStartEventForCaseUrl("1123", "TRIBUNALS", "TRIB_03",
                 "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
                 + "/event-triggers/amendCaseDetails/token", uri);
     }
 
@@ -85,7 +87,7 @@ public class CcdClientConfigTest {
     public void buildStartEventForCaseUrlAPIRole() {
         String uri = ccdClientConfig.buildStartEventForCaseUrlAPIRole("1123", "TRIBUNALS", "TRIB_03",
                 "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
                 + "/event-triggers/amendSingle/token", uri);
     }
 
@@ -93,7 +95,7 @@ public class CcdClientConfigTest {
     public void buildStartEventForCaseUrlBulkSingle() {
         String uri = ccdClientConfig.buildStartEventForCaseUrlBulkSingle("1123", "TRIBUNALS", "TRIB_03",
                 "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
                 + "/event-triggers/amendCaseDetailsBulk/token", uri);
     }
 
@@ -101,7 +103,7 @@ public class CcdClientConfigTest {
     public void buildStartEventForCaseUrlPreAcceptBulkSingle() {
         String uri = ccdClientConfig.buildStartEventForCaseUrlPreAcceptBulkSingle("1123", "TRIBUNALS",
                 "TRIB_03", "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
                 + "/event-triggers/preAcceptanceCase/token", uri);
     }
 
@@ -109,7 +111,7 @@ public class CcdClientConfigTest {
     public void buildStartEventForBulkCaseUrl() {
         String uri = ccdClientConfig.buildStartEventForBulkCaseUrl("1123", "TRIBUNALS", "BULK_03",
                 "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/BULK_03/cases/1222222"
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/BULK_03/cases/1222222"
                 + "/event-triggers/updateBulkAction/token", uri);
     }
 
@@ -117,7 +119,7 @@ public class CcdClientConfigTest {
     public void buildStartEventForBulkAmendCaseUrl() {
         String uri = ccdClientConfig.buildStartEventForBulkAmendCaseUrl("1123", "TRIBUNALS", "BULK_03",
                 "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/BULK_03/cases/1222222"
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/BULK_03/cases/1222222"
                 + "/event-triggers/amendMultipleAPI/token", uri);
     }
 
@@ -125,14 +127,14 @@ public class CcdClientConfigTest {
     public void buildSubmitEventForCaseUrl() {
         String uri = ccdClientConfig.buildSubmitEventForCaseUrl("1123", "TRIBUNALS", "TRIB_03",
                 "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03"
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03"
                 + "/cases/1222222/events", uri);
     }
 
     @Test
     public void buildPaginationMetadataCaseUrl() {
         String uri = ccdClientConfig.buildPaginationMetadataCaseUrl("1123", "TRIBUNALS", "TRIB_03");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03"
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03"
                 + "/cases/pagination_metadata", uri);
     }
 
@@ -140,7 +142,15 @@ public class CcdClientConfigTest {
     public void buildStartDisposeEventForCaseUrl() {
         String uri = ccdClientConfig.buildStartDisposeEventForCaseUrl("1123", "TRIBUNALS", "TRIB_03",
                 "1222222");
-        assertEquals("null/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
                 + "/event-triggers/disposeCase/token", uri);
+    }
+
+    @Test
+    void buildStartUpdateRepEventForCaseUrl() {
+        String uri = ccdClientConfig.buildStartUpdateRepEventForCaseUrl("1123", "EMPLOYMENT", "ET_EnglandWales",
+            "1222222");
+        assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/EMPLOYMENT/case-types/ET_EnglandWales/cases/1222222"
+            + "/event-triggers/updateRepresentation/token", uri);
     }
 }

@@ -1,11 +1,11 @@
 package uk.gov.hmcts.ecm.common.client;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -58,11 +58,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.endsWith;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -79,7 +82,7 @@ import static uk.gov.hmcts.ecm.common.model.helper.Constants.LIVE_CASELOAD_REPOR
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.MANUALLY_CREATED_POSITION;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.TIME_TO_FIRST_HEARING_REPORT;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class CcdClientTest {
 
     @InjectMocks
@@ -109,9 +112,8 @@ public class CcdClientTest {
     private uk.gov.hmcts.ecm.common.model.ccd.CCDRequest ecmCcdRequest;
     private final String uri = "http://example.com";
 
-    @Before
+    @BeforeEach
     public void setUp() {
-
         ccdClient = new CcdClient(restTemplate, userService, caseDataBuilder, ccdClientConfig, authTokenGenerator);
 
         ccdRequest = new CCDRequest();
@@ -154,12 +156,6 @@ public class CcdClientTest {
         return headers;
     }
 
-    private HttpHeaders createHeadersWithExperimental() {
-        HttpHeaders httpHeaders = creatBuildHeaders();
-        httpHeaders.add("experimental", "true");
-        return httpHeaders;
-    }
-
     @Test
     public void startCaseCreation() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
@@ -188,17 +184,15 @@ public class CcdClientTest {
 
     @Test
     public void startEcmCaseCreationTransferAccepted() throws IOException {
-        HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<uk.gov.hmcts.ecm.common.model.ccd.CCDRequest> responseEntity =
+        ResponseEntity<CCDRequest> responseEntity =
             new ResponseEntity<>(HttpStatus.OK);
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartCaseCreationTransferUrl(any(), any(), any())).thenReturn(uri);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
-            eq(uk.gov.hmcts.ecm.common.model.ccd.CCDRequest.class)))
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), any(), eq(CCDRequest.class)))
             .thenReturn(responseEntity);
         ccdClient.startCaseCreationTransfer("authToken", caseDetails);
-        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
-            eq(uk.gov.hmcts.ecm.common.model.ccd.CCDRequest.class));
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), any(),
+            eq(CCDRequest.class));
         verifyNoMoreInteractions(restTemplate);
     }
 
@@ -307,16 +301,15 @@ public class CcdClientTest {
             new HttpEntity<>(uk.gov.hmcts.ecm.common.model.ccd.CaseDataContent.builder().build(),
             creatBuildHeaders());
         ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
-        when(ecmCaseDataBuilder.buildCaseDataContent(eq(ecmCaseData), eq(ecmCcdRequest), anyString()))
-            .thenReturn(uk.gov.hmcts.ecm.common.model.ccd.CaseDataContent.builder().build());
+
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildSubmitCaseCreationUrl(any(), any(), any())).thenReturn(uri);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class)))
+        when(restTemplate.exchange(endsWith(uri), eq(HttpMethod.POST), any(), eq(SubmitEvent.class)))
             .thenReturn(responseEntity);
 
         ccdClient.submitCaseCreation("authToken", caseDetails, ccdRequest, "Test Event Summary");
 
-        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class));
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), any(), eq(SubmitEvent.class));
         verifyNoMoreInteractions(restTemplate);
     }
 
@@ -483,67 +476,46 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCasesVenueAndRangeDateElasticSearch() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"term\""
-                + ":{\"data.hearingCollection.value.hearingDateCollection.value.hearingVenueDay.keyword\""
-                + ":{\"value\":\"Manchester\",\"boost\":1.0}}},"
-                + "{\"range\":{\"data.hearingCollection.value.hearingDateCollection.value"
-                + ".listedDate\":{\"from\":\"2019-09-23\",\"to\":\"2019-09-24\",\"include_lower\":true,"
-                + "\"include_upper\":true,\"boost\":1"
-                + ".0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
-        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
-                Arrays.asList(new SubmitEvent(), new SubmitEvent()));
+            Arrays.asList(new SubmitEvent(), new SubmitEvent()));
         ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
-                eq(CaseSearchResult.class))).thenReturn(responseEntity);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), any(),
+            eq(CaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesVenueAndDateElasticSearch("authToken",
-                caseDetails.getCaseTypeId(), "2019-09-23",
-                "2019-09-24", "Manchester", LISTING_VENUE_FIELD_NAME, "Manchester");
-        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
+            caseDetails.getCaseTypeId(), "2019-09-23",
+            "2019-09-24", "Manchester", LISTING_VENUE_FIELD_NAME, "Manchester");
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), any(), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
     }
 
     @Test
     public void retrieveCasesVenueAndSingleDateElasticSearch() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"term\""
-                + ":{\"data.hearingCollection.value.hearingDateCollection.value"
-                + ".hearingVenueDay.keyword\":{\"value\":\"Manchester\",\"boost\":1.0}}},{\"range\""
-                + ":{\"data.hearingCollection.value.hearingDateCollection.value"
-                + ".listedDate\":{\"from\":\"2019-09-23\",\"to\":\"2019-09-24\""
-                + ",\"include_lower\":true,\"include_upper\":true,\"boost\":1.0}}}],"
-                + "\"adjust_pure_negative\":true,\"boost\":1.0}}}";
-        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
         ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), any(),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesVenueAndDateElasticSearch("authToken",
                 caseDetails.getCaseTypeId(), "2019-09-23",
                 "2019-09-24", "Manchester", LISTING_VENUE_FIELD_NAME, "Manchester");
-        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), any(), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
     }
 
     @Test
     public void retrieveCasesAllVenuesAndSingleDateElasticSearch() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"range\""
-                + ":{\"data.hearingCollection.value.hearingDateCollection.value.listedDate\":{\"from\":"
-                + "\"2019-09-23\",\"to\":\"2019-09-23\",\"include_lower\":true,\"include_upper\":true,\"boost\":1"
-                + ".0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
-        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L, Arrays.asList(new SubmitEvent(),
                 new SubmitEvent()));
         ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), any(),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
         ccdClient.retrieveCasesVenueAndDateElasticSearch("authToken",
                 caseDetails.getCaseTypeId(), "2019-09-23",
                 "2019-09-23", ALL_VENUES, ALL_VENUES, "Manchester");
-        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(CaseSearchResult.class));
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), any(), eq(CaseSearchResult.class));
         verifyNoMoreInteractions(restTemplate);
     }
 
@@ -1098,14 +1070,48 @@ public class CcdClientTest {
 
     @Test
     public void retrieveCaseEvents() throws IOException {
-        HttpEntity<Object> httpEntity = new HttpEntity<>(createHeadersWithExperimental());
         ResponseEntity<AuditEventsResponse> responseEntity = new ResponseEntity<>(HttpStatus.OK);
-        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildCaseEventsUrl(any())).thenReturn(uri);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), any(),
             eq(AuditEventsResponse.class))).thenReturn(responseEntity);
         ccdClient.retrieveCaseEvents("authToken", caseDetails.getCaseId());
-        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(AuditEventsResponse.class));
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), any(), eq(AuditEventsResponse.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    void submitUpdateRepEvent() throws IOException {
+        HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
+            creatBuildHeaders());
+        ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+
+        Map<String, Object> changeOrganisationRequest = new ConcurrentHashMap<>();
+
+        when(caseDataBuilder.buildChangeOrganisationDataContent(eq(changeOrganisationRequest), eq(ccdRequest),
+            anyString())).thenReturn(CaseDataContent.builder().build());
+        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
+        when(ccdClientConfig.buildSubmitEventForCaseUrl(any(), any(), any(), any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class)))
+            .thenReturn(responseEntity);
+
+        ccdClient.submitUpdateRepEvent("authToken", changeOrganisationRequest, caseDetails.getCaseTypeId(),
+            caseDetails.getJurisdiction(), ccdRequest, "111111");
+
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity), eq(SubmitEvent.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    void startEventForUpdateRep() throws IOException {
+        HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
+        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
+        when(ccdClientConfig.buildStartUpdateRepEventForCaseUrl(any(), any(), any(), any())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
+            eq(CCDRequest.class))).thenReturn(responseEntity);
+        ccdClient.startEventForUpdateRep("authToken", caseDetails.getCaseTypeId(),
+            caseDetails.getJurisdiction(), "1111");
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class));
         verifyNoMoreInteractions(restTemplate);
     }
 
