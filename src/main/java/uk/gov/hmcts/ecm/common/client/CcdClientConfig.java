@@ -15,6 +15,7 @@ import static uk.gov.hmcts.ecm.common.model.helper.Constants.RETURN_TRANSFER_EVE
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.UPDATE_BULK_EVENT_TRIGGER_ID;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.UPDATE_EVENT_TRIGGER_ID;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.UPDATE_EVENT_TRIGGER_ID_BULK;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.UPDATE_REPRESENTATION_EVENT_TRIGGER_ID;
 
 @Slf4j
 public class CcdClientConfig {
@@ -133,6 +134,11 @@ public class CcdClientConfig {
     String buildStartDisposeEventForCaseUrl(String uid, String jid, String ctid, String cid) {
         return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT,
                 ccdDataStoreApiBaseUrl, uid, jid, ctid, cid, DISPOSE_EVENT_TRIGGER_ID);
+    }
+
+    String buildStartUpdateRepEventForCaseUrl(String uid, String jid, String ctid, String cid) {
+        return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT,
+            ccdDataStoreApiBaseUrl, uid, jid, ctid, cid, UPDATE_REPRESENTATION_EVENT_TRIGGER_ID);
     }
 
     String buildPaginationMetadataCaseUrl(String uid, String jid, String ctid) {

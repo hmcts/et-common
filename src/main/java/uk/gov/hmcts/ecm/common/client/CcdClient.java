@@ -50,6 +50,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -72,6 +73,8 @@ public class CcdClient {
     static final String CREATION_EVENT_SUMMARY = "Case created automatically";
     static final String UPDATE_EVENT_SUMMARY = "Case updated by bulk";
     static final String UPDATE_BULK_EVENT_SUMMARY = "Bulk case updated by bulk";
+
+    static final String UPDATE_CHANGE_ORG_SUMMARY = "Change of organisation completed";
     private static final int MAX_RETRIES = 7;
 
     public CcdClient(RestTemplate restTemplate, UserService userService, CaseDataBuilder caseDataBuilder,
@@ -726,6 +729,26 @@ public class CcdClient {
         HttpEntity<String> request = new HttpEntity<>(httpHeaders);
 
         return restTemplate.exchange(uri, HttpMethod.GET, request, AuditEventsResponse.class).getBody();
+    }
+
+    public SubmitEvent submitUpdateRepEvent(String authToken, Map<String, Object> changeOrganisationRequest,
+                                            String caseTypeId, String jurisdiction, CCDRequest req,
+                                            String cid) throws IOException {
+        HttpEntity<CaseDataContent> request =
+            new HttpEntity<>(caseDataBuilder.buildChangeOrganisationDataContent(changeOrganisationRequest, req,
+                UPDATE_CHANGE_ORG_SUMMARY), buildHeaders(authToken));
+        String uri = ccdClientConfig.buildSubmitEventForCaseUrl(userService.getUserDetails(authToken).getUid(),
+            jurisdiction, caseTypeId, cid);
+        return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitEvent.class).getBody();
+    }
+
+    public CCDRequest startEventForUpdateRep(String authToken, String caseTypeId, String jurisdiction,
+                                                           String cid) throws IOException {
+        HttpEntity<String> request =
+            new HttpEntity<>(buildHeaders(authToken));
+        String uri = ccdClientConfig.buildStartUpdateRepEventForCaseUrl(
+            userService.getUserDetails(authToken).getUid(), jurisdiction, caseTypeId, cid);
+        return restTemplate.exchange(uri, HttpMethod.GET, request, CCDRequest.class).getBody();
     }
 
     HttpHeaders buildHeaders(String authToken) throws IOException {

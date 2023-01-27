@@ -121,6 +121,7 @@ public class Constants {
     public static final String CASE_TRANSFER_EVENT_TRIGGER_ID = "caseTransferMultiple";
     public static final String RETURN_TRANSFER_EVENT_TRIGGER_ID = "returnCaseTransfer";
     public static final String CREATE_MULTIPLE_EVENT_TRIGGER_ID = "createMultiple";
+    public static final String UPDATE_REPRESENTATION_EVENT_TRIGGER_ID = "updateRepresentation";
 
     public static final String DEFAULT_SELECT_ALL_VALUE = "999999";
     public static final String SELECT_ALL_VALUE = "Select All";

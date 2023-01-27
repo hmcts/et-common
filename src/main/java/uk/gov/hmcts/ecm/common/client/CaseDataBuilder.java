@@ -41,6 +41,12 @@ public class CaseDataBuilder {
         }), eventSummary, null);
     }
 
+    public CaseDataContent buildChangeOrganisationDataContent(Map<String, Object> changeOrganisationRequest,
+                                                              CCDRequest req, String updateChangeOrgSummary) {
+        return getCaseDataContent(req, objectMapper.convertValue(changeOrganisationRequest, new TypeReference<>() {
+        }), updateChangeOrgSummary, null);
+    }
+
     private CaseDataContent getCaseDataContent(CCDRequest req, Map<String, JsonNode> data, String eventSummary,
                                                String eventDescription) {
         var event = Event.builder()
