@@ -39,6 +39,7 @@ import uk.gov.hmcts.et.common.model.ccd.CaseData;
 import uk.gov.hmcts.et.common.model.ccd.CaseDataContent;
 import uk.gov.hmcts.et.common.model.ccd.CaseDetails;
 import uk.gov.hmcts.et.common.model.ccd.CaseSearchResult;
+import uk.gov.hmcts.et.common.model.ccd.CaseUserAssignmentData;
 import uk.gov.hmcts.et.common.model.ccd.PaginatedSearchMetadata;
 import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.et.common.model.multiples.MultipleCaseSearchResult;
@@ -61,6 +62,7 @@ import static uk.gov.hmcts.ecm.common.model.helper.Constants.OLD_DATE_TIME_PATTE
 @Slf4j
 public class CcdClient {
 
+    public static final String EXPERIMENTAL = "experimental";
     private RestTemplate restTemplate;
     private UserService userService;
     private CcdClientConfig ccdClientConfig;
@@ -724,7 +726,7 @@ public class CcdClient {
         String uri = ccdClientConfig.buildCaseEventsUrl(cid);
 
         HttpHeaders httpHeaders = buildHeaders(authToken);
-        httpHeaders.add("experimental", "true");
+        httpHeaders.add(EXPERIMENTAL, "true");
 
         HttpEntity<String> request = new HttpEntity<>(httpHeaders);
 
@@ -740,6 +742,28 @@ public class CcdClient {
         String uri = ccdClientConfig.buildSubmitEventForCaseUrl(userService.getUserDetails(authToken).getUid(),
             jurisdiction, caseTypeId, cid);
         return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitEvent.class).getBody();
+    }
+
+    public CaseUserAssignmentData retrieveCaseAssignments(String authToken, String cid) throws IOException {
+        String uri = ccdClientConfig.buildUrlForCaseAccessRetrieval(cid);
+        HttpHeaders httpHeaders = buildHeaders(authToken);
+        httpHeaders.add(EXPERIMENTAL, "true");
+
+        HttpEntity<String> request = new HttpEntity<>(httpHeaders);
+
+        return restTemplate.exchange(uri, HttpMethod.GET, request, CaseUserAssignmentData.class).getBody();
+    }
+
+    public String revokeCaseAssignments(String authToken, CaseUserAssignmentData caseUserAssignmentData)
+        throws IOException {
+        String uri = ccdClientConfig.buildUrlForCaseAccessRevocation();
+
+        HttpHeaders httpHeaders = buildHeaders(authToken);
+        httpHeaders.add(EXPERIMENTAL, "true");
+
+        HttpEntity<CaseUserAssignmentData> request = new HttpEntity<>(caseUserAssignmentData, httpHeaders);
+
+        return restTemplate.exchange(uri, HttpMethod.DELETE, request, String.class).getBody();
     }
 
     public CCDRequest startEventForUpdateRep(String authToken, String caseTypeId, String jurisdiction,
