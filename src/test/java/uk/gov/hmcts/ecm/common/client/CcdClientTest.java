@@ -45,6 +45,7 @@ import uk.gov.hmcts.et.common.model.ccd.CaseData;
 import uk.gov.hmcts.et.common.model.ccd.CaseDataContent;
 import uk.gov.hmcts.et.common.model.ccd.CaseDetails;
 import uk.gov.hmcts.et.common.model.ccd.CaseSearchResult;
+import uk.gov.hmcts.et.common.model.ccd.CaseUserAssignmentData;
 import uk.gov.hmcts.et.common.model.ccd.PaginatedSearchMetadata;
 import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.et.common.model.multiples.MultipleCaseSearchResult;
@@ -1112,6 +1113,31 @@ public class CcdClientTest {
         ccdClient.startEventForUpdateRep("authToken", caseDetails.getCaseTypeId(),
             caseDetails.getJurisdiction(), "1111");
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    void retrieveCaseAssignments() throws IOException {
+        ResponseEntity<CaseUserAssignmentData> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        when(ccdClientConfig.buildUrlForCaseAccessRetrieval(anyString())).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), any(),
+            eq(CaseUserAssignmentData.class))).thenReturn(responseEntity);
+
+        ccdClient.retrieveCaseAssignments("authToken", "1111");
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), any(), eq(CaseUserAssignmentData.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    void revokeCaseAssignments() throws IOException {
+        CaseUserAssignmentData caseUserAssignmentData = CaseUserAssignmentData.builder().build();
+        ResponseEntity<String> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        when(ccdClientConfig.buildUrlForCaseAccessRevocation()).thenReturn(uri);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.DELETE), any(),
+            eq(String.class))).thenReturn(responseEntity);
+
+        ccdClient.revokeCaseAssignments("authToken", caseUserAssignmentData);
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.DELETE), any(), eq(String.class));
         verifyNoMoreInteractions(restTemplate);
     }
 
