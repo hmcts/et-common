@@ -44,7 +44,7 @@ public class Constants {
     public static final String UPDATING_STATE = "Updating";
     public static final String TRANSFERRED_STATE = "Transferred";
     public static final String TRANSFERRED_IN_STATE = "TransferredIn";
-    public static final String IN_PROGRESS = "In progress";
+    public static final String IN_PROGRESS = "inProgress";
 
     public static final String MULTIPLES_DEV = "_Multiples_Dev";
     public static final String MULTIPLE_DEV = "_Multiple_Dev";
