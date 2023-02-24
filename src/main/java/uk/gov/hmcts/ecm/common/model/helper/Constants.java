@@ -284,7 +284,7 @@ public class Constants {
     public static final String RESPONDENTS_REPS_ADDRESS__LABEL = "respondentsRepsAddressLabel";
 
     public static final int TARGET_HEARING_DATE_INCREMENT = 180;
-
+    public static final int ET3_DUE_DATE_FROM_SERVING_DATE = 28;
     public static final int MAX_ES_SIZE = 10000;
 
     public static final String MID_EVENT_CALLBACK = "Mid Event Callback";
