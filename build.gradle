@@ -9,8 +9,8 @@ plugins {
     id 'com.github.ben-manes.versions' version '0.42.0'
 }
 
-group 'uk.gov.hmcts.reform'
-version '1.0.14'
+group 'com.github.hmcts'
+version '1.0.15'
 
 sourceCompatibility = '11.0'
 

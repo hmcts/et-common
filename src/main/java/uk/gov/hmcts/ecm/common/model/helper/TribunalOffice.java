@@ -9,20 +9,20 @@ import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_CASE_TYPE_
 
 public enum TribunalOffice {
     ABERDEEN("Aberdeen"),
-    BRISTOL("Bristol", "14"),
+    BRISTOL("Bristol", "14", "bristolet@justice.gov.uk"),
     DUNDEE("Dundee"),
     EDINBURGH("Edinburgh"),
-    GLASGOW("Glasgow", "41"),
-    LEEDS("Leeds", "18"),
-    LONDON_CENTRAL("London Central", "22"),
-    LONDON_EAST("London East", "32"),
-    LONDON_SOUTH("London South", "23"),
-    MANCHESTER("Manchester", "24"),
-    MIDLANDS_EAST("Midlands East", "26"),
-    MIDLANDS_WEST("Midlands West", "13"),
-    NEWCASTLE("Newcastle", "25"),
-    WALES("Wales", "16"),
-    WATFORD("Watford", "33"),
+    GLASGOW("Glasgow", "41", "glasgowet@justice.gov.uk"),
+    LEEDS("Leeds", "18", "leedset@justice.gov.uk"),
+    LONDON_CENTRAL("London Central", "22", "londoncentralet@justice.gov.uk"),
+    LONDON_EAST("London East", "32", "eastlondon@justice.gov.uk"),
+    LONDON_SOUTH("London South", "23", "londonsouthet@justice.gov.uk"),
+    MANCHESTER("Manchester", "24", "manchesteret@justice.gov.uk"),
+    MIDLANDS_EAST("Midlands East", "26", "midlandseastet@justice.gov.uk"),
+    MIDLANDS_WEST("Midlands West", "13", "midlandswestet@justice.gov.uk"),
+    NEWCASTLE("Newcastle", "25", "newcastleet@justice.gov.uk"),
+    WALES("Wales", "16", "waleset@justice.gov.uk"),
+    WATFORD("Watford", "33", "watfordet@justice.gov.uk"),
     SCOTLAND("Scotland");
 
     public static final List<TribunalOffice> ENGLANDWALES_OFFICES = List.of(
@@ -36,14 +36,20 @@ public enum TribunalOffice {
 
     private final String officeName;
     private final String officeNumber;
+    private final String email;
 
     TribunalOffice(String officeName) {
         this(officeName, null);
     }
 
     TribunalOffice(String officeName, String officeNumber) {
+        this(officeName, officeNumber, null);
+    }
+
+    TribunalOffice(String officeName, String officeNumber, String email) {
         this.officeName = officeName;
         this.officeNumber = officeNumber;
+        this.email = email;
     }
 
     public String getOfficeName() {
@@ -52,6 +58,10 @@ public enum TribunalOffice {
 
     public String getOfficeNumber() {
         return officeNumber;
+    }
+
+    public String getOfficeEmail() {
+        return email;
     }
 
     public static Optional<TribunalOffice> valueOfOfficeNumber(String officeNumber) {

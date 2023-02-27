@@ -360,5 +360,4 @@ public class Constants {
     public static final String CASE_MANAGEMENT_ORDER = "Case management order";
     public static final String REQUEST = "Request";
     public static final String NEITHER = "Neither";
-
 }
