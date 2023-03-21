@@ -361,5 +361,5 @@ public class Constants {
     public static final String REQUEST = "Request";
     public static final String NEITHER = "Neither";
 
-    private static final String TRIBUNAL = "TRIBUNAL";
+    public static final String TRIBUNAL = "TRIBUNAL";
 }
