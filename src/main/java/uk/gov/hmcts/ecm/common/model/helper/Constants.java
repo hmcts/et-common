@@ -362,4 +362,6 @@ public class Constants {
     public static final String NEITHER = "Neither";
 
     public static final String TRIBUNAL = "Tribunal";
+    public static final String NOT_VIEWED_YET = "notViewedYet";
+    public static final String NOT_STARTED_YET = "notStartedYet";
 }
