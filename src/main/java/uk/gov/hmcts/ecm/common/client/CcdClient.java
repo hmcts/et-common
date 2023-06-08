@@ -7,6 +7,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.hmcts.ecm.common.helpers.ESHelper;
 import uk.gov.hmcts.ecm.common.model.helper.TribunalOffice;
@@ -773,6 +774,12 @@ public class CcdClient {
         String uri = ccdClientConfig.buildStartUpdateRepEventForCaseUrl(
             userService.getUserDetails(authToken).getUid(), jurisdiction, caseTypeId, cid);
         return restTemplate.exchange(uri, HttpMethod.GET, request, CCDRequest.class).getBody();
+    }
+
+    public ResponseEntity<Object> setSupplementaryData(String authToken, Map<String, Object> payload, String caseId) throws IOException {
+        HttpEntity<Map<String, Object>> request = new HttpEntity<>(payload, buildHeaders(authToken));
+        String uri = ccdClientConfig.buildUrlForSupplementaryApi(caseId);
+        return restTemplate.exchange(uri, HttpMethod.POST, request, Object.class);
     }
 
     HttpHeaders buildHeaders(String authToken) throws IOException {
