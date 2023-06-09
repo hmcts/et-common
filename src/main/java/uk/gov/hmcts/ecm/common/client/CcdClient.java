@@ -776,7 +776,8 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.GET, request, CCDRequest.class).getBody();
     }
 
-    public ResponseEntity<Object> setSupplementaryData(String authToken, Map<String, Object> payload, String caseId) throws IOException {
+    public ResponseEntity<Object> setSupplementaryData(String authToken, Map<String, Object> payload, String caseId)
+            throws IOException {
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(payload, buildHeaders(authToken));
         String uri = ccdClientConfig.buildUrlForSupplementaryApi(caseId);
         return restTemplate.exchange(uri, HttpMethod.POST, request, Object.class);

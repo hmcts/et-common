@@ -1,9 +1,6 @@
 package uk.gov.hmcts.ecm.common.client;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import java.net.URI;
 
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.AMEND_MULTIPLE_EVENT_TRIGGER_ID;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.AMEND_SINGLE_EVENT_TRIGGER_ID;

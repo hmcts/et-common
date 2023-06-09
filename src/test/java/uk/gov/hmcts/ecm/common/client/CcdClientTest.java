@@ -1141,6 +1141,16 @@ public class CcdClientTest {
         verifyNoMoreInteractions(restTemplate);
     }
 
+    @Test
+    void setSupplementaryData() throws IOException {
+        when(ccdClientConfig.buildUrlForSupplementaryApi(any())).thenReturn(uri);
+        ResponseEntity<Object> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), any(), eq(Object.class))).thenReturn(responseEntity);
+        ccdClient.setSupplementaryData("authToken", Map.of("HMCTSServiceID", "BHA1"), caseDetails.getCaseId());
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), any(), eq(Object.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
     public static UserDetails getUserDetails() {
         UserDetails userDetails = new UserDetails();
         userDetails.setUid("id");
