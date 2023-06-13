@@ -41,6 +41,8 @@ public class CcdClientConfig {
     private static final String CASE_USERS_RETRIEVE = "%s/case-users?case_ids=%s";
 
     private static final String CASE_USERS_REVOKE = "%s/case-users";
+
+    private static final String SET_SUPPLEMENTARY_DATA = "%s/cases/%s/supplementary-data";
     private final String ccdDataStoreApiBaseUrl;
 
     public CcdClientConfig(String ccdDataStoreApiBaseUrl) {
@@ -158,5 +160,9 @@ public class CcdClientConfig {
 
     String buildUrlForCaseAccessRevocation() {
         return String.format(CASE_USERS_REVOKE, ccdDataStoreApiBaseUrl);
+    }
+
+    String buildUrlForSupplementaryApi(String caseId) {
+        return String.format(SET_SUPPLEMENTARY_DATA, ccdDataStoreApiBaseUrl, caseId);
     }
 }

@@ -153,4 +153,10 @@ public class CcdClientConfigTest {
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/EMPLOYMENT/case-types/ET_EnglandWales/cases/1222222"
             + "/event-triggers/updateRepresentation/token", uri);
     }
+
+    @Test
+    void buildUrlForSupplementaryApi() {
+        String uri = ccdClientConfig.buildUrlForSupplementaryApi("1123");
+        assertEquals("https://localhost:4452/cases/1123/supplementary-data", uri);
+    }
 }
