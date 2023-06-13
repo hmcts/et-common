@@ -364,6 +364,8 @@ public class Constants {
     public static final String TRIBUNAL = "Tribunal";
     public static final String NOT_VIEWED_YET = "notViewedYet";
     public static final String NOT_STARTED_YET = "notStartedYet";
+    public static final String UPDATED = "updated";
+
     public static final String FUNCTION_NOT_AVAILABLE_ERROR = "This function is not available for this case,"
             + " please click cancel to return to the main page, you will need to submit your application outside"
             + " the portal via email or post.";
