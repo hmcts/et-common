@@ -7,4 +7,8 @@ public class CaseFlagConstants {
     public static final String LANGUAGE_INTERPRETER = "Language Interpreter";
     public static final String VEXATIOUS_LITIGANT = "Vexatious litigant";
     public static final String DISRUPTIVE_CUSTOMER = "Unacceptable/disruptive customer behaviour";
+
+    private CaseFlagConstants() {
+        // Class only provides constant values
+    }
 }
