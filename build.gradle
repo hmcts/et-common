@@ -6,7 +6,7 @@ plugins {
     id 'jacoco'
     id 'io.spring.dependency-management' version '1.0.12.RELEASE'
     id 'org.owasp.dependencycheck' version '7.1.2'
-    id 'com.github.ben-manes.versions' version '0.42.0'
+    id 'com.github.ben-manes.versions' version '0.47.0'
 }
 
 group 'com.github.hmcts'
@@ -85,7 +85,7 @@ ext {
 
 dependencies {
     api group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '4.0.3'
-    api group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.6.6'
+    api group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.6.7'
     api group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.2'
 
     api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.6'
@@ -105,12 +105,12 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: junitJupiterVersion
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junitJupiterVersion
     testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-commons', version: '1.9.0'
-    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.1.1'
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.3.1'
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
-    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.23.1'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.24.2'
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.7.0'
-    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '4.7.0'
-    testImplementation group: 'org.springframework', name: 'spring-test', version: '5.3.22'
+    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.4.0'
+    testImplementation group: 'org.springframework', name: 'spring-test', version: '6.0.11'
     testImplementation group: 'pl.pragmatists', name: 'JUnitParams', version: '1.1.1'
 
     testCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
