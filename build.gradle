@@ -37,7 +37,7 @@ jacocoTestReport {
 
 checkstyle {
     maxWarnings = 0
-    toolVersion = '8.29'
+    toolVersion = '8.45.1'
 }
 
 // region publishing
