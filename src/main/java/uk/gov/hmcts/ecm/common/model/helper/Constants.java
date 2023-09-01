@@ -374,6 +374,7 @@ public class Constants {
     public static final String NOT_YET_AVAILABLE = "notAvailableYet";
     public static final String SUBMITTED_AND_VIEWED = "submittedAndViewed";
     public static final String IN_PROGRESS = "inProgress";
+    public static final String STORED = "stored";
 
     public static final String FUNCTION_NOT_AVAILABLE_ERROR = "This function is not available for this case,"
             + " please click cancel to return to the main page, you will need to submit your application outside"
