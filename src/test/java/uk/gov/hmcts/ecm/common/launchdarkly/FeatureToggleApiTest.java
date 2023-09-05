@@ -43,7 +43,7 @@ class FeatureToggleApiTest {
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
     void shouldReturnCorrectState_whenUserIsProvided(Boolean toggleState) {
-        LDUser ldUSer = new LDUser.Builder("civil-service")
+        LDUser ldUSer = new LDUser.Builder("et-cos")
                 .custom("timestamp", String.valueOf(System.currentTimeMillis()))
                 .custom("environment", FAKE_ENVIRONMENT).build();
         givenToggle(FAKE_FEATURE, toggleState);
