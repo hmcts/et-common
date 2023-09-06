@@ -73,9 +73,9 @@ public class DocumentConstants {
     public static final String REASONS = "Reasons";
     public static final String EXTRACT_OF_JUDGMENT = "Extract of Judgment";
     public static final String APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_C = "App to have a Legal Officer"
-                                                                                          + " decision considered afresh - C";
+                                                                                  + " decision considered afresh - C";
     public static final String APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_R = "App to have a Legal Officer "
-                                                                                          + "decision considered afresh - R";
+                                                                                  + "decision considered afresh - R";
     public static final String APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_C = "App for a judgment to be reconsidered - C";
     public static final String APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_R = "App for a judgment to be reconsidered - R";
     public static final String CERTIFICATE_OF_CORRECTION = "Certificate of Correction";

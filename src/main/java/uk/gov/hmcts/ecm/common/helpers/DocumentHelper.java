@@ -1,6 +1,5 @@
 package uk.gov.hmcts.ecm.common.helpers;
 
-import uk.gov.hmcts.et.common.model.ccd.items.DocumentTypeItem;
 import uk.gov.hmcts.et.common.model.ccd.types.DocumentType;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
@@ -81,7 +80,7 @@ public class DocumentHelper {
     }
 
     public static String getTopLevelDocument(String typeOfDocument) {
-        return switch (typeOfDocument){
+        return switch (typeOfDocument) {
             case ET1, ET1_ATTACHMENT, ACAS_CERTIFICATE, NOTICE_OF_CLAIM, CLAIM_ACCEPTED, CLAIM_REJECTED,
                     CLAIM_PART_REJECTED -> STARTING_A_CLAIM;
             case ET3, ET3_ATTACHMENT, RESPONSE_ACCEPTED, RESPONSE_REJECTED, APP_TO_EXTEND_TIME_TO_PRESENT_A_RESPONSE
@@ -96,26 +95,27 @@ public class DocumentHelper {
                     C_HAS_NOT_COMPLIED_WITH_AN_ORDER_R, APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_CLAIM,
                     APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_RESPONSE, REFERRAL_JUDICIAL_DIRECTION,
                     CHANGE_OF_PARTYS_DETAILS -> CASE_MANAGEMENT;
-            case WITHDRAWAL_OF_ENTIRE_CLAIM, WITHDRAWAL_OF_PART_OF_CLAIM,COT3 -> WITHDRAWAL_SETTLED;
+            case WITHDRAWAL_OF_ENTIRE_CLAIM, WITHDRAWAL_OF_PART_OF_CLAIM, COT3 -> WITHDRAWAL_SETTLED;
             case APP_TO_RESTRICT_PUBLICITY_C, APP_TO_RESTRICT_PUBLICITY_R, ANONYMITY_ORDER, NOTICE_OF_HEARING,
                     APP_TO_POSTPONE_C, APP_TO_POSTPONE_R, HEARING_BUNDLE, SCHEDULE_OF_LOSS, COUNTER_SCHEDULE_OF_LOSS
                     -> HEARINGS;
-            case JUDGMENT, JUDGMENT_WITH_REASONS,REASONS, EXTRACT_OF_JUDGMENT -> JUDGMENT_AND_REASONS;
+            case JUDGMENT, JUDGMENT_WITH_REASONS, REASONS, EXTRACT_OF_JUDGMENT -> JUDGMENT_AND_REASONS;
             case APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_C,
-                    APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_R, APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_C
-                    ,  APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_R -> RECONSIDERATION;
-            case CERTIFICATE_OF_CORRECTION, TRIBUNAL_CASE_FILE,OTHER -> MISC;
+                    APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_R, APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_C,
+                    APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_R -> RECONSIDERATION;
+            case CERTIFICATE_OF_CORRECTION, TRIBUNAL_CASE_FILE, OTHER -> MISC;
             default -> LEGACY_DOCUMENT_NAMES;
         };
     }
 
     public static void setSecondLevelDocumentFromType(DocumentType documentType, String typeOfDocument) {
-        switch (typeOfDocument){
+        switch (typeOfDocument) {
             case ET1, ET1_ATTACHMENT, ACAS_CERTIFICATE, NOTICE_OF_CLAIM, CLAIM_ACCEPTED, CLAIM_REJECTED,
                     CLAIM_PART_REJECTED -> documentType.setStartingClaimDocuments(typeOfDocument);
             case ET3, ET3_ATTACHMENT, RESPONSE_ACCEPTED, RESPONSE_REJECTED, APP_TO_EXTEND_TIME_TO_PRESENT_A_RESPONSE
                     -> documentType.setResponseClaimDocuments(typeOfDocument);
-            case INITIAL_CONSIDERATION, RULE_27_NOTICE, RULE_28_NOTICE -> documentType.setInitialConsiderationDocuments(typeOfDocument);
+            case INITIAL_CONSIDERATION, RULE_27_NOTICE, RULE_28_NOTICE
+                    -> documentType.setInitialConsiderationDocuments(typeOfDocument);
             case TRIBUNAL_ORDER, DEPOSIT_ORDER, UNLESS_ORDER, TRIBUNAL_NOTICE, APP_TO_VARY_AN_ORDER_C,
                     APP_TO_VARY_AN_ORDER_R, APP_TO_REVOKE_AN_ORDER_C, APP_TO_REVOKE_AN_ORDER_R,
                     APP_TO_EXTEND_TIME_TO_COMPLY_TO_AN_ORDER_DIRECTIONS_C,
@@ -125,15 +125,17 @@ public class DocumentHelper {
                     C_HAS_NOT_COMPLIED_WITH_AN_ORDER_R, APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_CLAIM,
                     APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_RESPONSE, REFERRAL_JUDICIAL_DIRECTION,
                     CHANGE_OF_PARTYS_DETAILS -> documentType.setCaseManagementDocuments(typeOfDocument);
-            case WITHDRAWAL_OF_ENTIRE_CLAIM, WITHDRAWAL_OF_PART_OF_CLAIM,COT3 -> documentType.setWithdrawalSettledDocuments(typeOfDocument);
+            case WITHDRAWAL_OF_ENTIRE_CLAIM, WITHDRAWAL_OF_PART_OF_CLAIM, COT3
+                    -> documentType.setWithdrawalSettledDocuments(typeOfDocument);
             case APP_TO_RESTRICT_PUBLICITY_C, APP_TO_RESTRICT_PUBLICITY_R, ANONYMITY_ORDER, NOTICE_OF_HEARING,
                     APP_TO_POSTPONE_C, APP_TO_POSTPONE_R, HEARING_BUNDLE, SCHEDULE_OF_LOSS, COUNTER_SCHEDULE_OF_LOSS
                     -> documentType.setHearingsDocuments(typeOfDocument);
-            case JUDGMENT, JUDGMENT_WITH_REASONS,REASONS, EXTRACT_OF_JUDGMENT -> documentType.setJudgmentAndReasonsDocuments(typeOfDocument);
+            case JUDGMENT, JUDGMENT_WITH_REASONS, REASONS, EXTRACT_OF_JUDGMENT
+                    -> documentType.setJudgmentAndReasonsDocuments(typeOfDocument);
             case APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_C,
-                    APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_R, APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_C
-                    ,  APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_R -> documentType.setReconsiderationDocuments(typeOfDocument);
-            case CERTIFICATE_OF_CORRECTION, TRIBUNAL_CASE_FILE,OTHER -> documentType.setMiscDocuments(typeOfDocument);
+                    APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_R, APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_C,
+                    APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_R -> documentType.setReconsiderationDocuments(typeOfDocument);
+            case CERTIFICATE_OF_CORRECTION, TRIBUNAL_CASE_FILE, OTHER -> documentType.setMiscDocuments(typeOfDocument);
             default -> documentType.setTypeOfDocument(typeOfDocument);
         }
     }
