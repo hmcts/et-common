@@ -1,6 +1,6 @@
 spring:
   config:
-    import: "optional:configserver:"
+    import: "optional:configserver:/"
 
 launchdarkly:
   sdk-key: ${LAUNCH_DARKLY_SDK_KEY:sdk-key}
