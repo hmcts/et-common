@@ -45,9 +45,9 @@ class PreAcceptDataTaskTest {
 
     @ParameterizedTest
     @CsvSource({
-            ACCEPTED_STATE + "," + YES,
-            REJECTED_STATE + "," + YES,
-            SUBMITTED_STATE + "," + YES
+        ACCEPTED_STATE + "," + YES,
+        REJECTED_STATE + "," + YES,
+        SUBMITTED_STATE + "," + YES
     })
     void checkValidCaseStates(String state, String caseAccepted) {
         var updateModel = preAcceptDataModelBuilder.preAcceptDataModelBuilder("2022-02-02").build();

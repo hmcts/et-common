@@ -105,20 +105,20 @@ public class TribunalOfficeTest {
 
     @Test
     @Parameters({
-            "Aberdeen, false",
-            "Bristol, true",
-            "Dundee, false",
-            "Edinburgh, false",
-            "Glasgow, false",
-            "London Central, true",
-            "London East, true",
-            "London South, true",
-            "Manchester, true",
-            "Midlands East, true",
-            "Midlands West, true",
-            "Newcastle, true",
-            "Wales, true",
-            "Watford, true"
+        "Aberdeen, false",
+        "Bristol, true",
+        "Dundee, false",
+        "Edinburgh, false",
+        "Glasgow, false",
+        "London Central, true",
+        "London East, true",
+        "London South, true",
+        "Manchester, true",
+        "Midlands East, true",
+        "Midlands West, true",
+        "Newcastle, true",
+        "Wales, true",
+        "Watford, true"
     })
     public void testIsEnglandWalesOffice(String officeName, boolean expected) {
         assertEquals(expected, TribunalOffice.isEnglandWalesOffice(officeName));
@@ -126,20 +126,20 @@ public class TribunalOfficeTest {
 
     @Test
     @Parameters({
-            "Aberdeen, true",
-            "Bristol, false",
-            "Dundee, true",
-            "Edinburgh, true",
-            "Glasgow, true",
-            "London Central, false",
-            "London East, false",
-            "London South, false",
-            "Manchester, false",
-            "Midlands East, false",
-            "Midlands West, false",
-            "Newcastle, false",
-            "Wales, false",
-            "Watford, false"
+        "Aberdeen, true",
+        "Bristol, false",
+        "Dundee, true",
+        "Edinburgh, true",
+        "Glasgow, true",
+        "London Central, false",
+        "London East, false",
+        "London South, false",
+        "Manchester, false",
+        "Midlands East, false",
+        "Midlands West, false",
+        "Newcastle, false",
+        "Wales, false",
+        "Watford, false"
     })
     public void testIsScotlandOffice(String officeName, boolean expected) {
         assertEquals(expected, TribunalOffice.isScotlandOffice(officeName));
@@ -147,10 +147,10 @@ public class TribunalOfficeTest {
 
     @Test(expected = IllegalArgumentException.class)
     @Parameters({
-            "null",
-            "",
-            " ",
-            "invalid"
+        "null",
+        "",
+        " ",
+        "invalid"
     })
     public void testIsEnglandWalesOfficeThrowsException(@Nullable String officeName) {
         TribunalOffice.isEnglandWalesOffice(officeName);
@@ -159,10 +159,10 @@ public class TribunalOfficeTest {
 
     @Test(expected = IllegalArgumentException.class)
     @Parameters({
-            "null",
-            "",
-            " ",
-            "invalid"
+        "null",
+        "",
+        " ",
+        "invalid"
     })
     public void testIsScotlandOfficeThrowsException(@Nullable String officeName) {
         TribunalOffice.isScotlandOffice(officeName);
