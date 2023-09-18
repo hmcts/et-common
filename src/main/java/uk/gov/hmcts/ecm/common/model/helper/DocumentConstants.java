@@ -84,4 +84,6 @@ public class DocumentConstants {
     public static final String NOTICE_OF_A_CLAIM = "Notice of a claim";
     public static final String TRIBUNAL_CORRESPONDENCE = "Tribunal Correspondence";
     public static final String REJECTION_OF_CLAIM = "Rejection of claim";
+    public static final String ET1_VETTING = "ET1 Vetting";
+    public static final String ET3_PROCESSING = "ET3 Processing";
 }

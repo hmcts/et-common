@@ -40,8 +40,10 @@ import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.DEPOSIT_ORD
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.DISABILITY_IMPACT_STATEMENT;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.ET1;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.ET1_ATTACHMENT;
+import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.ET1_VETTING;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.ET3;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.ET3_ATTACHMENT;
+import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.ET3_PROCESSING;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.EXTRACT_OF_JUDGMENT;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.HEARINGS;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.HEARING_BUNDLE;
@@ -82,8 +84,9 @@ public class DocumentHelper {
     public static String getTopLevelDocument(String typeOfDocument) {
         return switch (typeOfDocument) {
             case ET1, ET1_ATTACHMENT, ACAS_CERTIFICATE, NOTICE_OF_CLAIM, CLAIM_ACCEPTED, CLAIM_REJECTED,
-                    CLAIM_PART_REJECTED -> STARTING_A_CLAIM;
-            case ET3, ET3_ATTACHMENT, RESPONSE_ACCEPTED, RESPONSE_REJECTED, APP_TO_EXTEND_TIME_TO_PRESENT_A_RESPONSE
+                    CLAIM_PART_REJECTED, ET1_VETTING -> STARTING_A_CLAIM;
+            case ET3, ET3_ATTACHMENT, RESPONSE_ACCEPTED, RESPONSE_REJECTED, APP_TO_EXTEND_TIME_TO_PRESENT_A_RESPONSE,
+                    ET3_PROCESSING
                     -> RESPONSE_TO_A_CLAIM;
             case INITIAL_CONSIDERATION, RULE_27_NOTICE, RULE_28_NOTICE -> INITIAL_CONSIDERATION;
             case TRIBUNAL_ORDER, DEPOSIT_ORDER, UNLESS_ORDER, TRIBUNAL_NOTICE, APP_TO_VARY_AN_ORDER_C,
@@ -111,9 +114,9 @@ public class DocumentHelper {
     public static void setSecondLevelDocumentFromType(DocumentType documentType, String typeOfDocument) {
         switch (typeOfDocument) {
             case ET1, ET1_ATTACHMENT, ACAS_CERTIFICATE, NOTICE_OF_CLAIM, CLAIM_ACCEPTED, CLAIM_REJECTED,
-                    CLAIM_PART_REJECTED -> documentType.setStartingClaimDocuments(typeOfDocument);
-            case ET3, ET3_ATTACHMENT, RESPONSE_ACCEPTED, RESPONSE_REJECTED, APP_TO_EXTEND_TIME_TO_PRESENT_A_RESPONSE
-                    -> documentType.setResponseClaimDocuments(typeOfDocument);
+                    CLAIM_PART_REJECTED, ET1_VETTING -> documentType.setStartingClaimDocuments(typeOfDocument);
+            case ET3, ET3_ATTACHMENT, RESPONSE_ACCEPTED, RESPONSE_REJECTED, APP_TO_EXTEND_TIME_TO_PRESENT_A_RESPONSE,
+                    ET3_PROCESSING -> documentType.setResponseClaimDocuments(typeOfDocument);
             case INITIAL_CONSIDERATION, RULE_27_NOTICE, RULE_28_NOTICE
                     -> documentType.setInitialConsiderationDocuments(typeOfDocument);
             case TRIBUNAL_ORDER, DEPOSIT_ORDER, UNLESS_ORDER, TRIBUNAL_NOTICE, APP_TO_VARY_AN_ORDER_C,
