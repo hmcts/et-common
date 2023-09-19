@@ -86,4 +86,10 @@ public class DocumentConstants {
     public static final String REJECTION_OF_CLAIM = "Rejection of claim";
     public static final String ET1_VETTING = "ET1 Vetting";
     public static final String ET3_PROCESSING = "ET3 Processing";
+    public static final String WITHDRAWAL_OF_ALL_OR_PART_CLAIM = "Withdrawal of all or part of claim";
+    public static final String APP_TO_VARY_OR_REVOKE_AN_ORDER_C = "App to vary or revoke an order- C";
+    public static final String APP_TO_VARY_OR_REVOKE_AN_ORDER_R = "App to vary or revoke an order – R";
+    public static final String CONTACT_THE_TRIBUNAL_C = "Contact the tribunal about something else - C";
+    public static final String CONTACT_THE_TRIBUNAL_R = "Contact the tribunal about something else - R";
+
 }

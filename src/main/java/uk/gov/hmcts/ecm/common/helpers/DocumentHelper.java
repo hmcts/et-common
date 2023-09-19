@@ -27,12 +27,16 @@ import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.APP_TO_STRI
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_RESPONSE;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.APP_TO_VARY_AN_ORDER_C;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.APP_TO_VARY_AN_ORDER_R;
+import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.APP_TO_VARY_OR_REVOKE_AN_ORDER_C;
+import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.APP_TO_VARY_OR_REVOKE_AN_ORDER_R;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.CASE_MANAGEMENT;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.CERTIFICATE_OF_CORRECTION;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.CHANGE_OF_PARTYS_DETAILS;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.CLAIM_ACCEPTED;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.CLAIM_PART_REJECTED;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.CLAIM_REJECTED;
+import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.CONTACT_THE_TRIBUNAL_C;
+import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.CONTACT_THE_TRIBUNAL_R;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.COT3;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.COUNTER_SCHEDULE_OF_LOSS;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.C_HAS_NOT_COMPLIED_WITH_AN_ORDER_R;
@@ -71,6 +75,7 @@ import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.TRIBUNAL_CA
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.TRIBUNAL_NOTICE;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.TRIBUNAL_ORDER;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.UNLESS_ORDER;
+import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.WITHDRAWAL_OF_ALL_OR_PART_CLAIM;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.WITHDRAWAL_OF_ENTIRE_CLAIM;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.WITHDRAWAL_OF_PART_OF_CLAIM;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.WITHDRAWAL_SETTLED;
@@ -97,8 +102,10 @@ public class DocumentHelper {
                     APP_FOR_A_WITNESS_ORDER, DISABILITY_IMPACT_STATEMENT, R_HAS_NOT_COMPLIED_WITH_AN_ORDER_C,
                     C_HAS_NOT_COMPLIED_WITH_AN_ORDER_R, APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_CLAIM,
                     APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_RESPONSE, REFERRAL_JUDICIAL_DIRECTION,
-                    CHANGE_OF_PARTYS_DETAILS -> CASE_MANAGEMENT;
-            case WITHDRAWAL_OF_ENTIRE_CLAIM, WITHDRAWAL_OF_PART_OF_CLAIM, COT3 -> WITHDRAWAL_SETTLED;
+                    CHANGE_OF_PARTYS_DETAILS, APP_TO_VARY_OR_REVOKE_AN_ORDER_R, APP_TO_VARY_OR_REVOKE_AN_ORDER_C,
+                    CONTACT_THE_TRIBUNAL_C, CONTACT_THE_TRIBUNAL_R -> CASE_MANAGEMENT;
+            case WITHDRAWAL_OF_ENTIRE_CLAIM, WITHDRAWAL_OF_PART_OF_CLAIM, COT3, WITHDRAWAL_OF_ALL_OR_PART_CLAIM
+                    -> WITHDRAWAL_SETTLED;
             case APP_TO_RESTRICT_PUBLICITY_C, APP_TO_RESTRICT_PUBLICITY_R, ANONYMITY_ORDER, NOTICE_OF_HEARING,
                     APP_TO_POSTPONE_C, APP_TO_POSTPONE_R, HEARING_BUNDLE, SCHEDULE_OF_LOSS, COUNTER_SCHEDULE_OF_LOSS
                     -> HEARINGS;
@@ -127,8 +134,9 @@ public class DocumentHelper {
                     APP_FOR_A_WITNESS_ORDER, DISABILITY_IMPACT_STATEMENT, R_HAS_NOT_COMPLIED_WITH_AN_ORDER_C,
                     C_HAS_NOT_COMPLIED_WITH_AN_ORDER_R, APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_CLAIM,
                     APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_RESPONSE, REFERRAL_JUDICIAL_DIRECTION,
-                    CHANGE_OF_PARTYS_DETAILS -> documentType.setCaseManagementDocuments(typeOfDocument);
-            case WITHDRAWAL_OF_ENTIRE_CLAIM, WITHDRAWAL_OF_PART_OF_CLAIM, COT3
+                    CHANGE_OF_PARTYS_DETAILS, APP_TO_VARY_OR_REVOKE_AN_ORDER_R, APP_TO_VARY_OR_REVOKE_AN_ORDER_C,
+                    CONTACT_THE_TRIBUNAL_C, CONTACT_THE_TRIBUNAL_R -> documentType.setCaseManagementDocuments(typeOfDocument);
+            case WITHDRAWAL_OF_ENTIRE_CLAIM, WITHDRAWAL_OF_PART_OF_CLAIM, COT3, WITHDRAWAL_OF_ALL_OR_PART_CLAIM
                     -> documentType.setWithdrawalSettledDocuments(typeOfDocument);
             case APP_TO_RESTRICT_PUBLICITY_C, APP_TO_RESTRICT_PUBLICITY_R, ANONYMITY_ORDER, NOTICE_OF_HEARING,
                     APP_TO_POSTPONE_C, APP_TO_POSTPONE_R, HEARING_BUNDLE, SCHEDULE_OF_LOSS, COUNTER_SCHEDULE_OF_LOSS
@@ -175,24 +183,24 @@ public class DocumentHelper {
             case "Change personal details" -> CHANGE_OF_PARTYS_DETAILS;
             case "Claimant not complied" -> C_HAS_NOT_COMPLIED_WITH_AN_ORDER_R;
             case "Consider a decision afresh" -> APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_R;
-            case "Contact the tribunal" -> OTHER; // Unsure
+            case "Contact the tribunal" -> CONTACT_THE_TRIBUNAL_R;
             case "Order other party" -> APP_TO_ORDER_THE_C_TO_DO_SOMETHING;
             case "Order a witness to attend to give evidence" -> APP_FOR_A_WITNESS_ORDER;
             case "Postpone a hearing" -> APP_TO_POSTPONE_R;
             case "Reconsider judgement" -> APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_R;
             case "Restrict publicity" -> APP_TO_RESTRICT_PUBLICITY_R;
             case "Strike out all or part of a claim" -> APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_CLAIM;
-            case "Vary or revoke an order" -> APP_TO_VARY_AN_ORDER_R; // Unsure
+            case "Vary or revoke an order" -> APP_TO_VARY_OR_REVOKE_AN_ORDER_R;
             default -> throw new IllegalStateException("Unexpected value: " + applicationType);
         };
     }
 
     public static String claimantApplicationTypeToDocType(String applicationType) {
         return switch (applicationType) {
-            case "withdraw" -> WITHDRAWAL_OF_ENTIRE_CLAIM; // Unsure
+            case "withdraw" -> WITHDRAWAL_OF_ALL_OR_PART_CLAIM;
             case "change-details" -> CHANGE_OF_PARTYS_DETAILS;
             case "postpone" -> APP_TO_POSTPONE_C;
-            case "vary" -> APP_TO_VARY_AN_ORDER_C; // unsure
+            case "vary" -> APP_TO_VARY_OR_REVOKE_AN_ORDER_C;
             case "reconsider-decision" -> APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_C;
             case "amend" -> APP_TO_AMEND_CLAIM;
             case "respondent" -> APP_TO_ORDER_THE_R_TO_DO_SOMETHING;
@@ -201,7 +209,7 @@ public class DocumentHelper {
             case "publicity" -> APP_TO_RESTRICT_PUBLICITY_C;
             case "strike" -> APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_RESPONSE;
             case "reconsider-judgement" -> APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_C;
-            case "other" -> OTHER; // Unsure
+            case "other" -> CONTACT_THE_TRIBUNAL_C;
             default -> throw new IllegalStateException("Unexpected value: " + applicationType);
         };
     }
