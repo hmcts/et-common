@@ -135,7 +135,8 @@ public class DocumentHelper {
                     C_HAS_NOT_COMPLIED_WITH_AN_ORDER_R, APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_CLAIM,
                     APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_RESPONSE, REFERRAL_JUDICIAL_DIRECTION,
                     CHANGE_OF_PARTYS_DETAILS, APP_TO_VARY_OR_REVOKE_AN_ORDER_R, APP_TO_VARY_OR_REVOKE_AN_ORDER_C,
-                    CONTACT_THE_TRIBUNAL_C, CONTACT_THE_TRIBUNAL_R -> documentType.setCaseManagementDocuments(typeOfDocument);
+                    CONTACT_THE_TRIBUNAL_C, CONTACT_THE_TRIBUNAL_R
+                    -> documentType.setCaseManagementDocuments(typeOfDocument);
             case WITHDRAWAL_OF_ENTIRE_CLAIM, WITHDRAWAL_OF_PART_OF_CLAIM, COT3, WITHDRAWAL_OF_ALL_OR_PART_CLAIM
                     -> documentType.setWithdrawalSettledDocuments(typeOfDocument);
             case APP_TO_RESTRICT_PUBLICITY_C, APP_TO_RESTRICT_PUBLICITY_R, ANONYMITY_ORDER, NOTICE_OF_HEARING,
