@@ -7,7 +7,8 @@ import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.ACAS_CERTIF
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.ANONYMITY_ORDER;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_C;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_R;
-import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.APP_FOR_A_WITNESS_ORDER;
+import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.APP_FOR_A_WITNESS_ORDER_C;
+import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.APP_FOR_A_WITNESS_ORDER_R;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.APP_TO_AMEND_CLAIM;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.APP_TO_AMEND_RESPONSE;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.APP_TO_EXTEND_TIME_TO_COMPLY_TO_AN_ORDER_DIRECTIONS_C;
@@ -99,11 +100,11 @@ public class DocumentHelper {
                     APP_TO_EXTEND_TIME_TO_COMPLY_TO_AN_ORDER_DIRECTIONS_C,
                     APP_TO_EXTEND_TIME_TO_COMPLY_TO_AN_ORDER_DIRECTIONS_R, APP_TO_ORDER_THE_R_TO_DO_SOMETHING,
                     APP_TO_ORDER_THE_C_TO_DO_SOMETHING, APP_TO_AMEND_CLAIM, APP_TO_AMEND_RESPONSE,
-                    APP_FOR_A_WITNESS_ORDER, DISABILITY_IMPACT_STATEMENT, R_HAS_NOT_COMPLIED_WITH_AN_ORDER_C,
+                    APP_FOR_A_WITNESS_ORDER_C, DISABILITY_IMPACT_STATEMENT, R_HAS_NOT_COMPLIED_WITH_AN_ORDER_C,
                     C_HAS_NOT_COMPLIED_WITH_AN_ORDER_R, APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_CLAIM,
                     APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_RESPONSE, REFERRAL_JUDICIAL_DIRECTION,
                     CHANGE_OF_PARTYS_DETAILS, APP_TO_VARY_OR_REVOKE_AN_ORDER_R, APP_TO_VARY_OR_REVOKE_AN_ORDER_C,
-                    CONTACT_THE_TRIBUNAL_C, CONTACT_THE_TRIBUNAL_R -> CASE_MANAGEMENT;
+                    CONTACT_THE_TRIBUNAL_C, CONTACT_THE_TRIBUNAL_R, APP_FOR_A_WITNESS_ORDER_R -> CASE_MANAGEMENT;
             case WITHDRAWAL_OF_ENTIRE_CLAIM, WITHDRAWAL_OF_PART_OF_CLAIM, COT3, WITHDRAWAL_OF_ALL_OR_PART_CLAIM
                     -> WITHDRAWAL_SETTLED;
             case APP_TO_RESTRICT_PUBLICITY_C, APP_TO_RESTRICT_PUBLICITY_R, ANONYMITY_ORDER, NOTICE_OF_HEARING,
@@ -131,11 +132,11 @@ public class DocumentHelper {
                     APP_TO_EXTEND_TIME_TO_COMPLY_TO_AN_ORDER_DIRECTIONS_C,
                     APP_TO_EXTEND_TIME_TO_COMPLY_TO_AN_ORDER_DIRECTIONS_R, APP_TO_ORDER_THE_R_TO_DO_SOMETHING,
                     APP_TO_ORDER_THE_C_TO_DO_SOMETHING, APP_TO_AMEND_CLAIM, APP_TO_AMEND_RESPONSE,
-                    APP_FOR_A_WITNESS_ORDER, DISABILITY_IMPACT_STATEMENT, R_HAS_NOT_COMPLIED_WITH_AN_ORDER_C,
+                    APP_FOR_A_WITNESS_ORDER_C, DISABILITY_IMPACT_STATEMENT, R_HAS_NOT_COMPLIED_WITH_AN_ORDER_C,
                     C_HAS_NOT_COMPLIED_WITH_AN_ORDER_R, APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_CLAIM,
                     APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_RESPONSE, REFERRAL_JUDICIAL_DIRECTION,
                     CHANGE_OF_PARTYS_DETAILS, APP_TO_VARY_OR_REVOKE_AN_ORDER_R, APP_TO_VARY_OR_REVOKE_AN_ORDER_C,
-                    CONTACT_THE_TRIBUNAL_C, CONTACT_THE_TRIBUNAL_R
+                    CONTACT_THE_TRIBUNAL_C, CONTACT_THE_TRIBUNAL_R, APP_FOR_A_WITNESS_ORDER_R
                     -> documentType.setCaseManagementDocuments(typeOfDocument);
             case WITHDRAWAL_OF_ENTIRE_CLAIM, WITHDRAWAL_OF_PART_OF_CLAIM, COT3, WITHDRAWAL_OF_ALL_OR_PART_CLAIM
                     -> documentType.setWithdrawalSettledDocuments(typeOfDocument);
@@ -186,7 +187,7 @@ public class DocumentHelper {
             case "Consider a decision afresh" -> APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_R;
             case "Contact the tribunal" -> CONTACT_THE_TRIBUNAL_R;
             case "Order other party" -> APP_TO_ORDER_THE_C_TO_DO_SOMETHING;
-            case "Order a witness to attend to give evidence" -> APP_FOR_A_WITNESS_ORDER;
+            case "Order a witness to attend to give evidence" -> APP_FOR_A_WITNESS_ORDER_R;
             case "Postpone a hearing" -> APP_TO_POSTPONE_R;
             case "Reconsider judgement" -> APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_R;
             case "Restrict publicity" -> APP_TO_RESTRICT_PUBLICITY_R;
@@ -205,7 +206,7 @@ public class DocumentHelper {
             case "reconsider-decision" -> APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_C;
             case "amend" -> APP_TO_AMEND_CLAIM;
             case "respondent" -> APP_TO_ORDER_THE_R_TO_DO_SOMETHING;
-            case "witness" -> APP_FOR_A_WITNESS_ORDER;
+            case "witness" -> APP_FOR_A_WITNESS_ORDER_C;
             case "non-compliance" -> R_HAS_NOT_COMPLIED_WITH_AN_ORDER_C;
             case "publicity" -> APP_TO_RESTRICT_PUBLICITY_C;
             case "strike" -> APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_RESPONSE;
