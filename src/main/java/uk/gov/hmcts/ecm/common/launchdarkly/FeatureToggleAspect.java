@@ -24,9 +24,9 @@ public class FeatureToggleAspect {
             joinPoint.proceed();
         } else {
             log.warn(
-                    "Feature %s is not enabled for method %s",
+                    String.format("Feature %s is not enabled for method %s",
                     featureToggle.feature(),
-                    joinPoint.getSignature().getName()
+                    joinPoint.getSignature().getName())
             );
         }
     }
