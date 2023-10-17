@@ -32,7 +32,7 @@ class FeatureToggleApiTest {
     private LDClientInterface ldClient;
 
     @Captor
-    private ArgumentCaptor<LDUser> ldUserArgumentCaptor;
+    private ArgumentCaptor<LDContext> ldContextArgumentCaptor;
 
     private FeatureToggleApi featureToggleApi;
 
@@ -47,7 +47,7 @@ class FeatureToggleApiTest {
         LDUser ldUSer = new LDUser.Builder("et-cos")
                 .custom("timestamp", String.valueOf(System.currentTimeMillis()))
                 .custom("environment", FAKE_ENVIRONMENT).build();
-        givenToggle(FAKE_FEATURE, toggleState);
+        givenToggle(toggleState);
 
         assertThat(featureToggleApi.isFeatureEnabled(FAKE_FEATURE, ldUSer)).isEqualTo(toggleState);
 
@@ -61,27 +61,26 @@ class FeatureToggleApiTest {
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
     void shouldReturnCorrectState_whenDefaultServiceUser(Boolean toggleState) {
-        givenToggle(FAKE_FEATURE, toggleState);
+        givenToggle(toggleState);
 
         assertThat(featureToggleApi.isFeatureEnabled(FAKE_FEATURE)).isEqualTo(toggleState);
         verifyBoolVariationCalled(List.of("timestamp", "environment"));
     }
 
-    private void givenToggle(String feature, boolean state) {
-        when(ldClient.boolVariation(eq(feature), any(LDContext.class), anyBoolean()))
+    private void givenToggle(boolean state) {
+        when(ldClient.boolVariation(eq(FeatureToggleApiTest.FAKE_FEATURE), any(LDContext.class), anyBoolean()))
                 .thenReturn(state);
     }
 
     private void verifyBoolVariationCalled(List<String> customAttributesKeys) {
         verify(ldClient).boolVariation(
                 eq(FeatureToggleApiTest.FAKE_FEATURE),
-                LDContext.fromUser(ldUserArgumentCaptor.capture()),
+                ldContextArgumentCaptor.capture(),
                 eq(false)
         );
-
-        var capturedLdUser = ldUserArgumentCaptor.getValue();
-        assertThat(capturedLdUser.getKey()).isEqualTo("et-cos");
-        assertThat(ImmutableList.copyOf(capturedLdUser.getCustomAttributes())).extracting("name")
+        LDContext capturedLdContext = ldContextArgumentCaptor.getValue();
+        assertThat(capturedLdContext.getKey()).isEqualTo("et-cos");
+        assertThat(ImmutableList.copyOf(capturedLdContext.getCustomAttributeNames()))
                 .containsOnlyOnceElementsOf(customAttributesKeys);
     }
 }
