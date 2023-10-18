@@ -1,6 +1,7 @@
 package uk.gov.hmcts.ecm.common.launchdarkly;
 
 import com.google.common.collect.ImmutableList;
+import com.launchdarkly.sdk.LDContext;
 import com.launchdarkly.sdk.LDUser;
 import com.launchdarkly.sdk.server.interfaces.LDClientInterface;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +32,7 @@ class FeatureToggleApiTest {
     private LDClientInterface ldClient;
 
     @Captor
-    private ArgumentCaptor<LDUser> ldUserArgumentCaptor;
+    private ArgumentCaptor<LDContext> ldContextArgumentCaptor;
 
     private FeatureToggleApi featureToggleApi;
 
@@ -46,13 +47,13 @@ class FeatureToggleApiTest {
         LDUser ldUSer = new LDUser.Builder("et-cos")
                 .custom("timestamp", String.valueOf(System.currentTimeMillis()))
                 .custom("environment", FAKE_ENVIRONMENT).build();
-        givenToggle(FAKE_FEATURE, toggleState);
+        givenToggle(toggleState);
 
         assertThat(featureToggleApi.isFeatureEnabled(FAKE_FEATURE, ldUSer)).isEqualTo(toggleState);
 
         verify(ldClient).boolVariation(
                 FAKE_FEATURE,
-                ldUSer,
+                LDContext.fromUser(ldUSer),
                 false
         );
     }
@@ -60,27 +61,26 @@ class FeatureToggleApiTest {
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
     void shouldReturnCorrectState_whenDefaultServiceUser(Boolean toggleState) {
-        givenToggle(FAKE_FEATURE, toggleState);
+        givenToggle(toggleState);
 
         assertThat(featureToggleApi.isFeatureEnabled(FAKE_FEATURE)).isEqualTo(toggleState);
-        verifyBoolVariationCalled(FAKE_FEATURE, List.of("timestamp", "environment"));
+        verifyBoolVariationCalled(List.of("timestamp", "environment"));
     }
 
-    private void givenToggle(String feature, boolean state) {
-        when(ldClient.boolVariation(eq(feature), any(LDUser.class), anyBoolean()))
+    private void givenToggle(boolean state) {
+        when(ldClient.boolVariation(eq(FeatureToggleApiTest.FAKE_FEATURE), any(LDContext.class), anyBoolean()))
                 .thenReturn(state);
     }
 
-    private void verifyBoolVariationCalled(String feature, List<String> customAttributesKeys) {
+    private void verifyBoolVariationCalled(List<String> customAttributesKeys) {
         verify(ldClient).boolVariation(
-                eq(feature),
-                ldUserArgumentCaptor.capture(),
+                eq(FeatureToggleApiTest.FAKE_FEATURE),
+                ldContextArgumentCaptor.capture(),
                 eq(false)
         );
-
-        var capturedLdUser = ldUserArgumentCaptor.getValue();
-        assertThat(capturedLdUser.getKey()).isEqualTo("et-cos");
-        assertThat(ImmutableList.copyOf(capturedLdUser.getCustomAttributes())).extracting("name")
+        LDContext capturedLdContext = ldContextArgumentCaptor.getValue();
+        assertThat(capturedLdContext.getKey()).isEqualTo("et-cos");
+        assertThat(ImmutableList.copyOf(capturedLdContext.getCustomAttributeNames()))
                 .containsOnlyOnceElementsOf(customAttributesKeys);
     }
 }
