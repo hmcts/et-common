@@ -139,8 +139,8 @@ public class CcdClient {
     public CCDRequest startCaseTransferSameCountryEccLinkedCase(String authToken, String caseTypeId,
                                                                 String jurisdiction, String cid) throws IOException {
         String uid = userService.getUserDetails(authToken).getUid();
-        String uri = ccdClientConfig.buildStartCaseTransferSameCountryLinkedCaseUrl(uid, jurisdiction,
-                caseTypeId, cid);
+        String uri = ccdClientConfig.buildStartCaseTransferSameCountryLinkedCaseUrl(
+                uid, jurisdiction, caseTypeId, cid);
         return restTemplate.exchange(uri, HttpMethod.GET, getRequest(authToken), CCDRequest.class).getBody();
     }
 
