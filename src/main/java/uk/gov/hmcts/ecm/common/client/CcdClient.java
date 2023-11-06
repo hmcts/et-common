@@ -170,7 +170,7 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitEvent.class).getBody();
     }
 
-    public uk.gov.hmcts.et.common.model.ccd.SubmitEvent submitEcmCaseCreation(String authToken,
+    public uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent submitEcmCaseCreation(String authToken,
                                              uk.gov.hmcts.ecm.common.model.ccd.CaseDetails caseDetails,
                                              uk.gov.hmcts.ecm.common.model.ccd.CCDRequest req)
         throws IOException {
@@ -180,7 +180,8 @@ public class CcdClient {
             buildHeaders(authToken));
         String uri = ccdClientConfig.buildSubmitCaseCreationUrl(userService.getUserDetails(authToken).getUid(),
             caseDetails.getJurisdiction(), caseDetails.getCaseTypeId());
-        return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitEvent.class).getBody();
+        return restTemplate.exchange(uri, HttpMethod.POST, request,
+                uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent.class).getBody();
     }
 
     public SubmitEvent retrieveCase(String authToken, String caseTypeId, String jurisdiction, String cid)
