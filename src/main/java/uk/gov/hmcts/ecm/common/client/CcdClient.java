@@ -140,7 +140,7 @@ public class CcdClient {
                                                                 String jurisdiction, String cid) throws IOException {
         String uid = userService.getUserDetails(authToken).getUid();
         String uri = ccdClientConfig.buildStartCaseTransferSameCountryLinkedCaseUrl(uid, jurisdiction,
-            caseTypeId, cid);
+                caseTypeId, cid);
         return restTemplate.exchange(uri, HttpMethod.GET, getRequest(authToken), CCDRequest.class).getBody();
     }
 
