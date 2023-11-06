@@ -41,6 +41,7 @@ import uk.gov.hmcts.et.common.model.ccd.CaseDataContent;
 import uk.gov.hmcts.et.common.model.ccd.CaseDetails;
 import uk.gov.hmcts.et.common.model.ccd.CaseSearchResult;
 import uk.gov.hmcts.et.common.model.ccd.CaseUserAssignmentData;
+import uk.gov.hmcts.et.common.model.ccd.GenericTypeCaseDetails;
 import uk.gov.hmcts.et.common.model.ccd.PaginatedSearchMetadata;
 import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
 import uk.gov.hmcts.et.common.model.multiples.MultipleCaseSearchResult;
@@ -97,6 +98,14 @@ public class CcdClient {
     }
 
     public CCDRequest startCaseCreation(String authToken, CaseDetails caseDetails) throws IOException {
+        String uri = ccdClientConfig.buildStartCaseCreationUrl(userService.getUserDetails(authToken).getUid(),
+                caseDetails.getJurisdiction(),
+                caseDetails.getCaseTypeId());
+        return restTemplate.exchange(uri, HttpMethod.GET, getRequest(authToken), CCDRequest.class).getBody();
+    }
+
+    public <T> CCDRequest startGenericTypeCaseCreation(String authToken, GenericTypeCaseDetails<T> caseDetails)
+            throws IOException {
         String uri = ccdClientConfig.buildStartCaseCreationUrl(userService.getUserDetails(authToken).getUid(),
                 caseDetails.getJurisdiction(),
                 caseDetails.getCaseTypeId());
@@ -164,6 +173,17 @@ public class CcdClient {
                                           String eventSummary) throws IOException {
         var caseDataContent = caseDataBuilder
             .buildCaseDataContent(caseDetails.getCaseData(), req, eventSummary);
+        HttpEntity<CaseDataContent> request = new HttpEntity<>(caseDataContent, buildHeaders(authToken));
+        String uri = ccdClientConfig.buildSubmitCaseCreationUrl(userService.getUserDetails(authToken).getUid(),
+                caseDetails.getJurisdiction(), caseDetails.getCaseTypeId());
+        return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitEvent.class).getBody();
+    }
+
+    public <T> SubmitEvent submitGenericTypeCaseCreation(String authToken, GenericTypeCaseDetails<T> caseDetails,
+                                                     CCDRequest req, String eventSummary, String eventDescription)
+            throws IOException {
+        var caseDataContent = caseDataBuilder
+                .buildGenericCaseDataContent(caseDetails.getCaseData(), req, eventSummary, eventDescription);
         HttpEntity<CaseDataContent> request = new HttpEntity<>(caseDataContent, buildHeaders(authToken));
         String uri = ccdClientConfig.buildSubmitCaseCreationUrl(userService.getUserDetails(authToken).getUid(),
                 caseDetails.getJurisdiction(), caseDetails.getCaseTypeId());
