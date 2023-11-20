@@ -22,6 +22,10 @@ public class CaseDataBuilderTest {
     static final String CREATION_EVENT_SUMMARY = "Case created automatically";
     static final String UPDATE_BULK_EVENT_SUMMARY = "Bulk case updated by bulk";
     static final String UPDATE_CHANGE_ORG_SUMMARY = "Change of organisation completed";
+    static final String CASE_CREATION_BY_GENERIC_CASE_DATA_SUMMARY
+            = "Case with generic case data creation content summary";
+    static final String CASE_CREATION_BY_GENERIC_CASE_DATA_DESCRIPTION
+            = "Case with generic case data creation content description";
 
     @InjectMocks
     private CaseDataBuilder caseDataBuilder;
@@ -35,7 +39,7 @@ public class CaseDataBuilderTest {
     private MultipleData multipleData;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         ccdRequest = new CCDRequest();
         ccdRequest.setEventId("1111");
         ccdRequest.setToken("Token");
@@ -45,7 +49,7 @@ public class CaseDataBuilderTest {
     }
 
     @Test
-    public void buildCaseDataContent() {
+    void buildCaseDataContent() {
         CaseDataContent caseDataContent = CaseDataContent.builder()
                 .event(Event.builder().eventId(ccdRequest.getEventId()).summary(CREATION_EVENT_SUMMARY).build())
                 .ignoreWarning(false)
@@ -56,7 +60,7 @@ public class CaseDataBuilderTest {
     }
 
     @Test
-    public void buildBulkDataContent() {
+    void buildBulkDataContent() {
         CaseDataContent caseDataContent = CaseDataContent.builder()
                 .event(Event.builder().eventId(ccdRequest.getEventId()).summary(UPDATE_BULK_EVENT_SUMMARY).build())
                 .ignoreWarning(false)
@@ -67,7 +71,7 @@ public class CaseDataBuilderTest {
     }
 
     @Test
-    public void buildMultipleDataContent() {
+    void buildMultipleDataContent() {
         CaseDataContent caseDataContent = CaseDataContent.builder()
                 .event(Event.builder().eventId(ccdRequest.getEventId()).summary(UPDATE_BULK_EVENT_SUMMARY).build())
                 .ignoreWarning(false)
@@ -78,7 +82,7 @@ public class CaseDataBuilderTest {
     }
 
     @Test
-    public void buildChangeOrganisationDataContent() {
+    void buildChangeOrganisationDataContent() {
         CaseDataContent caseDataContent = CaseDataContent.builder()
             .event(Event.builder().eventId(ccdRequest.getEventId()).summary(UPDATE_CHANGE_ORG_SUMMARY).build())
             .ignoreWarning(false)
@@ -86,5 +90,18 @@ public class CaseDataBuilderTest {
             .build();
         assertEquals(caseDataContent, caseDataBuilder.buildChangeOrganisationDataContent(new HashMap<>(),
             ccdRequest, UPDATE_CHANGE_ORG_SUMMARY));
+    }
+
+    @Test
+    void buildGenericCaseDataContent() {
+        CaseDataContent caseDataContent = CaseDataContent.builder()
+                .event(Event.builder().eventId(ccdRequest.getEventId())
+                        .summary(CASE_CREATION_BY_GENERIC_CASE_DATA_SUMMARY)
+                        .description(CASE_CREATION_BY_GENERIC_CASE_DATA_DESCRIPTION).build())
+                .ignoreWarning(false)
+                .token(ccdRequest.getToken())
+                .build();
+        assertEquals(caseDataContent, caseDataBuilder.buildGenericCaseDataContent(caseData, ccdRequest,
+                CASE_CREATION_BY_GENERIC_CASE_DATA_SUMMARY, CASE_CREATION_BY_GENERIC_CASE_DATA_DESCRIPTION));
     }
 }
