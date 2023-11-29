@@ -105,11 +105,19 @@ public enum DocumentCategory {
         return DocumentCategory.valueOf(parentId).getCategory();
     }
 
-    public List<String> getSubCategoryNames(String parentId) {
+    public static List<String> getSubCategoryNames(String parentId) {
         return Stream.of(DocumentCategory.values())
                 .filter(documentCategory -> documentCategory.getParentId().equals(parentId))
                 .map(DocumentCategory::getCategory)
                 .toList();
+    }
+
+    public static String getIdFromCategory(String category) {
+        return Stream.of(DocumentCategory.values())
+                .filter(documentCategory -> documentCategory.getCategory().equals(category))
+                .map(DocumentCategory::getId)
+                .findFirst()
+                .orElse("C9");
     }
 
 }
