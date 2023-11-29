@@ -83,7 +83,9 @@ public enum DocumentCategory {
     APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_R("C67", "App for a judgment to be reconsidered - R", "C8"),
     CERTIFICATE_OF_CORRECTION("C68", "Certificate of Correction", "C9"),
     TRIBUNAL_CASE_FILE("C69", "Tribunal Case File", "C9"),
-    OTHER("C70", "Other", "C9");
+    OTHER("C70", "Other", "C9"),
+    ET1_VETTING("C71", "ET1 Vetting", "C1"),
+    ET3_PROCESSING("C72", "ET3 Processing", "C2");
 
     private final String id;
     private final String category;
