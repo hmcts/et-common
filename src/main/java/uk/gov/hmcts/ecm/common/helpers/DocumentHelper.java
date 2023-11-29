@@ -215,4 +215,5 @@ public class DocumentHelper {
             default -> throw new IllegalStateException("Unexpected value: " + applicationType);
         };
     }
+
 }
