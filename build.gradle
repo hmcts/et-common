@@ -5,7 +5,7 @@ plugins {
     id 'checkstyle'
     id 'jacoco'
     id 'io.spring.dependency-management' version '1.1.4'
-    id 'org.owasp.dependencycheck' version '8.4.3'
+    id 'org.owasp.dependencycheck' version '9.0.1'
     id 'com.github.ben-manes.versions' version '0.50.0'
 }
 
@@ -86,11 +86,11 @@ ext {
 dependencies {
     api group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '4.0.3'
     api group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.6.7'
-    api group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.4'
+    api group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.5'
 
     api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.15'
 
-    implementation group: 'com.github.hmcts', name: 'et-data-model', version: '6358f35cd3'
+    implementation group: 'com.github.hmcts', name: 'et-data-model', version: '4d298cc23c'
     implementation group: 'com.github.hmcts', name: 'ecm-common', version: '2.0.5'
     implementation group: 'com.github.hmcts', name: 'ecm-data-model', version: '1.1.7'
 
@@ -113,7 +113,7 @@ dependencies {
     testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.24.2'
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.7.0'
     testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.7.0'
-    testImplementation group: 'org.springframework', name: 'spring-test', version: '6.1.0'
+    testImplementation group: 'org.springframework', name: 'spring-test', version: '6.1.1'
     testImplementation group: 'pl.pragmatists', name: 'JUnitParams', version: '1.1.1'
 
     testCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
