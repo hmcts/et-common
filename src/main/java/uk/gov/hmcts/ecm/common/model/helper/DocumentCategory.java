@@ -119,7 +119,7 @@ public enum DocumentCategory {
                 .filter(documentCategory -> documentCategory.getCategory().equals(category))
                 .map(DocumentCategory::getId)
                 .findFirst()
-                .orElse("C9");
+                .orElse(null);
     }
 
 }
