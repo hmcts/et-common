@@ -340,6 +340,8 @@ public class Constants {
 
     public static final String ADMIN = "Admin";
 
+    public static final String SEND_NOTIFICATION_RESPONSE_REQUIRED = "Yes - view document for details";
+
     public static final String TSE_APP_AMEND_RESPONSE = "Amend response";
     public static final String TSE_APP_CHANGE_PERSONAL_DETAILS = "Change personal details";
     public static final String TSE_APP_CLAIMANT_NOT_COMPLIED = "Claimant not complied";
