@@ -631,6 +631,16 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.GET, request, CCDRequest.class).getBody();
     }
 
+    public CCDRequest startEventForCase(String authToken, String caseTypeId, String jurisdiction, String cid,
+                                        String eventId) throws IOException {
+        HttpEntity<String> request =
+                new HttpEntity<>(buildHeaders(authToken));
+        String uri = ccdClientConfig.buildStartEventUrlForCaseWorker(userService.getUserDetails(authToken).getUid(),
+                jurisdiction,
+                caseTypeId, cid, eventId);
+        return restTemplate.exchange(uri, HttpMethod.GET, request, CCDRequest.class).getBody();
+    }
+
     public CCDRequest startEventForCaseAPIRole(String authToken, String caseTypeId, String jurisdiction, String cid)
             throws IOException {
         HttpEntity<String> request =
