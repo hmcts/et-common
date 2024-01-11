@@ -76,11 +76,11 @@ public class CaseJudgementUpdate {
         List<String> existingJurisdictionCodes =
                 caseData.getJurCodesCollection().stream()
                         .map(jurCodesTypeItem -> jurCodesTypeItem.getValue().getJuridictionCodesList())
-                        .collect(Collectors.toList());
+                        .toList();
 
         return jurisdictionCodes.stream()
                 .filter(jurCodesTypeItem -> existingJurisdictionCodes
                         .contains(jurCodesTypeItem.getValue().getJuridictionCodesList()))
-                .collect(Collectors.toList());
+                .toList();
     }
 }
