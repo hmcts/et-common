@@ -381,4 +381,5 @@ public class Constants {
     public static final String FUNCTION_NOT_AVAILABLE_ERROR = "This function is not available for this case,"
             + " please click cancel to return to the main page, you will need to submit your application outside"
             + " the portal via email or post.";
+    public static final String UNASSIGNED_OFFICE = "Unassigned";
 }
