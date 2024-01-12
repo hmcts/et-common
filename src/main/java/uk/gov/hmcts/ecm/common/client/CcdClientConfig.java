@@ -165,4 +165,9 @@ public class CcdClientConfig {
     String buildUrlForSupplementaryApi(String caseId) {
         return String.format(SET_SUPPLEMENTARY_DATA, ccdDataStoreApiBaseUrl, caseId);
     }
+
+    String buildStartEventUrlForCaseWorker(String uid, String jid, String ctid, String cid, String eventId) {
+        return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, cid,
+                eventId);
+    }
 }
