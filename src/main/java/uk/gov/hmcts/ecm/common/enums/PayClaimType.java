@@ -6,7 +6,6 @@ import uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-
 public enum PayClaimType {
 
     ARREARS(ClaimTypesConstants.ARREARS, PdfMapperConstants.Q8_TYPE_OF_PAY_CLAIMS_ARREARS),

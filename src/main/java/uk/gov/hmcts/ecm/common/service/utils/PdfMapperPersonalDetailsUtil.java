@@ -28,8 +28,6 @@ import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.SEX_PREFE
 import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.TITLES;
 import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.TITLE_MAP;
 
-
-
 /**
  * Mapper for personal details on the case data to the ET1 Pdf form.
  */

@@ -14,7 +14,6 @@ import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.EMAIL;
 import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.FAX;
 import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.POST;
 
-
 public final class PdfMapperRepresentativeUtil {
 
     private PdfMapperRepresentativeUtil() {

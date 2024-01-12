@@ -36,7 +36,6 @@ import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.PDF_TEMPL
 import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.PDF_TEMPLATE_REASON_NOT_HAVING_ACAS_UNFAIR_DISMISSAL;
 import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.YES;
 
-
 public final class PdfMapperRespondentUtil {
 
     private PdfMapperRespondentUtil() {

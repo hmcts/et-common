@@ -1,7 +1,6 @@
 package uk.gov.hmcts.ecm.common.service.pdf;
 
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import uk.gov.hmcts.ecm.common.service.utils.GenericServiceUtil;
@@ -88,7 +87,6 @@ public class PdfMapperService {
             ? ""
             : caseData.getManagingOffice();
     }
-
 
     private static void putMultipleClaimsDetails(
         CaseData caseData,

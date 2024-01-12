@@ -7,7 +7,6 @@ import uk.gov.hmcts.ecm.common.enums.DiscriminationType;
 import uk.gov.hmcts.ecm.common.enums.PayClaimType;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 
-
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentMap;
@@ -18,7 +17,6 @@ import static uk.gov.hmcts.ecm.common.constants.ClaimTypesConstants.OTHER_TYPES;
 import static uk.gov.hmcts.ecm.common.constants.ClaimTypesConstants.PAY_RELATED_CLAIM;
 import static uk.gov.hmcts.ecm.common.constants.ClaimTypesConstants.REDUNDANCY_PAY;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
-
 
 public final class PdfMapperClaimDetailsUtil {
 

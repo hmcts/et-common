@@ -18,7 +18,6 @@ import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.NO_LOWERC
 import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.WEEKS;
 import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.YES;
 
-
 public final class PdfMapperEmploymentDetailsUtil {
 
     private PdfMapperEmploymentDetailsUtil() {
