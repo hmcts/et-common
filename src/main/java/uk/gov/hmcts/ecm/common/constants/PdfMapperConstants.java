@@ -1,4 +1,4 @@
-package uk.gov.hmcts.ecm.common.service.utils;
+package uk.gov.hmcts.ecm.common.constants;
 
 import java.util.Map;
 
@@ -40,6 +40,7 @@ public final class PdfMapperConstants {
         + "claims against the same employer arising from the same, or similar, circumstances? Yes";
     public static final String Q3_MORE_CLAIMS_NO = "3.1 Are you aware that your claim is one of a number of "
         + "claims against the same employer arising from the same, or similar, circumstances? No";
+    public static final String Q3_MORE_CLAIMS_DETAILS = "3.1 if yes, give the names of any other claimants";
     public static final String Q4_EMPLOYED_BY_YES = "4.1 yes";
     public static final String Q4_EMPLOYED_BY_NO = "4.1 no";
     public static final String Q5_EMPLOYMENT_START = "5.1 employment start";

@@ -1,6 +1,7 @@
 package uk.gov.hmcts.ecm.common.service.utils;
 
 import org.springframework.util.ObjectUtils;
+import uk.gov.hmcts.ecm.common.constants.PdfMapperConstants;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 import uk.gov.hmcts.et.common.model.ccd.types.ClaimantOtherType;
 import uk.gov.hmcts.et.common.model.ccd.types.NewEmploymentType;
@@ -9,14 +10,14 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentMap;
 
 import static java.util.Optional.ofNullable;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.ANNUAL;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.MONTHS;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.NO;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.NOTICE;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.NO_LONGER_WORKING;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.NO_LOWERCASE;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.WEEKS;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.YES;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.ANNUAL;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.MONTHS;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.NO;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.NOTICE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.NO_LONGER_WORKING;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.NO_LOWERCASE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.WEEKS;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.YES;
 
 public final class PdfMapperEmploymentDetailsUtil {
 

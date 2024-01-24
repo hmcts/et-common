@@ -2,11 +2,12 @@ package uk.gov.hmcts.ecm.common.service.pdf;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import uk.gov.hmcts.ecm.common.service.utils.GenericServiceUtil;
 import uk.gov.hmcts.ecm.common.service.utils.PdfMapperClaimDescriptionUtil;
 import uk.gov.hmcts.ecm.common.service.utils.PdfMapperClaimDetailsUtil;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants;
+import uk.gov.hmcts.ecm.common.constants.PdfMapperConstants;
 import uk.gov.hmcts.ecm.common.service.utils.PdfMapperEmploymentDetailsUtil;
 import uk.gov.hmcts.ecm.common.service.utils.PdfMapperHearingPreferencesUtil;
 import uk.gov.hmcts.ecm.common.service.utils.PdfMapperPersonalDetailsUtil;
@@ -91,11 +92,18 @@ public class PdfMapperService {
     private static void putMultipleClaimsDetails(
         CaseData caseData,
         ConcurrentMap<String, Optional<String>> printFields) {
-        if ("Multiple".equals(caseData.getEcmCaseType())) {
+        if ("Multiple".equals(caseData.getEcmCaseType()) || hasLinkedCases(caseData)) {
             printFields.put(PdfMapperConstants.Q3_MORE_CLAIMS_YES, Optional.of(YES));
+            printFields.put(PdfMapperConstants.Q3_MORE_CLAIMS_DETAILS,
+                    Optional.of(caseData.getClaimantRequests().getLinkedCases()));
         } else {
             printFields.put(PdfMapperConstants.Q3_MORE_CLAIMS_NO, Optional.of(NO));
         }
+    }
+
+    private static boolean hasLinkedCases(CaseData caseData) {
+        return caseData.getClaimantRequests() != null && !CollectionUtils.isEmpty(caseData.getClaimantRequests()
+            .getLinkedCasesYesNo()) && caseData.getClaimantRequests().getLinkedCasesYesNo().contains(YES);
     }
 
     private Map<String, Optional<String>> printCompensation(CaseData caseData) {

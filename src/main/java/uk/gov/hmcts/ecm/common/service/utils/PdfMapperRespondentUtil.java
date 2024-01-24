@@ -16,25 +16,25 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentMap;
 
 import static java.util.Optional.ofNullable;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.INVALID_NO_ACAS_REASON;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.MAX_NUMBER_OF_RESPONDENTS;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.NO;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.NO_LOWERCASE;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.NUMERIC_FOUR_INT_VALUE;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.NUMERIC_THREE_INT_VALUE;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.PDF_CREATION_ERROR;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.PDF_TEMPLATE_MULTIPLE_RESPONDENTS_MIN_NUMBER;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.PDF_TEMPLATE_Q13_2_1_2_FORTH_RESPONDENT_ACAS_CERTIFICATE_CHECK_NO;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.PDF_TEMPLATE_Q2_3_1_2_FIRST_RESPONDENT_ACAS_CERTIFICATE_CHECK_NO;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.PDF_TEMPLATE_Q2_4_1_CLAIMANT_WORK_ADDRESS;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.PDF_TEMPLATE_Q2_4_2_CLAIMANT_WORK_POSTCODE;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.PDF_TEMPLATE_Q2_5_MULTIPLE_RESPONDENTS;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.PDF_TEMPLATE_Q2_8_1_2_THIRD_RESPONDENT_ACAS_CERTIFICATE_CHECK_NO;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.PDF_TEMPLATE_REASON_NOT_HAVING_ACAS_ANOTHER_PERSON;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.PDF_TEMPLATE_REASON_NOT_HAVING_ACAS_EMPLOYER_ALREADY_IN_TOUCH;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.PDF_TEMPLATE_REASON_NOT_HAVING_ACAS_NO_POWER;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.PDF_TEMPLATE_REASON_NOT_HAVING_ACAS_UNFAIR_DISMISSAL;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.YES;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.INVALID_NO_ACAS_REASON;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.MAX_NUMBER_OF_RESPONDENTS;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.NO;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.NO_LOWERCASE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.NUMERIC_FOUR_INT_VALUE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.NUMERIC_THREE_INT_VALUE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_CREATION_ERROR;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TEMPLATE_MULTIPLE_RESPONDENTS_MIN_NUMBER;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TEMPLATE_Q13_2_1_2_FORTH_RESPONDENT_ACAS_CERTIFICATE_CHECK_NO;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TEMPLATE_Q2_3_1_2_FIRST_RESPONDENT_ACAS_CERTIFICATE_CHECK_NO;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TEMPLATE_Q2_4_1_CLAIMANT_WORK_ADDRESS;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TEMPLATE_Q2_4_2_CLAIMANT_WORK_POSTCODE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TEMPLATE_Q2_5_MULTIPLE_RESPONDENTS;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TEMPLATE_Q2_8_1_2_THIRD_RESPONDENT_ACAS_CERTIFICATE_CHECK_NO;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TEMPLATE_REASON_NOT_HAVING_ACAS_ANOTHER_PERSON;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TEMPLATE_REASON_NOT_HAVING_ACAS_EMPLOYER_ALREADY_IN_TOUCH;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TEMPLATE_REASON_NOT_HAVING_ACAS_NO_POWER;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TEMPLATE_REASON_NOT_HAVING_ACAS_UNFAIR_DISMISSAL;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.YES;
 
 public final class PdfMapperRespondentUtil {
 

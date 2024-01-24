@@ -3,6 +3,7 @@ package uk.gov.hmcts.ecm.common.service.utils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ObjectUtils;
+import uk.gov.hmcts.ecm.common.constants.PdfMapperConstants;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 
 import java.util.Optional;
@@ -10,9 +11,9 @@ import java.util.concurrent.ConcurrentMap;
 
 import static java.util.Optional.ofNullable;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.NO_LOWERCASE;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.PHONE;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.VIDEO;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.NO_LOWERCASE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PHONE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.VIDEO;
 
 @Slf4j
 public final class PdfMapperHearingPreferencesUtil {

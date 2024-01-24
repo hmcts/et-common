@@ -1,7 +1,7 @@
 package uk.gov.hmcts.ecm.common.enums;
 
 import uk.gov.hmcts.ecm.common.constants.ClaimTypesConstants;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants;
+import uk.gov.hmcts.ecm.common.constants.PdfMapperConstants;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

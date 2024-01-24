@@ -2,6 +2,7 @@ package uk.gov.hmcts.ecm.common.service.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ObjectUtils;
+import uk.gov.hmcts.ecm.common.constants.PdfMapperConstants;
 import uk.gov.hmcts.ecm.common.enums.ClaimType;
 import uk.gov.hmcts.ecm.common.enums.DiscriminationType;
 import uk.gov.hmcts.ecm.common.enums.PayClaimType;

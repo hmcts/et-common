@@ -2,6 +2,7 @@ package uk.gov.hmcts.ecm.common.service.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ObjectUtils;
+import uk.gov.hmcts.ecm.common.constants.PdfMapperConstants;
 import uk.gov.hmcts.et.common.model.ccd.Address;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 import uk.gov.hmcts.et.common.model.ccd.types.ClaimantIndType;
@@ -15,18 +16,18 @@ import java.util.concurrent.ConcurrentMap;
 
 import static java.util.Optional.ofNullable;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.EMAIL;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.OTHER;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.OTHER_SPECIFY;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.PHONE_NUMBER_PREFIX;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.POST;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.SEX_FEMALE;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.SEX_FEMALE_LOWERCASE;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.SEX_MALE;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.SEX_PREFER_NOT_TO_SAY;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.SEX_PREFER_NOT_TO_SAY_LOWERCASE;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.TITLES;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperConstants.TITLE_MAP;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.EMAIL;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.OTHER;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.OTHER_SPECIFY;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PHONE_NUMBER_PREFIX;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.POST;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.SEX_FEMALE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.SEX_FEMALE_LOWERCASE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.SEX_MALE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.SEX_PREFER_NOT_TO_SAY;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.SEX_PREFER_NOT_TO_SAY_LOWERCASE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.TITLES;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.TITLE_MAP;
 
 /**
  * Mapper for personal details on the case data to the ET1 Pdf form.
