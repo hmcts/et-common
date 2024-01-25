@@ -52,9 +52,9 @@ class RejectDataTaskTest {
 
     @ParameterizedTest
     @CsvSource({
-            ACCEPTED_STATE + "," + NO,
-            REJECTED_STATE + "," + NO,
-            SUBMITTED_STATE + "," + NO
+        ACCEPTED_STATE + "," + NO,
+        REJECTED_STATE + "," + NO,
+        SUBMITTED_STATE + "," + NO
     })
     void checkValidCaseStates(String state, String caseAcceptedStatus) {
         var rejectReasons = List.of("Defect", "Not on Prescribed Form");
