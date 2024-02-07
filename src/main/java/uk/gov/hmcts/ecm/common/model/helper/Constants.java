@@ -27,6 +27,7 @@ public class Constants {
     public static final String POST_DEFAULT_XLSX_FILE_PATH = "postDefaultValues.xlsx";
     public static final String VENUE_ADDRESS_VALUES_FILE_PATH = "venueAddressValues.xlsx";
 
+    public static final String EMPLOYMENT = "EMPLOYMENT"
     public static final String ENGLANDWALES_BULK_CASE_TYPE_ID = "ET_EnglandWales_Multiple";
     public static final String SCOTLAND_BULK_CASE_TYPE_ID = "ET_Scotland_Multiple";
     public static final String ENGLANDWALES_CASE_TYPE_ID = "ET_EnglandWales";
