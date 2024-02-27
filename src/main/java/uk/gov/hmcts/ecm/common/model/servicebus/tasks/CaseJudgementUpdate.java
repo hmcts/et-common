@@ -8,7 +8,6 @@ import uk.gov.hmcts.et.common.model.ccd.types.JudgementType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
@@ -76,11 +75,11 @@ public class CaseJudgementUpdate {
         List<String> existingJurisdictionCodes =
                 caseData.getJurCodesCollection().stream()
                         .map(jurCodesTypeItem -> jurCodesTypeItem.getValue().getJuridictionCodesList())
-                        .collect(Collectors.toList());
+                        .toList();
 
         return jurisdictionCodes.stream()
                 .filter(jurCodesTypeItem -> existingJurisdictionCodes
                         .contains(jurCodesTypeItem.getValue().getJuridictionCodesList()))
-                .collect(Collectors.toList());
+                .toList();
     }
 }
