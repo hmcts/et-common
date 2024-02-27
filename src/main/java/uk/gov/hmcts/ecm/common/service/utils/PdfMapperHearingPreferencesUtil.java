@@ -10,10 +10,10 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentMap;
 
 import static java.util.Optional.ofNullable;
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.NO_LOWERCASE;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PHONE;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.VIDEO;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
 @Slf4j
 public final class PdfMapperHearingPreferencesUtil {

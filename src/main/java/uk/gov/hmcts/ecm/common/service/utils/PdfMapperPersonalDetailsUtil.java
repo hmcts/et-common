@@ -15,7 +15,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import static java.util.Optional.ofNullable;
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.EMAIL;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.OTHER;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.OTHER_SPECIFY;
@@ -28,6 +27,7 @@ import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.SEX_PREFER_NO
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.SEX_PREFER_NOT_TO_SAY_LOWERCASE;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.TITLES;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.TITLE_MAP;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
 /**
  * Mapper for personal details on the case data to the ET1 Pdf form.
