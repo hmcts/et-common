@@ -105,7 +105,7 @@ public class UpdateDataTaskTest {
     }
 
     @Test
-    public void noJurisdictionCode() {
+    public void noJurisdictionCodeOrCaseStayed() {
         var updateModel = updateDataModelBuilder.build();
         var submitEvent = caseDataBuilder.buildAsSubmitEvent("Accepted");
 
@@ -113,6 +113,7 @@ public class UpdateDataTaskTest {
         task.run(submitEvent);
 
         assertNull(submitEvent.getCaseData().getJurCodesCollection());
+        assertNull(submitEvent.getCaseData().getBatchCaseStayed());
     }
 
     @Test
@@ -155,17 +156,5 @@ public class UpdateDataTaskTest {
         task.run(submitEvent);
 
         assertEquals(YES, submitEvent.getCaseData().getBatchCaseStayed());
-    }
-
-    @Test
-    public void batchUpdate1_withoutCaseStayed_doesNotSetBatchCaseStayed() {
-        var updateModel = updateDataModelBuilder.build();
-        updateModel.setBatchCaseStayed(YES);
-        var submitEvent = caseDataBuilder.buildAsSubmitEvent("Accepted");
-
-        var task = new UpdateDataTask(updateModel);
-        task.run(submitEvent);
-
-        assertNull(submitEvent.getCaseData().getBatchCaseStayed());
     }
 }
