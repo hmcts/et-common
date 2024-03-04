@@ -23,7 +23,8 @@ import lombok.experimental.SuperBuilder;
     @JsonSubTypes.Type(value = CloseDataModel.class, name = "closeDataModel"),
     @JsonSubTypes.Type(value = ResetStateDataModel.class, name = "resetStateDataModel"),
     @JsonSubTypes.Type(value = CreationSingleDataModel.class, name = "creationSingleDataModel"),
-    @JsonSubTypes.Type(value = TransferToEcmDataModel.class, name = "transferToEcmDataModel")
+    @JsonSubTypes.Type(value = TransferToEcmDataModel.class, name = "transferToEcmDataModel"),
+    @JsonSubTypes.Type(value = SendNotificationDataModel.class, name = "SendNotificationDataModel")
 })
 public class DataModelParent {
 
