@@ -71,7 +71,7 @@ publishing {
 }
 
 test {
-    useJUnitPlatform()
+    failFast = true
 }
 
 ext {
