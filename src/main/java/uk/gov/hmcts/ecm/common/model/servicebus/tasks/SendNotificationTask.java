@@ -36,6 +36,7 @@ public class SendNotificationTask extends DataTaskParent {
         caseData.setSendNotificationAdditionalInfo(
                 sendNotificationData.getSendNotificationAdditionalInfo());
         caseData.setSendNotificationNotify(sendNotificationData.getSendNotificationNotify());
+        caseData.setSendNotificationNotifyLeadCase(sendNotificationData.getSendNotificationNotifyLeadCase());
         caseData.setSendNotificationSelectHearing(sendNotificationData.getSendNotificationSelectHearing());
         caseData.setSendNotificationCaseManagement(
                 sendNotificationData.getSendNotificationCaseManagement());
