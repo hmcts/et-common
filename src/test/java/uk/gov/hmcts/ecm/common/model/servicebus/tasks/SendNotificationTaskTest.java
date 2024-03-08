@@ -19,9 +19,10 @@ public class SendNotificationTaskTest {
 
     @Test
     public void addSendNotification() {
-        String whoToNotify = "Lead Claimant Only";
+        String whoToNotify = "Claimant only";
         SendNotificationType sendNotification = SendNotificationType.builder()
-                .sendNotificationNotify(whoToNotify)
+                .sendNotificationNotify("Lead case")
+                .sendNotificationNotifyLeadCase(whoToNotify)
                 .build();
         var updateModel = sendNotificationDataModelBuilder.withSendNotification(sendNotification).build();
         var submitEvent = caseDataBuilder.buildAsSubmitEvent("Accepted");
