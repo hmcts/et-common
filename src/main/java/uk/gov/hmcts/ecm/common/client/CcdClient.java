@@ -822,6 +822,8 @@ public class CcdClient {
         headers.add(HttpHeaders.AUTHORIZATION, authToken);
         headers.add(SERVICE_AUTHORIZATION, authTokenGenerator.generate());
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
+        log.error("Auth Token: " + authToken);
+        log.error("Service Auth Token: ServiceAuthorization: " + authTokenGenerator.generate());
         return headers;
     }
 
