@@ -1,4 +1,4 @@
 launchdarkly:
-  sdk-key: ${LAUNCH_DARKLY_SDK_KEY:sdk-key}
+  sdk-key: ${LAUNCH_DARKLY_SDK_KEY:sdk-33e26490-a665-4612-929b-7a1b202963d5}
   offline-mode: false
   env: ${LAUNCH_DARKLY_ENV:test}
