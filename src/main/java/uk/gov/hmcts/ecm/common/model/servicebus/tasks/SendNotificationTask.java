@@ -58,6 +58,8 @@ public class SendNotificationTask extends DataTaskParent {
         caseData.setSendNotificationRequestMadeBy(sendNotificationData.getSendNotificationRequestMadeBy());
         caseData.setSendNotificationEccQuestion(sendNotificationData.getSendNotificationEccQuestion());
         caseData.setSendNotificationWhoMadeJudgement(sendNotificationData.getSendNotificationWhoCaseOrder());
+        // Multiple indicator
+        caseData.setNotificationSentFrom(sendNotificationData.getNotificationSentFrom());
     }
 
 }
