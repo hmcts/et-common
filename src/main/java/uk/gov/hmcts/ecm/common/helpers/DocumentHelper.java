@@ -154,7 +154,12 @@ public class DocumentHelper {
     }
 
     public static void setDocumentTypeForDocument(DocumentType documentType) {
-        if (!isNullOrEmpty(documentType.getTopLevelDocuments()) || !isNullOrEmpty(documentType.getTypeOfDocument())) {
+        if (documentType == null) {
+            return;
+        }
+
+        if (!isNullOrEmpty(documentType.getTopLevelDocuments())
+                || !isNullOrEmpty(documentType.getTypeOfDocument())) {
             if (!isNullOrEmpty(documentType.getStartingClaimDocuments())) {
                 documentType.setDocumentType(documentType.getStartingClaimDocuments());
             } else if (!isNullOrEmpty(documentType.getResponseClaimDocuments())) {
