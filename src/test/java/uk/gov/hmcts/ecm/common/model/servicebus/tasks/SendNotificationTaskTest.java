@@ -11,6 +11,7 @@ import static uk.gov.hmcts.ecm.common.model.helper.Constants.SEND_NOTIFICATION_L
 
 public class SendNotificationTaskTest {
 
+    public static final String MULTIPLE_REF = "6001";
     CaseDataBuilder caseDataBuilder;
     SendNotificationDataModelBuilder sendNotificationDataModelBuilder;
 
@@ -25,6 +26,7 @@ public class SendNotificationTaskTest {
         SendNotificationTypeMultiple sendNotification = new SendNotificationTypeMultiple();
         sendNotification.setSendNotificationNotifyLeadCase(CLAIMANT_ONLY);
         sendNotification.setSendNotificationNotify(SEND_NOTIFICATION_LEAD);
+        sendNotification.setNotificationSentFrom(MULTIPLE_REF);
         var updateModel = sendNotificationDataModelBuilder.withSendNotification(sendNotification).build();
         var submitEvent = caseDataBuilder.buildAsSubmitEvent(ACCEPTED_STATE);
 
@@ -32,7 +34,7 @@ public class SendNotificationTaskTest {
         task.run(submitEvent);
 
         assertEquals(CLAIMANT_ONLY, submitEvent.getCaseData().getSendNotificationNotify());
-
+        assertEquals(MULTIPLE_REF, submitEvent.getCaseData().getNotificationSentFrom());
     }
 
 }
