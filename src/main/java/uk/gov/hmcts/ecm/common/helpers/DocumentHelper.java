@@ -120,7 +120,7 @@ public class DocumentHelper {
     }
 
     public static void setSecondLevelDocumentFromType(DocumentType documentType, String typeOfDocument) {
-        if (typeOfDocument != null && documentType != null) {
+        if (typeOfDocument == null || documentType == null) {
             return;
         }
 
