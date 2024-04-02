@@ -120,6 +120,10 @@ public class DocumentHelper {
     }
 
     public static void setSecondLevelDocumentFromType(DocumentType documentType, String typeOfDocument) {
+        if (typeOfDocument == null || documentType == null) {
+            return;
+        }
+
         switch (typeOfDocument) {
             case ET1, ET1_ATTACHMENT, ACAS_CERTIFICATE, NOTICE_OF_CLAIM, CLAIM_ACCEPTED, CLAIM_REJECTED,
                     CLAIM_PART_REJECTED, ET1_VETTING -> documentType.setStartingClaimDocuments(typeOfDocument);
