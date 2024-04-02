@@ -120,36 +120,38 @@ public class DocumentHelper {
     }
 
     public static void setSecondLevelDocumentFromType(DocumentType documentType, String typeOfDocument) {
-        switch (typeOfDocument) {
-            case ET1, ET1_ATTACHMENT, ACAS_CERTIFICATE, NOTICE_OF_CLAIM, CLAIM_ACCEPTED, CLAIM_REJECTED,
-                    CLAIM_PART_REJECTED, ET1_VETTING -> documentType.setStartingClaimDocuments(typeOfDocument);
-            case ET3, ET3_ATTACHMENT, RESPONSE_ACCEPTED, RESPONSE_REJECTED, APP_TO_EXTEND_TIME_TO_PRESENT_A_RESPONSE,
-                    ET3_PROCESSING -> documentType.setResponseClaimDocuments(typeOfDocument);
-            case INITIAL_CONSIDERATION, RULE_27_NOTICE, RULE_28_NOTICE
-                    -> documentType.setInitialConsiderationDocuments(typeOfDocument);
-            case TRIBUNAL_ORDER, DEPOSIT_ORDER, UNLESS_ORDER, TRIBUNAL_NOTICE, APP_TO_VARY_AN_ORDER_C,
-                    APP_TO_VARY_AN_ORDER_R, APP_TO_REVOKE_AN_ORDER_C, APP_TO_REVOKE_AN_ORDER_R,
-                    APP_TO_EXTEND_TIME_TO_COMPLY_TO_AN_ORDER_DIRECTIONS_C,
-                    APP_TO_EXTEND_TIME_TO_COMPLY_TO_AN_ORDER_DIRECTIONS_R, APP_TO_ORDER_THE_R_TO_DO_SOMETHING,
-                    APP_TO_ORDER_THE_C_TO_DO_SOMETHING, APP_TO_AMEND_CLAIM, APP_TO_AMEND_RESPONSE,
-                    APP_FOR_A_WITNESS_ORDER_C, DISABILITY_IMPACT_STATEMENT, R_HAS_NOT_COMPLIED_WITH_AN_ORDER_C,
-                    C_HAS_NOT_COMPLIED_WITH_AN_ORDER_R, APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_CLAIM,
-                    APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_RESPONSE, REFERRAL_JUDICIAL_DIRECTION,
-                    CHANGE_OF_PARTYS_DETAILS, APP_TO_VARY_OR_REVOKE_AN_ORDER_R, APP_TO_VARY_OR_REVOKE_AN_ORDER_C,
-                    CONTACT_THE_TRIBUNAL_C, CONTACT_THE_TRIBUNAL_R, APP_FOR_A_WITNESS_ORDER_R
-                    -> documentType.setCaseManagementDocuments(typeOfDocument);
-            case WITHDRAWAL_OF_ENTIRE_CLAIM, WITHDRAWAL_OF_PART_OF_CLAIM, COT3, WITHDRAWAL_OF_ALL_OR_PART_CLAIM
-                    -> documentType.setWithdrawalSettledDocuments(typeOfDocument);
-            case APP_TO_RESTRICT_PUBLICITY_C, APP_TO_RESTRICT_PUBLICITY_R, ANONYMITY_ORDER, NOTICE_OF_HEARING,
-                    APP_TO_POSTPONE_C, APP_TO_POSTPONE_R, HEARING_BUNDLE, SCHEDULE_OF_LOSS, COUNTER_SCHEDULE_OF_LOSS
-                    -> documentType.setHearingsDocuments(typeOfDocument);
-            case JUDGMENT, JUDGMENT_WITH_REASONS, REASONS, EXTRACT_OF_JUDGMENT
-                    -> documentType.setJudgmentAndReasonsDocuments(typeOfDocument);
-            case APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_C,
-                    APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_R, APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_C,
-                    APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_R -> documentType.setReconsiderationDocuments(typeOfDocument);
-            case CERTIFICATE_OF_CORRECTION, TRIBUNAL_CASE_FILE, OTHER -> documentType.setMiscDocuments(typeOfDocument);
-            default -> documentType.setTypeOfDocument(typeOfDocument);
+        if(typeOfDocument != null && documentType != null) {
+            switch (typeOfDocument) {
+                case ET1, ET1_ATTACHMENT, ACAS_CERTIFICATE, NOTICE_OF_CLAIM, CLAIM_ACCEPTED, CLAIM_REJECTED,
+                        CLAIM_PART_REJECTED, ET1_VETTING -> documentType.setStartingClaimDocuments(typeOfDocument);
+                case ET3, ET3_ATTACHMENT, RESPONSE_ACCEPTED, RESPONSE_REJECTED, APP_TO_EXTEND_TIME_TO_PRESENT_A_RESPONSE,
+                        ET3_PROCESSING -> documentType.setResponseClaimDocuments(typeOfDocument);
+                case INITIAL_CONSIDERATION, RULE_27_NOTICE, RULE_28_NOTICE
+                        -> documentType.setInitialConsiderationDocuments(typeOfDocument);
+                case TRIBUNAL_ORDER, DEPOSIT_ORDER, UNLESS_ORDER, TRIBUNAL_NOTICE, APP_TO_VARY_AN_ORDER_C,
+                        APP_TO_VARY_AN_ORDER_R, APP_TO_REVOKE_AN_ORDER_C, APP_TO_REVOKE_AN_ORDER_R,
+                        APP_TO_EXTEND_TIME_TO_COMPLY_TO_AN_ORDER_DIRECTIONS_C,
+                        APP_TO_EXTEND_TIME_TO_COMPLY_TO_AN_ORDER_DIRECTIONS_R, APP_TO_ORDER_THE_R_TO_DO_SOMETHING,
+                        APP_TO_ORDER_THE_C_TO_DO_SOMETHING, APP_TO_AMEND_CLAIM, APP_TO_AMEND_RESPONSE,
+                        APP_FOR_A_WITNESS_ORDER_C, DISABILITY_IMPACT_STATEMENT, R_HAS_NOT_COMPLIED_WITH_AN_ORDER_C,
+                        C_HAS_NOT_COMPLIED_WITH_AN_ORDER_R, APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_CLAIM,
+                        APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_RESPONSE, REFERRAL_JUDICIAL_DIRECTION,
+                        CHANGE_OF_PARTYS_DETAILS, APP_TO_VARY_OR_REVOKE_AN_ORDER_R, APP_TO_VARY_OR_REVOKE_AN_ORDER_C,
+                        CONTACT_THE_TRIBUNAL_C, CONTACT_THE_TRIBUNAL_R, APP_FOR_A_WITNESS_ORDER_R
+                        -> documentType.setCaseManagementDocuments(typeOfDocument);
+                case WITHDRAWAL_OF_ENTIRE_CLAIM, WITHDRAWAL_OF_PART_OF_CLAIM, COT3, WITHDRAWAL_OF_ALL_OR_PART_CLAIM
+                        -> documentType.setWithdrawalSettledDocuments(typeOfDocument);
+                case APP_TO_RESTRICT_PUBLICITY_C, APP_TO_RESTRICT_PUBLICITY_R, ANONYMITY_ORDER, NOTICE_OF_HEARING,
+                        APP_TO_POSTPONE_C, APP_TO_POSTPONE_R, HEARING_BUNDLE, SCHEDULE_OF_LOSS, COUNTER_SCHEDULE_OF_LOSS
+                        -> documentType.setHearingsDocuments(typeOfDocument);
+                case JUDGMENT, JUDGMENT_WITH_REASONS, REASONS, EXTRACT_OF_JUDGMENT
+                        -> documentType.setJudgmentAndReasonsDocuments(typeOfDocument);
+                case APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_C,
+                        APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_R, APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_C,
+                        APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_R -> documentType.setReconsiderationDocuments(typeOfDocument);
+                case CERTIFICATE_OF_CORRECTION, TRIBUNAL_CASE_FILE, OTHER -> documentType.setMiscDocuments(typeOfDocument);
+                default -> documentType.setTypeOfDocument(typeOfDocument);
+            }
         }
     }
 
