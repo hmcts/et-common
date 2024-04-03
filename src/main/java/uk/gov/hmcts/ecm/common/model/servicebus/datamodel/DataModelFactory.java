@@ -8,6 +8,7 @@ import uk.gov.hmcts.ecm.common.model.servicebus.tasks.DetachDataTask;
 import uk.gov.hmcts.ecm.common.model.servicebus.tasks.PreAcceptDataTask;
 import uk.gov.hmcts.ecm.common.model.servicebus.tasks.RejectDataTask;
 import uk.gov.hmcts.ecm.common.model.servicebus.tasks.ResetStateDataTask;
+import uk.gov.hmcts.ecm.common.model.servicebus.tasks.SendNotificationTask;
 import uk.gov.hmcts.ecm.common.model.servicebus.tasks.UpdateDataTask;
 
 public class DataModelFactory {
@@ -31,6 +32,8 @@ public class DataModelFactory {
             return new ResetStateDataTask(dataModelParent);
         } else if (dataModelParent instanceof CreationSingleDataModel) {
             return new CreationSingleDataTask(dataModelParent);
+        } else if (dataModelParent instanceof SendNotificationDataModel) {
+            return new SendNotificationTask(dataModelParent);
         } else {
             return new PreAcceptDataTask(dataModelParent);
         }

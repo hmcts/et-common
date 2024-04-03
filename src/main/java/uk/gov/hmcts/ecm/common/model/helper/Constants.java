@@ -379,6 +379,9 @@ public class Constants {
     public static final String IN_PROGRESS = "inProgress";
     public static final String STORED = "stored";
 
+    public static final String SEND_NOTIFICATION_LEAD = "Lead case";
+    public static final String SEND_NOTIFICATION_ALL = "Lead and sub cases";
+
     public static final String FUNCTION_NOT_AVAILABLE_ERROR = "This function is not available for this case,"
             + " please click cancel to return to the main page, you will need to submit your application outside"
             + " the portal via email or post.";

@@ -8,6 +8,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
 public class UpdateDataTaskTest {
 
@@ -104,7 +105,7 @@ public class UpdateDataTaskTest {
     }
 
     @Test
-    public void noJurisdictionCode() {
+    public void noJurisdictionCodeOrCaseStayed() {
         var updateModel = updateDataModelBuilder.build();
         var submitEvent = caseDataBuilder.buildAsSubmitEvent("Accepted");
 
@@ -112,6 +113,7 @@ public class UpdateDataTaskTest {
         task.run(submitEvent);
 
         assertNull(submitEvent.getCaseData().getJurCodesCollection());
+        assertNull(submitEvent.getCaseData().getBatchCaseStayed());
     }
 
     @Test
@@ -142,5 +144,17 @@ public class UpdateDataTaskTest {
         var task = new UpdateDataTask(updateModel);
         task.run(submitEvent);
         assertEquals("SubMultiple", submitEvent.getCaseData().getSubMultipleName());
+    }
+
+    @Test
+    public void batchUpdate1_withCaseStayed_setsBatchCaseStayed() {
+        var updateModel = updateDataModelBuilder.build();
+        updateModel.setBatchCaseStayed(YES);
+        var submitEvent = caseDataBuilder.buildAsSubmitEvent("Accepted");
+
+        var task = new UpdateDataTask(updateModel);
+        task.run(submitEvent);
+
+        assertEquals(YES, submitEvent.getCaseData().getBatchCaseStayed());
     }
 }

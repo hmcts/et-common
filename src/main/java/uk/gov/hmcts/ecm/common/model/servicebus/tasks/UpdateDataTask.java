@@ -91,6 +91,10 @@ public class UpdateDataTask extends DataTaskParent {
             caseData.setReceiptDate(updateDataModel.getReceiptDate());
         }
 
+        if (!isNullOrEmpty(updateDataModel.getBatchCaseStayed())) {
+            caseData.setBatchCaseStayed(updateDataModel.getBatchCaseStayed());
+        }
+
         updateManagingOffice(caseData, updateDataModel);
     }
 
