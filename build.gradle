@@ -91,6 +91,7 @@ dependencies {
     api group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.5'
 
     api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.19'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.14.0'
 
     implementation group: 'com.github.hmcts', name: 'et-data-model', version: 'd53ccc4bac'
     implementation group: 'com.github.hmcts', name: 'ecm-common', version: '2.0.5'
