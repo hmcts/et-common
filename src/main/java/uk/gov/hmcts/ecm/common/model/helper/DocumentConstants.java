@@ -1,5 +1,7 @@
 package uk.gov.hmcts.ecm.common.model.helper;
 
+import java.util.List;
+
 public class DocumentConstants {
 
     private DocumentConstants() {
@@ -90,8 +92,35 @@ public class DocumentConstants {
     public static final String NOTICE_OF_A_CLAIM = "Notice of a claim";
     public static final String TRIBUNAL_CORRESPONDENCE = "Tribunal Correspondence";
     public static final String REJECTION_OF_CLAIM = "Rejection of claim";
+    public static final String ACKNOWLEDGEMENT_OF_CLAIM = "Acknowledgement of claim";
+    public static final String CLAIMANT_CORRESPONDENCE = "Claimant correspondence";
+    public static final String RESPONDENT_CORRESPONDENCE = "Respondent correspondence";
+    public static final String TRIBUNAL_ORDER_DEPOSIT_ORDER = "Tribunal Order/Deposit Order";
+    public static final String TRIBUNAL_JUDGMENT_REASONS = "Tribunal Judgment/Reasons";
+    public static final String OTHER_SPACE = "Other ";
+    public static final String TSE_ADMIN_CORRESPONDENCE = "Tse admin correspondence";
 
     public static final String CONTACT_THE_TRIBUNAL_C = "Contact the tribunal about something else - C";
     public static final String CONTACT_THE_TRIBUNAL_R = "Contact the tribunal about something else - R";
 
+    public static final List<String> TYPE_OF_DOCUMENT = List.of(
+        ET1,
+        ET1_ATTACHMENT,
+        ACAS_CERTIFICATE,
+        ACKNOWLEDGEMENT_OF_CLAIM,
+        NOTICE_OF_A_CLAIM,
+        ET3,
+        ET3_ATTACHMENT,
+        CLAIMANT_CORRESPONDENCE,
+        RESPONDENT_CORRESPONDENCE,
+        NOTICE_OF_HEARING,
+        TRIBUNAL_CASE_FILE,
+        TRIBUNAL_CORRESPONDENCE,
+        TRIBUNAL_ORDER_DEPOSIT_ORDER,
+        TRIBUNAL_JUDGMENT_REASONS,
+        REFERRAL_JUDICIAL_DIRECTION,
+        REJECTION_OF_CLAIM,
+        OTHER_SPACE,
+        TSE_ADMIN_CORRESPONDENCE
+    );
 }
