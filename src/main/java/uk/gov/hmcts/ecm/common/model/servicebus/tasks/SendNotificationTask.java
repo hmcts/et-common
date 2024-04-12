@@ -14,6 +14,7 @@ import uk.gov.hmcts.et.common.model.ccd.types.SendNotificationTypeMultiple;
 
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.SEND_NOTIFICATION_ALL;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.SEND_NOTIFICATION_LEAD;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SEND_NOTIFICATION_SELECTED;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -45,6 +46,8 @@ public class SendNotificationTask extends DataTaskParent {
             caseData.setSendNotificationNotify(sendNotificationData.getSendNotificationNotifyLeadCase());
         } else if (SEND_NOTIFICATION_ALL.equals(sendNotificationData.getSendNotificationNotify())) {
             caseData.setSendNotificationNotify(sendNotificationData.getSendNotificationNotifyAll());
+        } else if (SEND_NOTIFICATION_SELECTED.equals(sendNotificationData.getSendNotificationNotify())) {
+            caseData.setSendNotificationNotify(sendNotificationData.getSendNotificationNotifySelected());
         }
         caseData.setSendNotificationSelectHearing(sendNotificationData.getSendNotificationSelectHearing());
         caseData.setSendNotificationCaseManagement(sendNotificationData.getSendNotificationCaseManagement());
