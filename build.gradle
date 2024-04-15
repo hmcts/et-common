@@ -90,10 +90,11 @@ dependencies {
     api group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.6.7'
     api group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.5'
 
-    api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.19'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.14.0'
-
     implementation group: 'com.github.hmcts', name: 'et-data-model', version: 'd53ccc4bac'
+
+    api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.20'
+
     implementation group: 'com.github.hmcts', name: 'ecm-common', version: '2.0.5'
     implementation group: 'com.github.hmcts', name: 'ecm-data-model', version: '1.3.3'
 
@@ -114,10 +115,10 @@ dependencies {
     testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-commons', version: '1.10.2'
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.4.0'
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
-    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.24.2'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.25.3'
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.11.0'
     testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.11.0'
-    testImplementation group: 'org.springframework', name: 'spring-test', version: '6.1.5'
+    testImplementation group: 'org.springframework', name: 'spring-test', version: '6.1.6'
     testImplementation group: 'pl.pragmatists', name: 'JUnitParams', version: '1.1.1'
 
     testCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
