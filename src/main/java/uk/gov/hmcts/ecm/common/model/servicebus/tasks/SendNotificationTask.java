@@ -10,7 +10,11 @@ import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.SendNotificationDataModel;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
-import uk.gov.hmcts.et.common.model.ccd.types.SendNotificationType;
+import uk.gov.hmcts.et.common.model.ccd.types.SendNotificationTypeMultiple;
+
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SEND_NOTIFICATION_ALL;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SEND_NOTIFICATION_LEAD;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SEND_NOTIFICATION_SELECTED;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -27,7 +31,8 @@ public class SendNotificationTask extends DataTaskParent {
     public void run(SubmitEvent submitEvent) {
         log.info("Setting single case with Notification");
         CaseData caseData = submitEvent.getCaseData();
-        SendNotificationType sendNotificationData = ((SendNotificationDataModel) dataModelParent).getSendNotification();
+        SendNotificationTypeMultiple sendNotificationData =
+                ((SendNotificationDataModel) dataModelParent).getSendNotification();
 
         caseData.setSendNotificationTitle(sendNotificationData.getSendNotificationTitle());
         caseData.setSendNotificationLetter(sendNotificationData.getSendNotificationLetter());
@@ -36,11 +41,13 @@ public class SendNotificationTask extends DataTaskParent {
         caseData.setSendNotificationAdditionalInfo(sendNotificationData.getSendNotificationAdditionalInfo());
 
         log.info("Send notify " + sendNotificationData.getSendNotificationNotify());
-        if (sendNotificationData.getSendNotificationNotify().equals("Lead case")) {
-            // Translates SendNotificationNotify property on multiple into fixed list format on single
-            // TODO Implementation for sending to lead and sub cases
+        // Translates SendNotificationNotify property on multiple into fixed list format on single
+        if (SEND_NOTIFICATION_LEAD.equals(sendNotificationData.getSendNotificationNotify())) {
             caseData.setSendNotificationNotify(sendNotificationData.getSendNotificationNotifyLeadCase());
-            log.info("Send notify now " +  caseData.getSendNotificationNotify());
+        } else if (SEND_NOTIFICATION_ALL.equals(sendNotificationData.getSendNotificationNotify())) {
+            caseData.setSendNotificationNotify(sendNotificationData.getSendNotificationNotifyAll());
+        } else if (SEND_NOTIFICATION_SELECTED.equals(sendNotificationData.getSendNotificationNotify())) {
+            caseData.setSendNotificationNotify(sendNotificationData.getSendNotificationNotifySelected());
         }
         caseData.setSendNotificationSelectHearing(sendNotificationData.getSendNotificationSelectHearing());
         caseData.setSendNotificationCaseManagement(sendNotificationData.getSendNotificationCaseManagement());
@@ -54,6 +61,8 @@ public class SendNotificationTask extends DataTaskParent {
         caseData.setSendNotificationRequestMadeBy(sendNotificationData.getSendNotificationRequestMadeBy());
         caseData.setSendNotificationEccQuestion(sendNotificationData.getSendNotificationEccQuestion());
         caseData.setSendNotificationWhoMadeJudgement(sendNotificationData.getSendNotificationWhoCaseOrder());
+        // Multiple indicator
+        caseData.setNotificationSentFrom(sendNotificationData.getNotificationSentFrom());
     }
 
 }

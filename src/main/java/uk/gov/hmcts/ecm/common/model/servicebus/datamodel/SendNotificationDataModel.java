@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import uk.gov.hmcts.et.common.model.ccd.types.SendNotificationType;
+import uk.gov.hmcts.et.common.model.ccd.types.SendNotificationTypeMultiple;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -18,5 +18,5 @@ import uk.gov.hmcts.et.common.model.ccd.types.SendNotificationType;
 public class SendNotificationDataModel extends DataModelParent {
 
     @JsonProperty("sendNotification")
-    private SendNotificationType sendNotification;
+    private SendNotificationTypeMultiple sendNotification;
 }
