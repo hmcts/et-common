@@ -28,6 +28,8 @@ import uk.gov.hmcts.ecm.common.model.reports.respondentsreport.RespondentsReport
 import uk.gov.hmcts.ecm.common.model.reports.respondentsreport.RespondentsReportSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.sessiondays.SessionDaysSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.sessiondays.SessionDaysSubmitEvent;
+import uk.gov.hmcts.ecm.common.model.schedule.NotificationSchedulePayloadEvent;
+import uk.gov.hmcts.ecm.common.model.schedule.NotificationScheduleSearchCasesResult;
 import uk.gov.hmcts.ecm.common.model.schedule.ScheduleCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadEvent;
 import uk.gov.hmcts.ecm.common.service.UserService;
@@ -441,6 +443,24 @@ public class CcdClient {
         return schedulePayloadEvents;
     }
 
+    private List<NotificationSchedulePayloadEvent> buildAndGetElasticNotificationSearchScheduleRequest(
+            String authToken,
+            String caseTypeId,
+            String query) throws IOException {
+        List<NotificationSchedulePayloadEvent> schedulePayloadEvents = new ArrayList<>();
+        HttpEntity<String> request = new HttpEntity<>(query, buildHeaders(authToken));
+        String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
+        NotificationScheduleSearchCasesResult scheduleCaseSearchResult =
+                restTemplate.exchange(url,
+                        HttpMethod.POST,
+                        request,
+                        NotificationScheduleSearchCasesResult.class).getBody();
+        if (scheduleCaseSearchResult != null && scheduleCaseSearchResult.getCases() != null) {
+            schedulePayloadEvents.addAll(scheduleCaseSearchResult.getCases());
+        }
+        return schedulePayloadEvents;
+    }
+
     private List<LabelPayloadEvent> buildAndGetElasticSearchLabelRequest(String authToken, String caseTypeId,
                                                                          String query) throws IOException {
         List<LabelPayloadEvent> labelPayloadEvents = new ArrayList<>();
@@ -559,6 +579,15 @@ public class CcdClient {
         return buildAndGetElasticSearchScheduleRequest(authToken, caseTypeId, query);
     }
 
+    public List<NotificationSchedulePayloadEvent> retrieveCasesElasticNotificationSearchSchedule(
+            String authToken,
+            String caseTypeId,
+            List<String> caseIds) throws IOException {
+        String query = ESHelper.getNotificationSearchQuerySchedule(caseIds);
+        log.info("QUERY Schedule: " + query);
+        return buildAndGetElasticNotificationSearchScheduleRequest(authToken, caseTypeId, query);
+    }
+
     public List<LabelPayloadEvent> retrieveCasesElasticSearchLabels(String authToken, String caseTypeId,
                                                                     List<String> caseIds) throws IOException {
         String query = ESHelper.getSearchQueryLabels(caseIds);
@@ -572,9 +601,10 @@ public class CcdClient {
         int totalNumberPages = getTotalPagesCount(authToken, caseTypeId, jurisdiction);
         for (int page = 1; page <= totalNumberPages; page++) {
             List<SubmitBulkEvent> submitBulkEventAux = restTemplate.exchange(getURI(authToken, caseTypeId, jurisdiction,
-                    String.valueOf(page)), HttpMethod.GET,
+                            String.valueOf(page)), HttpMethod.GET,
                     new HttpEntity<>(buildHeaders(authToken)),
-                    new ParameterizedTypeReference<List<SubmitBulkEvent>>(){}).getBody();
+                    new ParameterizedTypeReference<List<SubmitBulkEvent>>() {
+                    }).getBody();
             if (submitBulkEventAux != null) {
                 submitBulkEvents.addAll(submitBulkEventAux);
             }
@@ -607,7 +637,7 @@ public class CcdClient {
 
     public List<SubmitMultipleEvent> retrieveMultipleCasesElasticSearch(String authToken, String caseTypeId,
                                                                         String multipleReference)
-        throws IOException {
+            throws IOException {
         List<SubmitMultipleEvent> submitMultipleEvents = new ArrayList<>();
         log.info("QUERY: " + ESHelper.getBulkSearchQuery(multipleReference));
         HttpEntity<String> request =
@@ -769,10 +799,10 @@ public class CcdClient {
                                             String caseTypeId, String jurisdiction, CCDRequest req,
                                             String cid) throws IOException {
         HttpEntity<CaseDataContent> request =
-            new HttpEntity<>(caseDataBuilder.buildChangeOrganisationDataContent(changeOrganisationRequest, req,
-                UPDATE_CHANGE_ORG_SUMMARY), buildHeaders(authToken));
+                new HttpEntity<>(caseDataBuilder.buildChangeOrganisationDataContent(changeOrganisationRequest, req,
+                        UPDATE_CHANGE_ORG_SUMMARY), buildHeaders(authToken));
         String uri = ccdClientConfig.buildSubmitEventForCaseUrl(userService.getUserDetails(authToken).getUid(),
-            jurisdiction, caseTypeId, cid);
+                jurisdiction, caseTypeId, cid);
         return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitEvent.class).getBody();
     }
 
@@ -787,7 +817,7 @@ public class CcdClient {
     }
 
     public String revokeCaseAssignments(String authToken, CaseUserAssignmentData caseUserAssignmentData)
-        throws IOException {
+            throws IOException {
         String uri = ccdClientConfig.buildUrlForCaseAccessRevocation();
 
         HttpHeaders httpHeaders = buildHeaders(authToken);
@@ -799,11 +829,11 @@ public class CcdClient {
     }
 
     public CCDRequest startEventForUpdateRep(String authToken, String caseTypeId, String jurisdiction,
-                                                           String cid) throws IOException {
+                                             String cid) throws IOException {
         HttpEntity<String> request =
-            new HttpEntity<>(buildHeaders(authToken));
+                new HttpEntity<>(buildHeaders(authToken));
         String uri = ccdClientConfig.buildStartUpdateRepEventForCaseUrl(
-            userService.getUserDetails(authToken).getUid(), jurisdiction, caseTypeId, cid);
+                userService.getUserDetails(authToken).getUid(), jurisdiction, caseTypeId, cid);
         return restTemplate.exchange(uri, HttpMethod.GET, request, CCDRequest.class).getBody();
     }
 
