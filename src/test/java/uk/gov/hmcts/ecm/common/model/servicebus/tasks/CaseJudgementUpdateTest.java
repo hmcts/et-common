@@ -1,6 +1,6 @@
 package uk.gov.hmcts.ecm.common.model.servicebus.tasks;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import uk.gov.hmcts.et.common.model.bulk.types.DynamicFixedListType;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 import uk.gov.hmcts.et.common.model.ccd.items.JudgementTypeItem;
@@ -11,17 +11,17 @@ import uk.gov.hmcts.et.common.model.ccd.types.JurCodesType;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
-public class CaseJudgementUpdateTest {
+class CaseJudgementUpdateTest {
 
     private static final String JUDGEMENT_NOTES = "This is a test judgement";
 
     @Test
-    public void shouldNotAddJudgementIfNoJurisdictionCodeExists() {
+    void shouldNotAddJudgementIfNoJurisdictionCodeExists() {
         // given source case has a judgement for a single jurisdiction
         // given target case has no jurisdictions
         // when we batch update judgements
@@ -36,7 +36,7 @@ public class CaseJudgementUpdateTest {
     }
 
     @Test
-    public void shouldNotAddJudgementIfJurisdictionCodeDoesNotMatch() {
+    void shouldNotAddJudgementIfJurisdictionCodeDoesNotMatch() {
         // given source case has a judgement for a jurisdiction
         // given target case has a different jurisdiction
         // when we batch update judgements
@@ -51,7 +51,7 @@ public class CaseJudgementUpdateTest {
     }
 
     @Test
-    public void shouldNotAddJudgementIfMultipleJurisdictionCodeDontMatch() {
+    void shouldNotAddJudgementIfMultipleJurisdictionCodeDontMatch() {
         // given source case has a judgement for a jurisdiction
         // given target case has multiple different jurisdictions
         // when we batch update judgements
@@ -66,7 +66,7 @@ public class CaseJudgementUpdateTest {
     }
 
     @Test
-    public void shouldAddJudgementWhenSingleJurisdictionCodeMatches() {
+    void shouldAddJudgementWhenSingleJurisdictionCodeMatches() {
         // given source case has a judgement for a jurisdiction
         // given target case has the same jurisdiction
         // when we batch update judgements
@@ -88,7 +88,7 @@ public class CaseJudgementUpdateTest {
     }
 
     @Test
-    public void shouldAddJudgementWhenMultipleJurisdictionCodesMatch() {
+    void shouldAddJudgementWhenMultipleJurisdictionCodesMatch() {
         // given source case has a judgement for multiple jurisdictions
         // given target case has one matching jurisdiction
         // when we batch update judgements
@@ -110,7 +110,7 @@ public class CaseJudgementUpdateTest {
     }
 
     @Test
-    public void shouldAddJudgementToExistingJudgementCollection() {
+    void shouldAddJudgementToExistingJudgementCollection() {
         // given source case has a judgement
         // given target case has a judgement
         // given target jurisdiction matches source case judgement jurisdiction
@@ -142,7 +142,7 @@ public class CaseJudgementUpdateTest {
     }
 
     @Test
-    public void shouldAddJudgementIfItHasNoJurisdiction() {
+    void shouldAddJudgementIfItHasNoJurisdiction() {
         // given source case has a judgement for no jurisdictions
         // given target case has no jurisdictions
         // when we batch update judgements
@@ -160,7 +160,7 @@ public class CaseJudgementUpdateTest {
     }
 
     @Test
-    public void shouldAddJudgementIfBothCaseAndJudgementHaveNoJurisdiction() {
+    void shouldAddJudgementIfBothCaseAndJudgementHaveNoJurisdiction() {
         // given source case has a judgement for no jurisdictions
         // given target case has jurisdictions
         // when we batch update judgements
@@ -178,7 +178,7 @@ public class CaseJudgementUpdateTest {
     }
 
     @Test
-    public void shouldSetNonHearingToYesIfHearingExists() {
+    void shouldSetNonHearingToYesIfHearingExists() {
         // give source case has a judgment which is hearing related
         // when we batch update judgments
         // the target case should be set as a non hearing judgment
