@@ -199,7 +199,7 @@ public class CcdClientTest {
         ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartCaseCreationTransferUrl(any(), any(), any())).thenReturn(uri);
-        when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class)))
+        when(restTemplate.exchange(eq("Fail"), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class)))
                 .thenReturn(responseEntity);
         ccdClient.startCaseCreationTransfer("authToken", caseDetails);
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class));
