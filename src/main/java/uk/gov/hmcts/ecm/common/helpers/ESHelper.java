@@ -79,6 +79,19 @@ public class ESHelper {
                 MAX_ES_SIZE / 2, ETHOS_CASE_REFERENCE_KEYWORD, cases);
     }
 
+    public static String getNotificationSearchQuerySchedule(List<String> caseIds) {
+        String cases = caseIds.stream()
+                .map(s -> "\"" + s + "\"")
+                .collect(Collectors.joining(","));
+
+        return String.format("{\"size\":%s,"
+                        + "\"query\":{\"terms\":{\"%s\":[%s],\"boost\":1.0}},"
+                        + "\"_source\":["
+                        + "\"data.ethosCaseReference\","
+                        + "\"data.sendNotificationCollection.*\"]}",
+                MAX_ES_SIZE / 2, ETHOS_CASE_REFERENCE_KEYWORD, cases);
+    }
+
     public static String getSearchQueryLabels(List<String> caseIds) {
         String cases = caseIds.stream()
                 .map(s -> "\"" + s + "\"")
