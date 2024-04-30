@@ -175,7 +175,7 @@ public class CcdClientConfig {
                 eventId);
     }
 
-    String buildLegalRepToMultiCaseUrl(String adminUid, String jid, String ctid, String mid) {
+    String addLegalRepToMultiCaseUrl(String adminUid, String jid, String ctid, String mid) {
         return String.format(ADD_LEGAL_REP_TO_MULTIPLE, ccdDataStoreApiBaseUrl, adminUid, jid, ctid, mid);
     }
 
