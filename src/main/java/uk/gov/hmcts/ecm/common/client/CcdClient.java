@@ -455,8 +455,8 @@ public class CcdClient {
                         HttpMethod.POST,
                         request,
                         NotificationScheduleSearchCasesResult.class).getBody();
-        if (scheduleCaseSearchResult != null && scheduleCaseSearchResult.getCases() != null) {
-            schedulePayloadEvents.addAll(scheduleCaseSearchResult.getCases());
+        if (scheduleCaseSearchResult != null && scheduleCaseSearchResult.cases() != null) {
+            schedulePayloadEvents.addAll(scheduleCaseSearchResult.cases());
         }
         return schedulePayloadEvents;
     }
@@ -603,8 +603,7 @@ public class CcdClient {
             List<SubmitBulkEvent> submitBulkEventAux = restTemplate.exchange(getURI(authToken, caseTypeId, jurisdiction,
                             String.valueOf(page)), HttpMethod.GET,
                     new HttpEntity<>(buildHeaders(authToken)),
-                    new ParameterizedTypeReference<List<SubmitBulkEvent>>() {
-                    }).getBody();
+                    new ParameterizedTypeReference<List<SubmitBulkEvent>>(){}).getBody();
             if (submitBulkEventAux != null) {
                 submitBulkEvents.addAll(submitBulkEventAux);
             }
