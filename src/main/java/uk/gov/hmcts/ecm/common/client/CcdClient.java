@@ -814,13 +814,31 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.POST, request, Object.class);
     }
 
+    public ResponseEntity<Object> addUserToMultiple(String authToken, Map<String, String> userToAddId,
+                                            String caseTypeId, String jurisdiction,
+                                            String multiCid) throws IOException {
+        HttpEntity<Map<String, String>> request = new HttpEntity<>(userToAddId, buildHeaders(authToken));
+        String uri = ccdClientConfig.buildLegalRepToMultiCaseUrl(userService.getUserDetails(authToken).getUid(),
+                jurisdiction, caseTypeId, multiCid);
+        return restTemplate.exchange(uri, HttpMethod.POST, request, Object.class);
+    }
+
+    public ResponseEntity<Object> removeUserFromMultiple(String authToken,
+                                                String caseTypeId, String jurisdiction,
+                                                String multiCid, String lrUid) throws IOException {
+        HttpEntity<String> request =
+                new HttpEntity<>(buildHeaders(authToken));
+        String uri = ccdClientConfig.removeLegalRepFromMultiCaseUrl(userService.getUserDetails(authToken).getUid(),
+                jurisdiction, caseTypeId, multiCid, lrUid);
+        return restTemplate.exchange(uri, HttpMethod.DELETE, request, Object.class);
+    }
+
     HttpHeaders buildHeaders(String authToken) throws IOException {
         if (!authToken.matches("[a-zA-Z0-9._\\s\\S]+$")) {
             throw new IOException("authToken regex exception");
         }
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, authToken);
-        headers.add(SERVICE_AUTHORIZATION, authTokenGenerator.generate());
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
         return headers;
     }

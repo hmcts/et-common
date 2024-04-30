@@ -43,6 +43,10 @@ public class CcdClientConfig {
     private static final String CASE_USERS_REVOKE = "%s/case-users";
 
     private static final String SET_SUPPLEMENTARY_DATA = "%s/cases/%s/supplementary-data";
+    private static final String ADD_LEGAL_REP_TO_MULTIPLE =
+            "%s/caseworkers/%s/jurisdictions/%s/case-types/%s/cases/%s/users";
+    private static final String REMOVE_LEGAL_REP_FROM_MULTIPLE =
+            "%s/caseworkers/%s/jurisdictions/%s/case-types/%s/cases/%s/users/%s";
     private final String ccdDataStoreApiBaseUrl;
 
     public CcdClientConfig(String ccdDataStoreApiBaseUrl) {
@@ -169,5 +173,13 @@ public class CcdClientConfig {
     String buildStartEventUrlForCaseWorker(String uid, String jid, String ctid, String cid, String eventId) {
         return String.format(START_EVENT_FOR_CASE_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, cid,
                 eventId);
+    }
+
+    String buildLegalRepToMultiCaseUrl(String adminUid, String jid, String ctid, String mid) {
+        return String.format(ADD_LEGAL_REP_TO_MULTIPLE, ccdDataStoreApiBaseUrl, adminUid, jid, ctid, mid);
+    }
+
+    String removeLegalRepFromMultiCaseUrl(String adminUid, String jid, String ctid, String mid, String lrUid) {
+        return String.format(REMOVE_LEGAL_REP_FROM_MULTIPLE, ccdDataStoreApiBaseUrl, adminUid, jid, ctid, mid, lrUid);
     }
 }
