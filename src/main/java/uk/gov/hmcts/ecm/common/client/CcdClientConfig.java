@@ -20,6 +20,9 @@ import static uk.gov.hmcts.ecm.common.model.helper.Constants.UPDATE_REPRESENTATI
 @Slf4j
 public class CcdClientConfig {
 
+    private static final String FORMAT = "Format: {}";
+    private static final String URL_DETAILS = "Looking cases by: uid: {}, jid: {}, ctid: {}, param: {}";
+
     private static final String START_CASE_CREATION_URL_CASEWORKER_FORMAT =
             "%s/caseworkers/%s/jurisdictions/%s/case-types/%s/event-triggers/%s/token?ignore-warning=true";
     private static final String SUBMIT_CASE_CREATION_URL_CASEWORKER_FORMAT =
@@ -94,15 +97,15 @@ public class CcdClientConfig {
 
     String buildRetrieveCasesUrl(String uid, String jid, String ctid, String page) {
         String param = "page=" + page;
-        log.info("Looking cases by: uid: " + uid + " jid: " + jid + " ctid: " + ctid + " param: " + param);
-        log.info("Format: " + String.format(RETRIEVE_CASES_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid,
-                jid, ctid, param));
-        return String.format(RETRIEVE_CASES_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, param);
+        String url = String.format(RETRIEVE_CASES_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, param);
+        log.info(URL_DETAILS, uid , jid, ctid, param);
+        log.info(FORMAT, url);
+        return url;
     }
 
     String buildRetrieveCasesUrlElasticSearch(String ctid) {
         String format = String.format(SEARCH_CASES_FORMAT, ccdDataStoreApiBaseUrl, "ctid=" + ctid);
-        log.info("Format: " + format);
+        log.info(FORMAT, format);
         return format;
     }
 
