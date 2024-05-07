@@ -17,6 +17,7 @@ public final class ScheduleConstants {
     public static final String HEADER_5 = "Claimant Name";
     public static final String HEADER_6 = "Current Position";
     public static final String NEW_LINE_CELL = "\n";
+    public static final String RESPONSE = "Response received";
 
 }
 
