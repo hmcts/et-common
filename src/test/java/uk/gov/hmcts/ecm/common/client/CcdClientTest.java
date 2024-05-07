@@ -32,6 +32,8 @@ import uk.gov.hmcts.ecm.common.model.reports.respondentsreport.RespondentsReport
 import uk.gov.hmcts.ecm.common.model.reports.respondentsreport.RespondentsReportSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.sessiondays.SessionDaysSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.sessiondays.SessionDaysSubmitEvent;
+import uk.gov.hmcts.ecm.common.model.schedule.NotificationSchedulePayloadEvent;
+import uk.gov.hmcts.ecm.common.model.schedule.NotificationScheduleSearchCasesResult;
 import uk.gov.hmcts.ecm.common.model.schedule.ScheduleCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadEvent;
 import uk.gov.hmcts.ecm.common.service.UserService;
@@ -452,6 +454,28 @@ public class CcdClientTest {
                 new ArrayList<>(Arrays.asList("2420117/2019", "2420118/2019")));
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(ScheduleCaseSearchResult.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    void retrieveNotificationElasticSearchSchedule() throws IOException {
+        String jsonQuery = "{\"size\":5000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":["
+                + "\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}},"
+                + "\"_source\":[\"data.ethosCaseReference\","
+                + "\"data.sendNotificationCollection.*\"]}";
+        HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
+        NotificationScheduleSearchCasesResult scheduleCaseSearchResult =
+                new NotificationScheduleSearchCasesResult(2L, Arrays.asList(new NotificationSchedulePayloadEvent(),
+                        new NotificationSchedulePayloadEvent()));
+        ResponseEntity<NotificationScheduleSearchCasesResult> responseEntity =
+                new ResponseEntity<>(scheduleCaseSearchResult, HttpStatus.OK);
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+        when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity,
+                NotificationScheduleSearchCasesResult.class)).thenReturn(responseEntity);
+        ccdClient.retrieveCasesElasticNotificationSearchSchedule("authToken", caseDetails.getCaseTypeId(),
+                new ArrayList<>(Arrays.asList("2420117/2019", "2420118/2019")));
+        verify(restTemplate).exchange(uri, HttpMethod.POST, httpEntity,
+                NotificationScheduleSearchCasesResult.class);
         verifyNoMoreInteractions(restTemplate);
     }
 

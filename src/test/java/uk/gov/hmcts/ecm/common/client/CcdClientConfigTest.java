@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CcdClientConfigTest {
+class CcdClientConfigTest {
 
     private CcdClientConfig ccdClientConfig;
 
@@ -15,21 +15,21 @@ public class CcdClientConfigTest {
     }
 
     @Test
-    public void buildStartCaseCreationUrl() {
+    void buildStartCaseCreationUrl() {
         String uri = ccdClientConfig.buildStartCaseCreationUrl("1123", "TRIBUNALS", "TRIB_03");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/event-triggers/"
                 + "initiateCase/token?ignore-warning=true", uri);
     }
 
     @Test
-    public void buildStartCaseCreationTransferUrl() {
+    void buildStartCaseCreationTransferUrl() {
         String uri = ccdClientConfig.buildStartCaseCreationTransferUrl("1123", "TRIBUNALS", "TRIB_03");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/event-triggers/"
                 + "processCaseTransfer/token?ignore-warning=true", uri);
     }
 
     @Test
-    public void buildStartCaseTransferUrl() {
+    void buildStartCaseTransferUrl() {
         String uri = ccdClientConfig.buildStartCaseTransferUrl("1123", "TRIBUNALS", "TRIB_03",
                 "223");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/223/"
@@ -37,7 +37,7 @@ public class CcdClientConfigTest {
     }
 
     @Test
-    public void buildReturnCaseCreationTransferUrl() {
+    void buildReturnCaseCreationTransferUrl() {
         String uri = ccdClientConfig.buildReturnCaseCreationTransferUrl("1123", "TRIBUNALS", "TRIB_03",
                 "233");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/233/"
@@ -45,38 +45,38 @@ public class CcdClientConfigTest {
     }
 
     @Test
-    public void buildStartCaseMultipleCreationUrl() {
+    void buildStartCaseMultipleCreationUrl() {
         String uri = ccdClientConfig.buildStartCaseMultipleCreationUrl("1123", "TRIBUNALS", "TRIB_03");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/event-triggers/"
                 + "createMultiple/token?ignore-warning=true", uri);
     }
 
     @Test
-    public void buildSubmitCaseCreationUrl() {
+    void buildSubmitCaseCreationUrl() {
         String uri = ccdClientConfig.buildSubmitCaseCreationUrl("1123", "TRIBUNALS", "TRIB_03");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases", uri);
     }
 
     @Test
-    public void buildRetrieveCaseUrl() {
+    void buildRetrieveCaseUrl() {
         String uri = ccdClientConfig.buildRetrieveCaseUrl("1123", "TRIBUNALS", "TRIB_03", "1222222");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222", uri);
     }
 
     @Test
-    public void buildRetrieveCasesUrl() {
+    void buildRetrieveCasesUrl() {
         String uri = ccdClientConfig.buildRetrieveCasesUrl("1123", "TRIBUNALS", "TRIB_03", "2");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases?page=2", uri);
     }
 
     @Test
-    public void buildRetrieveCasesUrlElasticSearch() {
+    void buildRetrieveCasesUrlElasticSearch() {
         String uri = ccdClientConfig.buildRetrieveCasesUrlElasticSearch("1123");
         assertEquals("https://localhost:4452/searchCases?ctid=1123", uri);
     }
 
     @Test
-    public void buildStartEventForCaseUrl() {
+    void buildStartEventForCaseUrl() {
         String uri = ccdClientConfig.buildStartEventForCaseUrl("1123", "TRIBUNALS", "TRIB_03",
                 "1222222");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
@@ -84,7 +84,7 @@ public class CcdClientConfigTest {
     }
 
     @Test
-    public void buildStartEventForCaseUrlAPIRole() {
+    void buildStartEventForCaseUrlAPIRole() {
         String uri = ccdClientConfig.buildStartEventForCaseUrlAPIRole("1123", "TRIBUNALS", "TRIB_03",
                 "1222222");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
@@ -92,7 +92,7 @@ public class CcdClientConfigTest {
     }
 
     @Test
-    public void buildStartEventForCaseUrlBulkSingle() {
+    void buildStartEventForCaseUrlBulkSingle() {
         String uri = ccdClientConfig.buildStartEventForCaseUrlBulkSingle("1123", "TRIBUNALS", "TRIB_03",
                 "1222222");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
@@ -100,7 +100,7 @@ public class CcdClientConfigTest {
     }
 
     @Test
-    public void buildStartEventForCaseUrlPreAcceptBulkSingle() {
+    void buildStartEventForCaseUrlPreAcceptBulkSingle() {
         String uri = ccdClientConfig.buildStartEventForCaseUrlPreAcceptBulkSingle("1123", "TRIBUNALS",
                 "TRIB_03", "1222222");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
@@ -108,7 +108,7 @@ public class CcdClientConfigTest {
     }
 
     @Test
-    public void buildStartEventForBulkCaseUrl() {
+    void buildStartEventForBulkCaseUrl() {
         String uri = ccdClientConfig.buildStartEventForBulkCaseUrl("1123", "TRIBUNALS", "BULK_03",
                 "1222222");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/BULK_03/cases/1222222"
@@ -116,7 +116,7 @@ public class CcdClientConfigTest {
     }
 
     @Test
-    public void buildStartEventForBulkAmendCaseUrl() {
+    void buildStartEventForBulkAmendCaseUrl() {
         String uri = ccdClientConfig.buildStartEventForBulkAmendCaseUrl("1123", "TRIBUNALS", "BULK_03",
                 "1222222");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/BULK_03/cases/1222222"
@@ -124,7 +124,7 @@ public class CcdClientConfigTest {
     }
 
     @Test
-    public void buildSubmitEventForCaseUrl() {
+    void buildSubmitEventForCaseUrl() {
         String uri = ccdClientConfig.buildSubmitEventForCaseUrl("1123", "TRIBUNALS", "TRIB_03",
                 "1222222");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03"
@@ -132,14 +132,14 @@ public class CcdClientConfigTest {
     }
 
     @Test
-    public void buildPaginationMetadataCaseUrl() {
+    void buildPaginationMetadataCaseUrl() {
         String uri = ccdClientConfig.buildPaginationMetadataCaseUrl("1123", "TRIBUNALS", "TRIB_03");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03"
                 + "/cases/pagination_metadata", uri);
     }
 
     @Test
-    public void buildStartDisposeEventForCaseUrl() {
+    void buildStartDisposeEventForCaseUrl() {
         String uri = ccdClientConfig.buildStartDisposeEventForCaseUrl("1123", "TRIBUNALS", "TRIB_03",
                 "1222222");
         assertEquals("https://localhost:4452/caseworkers/1123/jurisdictions/TRIBUNALS/case-types/TRIB_03/cases/1222222"
