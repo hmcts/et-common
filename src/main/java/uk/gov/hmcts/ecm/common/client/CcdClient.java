@@ -595,6 +595,13 @@ public class CcdClient {
         return buildAndGetElasticSearchLabelRequest(authToken, caseTypeId, query);
     }
 
+    public List<SubmitEvent> retrieveTransferredCaseElasticSearch(String authToken, String caseTypeId,
+                                                                  String currentCaseId) throws IOException {
+        String query = ESHelper.getTransferredCaseSearchQueryLabel(currentCaseId);
+        log.info("QUERY Labels: " + query);
+        return this.buildAndGetElasticSearchRequest(authToken, caseTypeId, query);
+    }
+
     public List<SubmitBulkEvent> retrieveBulkCases(String authToken, String caseTypeId, String jurisdiction)
             throws IOException {
         List<SubmitBulkEvent> submitBulkEvents = new ArrayList<>();
