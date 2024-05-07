@@ -98,7 +98,7 @@ public class CcdClientConfig {
     String buildRetrieveCasesUrl(String uid, String jid, String ctid, String page) {
         String param = "page=" + page;
         String url = String.format(RETRIEVE_CASES_URL_CASEWORKER_FORMAT, ccdDataStoreApiBaseUrl, uid, jid, ctid, param);
-        log.info(URL_DETAILS, uid , jid, ctid, param);
+        log.info(URL_DETAILS, uid, jid, ctid, param);
         log.info(FORMAT, url);
         return url;
     }
