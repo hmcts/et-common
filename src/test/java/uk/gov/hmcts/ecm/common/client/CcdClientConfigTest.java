@@ -159,4 +159,30 @@ public class CcdClientConfigTest {
         String uri = ccdClientConfig.buildUrlForSupplementaryApi("1123");
         assertEquals("https://localhost:4452/cases/1123/supplementary-data", uri);
     }
+
+    @Test
+    void addLegalRepToMultiCaseUrl() {
+        String uri = ccdClientConfig.addLegalRepToMultiCaseUrl("123", "EMPLOYMENT",
+                "ET_EnglandWales_Multiples", "6000001");
+        assertEquals("https://localhost:4452"
+                        + "/caseworkers/123"
+                        + "/jurisdictions/EMPLOYMENT"
+                        + "/case-types/ET_EnglandWales_Multiples"
+                        + "/cases/6000001"
+                        + "/users"
+                , uri);
+    }
+
+    @Test
+    void removeLegalRepFromMultiCaseUrl() {
+        String uri = ccdClientConfig.removeLegalRepFromMultiCaseUrl("123", "EMPLOYMENT",
+                "ET_EnglandWales_Multiples", "6000001", "456");
+        assertEquals("https://localhost:4452"
+                        + "/caseworkers/123"
+                        + "/jurisdictions/EMPLOYMENT"
+                        + "/case-types/ET_EnglandWales_Multiples"
+                        + "/cases/6000001"
+                        + "/users/456"
+                , uri);
+    }
 }

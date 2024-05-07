@@ -1191,6 +1191,44 @@ public class CcdClientTest {
         verifyNoMoreInteractions(restTemplate);
     }
 
+    @Test
+    void addUserToMultiple() throws IOException {
+        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
+        when(ccdClientConfig.addLegalRepToMultiCaseUrl(any(), any(), any(), any())).thenReturn(uri);
+        ResponseEntity<Object> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), any(), eq(Object.class))).thenReturn(responseEntity);
+
+        ccdClient.addUserToMultiple(
+                "authToken",
+                caseDetails.getJurisdiction(),
+                caseDetails.getCaseTypeId(),
+                "6000001",
+                Map.of("id", "123")
+        );
+
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), any(), eq(Object.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    void removeUserFromMultiple() throws IOException {
+        when(userService.getUserDetails(anyString())).thenReturn(userDetails);
+        when(ccdClientConfig.removeLegalRepFromMultiCaseUrl(any(), any(), any(), any(), any())).thenReturn(uri);
+        ResponseEntity<Object> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.DELETE), any(), eq(Object.class))).thenReturn(responseEntity);
+
+        ccdClient.removeUserFromMultiple(
+                "authToken",
+                caseDetails.getJurisdiction(),
+                caseDetails.getCaseTypeId(),
+                "6000001",
+                "123"
+        );
+
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.DELETE), any(), eq(Object.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
     public static UserDetails getUserDetails() {
         UserDetails userDetails = new UserDetails();
         userDetails.setUid("id");
