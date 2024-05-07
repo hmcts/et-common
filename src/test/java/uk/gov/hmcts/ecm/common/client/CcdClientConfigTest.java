@@ -169,8 +169,7 @@ class CcdClientConfigTest {
                         + "/jurisdictions/EMPLOYMENT"
                         + "/case-types/ET_EnglandWales_Multiples"
                         + "/cases/6000001"
-                        + "/users"
-                , uri);
+                        + "/users", uri);
     }
 
     @Test
@@ -182,7 +181,6 @@ class CcdClientConfigTest {
                         + "/jurisdictions/EMPLOYMENT"
                         + "/case-types/ET_EnglandWales_Multiples"
                         + "/cases/6000001"
-                        + "/users/456"
-                , uri);
+                        + "/users/456", uri);
     }
 }
