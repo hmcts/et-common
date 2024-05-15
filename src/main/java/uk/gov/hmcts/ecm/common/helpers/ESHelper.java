@@ -79,6 +79,40 @@ public class ESHelper {
                 MAX_ES_SIZE / 2, ETHOS_CASE_REFERENCE_KEYWORD, cases);
     }
 
+    public static String getTransferredCaseSearchQueryLabel(String caseId) {
+        //get source case using current case id - partial match with transferredCaseLink
+        return String.format("{\"size\":%s,"
+                        + "\"query\":{"
+                        + "\"bool\":{"
+                        + "\"must\":["
+                        + "{\"terms\": {"
+                        + "\"state.keyword\": [\"Accepted\", \"Rejected\", \"Submitted\", \"Closed\", \"Vetted\"]"
+                        + "}}," //terms end
+                        + "{\"exists\": {\"field\": \"data.linkedCaseCT\" }},"
+                        + "{\"wildcard\": {\"data.linkedCaseCT\": { \"value\": %s }}}"
+                        + "]," //must end
+                        + "\"must_not\": [{\"exists\": {\"field\": \"data.transferredCaseLink\"}}]" //must_not end
+                        + "}" //bool end
+                        + "}," //query end
+                        + "\"_source\":[\"reference\"],"
+                        + "\"terminate_after\":1"
+                        + "}",
+                MAX_ES_SIZE / 2, "\"" + caseId + "\"");
+    }
+
+    public static String getNotificationSearchQuerySchedule(List<String> caseIds) {
+        String cases = caseIds.stream()
+                .map(s -> "\"" + s + "\"")
+                .collect(Collectors.joining(","));
+
+        return String.format("{\"size\":%s,"
+                        + "\"query\":{\"terms\":{\"%s\":[%s],\"boost\":1.0}},"
+                        + "\"_source\":["
+                        + "\"data.ethosCaseReference\","
+                        + "\"data.sendNotificationCollection.*\"]}",
+                MAX_ES_SIZE / 2, ETHOS_CASE_REFERENCE_KEYWORD, cases);
+    }
+
     public static String getSearchQueryLabels(List<String> caseIds) {
         String cases = caseIds.stream()
                 .map(s -> "\"" + s + "\"")

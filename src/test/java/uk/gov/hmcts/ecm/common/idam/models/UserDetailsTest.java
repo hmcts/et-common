@@ -1,13 +1,14 @@
 package uk.gov.hmcts.ecm.common.idam.models;
 
-import org.junit.Test;
-import java.util.Arrays;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
 
-public class UserDetailsTest {
+import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class UserDetailsTest {
 
     @Test
-    public void userDetails() {
+    void userDetails() {
         UserDetails userDetails = new UserDetails();
         userDetails.setEmail("example@gmail.com");
         userDetails.setFirstName("firstName");

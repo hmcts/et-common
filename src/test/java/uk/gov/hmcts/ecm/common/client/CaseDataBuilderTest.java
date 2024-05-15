@@ -18,7 +18,7 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
-public class CaseDataBuilderTest {
+class CaseDataBuilderTest {
     static final String CREATION_EVENT_SUMMARY = "Case created automatically";
     static final String UPDATE_BULK_EVENT_SUMMARY = "Bulk case updated by bulk";
     static final String UPDATE_CHANGE_ORG_SUMMARY = "Change of organisation completed";

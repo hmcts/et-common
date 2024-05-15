@@ -1,28 +1,28 @@
 package uk.gov.hmcts.ecm.common.model.servicebus.tasks;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
-public class UpdateDataTaskTest {
+class UpdateDataTaskTest {
 
     CaseDataBuilder caseDataBuilder;
     UpdateDataModelBuilder updateDataModelBuilder;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         caseDataBuilder = new CaseDataBuilder();
         updateDataModelBuilder = new UpdateDataModelBuilder();
     }
 
     @Test
-    public void addNewJurisdictionCode() {
+    void addNewJurisdictionCode() {
         var updateModel = updateDataModelBuilder.withJurisdictionCode("Code1", "Outcome1").build();
         var submitEvent = caseDataBuilder.withJurisdictionCode("Code2", "Outcome2")
                 .buildAsSubmitEvent("Accepted");
@@ -43,7 +43,7 @@ public class UpdateDataTaskTest {
     }
 
     @Test
-    public void updateExistingJurisdictionCode() {
+    void updateExistingJurisdictionCode() {
         var updateModel = updateDataModelBuilder.withJurisdictionCode("Code1", "Outcome1").build();
         var submitEvent = caseDataBuilder.withJurisdictionCode("Code1", "Outcome2")
                                         .buildAsSubmitEvent("Accepted");
@@ -64,7 +64,7 @@ public class UpdateDataTaskTest {
     }
 
     @Test
-    public void noUpdateToJurisdictionCode() {
+    void noUpdateToJurisdictionCode() {
         var updateModel = updateDataModelBuilder.build();
         var submitEvent = caseDataBuilder.withJurisdictionCode("Code1", "Outcome1")
                 .buildAsSubmitEvent("Accepted");
@@ -85,7 +85,7 @@ public class UpdateDataTaskTest {
     }
 
     @Test
-    public void addJurisdictionCodeWhenNonExist() {
+    void addJurisdictionCodeWhenNonExist() {
         var updateModel = updateDataModelBuilder.withJurisdictionCode("Code1", "Outcome1").build();
         var submitEvent = caseDataBuilder.buildAsSubmitEvent("Accepted");
 
@@ -105,7 +105,7 @@ public class UpdateDataTaskTest {
     }
 
     @Test
-    public void noJurisdictionCodeOrCaseStayed() {
+    void noJurisdictionCodeOrCaseStayed() {
         var updateModel = updateDataModelBuilder.build();
         var submitEvent = caseDataBuilder.buildAsSubmitEvent("Accepted");
 
@@ -117,7 +117,7 @@ public class UpdateDataTaskTest {
     }
 
     @Test
-    public void checkJurisdictionCode() {
+    void checkJurisdictionCode() {
         var updateModel = updateDataModelBuilder.build();
         updateModel.setIsFixCase("Yes");
 
@@ -137,7 +137,7 @@ public class UpdateDataTaskTest {
     }
 
     @Test
-    public void checkSubMultiple() {
+    void checkSubMultiple() {
         var updateModel = updateDataModelBuilder.build();
         updateModel.setSubMultiple("SubMultiple");
         var submitEvent = caseDataBuilder.buildAsSubmitEvent("Accepted");
@@ -147,7 +147,7 @@ public class UpdateDataTaskTest {
     }
 
     @Test
-    public void batchUpdate1_withCaseStayed_setsBatchCaseStayed() {
+    void batchUpdate1_withCaseStayed_setsBatchCaseStayed() {
         var updateModel = updateDataModelBuilder.build();
         updateModel.setBatchCaseStayed(YES);
         var submitEvent = caseDataBuilder.buildAsSubmitEvent("Accepted");
