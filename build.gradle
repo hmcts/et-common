@@ -10,7 +10,7 @@ plugins {
 }
 
 group 'com.github.hmcts'
-version '1.6.5'
+version '1.7.0'
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
