@@ -10,8 +10,7 @@ plugins {
 }
 
 group 'com.github.hmcts'
-version '1.6.3.3-beta'
-
+version '1.6.4'
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
@@ -91,7 +90,7 @@ dependencies {
 
     api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.21'
 
-    implementation group: 'com.github.hmcts', name: 'et-data-model', version: '3.7.1'
+    implementation group: 'com.github.hmcts', name: 'et-data-model', version: '3.8.0'
     implementation group: 'com.github.hmcts', name: 'ecm-common', version: '2.0.5'
     implementation group: 'com.github.hmcts', name: 'ecm-data-model', version: '1.3.4'
 
@@ -103,7 +102,7 @@ dependencies {
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-    implementation group: 'com.launchdarkly', name: 'launchdarkly-java-server-sdk', version: '7.4.0'
+    implementation group: 'com.launchdarkly', name: 'launchdarkly-java-server-sdk', version: '7.4.1'
 
     testImplementation(platform('org.junit:junit-bom:5.10.2'))
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: junitJupiterVersion
@@ -112,11 +111,10 @@ dependencies {
     testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-commons', version: '1.10.2'
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.4.0'
     testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.25.3'
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.11.0'
-    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.11.0'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.12.0'
+    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.12.0'
     testImplementation group: 'org.springframework', name: 'spring-test', version: '6.1.6'
     testImplementation group: 'pl.pragmatists', name: 'JUnitParams', version: '1.1.1'
-
     testCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 }
