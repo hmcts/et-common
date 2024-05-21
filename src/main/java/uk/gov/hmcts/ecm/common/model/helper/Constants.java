@@ -387,4 +387,7 @@ public class Constants {
             + " please click cancel to return to the main page, you will need to submit your application outside"
             + " the portal via email or post.";
     public static final String UNASSIGNED_OFFICE = "Unassigned";
+    public static final String WELSH_LANGUAGE = "Welsh";
+    public static final String ENGLISH_LANGUAGE = "English";
+
 }

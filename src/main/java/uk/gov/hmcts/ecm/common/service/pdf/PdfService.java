@@ -8,6 +8,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import uk.gov.hmcts.ecm.common.exceptions.PdfServiceException;
@@ -25,6 +26,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PdfService {
     private final PdfMapperService pdfMapperService;
+    @Value("${pdf.english}")
+    public String englishPdfTemplateSource;
+    @Value("${pdf.welsh}")
+    public String welshPdfTemplateSource;
 
     /**
      * Converts a {@link CaseData} class object into a pdf document
@@ -71,8 +76,8 @@ public class PdfService {
                             PDField pdfField = pdfForm.getField(entryKey);
                             pdfField.setValue(entryValue.get());
                         } catch (Exception e) {
-                            log.error("Error while parsing PDF file for entry key \""
-                                              + entryKey, caseData.getEthosCaseReference(), e.getMessage());
+                            log.error("Error while parsing PDF file for entry key {}, {}, {}", entryKey,
+                                    caseData.getEthosCaseReference(), e.getMessage());
                         }
                     }
                 }
@@ -87,12 +92,12 @@ public class PdfService {
         return new byte[0];
     }
 
-    private static void safeClose(InputStream is, CaseData caseData) {
+    public static void safeClose(InputStream is, CaseData caseData) {
         if (is != null) {
             try {
                 is.close();
             } catch (IOException e) {
-                log.error("Error while closing input stream for case: ", caseData.getEthosCaseReference(),
+                log.error("Error while closing input stream for case: {}, {}", caseData.getEthosCaseReference(),
                         e.getMessage());
             }
         }
