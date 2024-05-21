@@ -2,3 +2,7 @@ launchdarkly:
   sdk-key: ${LAUNCH_DARKLY_SDK_KEY:sdk-key}
   offline-mode: false
   env: ${LAUNCH_DARKLY_ENV:default}
+
+pdf:
+  english: "ET1_0224.pdf"
+  welsh: "CY_ET1_2222.pdf"
