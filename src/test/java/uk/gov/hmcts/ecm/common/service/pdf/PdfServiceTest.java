@@ -29,15 +29,11 @@ import uk.gov.hmcts.ecm.common.service.utils.GenericServiceUtil;
 import uk.gov.hmcts.ecm.common.service.utils.ResourceLoader;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 import static uk.gov.hmcts.ecm.common.service.utils.TestConstants.ENGLISH_LANGUAGE;
 import static uk.gov.hmcts.ecm.common.service.utils.TestConstants.WELSH_LANGUAGE;
