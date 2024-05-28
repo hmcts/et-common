@@ -62,6 +62,7 @@ import java.util.stream.Collectors;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.ALL_VENUES;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.MANUALLY_CREATED_POSITION;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.OLD_DATE_TIME_PATTERN;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SERVICE_AUTHORIZATION;
 
 @Slf4j
 public class CcdClient {
@@ -73,8 +74,6 @@ public class CcdClient {
     private CaseDataBuilder caseDataBuilder;
     private EcmCaseDataBuilder ecmCaseDataBuilder;
     private AuthTokenGenerator authTokenGenerator;
-
-    private static final String SERVICE_AUTHORIZATION = "ServiceAuthorization";
 
     static final String CREATION_EVENT_SUMMARY = "Case created automatically";
     static final String UPDATE_EVENT_SUMMARY = "Case updated by bulk";

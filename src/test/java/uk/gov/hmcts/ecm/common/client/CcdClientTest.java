@@ -84,6 +84,7 @@ import static uk.gov.hmcts.ecm.common.model.helper.Constants.CASE_SOURCE_LOCAL_R
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.LIVE_CASELOAD_REPORT;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.MANUALLY_CREATED_POSITION;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SERVICE_AUTHORIZATION;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.TIME_TO_FIRST_HEARING_REPORT;
 
 @ExtendWith(MockitoExtension.class)
@@ -120,7 +121,6 @@ public class CcdClientTest {
             = "Case with generic case data creation content summary";
     static final String CASE_CREATION_BY_GENERIC_CASE_DATA_DESCRIPTION
             = "Case with generic case data creation content description";
-    private static final String SERVICE_AUTHORIZATION = "ServiceAuthorization";
 
     @BeforeEach
     void setUp() {
@@ -160,12 +160,14 @@ public class CcdClientTest {
 
         ecmCaseData = new uk.gov.hmcts.ecm.common.model.ccd.CaseData();
         ecmCaseData.setManagingOffice(TribunalOffice.LEEDS.getOfficeName());
+
+        when(authTokenGenerator.generate()).thenReturn("authString");
     }
 
     private HttpHeaders creatBuildHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, "authToken");
-        headers.add(SERVICE_AUTHORIZATION, null);
+        headers.add(SERVICE_AUTHORIZATION, "authString");
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         return headers;
     }
@@ -934,7 +936,6 @@ public class CcdClientTest {
 
     @Test
     void buildHeaders() throws IOException {
-        when(authTokenGenerator.generate()).thenReturn("authString");
         HttpHeaders httpHeaders = ccdClient.buildHeaders("authString");
         assertEquals("[Authorization:\"authString\","
                 + " ServiceAuthorization:\"authString\","
