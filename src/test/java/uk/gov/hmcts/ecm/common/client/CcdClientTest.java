@@ -120,6 +120,7 @@ public class CcdClientTest {
             = "Case with generic case data creation content summary";
     static final String CASE_CREATION_BY_GENERIC_CASE_DATA_DESCRIPTION
             = "Case with generic case data creation content description";
+    private static final String SERVICE_AUTHORIZATION = "ServiceAuthorization";
 
     @BeforeEach
     void setUp() {
@@ -164,8 +165,8 @@ public class CcdClientTest {
     private HttpHeaders creatBuildHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, "authToken");
-        headers.add("ServiceAuthorization", null);
-        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
+        headers.add(SERVICE_AUTHORIZATION, null);
+        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         return headers;
     }
 
@@ -935,8 +936,9 @@ public class CcdClientTest {
     void buildHeaders() throws IOException {
         when(authTokenGenerator.generate()).thenReturn("authString");
         HttpHeaders httpHeaders = ccdClient.buildHeaders("authString");
-        assertEquals("[Authorization:\"authString\", ServiceAuthorization:\"authString\", "
-                + "Content-Type:\"application/json;charset=UTF-8\"]", httpHeaders.toString());
+        assertEquals("[Authorization:\"authString\","
+                + " ServiceAuthorization:\"authString\","
+                + " Content-Type:\"application/json\"]", httpHeaders.toString());
     }
 
     @Test

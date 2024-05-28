@@ -881,14 +881,14 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.DELETE, request, Object.class);
     }
 
-    HttpHeaders buildHeaders(String authToken) throws IOException {
+    public HttpHeaders buildHeaders(String authToken) throws IOException {
         if (!authToken.matches("[a-zA-Z0-9._\\s\\S]+$")) {
             throw new IOException("authToken regex exception");
         }
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, authToken);
         headers.add(SERVICE_AUTHORIZATION, authTokenGenerator.generate());
-        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
+        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         return headers;
     }
 
