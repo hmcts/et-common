@@ -62,6 +62,7 @@ import java.util.stream.Collectors;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.ALL_VENUES;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.MANUALLY_CREATED_POSITION;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.OLD_DATE_TIME_PATTERN;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SERVICE_AUTHORIZATION;
 
 @Slf4j
 public class CcdClient {
@@ -73,8 +74,6 @@ public class CcdClient {
     private CaseDataBuilder caseDataBuilder;
     private EcmCaseDataBuilder ecmCaseDataBuilder;
     private AuthTokenGenerator authTokenGenerator;
-
-    private static final String SERVICE_AUTHORIZATION = "ServiceAuthorization";
 
     static final String CREATION_EVENT_SUMMARY = "Case created automatically";
     static final String UPDATE_EVENT_SUMMARY = "Case updated by bulk";
@@ -881,14 +880,14 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.DELETE, request, Object.class);
     }
 
-    HttpHeaders buildHeaders(String authToken) throws IOException {
+    public HttpHeaders buildHeaders(String authToken) throws IOException {
         if (!authToken.matches("[a-zA-Z0-9._\\s\\S]+$")) {
             throw new IOException("authToken regex exception");
         }
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, authToken);
         headers.add(SERVICE_AUTHORIZATION, authTokenGenerator.generate());
-        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
+        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         return headers;
     }
 
