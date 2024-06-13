@@ -37,6 +37,7 @@ public class ESHelper {
     public static final String BROUGHT_FORWARD_DATE_FIELD_NAME = "data.bfActions.value.bfDate";
     public static final String CLAIMS_ACCEPTED_DATE_FIELD_NAME = "data.preAcceptCase.dateAccepted";
     public static final String MANAGING_OFFICE_FIELD_NAME = "data.managingOffice";
+    public static final String MANAGING_OFFICE_KEYWORD_FIELD_NAME = "data.managingOffice.keyword";
     private static final String REPORT_TYPE_NOT_FOUND = "Report type not found";
     public static final String CLAIMS_SERVED_DATE_FIELD_NAME = "data.claimServedDate";
     public static final String LISTING_GLASGOW_VENUE_FIELD_NAME =
@@ -167,7 +168,7 @@ public class ESHelper {
                                                        String reportType, String managingOffice) {
         String dateFieldName = getDateFieldName(reportType);
         BoolQueryBuilder boolQueryBuilder = boolQuery()
-                .must(new MatchQueryBuilder(MANAGING_OFFICE_FIELD_NAME, managingOffice))
+                .filter(new TermsQueryBuilder(MANAGING_OFFICE_KEYWORD_FIELD_NAME, managingOffice))
                 .filter(new RangeQueryBuilder(dateFieldName).gte(dateToSearchFrom).lte(dateToSearchTo));
         return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
