@@ -84,6 +84,7 @@ import static uk.gov.hmcts.ecm.common.model.helper.Constants.CASE_SOURCE_LOCAL_R
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.LIVE_CASELOAD_REPORT;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.MANUALLY_CREATED_POSITION;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SERVICE_AUTHORIZATION;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.TIME_TO_FIRST_HEARING_REPORT;
 
 @ExtendWith(MockitoExtension.class)
@@ -159,13 +160,15 @@ public class CcdClientTest {
 
         ecmCaseData = new uk.gov.hmcts.ecm.common.model.ccd.CaseData();
         ecmCaseData.setManagingOffice(TribunalOffice.LEEDS.getOfficeName());
+
+        when(authTokenGenerator.generate()).thenReturn("authString");
     }
 
     private HttpHeaders creatBuildHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, "authToken");
-        headers.add("ServiceAuthorization", null);
-        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
+        headers.add(SERVICE_AUTHORIZATION, "authString");
+        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         return headers;
     }
 
@@ -586,11 +589,9 @@ public class CcdClientTest {
 
     @Test
     void retrieveCasesGenericReportElasticSearchWithTribunalOffice() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":{\"data.managingOffice\""
-                + ":{\"query\":\"Leeds\",\"operator\":\"OR\",\"prefix_length\":0,\"max_expansions\":50,"
-                + "\"fuzzy_transpositions\":true,\"lenient\":false,\"zero_terms_query\":\"NONE\","
-                + "\"auto_generate_synonyms_phrase_query\":true,\"boost\":1.0}}}],\"filter\":[{\"range\""
-                + ":{\"data.bfActions.value.bfDate\":{\"from\":\"2019-09-23T00:00:00.000\",\"to\":\""
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"terms\":"
+                + "{\"data.managingOffice.keyword\":[\"Leeds\"],\"boost\":1.0}},"
+                + "{\"range\":{\"data.bfActions.value.bfDate\":{\"from\":\"2019-09-23T00:00:00.000\",\"to\":\""
                 + "2019-09-24T23:59:59.000\",\"include_lower\":true,\"include_upper\":true,\"boost\":1.0}}}],"
                 + "\"adjust_pure_negative\":true,\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
@@ -631,11 +632,9 @@ public class CcdClientTest {
     @Test
     void retrieveCasesGenericReportElasticSearchCasesCompleted() throws IOException {
 
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":"
-                + "{\"data.managingOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\",\"prefix_length\""
-                + ":0,\"max_expansions\":50,\"fuzzy_transpositions\":true,\"lenient\":false,"
-                + "\"zero_terms_query\":\"NONE\",\"auto_generate_synonyms_phrase_query\":true,"
-                + "\"boost\":1.0}}}],\"filter\":[{\"range\":{\"data.hearingCollection.value."
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"terms\":"
+                + "{\"data.managingOffice.keyword\":[\"Leeds\"],\"boost\":1.0}},"
+                + "{\"range\":{\"data.hearingCollection.value."
                 + "hearingDateCollection.value.listedDate\":{\"from\":\"2019-09-24T00:00:00.000\","
                 + "\"to\":\"2019-09-24T23:59:59.000\",\"include_lower\":true,\"include_upper\":true,"
                 + "\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
@@ -655,12 +654,9 @@ public class CcdClientTest {
 
     @Test
     void retrieveCasesGenericReportElasticSearchCasesTimeToFirstHearing() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":"
-                + "{\"data.managingOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\","
-                + "\"prefix_length\":0,\"max_expansions\":50,\"fuzzy_transpositions\""
-                + ":true,\"lenient\":false,\"zero_terms_query\":\"NONE\","
-                + "\"auto_generate_synonyms_phrase_query\":true,\"boost\":1.0}}}],"
-                + "\"filter\":[{\"range\":{\"data.hearingCollection."
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"terms\":"
+                + "{\"data.managingOffice.keyword\":[\"Leeds\"],\"boost\":1.0}},"
+                + "{\"range\":{\"data.hearingCollection."
                 + "value.hearingDateCollection.value.listedDate\":"
                 + "{\"from\":\"2019-09-24T00:00:00.000\",\"to\":\"2019-09-24T23:59:59.000\""
                 + ",\"include_lower\":true,\"include_upper\":true,\""
@@ -681,12 +677,12 @@ public class CcdClientTest {
 
     @Test
     void retrieveCasesGenericReportElasticSearchCasesLocalReportCaseSource() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":{\"data.managingOffice\":"
-                + "{\"query\":\"Leeds\",\"operator\":\"OR\",\"prefix_length\":0,\"max_expansions\":50"
-                + ",\"fuzzy_transpositions\":true,\"lenient\":false,\"zero_terms_query\":\"NONE\","
-                + "\"auto_generate_synonyms_phrase_query\":true,\"boost\":1.0}}}],\"filter\":[{\"range\":"
-                + "{\"data.receiptDate\":{\"from\":\"2019-09-24T00:00:00.000\",\"to\":\"2019-09-24T23:59:59.000\","
-                + "\"include_lower\":true,\"include_upper\":true,\"boost\":1.0}}}],\"adjust_pure_negative\":true"
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"terms\":"
+                + "{\"data.managingOffice.keyword\":[\"Leeds\"],\"boost\":1.0}},"
+                + "{\"range\":{\"data.receiptDate\":{\"from\":\"2019-09-24T00:00:00.000\","
+                + "\"to\":\"2019-09-24T23:59:59.000\","
+                + "\"include_lower\":true,\"include_upper\":true,\"boost\":1.0}}}],"
+                + "\"adjust_pure_negative\":true"
                 + ",\"boost\":1.0}}}";
 
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
@@ -706,13 +702,9 @@ public class CcdClientTest {
 
     @Test
     void retrieveCasesGenericReportElasticSearchLiveCaseload() throws IOException {
-        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"match\":"
-                + "{\"data.managingOffice\":{\"query\":\"Leeds\",\"operator\":\"OR\""
-                + ",\"prefix_length\":0,\"max_expansions\":50,"
-                + "\"fuzzy_transpositions\":true,\"lenient\":false,\"zero_terms_query\""
-                + ":\"NONE\",\"auto_generate_synonyms_phrase_query\":true,"
-                + "\"boost\":1.0}}}],\"filter\":[{\"range\":"
-                + "{\"data.preAcceptCase.dateAccepted\":{\"from\":\"2019-09-24T00:00:00.000\","
+        String jsonQuery = "{\"size\":10000,\"query\":{\"bool\":{\"filter\":[{\"terms\":"
+                + "{\"data.managingOffice.keyword\":[\"Leeds\"],\"boost\":1.0}},"
+                + "{\"range\":{\"data.preAcceptCase.dateAccepted\":{\"from\":\"2019-09-24T00:00:00.000\","
                 + "\"to\":\"2019-09-24T23:59:59.000\",\"include_lower\":true,\"include_upper\":true,"
                 + "\"boost\":1.0}}}],\"adjust_pure_negative\":true,\"boost\":1.0}}}";
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
@@ -933,10 +925,10 @@ public class CcdClientTest {
 
     @Test
     void buildHeaders() throws IOException {
-        when(authTokenGenerator.generate()).thenReturn("authString");
         HttpHeaders httpHeaders = ccdClient.buildHeaders("authString");
-        assertEquals("[Authorization:\"authString\", ServiceAuthorization:\"authString\", "
-                + "Content-Type:\"application/json;charset=UTF-8\"]", httpHeaders.toString());
+        assertEquals("[Authorization:\"authString\","
+                + " ServiceAuthorization:\"authString\","
+                + " Content-Type:\"application/json\"]", httpHeaders.toString());
     }
 
     @Test

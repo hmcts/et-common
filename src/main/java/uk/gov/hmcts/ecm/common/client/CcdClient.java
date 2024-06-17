@@ -61,8 +61,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.ALL_VENUES;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.MANUALLY_CREATED_POSITION;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.OLD_DATE_TIME_PATTERN;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_CASE_TYPE_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SERVICE_AUTHORIZATION;
 
 @Slf4j
 public class CcdClient {
@@ -74,8 +77,6 @@ public class CcdClient {
     private CaseDataBuilder caseDataBuilder;
     private EcmCaseDataBuilder ecmCaseDataBuilder;
     private AuthTokenGenerator authTokenGenerator;
-
-    private static final String SERVICE_AUTHORIZATION = "ServiceAuthorization";
 
     static final String CREATION_EVENT_SUMMARY = "Case created automatically";
     static final String UPDATE_EVENT_SUMMARY = "Case updated by bulk";
@@ -214,6 +215,30 @@ public class CcdClient {
         String uri = ccdClientConfig.buildRetrieveCaseUrl(userService.getUserDetails(authToken).getUid(), jurisdiction,
                 caseTypeId, cid);
         return restTemplate.exchange(uri, HttpMethod.GET, request, SubmitEvent.class).getBody();
+    }
+
+    public String retrieveTransferredCaseReference(String authToken, String caseTypeId,
+                                                   String jurisdiction, String cid)
+            throws IOException {
+        HttpEntity<uk.gov.hmcts.ecm.common.model.ccd.CCDRequest> request = new HttpEntity<>(buildHeaders(authToken));
+        String uri = ccdClientConfig.buildRetrieveCaseUrl(userService.getUserDetails(authToken).getUid(),
+                jurisdiction, caseTypeId, cid);
+
+        String targetCaseEthosReference = null;
+        if (ENGLANDWALES_CASE_TYPE_ID.equals(caseTypeId) || SCOTLAND_CASE_TYPE_ID.equals(caseTypeId)) {
+            uk.gov.hmcts.et.common.model.ccd.SubmitEvent reformCase = restTemplate.exchange(uri, HttpMethod.GET,
+                    request, uk.gov.hmcts.et.common.model.ccd.SubmitEvent.class).getBody();
+            if (reformCase != null && reformCase.getCaseData() != null) {
+                targetCaseEthosReference = reformCase.getCaseData().getEthosCaseReference();
+            }
+        } else {
+            uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent ecmCase = restTemplate.exchange(uri, HttpMethod.GET,
+                    request, uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent.class).getBody();
+            if (ecmCase != null && ecmCase.getCaseData() != null) {
+                targetCaseEthosReference = ecmCase.getCaseData().getEthosCaseReference();
+            }
+        }
+        return targetCaseEthosReference;
     }
 
     public List<SubmitEvent> executeElasticSearch(String authToken, String caseTypeId, String query)
@@ -913,16 +938,16 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.DELETE, request, Object.class);
     }
 
-    HttpHeaders buildHeaders(String authToken) throws IOException {
+    public HttpHeaders buildHeaders(String authToken) throws IOException {
         if (!authToken.matches("[a-zA-Z0-9._\\s\\S]+$")) {
             throw new IOException("authToken regex exception");
         }
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, authToken);
         headers.add(SERVICE_AUTHORIZATION, authTokenGenerator.generate());
-        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
         log.error(authToken);
         log.error(authTokenGenerator.generate());
+        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         return headers;
     }
 
