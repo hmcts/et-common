@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.hmcts.ecm.common.helpers.ESHelper;
 import uk.gov.hmcts.ecm.common.model.helper.TribunalOffice;
@@ -790,6 +791,37 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitMultipleEvent.class).getBody();
     }
 
+    public SubmitMultipleEvent getMultipleByReference(String adminUserToken,
+                                                      String caseType,
+                                                      String multipleReference) throws IOException {
+        String requestBody = ESHelper.getBulkSearchQuery(multipleReference);
+
+        HttpEntity<String> request = new HttpEntity<>(requestBody, buildHeaders(adminUserToken));
+
+        ResponseEntity<MultipleCaseSearchResult> response;
+
+        try {
+            response = restTemplate
+                    .exchange(
+                        ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseType),
+                        HttpMethod.POST,
+                        request,
+                        MultipleCaseSearchResult.class
+                    );
+        } catch (RestClientResponseException exception) {
+            log.error("Error from ccd - {}", exception.getMessage());
+            throw exception;
+        }
+
+        MultipleCaseSearchResult resultBody = response.getBody();
+
+        if (resultBody != null && CollectionUtils.isNotEmpty(resultBody.getCases())) {
+            return resultBody.getCases().get(0);
+        }
+
+        return new SubmitMultipleEvent();
+    }
+
     public AuditEventsResponse retrieveCaseEvents(String authToken, String cid) throws IOException {
         String uri = ccdClientConfig.buildCaseEventsUrl(cid);
 
@@ -889,6 +921,8 @@ public class CcdClient {
         headers.add(HttpHeaders.AUTHORIZATION, authToken);
         headers.add(SERVICE_AUTHORIZATION, authTokenGenerator.generate());
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
+        log.error(authToken);
+        log.error(authTokenGenerator.generate());
         return headers;
     }
 
