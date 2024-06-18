@@ -76,7 +76,7 @@ test {
 }
 
 ext {
-    reformLoggingVersion = '6.1.4'
+    reformLoggingVersion = '6.1.5'
     log4JVersion = '2.23.1'
     lombokVersion = '1.18.32'
     junitJupiterVersion = '5.10.2'
