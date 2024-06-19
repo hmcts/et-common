@@ -816,10 +816,10 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitMultipleEvent.class).getBody();
     }
 
-    public SubmitMultipleEvent getMultipleByReference(String adminUserToken,
+    public SubmitMultipleEvent getMultipleByName(String adminUserToken,
                                                       String caseType,
-                                                      String multipleReference) throws IOException {
-        String requestBody = ESHelper.getBulkSearchQuery(multipleReference);
+                                                      String multipleName) throws IOException {
+        String requestBody = ESHelper.getBulkSearchQueryByName(multipleName);
 
         HttpEntity<String> request = new HttpEntity<>(requestBody, buildHeaders(adminUserToken));
 
