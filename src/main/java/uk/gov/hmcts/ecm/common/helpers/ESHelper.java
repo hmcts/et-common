@@ -29,6 +29,7 @@ public class ESHelper {
 
     private static final String ETHOS_CASE_REFERENCE_KEYWORD = "data.ethosCaseReference.keyword";
     private static final String MULTIPLE_CASE_REFERENCE_KEYWORD = "data.multipleReference.keyword";
+    private static final String MULTIPLE_CASE_NAME_KEYWORD = "data.multipleName.keyword";
     private static final String LISTING_DATE_FIELD_NAME =
             "data.hearingCollection.value.hearingDateCollection.value.listedDate";
     private static final String RECEIPT_DATE_FIELD_NAME = "data.receiptDate";
@@ -136,6 +137,13 @@ public class ESHelper {
 
     public static String getBulkSearchQuery(String multipleReference) {
         TermsQueryBuilder termsQueryBuilder = termsQuery(MULTIPLE_CASE_REFERENCE_KEYWORD, multipleReference);
+        return new SearchSourceBuilder()
+                .size(MAX_ES_SIZE)
+                .query(termsQueryBuilder).toString();
+    }
+
+    public static String getBulkSearchQueryByName(String multipleName) {
+        TermsQueryBuilder termsQueryBuilder = termsQuery(MULTIPLE_CASE_NAME_KEYWORD, multipleName);
         return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
                 .query(termsQueryBuilder).toString();

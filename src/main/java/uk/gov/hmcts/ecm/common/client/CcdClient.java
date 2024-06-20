@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.hmcts.ecm.common.helpers.ESHelper;
 import uk.gov.hmcts.ecm.common.model.helper.TribunalOffice;
@@ -58,6 +59,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import javax.naming.NameNotFoundException;
 
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.ALL_VENUES;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
@@ -813,6 +815,30 @@ public class CcdClient {
         String uri = ccdClientConfig.buildSubmitCaseCreationUrl(userService.getUserDetails(authToken).getUid(),
                 jurisdiction, caseTypeId);
         return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitMultipleEvent.class).getBody();
+    }
+
+    public SubmitMultipleEvent getMultipleByName(String token, String ctid, String multipleName)
+        throws IOException, NameNotFoundException {
+
+        String requestBody = ESHelper.getBulkSearchQueryByName(multipleName);
+        HttpEntity<String> request = new HttpEntity<>(requestBody, buildHeaders(token));
+        ResponseEntity<MultipleCaseSearchResult> response;
+
+        try {
+            String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(ctid);
+            response = restTemplate.exchange(url, HttpMethod.POST, request, MultipleCaseSearchResult.class);
+        } catch (RestClientResponseException exception) {
+            log.error("Error from ccd - {}", exception.getMessage());
+            throw exception;
+        }
+
+        MultipleCaseSearchResult resultBody = response.getBody();
+
+        if (resultBody != null && CollectionUtils.isNotEmpty(resultBody.getCases())) {
+            return resultBody.getCases().get(0);
+        }
+
+        throw new NameNotFoundException("Multiple with name: " + multipleName + " not found.");
     }
 
     public AuditEventsResponse retrieveCaseEvents(String authToken, String cid) throws IOException {
