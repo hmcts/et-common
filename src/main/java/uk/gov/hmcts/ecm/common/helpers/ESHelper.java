@@ -140,7 +140,6 @@ public class ESHelper {
         var str = new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
                 .query(termsQueryBuilder).toString();
-        log.error("\\/\\/\\/\\ ES QUERY:" + str);
         return str;
     }
 
@@ -149,7 +148,6 @@ public class ESHelper {
         var str = new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
                 .query(termsQueryBuilder).toString();
-        log.error("\\/\\/\\/\\ ES QUERY:" + str);
         return str;
     }
 

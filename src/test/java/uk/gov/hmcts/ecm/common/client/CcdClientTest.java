@@ -64,6 +64,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import javax.naming.NameNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -1242,6 +1243,28 @@ public class CcdClientTest {
         );
 
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.DELETE), any(), eq(Object.class));
+        verifyNoMoreInteractions(restTemplate);
+    }
+
+    @Test
+    void getMultipleByName() throws NameNotFoundException, IOException {
+        MultipleCaseSearchResult multipleCaseSearchResult =
+                new MultipleCaseSearchResult(2L, Arrays.asList(new SubmitMultipleEvent(),
+                        new SubmitMultipleEvent()));
+
+        ResponseEntity<MultipleCaseSearchResult> responseEntity =
+                new ResponseEntity<>(multipleCaseSearchResult, HttpStatus.OK);
+
+        when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
+
+        when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), any(),
+                eq(MultipleCaseSearchResult.class))).thenReturn(responseEntity);
+
+        ccdClient.getMultipleByName("authToken", caseDetails.getCaseTypeId(), "2400001/2020");
+
+        verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), any(),
+                eq(MultipleCaseSearchResult.class));
+
         verifyNoMoreInteractions(restTemplate);
     }
 

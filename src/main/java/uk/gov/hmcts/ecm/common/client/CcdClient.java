@@ -59,6 +59,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import javax.naming.NameNotFoundException;
 
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.ALL_VENUES;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
@@ -816,23 +817,16 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitMultipleEvent.class).getBody();
     }
 
-    public SubmitMultipleEvent getMultipleByName(String adminUserToken,
-                                                      String caseType,
-                                                      String multipleName) throws IOException {
+    public SubmitMultipleEvent getMultipleByName(String token, String ctid, String multipleName)
+        throws IOException, NameNotFoundException {
+
         String requestBody = ESHelper.getBulkSearchQueryByName(multipleName);
-
-        HttpEntity<String> request = new HttpEntity<>(requestBody, buildHeaders(adminUserToken));
-
+        HttpEntity<String> request = new HttpEntity<>(requestBody, buildHeaders(token));
         ResponseEntity<MultipleCaseSearchResult> response;
 
         try {
-            response = restTemplate
-                    .exchange(
-                        ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseType),
-                        HttpMethod.POST,
-                        request,
-                        MultipleCaseSearchResult.class
-                    );
+            String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(ctid);
+            response = restTemplate.exchange(url, HttpMethod.POST, request, MultipleCaseSearchResult.class);
         } catch (RestClientResponseException exception) {
             log.error("Error from ccd - {}", exception.getMessage());
             throw exception;
@@ -844,7 +838,7 @@ public class CcdClient {
             return resultBody.getCases().get(0);
         }
 
-        return new SubmitMultipleEvent();
+        throw new NameNotFoundException("Multiple with name: " + multipleName + " not found.");
     }
 
     public AuditEventsResponse retrieveCaseEvents(String authToken, String cid) throws IOException {
@@ -945,8 +939,6 @@ public class CcdClient {
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, authToken);
         headers.add(SERVICE_AUTHORIZATION, authTokenGenerator.generate());
-        log.error(authToken);
-        log.error(authTokenGenerator.generate());
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         return headers;
     }
