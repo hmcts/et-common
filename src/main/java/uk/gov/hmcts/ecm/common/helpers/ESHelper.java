@@ -137,18 +137,16 @@ public class ESHelper {
 
     public static String getBulkSearchQuery(String multipleReference) {
         TermsQueryBuilder termsQueryBuilder = termsQuery(MULTIPLE_CASE_REFERENCE_KEYWORD, multipleReference);
-        var str = new SearchSourceBuilder()
+        return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
                 .query(termsQueryBuilder).toString();
-        return str;
     }
 
     public static String getBulkSearchQueryByName(String multipleName) {
         TermsQueryBuilder termsQueryBuilder = termsQuery(MULTIPLE_CASE_NAME_KEYWORD, multipleName);
-        var str = new SearchSourceBuilder()
+        return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
                 .query(termsQueryBuilder).toString();
-        return str;
     }
 
     public static String getListingVenueAndRangeDateSearchQuery(String dateToSearchFrom, String dateToSearchTo,
