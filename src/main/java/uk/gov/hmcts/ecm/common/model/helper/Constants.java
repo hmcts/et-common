@@ -305,6 +305,7 @@ public class Constants {
     public static final String MULTIPLE_NAME_AMENDMENT = "Amend multiple name";
     public static final String LEAD_CASE_AMENDMENT = "Amend lead case";
     public static final String ADD_CASES_TO_MULTIPLE_AMENDMENT = "Add cases to multiple";
+    public static final String REMOVE_CASES_FROM_MULTIPLE_AMENDMENT = "Remove cases from multiple";
 
     public static final String CREATE_ACTION = "Create";
     public static final String AMEND_ACTION = "Amend";
