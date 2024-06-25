@@ -7,12 +7,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import uk.gov.hmcts.et.common.model.bulk.types.DynamicFixedListType;
 import uk.gov.hmcts.et.common.model.bulk.types.DynamicValueType;
+import uk.gov.hmcts.et.common.model.ccd.items.JurCodesTypeItem;
 import uk.gov.hmcts.et.common.model.ccd.types.JudgementType;
 import uk.gov.hmcts.et.common.model.ccd.types.JurCodesType;
 import uk.gov.hmcts.et.common.model.ccd.types.RepresentedTypeC;
 import uk.gov.hmcts.et.common.model.ccd.types.RepresentedTypeR;
 import uk.gov.hmcts.et.common.model.ccd.types.RespondentSumType;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -57,6 +61,9 @@ public class UpdateDataModel extends DataModelParent {
 
     @JsonProperty("jurCodesType")
     private JurCodesType jurCodesType;
+
+    @JsonProperty("batchUpdateJurisdiction")
+    private List<JurCodesTypeItem> batchUpdateJurisdiction;
 
     @JsonProperty("outcomeUpdate")
     private RespondentSumType respondentSumType;
