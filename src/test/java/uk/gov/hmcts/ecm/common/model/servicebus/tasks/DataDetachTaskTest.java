@@ -3,12 +3,14 @@ package uk.gov.hmcts.ecm.common.model.servicebus.tasks;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
-import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DetachDataModel;
-import uk.gov.hmcts.et.common.model.ccd.types.SendNotificationTypeMultiple;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static uk.gov.hmcts.ecm.common.model.helper.Constants.*;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.ACCEPTED_STATE;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.MULTIPLE_CASE_TYPE;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SINGLE_CASE_TYPE;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
 class DataDetachTaskTest {
 

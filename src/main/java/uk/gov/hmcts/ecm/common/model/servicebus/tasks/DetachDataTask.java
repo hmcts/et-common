@@ -40,7 +40,7 @@ public class DetachDataTask extends DataTaskParent {
         submitEvent.getCaseData().setMultipleFlag(NO);
         submitEvent.getCaseData().setMultipleReferenceLinkMarkUp(" ");
 
-        if (!StringUtils.isEmpty(submitEvent.getCaseData().getSubMultipleName())){
+        if (!StringUtils.isEmpty(submitEvent.getCaseData().getSubMultipleName())) {
             submitEvent.getCaseData().setSubMultipleName(" ");
         }
 
