@@ -1,28 +1,33 @@
 package uk.gov.hmcts.ecm.common.model.helper;
 
 import junitparams.JUnitParamsRunner;
-import junitparams.Parameters;
 import junitparams.converters.Nullable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.runner.RunWith;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_CASE_TYPE_ID;
 
 @RunWith(JUnitParamsRunner.class)
-public class TribunalOfficeTest {
+class TribunalOfficeTest {
 
-    @Test
-    @Parameters
-    public void testValueOfOfficeNumber(Optional<TribunalOffice> expected, String officeNumber) {
+    @ParameterizedTest
+    @MethodSource("parametersForTestValueOfOfficeNumber")
+    void testValueOfOfficeNumber(Optional<TribunalOffice> expected, String officeNumber) {
         assertEquals(expected, TribunalOffice.valueOfOfficeNumber(officeNumber));
     }
 
-    private Object[] parametersForTestValueOfOfficeNumber() {
+    private static Object[] parametersForTestValueOfOfficeNumber() {
         return new Object[]{
             new Object[]{Optional.empty(), null},
             new Object[]{Optional.empty(), ""},
@@ -42,13 +47,13 @@ public class TribunalOfficeTest {
         };
     }
 
-    @Test
-    @Parameters
-    public void testValueOfOfficeName(TribunalOffice expected, String officeName) {
+    @ParameterizedTest
+    @MethodSource("parametersForTestValueOfOfficeName")
+    void testValueOfOfficeName(TribunalOffice expected, String officeName) {
         assertEquals(expected, TribunalOffice.valueOfOfficeName(officeName));
     }
 
-    private Object[] parametersForTestValueOfOfficeName() {
+    private static Object[] parametersForTestValueOfOfficeName() {
         return new Object[]{
             new Object[]{TribunalOffice.ABERDEEN, "Aberdeen"},
             new Object[]{TribunalOffice.BRISTOL, "Bristol"},
@@ -68,18 +73,21 @@ public class TribunalOfficeTest {
         };
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testValueOfOfficeNameNotFound() {
-        TribunalOffice.valueOfOfficeName("invalid-office-name");
+    @Test()
+    void testValueOfOfficeNameNotFound() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            TribunalOffice.valueOfOfficeName("invalid-office-name");
+            ;
+        });
     }
 
-    @Test
-    @Parameters
-    public void testGetCaseTypeId(String expectedCaseTypeId, String officeName) {
+    @ParameterizedTest
+    @MethodSource("parametersForTestGetCaseTypeId")
+    void testGetCaseTypeId(String expectedCaseTypeId, String officeName) {
         assertEquals(expectedCaseTypeId, TribunalOffice.getCaseTypeId(officeName));
     }
 
-    private Object[] parametersForTestGetCaseTypeId() {
+    private static Object[] parametersForTestGetCaseTypeId() {
         return new Object[]{
             new Object[]{SCOTLAND_CASE_TYPE_ID, "Aberdeen"},
             new Object[]{ENGLANDWALES_CASE_TYPE_ID, "Bristol"},
@@ -98,84 +106,86 @@ public class TribunalOfficeTest {
         };
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetCaseTypeIdNotFound() {
-        TribunalOffice.getCaseTypeId("invalid-office-name");
+    @Test()
+    void testGetCaseTypeIdNotFound() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            TribunalOffice.getCaseTypeId("invalid-office-name");
+        });
     }
 
-    @Test
-    @Parameters({
-        "Aberdeen, false",
-        "Bristol, true",
-        "Dundee, false",
-        "Edinburgh, false",
-        "Glasgow, false",
-        "London Central, true",
-        "London East, true",
-        "London South, true",
-        "Manchester, true",
-        "Midlands East, true",
-        "Midlands West, true",
-        "Newcastle, true",
-        "Wales, true",
-        "Watford, true"
-    })
-    public void testIsEnglandWalesOffice(String officeName, boolean expected) {
+    @ParameterizedTest
+    @MethodSource("parametersFoTestIsEnglandWalesOffice")
+    void testIsEnglandWalesOffice(String officeName, boolean expected) {
         assertEquals(expected, TribunalOffice.isEnglandWalesOffice(officeName));
     }
 
-    @Test
-    @Parameters({
-        "Aberdeen, true",
-        "Bristol, false",
-        "Dundee, true",
-        "Edinburgh, true",
-        "Glasgow, true",
-        "London Central, false",
-        "London East, false",
-        "London South, false",
-        "Manchester, false",
-        "Midlands East, false",
-        "Midlands West, false",
-        "Newcastle, false",
-        "Wales, false",
-        "Watford, false"
-    })
-    public void testIsScotlandOffice(String officeName, boolean expected) {
+    private static Stream<Arguments> parametersFoTestIsEnglandWalesOffice() {
+        return Stream.of(
+                Arguments.of("Aberdeen", false),
+                Arguments.of("Bristol", true),
+                Arguments.of("Dundee", false),
+                Arguments.of("Edinburgh", false),
+                Arguments.of("Glasgow", false),
+                Arguments.of("London Central", true),
+                Arguments.of("London East", true),
+                Arguments.of("London South", true),
+                Arguments.of("Manchester", true),
+                Arguments.of("Midlands East", true),
+                Arguments.of("Midlands West", true),
+                Arguments.of("Newcastle", true),
+                Arguments.of("Wales", true),
+                Arguments.of("Watford", true));
+    }
+
+    @ParameterizedTest
+    @MethodSource("parametersForTestIsScotlandOffice")
+    void testIsScotlandOffice(String officeName, boolean expected) {
         assertEquals(expected, TribunalOffice.isScotlandOffice(officeName));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    @Parameters({
-        "null",
-        "",
-        " ",
-        "invalid"
-    })
-    public void testIsEnglandWalesOfficeThrowsException(@Nullable String officeName) {
-        TribunalOffice.isEnglandWalesOffice(officeName);
-        fail(officeName + " should throw an IllegalArgumentException");
+    private static Stream<Arguments> parametersForTestIsScotlandOffice() {
+        return Stream.of(
+                Arguments.of("Aberdeen", true),
+                Arguments.of("Bristol", false),
+                Arguments.of("Dundee", true),
+                Arguments.of("Edinburgh", true),
+                Arguments.of("Glasgow", true),
+                Arguments.of("London Central", false),
+                Arguments.of("London East", false),
+                Arguments.of("London South", false),
+                Arguments.of("Manchester", false),
+                Arguments.of("Midlands East", false),
+                Arguments.of("Midlands West", false),
+                Arguments.of("Newcastle", false),
+                Arguments.of("Wales", false),
+                Arguments.of("Watford", false));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    @Parameters({
-        "null",
-        "",
-        " ",
-        "invalid"
-    })
-    public void testIsScotlandOfficeThrowsException(@Nullable String officeName) {
-        TribunalOffice.isScotlandOffice(officeName);
-        fail(officeName + " should throw an IllegalArgumentException");
+    @ParameterizedTest
+    @ValueSource(strings = {"null", "", " ", "invalid"})
+    void testIsEnglandWalesOfficeThrowsException(@Nullable String officeName) {
+        assertThrows(IllegalArgumentException.class, () -> {
+            TribunalOffice.isEnglandWalesOffice(officeName);
+            fail(officeName + " should throw an IllegalArgumentException");
+        });
     }
 
-    @Test
-    @Parameters
-    public void testGetOfficeForReferenceData(TribunalOffice tribunalOffice, TribunalOffice expected) {
+    @ParameterizedTest()
+    @ValueSource(strings = {"null", "", " ", "invalid"})
+    void testIsScotlandOfficeThrowsException(@Nullable String officeName) {
+        assertThrows(IllegalArgumentException.class, () -> {
+            TribunalOffice.isScotlandOffice(officeName);
+            fail(officeName + " should throw an IllegalArgumentException");
+        });
+    }
+
+    @ParameterizedTest
+    @MethodSource("parametersForTestGetOfficeForReferenceData")
+    void testGetOfficeForReferenceData(TribunalOffice tribunalOffice, TribunalOffice expected) {
         assertEquals(expected, TribunalOffice.getOfficeForReferenceData(tribunalOffice));
     }
 
-    private Object[] parametersForTestGetOfficeForReferenceData() {
+    private static Object[] parametersForTestGetOfficeForReferenceData() {
         return new Object[]{
             new Object[]{TribunalOffice.ABERDEEN, TribunalOffice.SCOTLAND},
             new Object[]{TribunalOffice.BRISTOL, TribunalOffice.BRISTOL},

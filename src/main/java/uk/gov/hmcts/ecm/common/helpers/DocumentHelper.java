@@ -153,7 +153,9 @@ public class DocumentHelper {
                     APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_R, APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_C,
                     APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_R -> documentType.setReconsiderationDocuments(typeOfDocument);
             case CERTIFICATE_OF_CORRECTION, TRIBUNAL_CASE_FILE, OTHER -> documentType.setMiscDocuments(typeOfDocument);
-            default -> documentType.setTypeOfDocument(typeOfDocument);
+            default -> {
+                // do nothing for unmatched types
+            }
         }
     }
 

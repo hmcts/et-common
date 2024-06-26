@@ -23,6 +23,8 @@ public class Constants {
     public static final String ADDRESS_LABELS_TEMPLATE = "EM-TRB-LET-ENG-00544";
     public static final int ADDRESS_LABELS_PAGE_SIZE = 14;
 
+    public static final String SERVICE_AUTHORIZATION = "ServiceAuthorization";
+
     public static final String PRE_DEFAULT_XLSX_FILE_PATH = "preDefaultValues.xlsx";
     public static final String POST_DEFAULT_XLSX_FILE_PATH = "postDefaultValues.xlsx";
     public static final String VENUE_ADDRESS_VALUES_FILE_PATH = "venueAddressValues.xlsx";
@@ -303,6 +305,7 @@ public class Constants {
     public static final String MULTIPLE_NAME_AMENDMENT = "Amend multiple name";
     public static final String LEAD_CASE_AMENDMENT = "Amend lead case";
     public static final String ADD_CASES_TO_MULTIPLE_AMENDMENT = "Add cases to multiple";
+    public static final String REMOVE_CASES_FROM_MULTIPLE_AMENDMENT = "Remove cases from multiple";
 
     public static final String CREATE_ACTION = "Create";
     public static final String AMEND_ACTION = "Amend";
@@ -386,4 +389,8 @@ public class Constants {
     public static final String FUNCTION_NOT_AVAILABLE_ERROR = "This function is not available for this case,"
             + " please click cancel to return to the main page, you will need to submit your application outside"
             + " the portal via email or post.";
+    public static final String UNASSIGNED_OFFICE = "Unassigned";
+    public static final String WELSH_LANGUAGE = "Welsh";
+    public static final String ENGLISH_LANGUAGE = "English";
+
 }

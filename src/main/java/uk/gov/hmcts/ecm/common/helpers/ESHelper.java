@@ -29,6 +29,7 @@ public class ESHelper {
 
     private static final String ETHOS_CASE_REFERENCE_KEYWORD = "data.ethosCaseReference.keyword";
     private static final String MULTIPLE_CASE_REFERENCE_KEYWORD = "data.multipleReference.keyword";
+    private static final String MULTIPLE_CASE_NAME_KEYWORD = "data.multipleName.keyword";
     private static final String LISTING_DATE_FIELD_NAME =
             "data.hearingCollection.value.hearingDateCollection.value.listedDate";
     private static final String RECEIPT_DATE_FIELD_NAME = "data.receiptDate";
@@ -37,6 +38,7 @@ public class ESHelper {
     public static final String BROUGHT_FORWARD_DATE_FIELD_NAME = "data.bfActions.value.bfDate";
     public static final String CLAIMS_ACCEPTED_DATE_FIELD_NAME = "data.preAcceptCase.dateAccepted";
     public static final String MANAGING_OFFICE_FIELD_NAME = "data.managingOffice";
+    public static final String MANAGING_OFFICE_KEYWORD_FIELD_NAME = "data.managingOffice.keyword";
     private static final String REPORT_TYPE_NOT_FOUND = "Report type not found";
     public static final String CLAIMS_SERVED_DATE_FIELD_NAME = "data.claimServedDate";
     public static final String LISTING_GLASGOW_VENUE_FIELD_NAME =
@@ -79,6 +81,40 @@ public class ESHelper {
                 MAX_ES_SIZE / 2, ETHOS_CASE_REFERENCE_KEYWORD, cases);
     }
 
+    public static String getTransferredCaseSearchQueryLabel(String caseId) {
+        //get source case using current case id - partial match with transferredCaseLink
+        return String.format("{\"size\":%s,"
+                        + "\"query\":{"
+                        + "\"bool\":{"
+                        + "\"must\":["
+                        + "{\"terms\": {"
+                        + "\"state.keyword\": [\"Accepted\", \"Rejected\", \"Submitted\", \"Closed\", \"Vetted\"]"
+                        + "}}," //terms end
+                        + "{\"exists\": {\"field\": \"data.linkedCaseCT\" }},"
+                        + "{\"wildcard\": {\"data.linkedCaseCT\": { \"value\": %s }}}"
+                        + "]," //must end
+                        + "\"must_not\": [{\"exists\": {\"field\": \"data.transferredCaseLink\"}}]" //must_not end
+                        + "}" //bool end
+                        + "}," //query end
+                        + "\"_source\":[\"reference\"],"
+                        + "\"terminate_after\":1"
+                        + "}",
+                MAX_ES_SIZE / 2, "\"" + caseId + "\"");
+    }
+
+    public static String getNotificationSearchQuerySchedule(List<String> caseIds) {
+        String cases = caseIds.stream()
+                .map(s -> "\"" + s + "\"")
+                .collect(Collectors.joining(","));
+
+        return String.format("{\"size\":%s,"
+                        + "\"query\":{\"terms\":{\"%s\":[%s],\"boost\":1.0}},"
+                        + "\"_source\":["
+                        + "\"data.ethosCaseReference\","
+                        + "\"data.sendNotificationCollection.*\"]}",
+                MAX_ES_SIZE / 2, ETHOS_CASE_REFERENCE_KEYWORD, cases);
+    }
+
     public static String getSearchQueryLabels(List<String> caseIds) {
         String cases = caseIds.stream()
                 .map(s -> "\"" + s + "\"")
@@ -101,6 +137,13 @@ public class ESHelper {
 
     public static String getBulkSearchQuery(String multipleReference) {
         TermsQueryBuilder termsQueryBuilder = termsQuery(MULTIPLE_CASE_REFERENCE_KEYWORD, multipleReference);
+        return new SearchSourceBuilder()
+                .size(MAX_ES_SIZE)
+                .query(termsQueryBuilder).toString();
+    }
+
+    public static String getBulkSearchQueryByName(String multipleName) {
+        TermsQueryBuilder termsQueryBuilder = termsQuery(MULTIPLE_CASE_NAME_KEYWORD, multipleName);
         return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)
                 .query(termsQueryBuilder).toString();
@@ -133,7 +176,7 @@ public class ESHelper {
                                                        String reportType, String managingOffice) {
         String dateFieldName = getDateFieldName(reportType);
         BoolQueryBuilder boolQueryBuilder = boolQuery()
-                .must(new MatchQueryBuilder(MANAGING_OFFICE_FIELD_NAME, managingOffice))
+                .filter(new TermsQueryBuilder(MANAGING_OFFICE_KEYWORD_FIELD_NAME, managingOffice))
                 .filter(new RangeQueryBuilder(dateFieldName).gte(dateToSearchFrom).lte(dateToSearchTo));
         return new SearchSourceBuilder()
                 .size(MAX_ES_SIZE)

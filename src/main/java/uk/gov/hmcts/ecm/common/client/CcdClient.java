@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.hmcts.ecm.common.helpers.ESHelper;
 import uk.gov.hmcts.ecm.common.model.helper.TribunalOffice;
@@ -28,6 +29,8 @@ import uk.gov.hmcts.ecm.common.model.reports.respondentsreport.RespondentsReport
 import uk.gov.hmcts.ecm.common.model.reports.respondentsreport.RespondentsReportSubmitEvent;
 import uk.gov.hmcts.ecm.common.model.reports.sessiondays.SessionDaysSearchResult;
 import uk.gov.hmcts.ecm.common.model.reports.sessiondays.SessionDaysSubmitEvent;
+import uk.gov.hmcts.ecm.common.model.schedule.NotificationSchedulePayloadEvent;
+import uk.gov.hmcts.ecm.common.model.schedule.NotificationScheduleSearchCasesResult;
 import uk.gov.hmcts.ecm.common.model.schedule.ScheduleCaseSearchResult;
 import uk.gov.hmcts.ecm.common.model.schedule.SchedulePayloadEvent;
 import uk.gov.hmcts.ecm.common.service.UserService;
@@ -56,10 +59,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import javax.naming.NameNotFoundException;
 
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.ALL_VENUES;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.ENGLANDWALES_CASE_TYPE_ID;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.MANUALLY_CREATED_POSITION;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.OLD_DATE_TIME_PATTERN;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SCOTLAND_CASE_TYPE_ID;
+import static uk.gov.hmcts.ecm.common.model.helper.Constants.SERVICE_AUTHORIZATION;
 
 @Slf4j
 public class CcdClient {
@@ -71,8 +78,6 @@ public class CcdClient {
     private CaseDataBuilder caseDataBuilder;
     private EcmCaseDataBuilder ecmCaseDataBuilder;
     private AuthTokenGenerator authTokenGenerator;
-
-    private static final String SERVICE_AUTHORIZATION = "ServiceAuthorization";
 
     static final String CREATION_EVENT_SUMMARY = "Case created automatically";
     static final String UPDATE_EVENT_SUMMARY = "Case updated by bulk";
@@ -211,6 +216,30 @@ public class CcdClient {
         String uri = ccdClientConfig.buildRetrieveCaseUrl(userService.getUserDetails(authToken).getUid(), jurisdiction,
                 caseTypeId, cid);
         return restTemplate.exchange(uri, HttpMethod.GET, request, SubmitEvent.class).getBody();
+    }
+
+    public String retrieveTransferredCaseReference(String authToken, String caseTypeId,
+                                                   String jurisdiction, String cid)
+            throws IOException {
+        HttpEntity<uk.gov.hmcts.ecm.common.model.ccd.CCDRequest> request = new HttpEntity<>(buildHeaders(authToken));
+        String uri = ccdClientConfig.buildRetrieveCaseUrl(userService.getUserDetails(authToken).getUid(),
+                jurisdiction, caseTypeId, cid);
+
+        String targetCaseEthosReference = null;
+        if (ENGLANDWALES_CASE_TYPE_ID.equals(caseTypeId) || SCOTLAND_CASE_TYPE_ID.equals(caseTypeId)) {
+            uk.gov.hmcts.et.common.model.ccd.SubmitEvent reformCase = restTemplate.exchange(uri, HttpMethod.GET,
+                    request, uk.gov.hmcts.et.common.model.ccd.SubmitEvent.class).getBody();
+            if (reformCase != null && reformCase.getCaseData() != null) {
+                targetCaseEthosReference = reformCase.getCaseData().getEthosCaseReference();
+            }
+        } else {
+            uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent ecmCase = restTemplate.exchange(uri, HttpMethod.GET,
+                    request, uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent.class).getBody();
+            if (ecmCase != null && ecmCase.getCaseData() != null) {
+                targetCaseEthosReference = ecmCase.getCaseData().getEthosCaseReference();
+            }
+        }
+        return targetCaseEthosReference;
     }
 
     public List<SubmitEvent> executeElasticSearch(String authToken, String caseTypeId, String query)
@@ -441,6 +470,24 @@ public class CcdClient {
         return schedulePayloadEvents;
     }
 
+    private List<NotificationSchedulePayloadEvent> buildAndGetElasticNotificationSearchScheduleRequest(
+            String authToken,
+            String caseTypeId,
+            String query) throws IOException {
+        List<NotificationSchedulePayloadEvent> schedulePayloadEvents = new ArrayList<>();
+        HttpEntity<String> request = new HttpEntity<>(query, buildHeaders(authToken));
+        String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(caseTypeId);
+        NotificationScheduleSearchCasesResult scheduleCaseSearchResult =
+                restTemplate.exchange(url,
+                        HttpMethod.POST,
+                        request,
+                        NotificationScheduleSearchCasesResult.class).getBody();
+        if (scheduleCaseSearchResult != null && scheduleCaseSearchResult.cases() != null) {
+            schedulePayloadEvents.addAll(scheduleCaseSearchResult.cases());
+        }
+        return schedulePayloadEvents;
+    }
+
     private List<LabelPayloadEvent> buildAndGetElasticSearchLabelRequest(String authToken, String caseTypeId,
                                                                          String query) throws IOException {
         List<LabelPayloadEvent> labelPayloadEvents = new ArrayList<>();
@@ -559,11 +606,27 @@ public class CcdClient {
         return buildAndGetElasticSearchScheduleRequest(authToken, caseTypeId, query);
     }
 
+    public List<NotificationSchedulePayloadEvent> retrieveCasesElasticNotificationSearchSchedule(
+            String authToken,
+            String caseTypeId,
+            List<String> caseIds) throws IOException {
+        String query = ESHelper.getNotificationSearchQuerySchedule(caseIds);
+        log.info("QUERY Schedule: " + query);
+        return buildAndGetElasticNotificationSearchScheduleRequest(authToken, caseTypeId, query);
+    }
+
     public List<LabelPayloadEvent> retrieveCasesElasticSearchLabels(String authToken, String caseTypeId,
                                                                     List<String> caseIds) throws IOException {
         String query = ESHelper.getSearchQueryLabels(caseIds);
         log.info("QUERY Labels: " + query);
         return buildAndGetElasticSearchLabelRequest(authToken, caseTypeId, query);
+    }
+
+    public List<SubmitEvent> retrieveTransferredCaseElasticSearch(String authToken, String caseTypeId,
+                                                                  String currentCaseId) throws IOException {
+        String query = ESHelper.getTransferredCaseSearchQueryLabel(currentCaseId);
+        log.info("QUERY Labels: " + query);
+        return this.buildAndGetElasticSearchRequest(authToken, caseTypeId, query);
     }
 
     public List<SubmitBulkEvent> retrieveBulkCases(String authToken, String caseTypeId, String jurisdiction)
@@ -572,7 +635,7 @@ public class CcdClient {
         int totalNumberPages = getTotalPagesCount(authToken, caseTypeId, jurisdiction);
         for (int page = 1; page <= totalNumberPages; page++) {
             List<SubmitBulkEvent> submitBulkEventAux = restTemplate.exchange(getURI(authToken, caseTypeId, jurisdiction,
-                    String.valueOf(page)), HttpMethod.GET,
+                            String.valueOf(page)), HttpMethod.GET,
                     new HttpEntity<>(buildHeaders(authToken)),
                     new ParameterizedTypeReference<List<SubmitBulkEvent>>(){}).getBody();
             if (submitBulkEventAux != null) {
@@ -607,7 +670,7 @@ public class CcdClient {
 
     public List<SubmitMultipleEvent> retrieveMultipleCasesElasticSearch(String authToken, String caseTypeId,
                                                                         String multipleReference)
-        throws IOException {
+            throws IOException {
         List<SubmitMultipleEvent> submitMultipleEvents = new ArrayList<>();
         log.info("QUERY: " + ESHelper.getBulkSearchQuery(multipleReference));
         HttpEntity<String> request =
@@ -754,6 +817,30 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitMultipleEvent.class).getBody();
     }
 
+    public SubmitMultipleEvent getMultipleByName(String token, String ctid, String multipleName)
+        throws IOException, NameNotFoundException {
+
+        String requestBody = ESHelper.getBulkSearchQueryByName(multipleName);
+        HttpEntity<String> request = new HttpEntity<>(requestBody, buildHeaders(token));
+        ResponseEntity<MultipleCaseSearchResult> response;
+
+        try {
+            String url = ccdClientConfig.buildRetrieveCasesUrlElasticSearch(ctid);
+            response = restTemplate.exchange(url, HttpMethod.POST, request, MultipleCaseSearchResult.class);
+        } catch (RestClientResponseException exception) {
+            log.error("Error from ccd - {}", exception.getMessage());
+            throw exception;
+        }
+
+        MultipleCaseSearchResult resultBody = response.getBody();
+
+        if (resultBody != null && CollectionUtils.isNotEmpty(resultBody.getCases())) {
+            return resultBody.getCases().get(0);
+        }
+
+        throw new NameNotFoundException("Multiple with name: " + multipleName + " not found.");
+    }
+
     public AuditEventsResponse retrieveCaseEvents(String authToken, String cid) throws IOException {
         String uri = ccdClientConfig.buildCaseEventsUrl(cid);
 
@@ -769,10 +856,10 @@ public class CcdClient {
                                             String caseTypeId, String jurisdiction, CCDRequest req,
                                             String cid) throws IOException {
         HttpEntity<CaseDataContent> request =
-            new HttpEntity<>(caseDataBuilder.buildChangeOrganisationDataContent(changeOrganisationRequest, req,
-                UPDATE_CHANGE_ORG_SUMMARY), buildHeaders(authToken));
+                new HttpEntity<>(caseDataBuilder.buildChangeOrganisationDataContent(changeOrganisationRequest, req,
+                        UPDATE_CHANGE_ORG_SUMMARY), buildHeaders(authToken));
         String uri = ccdClientConfig.buildSubmitEventForCaseUrl(userService.getUserDetails(authToken).getUid(),
-            jurisdiction, caseTypeId, cid);
+                jurisdiction, caseTypeId, cid);
         return restTemplate.exchange(uri, HttpMethod.POST, request, SubmitEvent.class).getBody();
     }
 
@@ -787,7 +874,7 @@ public class CcdClient {
     }
 
     public String revokeCaseAssignments(String authToken, CaseUserAssignmentData caseUserAssignmentData)
-        throws IOException {
+            throws IOException {
         String uri = ccdClientConfig.buildUrlForCaseAccessRevocation();
 
         HttpHeaders httpHeaders = buildHeaders(authToken);
@@ -799,11 +886,11 @@ public class CcdClient {
     }
 
     public CCDRequest startEventForUpdateRep(String authToken, String caseTypeId, String jurisdiction,
-                                                           String cid) throws IOException {
+                                             String cid) throws IOException {
         HttpEntity<String> request =
-            new HttpEntity<>(buildHeaders(authToken));
+                new HttpEntity<>(buildHeaders(authToken));
         String uri = ccdClientConfig.buildStartUpdateRepEventForCaseUrl(
-            userService.getUserDetails(authToken).getUid(), jurisdiction, caseTypeId, cid);
+                userService.getUserDetails(authToken).getUid(), jurisdiction, caseTypeId, cid);
         return restTemplate.exchange(uri, HttpMethod.GET, request, CCDRequest.class).getBody();
     }
 
@@ -814,14 +901,45 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.POST, request, Object.class);
     }
 
-    HttpHeaders buildHeaders(String authToken) throws IOException {
+    public ResponseEntity<Object> addUserToMultiple(
+            String authToken,
+            String jurisdiction,
+            String caseTypeId,
+            String multiCid,
+            Map<String, String> payload) throws IOException {
+        HttpEntity<Map<String, String>> request = new HttpEntity<>(payload, buildHeaders(authToken));
+        String uri = ccdClientConfig.addLegalRepToMultiCaseUrl(
+                userService.getUserDetails(authToken).getUid(),
+                jurisdiction,
+                caseTypeId,
+                multiCid);
+        return restTemplate.exchange(uri, HttpMethod.POST, request, Object.class);
+    }
+
+    public ResponseEntity<Object> removeUserFromMultiple(
+            String authToken,
+            String jurisdiction,
+            String caseTypeId,
+            String multiCid,
+            String lrUid) throws IOException {
+        HttpEntity<String> request = new HttpEntity<>(buildHeaders(authToken));
+        String uri = ccdClientConfig.removeLegalRepFromMultiCaseUrl(
+                userService.getUserDetails(authToken).getUid(),
+                jurisdiction,
+                caseTypeId,
+                multiCid,
+                lrUid);
+        return restTemplate.exchange(uri, HttpMethod.DELETE, request, Object.class);
+    }
+
+    public HttpHeaders buildHeaders(String authToken) throws IOException {
         if (!authToken.matches("[a-zA-Z0-9._\\s\\S]+$")) {
             throw new IOException("authToken regex exception");
         }
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, authToken);
         headers.add(SERVICE_AUTHORIZATION, authTokenGenerator.generate());
-        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
+        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         return headers;
     }
 
