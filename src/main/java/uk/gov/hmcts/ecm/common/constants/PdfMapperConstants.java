@@ -356,6 +356,11 @@ public final class PdfMapperConstants {
     public static final String EMAIL = "Email";
     public static final String POST = "Post";
     public static final String FAX = "Fax";
+    public static final String TIMES_NEW_ROMAN_PDFBOX_CHARACTER_CODE = "TiRo";
+    public static final String HELVETICA_PDFBOX_CHARACTER_CODE_1 = "Helvetica";
+    public static final String HELVETICA_PDFBOX_CHARACTER_CODE_2 = "Helv";
+    public static final String STRING_COMMA = ",";
+    public static final char LINE_FEED = '\n';
 
     private PdfMapperConstants() {
         // private due to being class of constants
