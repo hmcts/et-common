@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tika.utils.StringUtils;
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.DataModelParent;
 import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
 
@@ -33,10 +34,15 @@ public class DetachDataTask extends DataTaskParent {
     private void detachCaseFieldsFromMultiple(SubmitEvent submitEvent) {
 
         log.info("Detaching case from the Multiples");
-        submitEvent.getCaseData().setMultipleReference(null);
+        submitEvent.getCaseData().setMultipleReference(" ");
         submitEvent.getCaseData().setLeadClaimant(" ");
         submitEvent.getCaseData().setEcmCaseType(SINGLE_CASE_TYPE);
         submitEvent.getCaseData().setMultipleFlag(NO);
+        submitEvent.getCaseData().setMultipleReferenceLinkMarkUp(" ");
+
+        if (!StringUtils.isEmpty(submitEvent.getCaseData().getSubMultipleName())) {
+            submitEvent.getCaseData().setSubMultipleName(" ");
+        }
 
     }
 
