@@ -2,7 +2,6 @@ package uk.gov.hmcts.ecm.common.model.servicebus.tasks;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import uk.gov.hmcts.et.common.model.ccd.types.JurCodesType;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
