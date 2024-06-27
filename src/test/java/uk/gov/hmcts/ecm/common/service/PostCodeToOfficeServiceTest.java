@@ -29,7 +29,6 @@ class PostCodeToOfficeServiceTest {
     private static final String MIDLANDS_EAST = "Midlands East";
     private static final String WATFORD = "Watford";
 
-
     @Mock
     private PostcodeToOfficeMappings mockPostcodeToOfficeMappings;
 
@@ -73,8 +72,7 @@ class PostCodeToOfficeServiceTest {
     @Test
     void shouldDistinguishBetweenOutcodeAndAreaCode() throws InvalidPostcodeException {
 
-        Map<String, String> mockData = Map.of("PE11", MIDLANDS_EAST,
-                "PE",WATFORD);
+        Map<String, String> mockData = Map.of("PE11", MIDLANDS_EAST, "PE", WATFORD);
         given(mockPostcodeToOfficeMappings.getPostcodes()).willReturn(mockData);
         Optional<TribunalOffice> result = postcodeToOfficeService.getTribunalOfficeFromPostcode(SPALDING_POSTCODE);
         assertThat(result).contains(TribunalOffice.MIDLANDS_EAST);
@@ -83,8 +81,7 @@ class PostCodeToOfficeServiceTest {
     @Test
     void shouldDistinguishBetweenOutcodeAndAreaCode2() throws InvalidPostcodeException {
 
-        Map<String, String> mockData = Map.of("PE11", MIDLANDS_EAST,
-                "PE",WATFORD);
+        Map<String, String> mockData = Map.of("PE11", MIDLANDS_EAST, "PE", WATFORD);
         given(mockPostcodeToOfficeMappings.getPostcodes()).willReturn(mockData);
         Optional<TribunalOffice> result = postcodeToOfficeService.getTribunalOfficeFromPostcode(PETERBOROUGH_POSTCODE);
         assertThat(result).contains(TribunalOffice.WATFORD);
