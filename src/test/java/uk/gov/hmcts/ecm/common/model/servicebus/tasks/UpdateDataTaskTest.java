@@ -3,6 +3,8 @@ package uk.gov.hmcts.ecm.common.model.servicebus.tasks;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import uk.gov.hmcts.et.common.model.ccd.types.JurCodesType;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -40,6 +42,26 @@ class UpdateDataTaskTest {
                         j.getValue().getJuridictionCodesList().equals(expectedCode)
                                 && j.getValue().getJudgmentOutcome().equals(expectedOutcome))
         );
+    }
+
+    @Test
+    void addNewMultipleJurisdictionCodes() {
+        var updateModel = updateDataModelBuilder.withJurisdictionCode("Code1", "Outcome1").build();
+        var jurCodeType = new JurCodesType();
+        jurCodeType.setJuridictionCodesList("DAG");
+        jurCodeType.setJudgmentOutcome("Not allocated");
+        updateModel.getJurCodesList().add(jurCodeType);
+
+        var submitEvent = caseDataBuilder.withJurisdictionCode("Code2", "Outcome2")
+                .buildAsSubmitEvent("Accepted");
+
+        var task = new UpdateDataTask(updateModel);
+        task.run(submitEvent);
+
+        var resultJurCollection = submitEvent.getCaseData().getJurCodesCollection();
+        assertEquals("DAG", resultJurCollection.get(2).getValue().getJuridictionCodesList());
+        assertEquals("Not allocated", resultJurCollection.get(2).getValue().getJudgmentOutcome());
+        assertEquals(3, resultJurCollection.size());
     }
 
     @Test

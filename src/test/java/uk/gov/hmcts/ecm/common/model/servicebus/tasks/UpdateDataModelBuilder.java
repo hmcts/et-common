@@ -1,5 +1,8 @@
 package uk.gov.hmcts.ecm.common.model.servicebus.tasks;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.gov.hmcts.ecm.common.model.servicebus.datamodel.UpdateDataModel;
 import uk.gov.hmcts.et.common.model.ccd.types.JurCodesType;
 
@@ -11,7 +14,9 @@ public class UpdateDataModelBuilder {
         jurCodeType.setJuridictionCodesList(jurCode);
         jurCodeType.setJudgmentOutcome(outcome);
 
-        dataModel.setJurCodesType(jurCodeType);
+        ArrayList<JurCodesType> list = new ArrayList<>();
+        list.add(jurCodeType);
+        dataModel.setJurCodesList(list);
         return this;
     }
 
