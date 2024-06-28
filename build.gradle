@@ -79,7 +79,7 @@ ext {
     reformLoggingVersion = '6.1.5'
     log4JVersion = '2.23.1'
     lombokVersion = '1.18.34'
-    junitJupiterVersion = '5.10.2'
+    junitJupiterVersion = '5.10.3'
 }
 
 // endregion
@@ -112,11 +112,11 @@ dependencies {
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     implementation group: 'com.launchdarkly', name: 'launchdarkly-java-server-sdk', version: '7.5.0'
 
-    testImplementation(platform('org.junit:junit-bom:5.10.2'))
+    testImplementation(platform('org.junit:junit-bom:5.10.3'))
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: junitJupiterVersion
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: junitJupiterVersion
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junitJupiterVersion
-    testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-commons', version: '1.10.2'
+    testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-commons', version: '1.10.3'
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.4.0'
     testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.26.0'
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.12.0'
