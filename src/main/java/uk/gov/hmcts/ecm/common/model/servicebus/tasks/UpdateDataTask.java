@@ -194,6 +194,10 @@ public class UpdateDataTask extends DataTaskParent {
             updateJurisdictionCode(caseData, updateDataModel.getJurCodesType());
         }
 
+        if (updateDataModel.getJurCodesList() != null) {
+            updateDataModel.getJurCodesList().forEach(o -> updateJurisdictionCode(caseData, o));
+        }
+
         if (updateDataModel.getRespondentSumType() != null) {
             updateRespondentSumType(caseData, updateDataModel.getRespondentSumType());
         }
