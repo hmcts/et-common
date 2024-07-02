@@ -54,7 +54,7 @@ public final class PdfMapperServiceUtil {
      * @return boolean true when UK, false when not UK country
      */
     private static boolean isUkCountry(String countryName) {
-        return StringUtils.isEmpty(countryName) || UK_COUNTRY_NAMES.contains(countryName
+        return StringUtils.isNotEmpty(countryName) && UK_COUNTRY_NAMES.contains(countryName
                                                                                  .replace(" ", "")
                                                                                  .toUpperCase(Locale.UK)
                                                                                  .trim());
