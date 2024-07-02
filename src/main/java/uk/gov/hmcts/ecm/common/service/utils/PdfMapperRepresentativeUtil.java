@@ -1,7 +1,7 @@
 package uk.gov.hmcts.ecm.common.service.utils;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.util.ObjectUtils;
 import uk.gov.hmcts.ecm.common.constants.PdfMapperConstants;
 import uk.gov.hmcts.et.common.model.ccd.Address;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
@@ -23,7 +23,7 @@ public final class PdfMapperRepresentativeUtil {
 
     public static void putRepresentative(CaseData caseData, ConcurrentMap<String, Optional<String>> printFields) {
         try {
-            if (!ObjectUtils.isEmpty(caseData.getRepresentativeClaimantType())) {
+            if (ObjectUtils.isNotEmpty(caseData.getRepresentativeClaimantType())) {
                 putGenericRepresentativeFields(caseData.getRepresentativeClaimantType(), printFields);
                 putRepresentativeAddress(caseData.getRepresentativeClaimantType().getRepresentativeAddress(),
                                          printFields);
@@ -71,7 +71,7 @@ public final class PdfMapperRepresentativeUtil {
 
     private static void putRepresentativeAddress(Address representativeAddress,
                                                  ConcurrentMap<String, Optional<String>> printFields) {
-        if (!ObjectUtils.isEmpty(representativeAddress)) {
+        if (ObjectUtils.isNotEmpty(representativeAddress)) {
             printFields.put(
                 PdfMapperConstants.Q11_3_REPRESENTATIVE_ADDRESS,
                 ofNullable(PdfMapperServiceUtil.formatAddressForTextField(representativeAddress))
