@@ -127,18 +127,16 @@ public final class PdfMapperServiceUtil {
     public static String formatUkPostcode(Address address) {
         if (isUkCountry(address.getCountry())) {
             try {
-                if (StringUtils.isNotBlank(address.getPostCode())) {
-                    PostCodeValidator postCodeValidator = new PostCodeValidator(address.getPostCode());
+                PostCodeValidator postCodeValidator = new PostCodeValidator(address.getPostCode());
 
-                    String outward = postCodeValidator.returnOutwardCode().trim() + " ";
-                    String inward = postCodeValidator.returnInwardCode().trim();
+                String outward = postCodeValidator.returnOutwardCode().trim() + " ";
+                String inward = postCodeValidator.returnInwardCode().trim();
 
-                    return outward + inward;
-                } else {
-                    return "";
-                }
+                return outward + inward;
             } catch (InvalidPostcodeException e) {
-                log.error("Exception occurred when formatting postcode " + address.getPostCode(), e);
+                GenericServiceUtil.logException("Exception occurred when formatting postcode " + address.getPostCode(),
+                        "can not reach case reference number", e.getMessage(), "PdfMapperServiceUtil",
+                        "formatUkPostcode");
                 return address.getPostCode();
             }
         } else {

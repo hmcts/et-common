@@ -173,7 +173,7 @@ class PdfMapperServiceUtilTest {
     void formatUkPostcodeNull() {
         Address address = new CaseTestData().getCaseData().getClaimantType().getClaimantAddressUK();
         address.setPostCode(null);
-        assertThat(PdfMapperServiceUtil.formatUkPostcode(address)).isEmpty();
+        assertThat(PdfMapperServiceUtil.formatUkPostcode(address)).isBlank();
     }
 
     @ParameterizedTest
@@ -221,7 +221,7 @@ class PdfMapperServiceUtilTest {
                         TestDataProvider.generateTestAddressByPostcodeCountry("AB121AB",
                                 TestConstants.NULL_STRING)),
                 Arguments.of("AB13 1AB",
-                        TestDataProvider.generateTestAddressByPostcodeCountry("AB131AB",
+                        TestDataProvider.generateTestAddressByPostcodeCountry("AB13 1AB",
                                 TestConstants.EMPTY_STRING)),
                 Arguments.of(TestConstants.EMPTY_STRING,
                         TestDataProvider.generateTestAddressByPostcodeCountry(TestConstants.EMPTY_STRING,
