@@ -89,7 +89,7 @@ dependencies {
     implementation group: 'uk.gov.dwp.regex', name: 'postcode-validation', version: '1.1.0'
 
     api group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.6.7'
-    api group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.5'
+    api group: 'org.apache.poi', name: 'poi-ooxml', version: '5.3.0'
 
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.14.0'
 
