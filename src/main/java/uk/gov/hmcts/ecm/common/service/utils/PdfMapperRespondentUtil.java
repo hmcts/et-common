@@ -154,7 +154,7 @@ public final class PdfMapperRespondentUtil {
             );
             printFields.put(
                 postCodeField,
-                ofNullable(PdfMapperServiceUtil.formatUkPostcode(address))
+                ofNullable(PdfMapperServiceUtil.formatPostcode(address))
             );
         }
     }

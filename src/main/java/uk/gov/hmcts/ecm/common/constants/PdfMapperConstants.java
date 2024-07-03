@@ -361,6 +361,8 @@ public final class PdfMapperConstants {
     public static final String HELVETICA_PDFBOX_CHARACTER_CODE_2 = "Helv";
     public static final String STRING_COMMA = ",";
     public static final char LINE_FEED = '\n';
+    public static final String STRING_EMPTY = "";
+    public static final String STRING_BLANK = " ";
 
     private PdfMapperConstants() {
         // private due to being class of constants
