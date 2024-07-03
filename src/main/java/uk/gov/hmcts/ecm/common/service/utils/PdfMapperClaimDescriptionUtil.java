@@ -1,7 +1,7 @@
 package uk.gov.hmcts.ecm.common.service.utils;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.util.ObjectUtils;
 import uk.gov.hmcts.ecm.common.constants.PdfMapperConstants;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 
@@ -18,7 +18,7 @@ public final class PdfMapperClaimDescriptionUtil {
 
     public static void putClaimDescription(CaseData caseData, ConcurrentMap<String, Optional<String>> printFields) {
         try {
-            if (!ObjectUtils.isEmpty(caseData.getClaimantRequests())
+            if (ObjectUtils.isNotEmpty(caseData.getClaimantRequests())
                 && StringUtils.isNotBlank(caseData.getClaimantRequests().getClaimDescription())) {
                 printFields.put(
                     PdfMapperConstants.Q8_CLAIM_DESCRIPTION,

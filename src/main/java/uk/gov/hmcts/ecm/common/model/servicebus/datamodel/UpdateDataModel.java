@@ -14,6 +14,8 @@ import uk.gov.hmcts.et.common.model.ccd.types.RepresentedTypeC;
 import uk.gov.hmcts.et.common.model.ccd.types.RepresentedTypeR;
 import uk.gov.hmcts.et.common.model.ccd.types.RespondentSumType;
 
+import java.util.List;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
@@ -57,6 +59,8 @@ public class UpdateDataModel extends DataModelParent {
 
     @JsonProperty("jurCodesType")
     private JurCodesType jurCodesType;
+
+    private List<JurCodesType> jurCodesList;
 
     @JsonProperty("outcomeUpdate")
     private RespondentSumType respondentSumType;

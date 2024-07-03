@@ -58,14 +58,14 @@ class PdfMapperServiceUtilTest {
         address.setAddressLine2(ADDRESS_LINE2);
         address.setAddressLine3(ADDRESS_LINE3);
         address.setPostCode(POSTCODE);
-        address.setCountry(ENGLAND);
         address.setPostTown(LEEDS);
+        address.setCountry(ENGLAND);
         String expectedAddressString = """
-            Co-operative Retail Services Ltd, 11, Merrion Way,
-            Sample Address Line 2,
-            Sample Address Line 3,
-            Leeds,
-            England""";
+                        Co-operative Retail Services Ltd, 11, Merrion Way,
+                        Sample Address Line 2,
+                        Sample Address Line 3,
+                        Leeds,
+                        England""";
         // When
         String actualAddressString = PdfMapperServiceUtil.formatAddressForTextField(address);
         // Then
@@ -80,8 +80,8 @@ class PdfMapperServiceUtilTest {
         address.setAddressLine2(null);
         address.setAddressLine3(null);
         address.setPostCode(null);
-        address.setCountry(null);
         address.setPostTown(null);
+        address.setCountry(null);
         // When
         String actualAddressString = PdfMapperServiceUtil.formatAddressForTextField(address);
         // Then
@@ -96,14 +96,18 @@ class PdfMapperServiceUtilTest {
         address.setAddressLine1("");
         address.setAddressLine2(ADDRESS_LINE2);
         address.setAddressLine3(ADDRESS_LINE3);
-        address.setPostCode(POSTCODE);
-        address.setCountry(ENGLAND);
         address.setPostTown(LEEDS);
+        address.setCountry(ENGLAND);
+        String expectedAddressString = """
+                       Sample Address Line 2,
+                       Sample Address Line 3,
+                       Leeds,
+                       England""";
         // When
         String actualAddressString = PdfMapperServiceUtil.formatAddressForTextField(address);
         // Then
         assertDoesNotThrow(() -> PdfMapperServiceUtil.formatAddressForTextField(address));
-        assertThat(actualAddressString).isNull();
+        assertThat(actualAddressString).isEqualTo(expectedAddressString);
     }
 
     @Test
@@ -113,14 +117,18 @@ class PdfMapperServiceUtilTest {
         address.setAddressLine1(ADDRESS_LINE1);
         address.setAddressLine2(ADDRESS_LINE2);
         address.setAddressLine3(ADDRESS_LINE3);
-        address.setPostCode(POSTCODE);
-        address.setCountry(ENGLAND);
         address.setPostTown("");
+        address.setCountry(ENGLAND);
+        String expectedAddressString = """
+                       Co-operative Retail Services Ltd, 11, Merrion Way,
+                       Sample Address Line 2,
+                       Sample Address Line 3,
+                       England""";
         // When
         String actualAddressString = PdfMapperServiceUtil.formatAddressForTextField(address);
         // Then
         assertDoesNotThrow(() -> PdfMapperServiceUtil.formatAddressForTextField(address));
-        assertThat(actualAddressString).isNull();
+        assertThat(actualAddressString).isEqualTo(expectedAddressString);
     }
 
     @Test
@@ -131,13 +139,18 @@ class PdfMapperServiceUtilTest {
         address.setAddressLine2(ADDRESS_LINE2);
         address.setAddressLine3(ADDRESS_LINE3);
         address.setPostCode(POSTCODE);
-        address.setCountry("");
         address.setPostTown(LEEDS);
+        address.setCountry("");
+        String expectedAddressString = """
+                       Co-operative Retail Services Ltd, 11, Merrion Way,
+                       Sample Address Line 2,
+                       Sample Address Line 3,
+                       Leeds""";
         // When
         String actualAddressString = PdfMapperServiceUtil.formatAddressForTextField(address);
         // Then
         assertDoesNotThrow(() -> PdfMapperServiceUtil.formatAddressForTextField(address));
-        assertThat(actualAddressString).isNull();
+        assertThat(actualAddressString).isEqualTo(expectedAddressString);
     }
 
     @Test
@@ -160,7 +173,7 @@ class PdfMapperServiceUtilTest {
     void formatUkPostcodeNull() {
         Address address = new CaseTestData().getCaseData().getClaimantType().getClaimantAddressUK();
         address.setPostCode(null);
-        assertThat(PdfMapperServiceUtil.formatUkPostcode(address)).isEmpty();
+        assertThat(PdfMapperServiceUtil.formatUkPostcode(address)).isBlank();
     }
 
     @ParameterizedTest
@@ -208,7 +221,7 @@ class PdfMapperServiceUtilTest {
                         TestDataProvider.generateTestAddressByPostcodeCountry("AB121AB",
                                 TestConstants.NULL_STRING)),
                 Arguments.of("AB13 1AB",
-                        TestDataProvider.generateTestAddressByPostcodeCountry("AB131AB",
+                        TestDataProvider.generateTestAddressByPostcodeCountry("AB13 1AB",
                                 TestConstants.EMPTY_STRING)),
                 Arguments.of(TestConstants.EMPTY_STRING,
                         TestDataProvider.generateTestAddressByPostcodeCountry(TestConstants.EMPTY_STRING,

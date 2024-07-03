@@ -4,14 +4,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.pdfbox.Loader;
+import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
+import org.apache.pdfbox.pdmodel.PDResources;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import uk.gov.hmcts.ecm.common.exceptions.PdfServiceException;
+import uk.gov.hmcts.ecm.common.service.utils.GenericServiceUtil;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 
 import java.io.ByteArrayOutputStream;
@@ -20,6 +24,10 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.HELVETICA_PDFBOX_CHARACTER_CODE_1;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.HELVETICA_PDFBOX_CHARACTER_CODE_2;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.TIMES_NEW_ROMAN_PDFBOX_CHARACTER_CODE;
 
 @Slf4j
 @Service
@@ -33,13 +41,12 @@ public class PdfService {
 
     /**
      * Converts a {@link CaseData} class object into a pdf document
-     * using template (ver. ET1_2222)
+     * using template (ver. ET1_0224)
      *
      * @param caseData  The data that is to be converted into pdf
      * @param pdfSource The source location of the PDF file to be used as the template
      * @return A byte array that contains the pdf document.
      */
-    // TODO - refactor this method and related call out of et-sya-api
     public byte[] convertCaseToPdf(CaseData caseData, String pdfSource) throws PdfServiceException {
         byte[] pdfDocumentBytes;
         try {
@@ -64,7 +71,11 @@ public class PdfService {
                 : cl.getResourceAsStream(pdfSource);
         if (!ObjectUtils.isEmpty(stream)) {
             try (PDDocument pdfDocument = Loader.loadPDF(
-                    Objects.requireNonNull(stream))) {
+                Objects.requireNonNull(stream))) {
+                PDResources resources = new PDResources();
+                resources.put(COSName.getPDFName(TIMES_NEW_ROMAN_PDFBOX_CHARACTER_CODE), PDType1Font.TIMES_ROMAN);
+                resources.put(COSName.getPDFName(HELVETICA_PDFBOX_CHARACTER_CODE_1), PDType1Font.HELVETICA);
+                resources.put(COSName.getPDFName(HELVETICA_PDFBOX_CHARACTER_CODE_2), PDType1Font.HELVETICA);
                 PDDocumentCatalog pdDocumentCatalog = pdfDocument.getDocumentCatalog();
                 PDAcroForm pdfForm = pdDocumentCatalog.getAcroForm();
                 for (Map.Entry<String, Optional<String>> entry : this.pdfMapperService.mapHeadersToPdf(caseData)
@@ -76,8 +87,9 @@ public class PdfService {
                             PDField pdfField = pdfForm.getField(entryKey);
                             pdfField.setValue(entryValue.get());
                         } catch (Exception e) {
-                            log.error("Error while parsing PDF file for entry key {}, {}, {}", entryKey,
-                                    caseData.getEthosCaseReference(), e.getMessage());
+                            GenericServiceUtil.logException("Error while parsing PDF file for entry key \""
+                                                         + entryKey, caseData.getEthosCaseReference(), e.getMessage(),
+                                                            this.getClass().getName(), "createPdf");
                         }
                     }
                 }
@@ -97,8 +109,9 @@ public class PdfService {
             try {
                 is.close();
             } catch (IOException e) {
-                log.error("Error while closing input stream for case: {}, {}", caseData.getEthosCaseReference(),
-                        e.getMessage());
+                GenericServiceUtil.logException("Input stream for the template PDF file was not closed: ",
+                                                caseData.getEthosCaseReference(), e.getMessage(),
+                                                "PDFServiceUtil", "safeClose");
             }
         }
     }

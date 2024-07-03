@@ -1,6 +1,7 @@
 package uk.gov.hmcts.ecm.common.service.utils;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import uk.gov.dwp.regex.InvalidPostcodeException;
 import uk.gov.dwp.regex.PostCodeValidator;
@@ -12,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Set;
 
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.LINE_FEED;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.STRING_COMMA;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
 /**
@@ -51,7 +54,7 @@ public final class PdfMapperServiceUtil {
      * @return boolean true when UK, false when not UK country
      */
     private static boolean isUkCountry(String countryName) {
-        return StringUtils.isEmpty(countryName) || UK_COUNTRY_NAMES.contains(countryName
+        return StringUtils.isNotEmpty(countryName) && UK_COUNTRY_NAMES.contains(countryName
                                                                                  .replace(" ", "")
                                                                                  .toUpperCase(Locale.UK)
                                                                                  .trim());
@@ -88,49 +91,30 @@ public final class PdfMapperServiceUtil {
      * @return converted String value of address model.
      */
     public static String formatAddressForTextField(Address address) {
-        StringBuilder addressStringValue = new StringBuilder();
+        StringBuilder addressValue = new StringBuilder();
+        appendAddress(addressValue, address.getAddressLine1());
+        appendAddress(addressValue, address.getAddressLine2());
+        appendAddress(addressValue, address.getAddressLine3());
+        appendAddress(addressValue, address.getPostTown());
+        appendAddress(addressValue, address.getCounty());
+        appendAddress(addressValue, address.getCountry());
+        addressValue = ObjectUtils.isNotEmpty(addressValue)
+                && StringUtils.isNotEmpty(addressValue)
+                && addressValue.length() > 1
+                && STRING_COMMA.equals(addressValue.substring(addressValue.length() - 1))
+                ? new StringBuilder(addressValue.substring(0, addressValue.length() - 1))
+                : addressValue;
+        return StringUtils.isNotEmpty(addressValue.toString()) ? addressValue.toString() : null;
+    }
 
-        if (StringUtils.isNotEmpty(address.getAddressLine1())) {
-            addressStringValue
-                .append(convertFirstCharactersOfWordsToCapitalCase(address.getAddressLine1()))
-                .append(',');
-        } else {
-            return null;
+    private static void appendAddress(StringBuilder addressValue, String appendValue) {
+        if (StringUtils.isNotEmpty(appendValue)) {
+            if (ObjectUtils.isNotEmpty(addressValue)
+                    && StringUtils.isNotEmpty(addressValue.toString())) {
+                addressValue.append(LINE_FEED);
+            }
+            addressValue.append(convertFirstCharactersOfWordsToCapitalCase(appendValue)).append(STRING_COMMA);
         }
-        if (StringUtils.isNotEmpty(address.getAddressLine2())) {
-            addressStringValue
-                .append('\n')
-                .append(convertFirstCharactersOfWordsToCapitalCase(address.getAddressLine2()))
-                .append(',');
-        }
-        if (StringUtils.isNotEmpty(address.getAddressLine3())) {
-            addressStringValue
-                .append('\n')
-                .append(convertFirstCharactersOfWordsToCapitalCase(address.getAddressLine3()))
-                .append(',');
-        }
-        if (StringUtils.isNotEmpty(address.getPostTown())) {
-            addressStringValue
-                .append('\n')
-                .append(convertFirstCharactersOfWordsToCapitalCase(address.getPostTown()))
-                .append(',');
-        } else {
-            return null;
-        }
-        if (StringUtils.isNotEmpty(address.getCounty())) {
-            addressStringValue
-                .append('\n')
-                .append(convertFirstCharactersOfWordsToCapitalCase(address.getCounty()))
-                .append(',');
-        }
-        if (StringUtils.isNotEmpty(address.getCountry())) {
-            addressStringValue
-                .append('\n')
-                .append(convertFirstCharactersOfWordsToCapitalCase(address.getCountry()));
-        } else {
-            return null;
-        }
-        return StringUtils.isNotEmpty(addressStringValue.toString()) ? addressStringValue.toString() : null;
     }
 
     /**
@@ -143,18 +127,16 @@ public final class PdfMapperServiceUtil {
     public static String formatUkPostcode(Address address) {
         if (isUkCountry(address.getCountry())) {
             try {
-                if (StringUtils.isNotBlank(address.getPostCode())) {
-                    PostCodeValidator postCodeValidator = new PostCodeValidator(address.getPostCode());
+                PostCodeValidator postCodeValidator = new PostCodeValidator(address.getPostCode());
 
-                    String outward = postCodeValidator.returnOutwardCode().trim() + " ";
-                    String inward = postCodeValidator.returnInwardCode().trim();
+                String outward = postCodeValidator.returnOutwardCode().trim() + " ";
+                String inward = postCodeValidator.returnInwardCode().trim();
 
-                    return outward + inward;
-                } else {
-                    return "";
-                }
+                return outward + inward;
             } catch (InvalidPostcodeException e) {
-                log.error("Exception occurred when formatting postcode " + address.getPostCode(), e);
+                GenericServiceUtil.logException("Exception occurred when formatting postcode " + address.getPostCode(),
+                        "can not reach case reference number", e.getMessage(), "PdfMapperServiceUtil",
+                        "formatUkPostcode");
                 return address.getPostCode();
             }
         } else {
