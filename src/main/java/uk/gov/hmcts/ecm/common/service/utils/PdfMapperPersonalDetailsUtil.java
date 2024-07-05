@@ -136,7 +136,7 @@ public final class PdfMapperPersonalDetailsUtil {
             printFields.put(PdfMapperConstants.Q1_6_CLAIMANT_ADDRESS,
                             ofNullable(PdfMapperServiceUtil.formatAddressForTextField(claimantAddressUK)));
             printFields.put(PdfMapperConstants.Q1_6_CLAIMANT_POSTCODE,
-                            ofNullable(PdfMapperServiceUtil.formatUkPostcode(claimantAddressUK)));
+                            ofNullable(PdfMapperServiceUtil.formatPostcode(claimantAddressUK)));
         }
 
         printFields.put(

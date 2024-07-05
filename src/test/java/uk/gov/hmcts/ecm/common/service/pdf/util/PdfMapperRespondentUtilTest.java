@@ -166,7 +166,7 @@ class PdfMapperRespondentUtilTest {
         assertThat(printFields.get(addressField))
             .contains(PdfMapperServiceUtil.formatAddressForTextField(address));
         assertThat(printFields.get(postCodeField))
-            .contains(PdfMapperServiceUtil.formatUkPostcode(address));
+            .contains(PdfMapperServiceUtil.formatPostcode(address));
     }
 
     private static void checkAcasCertificate(ConcurrentMap<String, Optional<String>> printFields,

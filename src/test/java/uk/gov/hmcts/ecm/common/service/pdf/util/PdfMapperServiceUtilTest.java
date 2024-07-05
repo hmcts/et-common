@@ -173,13 +173,13 @@ class PdfMapperServiceUtilTest {
     void formatUkPostcodeNull() {
         Address address = new CaseTestData().getCaseData().getClaimantType().getClaimantAddressUK();
         address.setPostCode(null);
-        assertThat(PdfMapperServiceUtil.formatUkPostcode(address)).isBlank();
+        assertThat(PdfMapperServiceUtil.formatPostcode(address)).isBlank();
     }
 
     @ParameterizedTest
     @MethodSource("postcodeAddressArguments")
     void formatUkPostcode(String expectedPostCode, Address address) {
-        assertThat(PdfMapperServiceUtil.formatUkPostcode(address)).isEqualTo(expectedPostCode);
+        assertThat(PdfMapperServiceUtil.formatPostcode(address)).isEqualTo(expectedPostCode);
     }
 
     private static Stream<Arguments> postcodeAddressArguments() {
@@ -214,13 +214,19 @@ class PdfMapperServiceUtilTest {
                 Arguments.of("34730",
                         TestDataProvider.generateTestAddressByPostcodeCountry("34730",
                                 "Turkey")),
+                Arguments.of("CF119HA",
+                        TestDataProvider.generateTestAddressByPostcodeCountry("C F 1 1  9 H A",
+                                "Turkey")),
+                Arguments.of("CF11 9HA",
+                        TestDataProvider.generateTestAddressByPostcodeCountry("C F 1 1  9 H A",
+                                "wales")),
                 Arguments.of("AB11 1AB",
                         TestDataProvider.generateTestAddressByPostcodeCountry("AB111AB",
                                 "United kingdom")),
                 Arguments.of("AB12 1AB",
                         TestDataProvider.generateTestAddressByPostcodeCountry("AB121AB",
                                 TestConstants.NULL_STRING)),
-                Arguments.of("AB13 1AB",
+                Arguments.of("AB131AB",
                         TestDataProvider.generateTestAddressByPostcodeCountry("AB13 1AB",
                                 TestConstants.EMPTY_STRING)),
                 Arguments.of(TestConstants.EMPTY_STRING,

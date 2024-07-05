@@ -78,7 +78,7 @@ public final class PdfMapperRepresentativeUtil {
             );
             printFields.put(
                 PdfMapperConstants.Q11_3_REPRESENTATIVE_POSTCODE,
-                ofNullable(PdfMapperServiceUtil.formatUkPostcode(representativeAddress))
+                ofNullable(PdfMapperServiceUtil.formatPostcode(representativeAddress))
             );
         }
     }

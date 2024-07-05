@@ -57,7 +57,7 @@ class PdfMapperRepresentativeUtilTest {
                     .contains(PdfMapperServiceUtil.formatAddressForTextField(
                         caseData.getRepresentativeClaimantType().getRepresentativeAddress()));
                 assertThat(printFields.get(PdfMapperConstants.Q11_3_REPRESENTATIVE_POSTCODE))
-                    .contains(PdfMapperServiceUtil.formatUkPostcode(
+                    .contains(PdfMapperServiceUtil.formatPostcode(
                         caseData.getRepresentativeClaimantType().getRepresentativeAddress()));
             } else {
                 assertThat(printFields.get(PdfMapperConstants.Q11_3_REPRESENTATIVE_ADDRESS)).isNull();

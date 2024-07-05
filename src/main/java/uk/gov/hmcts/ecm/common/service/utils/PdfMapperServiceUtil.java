@@ -14,7 +14,9 @@ import java.util.Locale;
 import java.util.Set;
 
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.LINE_FEED;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.STRING_BLANK;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.STRING_COMMA;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.STRING_EMPTY;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
 /**
@@ -118,29 +120,37 @@ public final class PdfMapperServiceUtil {
     }
 
     /**
-     * Returns formatted UK Postcode.
-     * A UK postcode has a space character before 3rd character of it' s last character.
+     * Removes all space characters in between all country's postcode characters.
+     * If postcode is a postcode in the UK.
+     * UK postcode has a space character before 3rd character of it's last character.
      * Such as SL63NY should be formatted as SL6 3NY or WF102SX as WF10 2SX etc...
      * @param address address model that holds address data
      * @return formatted String value of Postcode
      */
-    public static String formatUkPostcode(Address address) {
+    public static String formatPostcode(Address address) {
+        if (ObjectUtils.isEmpty(address) || StringUtils.isBlank(address.getPostCode())) {
+            return STRING_EMPTY;
+        }
         if (isUkCountry(address.getCountry())) {
             try {
                 PostCodeValidator postCodeValidator = new PostCodeValidator(address.getPostCode());
 
-                String outward = postCodeValidator.returnOutwardCode().trim() + " ";
-                String inward = postCodeValidator.returnInwardCode().trim();
+                String outward = StringUtils.isNotBlank(postCodeValidator.returnOutwardCode())
+                        ? postCodeValidator.returnOutwardCode().replace(STRING_BLANK, STRING_EMPTY).trim()
+                        : STRING_EMPTY;
+                String inward = StringUtils.isNotBlank(postCodeValidator.returnInwardCode())
+                        ? postCodeValidator.returnInwardCode().replace(STRING_BLANK, STRING_EMPTY).trim()
+                        : STRING_EMPTY;
 
-                return outward + inward;
+                return outward + STRING_BLANK + inward;
             } catch (InvalidPostcodeException e) {
                 GenericServiceUtil.logException("Exception occurred when formatting postcode " + address.getPostCode(),
                         "can not reach case reference number", e.getMessage(), "PdfMapperServiceUtil",
                         "formatUkPostcode");
-                return address.getPostCode();
+                return address.getPostCode().replace(STRING_BLANK, STRING_EMPTY).trim();
             }
         } else {
-            return address.getPostCode();
+            return address.getPostCode().replace(STRING_BLANK, STRING_EMPTY).trim();
         }
     }
 
