@@ -39,6 +39,7 @@ public class Constants {
 
     public static final String PENDING_STATE = "Pending";
     public static final String SUBMITTED_STATE = "Submitted";
+    public static final String VETTED_STATE = "Vetted";
     public static final String ACCEPTED_STATE = "Accepted";
     public static final String REJECTED_STATE = "Rejected";
     public static final String CLOSED_STATE = "Closed";
