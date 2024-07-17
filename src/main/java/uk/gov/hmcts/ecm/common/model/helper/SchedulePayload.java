@@ -24,4 +24,5 @@ public class SchedulePayload {
     private String respondentAddressLine3;
     private String respondentTown;
     private String respondentPostCode;
+    private String state;
 }
