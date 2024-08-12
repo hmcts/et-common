@@ -8,6 +8,7 @@ import uk.gov.hmcts.et.common.model.ccd.CCDRequest;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 import uk.gov.hmcts.et.common.model.ccd.CaseDataContent;
 import uk.gov.hmcts.et.common.model.ccd.Event;
+import uk.gov.hmcts.et.common.model.generic.GenericRequest;
 import uk.gov.hmcts.et.common.model.multiples.MultipleData;
 
 import java.util.Map;
@@ -42,8 +43,8 @@ public class CaseDataBuilder {
         }), eventSummary, null);
     }
 
-    public CaseDataContent buildMultipleDataContent(MultipleData multipleData, CCDRequest req, String eventSummary) {
-        return getCaseDataContent(req, objectMapper.convertValue(multipleData, new TypeReference<>() {
+    public CaseDataContent buildMultipleDataContent(MultipleData mdata, GenericRequest req, String eventSummary) {
+        return getCaseDataContent(req, objectMapper.convertValue(mdata, new TypeReference<>() {
         }), eventSummary, null);
     }
 
@@ -53,7 +54,7 @@ public class CaseDataBuilder {
         }), updateChangeOrgSummary, null);
     }
 
-    private CaseDataContent getCaseDataContent(CCDRequest req, Map<String, JsonNode> data, String eventSummary,
+    private CaseDataContent getCaseDataContent(GenericRequest req, Map<String, JsonNode> data, String eventSummary,
                                                String eventDescription) {
         var event = Event.builder()
                 .eventId(req.getEventId())
