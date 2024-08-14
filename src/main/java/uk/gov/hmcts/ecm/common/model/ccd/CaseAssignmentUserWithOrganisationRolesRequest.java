@@ -10,9 +10,9 @@ import java.util.List;
 @Data
 @Builder
 @Jacksonized
-public class CaseAssignmentUserRolesRequest {
+public class CaseAssignmentUserWithOrganisationRolesRequest {
 
     @JsonProperty("case_users")
-    private List<CaseAssignmentUserRole> caseAssignmentUserRoles;
+    private List<CaseAssignmentUserWithOrganisationRole> caseAssignmentUserRoles;
 
 }
