@@ -8,10 +8,11 @@ import lombok.extern.jackson.Jacksonized;
 import java.util.List;
 
 @Data
-@Builder(toBuilder = true)
+@Builder
 @Jacksonized
-public class CaseAssignmentUserRolesResource {
+public class CaseAssignmentUserWithOrganisationRolesRequest {
 
     @JsonProperty("case_users")
-    private List<CaseAssignmentUserRole> caseAssignmentUserRoles;
+    private List<CaseAssignmentUserWithOrganisationRole> caseAssignmentUserRoles;
+
 }

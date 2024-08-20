@@ -9,7 +9,7 @@ import lombok.extern.jackson.Jacksonized;
 @Data
 @Builder(toBuilder = true)
 @Jacksonized
-public class CaseAssignmentUserRoleWithOrganisation {
+public class CaseAssignmentUserWithOrganisationRole {
 
     @JsonProperty("organisation_id")
     @JsonInclude(JsonInclude.Include.NON_NULL)
