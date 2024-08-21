@@ -47,8 +47,10 @@ import uk.gov.hmcts.et.common.model.ccd.CaseUserAssignmentData;
 import uk.gov.hmcts.et.common.model.ccd.GenericTypeCaseDetails;
 import uk.gov.hmcts.et.common.model.ccd.PaginatedSearchMetadata;
 import uk.gov.hmcts.et.common.model.ccd.SubmitEvent;
+import uk.gov.hmcts.et.common.model.generic.GenericRequest;
 import uk.gov.hmcts.et.common.model.multiples.MultipleCaseSearchResult;
 import uk.gov.hmcts.et.common.model.multiples.MultipleData;
+import uk.gov.hmcts.et.common.model.multiples.MultipleRequest;
 import uk.gov.hmcts.et.common.model.multiples.SubmitMultipleEvent;
 import uk.gov.hmcts.reform.authorisation.generators.AuthTokenGenerator;
 
@@ -751,6 +753,14 @@ public class CcdClient {
         return restTemplate.exchange(uri, HttpMethod.GET, request, CCDRequest.class).getBody();
     }
 
+    public MultipleRequest startBulkAmendEventForMultiple(String authToken, String caseTypeId, String jur, String cid)
+        throws IOException {
+        HttpEntity<String> request = new HttpEntity<>(buildHeaders(authToken));
+        String uri = ccdClientConfig.buildStartEventForBulkAmendCaseUrl(userService.getUserDetails(authToken).getUid(),
+            jur, caseTypeId, cid);
+        return restTemplate.exchange(uri, HttpMethod.GET, request, MultipleRequest.class).getBody();
+    }
+
     public CCDRequest startDisposeEventForCase(String authToken, String caseTypeId, String jurisdiction, String cid)
             throws IOException {
         HttpEntity<String> request =
@@ -796,7 +806,7 @@ public class CcdClient {
     }
 
     public SubmitMultipleEvent submitMultipleEventForCase(String authToken, MultipleData multipleData,
-                                                          String caseTypeId, String jurisdiction, CCDRequest req,
+                                                          String caseTypeId, String jurisdiction, GenericRequest req,
                                                           String cid) throws IOException {
         HttpEntity<CaseDataContent> request =
                 new HttpEntity<>(caseDataBuilder.buildMultipleDataContent(multipleData, req, UPDATE_BULK_EVENT_SUMMARY),
