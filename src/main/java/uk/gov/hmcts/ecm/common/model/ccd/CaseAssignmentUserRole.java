@@ -18,8 +18,8 @@ public class CaseAssignmentUserRole {
     @JsonProperty("case_type_id")
     private String caseTypeId;
 
-    @JsonProperty("respondent_name")
-    private String respondentName;
+    @JsonProperty("user_name")
+    private String userName;
 
     @JsonProperty("user_id")
     private String userId;
