@@ -18,7 +18,7 @@ import lombok.extern.jackson.Jacksonized;
 @SuperBuilder
 @Jacksonized
 public class ModifyCaseUserRole extends CaseAssignmentUserRole {
-    @JsonProperty("case_type_name")
+    @JsonProperty("case_type_id")
     private String caseTypeId;
     @JsonProperty("user_full_name")
     private String userFullName;
