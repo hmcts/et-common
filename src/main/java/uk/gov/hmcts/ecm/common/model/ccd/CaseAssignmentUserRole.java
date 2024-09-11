@@ -15,6 +15,12 @@ public class CaseAssignmentUserRole {
     @JsonProperty("case_id")
     private String caseDataId;
 
+    @JsonProperty("case_type_id")
+    private String caseTypeId;
+
+    @JsonProperty("respondent_name")
+    private String respondentName;
+
     @JsonProperty("user_id")
     private String userId;
 
