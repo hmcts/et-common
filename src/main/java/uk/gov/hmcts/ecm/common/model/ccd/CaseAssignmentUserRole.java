@@ -1,14 +1,14 @@
 package uk.gov.hmcts.ecm.common.model.ccd;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
 
 @ToString
 @Getter
-@Builder(toBuilder = true)
+@SuperBuilder(toBuilder = true)
 @Jacksonized
 public class CaseAssignmentUserRole {
 
