@@ -12,6 +12,8 @@ public class CaseAssignmentUserRolesRequestWithRespondentName {
 
     @JsonProperty("respondent_name")
     private String respondentName;
+    @JsonProperty("case_type_id")
+    private String caseTypeId;
     @JsonProperty("case_assignment_user_roles_request")
     private CaseAssignmentUserRolesRequest caseAssignmentUserRolesRequest;
 

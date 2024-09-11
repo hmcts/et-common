@@ -15,6 +15,7 @@ public class CaseAssignmentUserRolesRequestWithRespondentNameTest {
     private static final String TEST_CASE_ROLE = "test-case-role";
     private static final String TEST_CASE_USER_ID = "test-case-user-id";
     private static final String TEST_RESPONDENT_NAME = "test-respondent-name";
+    private static final String TEST_CASE_TYPE_ID = "test-case-type-id";
 
     @Test
     void theCaseAssignmentUserRolesRequestWithRespondentNameModel() {
@@ -34,6 +35,7 @@ public class CaseAssignmentUserRolesRequestWithRespondentNameTest {
                 CaseAssignmentUserRolesRequestWithRespondentName
                         .builder()
                         .respondentName(TEST_RESPONDENT_NAME)
+                        .caseTypeId(TEST_CASE_TYPE_ID)
                         .caseAssignmentUserRolesRequest(caseAssignmentUserRolesRequest)
                         .build();
         assertFalse(caseAssignmentUserRolesRequestWithRespondentName
@@ -49,6 +51,10 @@ public class CaseAssignmentUserRolesRequestWithRespondentNameTest {
         assertThat(caseAssignmentUserRolesRequestWithRespondentName
                 .getCaseAssignmentUserRolesRequest().getCaseAssignmentUserRoles().get(0).getCaseDataId())
                 .isEqualTo(TEST_CASE_DATA_ID);
+        assertThat(caseAssignmentUserRolesRequestWithRespondentName.getRespondentName())
+                .isEqualTo(TEST_RESPONDENT_NAME);
+        assertThat(caseAssignmentUserRolesRequestWithRespondentName.getCaseTypeId())
+                .isEqualTo(TEST_CASE_TYPE_ID);
     }
 
 }
