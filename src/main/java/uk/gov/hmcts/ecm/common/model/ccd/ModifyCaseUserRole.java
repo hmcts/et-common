@@ -20,6 +20,6 @@ import lombok.extern.jackson.Jacksonized;
 public class ModifyCaseUserRole extends CaseAssignmentUserRole {
     @JsonProperty("case_type_id")
     private String caseTypeId;
-    @JsonProperty("user_full_name")
-    private String userFullName;
+    @JsonProperty("respondent_name")
+    private String respondentName;
 }
