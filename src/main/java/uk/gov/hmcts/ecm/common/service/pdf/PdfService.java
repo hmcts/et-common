@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import uk.gov.hmcts.ecm.common.exceptions.PdfServiceException;
-import uk.gov.hmcts.ecm.common.service.utils.GenericServiceUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.GenericServiceUtil;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 
 import java.io.ByteArrayOutputStream;
@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.HELVETICA_PDFBOX_CHARACTER_CODE_1;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.HELVETICA_PDFBOX_CHARACTER_CODE_2;
@@ -33,7 +34,7 @@ import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.TIMES_NEW_ROM
 @Service
 @RequiredArgsConstructor
 public class PdfService {
-    private final PdfMapperService pdfMapperService;
+    private final ET1PdfMapperService et1PdfMapperService;
     @Value("${pdf.english}")
     public String englishPdfTemplateSource;
     @Value("${pdf.welsh}")
@@ -47,10 +48,10 @@ public class PdfService {
      * @param pdfSource The source location of the PDF file to be used as the template
      * @return A byte array that contains the pdf document.
      */
-    public byte[] convertCaseToPdf(CaseData caseData, String pdfSource) throws PdfServiceException {
+    public byte[] convertCaseToPdf(CaseData caseData, String pdfSource, String pdfType) throws PdfServiceException {
         byte[] pdfDocumentBytes;
         try {
-            pdfDocumentBytes = createPdf(caseData, pdfSource);
+            pdfDocumentBytes = createPdf(caseData, pdfSource, pdfType);
         } catch (IOException ioe) {
             throw new PdfServiceException("Failed to convert to PDF", ioe);
         }
@@ -65,7 +66,7 @@ public class PdfService {
      * @return a byte array of the generated pdf file.
      * @throws IOException if there is an issue reading the pdf template
      */
-    public byte[] createPdf(CaseData caseData, String pdfSource) throws IOException {
+    public byte[] createPdf(CaseData caseData, String pdfSource, String pdfType) throws IOException {
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
         InputStream stream = ObjectUtils.isEmpty(cl) || StringUtils.isBlank(pdfSource) ? null
                 : cl.getResourceAsStream(pdfSource);
@@ -78,8 +79,9 @@ public class PdfService {
                 resources.put(COSName.getPDFName(HELVETICA_PDFBOX_CHARACTER_CODE_2), PDType1Font.HELVETICA);
                 PDDocumentCatalog pdDocumentCatalog = pdfDocument.getDocumentCatalog();
                 PDAcroForm pdfForm = pdDocumentCatalog.getAcroForm();
-                for (Map.Entry<String, Optional<String>> entry : this.pdfMapperService.mapHeadersToPdf(caseData)
-                        .entrySet()) {
+                Set<Map.Entry<String, Optional<String>>> pdfEntriesMap;
+                pdfEntriesMap = this.et1PdfMapperService.mapHeadersToPdf(caseData).entrySet();
+                for (Map.Entry<String, Optional<String>> entry : pdfEntriesMap) {
                     String entryKey = entry.getKey();
                     Optional<String> entryValue = entry.getValue();
                     if (entryValue.isPresent()) {

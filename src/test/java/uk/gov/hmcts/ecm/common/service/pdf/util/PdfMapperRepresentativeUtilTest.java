@@ -7,8 +7,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 import uk.gov.hmcts.ecm.common.constants.PdfMapperConstants;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperRepresentativeUtil;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperServiceUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperRepresentativeUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperServiceUtil;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 import uk.gov.hmcts.et.common.model.ccd.types.RepresentedTypeC;
 

@@ -1,4 +1,4 @@
-package uk.gov.hmcts.ecm.common.service.utils;
+package uk.gov.hmcts.ecm.common.service.pdf.et1;
 
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.common.Strings;

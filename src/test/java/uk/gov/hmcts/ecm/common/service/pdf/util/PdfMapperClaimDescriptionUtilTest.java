@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import uk.gov.hmcts.ecm.common.constants.PdfMapperConstants;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperClaimDescriptionUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperClaimDescriptionUtil;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 import uk.gov.hmcts.et.common.model.ccd.types.ClaimantRequestType;
 
