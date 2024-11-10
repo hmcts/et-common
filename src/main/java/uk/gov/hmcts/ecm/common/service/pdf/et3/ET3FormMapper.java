@@ -1,5 +1,6 @@
 package uk.gov.hmcts.ecm.common.service.pdf.et3;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -39,6 +40,7 @@ import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormResponseMapper.mapR
 /**
  * Service to support ET3 Response journey. Contains methods for generating and saving ET3 Response documents.
  */
+@Slf4j
 public final class ET3FormMapper {
 
     private ET3FormMapper() {
@@ -48,9 +50,10 @@ public final class ET3FormMapper {
     public static Map<String, Optional<String>> mapEt3Form(CaseData caseData, String event)
             throws GenericServiceException {
         checkCaseData(caseData);
-        String submitRespondent = caseData.getSubmitEt3Respondent().getSelectedLabel();
+        String submitRespondent = caseData.getSubmitEt3Respondent().getValue().getLabel();
         Stream<RespondentSumTypeItem> respondentSumTypeStream = caseData.getRespondentCollection().stream()
-                .filter(r -> submitRespondent.equals(r.getValue().getRespondentName()));
+                .filter(r -> submitRespondent.equals(r.getId()));
+        log.info("******** Submitted Respondent: {}", submitRespondent);
         if (ObjectUtils.isEmpty(respondentSumTypeStream)) {
             Throwable throwable = new Exception(
                     RESPONDENT_NOT_FOUND_IN_RESPONDENT_COLLECTION_EXCEPTION_MESSAGE);
