@@ -96,7 +96,6 @@ public final class ET3FormMapper {
                     .filter(r -> submitRespondent.equals(r.getValue().getRespondentName()));
         }
         if (ET3_FORM_CLIENT_TYPE_RESPONDENT.equals(clientType)) {
-
             respondentSumTypeStream = caseData.getRespondentCollection().stream()
                     .filter(r -> submitRespondent.equals(r.getId()));
         }
