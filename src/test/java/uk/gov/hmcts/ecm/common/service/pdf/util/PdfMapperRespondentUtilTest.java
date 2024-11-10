@@ -1,7 +1,6 @@
 package uk.gov.hmcts.ecm.common.service.pdf.util;
 
 import org.apache.commons.lang3.StringUtils;
-import org.elasticsearch.common.Strings;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -179,7 +178,7 @@ class PdfMapperRespondentUtilTest {
             assertThat(printFields.get(acasCertificatePdfFieldModel.getAcasCertificateNumberFieldName()))
                 .contains(respondent.getRespondentAcas());
         } else {
-            if (!Strings.isNullOrEmpty(respondent.getRespondentAcasNo())) {
+            if (!StringUtils.isBlank(respondent.getRespondentAcasNo())) {
                 checkAcasCertificateNotFoundCheckbox(acasCertificatePdfFieldModel, printFields);
                 switch (respondent.getRespondentAcasNo()) {
                     case PdfMapperConstants.PDF_TEMPLATE_REASON_NOT_HAVING_ACAS_UNFAIR_DISMISSAL: {
