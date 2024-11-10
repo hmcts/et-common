@@ -1,8 +1,8 @@
 package uk.gov.hmcts.ecm.common.service.pdf.et3;
 
-import org.elasticsearch.core.List;
 import uk.gov.hmcts.et.common.model.ccd.types.RespondentSumType;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentMap;
 
