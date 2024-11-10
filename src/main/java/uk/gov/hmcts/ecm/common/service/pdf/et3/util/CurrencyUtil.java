@@ -54,6 +54,7 @@ public final class CurrencyUtil {
         if (isCaseDataRespondentEmpty(caseData)) {
             return null;
         }
+        //TODO change this with an if clause -- if representative or respondent...
         Stream<RepresentedTypeRItem> selectedRepresentativeStream = caseData.getRepCollection().stream().filter(
                 rep -> isNotEmpty(rep.getValue()) && rep.getValue().getRespRepName().equals(
                         caseData.getSubmitEt3Respondent().getSelectedLabel()
