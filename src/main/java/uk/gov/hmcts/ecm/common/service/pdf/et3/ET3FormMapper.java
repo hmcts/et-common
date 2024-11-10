@@ -19,6 +19,8 @@ import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormClaimantMapper.mapC
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.CASE_DATA_NOT_FOUND_EXCEPTION_FIRST_WORD;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.CASE_DATA_NOT_FOUND_EXCEPTION_MESSAGE;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.ET3_FORM_CASE_DATA_CHECK_METHOD_NAME;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.ET3_FORM_CLIENT_TYPE_REPRESENTATIVE;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.ET3_FORM_CLIENT_TYPE_RESPONDENT;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.ET3_FORM_MAPPER_CLASS_NAME;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.ET3_FORM_MAPPER_METHOD_NAME;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.RESPONDENT_COLLECTION_NOT_FOUND_EXCEPTION_FIRST_WORD;
@@ -45,13 +47,10 @@ public final class ET3FormMapper {
         // Add a private constructor to hide the implicit public one.
     }
 
-    public static Map<String, Optional<String>> mapEt3Form(CaseData caseData, String event)
+    public static Map<String, Optional<String>> mapEt3Form(CaseData caseData, String event, String clientType)
             throws GenericServiceException {
         checkCaseData(caseData);
-        String submitRespondent = caseData.getSubmitEt3Respondent().getValue().getLabel();
-        //TODO this check should be updated for representatives and respondents
-        Stream<RespondentSumTypeItem> respondentSumTypeStream = caseData.getRespondentCollection().stream()
-                .filter(r -> submitRespondent.equals(r.getValue().getRespondentName()));
+        Stream<RespondentSumTypeItem> respondentSumTypeStream = getRespondentSumTypeItemStream(caseData, clientType);
         if (ObjectUtils.isEmpty(respondentSumTypeStream)) {
             Throwable throwable = new Exception(
                     RESPONDENT_NOT_FOUND_IN_RESPONDENT_COLLECTION_EXCEPTION_MESSAGE);
@@ -60,7 +59,6 @@ public final class ET3FormMapper {
                     + caseData.getSubmitEt3Respondent().getSelectedLabel(), caseData.getEthosCaseReference(),
                     ET3_FORM_MAPPER_CLASS_NAME, ET3_FORM_MAPPER_METHOD_NAME);
         }
-
         Optional<RespondentSumTypeItem> selectedRespondent = respondentSumTypeStream.findFirst();
         if (ObjectUtils.isEmpty(selectedRespondent)
                 || selectedRespondent.isEmpty()
@@ -83,9 +81,26 @@ public final class ET3FormMapper {
         mapEarningsAndBenefits(respondentSumType, pdfFields);
         mapResponse(respondentSumType, pdfFields);
         mapEmployerContractClaim(respondentSumType, pdfFields);
-        mapRepresentative(caseData, respondentSumType, pdfFields);
+        if (ET3_FORM_CLIENT_TYPE_REPRESENTATIVE.equals(clientType)) {
+            mapRepresentative(caseData, respondentSumType, pdfFields);
+        }
         mapDisability(respondentSumType, pdfFields);
         return pdfFields;
+    }
+
+    private static Stream<RespondentSumTypeItem> getRespondentSumTypeItemStream(CaseData caseData, String clientType) {
+        String submitRespondent = caseData.getSubmitEt3Respondent().getSelectedLabel();
+        Stream<RespondentSumTypeItem> respondentSumTypeStream = null;
+        if (ET3_FORM_CLIENT_TYPE_REPRESENTATIVE.equals(clientType)) {
+            respondentSumTypeStream = caseData.getRespondentCollection().stream()
+                    .filter(r -> submitRespondent.equals(r.getValue().getRespondentName()));
+        }
+        if (ET3_FORM_CLIENT_TYPE_RESPONDENT.equals(clientType)) {
+
+            respondentSumTypeStream = caseData.getRespondentCollection().stream()
+                    .filter(r -> submitRespondent.equals(r.getId()));
+        }
+        return respondentSumTypeStream;
     }
 
     private static void checkCaseData(CaseData caseData) throws GenericServiceException {

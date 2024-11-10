@@ -205,6 +205,8 @@ public final class ET3FormConstants {
             "ET3 Form submitting respondent name is empty or blank";
     public static final String SUBMIT_ET3 = "submitEt3";
     public static final String UNABLE_TO_MAP_RESPONDENT_TO_ET3_FORM = "Unable to map respondent to et3 form";
+    public static final String ET3_FORM_CLIENT_TYPE_REPRESENTATIVE = "representative";
+    public static final String ET3_FORM_CLIENT_TYPE_RESPONDENT = "respondent";
 
     private ET3FormConstants() {
         // Add a private constructor to hide the implicit public one.

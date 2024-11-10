@@ -21,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.junit.platform.commons.util.StringUtils.isNotBlank;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.ET3_FORM_CLIENT_TYPE_REPRESENTATIVE;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormMapper.mapEt3Form;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormTestUtil.getCheckBoxNotApplicableValue;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormTestUtil.getCheckboxValue;
@@ -35,32 +36,39 @@ class ET3FormMapperTest {
     @SneakyThrows
     void testMapRespondent(CaseData caseData) {
         if (ObjectUtils.isEmpty(caseData)) {
-            assertThatThrownBy(() -> mapEt3Form(caseData, ET3FormConstants.SUBMIT_ET3))
+            assertThatThrownBy(() -> mapEt3Form(caseData,
+                    ET3FormConstants.SUBMIT_ET3,
+                    ET3_FORM_CLIENT_TYPE_REPRESENTATIVE))
                     .hasMessage(ET3FormTestConstants.TEST_PDF_CASE_DATA_NOT_FOUND_EXCEPTION_MESSAGE);
             return;
         }
         if (CollectionUtils.isEmpty(caseData.getRespondentCollection())) {
-            assertThatThrownBy(() -> mapEt3Form(caseData, ET3FormConstants.SUBMIT_ET3))
+            assertThatThrownBy(() -> mapEt3Form(caseData,
+                    ET3FormConstants.SUBMIT_ET3, ET3_FORM_CLIENT_TYPE_REPRESENTATIVE))
                     .hasMessage(ET3FormTestConstants.TEST_PDF_RESPONDENT_COLLECTION_NOT_FOUND_EXCEPTION_MESSAGE);
             return;
         }
         if (ObjectUtils.isEmpty(caseData.getSubmitEt3Respondent())) {
-            assertThatThrownBy(() -> mapEt3Form(caseData, ET3FormConstants.SUBMIT_ET3))
+            assertThatThrownBy(() -> mapEt3Form(caseData,
+                    ET3FormConstants.SUBMIT_ET3, ET3_FORM_CLIENT_TYPE_REPRESENTATIVE))
                     .hasMessage(ET3FormTestConstants.TEST_PDF_RESPONDENT_NOT_FOUND_IN_CASE_DATA_EXCEPTION_MESSAGE);
             return;
         }
         if (ObjectUtils.isEmpty(caseData.getSubmitEt3Respondent().getValue())) {
-            assertThatThrownBy(() -> mapEt3Form(caseData, ET3FormConstants.SUBMIT_ET3)).hasMessage(
+            assertThatThrownBy(() -> mapEt3Form(caseData,
+                    ET3FormConstants.SUBMIT_ET3, ET3_FORM_CLIENT_TYPE_REPRESENTATIVE)).hasMessage(
                     ET3FormTestConstants.TEST_PDF_RESPONDENT_NOT_FOUND_IN_CASE_DATA_EXCEPTION_MESSAGE);
             return;
         }
         if (isBlank(caseData.getSubmitEt3Respondent().getValue().getLabel())) {
-            assertThatThrownBy(() -> mapEt3Form(caseData, ET3FormConstants.SUBMIT_ET3)).hasMessage(
+            assertThatThrownBy(() -> mapEt3Form(caseData,
+                    ET3FormConstants.SUBMIT_ET3, ET3_FORM_CLIENT_TYPE_REPRESENTATIVE)).hasMessage(
                     ET3FormTestConstants.TEST_PDF_RESPONDENT_NAME_NOT_FOUND_IN_CASE_DATA_EXCEPTION_MESSAGE);
             return;
         }
         if (ET3FormTestConstants.TEST_DUMMY_VALUE.equals(caseData.getSubmitEt3Respondent().getValue().getLabel())) {
-            assertThatThrownBy(() -> mapEt3Form(caseData, ET3FormConstants.SUBMIT_ET3))
+            assertThatThrownBy(() -> mapEt3Form(caseData,
+                    ET3FormConstants.SUBMIT_ET3, ET3_FORM_CLIENT_TYPE_REPRESENTATIVE))
                     .hasMessage(
                             ET3FormTestConstants
                                     .TEST_PDF_RESPONDENT_NOT_FOUND_IN_RESPONDENT_COLLECTION_EXCEPTION_MESSAGE);
@@ -70,7 +78,8 @@ class ET3FormMapperTest {
                 .filter(r -> caseData.getSubmitEt3Respondent()
                         .getSelectedLabel().equals(r.getValue().getRespondentName()))
                 .toList().get(0).getValue();
-        Map<String, Optional<String>> pdfFields = mapEt3Form(caseData, ET3FormConstants.SUBMIT_ET3);
+        Map<String, Optional<String>> pdfFields = mapEt3Form(caseData,
+                ET3FormConstants.SUBMIT_ET3, ET3_FORM_CLIENT_TYPE_REPRESENTATIVE);
         checkRespondent(pdfFields, respondentSumType);
         checkHeader(pdfFields, respondentSumType);
         checkClaimant(pdfFields, respondentSumType);
