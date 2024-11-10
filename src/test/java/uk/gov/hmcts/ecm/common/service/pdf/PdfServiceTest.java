@@ -130,6 +130,7 @@ class PdfServiceTest {
     }
 
     @ParameterizedTest
+    @SneakyThrows
     @CsvSource({
         ENGLISH_LANGUAGE + "," + PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_ENGLISH,
         ENGLISH_LANGUAGE + "," + PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_ENGLISH_INVALID,

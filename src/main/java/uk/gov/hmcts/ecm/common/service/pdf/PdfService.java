@@ -67,7 +67,8 @@ public class PdfService {
      * @return a byte array of the generated pdf file.
      * @throws IOException if there is an issue reading the pdf template
      */
-    public byte[] createPdf(CaseData caseData, String pdfSource, String pdfType) throws IOException {
+    public byte[] createPdf(CaseData caseData, String pdfSource, String pdfType) throws IOException,
+            PdfServiceException {
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
         InputStream stream = ObjectUtils.isEmpty(cl) || StringUtils.isBlank(pdfSource) ? null
                 : cl.getResourceAsStream(pdfSource);
@@ -92,7 +93,7 @@ public class PdfService {
                                 UNABLE_TO_MAP_RESPONDENT_TO_ET3_FORM,
                                 "PdfService",
                                 "createPdf");
-                        return null;
+                        throw new PdfServiceException("Failed to convert to PDF", e);
                     }
                     pdfEntriesMap = pdfMap.entrySet();
                 }
@@ -102,7 +103,8 @@ public class PdfService {
                             UNABLE_TO_MAP_RESPONDENT_TO_ET3_FORM,
                             "PdfService",
                             "createPdf");
-                    return null;
+                    throw new PdfServiceException("Failed to convert to PDF",
+                            new Exception("Unable to map case data to et3 pdf form"));
                 }
                 PDDocumentCatalog pdDocumentCatalog = pdfDocument.getDocumentCatalog();
                 PDAcroForm pdfForm = pdDocumentCatalog.getAcroForm();
