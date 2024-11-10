@@ -48,7 +48,7 @@ public final class ET3FormMapper {
     public static Map<String, Optional<String>> mapEt3Form(CaseData caseData, String event)
             throws GenericServiceException {
         checkCaseData(caseData);
-        String submitRespondent = caseData.getSubmitEt3Respondent().getSelectedLabel();
+        String submitRespondent = caseData.getSubmitEt3Respondent().getValue().getLabel();
         //TODO this check should be updated for representatives and respondents
         Stream<RespondentSumTypeItem> respondentSumTypeStream = caseData.getRespondentCollection().stream()
                 .filter(r -> submitRespondent.equals(r.getValue().getRespondentName()));
