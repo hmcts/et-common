@@ -68,7 +68,7 @@ class ET3FormMapperTest {
         }
         RespondentSumType respondentSumType = caseData.getRespondentCollection().stream()
                 .filter(r -> caseData.getSubmitEt3Respondent()
-                        .getSelectedLabel().equals(r.getId()))
+                        .getSelectedLabel().equals(r.getValue().getRespondentName()))
                 .toList().get(0).getValue();
         Map<String, Optional<String>> pdfFields = mapEt3Form(caseData, ET3FormConstants.SUBMIT_ET3);
         checkRespondent(pdfFields, respondentSumType);

@@ -220,7 +220,7 @@
       "value": {
         "myHmctsYesNo": "Yes",
         "respondentId": "afaff844-f85e-4349-bde5-92c295f392f5",
-        "resp_rep_name": "afaff844-f85e-4349-bde5-92c295f392f5",
+        "resp_rep_name": "Test Company",
         "name_of_organisation": "ET Test Factory Solicitor",
         "name_of_representative": "EeT TesterOne",
         "representative_address": {
@@ -494,7 +494,7 @@
   "targetHearingDate": "2024-11-09",
   "submitEt3Respondent": {
     "value": {
-      "label": "afaff844-f85e-4349-bde5-92c295f392f5"
+      "label": "Test Company"
     }
   }
 }
