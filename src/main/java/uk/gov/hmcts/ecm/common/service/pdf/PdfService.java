@@ -11,11 +11,12 @@ import org.apache.pdfbox.pdmodel.PDResources;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import uk.gov.hmcts.ecm.common.exceptions.PdfServiceException;
 import uk.gov.hmcts.ecm.common.service.pdf.et1.GenericServiceUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormMapper;
+import uk.gov.hmcts.ecm.common.service.pdf.et3.util.GenericServiceException;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 
 import java.io.ByteArrayOutputStream;
@@ -28,17 +29,17 @@ import java.util.Set;
 
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.HELVETICA_PDFBOX_CHARACTER_CODE_1;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.HELVETICA_PDFBOX_CHARACTER_CODE_2;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TYPE_ET1;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TYPE_ET3;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.TIMES_NEW_ROMAN_PDFBOX_CHARACTER_CODE;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.SUBMIT_ET3;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.UNABLE_TO_MAP_RESPONDENT_TO_ET3_FORM;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class PdfService {
     private final ET1PdfMapperService et1PdfMapperService;
-    @Value("${pdf.english}")
-    public String englishPdfTemplateSource;
-    @Value("${pdf.welsh}")
-    public String welshPdfTemplateSource;
 
     /**
      * Converts a {@link CaseData} class object into a pdf document
@@ -77,10 +78,34 @@ public class PdfService {
                 resources.put(COSName.getPDFName(TIMES_NEW_ROMAN_PDFBOX_CHARACTER_CODE), PDType1Font.TIMES_ROMAN);
                 resources.put(COSName.getPDFName(HELVETICA_PDFBOX_CHARACTER_CODE_1), PDType1Font.HELVETICA);
                 resources.put(COSName.getPDFName(HELVETICA_PDFBOX_CHARACTER_CODE_2), PDType1Font.HELVETICA);
+                Set<Map.Entry<String, Optional<String>>> pdfEntriesMap = null;
+                if (PDF_TYPE_ET1.equals(pdfType)) {
+                    pdfEntriesMap = this.et1PdfMapperService.mapHeadersToPdf(caseData).entrySet();
+                }
+                if (PDF_TYPE_ET3.equals(pdfType)) {
+                    Map<String, Optional<String>> pdfMap;
+                    try {
+                        pdfMap = ET3FormMapper.mapEt3Form(caseData, SUBMIT_ET3);
+                    } catch (GenericServiceException e) {
+                        GenericServiceUtil.logException(UNABLE_TO_MAP_RESPONDENT_TO_ET3_FORM,
+                                caseData.getEthosCaseReference(),
+                                UNABLE_TO_MAP_RESPONDENT_TO_ET3_FORM,
+                                "PdfService",
+                                "createPdf");
+                        return null;
+                    }
+                    pdfEntriesMap = pdfMap.entrySet();
+                }
+                if (pdfEntriesMap == null) {
+                    GenericServiceUtil.logException(UNABLE_TO_MAP_RESPONDENT_TO_ET3_FORM,
+                            caseData.getEthosCaseReference(),
+                            UNABLE_TO_MAP_RESPONDENT_TO_ET3_FORM,
+                            "PdfService",
+                            "createPdf");
+                    return null;
+                }
                 PDDocumentCatalog pdDocumentCatalog = pdfDocument.getDocumentCatalog();
                 PDAcroForm pdfForm = pdDocumentCatalog.getAcroForm();
-                Set<Map.Entry<String, Optional<String>>> pdfEntriesMap;
-                pdfEntriesMap = this.et1PdfMapperService.mapHeadersToPdf(caseData).entrySet();
                 for (Map.Entry<String, Optional<String>> entry : pdfEntriesMap) {
                     String entryKey = entry.getKey();
                     Optional<String> entryValue = entry.getValue();

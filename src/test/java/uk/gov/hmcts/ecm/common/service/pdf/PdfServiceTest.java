@@ -21,12 +21,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-import org.springframework.test.util.ReflectionTestUtils;
 import uk.gov.hmcts.ecm.common.constants.PdfMapperConstants;
 import uk.gov.hmcts.ecm.common.model.CaseTestData;
-import uk.gov.hmcts.ecm.common.model.acas.AcasCertificate;
 import uk.gov.hmcts.ecm.common.service.pdf.et1.GenericServiceUtil;
-import uk.gov.hmcts.ecm.common.service.utils.ResourceLoader;
 
 import java.io.IOException;
 import java.util.Map;
@@ -51,20 +48,13 @@ class PdfServiceTest {
 
     private CaseTestData caseTestData;
 
-    private static final String PDF_TEMPLATE_SOURCE_ATTRIBUTE_NAME = "englishPdfTemplateSource";
     private static final String PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_ENGLISH = "ET1_0224.pdf";
     private static final String PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_ENGLISH_INVALID = "ET1_0722.pdf";
     private static final String PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_ENGLISH_NOT_EXISTS = "invalid_english.pdf";
-    private static final String PDF_TEMPLATE_SOURCE_ATTRIBUTE_NAME_WELSH = "welshPdfTemplateSource";
     private static final String PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_WELSH = "CY_ET1_2222.pdf";
     private static final String PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_WELSH_INVALID = "CY_ET1_0922.pdf";
     private static final String PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_WELSH_NOT_EXISTS = "invalid_welsh.pdf";
     private static final String PDF_FILE_TIKA_CONTENT_TYPE = "application/pdf";
-
-    private final AcasCertificate acasCertificate = ResourceLoader.fromString(
-        "requests/acasCertificate.json",
-        AcasCertificate.class
-    );
 
     @Mock
     private ET1PdfMapperService et1PdfMapperService;
@@ -74,16 +64,6 @@ class PdfServiceTest {
     @BeforeEach
     void beforeEach() {
         caseTestData = new CaseTestData();
-        ReflectionTestUtils.setField(
-            pdfService,
-            PDF_TEMPLATE_SOURCE_ATTRIBUTE_NAME,
-            PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_ENGLISH
-        );
-        ReflectionTestUtils.setField(
-            pdfService,
-            PDF_TEMPLATE_SOURCE_ATTRIBUTE_NAME_WELSH,
-            PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_WELSH
-        );
     }
 
     @SneakyThrows
@@ -127,7 +107,6 @@ class PdfServiceTest {
     @Test
     void shouldCreateEnglishPdfFile() {
         PdfService pdfService1 = new PdfService(new ET1PdfMapperService());
-        pdfService1.englishPdfTemplateSource = PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_ENGLISH;
         byte[] pdfData = pdfService1.createPdf(caseTestData.getCaseData(),
                 PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_ENGLISH, PDF_TYPE_ET1);
         assertThat(pdfData).isNotEmpty();
@@ -146,7 +125,6 @@ class PdfServiceTest {
     @Test
     void shouldNotCreateEnglishPdfFileWhenEnglishPdfTemplateNotExists() {
         PdfService pdfService1 = new PdfService(new ET1PdfMapperService());
-        pdfService1.englishPdfTemplateSource = PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_ENGLISH_NOT_EXISTS;
         byte[] pdfData = pdfService1.createPdf(caseTestData.getCaseData(), null, PDF_TYPE_ET1);
         assertThat(pdfData).isEmpty();
     }
@@ -193,7 +171,6 @@ class PdfServiceTest {
     void shouldCreateWelshPdfFile() {
         caseTestData.getCaseData().getClaimantHearingPreference().setContactLanguage(WELSH_LANGUAGE);
         PdfService pdfService1 = new PdfService(new ET1PdfMapperService());
-        pdfService1.welshPdfTemplateSource = PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_WELSH;
         byte[] pdfData = pdfService1.createPdf(caseTestData.getCaseData(),
                 PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_WELSH, PDF_TYPE_ET1);
         assertThat(pdfData).isNotEmpty();
@@ -214,7 +191,6 @@ class PdfServiceTest {
     void shouldNotCreateWelshPdfFileWhenWelshPdfTemplateNotExists() {
         caseTestData.getCaseData().getClaimantHearingPreference().setContactLanguage(WELSH_LANGUAGE);
         PdfService pdfService1 = new PdfService(new ET1PdfMapperService());
-        pdfService1.welshPdfTemplateSource = PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_WELSH_NOT_EXISTS;
         byte[] pdfData = pdfService1.createPdf(
             caseTestData.getCaseData(),
             PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_WELSH_NOT_EXISTS, PDF_TYPE_ET1);
