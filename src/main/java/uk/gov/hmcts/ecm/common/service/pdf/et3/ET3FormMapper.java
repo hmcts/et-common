@@ -1,5 +1,6 @@
 package uk.gov.hmcts.ecm.common.service.pdf.et3;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -41,6 +42,7 @@ import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormResponseMapper.mapR
 /**
  * Service to support ET3 Response journey. Contains methods for generating and saving ET3 Response documents.
  */
+@Slf4j
 public final class ET3FormMapper {
 
     private ET3FormMapper() {
@@ -90,12 +92,14 @@ public final class ET3FormMapper {
 
     private static Stream<RespondentSumTypeItem> getRespondentSumTypeItemStream(CaseData caseData, String clientType) {
         String submitRespondent = caseData.getSubmitEt3Respondent().getSelectedLabel();
+        log.info("******Submitted Respondent ID: {}", submitRespondent);
         Stream<RespondentSumTypeItem> respondentSumTypeStream = null;
         if (ET3_FORM_CLIENT_TYPE_REPRESENTATIVE.equals(clientType)) {
             respondentSumTypeStream = caseData.getRespondentCollection().stream()
                     .filter(r -> submitRespondent.equals(r.getValue().getRespondentName()));
         }
         if (ET3_FORM_CLIENT_TYPE_RESPONDENT.equals(clientType)) {
+            log.info("*****RESPONDENT ID: {}", caseData.getRespondentCollection().get(0).getId());
             respondentSumTypeStream = caseData.getRespondentCollection().stream()
                     .filter(r -> submitRespondent.equals(r.getId()));
         }
