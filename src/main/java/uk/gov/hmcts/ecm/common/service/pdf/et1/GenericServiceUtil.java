@@ -22,13 +22,15 @@ public final class GenericServiceUtil {
 
     public static void logException(String firstWord, String caseReferenceNumber, String errorMessage,
                                     String className, String methodName) {
-        log.error("*************EXCEPTION OCCURED*************"
-                  + "\nERROR DESCRIPTION: " + firstWord
-                  + "\nCASE REFERENCE: " + caseReferenceNumber
-                  + "\nERROR MESSAGE: " + errorMessage
-                  + "\nCLASS NAME: " + className
-                  + "\nMETHOD NAME: " + methodName
-                  + "\n*****************END OF EXCEPTION MESSAGE***********************");
+        String error = "*************EXCEPTION OCCURED*************"
+                + "\nERROR DESCRIPTION: " + firstWord
+                + "\nCASE REFERENCE: " + caseReferenceNumber
+                + "\nERROR MESSAGE: " + errorMessage
+                + "\nCLASS NAME: " + className
+                + "\nMETHOD NAME: " + methodName
+                + "\n*****************END OF EXCEPTION MESSAGE***********************";
+        log.error(error);
+        System.out.println(error);
     }
 
 }

@@ -19,9 +19,9 @@ import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.STRING_ZERO;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.TWO;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.ZERO;
 
-public final class CurrencyUtil {
+public final class ET3MapperUtilUtil {
 
-    private CurrencyUtil() {
+    private ET3MapperUtilUtil() {
         // Utility classes should not have a public or default constructor.
     }
 

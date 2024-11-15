@@ -1,8 +1,8 @@
 package uk.gov.hmcts.ecm.common.service.pdf.et3.util;
 
 import com.google.gson.Gson;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.util.CollectionUtils;
 import uk.gov.hmcts.et.common.model.ccd.Address;
 
 import java.text.ParseException;
@@ -16,6 +16,7 @@ import java.util.concurrent.ConcurrentMap;
 import static java.util.Optional.of;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.OFF_CAPITALISED;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.STRING_COMMA_WITH_SPACE;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.STRING_EMPTY;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.STRING_LINE_FEED;
@@ -100,6 +101,34 @@ public final class ET3FormUtil {
     }
 
     /**
+     * Adds a new field to pdf form fields when expected value equals to actual value and
+     * fieldname, expectedValue, actualValue and valurToPut parameters are not blank. Else puts Off value to checkboxes
+     * @param pdfFields map for mapping pdf fields with case data
+     * @param fieldName name of the field in the pdf file
+     * @param expectedValue value to check with actual value of the condition
+     * @param actualValue value to check with expected value of the condition
+     * @param valueToPut value to add pdf fields
+     */
+    public static void putConditionalPdfCheckboxField(ConcurrentMap<String, Optional<String>> pdfFields,
+                                                      String fieldName,
+                                                      String expectedValue,
+                                                      String actualValue,
+                                                      String valueToPut) {
+        if (isBlank(fieldName)) {
+            return;
+        }
+        if (isNotBlank(expectedValue)
+                && isNotBlank(actualValue)
+                && isNotBlank(valueToPut)
+                && expectedValue.equalsIgnoreCase(actualValue)) {
+            pdfFields.put(fieldName, of(valueToPut));
+            return;
+        }
+        pdfFields.put(fieldName, of(OFF_CAPITALISED));
+
+    }
+
+    /**
      * Puts checkbox field value to the pdf fields map. Checks field name, actual value, expected value, and
      * check value if they are empty or not. If not empty checks if expected value equals to the actual value.
      * If check passes it fills the checkbox with the check value to check it.
@@ -122,7 +151,7 @@ public final class ET3FormUtil {
                 || isBlank(expectedValue)
                 || isBlank(actualValue)
                 || !expectedValue.equalsIgnoreCase(actualValue)) {
-            pdfFields.put(fieldName, of(STRING_EMPTY));
+            pdfFields.put(fieldName, of(OFF_CAPITALISED));
         } else {
             pdfFields.put(fieldName, of(checkValue));
         }
@@ -149,7 +178,7 @@ public final class ET3FormUtil {
             return;
         }
         if (isBlank(checkValue)) {
-            pdfFields.put(fieldName, of(STRING_EMPTY));
+            pdfFields.put(fieldName, of(OFF_CAPITALISED));
             return;
         }
         if (CollectionUtils.isEmpty(expectedValueList) || isBlank(actualValue)) {
@@ -157,7 +186,7 @@ public final class ET3FormUtil {
             return;
         }
         if (expectedValueList.contains(actualValue)) {
-            pdfFields.put(fieldName, of(STRING_EMPTY));
+            pdfFields.put(fieldName, of(OFF_CAPITALISED));
             return;
         }
         pdfFields.put(fieldName, of(checkValue));

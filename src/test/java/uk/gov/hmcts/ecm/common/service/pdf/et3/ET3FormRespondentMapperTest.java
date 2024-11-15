@@ -33,16 +33,16 @@ class ET3FormRespondentMapperTest {
         String selectedTitle = respondentSumType.getEt3ResponseRespondentPreferredTitle();
         assertThat(pdfFields.get(ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_TITLE_MR)).contains(
                 ET3FormConstants.CHECKBOX_PDF_RESPONDENT_EXPECTED_VALUE_TITLE_MR.equals(selectedTitle)
-                        ? ET3FormConstants.YES_CAPITALISED : ET3FormConstants.STRING_EMPTY);
+                        ? ET3FormConstants.YES_CAPITALISED : ET3FormConstants.OFF_CAPITALISED);
         assertThat(pdfFields.get(ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_TITLE_MS)).contains(
                 ET3FormConstants.CHECKBOX_PDF_RESPONDENT_EXPECTED_VALUE_TITLE_MS.equals(selectedTitle)
-                        ? ET3FormConstants.YES_CAPITALISED : ET3FormConstants.STRING_EMPTY);
+                        ? ET3FormConstants.YES_CAPITALISED : ET3FormConstants.OFF_CAPITALISED);
         assertThat(pdfFields.get(ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_TITLE_MRS)).contains(
                 ET3FormConstants.CHECKBOX_PDF_RESPONDENT_EXPECTED_VALUE_TITLE_MRS.equals(selectedTitle)
-                        ? ET3FormConstants.YES_CAPITALISED : ET3FormConstants.STRING_EMPTY);
+                        ? ET3FormConstants.YES_CAPITALISED : ET3FormConstants.OFF_CAPITALISED);
         assertThat(pdfFields.get(ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_TITLE_MISS)).contains(
                 ET3FormConstants.CHECKBOX_PDF_RESPONDENT_EXPECTED_VALUE_TITLE_MISS.equals(selectedTitle)
-                        ? ET3FormConstants.YES_CAPITALISED : ET3FormConstants.STRING_EMPTY);
+                        ? ET3FormConstants.YES_CAPITALISED : ET3FormConstants.OFF_CAPITALISED);
         if (isOtherTitle(selectedTitle)) {
             assertThat(pdfFields.get(ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_TITLE_OTHER))
                     .contains(ET3FormConstants.YES_CAPITALISED);
@@ -65,7 +65,7 @@ class ET3FormRespondentMapperTest {
         assertThat(pdfFields.get(ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_MOBILE_NUMBER))
                 .contains(ET3FormTestConstants.TEST_PDF_RESPONDENT_EXPECTED_VALUE_MOBILE_NUMBER);
         assertThat(pdfFields.get(ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_CONTACT_TYPE_EMAIL))
-                .contains(ET3FormConstants.STRING_EMPTY);
+                .contains(ET3FormConstants.OFF_CAPITALISED);
         assertThat(pdfFields.get(ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_CONTACT_TYPE_POST))
                 .contains(ET3FormTestConstants.TEST_PDF_RESPONDENT_EXPECTED_VALUE_CONTACT_TYPE_POST);
         assertThat(pdfFields.get(ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_EMAIL))
@@ -79,7 +79,7 @@ class ET3FormRespondentMapperTest {
         assertThat(pdfFields.get(ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_MORE_THAN_ONE_SITE_GREAT_BRITAIN_YES))
                 .contains(ET3FormTestConstants.TEST_PDF_RESPONDENT_EXPECTED_VALUE_MORE_THAN_ONE_SITE_GREAT_BRITAIN_YES);
         assertThat(pdfFields.get(ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_MORE_THAN_ONE_SITE_GREAT_BRITAIN_NO))
-                .contains(ET3FormConstants.STRING_EMPTY);
+                .contains(ET3FormConstants.OFF_CAPITALISED);
         assertThat(pdfFields.get(ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_EMPLOYEE_NUMBER_CLAIMANT_WORK_PLACE))
                 .contains(ET3FormTestConstants.TEST_PDF_RESPONDENT_EXPECTED_VALUE_EMPLOYEE_NUMBER_CLAIMANT_WORK_PLACE);
         assertThat(pdfFields.get(ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_ADDRESS))

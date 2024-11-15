@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentMap;
 
-import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.CurrencyUtil.correctCurrency;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putConditionalPdfCheckboxField;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putConditionalPdfField;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putPdfCheckboxFieldWhenExpectedValueEqualsActualValue;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putPdfCheckboxFieldWhenOther;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3MapperUtilUtil.correctCurrency;
 
 public final class ET3FormEarningsAndBenefitsMapper {
 
@@ -67,19 +68,19 @@ public final class ET3FormEarningsAndBenefitsMapper {
                 ET3FormConstants.NO_CAPITALISED,
                 respondentSumType.getEt3ResponseEarningDetailsCorrect(),
                 correctCurrency(respondentSumType.getEt3ResponsePayBeforeTax()));
-        putConditionalPdfField(pdfFields,
+        putConditionalPdfCheckboxField(pdfFields,
                 ET3FormConstants.CHECKBOX_PDF_EARNINGS_BENEFITS_FIELD_PAY_BEFORE_TAX_WEEKLY,
                 ET3FormConstants.NO_CAPITALISED,
                 respondentSumType.getEt3ResponseEarningDetailsCorrect(),
                 getPaymentFrequencyCheckboxValue(respondentSumType.getEt3ResponsePayFrequency(),
                         ET3FormConstants.WEEKLY_CAPITALISED));
-        putConditionalPdfField(pdfFields,
+        putConditionalPdfCheckboxField(pdfFields,
                 ET3FormConstants.CHECKBOX_PDF_EARNINGS_BENEFITS_FIELD_PAY_BEFORE_TAX_MONTHLY,
                 ET3FormConstants.NO_CAPITALISED,
                 respondentSumType.getEt3ResponseEarningDetailsCorrect(),
                 getPaymentFrequencyCheckboxValue(respondentSumType.getEt3ResponsePayFrequency(),
                         ET3FormConstants.MONTHLY_CAPITALISED));
-        putConditionalPdfField(pdfFields,
+        putConditionalPdfCheckboxField(pdfFields,
                 ET3FormConstants.CHECKBOX_PDF_EARNINGS_BENEFITS_FIELD_PAY_BEFORE_TAX_ANNUALLY,
                 ET3FormConstants.NO_CAPITALISED,
                 respondentSumType.getEt3ResponseEarningDetailsCorrect(),
@@ -90,19 +91,19 @@ public final class ET3FormEarningsAndBenefitsMapper {
                 ET3FormConstants.NO_CAPITALISED,
                 respondentSumType.getEt3ResponseEarningDetailsCorrect(),
                 correctCurrency(respondentSumType.getEt3ResponsePayTakehome()));
-        putConditionalPdfField(pdfFields,
+        putConditionalPdfCheckboxField(pdfFields,
                 ET3FormConstants.CHECKBOX_PDF_EARNINGS_BENEFITS_FIELD_NORMAL_TAKE_HOME_PAY_WEEKLY,
                 ET3FormConstants.NO_CAPITALISED,
                 respondentSumType.getEt3ResponseEarningDetailsCorrect(),
                 getPaymentFrequencyCheckboxValue(respondentSumType.getEt3ResponsePayFrequency(),
                         ET3FormConstants.WEEKLY_CAPITALISED));
-        putConditionalPdfField(pdfFields,
+        putConditionalPdfCheckboxField(pdfFields,
                 ET3FormConstants.CHECKBOX_PDF_EARNINGS_BENEFITS_FIELD_NORMAL_TAKE_HOME_PAY_MONTHLY,
                 ET3FormConstants.NO_CAPITALISED,
                 respondentSumType.getEt3ResponseEarningDetailsCorrect(),
                 getPaymentFrequencyCheckboxValue(respondentSumType.getEt3ResponsePayFrequency(),
                         ET3FormConstants.MONTHLY_CAPITALISED));
-        putConditionalPdfField(pdfFields,
+        putConditionalPdfCheckboxField(pdfFields,
                 ET3FormConstants.CHECKBOX_PDF_EARNINGS_BENEFITS_FIELD_NORMAL_TAKE_HOME_PAY_ANNUALLY,
                 ET3FormConstants.NO_CAPITALISED,
                 respondentSumType.getEt3ResponseEarningDetailsCorrect(),

@@ -17,6 +17,7 @@ import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormAcasMapper.mapAcas;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.CHECKBOX_PDF_ACAS_FIELD_AGREEMENT_NO;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.CHECKBOX_PDF_ACAS_FIELD_AGREEMENT_YES;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.NO_CAPITALISED;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.OFF_CAPITALISED;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.STRING_EMPTY;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.TXT_PDF_ACAS_FIELD_AGREEMENT_NO_REASON;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.YES_CAPITALISED;
@@ -39,9 +40,9 @@ class ET3FormAcasMapperTest {
         mapAcas(respondentSumType, pdfFields);
         String acasAgreed = respondentSumType.getEt3ResponseAcasAgree();
         assertThat(pdfFields.get(CHECKBOX_PDF_ACAS_FIELD_AGREEMENT_YES)).contains(YES_CAPITALISED.equals(acasAgreed)
-                ? YES_CAPITALISED : STRING_EMPTY);
+                ? YES_CAPITALISED : OFF_CAPITALISED);
         assertThat(pdfFields.get(CHECKBOX_PDF_ACAS_FIELD_AGREEMENT_NO)).contains(NO_CAPITALISED.equals(acasAgreed)
-                ? NO_CAPITALISED : STRING_EMPTY);
+                ? NO_CAPITALISED : OFF_CAPITALISED);
         assertThat(pdfFields.get(TXT_PDF_ACAS_FIELD_AGREEMENT_NO_REASON)).contains(NO_CAPITALISED.equals(acasAgreed)
                 ? respondentSumType.getEt3ResponseAcasAgreeReason() : STRING_EMPTY);
     }

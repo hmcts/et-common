@@ -94,7 +94,7 @@ class ET3FormUtilTest {
         assumeTrue(isNotBlank(fieldName));
         assertThat(pdfFields.get(fieldName)).contains(isBlank(checkValue) || isBlank(expectedValue)
                 || isBlank(actualValue) || !expectedValue.equalsIgnoreCase(actualValue)
-                ? ET3FormConstants.STRING_EMPTY
+                ? ET3FormConstants.OFF_CAPITALISED
                 : checkValue);
     }
 
@@ -123,7 +123,7 @@ class ET3FormUtilTest {
         assumeTrue(isNotBlank(fieldName));
         assertThat(pdfFields.get(fieldName)).contains(isBlank(checkValue) || isEmpty(expectedValueList)
                 || isBlank(actualValue) || expectedValueList.contains(actualValue)
-                ? ET3FormConstants.STRING_EMPTY
+                ? ET3FormConstants.OFF_CAPITALISED
                 : checkValue);
     }
 

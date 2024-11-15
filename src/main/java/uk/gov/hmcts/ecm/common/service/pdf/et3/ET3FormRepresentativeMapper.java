@@ -29,11 +29,11 @@ import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.TXT_PDF_R
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.TXT_PDF_REPRESENTATIVE_FIELD_REFERENCE_FOR_CORRESPONDENCE;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.VIDEO_HEARINGS;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.YES_CAPITALISED;
-import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.CurrencyUtil.findRepresentativeFromCaseData;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putPdfAddressField;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putPdfCheckboxFieldWhenActualValueContainsExpectedValue;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putPdfCheckboxFieldWhenExpectedValueEqualsActualValue;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putPdfTextField;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3MapperUtilUtil.findRepresentativeFromCaseData;
 
 public final class ET3FormRepresentativeMapper {
 

@@ -16,6 +16,7 @@ public final class ET3FormConstants {
     public static final String YES_CAPITALISED = "Yes";
     public static final String NO_LOWERCASE = "no";
     public static final String NO_CAPITALISED = "No";
+    public static final String OFF_CAPITALISED = "Off";
     public static final String EMAIL_LOWERCASE = "email";
     public static final String POST_LOWERCASE = "post";
     public static final String VIDEO_HEARINGS = "Video hearings";

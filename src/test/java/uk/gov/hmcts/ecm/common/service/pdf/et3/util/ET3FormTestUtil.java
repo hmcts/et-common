@@ -4,6 +4,7 @@ import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.OFF_CAPITALISED;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.STRING_EMPTY;
 
 public final class ET3FormTestUtil {
@@ -16,12 +17,12 @@ public final class ET3FormTestUtil {
                                                        List<String> expectedValues,
                                                        String valueToEnableCheckbox) {
         return isBlank(actualValue) || !expectedValues.contains(actualValue)
-                ? valueToEnableCheckbox : STRING_EMPTY;
+                ? valueToEnableCheckbox : OFF_CAPITALISED;
     }
 
     public static String getCheckboxValue(String actualValue, String expectedValue, String valueToEnableCheckbox) {
         return isNotBlank(actualValue) && isNotBlank(expectedValue) && expectedValue.equalsIgnoreCase(actualValue)
-                ? valueToEnableCheckbox : STRING_EMPTY;
+                ? valueToEnableCheckbox : OFF_CAPITALISED;
     }
 
     public static String getCorrectedDetailValue(String checkboxActualValue,
@@ -42,6 +43,6 @@ public final class ET3FormTestUtil {
                 && expectedCheckBoxValue.equalsIgnoreCase(checkboxActualValue)
                 && isNotBlank(correctedDetailCheckboxValue)
                 && expectedDetailCheckboxValue.equalsIgnoreCase(correctedDetailCheckboxValue)
-                ? expectedCorrectedDetailValue : STRING_EMPTY;
+                ? expectedCorrectedDetailValue : OFF_CAPITALISED;
     }
 }
