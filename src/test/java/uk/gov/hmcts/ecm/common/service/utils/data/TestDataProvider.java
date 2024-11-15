@@ -3,7 +3,6 @@ package uk.gov.hmcts.ecm.common.service.utils.data;
 import uk.gov.hmcts.ecm.common.service.utils.ResourceLoader;
 import uk.gov.hmcts.et.common.model.ccd.Address;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
-import uk.gov.hmcts.et.common.model.ccd.types.ClaimantIndType;
 import uk.gov.hmcts.et.common.model.ccd.types.ClaimantWorkAddressType;
 
 import static uk.gov.hmcts.ecm.common.service.utils.TestConstants.TEST_CASE_DATA_JSON_FILE;
