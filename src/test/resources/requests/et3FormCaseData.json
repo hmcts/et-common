@@ -1,0 +1,501 @@
+{
+  "positionType": "ET1 Online submission",
+  "et1GovOrMajorQuestion": "No",
+  "claimantRepresentedQuestion": "No",
+  "respondentCollection": [
+    {
+      "id": "afaff844-f85e-4349-bde5-92c295f392f5",
+      "value": {
+        "et3Form": {
+          "category_id": "C18",
+          "document_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/1824d0e5-aecc-4dff-8e7c-03fbae8cfb39",
+          "document_filename": "Test Company - ET3 Response.pdf",
+          "document_binary_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/1824d0e5-aecc-4dff-8e7c-03fbae8cfb39/binary"
+        },
+        "respondent_phone1": "07444518907",
+        "respondent_phone2": "07444518904",
+        "respondent_contact_preference": "post",
+        "respondent_ACAS": "R123456/78/90",
+        "respondent_name": "Test Company",
+        "responseContinue": "Yes",
+        "responseReceived": "Yes",
+        "responseReference": "REF1234",
+        "responseStruckOut": "No",
+        "extensionRequested": "No",
+        "responseRespondentEmail" : "michael@jackson.com",
+        "respondent_address": {
+          "Country": "England",
+          "PostCode": "SL6 2DE",
+          "PostTown": "Maidenhead",
+          "AddressLine1": "48, Tithe Barn Drive"
+        },
+        "claimDetailsSection": "Yes",
+        "et3ResponseAcasAgree": "No",
+        "et3ResponseDXAddress": "Test DX Address",
+        "responseReceivedDate": "2024-05-13",
+        "et3ResponsePayTakehome": "3000000",
+        "personalDetailsSection": "Yes",
+        "responseRespondentName": "Test Company",
+        "et3ResponsePayBeforeTax": "3500000",
+        "et3ResponsePayFrequency": "Annually",
+        "employmentDetailsSection": "Yes",
+        "et3ResponseEmployerClaim": "Yes",
+        "et3ResponseMultipleSites": "Yes",
+        "respondent_ACAS_question": "Yes",
+        "responseRespondentPhone1": "07444518906",
+        "responseRespondentPhone2": "07444518907",
+        "respondent_email": "respondent@testmail.com",
+        "responseRespondentAddress": {
+          "Country": "United Kingdom",
+          "PostCode": "SL6 2DE",
+          "PostTown": "Maidenhead",
+          "AddressLine1": "50 Tithe Barn Drive"
+        },
+        "et3ResponseAcasAgreeReason": "I don't like ACAS.",
+        "et3ResponseAreDatesCorrect": "No",
+        "et3ResponseCorrectJobTitle": "IT Guy",
+        "et3ResponseEmploymentCount": "15",
+        "et3ResponseIsNoticeCorrect": "No",
+        "et3ResponseIsPensionCorrect": "No",
+        "et3ResponseEmploymentEndDate": "2021-12-28",
+        "et3ResponseHearingRespondent": [
+          "Phone hearings",
+          "Video hearings"
+        ],
+        "et3ResponseIsJobTitleCorrect": "No",
+        "et3ResponseClaimantWeeklyHours": "No",
+        "et3ResponseContestClaimDetails": "I don't agree with the claimant.",
+        "et3ResponseEmploymentStartDate": "2020-02-24",
+        "et3ResponseSiteEmploymentCount": "10",
+        "et3ResponseClaimantCorrectHours": "36",
+        "et3ResponseContestClaimDocument": [
+          {
+            "id": "ec7af2db-6a1a-430c-bcfc-3f536d1b6b13",
+            "value": {
+              "uploadedDocument": {
+                "document_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/f40ed136-fb26-4638-af6c-80a98d56af5d",
+                "document_filename": "employer_contract_claim_test_document.docx",
+                "document_binary_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/f40ed136-fb26-4638-af6c-80a98d56af5d/binary"
+              }
+            }
+          }
+        ],
+        "et3ResponseContinuingEmployment": "No",
+        "et3ResponseCorrectNoticeDetails": "His notice period was only for 3 weeks",
+        "et3ResponseEmployerClaimDetails": "I want to make employer's contract claim.",
+        "et3ResponseEarningDetailsCorrect": "No",
+        "et3ResponseEmployerClaimDocument": {
+          "document_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/d06b656c-5488-433b-ae14-c0f64be0f10b",
+          "document_filename": "CONTACT THE TRIBUNAL APPLICATION BY REPRESENTATIVE TEST FILE.docx",
+          "document_binary_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/d06b656c-5488-433b-ae14-c0f64be0f10b/binary"
+        },
+        "et3ResponseEmploymentInformation": "Claimant gave wrong dates",
+        "et3ResponseHearingRepresentative": [
+          "Phone hearings",
+          "Video hearings"
+        ],
+        "et3ResponseIsClaimantNameCorrect": "No",
+        "et3ResponsePensionCorrectDetails": "His pension was 300 and he didn't have a car.",
+        "et3ResponseRespondentContactName": "Will Respondent",
+        "et3ResponseClaimantNameCorrection": "Mehmet Tahir Dede",
+        "et3ResponseRespondentContestClaim": "Yes",
+        "et3ResponseRespondentEmployerType": "Limited company",
+        "et3ResponseRespondentCompanyNumber": "123456",
+        "et3ResponseRespondentSupportNeeded": "Yes",
+        "et3ResponseRespondentSupportDetails": "He needs some food. Because he is always hungry.",
+        "responseRespondentContactPreference": "Email",
+        "et3ResponseRespondentSupportDocument": {
+          "document_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/3a53a5f9-cf28-4726-9a6d-a8b9f0e8b0c9",
+          "document_filename": "ADR TEST DOCUMENT 1.docx",
+          "document_binary_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/3a53a5f9-cf28-4726-9a6d-a8b9f0e8b0c9/binary"
+        }
+      }
+    }
+  ],
+  "claimantRequests": {
+    "pay_claims": [
+      "Arrears",
+      "Holiday pay",
+      "Notice pay",
+      "Redundancy pay",
+      "Other payments"
+    ],
+    "linked_cases": "No",
+    "claim_outcome": [
+      "compensation",
+      "tribunal",
+      "oldJob",
+      "anotherJob"
+    ],
+    "whistleblowing": "Yes",
+    "claim_description": "Test description",
+    "discrimination_claims": [
+      "Age",
+      "Disability",
+      "Gender reassignment",
+      "Marriage or civil partnership",
+      "Pregnancy or maternity",
+      "Race",
+      "Religion or belief",
+      "Sex",
+      "Sexual orientation"
+    ],
+    "whistleblowing_authority": "Test regulatory",
+    "claimant_compensation_text": "Test compensation",
+    "claimant_compensation_amount": "1200",
+    "claimant_tribunal_recommendation": "Test tribunal recommendation"
+  },
+  "et1OnlineSubmission": "Yes",
+  "respondent": "Test Company",
+  "preAcceptCase": {
+    "caseAccepted": "Yes",
+    "dateAccepted": "2024-05-13"
+  },
+  "et1VettingCompletedBy": "ET Caseworker1",
+  "et1ReasonableAdjustmentsTextArea": "Wheelchair",
+  "et1DateCompleted": "13 May 2024",
+  "claimantOtherType": {
+    "pastEmployer": "Yes",
+    "stillWorking": "No longer working",
+    "claimant_benefits": "Yes",
+    "claimant_pay_cycle": "Annual",
+    "claimant_occupation": "IT Manager",
+    "claimant_employed_to": "2022-01-01",
+    "claimant_employed_from": "2020-01-01",
+    "claimant_notice_period": "Yes",
+    "claimant_pay_after_tax": "35000",
+    "claimant_pay_before_tax": "40000",
+    "claimant_benefits_detail": "Car",
+    "claimant_notice_period_unit": "Weeks",
+    "claimant_average_weekly_hours": "37.5",
+    "claimant_pension_contribution": "Yes",
+    "claimant_notice_period_duration": "4",
+    "claimant_pension_weekly_contribution": "200"
+  },
+  "tribunalCorrespondenceFax": "01264 887 302",
+  "managingOffice": "Watford",
+  "feeGroupReference": "1715631967114626",
+  "claimantDocumentCollection": [
+    {
+      "id": "a1c60f68-f818-4727-b228-cd5ced094518",
+      "value": {
+        "docNumber": "1",
+        "documentType": "ET1",
+        "typeOfDocument": "ET1",
+        "shortDescription": "ET1 - et citizen1",
+        "uploadedDocument": {
+          "category_id": "C11",
+          "document_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/6e872094-fdc6-4c52-b172-fbe510c0c58d",
+          "document_filename": "ET1 - et citizen1.pdf",
+          "document_binary_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/6e872094-fdc6-4c52-b172-fbe510c0c58d/binary"
+        },
+        "topLevelDocuments": "Starting a Claim",
+        "dateOfCorrespondence": "2024-05-13",
+        "startingClaimDocuments": "ET1"
+      }
+    }
+  ],
+  "et1VettingAcasCertIsYesOrNo1": "Yes",
+  "ethosCaseReference": "6009729/2024",
+  "claimantIndType": {
+    "claimant_sex": "Male",
+    "claimant_last_name": "citizen1",
+    "claimant_first_names": "et",
+    "claimant_date_of_birth": "1979-08-05",
+    "claimant_preferred_title": "Mr"
+  },
+  "claimantHearingPreference": {
+    "contact_language": "English",
+    "hearing_language": "English",
+    "hearing_preferences": [
+      "Video",
+      "Phone"
+    ],
+    "reasonable_adjustments": "Yes",
+    "reasonable_adjustments_detail": "Wheelchair"
+  },
+  "claimant": "et citizen1",
+  "repCollection": [
+    {
+      "id": "3dd0a7bc-d134-413a-965f-aaadf7a4cca7",
+      "value": {
+        "myHmctsYesNo": "Yes",
+        "respondentId": "afaff844-f85e-4349-bde5-92c295f392f5",
+        "resp_rep_name": "Test Company",
+        "name_of_organisation": "ET Test Factory Solicitor",
+        "name_of_representative": "EeT TesterOne",
+        "representative_address": {
+          "PostCode": "SN1 4ET",
+          "PostTown": "SWINDON",
+          "AddressLine1": "10, GROVELANDS AVENUE"
+        },
+        "respondentOrganisation": {
+          "OrganisationID": "PG7Q7JU"
+        },
+        "representative_email_address": "et.legalrep.1@gmail.com"
+      }
+    }
+  ],
+  "dateToPosition": "2024-05-13",
+  "multipleFlag": "No",
+  "et1ReasonableAdjustmentsQuestion": "Yes",
+  "trackType": "Open",
+  "currentPosition": "ET1 Online submission",
+  "receiptDate": "2024-05-13",
+  "caseSource": "ET1 Online",
+  "et1VettingDocument": {
+    "document_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/356d4727-e368-49e0-bf00-35cefd365e3d",
+    "document_filename": "ET1 Vetting - et citizen1.pdf",
+    "document_binary_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/356d4727-e368-49e0-bf00-35cefd365e3d/binary"
+  },
+  "typesOfClaim": [
+    "discrimination",
+    "payRelated",
+    "unfairDismissal",
+    "whistleBlowing"
+  ],
+  "claimantId": "8f4ac342-b574-4967-8ae4-719147c06289",
+  "flagsImageAltText": "<font color='DarkSlateBlue' size='5'> REASONABLE ADJUSTMENT </font>",
+  "isLocationCorrect": "Yes",
+  "jurCodesCollection": [
+    {
+      "id": "b5ceae69-d8f0-4ce6-b708-d81bbedd4d44",
+      "value": {
+        "juridictionCodesList": "DDA"
+      }
+    },
+    {
+      "id": "78912bfe-1e66-4ce0-9410-0b3692ed158f",
+      "value": {
+        "juridictionCodesList": "WTR(AL)"
+      }
+    },
+    {
+      "id": "f0f58555-668a-45fa-94f8-204fe29f08b2",
+      "value": {
+        "juridictionCodesList": "MAT"
+      }
+    },
+    {
+      "id": "02a6ced7-a5fa-45fa-95e4-ae033c3c3b67",
+      "value": {
+        "juridictionCodesList": "DSO"
+      }
+    },
+    {
+      "id": "ac3f7868-5604-43c6-9e84-7732e20f8d64",
+      "value": {
+        "juridictionCodesList": "RRD"
+      }
+    },
+    {
+      "id": "90d67476-3bfe-4632-9bce-913e5c1ce053",
+      "value": {
+        "juridictionCodesList": "PID"
+      }
+    },
+    {
+      "id": "ffb2fb3e-2971-470d-82db-32c9315f30ff",
+      "value": {
+        "juridictionCodesList": "WA"
+      }
+    },
+    {
+      "id": "44b66613-3da5-4b0a-8446-f285dce6083f",
+      "value": {
+        "juridictionCodesList": "DAG"
+      }
+    },
+    {
+      "id": "3978be16-6e2d-4c81-a273-6453e4062a5f",
+      "value": {
+        "juridictionCodesList": "DRB"
+      }
+    },
+    {
+      "id": "0cfe1d31-697c-497e-93d5-6cb450595aeb",
+      "value": {
+        "juridictionCodesList": "BOC"
+      }
+    },
+    {
+      "id": "384effe0-0833-4c94-8fa6-6d22601c5109",
+      "value": {
+        "juridictionCodesList": "RPT"
+      }
+    },
+    {
+      "id": "dd6896e1-f9d0-4775-913b-132ca611e64e",
+      "value": {
+        "juridictionCodesList": "UDL"
+      }
+    },
+    {
+      "id": "e776c2fb-21a1-4758-9ab4-76760c2108d8",
+      "value": {
+        "juridictionCodesList": "SXD"
+      }
+    }
+  ],
+  "caseManagementLocationCode": "685391",
+  "tribunalCorrespondenceDX": "DX 155650 Watford 3",
+  "triageQuestions": {
+    "caseType": "Single",
+    "postcode": "LS1 1AA",
+    "acasMultiple": "Yes",
+    "typesOfClaim": [
+      "discrimination",
+      "payRelated",
+      "unfairDismissal",
+      "whistleBlowing"
+    ],
+    "claimantRepresentedQuestion": "No"
+  },
+  "et1TribunalRegion": "Watford",
+  "caseType": "Single",
+  "claimant_TypeOfClaimant": "Individual",
+  "claimantFlags": {
+    "partyName": "et citizen1",
+    "roleOnCase": "claimant"
+  },
+  "areTheseCodesCorrect": "Yes",
+  "tribunalCorrespondenceEmail": "watfordet@justice.gov.uk",
+  "isTrackAllocationCorrect": "Yes",
+  "documentCollection": [
+    {
+      "id": "a1c60f68-f818-4727-b228-cd5ced094518",
+      "value": {
+        "docNumber": "1",
+        "documentType": "ET1",
+        "typeOfDocument": "ET1",
+        "shortDescription": "ET1 - et citizen1",
+        "uploadedDocument": {
+          "category_id": "C11",
+          "document_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/6e872094-fdc6-4c52-b172-fbe510c0c58d",
+          "document_filename": "ET1 - et citizen1.pdf",
+          "document_binary_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/6e872094-fdc6-4c52-b172-fbe510c0c58d/binary"
+        },
+        "topLevelDocuments": "Starting a Claim",
+        "dateOfCorrespondence": "2024-05-13",
+        "startingClaimDocuments": "ET1"
+      }
+    },
+    {
+      "id": "75e90068-85ac-472f-8789-b1b384711223",
+      "value": {
+        "documentType": "ET1 Vetting",
+        "uploadedDocument": {
+          "document_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/356d4727-e368-49e0-bf00-35cefd365e3d",
+          "document_filename": "ET1 Vetting - et citizen1.pdf",
+          "document_binary_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/356d4727-e368-49e0-bf00-35cefd365e3d/binary"
+        },
+        "topLevelDocuments": "Starting a Claim",
+        "dateOfCorrespondence": "2024-05-13",
+        "startingClaimDocuments": "ET1 Vetting"
+      }
+    },
+    {
+      "id": "d5fc6912-62c5-4333-b5b8-a0b3ba03fd0f",
+      "value": {
+        "documentType": "ET3 Attachment",
+        "shortDescription": "Attached document submitted with a Response : Respondent Support.",
+        "uploadedDocument": {
+          "document_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/3a53a5f9-cf28-4726-9a6d-a8b9f0e8b0c9",
+          "document_filename": "ADR TEST DOCUMENT 1.docx",
+          "document_binary_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/3a53a5f9-cf28-4726-9a6d-a8b9f0e8b0c9/binary"
+        },
+        "topLevelDocuments": "Response to a Claim",
+        "dateOfCorrespondence": "2024-05-13",
+        "responseClaimDocuments": "ET3 Attachment"
+      }
+    },
+    {
+      "id": "66d11f99-856a-49ea-b5d3-002bfc7766f7",
+      "value": {
+        "documentType": "ET3 Attachment",
+        "shortDescription": "Attached document submitted with a Response : Respondent Contest Claim.",
+        "uploadedDocument": {
+          "document_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/f40ed136-fb26-4638-af6c-80a98d56af5d",
+          "document_filename": "employer_contract_claim_test_document.docx",
+          "document_binary_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/f40ed136-fb26-4638-af6c-80a98d56af5d/binary"
+        },
+        "topLevelDocuments": "Response to a Claim",
+        "dateOfCorrespondence": "2024-05-13",
+        "responseClaimDocuments": "ET3 Attachment"
+      }
+    },
+    {
+      "id": "2c6fc727-d59d-4fcd-92c1-5aa62e795238",
+      "value": {
+        "documentType": "ET3 Attachment",
+        "shortDescription": "Attached document submitted with a Response : Employer Claim.",
+        "uploadedDocument": {
+          "document_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/d06b656c-5488-433b-ae14-c0f64be0f10b",
+          "document_filename": "CONTACT THE TRIBUNAL APPLICATION BY REPRESENTATIVE TEST FILE.docx",
+          "document_binary_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/d06b656c-5488-433b-ae14-c0f64be0f10b/binary"
+        },
+        "topLevelDocuments": "Response to a Claim",
+        "dateOfCorrespondence": "2024-05-13",
+        "responseClaimDocuments": "ET3 Attachment"
+      }
+    },
+    {
+      "id": "8023c301-22da-461e-8ad3-d63cefc3a93b",
+      "value": {
+        "documentType": "ET3",
+        "typeOfDocument": "ET3",
+        "shortDescription": "Attached document submitted with a Response : ET3 Form Submission.",
+        "uploadedDocument": {
+          "category_id": "C18",
+          "document_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/1824d0e5-aecc-4dff-8e7c-03fbae8cfb39",
+          "document_filename": "Test Company - ET3 Response.pdf",
+          "document_binary_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/1824d0e5-aecc-4dff-8e7c-03fbae8cfb39/binary"
+        },
+        "topLevelDocuments": "Response to a Claim",
+        "dateOfCorrespondence": "2024-05-13",
+        "responseClaimDocuments": "ET3"
+      }
+    }
+  ],
+  "et1VideoHearingQuestion": "Yes",
+  "et1VettingCanServeClaimYesOrNo": "Yes",
+  "caseNameHmctsInternal": "et citizen1 vs Test Company",
+  "tribunalCorrespondenceTelephone": "0192 328 1750",
+  "respondentFlags": {
+    "partyName": "Test Company",
+    "roleOnCase": "respondent"
+  },
+  "claimantWorkAddressQuestion": "Yes",
+  "conciliationTrack": "Open Track",
+  "newEmploymentType": {
+    "new_job": "Yes",
+    "new_pay_before_tax": "60000",
+    "newly_employed_from": "2022-02-01",
+    "new_job_pay_interval": "Annual"
+  },
+  "claimantTaskListChecks": {
+    "claimDetailsCheck": "Yes",
+    "personalDetailsCheck": "Yes",
+    "employmentAndRespondentCheck": "Yes"
+  },
+  "claimantType": {
+    "claimant_addressUK": {
+      "Country": "England",
+      "PostCode": "SL6 2DE",
+      "PostTown": "Maidenhead",
+      "AddressLine1": "50, Tithe Barn Drive"
+    },
+    "claimant_phone_number": "07444518903",
+    "claimant_email_address": "et.citizen1UI@testmail.com",
+    "claimant_contact_preference": "Email"
+  },
+  "flagsImageFileName": "EMP-TRIB-00000000010.jpg",
+  "et1SuggestHearingVenue": "No",
+  "publicCaseName": "et citizen1 vs Test Company",
+  "targetHearingDate": "2024-11-09",
+  "submitEt3Respondent": {
+    "value": {
+      "label": "Test Company"
+    }
+  }
+}

@@ -10,7 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import uk.gov.hmcts.ecm.common.model.CaseTestData;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperServiceUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperServiceUtil;
 import uk.gov.hmcts.ecm.common.service.utils.TestConstants;
 import uk.gov.hmcts.ecm.common.service.utils.data.TestDataProvider;
 import uk.gov.hmcts.et.common.model.ccd.Address;
@@ -20,13 +20,13 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperServiceUtil.generateClaimantCompensation;
-import static uk.gov.hmcts.ecm.common.service.utils.PdfMapperServiceUtil.generateClaimantTribunalRecommendation;
+import static uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperServiceUtil.generateClaimantCompensation;
+import static uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperServiceUtil.generateClaimantTribunalRecommendation;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 @SuppressWarnings({"PMD.TooManyMethods"})
-class PdfMapperServiceUtilTest {
+class Et1PdfMapperServiceUtilTest {
 
     private static final String ADDRESS_LINE1 = "CO-OPERATIVE RETAIL SERVICES LTD, 11, MERRION WAY";
     private static final String ADDRESS_LINE2 = "SAMPLE ADDRESS LINE 2";

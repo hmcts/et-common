@@ -1,7 +1,6 @@
-package uk.gov.hmcts.ecm.common.service.utils;
+package uk.gov.hmcts.ecm.common.service.pdf.et1;
 
 import org.apache.commons.lang3.StringUtils;
-import org.elasticsearch.common.Strings;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import uk.gov.hmcts.ecm.common.exceptions.PdfServiceException;
@@ -172,7 +171,7 @@ public final class PdfMapperRespondentUtil {
             );
         } else {
             putAcasCertificateNotFoundCheckbox(acasCertificatePdfModel, printFields);
-            if (!Strings.isNullOrEmpty(respondent.getRespondentAcasNo())) {
+            if (!StringUtils.isEmpty(respondent.getRespondentAcasNo())) {
                 switch (respondent.getRespondentAcasNo()) {
                     case PDF_TEMPLATE_REASON_NOT_HAVING_ACAS_UNFAIR_DISMISSAL: {
                         printFields.put(

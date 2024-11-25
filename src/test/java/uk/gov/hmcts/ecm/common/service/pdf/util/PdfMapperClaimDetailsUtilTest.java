@@ -9,7 +9,7 @@ import uk.gov.hmcts.ecm.common.constants.PdfMapperConstants;
 import uk.gov.hmcts.ecm.common.enums.ClaimType;
 import uk.gov.hmcts.ecm.common.enums.DiscriminationType;
 import uk.gov.hmcts.ecm.common.enums.PayClaimType;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperClaimDetailsUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperClaimDetailsUtil;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 
 import java.util.Optional;

@@ -32,9 +32,9 @@ import static uk.gov.hmcts.ecm.common.model.helper.Constants.NO;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
 @SuppressWarnings({"PMD.TooManyMethods"})
-class PdfMapperServiceTest {
+class Et1PdfMapperServiceTest {
     private static final Integer TOTAL_VALUES = 72;
-    private PdfMapperService pdfMapperService;
+    private ET1PdfMapperService et1PdfMapperService;
     private CaseData caseData;
     private static final String ACAS_PREFIX = "2.3";
 
@@ -42,7 +42,7 @@ class PdfMapperServiceTest {
 
     @BeforeEach
     void setup() {
-        pdfMapperService = new PdfMapperService();
+        et1PdfMapperService = new ET1PdfMapperService();
 
         caseData = ResourceLoader.fromString(
             "responses/pdfMapperCaseDetails.json", CaseData.class
@@ -52,7 +52,7 @@ class PdfMapperServiceTest {
     @Test
     void givenCaseProducesPdfHeaderMap() {
         caseData.setClaimantWorkAddressQuestion(NO);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertEquals(TOTAL_VALUES, pdfMap.size());
     }
 
@@ -61,7 +61,7 @@ class PdfMapperServiceTest {
         ClaimantType claimantType = caseData.getClaimantType();
         claimantType.setClaimantContactPreference("Email");
         caseData.setClaimantType(claimantType);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(PdfMapperConstants.Q1_CONTACT_EMAIL));
     }
 
@@ -70,7 +70,7 @@ class PdfMapperServiceTest {
         ClaimantType claimantType = caseData.getClaimantType();
         claimantType.setClaimantContactPreference(POST);
         caseData.setClaimantType(claimantType);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(PdfMapperConstants.Q1_CONTACT_POST));
     }
 
@@ -83,7 +83,7 @@ class PdfMapperServiceTest {
         RespondentSumTypeItem respondentSumTypeItem = new RespondentSumTypeItem();
         respondentSumTypeItem.setValue(respondentSumType);
         caseData.setRespondentCollection(List.of(respondentSumTypeItem));
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(String.format(PdfMapperConstants.QX_ACAS_NUMBER, ACAS_PREFIX)));
     }
 
@@ -96,7 +96,7 @@ class PdfMapperServiceTest {
         RespondentSumTypeItem respondentSumTypeItem = new RespondentSumTypeItem();
         respondentSumTypeItem.setValue(respondentSumType);
         caseData.setRespondentCollection(List.of(respondentSumTypeItem));
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(String.format(PdfMapperConstants.QX_ACAS_A1, ACAS_PREFIX)));
     }
 
@@ -109,7 +109,7 @@ class PdfMapperServiceTest {
         RespondentSumTypeItem respondentSumTypeItem = new RespondentSumTypeItem();
         respondentSumTypeItem.setValue(respondentSumType);
         caseData.setRespondentCollection(List.of(respondentSumTypeItem));
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(String.format(PdfMapperConstants.QX_ACAS_A2, ACAS_PREFIX)));
     }
 
@@ -122,7 +122,7 @@ class PdfMapperServiceTest {
         RespondentSumTypeItem respondentSumTypeItem = new RespondentSumTypeItem();
         respondentSumTypeItem.setValue(respondentSumType);
         caseData.setRespondentCollection(List.of(respondentSumTypeItem));
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(String.format(PdfMapperConstants.QX_ACAS_A3, ACAS_PREFIX)));
     }
 
@@ -135,7 +135,7 @@ class PdfMapperServiceTest {
         RespondentSumTypeItem respondentSumTypeItem = new RespondentSumTypeItem();
         respondentSumTypeItem.setValue(respondentSumType);
         caseData.setRespondentCollection(List.of(respondentSumTypeItem));
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(String.format(PdfMapperConstants.QX_ACAS_A4, ACAS_PREFIX)));
     }
 
@@ -148,21 +148,21 @@ class PdfMapperServiceTest {
         claimantWorkAddressType.setClaimantWorkAddress(claimantAddress);
         caseData.setClaimantWorkAddress(claimantWorkAddressType);
         caseData.setClaimantWorkAddressQuestion(NO);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(Q2_4_DIFFERENT_WORK_ADDRESS));
     }
 
     @Test
     void givenTwoRespondentsReflectsInMap() {
         caseData.setRespondentCollection(createRespondentList(2));
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(String.format(PdfMapperConstants.QX_NAME, "2.5 R2")));
     }
 
     @Test
     void givenThreeRespondentsReflectsInMap() {
         caseData.setRespondentCollection(createRespondentList(3));
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(String.format(PdfMapperConstants.QX_NAME, "2.5 R2")));
         assertNotNull(pdfMap.get(String.format(PdfMapperConstants.QX_NAME, "2.7 R3")));
     }
@@ -172,7 +172,7 @@ class PdfMapperServiceTest {
         ClaimantOtherType claimantOtherType = caseData.getClaimantOtherType();
         claimantOtherType.setPastEmployer(NO);
         caseData.setClaimantOtherType(claimantOtherType);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNull(pdfMap.get(PdfMapperConstants.Q5_EMPLOYMENT_START));
     }
 
@@ -181,7 +181,7 @@ class PdfMapperServiceTest {
         ClaimantOtherType claimantOtherType = caseData.getClaimantOtherType();
         claimantOtherType.setStillWorking("Working");
         caseData.setClaimantOtherType(claimantOtherType);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(PdfMapperConstants.Q5_CONTINUING_YES));
         assertNull(pdfMap.get(PdfMapperConstants.Q5_EMPLOYMENT_END));
     }
@@ -190,7 +190,7 @@ class PdfMapperServiceTest {
     void givenDiscontinuedEmploymentReflectsInMap() {
         ClaimantOtherType claimantOtherType = caseData.getClaimantOtherType();
         caseData.setClaimantOtherType(claimantOtherType);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(PdfMapperConstants.Q5_EMPLOYMENT_END));
         assertNull(pdfMap.get(PdfMapperConstants.Q5_CONTINUING_YES));
     }
@@ -200,7 +200,7 @@ class PdfMapperServiceTest {
         ClaimantOtherType claimantOtherType = caseData.getClaimantOtherType();
         claimantOtherType.setClaimantPayCycle("Weeks");
         caseData.setClaimantOtherType(claimantOtherType);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(PdfMapperConstants.Q6_GROSS_PAY_WEEKLY));
         assertNull(pdfMap.get(PdfMapperConstants.Q6_GROSS_PAY_ANNUAL));
     }
@@ -210,7 +210,7 @@ class PdfMapperServiceTest {
         ClaimantOtherType claimantOtherType = caseData.getClaimantOtherType();
         claimantOtherType.setClaimantPayCycle("Months");
         caseData.setClaimantOtherType(claimantOtherType);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(PdfMapperConstants.Q6_GROSS_PAY_MONTHLY));
         assertNull(pdfMap.get(PdfMapperConstants.Q6_GROSS_PAY_ANNUAL));
     }
@@ -220,7 +220,7 @@ class PdfMapperServiceTest {
         ClaimantOtherType claimantOtherType = caseData.getClaimantOtherType();
         claimantOtherType.setClaimantPayCycle("Annual");
         caseData.setClaimantOtherType(claimantOtherType);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(PdfMapperConstants.Q6_GROSS_PAY_ANNUAL));
     }
 
@@ -230,7 +230,7 @@ class PdfMapperServiceTest {
         claimantOtherType.setClaimantPensionContribution(YES);
         claimantOtherType.setClaimantPensionWeeklyContribution("100");
         caseData.setClaimantOtherType(claimantOtherType);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(PdfMapperConstants.Q6_PENSION_YES));
         assertNotNull(pdfMap.get(PdfMapperConstants.Q6_PENSION_WEEKLY));
     }
@@ -241,7 +241,7 @@ class PdfMapperServiceTest {
         claimantOtherType.setClaimantPensionContribution(NO);
         claimantOtherType.setClaimantPensionWeeklyContribution(null);
         caseData.setClaimantOtherType(claimantOtherType);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(PdfMapperConstants.Q6_PENSION_NO));
         assertNull(pdfMap.get(PdfMapperConstants.Q6_PENSION_WEEKLY));
     }
@@ -253,7 +253,7 @@ class PdfMapperServiceTest {
         claimantOtherType.setClaimantNoticePeriodUnit("Weeks");
         claimantOtherType.setClaimantNoticePeriodDuration("1");
         caseData.setClaimantOtherType(claimantOtherType);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(PdfMapperConstants.Q6_NOTICE_WEEKS));
     }
 
@@ -264,7 +264,7 @@ class PdfMapperServiceTest {
         claimantOtherType.setClaimantNoticePeriodUnit("Months");
         claimantOtherType.setClaimantNoticePeriodDuration("1");
         caseData.setClaimantOtherType(claimantOtherType);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(PdfMapperConstants.Q6_NOTICE_MONTHS));
     }
 
@@ -274,7 +274,7 @@ class PdfMapperServiceTest {
         claimantOtherType.setStillWorking("Notice");
         claimantOtherType.setClaimantEmployedNoticePeriod("2018-02-05");
         caseData.setClaimantOtherType(claimantOtherType);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(PdfMapperConstants.Q5_NOT_ENDED));
     }
 
@@ -285,7 +285,7 @@ class PdfMapperServiceTest {
         newEmploymentType.setNewlyEmployedFrom("26/09/2022");
         newEmploymentType.setNewPayBeforeTax("50000");
         caseData.setNewEmploymentType(newEmploymentType);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(PdfMapperConstants.Q7_OTHER_JOB_YES));
     }
 
@@ -294,14 +294,14 @@ class PdfMapperServiceTest {
         NewEmploymentType newEmploymentType = new NewEmploymentType();
         newEmploymentType.setNewJob("No");
         caseData.setNewEmploymentType(newEmploymentType);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(PdfMapperConstants.Q7_OTHER_JOB_NO));
     }
 
     @Test
     void givenNoNewEmploymentReflectsInMap() {
         caseData.setNewEmploymentType(null);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNull(pdfMap.get(PdfMapperConstants.Q7_OTHER_JOB_NO));
         assertNull(pdfMap.get(PdfMapperConstants.Q7_OTHER_JOB_YES));
     }
@@ -309,7 +309,7 @@ class PdfMapperServiceTest {
     @Test
     void givenNoRepresentativeReflectsInMap() {
         caseData.setRepresentativeClaimantType(null);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNull(pdfMap.get(PdfMapperConstants.Q11_REP_NAME));
     }
 
@@ -318,7 +318,7 @@ class PdfMapperServiceTest {
         RepresentedTypeC representedTypeC = caseData.getRepresentativeClaimantType();
         representedTypeC.setRepresentativePreference(POST);
         caseData.setRepresentativeClaimantType(representedTypeC);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(caseData);
         assertNotNull(pdfMap.get(PdfMapperConstants.Q11_CONTACT_POST));
     }
 
@@ -326,28 +326,28 @@ class PdfMapperServiceTest {
     void shouldNotThrowExceptionWhenClaimantIndTypeIsNull() {
         CaseData exceptionCaseData = new CaseTestData().getCaseData();
         exceptionCaseData.setClaimantIndType(null);
-        assertDoesNotThrow(() -> pdfMapperService.mapHeadersToPdf(exceptionCaseData));
+        assertDoesNotThrow(() -> et1PdfMapperService.mapHeadersToPdf(exceptionCaseData));
     }
 
     @Test
     void shouldNotThrowExceptionWhenRepresentativeAddressIsNull() {
         CaseData exceptionCaseData = new CaseTestData().getCaseData();
         exceptionCaseData.getRepresentativeClaimantType().setRepresentativeAddress(null);
-        assertDoesNotThrow(() -> pdfMapperService.mapHeadersToPdf(exceptionCaseData));
+        assertDoesNotThrow(() -> et1PdfMapperService.mapHeadersToPdf(exceptionCaseData));
     }
 
     @Test
     void shouldNotThrowExceptionWhenClaimantSexIsNull() {
         CaseData exceptionCaseData = new CaseTestData().getCaseData();
         exceptionCaseData.getClaimantIndType().setClaimantSex(null);
-        assertDoesNotThrow(() -> pdfMapperService.mapHeadersToPdf(exceptionCaseData));
+        assertDoesNotThrow(() -> et1PdfMapperService.mapHeadersToPdf(exceptionCaseData));
     }
 
     @Test
     void shouldSetFemaleWhenClaimantSexIsFemale() {
         CaseData exceptionCaseData = new CaseTestData().getCaseData();
         exceptionCaseData.getClaimantIndType().setClaimantSex("Female");
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(exceptionCaseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(exceptionCaseData);
         assertEquals(pdfMap.get(PdfMapperConstants.Q1_SEX_FEMALE), Optional.of("female"));
     }
 
@@ -355,7 +355,7 @@ class PdfMapperServiceTest {
     void shouldSetPreferNotToSayWhenClaimantSexIsPreferNotToSay() {
         CaseData exceptionCaseData = new CaseTestData().getCaseData();
         exceptionCaseData.getClaimantIndType().setClaimantSex("Prefer not to say");
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(exceptionCaseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(exceptionCaseData);
         assertEquals(pdfMap.get(PdfMapperConstants.Q1_SEX_PREFER_NOT_TO_SAY), Optional.of("prefer not to say"));
     }
 
@@ -363,21 +363,21 @@ class PdfMapperServiceTest {
     void shouldNotThrowExceptionWhenClaimantTypeIsNull() {
         CaseData exceptionCaseData = new CaseTestData().getCaseData();
         exceptionCaseData.setClaimantType(null);
-        assertDoesNotThrow(() -> pdfMapperService.mapHeadersToPdf(exceptionCaseData));
+        assertDoesNotThrow(() -> et1PdfMapperService.mapHeadersToPdf(exceptionCaseData));
     }
 
     @Test
     void shouldNotThrowExceptionWhenClaimantAddressUkIsNull() {
         CaseData exceptionCaseData = new CaseTestData().getCaseData();
         exceptionCaseData.getClaimantType().setClaimantAddressUK(null);
-        assertDoesNotThrow(() -> pdfMapperService.mapHeadersToPdf(exceptionCaseData));
+        assertDoesNotThrow(() -> et1PdfMapperService.mapHeadersToPdf(exceptionCaseData));
     }
 
     @Test
     void shouldSetContactPreferencePostWhenClaimantClaimantContactPreferenceIsPost() {
         CaseData exceptionCaseData = new CaseTestData().getCaseData();
         exceptionCaseData.getClaimantType().setClaimantContactPreference(POST);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(exceptionCaseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(exceptionCaseData);
         assertEquals(pdfMap.get(PdfMapperConstants.Q1_CONTACT_POST), Optional.of(POST));
     }
 
@@ -385,27 +385,27 @@ class PdfMapperServiceTest {
     void shouldNotThrowExceptionWhenClaimantHearingPreferenceIsNull() {
         CaseData exceptionCaseData = new CaseTestData().getCaseData();
         exceptionCaseData.setClaimantHearingPreference(null);
-        assertDoesNotThrow(() -> pdfMapperService.mapHeadersToPdf(exceptionCaseData));
+        assertDoesNotThrow(() -> et1PdfMapperService.mapHeadersToPdf(exceptionCaseData));
     }
 
     @Test
     void shouldNotThrowExceptionWhenHearingPreferencesIsNull() {
         CaseData exceptionCaseData = new CaseTestData().getCaseData();
         exceptionCaseData.getClaimantHearingPreference().setHearingPreferences(null);
-        assertDoesNotThrow(() -> pdfMapperService.mapHeadersToPdf(exceptionCaseData));
+        assertDoesNotThrow(() -> et1PdfMapperService.mapHeadersToPdf(exceptionCaseData));
     }
 
     @Test
     void shouldNotThrowExceptionWhenHearingPreferencesIsEmpty() {
         CaseData exceptionCaseData = new CaseTestData().getCaseData();
         exceptionCaseData.getClaimantHearingPreference().setHearingPreferences(new ArrayList<>());
-        assertDoesNotThrow(() -> pdfMapperService.mapHeadersToPdf(exceptionCaseData));
+        assertDoesNotThrow(() -> et1PdfMapperService.mapHeadersToPdf(exceptionCaseData));
     }
 
     @Test
     void shouldNotThrowWhenDobIsNull() {
         caseData.getClaimantIndType().setClaimantDateOfBirth(null);
-        Map<String, Optional<String>> pdfFields = pdfMapperService.mapHeadersToPdf(caseData);
+        Map<String, Optional<String>> pdfFields = et1PdfMapperService.mapHeadersToPdf(caseData);
 
         assertNull(pdfFields.get(Q1_DOB_DAY));
         assertNull(pdfFields.get(Q1_DOB_MONTH));
@@ -416,7 +416,7 @@ class PdfMapperServiceTest {
     void shouldSetICanTakePartInNoHearingsWhenVideoAndPhoneNotSelected() {
         CaseData exceptionCaseData = new CaseTestData().getCaseData();
         exceptionCaseData.getClaimantHearingPreference().setHearingPreferences(new ArrayList<>());
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(exceptionCaseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(exceptionCaseData);
         assertEquals(pdfMap.get(PdfMapperConstants.I_CAN_TAKE_PART_IN_NO_HEARINGS), Optional.of(YES));
     }
 
@@ -424,7 +424,7 @@ class PdfMapperServiceTest {
     void shouldSetICanTakePartInVideoHearingsWhenVideoSelected() {
         CaseData exceptionCaseData = new CaseTestData().getCaseData();
         exceptionCaseData.getClaimantHearingPreference().setHearingPreferences(List.of("Video"));
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(exceptionCaseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(exceptionCaseData);
         assertEquals(pdfMap.get(PdfMapperConstants.I_CAN_TAKE_PART_IN_VIDEO_HEARINGS), Optional.of(YES));
     }
 
@@ -432,7 +432,7 @@ class PdfMapperServiceTest {
     void shouldSetICanTakePartInPhoneHearingsWhenPhoneSelected() {
         CaseData exceptionCaseData = new CaseTestData().getCaseData();
         exceptionCaseData.getClaimantHearingPreference().setHearingPreferences(List.of("Phone"));
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(exceptionCaseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(exceptionCaseData);
         assertEquals(pdfMap.get(PdfMapperConstants.I_CAN_TAKE_PART_IN_PHONE_HEARINGS), Optional.of(YES));
     }
 
@@ -440,7 +440,7 @@ class PdfMapperServiceTest {
     void shouldSetDisabilityYesWhenReasonableAdjustmentsYes() {
         CaseData exceptionCaseData = new CaseTestData().getCaseData();
         exceptionCaseData.getClaimantHearingPreference().setReasonableAdjustments(YES);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(exceptionCaseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(exceptionCaseData);
         assertEquals(pdfMap.get(PdfMapperConstants.Q12_DISABILITY_YES), Optional.of(YES));
     }
 
@@ -448,13 +448,13 @@ class PdfMapperServiceTest {
     void shouldSetDisabilityNoWhenReasonableAdjustmentsNo() {
         CaseData exceptionCaseData = new CaseTestData().getCaseData();
         exceptionCaseData.getClaimantHearingPreference().setReasonableAdjustments(NO);
-        Map<String, Optional<String>> pdfMap = pdfMapperService.mapHeadersToPdf(exceptionCaseData);
+        Map<String, Optional<String>> pdfMap = et1PdfMapperService.mapHeadersToPdf(exceptionCaseData);
         assertEquals(pdfMap.get(PdfMapperConstants.Q12_DISABILITY_NO), Optional.of("no"));
     }
 
     @Test
     void shouldReturnEmptyMapWhenCaseDataIsNull() {
-        assertEquals(pdfMapperService.mapHeadersToPdf(null), new ConcurrentHashMap<>());
+        assertEquals(et1PdfMapperService.mapHeadersToPdf(null), new ConcurrentHashMap<>());
     }
 
     private List<RespondentSumTypeItem> createRespondentList(int count) {

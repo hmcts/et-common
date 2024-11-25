@@ -363,6 +363,15 @@ public final class PdfMapperConstants {
     public static final char LINE_FEED = '\n';
     public static final String STRING_EMPTY = "";
     public static final String STRING_BLANK = " ";
+    public static final String PDF_TYPE_ET1 = "ET1";
+    public static final String PDF_TYPE_ET3 = "ET3";
+    public static final char CHARACTER_DOT = '.';
+    public static final int ZERO = 0;
+    public static final int ONE = 1;
+    public static final int TWO = 2;
+    public static final String STRING_ZERO = "0";
+    public static final String CURRENCY_DECIMAL_ZERO_WITH_DOT = ".00";
+    public static final String SUBMIT_ET1 = "submitEt1";
 
     private PdfMapperConstants() {
         // private due to being class of constants

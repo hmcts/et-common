@@ -1,7 +1,6 @@
 package uk.gov.hmcts.ecm.common.service.pdf.util;
 
 import org.apache.commons.lang3.StringUtils;
-import org.elasticsearch.common.Strings;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -13,10 +12,10 @@ import org.springframework.util.ObjectUtils;
 import uk.gov.hmcts.ecm.common.constants.PdfMapperConstants;
 import uk.gov.hmcts.ecm.common.model.pdf.AcasCertificatePdfFieldModel;
 import uk.gov.hmcts.ecm.common.model.pdf.RespondentPdfFieldModel;
-import uk.gov.hmcts.ecm.common.service.utils.GenericServiceUtil;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperRespondentUtil;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperServiceUtil;
-import uk.gov.hmcts.ecm.common.service.utils.PdfTemplateRespondentFieldNamesEnum;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.GenericServiceUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperRespondentUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperServiceUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfTemplateRespondentFieldNamesEnum;
 import uk.gov.hmcts.ecm.common.service.utils.TestConstants;
 import uk.gov.hmcts.ecm.common.service.utils.data.PdfMapperRespondentUtilTestDataProvider;
 import uk.gov.hmcts.ecm.common.service.utils.data.TestDataProvider;
@@ -179,7 +178,7 @@ class PdfMapperRespondentUtilTest {
             assertThat(printFields.get(acasCertificatePdfFieldModel.getAcasCertificateNumberFieldName()))
                 .contains(respondent.getRespondentAcas());
         } else {
-            if (!Strings.isNullOrEmpty(respondent.getRespondentAcasNo())) {
+            if (!StringUtils.isBlank(respondent.getRespondentAcasNo())) {
                 checkAcasCertificateNotFoundCheckbox(acasCertificatePdfFieldModel, printFields);
                 switch (respondent.getRespondentAcasNo()) {
                     case PdfMapperConstants.PDF_TEMPLATE_REASON_NOT_HAVING_ACAS_UNFAIR_DISMISSAL: {

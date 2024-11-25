@@ -5,15 +5,15 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import uk.gov.hmcts.ecm.common.constants.PdfMapperConstants;
-import uk.gov.hmcts.ecm.common.service.utils.GenericServiceUtil;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperClaimDescriptionUtil;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperClaimDetailsUtil;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperEmploymentDetailsUtil;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperHearingPreferencesUtil;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperPersonalDetailsUtil;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperRepresentativeUtil;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperRespondentUtil;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperServiceUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.GenericServiceUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperClaimDescriptionUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperClaimDetailsUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperEmploymentDetailsUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperHearingPreferencesUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperPersonalDetailsUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperRepresentativeUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperRespondentUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperServiceUtil;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 
 import java.util.Map;
@@ -34,7 +34,7 @@ import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
  */
 @Slf4j
 @Service
-public class PdfMapperService {
+public class ET1PdfMapperService {
 
     private static final String YES_LOWERCASE = "yes";
 
@@ -67,7 +67,7 @@ public class PdfMapperService {
                                             + "whistle blowing to pdf file",
                                             caseData.getEthosCaseReference(),
                                             e.getMessage(),
-                                            "PdfMapperService",
+                                            "ET1PdfMapperService",
                                             "mapHeadersToPdf");
         }
         return printFields;

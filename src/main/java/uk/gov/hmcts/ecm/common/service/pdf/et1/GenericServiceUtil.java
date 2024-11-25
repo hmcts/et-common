@@ -1,4 +1,4 @@
-package uk.gov.hmcts.ecm.common.service.utils;
+package uk.gov.hmcts.ecm.common.service.pdf.et1;
 
 import lombok.extern.slf4j.Slf4j;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
@@ -22,13 +22,15 @@ public final class GenericServiceUtil {
 
     public static void logException(String firstWord, String caseReferenceNumber, String errorMessage,
                                     String className, String methodName) {
-        log.error("*************EXCEPTION OCCURED*************"
-                  + "\nERROR DESCRIPTION: " + firstWord
-                  + "\nCASE REFERENCE: " + caseReferenceNumber
-                  + "\nERROR MESSAGE: " + errorMessage
-                  + "\nCLASS NAME: " + className
-                  + "\nMETHOD NAME: " + methodName
-                  + "\n*****************END OF EXCEPTION MESSAGE***********************");
+        String error = "*************EXCEPTION OCCURED*************"
+                + "\nERROR DESCRIPTION: " + firstWord
+                + "\nCASE REFERENCE: " + caseReferenceNumber
+                + "\nERROR MESSAGE: " + errorMessage
+                + "\nCLASS NAME: " + className
+                + "\nMETHOD NAME: " + methodName
+                + "\n*****************END OF EXCEPTION MESSAGE***********************";
+        log.error(error);
+        System.out.println(error);
     }
 
 }

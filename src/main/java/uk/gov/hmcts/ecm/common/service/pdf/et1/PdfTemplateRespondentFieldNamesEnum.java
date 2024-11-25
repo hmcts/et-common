@@ -1,4 +1,4 @@
-package uk.gov.hmcts.ecm.common.service.utils;
+package uk.gov.hmcts.ecm.common.service.pdf.et1;
 
 import uk.gov.hmcts.ecm.common.constants.PdfMapperConstants;
 import uk.gov.hmcts.ecm.common.model.pdf.AcasCertificatePdfFieldModel;

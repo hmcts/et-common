@@ -3,10 +3,10 @@ package uk.gov.hmcts.ecm.common.service.utils.data;
 import uk.gov.hmcts.ecm.common.service.utils.ResourceLoader;
 import uk.gov.hmcts.et.common.model.ccd.Address;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
-import uk.gov.hmcts.et.common.model.ccd.types.ClaimantIndType;
 import uk.gov.hmcts.et.common.model.ccd.types.ClaimantWorkAddressType;
 
 import static uk.gov.hmcts.ecm.common.service.utils.TestConstants.TEST_CASE_DATA_JSON_FILE;
+import static uk.gov.hmcts.ecm.common.service.utils.TestConstants.TEST_ET3_CASE_DATA_JSON_FILE;
 
 public final class TestDataProvider {
 
@@ -25,6 +25,10 @@ public final class TestDataProvider {
         return caseData.getClaimantType().getClaimantAddressUK();
     }
 
+    public static CaseData generateEt3CaseData() {
+        return ResourceLoader.fromString(TEST_ET3_CASE_DATA_JSON_FILE, CaseData.class);
+    }
+
     public static CaseData generateTestCaseDataByClaimantCompensation(String claimantCompensationText,
                                                                   String claimantCompensationAmount,
                                                                   String claimantTribunalRecommendation) {
@@ -32,32 +36,6 @@ public final class TestDataProvider {
         caseData.getClaimantRequests().setClaimantCompensationText(claimantCompensationText);
         caseData.getClaimantRequests().setClaimantCompensationAmount(claimantCompensationAmount);
         caseData.getClaimantRequests().setClaimantTribunalRecommendation(claimantTribunalRecommendation);
-        return caseData;
-    }
-
-    public static CaseData generateTestCaseDataByClaimantHearingPreferenceContactLanguage(
-        boolean isClaimantHearingPreferenceEmpty,
-        String contactLanguage) {
-        CaseData caseData = ResourceLoader.fromString(TEST_CASE_DATA_JSON_FILE, CaseData.class);
-        if (isClaimantHearingPreferenceEmpty) {
-            caseData.setClaimantHearingPreference(null);
-        } else {
-            caseData.getClaimantHearingPreference().setContactLanguage(contactLanguage);
-        }
-        return caseData;
-    }
-
-    public static CaseData generateTestCaseDataByFirstNames(
-        String claimantIndTypeEmptyOrNull,
-        String firstNames) {
-        CaseData caseData = ResourceLoader.fromString(TEST_CASE_DATA_JSON_FILE, CaseData.class);
-        if ("null".equals(claimantIndTypeEmptyOrNull)) {
-            caseData.setClaimantIndType(null);
-        } else if ("empty".equals(claimantIndTypeEmptyOrNull)) {
-            caseData.setClaimantIndType(new ClaimantIndType());
-        } else {
-            caseData.getClaimantIndType().setClaimantFirstNames(firstNames);
-        }
         return caseData;
     }
 

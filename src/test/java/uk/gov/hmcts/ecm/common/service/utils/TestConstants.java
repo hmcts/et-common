@@ -117,6 +117,7 @@ public final class TestConstants {
     public static final String VIDEO = "Video";
     public static final String PHONE = "Phone";
     public static final String TEST_CASE_DATA_JSON_FILE = "requests/caseData.json";
+    public static final String TEST_ET3_CASE_DATA_JSON_FILE = "requests/et3CaseData.json";
     public static final String WEEKS = "Weeks";
     public static final String CLAIMANT_EMPLOYED_FROM = "2020-01-01";
     public static final String CLAIMANT_EMPLOYED_TO = "2022-01-01";
@@ -213,6 +214,10 @@ public final class TestConstants {
     public static final String EMAIL = "Email";
     public static final String POST = "Post";
     public static final String FAX = "Fax";
+    public static final String ENGLISH_PDF_TEMPLATE_SOURCE = "ET3_0224.pdf";
+    public static final String WELSH_PDF_TEMPLATE_SOURCE = "CY_ET3_0224.pdf";
+    public static final String ET3_FORM_TYPE = "ET3";
+    public static final String ET3_FORM_CLIENT_TYPE_RESPONDENT = "respondent";
 
     private TestConstants() {
 

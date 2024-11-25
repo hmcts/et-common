@@ -6,8 +6,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.springframework.util.ObjectUtils;
 import uk.gov.hmcts.ecm.common.constants.PdfMapperConstants;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperHearingPreferencesUtil;
-import uk.gov.hmcts.ecm.common.service.utils.PdfMapperServiceUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperHearingPreferencesUtil;
+import uk.gov.hmcts.ecm.common.service.pdf.et1.PdfMapperServiceUtil;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 
 import java.util.Optional;
