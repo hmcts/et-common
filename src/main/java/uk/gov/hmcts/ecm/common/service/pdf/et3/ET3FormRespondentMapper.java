@@ -67,7 +67,7 @@ public final class ET3FormRespondentMapper {
         putPdfTextField(pdfFields, ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_DX,
                 respondentSumType.getEt3ResponseDXAddress());
         putPdfTextField(pdfFields, ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_PHONE_NUMBER,
-                StringUtils.isBlank(respondentSumType.getResponseRespondentPhone1())
+                StringUtils.isNotBlank(respondentSumType.getResponseRespondentPhone1())
                         ? respondentSumType.getResponseRespondentPhone1()
                         : respondentSumType.getResponseRespondentPhone2());
         putPdfTextField(pdfFields, ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_MOBILE_NUMBER,

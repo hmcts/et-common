@@ -31,18 +31,17 @@ public final class ET3FormTestConstants {
             Maidenhead
             United Kingdom""";
     public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_CONTACT_NAME = "Will Respondent";
-    public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_CONTACT_TYPE_POST = "post";
     public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_DX = "Test DX Address";
-    public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_EMAIL = "respondent@testmail.com";
+    public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_EMAIL = "michael@jackson.com";
     public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_EMPLOYEE_NUMBER_CLAIMANT_WORK_PLACE = "10";
     public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_EMPLOYEE_NUMBER_GREAT_BRITAIN = "15";
     public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_HEARING_TYPE_PHONE = "Yes";
     public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_HEARING_TYPE_VIDEO = "Yes";
-    public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_MOBILE_NUMBER = "07444518904";
+    public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_MOBILE_NUMBER = "07444518907";
     public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_MORE_THAN_ONE_SITE_GREAT_BRITAIN_YES = "yes";
     public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_NAME = "Test Company";
     public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_NUMBER = "123456";
-    public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_PHONE_NUMBER = "07444518903";
+    public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_PHONE_NUMBER = "07444518906";
     public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_POSTCODE = "SL6 2DE";
     public static final String TEST_PDF_RESPONDENT_EXPECTED_VALUE_TYPE = "Limited company";
 

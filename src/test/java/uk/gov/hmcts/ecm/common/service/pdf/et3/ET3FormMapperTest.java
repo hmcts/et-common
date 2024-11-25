@@ -155,9 +155,9 @@ class ET3FormMapperTest {
         assertThat(pdfFields.get(ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_MOBILE_NUMBER))
                 .contains(ET3FormTestConstants.TEST_PDF_RESPONDENT_EXPECTED_VALUE_MOBILE_NUMBER);
         assertThat(pdfFields.get(ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_CONTACT_TYPE_EMAIL))
-                .contains(ET3FormConstants.OFF_CAPITALISED);
+                .contains(ET3FormConstants.EMAIL_LOWERCASE);
         assertThat(pdfFields.get(ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_CONTACT_TYPE_POST)).contains(
-                ET3FormTestConstants.TEST_PDF_RESPONDENT_EXPECTED_VALUE_CONTACT_TYPE_POST);
+                ET3FormConstants.OFF_CAPITALISED);
         assertThat(pdfFields.get(ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_EMAIL))
                 .contains(ET3FormTestConstants.TEST_PDF_RESPONDENT_EXPECTED_VALUE_EMAIL);
         assertThat(pdfFields.get(ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_HEARING_TYPE_VIDEO))
