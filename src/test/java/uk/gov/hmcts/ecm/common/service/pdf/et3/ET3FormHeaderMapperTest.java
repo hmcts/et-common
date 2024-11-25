@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.DATE_FORMAT_DD_MM_YYYY_DASH;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.DATE_FORMAT_YYYY_MM_DD_DASH;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.STRING_EMPTY;
-import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.SUBMIT_ET3;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.SUBMIT_ET3_FORM;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.TXT_PDF_HEADER_FIELD_CASE_NUMBER;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.TXT_PDF_HEADER_FIELD_DATE_RECEIVED;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.TXT_PDF_HEADER_FIELD_RTF;
@@ -44,7 +44,7 @@ class ET3FormHeaderMapperTest {
     @ParameterizedTest
     @MethodSource("provideMapHeaderTestData")
     void testMapHeader(CaseData caseData, RespondentSumType respondentSumType) {
-        mapHeader(caseData, respondentSumType, pdfFields, SUBMIT_ET3);
+        mapHeader(caseData, respondentSumType, pdfFields, SUBMIT_ET3_FORM);
         assertThat(pdfFields.get(TXT_PDF_HEADER_FIELD_CASE_NUMBER)).contains(TEST_PDF_HEADER_VALUE_CASE_NUMBER);
         assertThat(pdfFields.get(TXT_PDF_HEADER_FIELD_DATE_RECEIVED)).contains(
                 formatDate(LocalDate.now().toString(), DATE_FORMAT_YYYY_MM_DD_DASH, DATE_FORMAT_DD_MM_YYYY_DASH));

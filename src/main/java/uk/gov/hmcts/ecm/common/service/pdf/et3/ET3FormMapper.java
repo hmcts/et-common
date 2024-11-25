@@ -92,14 +92,12 @@ public final class ET3FormMapper {
 
     private static Stream<RespondentSumTypeItem> getRespondentSumTypeItemStream(CaseData caseData, String clientType) {
         String submitRespondent = caseData.getSubmitEt3Respondent().getSelectedLabel();
-        log.info("******Submitted Respondent ID: {}", submitRespondent);
         Stream<RespondentSumTypeItem> respondentSumTypeStream = null;
         if (ET3_FORM_CLIENT_TYPE_REPRESENTATIVE.equals(clientType)) {
             respondentSumTypeStream = caseData.getRespondentCollection().stream()
                     .filter(r -> submitRespondent.equals(r.getValue().getRespondentName()));
         }
         if (ET3_FORM_CLIENT_TYPE_RESPONDENT.equals(clientType)) {
-            log.info("*****RESPONDENT ID: {}", caseData.getRespondentCollection().get(0).getId());
             respondentSumTypeStream = caseData.getRespondentCollection().stream()
                     .filter(r -> submitRespondent.equals(r.getId()));
         }

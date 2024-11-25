@@ -204,7 +204,7 @@ public final class ET3FormConstants {
             "ET3 Form submitting respondent not found in case data";
     public static final String RESPONDENT_NAME_NOT_FOUND_IN_CASE_DATA_EXCEPTION_MESSAGE =
             "ET3 Form submitting respondent name is empty or blank";
-    public static final String SUBMIT_ET3 = "submitEt3";
+    public static final String SUBMIT_ET3_FORM = "submitEt3Form";
     public static final String UNABLE_TO_MAP_RESPONDENT_TO_ET3_FORM = "Unable to map respondent to et3 form";
     public static final String ET3_FORM_CLIENT_TYPE_REPRESENTATIVE = "representative";
     public static final String ET3_FORM_CLIENT_TYPE_RESPONDENT = "respondent";

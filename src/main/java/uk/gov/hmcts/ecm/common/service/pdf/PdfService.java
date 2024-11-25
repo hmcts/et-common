@@ -32,7 +32,7 @@ import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.HELVETICA_PDF
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TYPE_ET1;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TYPE_ET3;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.TIMES_NEW_ROMAN_PDFBOX_CHARACTER_CODE;
-import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.SUBMIT_ET3;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.SUBMIT_ET3_FORM;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.UNABLE_TO_MAP_RESPONDENT_TO_ET3_FORM;
 
 @Slf4j
@@ -87,7 +87,7 @@ public class PdfService {
                 if (PDF_TYPE_ET3.equals(pdfType)) {
                     Map<String, Optional<String>> pdfMap;
                     try {
-                        pdfMap = ET3FormMapper.mapEt3Form(caseData, SUBMIT_ET3, clientType);
+                        pdfMap = ET3FormMapper.mapEt3Form(caseData, SUBMIT_ET3_FORM, clientType);
                     } catch (GenericServiceException e) {
                         GenericServiceUtil.logException(UNABLE_TO_MAP_RESPONDENT_TO_ET3_FORM,
                                 caseData.getEthosCaseReference(),
