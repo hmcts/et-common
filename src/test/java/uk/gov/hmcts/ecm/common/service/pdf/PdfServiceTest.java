@@ -33,6 +33,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TYPE_ET1;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.SUBMIT_ET1;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.ET3_FORM_CLIENT_TYPE_REPRESENTATIVE;
 import static uk.gov.hmcts.ecm.common.service.utils.TestConstants.ENGLISH_LANGUAGE;
 import static uk.gov.hmcts.ecm.common.service.utils.TestConstants.WELSH_LANGUAGE;
@@ -72,8 +73,10 @@ class PdfServiceTest {
     void givenPdfValuesProducesAPdfDocument() {
         when(et1PdfMapperService.mapHeadersToPdf(caseTestData.getCaseData())).thenReturn(PDF_VALUES);
         byte[] pdfBytes = pdfService.convertCaseToPdf(
-            caseTestData.getCaseData(),
-            PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_ENGLISH, PDF_TYPE_ET1, ET3_FORM_CLIENT_TYPE_REPRESENTATIVE
+                caseTestData.getCaseData(),
+                PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_ENGLISH,
+                PDF_TYPE_ET1, ET3_FORM_CLIENT_TYPE_REPRESENTATIVE,
+                SUBMIT_ET1
         );
         try (PDDocument actualPdf = Loader.loadPDF(pdfBytes)) {
             Map<String, Optional<String>> actualPdfValues = processPdf(actualPdf);
@@ -108,8 +111,11 @@ class PdfServiceTest {
     @Test
     void shouldCreateEnglishPdfFile() {
         PdfService pdfService1 = new PdfService(new ET1PdfMapperService());
-        byte[] pdfData = pdfService1.createPdf(caseTestData.getCaseData(),
-                PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_ENGLISH, PDF_TYPE_ET1, ET3_FORM_CLIENT_TYPE_REPRESENTATIVE);
+        byte[] pdfData = pdfService1.createPdf(
+                caseTestData.getCaseData(),
+                PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_ENGLISH,
+                PDF_TYPE_ET1, ET3_FORM_CLIENT_TYPE_REPRESENTATIVE,
+                SUBMIT_ET1);
         assertThat(pdfData).isNotEmpty();
         assertThat(new Tika().detect(pdfData)).isEqualTo(PDF_FILE_TIKA_CONTENT_TYPE);
     }
@@ -119,7 +125,7 @@ class PdfServiceTest {
     void shouldNotCreateEnglishPdfFileWhenEnglishPdfTemplateIsNull() {
         PdfService pdfService1 = new PdfService(new ET1PdfMapperService());
         byte[] pdfData = pdfService1.createPdf(caseTestData.getCaseData(), null, PDF_TYPE_ET1,
-                ET3_FORM_CLIENT_TYPE_REPRESENTATIVE);
+                ET3_FORM_CLIENT_TYPE_REPRESENTATIVE, SUBMIT_ET1);
         assertThat(pdfData).isEmpty();
     }
 
@@ -128,7 +134,7 @@ class PdfServiceTest {
     void shouldNotCreateEnglishPdfFileWhenEnglishPdfTemplateNotExists() {
         PdfService pdfService1 = new PdfService(new ET1PdfMapperService());
         byte[] pdfData = pdfService1.createPdf(caseTestData.getCaseData(), null, PDF_TYPE_ET1,
-                ET3_FORM_CLIENT_TYPE_REPRESENTATIVE);
+                ET3_FORM_CLIENT_TYPE_REPRESENTATIVE, SUBMIT_ET1);
         assertThat(pdfData).isEmpty();
     }
 
@@ -156,8 +162,11 @@ class PdfServiceTest {
                     .thenReturn(WELSH_LANGUAGE);
             }
             PdfService pdfService1 = new PdfService(new ET1PdfMapperService());
-            byte[] pdfData = pdfService1.createPdf(caseTestData.getCaseData(), templateSource, PDF_TYPE_ET1,
-                    ET3_FORM_CLIENT_TYPE_REPRESENTATIVE);
+            byte[] pdfData = pdfService1.createPdf(caseTestData.getCaseData(),
+                    templateSource,
+                    PDF_TYPE_ET1,
+                    ET3_FORM_CLIENT_TYPE_REPRESENTATIVE,
+                    SUBMIT_ET1);
             if (PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_ENGLISH.equals(templateSource)
                 || PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_WELSH.equals(templateSource)) {
                 assertThat(pdfData).isNotEmpty();
@@ -177,7 +186,10 @@ class PdfServiceTest {
         caseTestData.getCaseData().getClaimantHearingPreference().setContactLanguage(WELSH_LANGUAGE);
         PdfService pdfService1 = new PdfService(new ET1PdfMapperService());
         byte[] pdfData = pdfService1.createPdf(caseTestData.getCaseData(),
-                PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_WELSH, PDF_TYPE_ET1, ET3_FORM_CLIENT_TYPE_REPRESENTATIVE);
+                PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_WELSH,
+                PDF_TYPE_ET1,
+                ET3_FORM_CLIENT_TYPE_REPRESENTATIVE,
+                SUBMIT_ET1);
         assertThat(pdfData).isNotEmpty();
         assertThat(new Tika().detect(pdfData)).isEqualTo(PDF_FILE_TIKA_CONTENT_TYPE);
     }
@@ -188,7 +200,7 @@ class PdfServiceTest {
         caseTestData.getCaseData().getClaimantHearingPreference().setContactLanguage(WELSH_LANGUAGE);
         PdfService pdfService1 = new PdfService(new ET1PdfMapperService());
         byte[] pdfData = pdfService1.createPdf(caseTestData.getCaseData(), null, PDF_TYPE_ET1,
-                ET3_FORM_CLIENT_TYPE_REPRESENTATIVE);
+                ET3_FORM_CLIENT_TYPE_REPRESENTATIVE, SUBMIT_ET1);
         assertThat(pdfData).isEmpty();
     }
 
@@ -198,8 +210,10 @@ class PdfServiceTest {
         caseTestData.getCaseData().getClaimantHearingPreference().setContactLanguage(WELSH_LANGUAGE);
         PdfService pdfService1 = new PdfService(new ET1PdfMapperService());
         byte[] pdfData = pdfService1.createPdf(
-            caseTestData.getCaseData(),
-            PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_WELSH_NOT_EXISTS, PDF_TYPE_ET1, ET3_FORM_CLIENT_TYPE_REPRESENTATIVE);
+                caseTestData.getCaseData(),
+                PDF_TEMPLATE_SOURCE_ATTRIBUTE_VALUE_WELSH_NOT_EXISTS,
+                PDF_TYPE_ET1, ET3_FORM_CLIENT_TYPE_REPRESENTATIVE,
+                SUBMIT_ET1);
         assertThat(pdfData).isEmpty();
     }
 

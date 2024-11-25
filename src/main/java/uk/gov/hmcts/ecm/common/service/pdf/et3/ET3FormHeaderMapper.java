@@ -11,7 +11,8 @@ import java.util.concurrent.ConcurrentMap;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.DATE_FORMAT_DD_MM_YYYY_DASH;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.DATE_FORMAT_YYYY_MM_DD_DASH;
-import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.SUBMIT_ET3_FORM;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.SUBMIT_ET3;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.SUBMIT_ET3_CITIZEN;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.TXT_PDF_HEADER_FIELD_CASE_NUMBER;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.TXT_PDF_HEADER_FIELD_DATE_RECEIVED;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.TXT_PDF_HEADER_FIELD_RTF;
@@ -36,7 +37,7 @@ public final class ET3FormHeaderMapper {
                                  ConcurrentMap<String, Optional<String>> pdfFields,
                                  String event) {
         putPdfTextField(pdfFields, TXT_PDF_HEADER_FIELD_CASE_NUMBER, caseData.getEthosCaseReference());
-        if (SUBMIT_ET3_FORM.equals(event)) {
+        if (SUBMIT_ET3.equals(event) || SUBMIT_ET3_CITIZEN.equals(event)) {
             putPdfTextField(pdfFields, TXT_PDF_HEADER_FIELD_DATE_RECEIVED,
                     formatDate(LocalDate.now().toString(), DATE_FORMAT_YYYY_MM_DD_DASH, DATE_FORMAT_DD_MM_YYYY_DASH));
         }

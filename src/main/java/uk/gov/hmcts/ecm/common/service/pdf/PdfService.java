@@ -32,7 +32,6 @@ import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.HELVETICA_PDF
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TYPE_ET1;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PDF_TYPE_ET3;
 import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.TIMES_NEW_ROMAN_PDFBOX_CHARACTER_CODE;
-import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.SUBMIT_ET3_FORM;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.ET3FormConstants.UNABLE_TO_MAP_RESPONDENT_TO_ET3_FORM;
 
 @Slf4j
@@ -49,11 +48,11 @@ public class PdfService {
      * @param pdfSource The source location of the PDF file to be used as the template
      * @return A byte array that contains the pdf document.
      */
-    public byte[] convertCaseToPdf(CaseData caseData, String pdfSource, String pdfType, String clientType)
+    public byte[] convertCaseToPdf(CaseData caseData, String pdfSource, String pdfType, String clientType, String event)
             throws PdfServiceException {
         byte[] pdfDocumentBytes;
         try {
-            pdfDocumentBytes = createPdf(caseData, pdfSource, pdfType, clientType);
+            pdfDocumentBytes = createPdf(caseData, pdfSource, pdfType, clientType, event);
         } catch (IOException ioe) {
             throw new PdfServiceException("Failed to convert to PDF", ioe);
         }
@@ -68,7 +67,11 @@ public class PdfService {
      * @return a byte array of the generated pdf file.
      * @throws IOException if there is an issue reading the pdf template
      */
-    public byte[] createPdf(CaseData caseData, String pdfSource, String pdfType, String clientType) throws IOException,
+    public byte[] createPdf(CaseData caseData,
+                            String pdfSource,
+                            String pdfType,
+                            String clientType,
+                            String event) throws IOException,
             PdfServiceException {
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
         InputStream stream = ObjectUtils.isEmpty(cl) || StringUtils.isBlank(pdfSource) ? null
@@ -87,7 +90,7 @@ public class PdfService {
                 if (PDF_TYPE_ET3.equals(pdfType)) {
                     Map<String, Optional<String>> pdfMap;
                     try {
-                        pdfMap = ET3FormMapper.mapEt3Form(caseData, SUBMIT_ET3_FORM, clientType);
+                        pdfMap = ET3FormMapper.mapEt3Form(caseData, event, clientType);
                     } catch (GenericServiceException e) {
                         GenericServiceUtil.logException(UNABLE_TO_MAP_RESPONDENT_TO_ET3_FORM,
                                 caseData.getEthosCaseReference(),
