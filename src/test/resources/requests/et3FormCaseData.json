@@ -12,7 +12,7 @@
           "document_filename": "Test Company - ET3 Response.pdf",
           "document_binary_url": "http://dm-store-aat.service.core-compute-aat.internal/documents/1824d0e5-aecc-4dff-8e7c-03fbae8cfb39/binary"
         },
-        "respondent_phone1": "07444518903",
+        "respondent_phone1": "07444518907",
         "respondent_phone2": "07444518904",
         "respondent_contact_preference": "post",
         "respondent_ACAS": "R123456/78/90",
@@ -22,6 +22,7 @@
         "responseReference": "REF1234",
         "responseStruckOut": "No",
         "extensionRequested": "No",
+        "responseRespondentEmail" : "michael@jackson.com",
         "respondent_address": {
           "Country": "England",
           "PostCode": "SL6 2DE",
