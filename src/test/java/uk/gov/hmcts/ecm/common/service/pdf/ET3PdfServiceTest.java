@@ -10,6 +10,9 @@ import org.mockito.quality.Strictness;
 import uk.gov.hmcts.ecm.common.service.utils.data.TestDataProvider;
 import uk.gov.hmcts.et.common.model.ccd.CaseData;
 
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static uk.gov.hmcts.ecm.common.service.utils.TestConstants.ENGLISH_PDF_TEMPLATE_SOURCE;
 import static uk.gov.hmcts.ecm.common.service.utils.TestConstants.ET3_FORM_CLIENT_TYPE_RESPONDENT;
@@ -32,6 +35,9 @@ class ET3PdfServiceTest {
         CaseData et3CaseData = TestDataProvider.generateEt3CaseData();
         byte[] pdfByteArray = pdfService.convertCaseToPdf(et3CaseData,
                 ENGLISH_PDF_TEMPLATE_SOURCE, ET3_FORM_TYPE, ET3_FORM_CLIENT_TYPE_RESPONDENT);
+        OutputStream out = new FileOutputStream("out.pdf");
+        out.write(pdfByteArray);
+        out.close();
         assertThat(pdfByteArray).isNotEmpty();
     }
 }

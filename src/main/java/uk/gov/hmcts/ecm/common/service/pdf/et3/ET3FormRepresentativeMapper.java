@@ -33,7 +33,7 @@ import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putPdfAdd
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putPdfCheckboxFieldWhenActualValueContainsExpectedValue;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putPdfCheckboxFieldWhenExpectedValueEqualsActualValue;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putPdfTextField;
-import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3MapperUtilUtil.findRepresentativeFromCaseData;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3MapperUtil.findRepresentativeFromCaseData;
 
 public final class ET3FormRepresentativeMapper {
 

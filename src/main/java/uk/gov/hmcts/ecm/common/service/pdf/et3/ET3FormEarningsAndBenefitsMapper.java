@@ -10,7 +10,7 @@ import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putCondit
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putConditionalPdfField;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putPdfCheckboxFieldWhenExpectedValueEqualsActualValue;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putPdfCheckboxFieldWhenOther;
-import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3MapperUtilUtil.correctCurrency;
+import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3MapperUtil.correctCurrency;
 
 public final class ET3FormEarningsAndBenefitsMapper {
 

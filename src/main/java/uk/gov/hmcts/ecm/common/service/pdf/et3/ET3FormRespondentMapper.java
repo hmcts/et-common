@@ -1,5 +1,6 @@
 package uk.gov.hmcts.ecm.common.service.pdf.et3;
 
+import com.microsoft.applicationinsights.boot.dependencies.apachecommons.lang3.StringUtils;
 import uk.gov.hmcts.et.common.model.ccd.types.RespondentSumType;
 
 import java.util.Optional;
@@ -66,21 +67,23 @@ public final class ET3FormRespondentMapper {
         putPdfTextField(pdfFields, ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_DX,
                 respondentSumType.getEt3ResponseDXAddress());
         putPdfTextField(pdfFields, ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_PHONE_NUMBER,
-                respondentSumType.getRespondentPhone1());
+                StringUtils.isBlank(respondentSumType.getResponseRespondentPhone1())
+                        ? respondentSumType.getResponseRespondentPhone1()
+                        : respondentSumType.getResponseRespondentPhone2());
         putPdfTextField(pdfFields, ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_MOBILE_NUMBER,
-                respondentSumType.getRespondentPhone2());
+                respondentSumType.getResponseRespondentPhone2());
         putPdfCheckboxFieldWhenExpectedValueEqualsActualValue(pdfFields,
                 ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_CONTACT_TYPE_EMAIL,
                 ET3FormConstants.EMAIL_LOWERCASE,
                 ET3FormConstants.EMAIL_CAPITALISED,
-                respondentSumType.getRespondentContactPreference());
+                respondentSumType.getResponseRespondentContactPreference());
         putPdfCheckboxFieldWhenExpectedValueEqualsActualValue(pdfFields,
                 ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_CONTACT_TYPE_POST,
                 ET3FormConstants.POST_LOWERCASE,
                 ET3FormConstants.POST_CAPITALISED,
-                respondentSumType.getRespondentContactPreference());
+                respondentSumType.getResponseRespondentContactPreference());
         putPdfTextField(pdfFields, ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_EMAIL,
-                respondentSumType.getRespondentEmail());
+                respondentSumType.getResponseRespondentEmail());
         putPdfCheckboxFieldWhenActualValueContainsExpectedValue(pdfFields,
                 ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_HEARING_TYPE_VIDEO,
                 ET3FormConstants.YES_CAPITALISED,
