@@ -493,8 +493,8 @@
         }
       } ],
       "et3ResponseContestClaimDetails" : "I am contesting the claim now and forever.",
-      "et3ResponseEmployerClaim" : null,
-      "et3ResponseEmployerClaimDetails" : null,
+      "et3ResponseEmployerClaim" : "Yes",
+      "et3ResponseEmployerClaimDetails" : "Test employer claim details",
       "et3ResponseEmployerClaimDocument" : null,
       "et3ResponseRespondentSupportNeeded" : "Yes",
       "et3ResponseRespondentSupportDetails" : "Test requirements",
