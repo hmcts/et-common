@@ -1,13 +1,12 @@
 package uk.gov.hmcts.ecm.common.service.pdf.et3;
 
-import com.microsoft.applicationinsights.boot.dependencies.apachecommons.lang3.StringUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import uk.gov.hmcts.et.common.model.ccd.types.RespondentSumType;
 
 import java.util.Optional;
 import java.util.concurrent.ConcurrentMap;
 
-import static org.apache.commons.lang3.ObjectUtils.isEmpty;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putPdfAddressField;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putPdfCheckboxFieldWhenActualValueContainsExpectedValue;
 import static uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormUtil.putPdfCheckboxFieldWhenExpectedValueEqualsActualValue;
@@ -61,7 +60,7 @@ public final class ET3FormRespondentMapper {
         putPdfAddressField(pdfFields,
                 ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_ADDRESS, respondentSumType.getResponseRespondentAddress());
         putPdfTextField(pdfFields, ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_POSTCODE,
-                isEmpty(respondentSumType.getResponseRespondentAddress())
+                ObjectUtils.isEmpty(respondentSumType.getResponseRespondentAddress())
                         ? ET3FormConstants.STRING_EMPTY
                         : respondentSumType.getResponseRespondentAddress().getPostCode());
         putPdfTextField(pdfFields, ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_DX,
@@ -115,7 +114,7 @@ public final class ET3FormRespondentMapper {
 
     private static void putOtherTitle(String selectedTitle,
                                       ConcurrentMap<String, Optional<String>> pdfFields) {
-        if (isBlank(selectedTitle)
+        if (StringUtils.isBlank(selectedTitle)
                 || ET3FormConstants.CHECKBOX_PDF_RESPONDENT_EXPECTED_VALUE_TITLE_MR.equalsIgnoreCase(selectedTitle)
                 || ET3FormConstants.CHECKBOX_PDF_RESPONDENT_EXPECTED_VALUE_TITLE_MRS.equalsIgnoreCase(selectedTitle)
                 || ET3FormConstants.CHECKBOX_PDF_RESPONDENT_EXPECTED_VALUE_TITLE_MISS.equalsIgnoreCase(selectedTitle)
