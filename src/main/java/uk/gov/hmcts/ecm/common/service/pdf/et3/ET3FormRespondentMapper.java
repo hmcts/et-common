@@ -2,6 +2,7 @@ package uk.gov.hmcts.ecm.common.service.pdf.et3;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import uk.gov.hmcts.ecm.common.service.pdf.et3.util.ET3FormRespondentUtil;
 import uk.gov.hmcts.et.common.model.ccd.types.RespondentSumType;
 
 import java.util.Optional;
@@ -50,7 +51,7 @@ public final class ET3FormRespondentMapper {
         putOtherTitle(selectedTitle, pdfFields);
         // END OF SETTING RESPONDENT TITLE
         putPdfTextField(pdfFields, ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_NAME,
-                respondentSumType.getResponseRespondentName());
+                ET3FormRespondentUtil.findResponseRespondentName(respondentSumType));
         putPdfTextField(pdfFields, ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_NUMBER,
                 respondentSumType.getEt3ResponseRespondentCompanyNumber());
         putPdfTextField(pdfFields, ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_TYPE,
