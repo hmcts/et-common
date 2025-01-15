@@ -79,10 +79,6 @@ public class PdfService {
         if (!ObjectUtils.isEmpty(stream)) {
             try (PDDocument pdfDocument = Loader.loadPDF(
                 Objects.requireNonNull(stream))) {
-                PDResources resources = new PDResources();
-                resources.put(COSName.getPDFName(TIMES_NEW_ROMAN_PDFBOX_CHARACTER_CODE), PDType1Font.TIMES_ROMAN);
-                resources.put(COSName.getPDFName(HELVETICA_PDFBOX_CHARACTER_CODE_1), PDType1Font.HELVETICA);
-                resources.put(COSName.getPDFName(HELVETICA_PDFBOX_CHARACTER_CODE_2), PDType1Font.HELVETICA);
                 Set<Map.Entry<String, Optional<String>>> pdfEntriesMap = null;
                 if (PDF_TYPE_ET1.equals(pdfType)) {
                     pdfEntriesMap = this.et1PdfMapperService.mapHeadersToPdf(caseData).entrySet();
@@ -112,6 +108,13 @@ public class PdfService {
                 }
                 PDDocumentCatalog pdDocumentCatalog = pdfDocument.getDocumentCatalog();
                 PDAcroForm pdfForm = pdDocumentCatalog.getAcroForm();
+                PDResources defaultResources = pdfForm.getDefaultResources();
+                defaultResources.put(COSName.getPDFName(TIMES_NEW_ROMAN_PDFBOX_CHARACTER_CODE),
+                        PDType1Font.TIMES_ROMAN);
+                defaultResources.put(COSName.getPDFName(HELVETICA_PDFBOX_CHARACTER_CODE_1),
+                        PDType1Font.HELVETICA);
+                defaultResources.put(COSName.getPDFName(HELVETICA_PDFBOX_CHARACTER_CODE_2),
+                        PDType1Font.HELVETICA);
                 for (Map.Entry<String, Optional<String>> entry : pdfEntriesMap) {
                     String entryKey = entry.getKey();
                     Optional<String> entryValue = entry.getValue();
