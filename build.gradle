@@ -10,7 +10,7 @@ plugins {
 }
 
 group 'com.github.hmcts'
-version '2.5.2'
+version '2.5.3'
 
 java {
     toolchain {
@@ -72,7 +72,6 @@ publishing {
 
 test {
     useJUnitPlatform()
-    failFast = true
 }
 
 ext {
