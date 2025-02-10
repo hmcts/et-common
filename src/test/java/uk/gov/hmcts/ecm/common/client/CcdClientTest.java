@@ -10,7 +10,6 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -176,7 +175,7 @@ public class CcdClientTest {
     @Test
     void startCaseCreation() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<CCDRequest> responseEntity = ResponseEntity.ok().build();
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartCaseCreationUrl(any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class)))
@@ -189,7 +188,7 @@ public class CcdClientTest {
     @Test
     void startGenericTypeCaseCreation() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<CCDRequest> responseEntity = ResponseEntity.ok().build();
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartCaseCreationUrl(any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class)))
@@ -202,7 +201,7 @@ public class CcdClientTest {
     @Test
     void startCaseCreationAccepted() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<CCDRequest> responseEntity = ResponseEntity.ok().build();
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartCaseCreationTransferUrl(any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class)))
@@ -214,8 +213,7 @@ public class CcdClientTest {
 
     @Test
     void startEcmCaseCreationTransferAccepted() throws IOException {
-        ResponseEntity<CCDRequest> responseEntity =
-            new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<CCDRequest> responseEntity = ResponseEntity.ok().build();
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartCaseCreationTransferUrl(any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), any(), eq(CCDRequest.class)))
@@ -229,7 +227,7 @@ public class CcdClientTest {
     @Test
     void startCaseTransfer() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<CCDRequest> responseEntity = ResponseEntity.ok().build();
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartCaseTransferUrl(any(), any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class)))
@@ -266,7 +264,7 @@ public class CcdClientTest {
     @Test
     void returnCaseCreation() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<CCDRequest> responseEntity = ResponseEntity.ok().build();
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildReturnCaseCreationTransferUrl(any(), any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class)))
@@ -280,7 +278,7 @@ public class CcdClientTest {
     @Test
     void startCaseMultipleCreation() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<CCDRequest> responseEntity = ResponseEntity.ok().build();
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartCaseMultipleCreationUrl(any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(CCDRequest.class)))
@@ -295,7 +293,7 @@ public class CcdClientTest {
     void submitCaseCreation() throws IOException {
         HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
                 creatBuildHeaders());
-        ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<SubmitEvent> responseEntity = ResponseEntity.ok().build();
         when(caseDataBuilder.buildCaseDataContent(eq(caseData), eq(ccdRequest), anyString()))
                 .thenReturn(CaseDataContent.builder().build());
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
@@ -311,7 +309,7 @@ public class CcdClientTest {
     void submitGenericTypeCaseCreation() throws IOException {
         HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
                 creatBuildHeaders());
-        ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<SubmitEvent> responseEntity = ResponseEntity.ok().build();
         when(caseDataBuilder.buildGenericCaseDataContent(eq(caseData), eq(ccdRequest), anyString(), anyString()))
                 .thenReturn(CaseDataContent.builder().build());
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
@@ -328,7 +326,7 @@ public class CcdClientTest {
     void submitCaseCreationWithEventSummary() throws IOException {
         HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
                 creatBuildHeaders());
-        ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<SubmitEvent> responseEntity = ResponseEntity.ok().build();
         when(caseDataBuilder.buildCaseDataContent(eq(caseData), eq(ccdRequest), anyString()))
                 .thenReturn(CaseDataContent.builder().build());
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
@@ -347,7 +345,7 @@ public class CcdClientTest {
         HttpEntity<uk.gov.hmcts.ecm.common.model.ccd.CaseDataContent> httpEntity =
             new HttpEntity<>(uk.gov.hmcts.ecm.common.model.ccd.CaseDataContent.builder().build(),
             creatBuildHeaders());
-        ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<SubmitEvent> responseEntity = ResponseEntity.ok().build();
 
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildSubmitCaseCreationUrl(any(), any(), any())).thenReturn(uri);
@@ -363,7 +361,7 @@ public class CcdClientTest {
     @Test
     void retrieveCase() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<SubmitEvent> responseEntity = ResponseEntity.ok().build();
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildRetrieveCaseUrl(any(), any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(SubmitEvent.class)))
@@ -378,14 +376,13 @@ public class CcdClientTest {
     void retrieveCases() throws IOException {
         PaginatedSearchMetadata metadata = new PaginatedSearchMetadata();
         metadata.setTotalPagesCount(1);
-        ResponseEntity<PaginatedSearchMetadata> paginatedSearchMetadata = new ResponseEntity<>(metadata,
-                HttpStatus.OK);
+        ResponseEntity<PaginatedSearchMetadata> paginatedSearchMetadata = ResponseEntity.ok().body(metadata);
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildRetrieveCasesUrl(any(), any(), any(), any())).thenReturn(uri);
         when(ccdClientConfig.buildPaginationMetadataCaseUrl(any(), any(), any())).thenReturn(uri);
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
         List<SubmitEvent> submitEvents = new ArrayList<>(Arrays.asList(new SubmitEvent(), new SubmitEvent()));
-        ResponseEntity<List<SubmitEvent>> responseEntity = new ResponseEntity<>(submitEvents, HttpStatus.OK);
+        ResponseEntity<List<SubmitEvent>> responseEntity = ResponseEntity.ok().body(submitEvents);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
                 eq(new ParameterizedTypeReference<List<SubmitEvent>>(){}))).thenReturn(responseEntity);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity), eq(PaginatedSearchMetadata.class)))
@@ -402,7 +399,7 @@ public class CcdClientTest {
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L, Arrays.asList(new SubmitEvent(),
                 new SubmitEvent()));
-        ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
+        ResponseEntity<CaseSearchResult> responseEntity = ResponseEntity.ok().body(caseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
@@ -424,7 +421,7 @@ public class CcdClientTest {
         caseData1.setEthosCaseReference("2420118/2019");
         submitEvent1.setCaseData(caseData1);
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L, Arrays.asList(submitEvent, submitEvent1));
-        ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
+        ResponseEntity<CaseSearchResult> responseEntity = ResponseEntity.ok().body(caseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.ethosCaseReference.keyword\":["
                 + "\"2420117/2019\",\"2420118/2019\"],\"boost\":1.0}}}";
@@ -449,8 +446,7 @@ public class CcdClientTest {
         ScheduleCaseSearchResult scheduleCaseSearchResult =
                 new ScheduleCaseSearchResult(2L, Arrays.asList(new SchedulePayloadEvent(),
                         new SchedulePayloadEvent()));
-        ResponseEntity<ScheduleCaseSearchResult> responseEntity = new ResponseEntity<>(scheduleCaseSearchResult,
-                HttpStatus.OK);
+        ResponseEntity<ScheduleCaseSearchResult> responseEntity = ResponseEntity.ok().body(scheduleCaseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(ScheduleCaseSearchResult.class))).thenReturn(responseEntity);
@@ -472,7 +468,7 @@ public class CcdClientTest {
                 new NotificationScheduleSearchCasesResult(2L, Arrays.asList(new NotificationSchedulePayloadEvent(),
                         new NotificationSchedulePayloadEvent()));
         ResponseEntity<NotificationScheduleSearchCasesResult> responseEntity =
-                new ResponseEntity<>(scheduleCaseSearchResult, HttpStatus.OK);
+                ResponseEntity.ok().body(scheduleCaseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity,
                 NotificationScheduleSearchCasesResult.class)).thenReturn(responseEntity);
@@ -495,8 +491,7 @@ public class CcdClientTest {
         LabelCaseSearchResult labelCaseSearchResult =
                 new LabelCaseSearchResult(2L, Arrays.asList(new LabelPayloadEvent(),
                         new LabelPayloadEvent()));
-        ResponseEntity<LabelCaseSearchResult> responseEntity =
-                new ResponseEntity<>(labelCaseSearchResult, HttpStatus.OK);
+        ResponseEntity<LabelCaseSearchResult> responseEntity = ResponseEntity.ok().body(labelCaseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(LabelCaseSearchResult.class))).thenReturn(responseEntity);
@@ -513,7 +508,7 @@ public class CcdClientTest {
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         BulkCaseSearchResult bulkCaseSearchResult = new BulkCaseSearchResult(2L,
                 Arrays.asList(new SubmitBulkEvent(), new SubmitBulkEvent()));
-        ResponseEntity<BulkCaseSearchResult> responseEntity = new ResponseEntity<>(bulkCaseSearchResult, HttpStatus.OK);
+        ResponseEntity<BulkCaseSearchResult> responseEntity = ResponseEntity.ok().body(bulkCaseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(BulkCaseSearchResult.class))).thenReturn(responseEntity);
@@ -531,8 +526,7 @@ public class CcdClientTest {
         MultipleCaseSearchResult multipleCaseSearchResult =
                 new MultipleCaseSearchResult(2L, Arrays.asList(new SubmitMultipleEvent(),
                         new SubmitMultipleEvent()));
-        ResponseEntity<MultipleCaseSearchResult> responseEntity =
-                new ResponseEntity<>(multipleCaseSearchResult, HttpStatus.OK);
+        ResponseEntity<MultipleCaseSearchResult> responseEntity = ResponseEntity.ok().body(multipleCaseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(MultipleCaseSearchResult.class))).thenReturn(responseEntity);
@@ -547,7 +541,7 @@ public class CcdClientTest {
     void retrieveCasesVenueAndRangeDateElasticSearch() throws IOException {
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
             Arrays.asList(new SubmitEvent(), new SubmitEvent()));
-        ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
+        ResponseEntity<CaseSearchResult> responseEntity = ResponseEntity.ok().body(caseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), any(),
             eq(CaseSearchResult.class))).thenReturn(responseEntity);
@@ -562,7 +556,7 @@ public class CcdClientTest {
     void retrieveCasesVenueAndSingleDateElasticSearch() throws IOException {
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
-        ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
+        ResponseEntity<CaseSearchResult> responseEntity = ResponseEntity.ok().body(caseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), any(),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
@@ -577,7 +571,7 @@ public class CcdClientTest {
     void retrieveCasesAllVenuesAndSingleDateElasticSearch() throws IOException {
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L, Arrays.asList(new SubmitEvent(),
                 new SubmitEvent()));
-        ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
+        ResponseEntity<CaseSearchResult> responseEntity = ResponseEntity.ok().body(caseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), any(),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
@@ -598,7 +592,7 @@ public class CcdClientTest {
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
-        ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
+        var responseEntity = ResponseEntity.ok().body(caseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
@@ -620,7 +614,7 @@ public class CcdClientTest {
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
-        ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
+        ResponseEntity<CaseSearchResult> responseEntity = ResponseEntity.ok().body(caseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
@@ -642,7 +636,7 @@ public class CcdClientTest {
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
-        ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
+        ResponseEntity<CaseSearchResult> responseEntity = ResponseEntity.ok().body(caseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
@@ -665,7 +659,7 @@ public class CcdClientTest {
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
-        ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
+        ResponseEntity<CaseSearchResult> responseEntity = ResponseEntity.ok().body(caseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
@@ -689,7 +683,7 @@ public class CcdClientTest {
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
-        ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
+        ResponseEntity<CaseSearchResult> responseEntity = ResponseEntity.ok().body(caseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
@@ -711,7 +705,7 @@ public class CcdClientTest {
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
-        ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
+        ResponseEntity<CaseSearchResult> responseEntity = ResponseEntity.ok().body(caseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
@@ -726,14 +720,14 @@ public class CcdClientTest {
     void retrieveBulkCases() throws IOException {
         PaginatedSearchMetadata metadata = new PaginatedSearchMetadata();
         metadata.setTotalPagesCount(1);
-        ResponseEntity<PaginatedSearchMetadata> paginatedSearchMetadata = new ResponseEntity<>(metadata, HttpStatus.OK);
+        ResponseEntity<PaginatedSearchMetadata> paginatedSearchMetadata = ResponseEntity.ok().body(metadata);
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildRetrieveCasesUrl(any(), any(), any(), any())).thenReturn(uri);
         when(ccdClientConfig.buildPaginationMetadataCaseUrl(any(), any(), any())).thenReturn(uri);
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
         List<SubmitBulkEvent> submitBulkEvents =
                 new ArrayList<>(Arrays.asList(new SubmitBulkEvent(), new SubmitBulkEvent()));
-        ResponseEntity<List<SubmitBulkEvent>> responseEntity = new ResponseEntity<>(submitBulkEvents, HttpStatus.OK);
+        ResponseEntity<List<SubmitBulkEvent>> responseEntity = ResponseEntity.ok().body(submitBulkEvents);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
                 eq(new ParameterizedTypeReference<List<SubmitBulkEvent>>(){}))).thenReturn(responseEntity);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
@@ -746,7 +740,7 @@ public class CcdClientTest {
     @Test
     void startEventForCase() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<CCDRequest> responseEntity = ResponseEntity.ok().build();
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartEventForCaseUrl(any(), any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
@@ -760,7 +754,7 @@ public class CcdClientTest {
     @Test
     void startEventForCaseAPIRole() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<CCDRequest> responseEntity = ResponseEntity.ok().body(new CCDRequest());
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartEventForCaseUrlAPIRole(any(), any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
@@ -774,7 +768,7 @@ public class CcdClientTest {
     @Test
     void startEventForCaseBulkSingle() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<CCDRequest> responseEntity = ResponseEntity.ok().build();
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartEventForCaseUrlBulkSingle(any(), any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
@@ -788,7 +782,7 @@ public class CcdClientTest {
     @Test
     void startEventForCasePreAcceptBulkSingle() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<CCDRequest> responseEntity = ResponseEntity.ok().build();
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartEventForCaseUrlPreAcceptBulkSingle(any(), any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
@@ -802,7 +796,7 @@ public class CcdClientTest {
     @Test
     void startBulkEventForCase() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<CCDRequest> responseEntity = ResponseEntity.ok().build();
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartEventForBulkCaseUrl(any(), any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
@@ -816,7 +810,7 @@ public class CcdClientTest {
     @Test
     void startBulkAmendEventForCase() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<CCDRequest> responseEntity = ResponseEntity.ok().build();
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartEventForBulkAmendCaseUrl(any(), any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
@@ -831,7 +825,7 @@ public class CcdClientTest {
     void submitEventForCase() throws IOException {
         HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
                 creatBuildHeaders());
-        ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<SubmitEvent> responseEntity = ResponseEntity.ok().build();
         when(caseDataBuilder.buildCaseDataContent(caseData, ccdRequest, UPDATE_EVENT_SUMMARY, null))
                 .thenReturn(CaseDataContent.builder().build());
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
@@ -850,7 +844,7 @@ public class CcdClientTest {
         var eventDescription = "Event Description";
         HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
                 creatBuildHeaders());
-        ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<SubmitEvent> responseEntity = ResponseEntity.ok().build();
         when(caseDataBuilder.buildCaseDataContent(caseData, ccdRequest, eventSummary, eventDescription))
                 .thenReturn(CaseDataContent.builder().build());
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
@@ -877,7 +871,7 @@ public class CcdClientTest {
     void submitBulkEventForCase() throws IOException {
         HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
                 creatBuildHeaders());
-        ResponseEntity<SubmitBulkEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<SubmitBulkEvent> responseEntity = ResponseEntity.ok().build();
         when(caseDataBuilder.buildBulkDataContent(eq(bulkData), eq(ccdRequest),
                 anyString())).thenReturn(CaseDataContent.builder().build());
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
@@ -894,7 +888,7 @@ public class CcdClientTest {
     void submitMultipleEventForCase() throws IOException {
         HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
                 creatBuildHeaders());
-        ResponseEntity<SubmitMultipleEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<SubmitMultipleEvent> responseEntity = ResponseEntity.ok().build();
         when(caseDataBuilder.buildMultipleDataContent(eq(multipleData), eq(ccdRequest),
                 anyString())).thenReturn(CaseDataContent.builder().build());
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
@@ -911,7 +905,7 @@ public class CcdClientTest {
     void submitMultipleCreation() throws IOException {
         HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
                 creatBuildHeaders());
-        ResponseEntity<SubmitMultipleEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<SubmitMultipleEvent> responseEntity = ResponseEntity.ok().build();
         when(caseDataBuilder.buildMultipleDataContent(eq(multipleData), eq(ccdRequest), anyString()))
                 .thenReturn(CaseDataContent.builder().build());
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
@@ -940,8 +934,8 @@ public class CcdClientTest {
         submitMultipleEvent.setCaseData(multipleData);
         MultipleCaseSearchResult multipleCaseSearchResult =
                 new MultipleCaseSearchResult(1L, Collections.singletonList(submitMultipleEvent));
-        ResponseEntity<MultipleCaseSearchResult> responseEntity = new ResponseEntity<>(multipleCaseSearchResult,
-                HttpStatus.OK);
+        ResponseEntity<MultipleCaseSearchResult> responseEntity = ResponseEntity.ok()
+                .body(multipleCaseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         String jsonQuery = "{\"size\":10000,\"query\":{\"terms\":{\"data.multipleReference.keyword\""
                 + ":[\"2400001/2020\"],\"boost\":1.0}}}";
@@ -965,7 +959,7 @@ public class CcdClientTest {
         var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
         CaseSearchResult caseSearchResult = new CaseSearchResult(2L,
                 Arrays.asList(new SubmitEvent(), new SubmitEvent()));
-        ResponseEntity<CaseSearchResult> responseEntity = new ResponseEntity<>(caseSearchResult, HttpStatus.OK);
+        ResponseEntity<CaseSearchResult> responseEntity = ResponseEntity.ok().body(caseSearchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CaseSearchResult.class))).thenReturn(responseEntity);
@@ -980,7 +974,7 @@ public class CcdClientTest {
         var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
         var searchResult = new CasesAwaitingJudgmentSearchResult(2L,
                 Arrays.asList(new CasesAwaitingJudgmentSubmitEvent(), new CasesAwaitingJudgmentSubmitEvent()));
-        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        ResponseEntity<CasesAwaitingJudgmentSearchResult> responseEntity = ResponseEntity.ok().body(searchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), eq(httpEntity),
                 eq(CasesAwaitingJudgmentSearchResult.class))).thenReturn(responseEntity);
@@ -998,7 +992,7 @@ public class CcdClientTest {
         var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
         var searchResult = new HearingsToJudgmentsSearchResult(2L,
                 Arrays.asList(new HearingsToJudgmentsSubmitEvent(), new HearingsToJudgmentsSubmitEvent()));
-        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        var responseEntity = ResponseEntity.ok().body(searchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, HearingsToJudgmentsSearchResult.class))
                 .thenReturn(responseEntity);
@@ -1015,7 +1009,7 @@ public class CcdClientTest {
         var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
         var searchResult = new RespondentsReportSearchResult(2L,
                 Arrays.asList(new RespondentsReportSubmitEvent(), new RespondentsReportSubmitEvent()));
-        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        ResponseEntity<RespondentsReportSearchResult> responseEntity = ResponseEntity.ok().body(searchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, RespondentsReportSearchResult.class))
                 .thenReturn(responseEntity);
@@ -1032,7 +1026,7 @@ public class CcdClientTest {
         var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
         var searchResult = new SessionDaysSearchResult(2L,
                 Arrays.asList(new SessionDaysSubmitEvent(), new SessionDaysSubmitEvent()));
-        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        var responseEntity = ResponseEntity.ok().body(searchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, SessionDaysSearchResult.class))
                 .thenReturn(responseEntity);
@@ -1049,7 +1043,7 @@ public class CcdClientTest {
         var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
         var searchResult = new ClaimsByHearingVenueSearchResult(2L,
             Arrays.asList(new ClaimsByHearingVenueSubmitEvent(), new ClaimsByHearingVenueSubmitEvent()));
-        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        var responseEntity = ResponseEntity.ok().body(searchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, ClaimsByHearingVenueSearchResult.class))
             .thenReturn(responseEntity);
@@ -1066,7 +1060,7 @@ public class CcdClientTest {
         var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
         var searchResult = new EccReportSearchResult(2L,
                 Arrays.asList(new EccReportSubmitEvent(), new EccReportSubmitEvent()));
-        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        var responseEntity = ResponseEntity.ok().body(searchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, EccReportSearchResult.class))
                 .thenReturn(responseEntity);
@@ -1083,7 +1077,7 @@ public class CcdClientTest {
         var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
         var searchResult = new HearingsByHearingTypeSearchResult(2L,
                 Arrays.asList(new HearingsByHearingTypeSubmitEvent(), new HearingsByHearingTypeSubmitEvent()));
-        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        var responseEntity = ResponseEntity.ok().body(searchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, HearingsByHearingTypeSearchResult.class))
                 .thenReturn(responseEntity);
@@ -1099,7 +1093,7 @@ public class CcdClientTest {
         var elasticSearchQuery = "{\"size\":10000,\"query\": {\"match_all\":{} }}";
         var httpEntity = new HttpEntity<>(elasticSearchQuery, creatBuildHeaders());
         var searchResult = new CaseSearchResult(2L, Arrays.asList(new SubmitEvent(), new SubmitEvent()));
-        var responseEntity = new ResponseEntity<>(searchResult, HttpStatus.OK);
+        var responseEntity = ResponseEntity.ok().body(searchResult);
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
         when(restTemplate.exchange(uri, HttpMethod.POST, httpEntity, CaseSearchResult.class))
                 .thenReturn(responseEntity);
@@ -1115,7 +1109,7 @@ public class CcdClientTest {
     @Test
     void startDisposeEventForCase() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<CCDRequest> responseEntity = ResponseEntity.ok().build();
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartDisposeEventForCaseUrl(any(), any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
@@ -1128,7 +1122,7 @@ public class CcdClientTest {
 
     @Test
     void retrieveCaseEvents() throws IOException {
-        ResponseEntity<AuditEventsResponse> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<AuditEventsResponse> responseEntity = ResponseEntity.ok().build();
         when(ccdClientConfig.buildCaseEventsUrl(any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), any(),
             eq(AuditEventsResponse.class))).thenReturn(responseEntity);
@@ -1141,7 +1135,7 @@ public class CcdClientTest {
     void submitUpdateRepEvent() throws IOException {
         HttpEntity<CaseDataContent> httpEntity = new HttpEntity<>(CaseDataContent.builder().build(),
             creatBuildHeaders());
-        ResponseEntity<SubmitEvent> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<SubmitEvent> responseEntity = ResponseEntity.ok().build();
 
         Map<String, Object> changeOrganisationRequest = new ConcurrentHashMap<>();
 
@@ -1162,7 +1156,7 @@ public class CcdClientTest {
     @Test
     void startEventForUpdateRep() throws IOException {
         HttpEntity<Object> httpEntity = new HttpEntity<>(creatBuildHeaders());
-        ResponseEntity<CCDRequest> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<CCDRequest> responseEntity = ResponseEntity.ok().build();
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.buildStartUpdateRepEventForCaseUrl(any(), any(), any(), any())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), eq(httpEntity),
@@ -1175,7 +1169,7 @@ public class CcdClientTest {
 
     @Test
     void retrieveCaseAssignments() throws IOException {
-        ResponseEntity<CaseUserAssignmentData> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<CaseUserAssignmentData> responseEntity = ResponseEntity.ok().build();
         when(ccdClientConfig.buildUrlForCaseAccessRetrieval(anyString())).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.GET), any(),
             eq(CaseUserAssignmentData.class))).thenReturn(responseEntity);
@@ -1188,7 +1182,7 @@ public class CcdClientTest {
     @Test
     void revokeCaseAssignments() throws IOException {
         CaseUserAssignmentData caseUserAssignmentData = CaseUserAssignmentData.builder().build();
-        ResponseEntity<String> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<String> responseEntity = ResponseEntity.ok().build();
         when(ccdClientConfig.buildUrlForCaseAccessRevocation()).thenReturn(uri);
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.DELETE), any(),
             eq(String.class))).thenReturn(responseEntity);
@@ -1201,7 +1195,7 @@ public class CcdClientTest {
     @Test
     void setSupplementaryData() throws IOException {
         when(ccdClientConfig.buildUrlForSupplementaryApi(any())).thenReturn(uri);
-        ResponseEntity<Object> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<Object> responseEntity = ResponseEntity.ok().build();
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), any(), eq(Object.class))).thenReturn(responseEntity);
         ccdClient.setSupplementaryData("authToken", Map.of("HMCTSServiceID", "BHA1"), caseDetails.getCaseId());
         verify(restTemplate).exchange(eq(uri), eq(HttpMethod.POST), any(), eq(Object.class));
@@ -1212,7 +1206,7 @@ public class CcdClientTest {
     void addUserToMultiple() throws IOException {
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.addLegalRepToMultiCaseUrl(any(), any(), any(), any())).thenReturn(uri);
-        ResponseEntity<Object> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<Object> responseEntity = ResponseEntity.ok().build();
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.POST), any(), eq(Object.class))).thenReturn(responseEntity);
 
         ccdClient.addUserToMultiple(
@@ -1231,7 +1225,7 @@ public class CcdClientTest {
     void removeUserFromMultiple() throws IOException {
         when(userService.getUserDetails(anyString())).thenReturn(userDetails);
         when(ccdClientConfig.removeLegalRepFromMultiCaseUrl(any(), any(), any(), any(), any())).thenReturn(uri);
-        ResponseEntity<Object> responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<Object> responseEntity = ResponseEntity.ok().build();
         when(restTemplate.exchange(eq(uri), eq(HttpMethod.DELETE), any(), eq(Object.class))).thenReturn(responseEntity);
 
         ccdClient.removeUserFromMultiple(
@@ -1252,8 +1246,7 @@ public class CcdClientTest {
                 new MultipleCaseSearchResult(2L, Arrays.asList(new SubmitMultipleEvent(),
                         new SubmitMultipleEvent()));
 
-        ResponseEntity<MultipleCaseSearchResult> responseEntity =
-                new ResponseEntity<>(multipleCaseSearchResult, HttpStatus.OK);
+        ResponseEntity<MultipleCaseSearchResult> responseEntity = ResponseEntity.ok().body(multipleCaseSearchResult);
 
         when(ccdClientConfig.buildRetrieveCasesUrlElasticSearch(any())).thenReturn(uri);
 
