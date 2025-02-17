@@ -214,7 +214,7 @@ public final class TestConstants {
     public static final String EMAIL = "Email";
     public static final String POST = "Post";
     public static final String FAX = "Fax";
-    public static final String ENGLISH_PDF_TEMPLATE_SOURCE = "ET3_0224.pdf";
+    public static final String ENGLISH_PDF_TEMPLATE_SOURCE = "ET3_0125.pdf";
     public static final String WELSH_PDF_TEMPLATE_SOURCE = "CY_ET3_0224.pdf";
     public static final String ET3_FORM_TYPE = "ET3";
     public static final String ET3_FORM_CLIENT_TYPE_RESPONDENT = "respondent";
