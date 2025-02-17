@@ -19,6 +19,9 @@ public final class ET3FormConstants {
     public static final String OFF_CAPITALISED = "Off";
     public static final String EMAIL_LOWERCASE = "email";
     public static final String POST_LOWERCASE = "post";
+    public static final String RESPONDENT_HEARING_PANEL_PREFERENCE_NO = "No preference";
+    public static final String RESPONDENT_HEARING_PANEL_PREFERENCE_JUDGE = "Judge";
+    public static final String RESPONDENT_HEARING_PANEL_PREFERENCE_PANEL = "Panel";
     public static final String VIDEO_HEARINGS = "Video hearings";
     public static final String PHONE_HEARINGS = "Phone hearings";
     public static final String EMAIL_CAPITALISED = "Email";
@@ -69,6 +72,10 @@ public final class ET3FormConstants {
     public static final String TXT_PDF_RESPONDENT_FIELD_EMAIL = "2.6 email address";
     public static final String TXT_PDF_RESPONDENT_FIELD_EMPLOYEE_NUMBER_CLAIMANT_WORK_PLACE =
             "2.13 employees employed at that site";
+    public static final String CHECKBOX_PDF_RESPONDENT_FIELD_HEARING_PANEL_TYPE_NO_PREFERENCE = "2.14 no preference";
+    public static final String CHECKBOX_PDF_RESPONDENT_FIELD_HEARING_PANEL_TYPE_JUDGE = "2.14 a judge";
+    public static final String CHECKBOX_PDF_RESPONDENT_FIELD_HEARING_PANEL_TYPE_PANEL = "2.14 a panel";
+    public static final String TXT_PDF_RESPONDENT_FIELD_HEARING_PANEL_TYPE_REASON = "2.14 reasons";
     public static final String TXT_PDF_RESPONDENT_FIELD_EMPLOYEE_NUMBER_GREAT_BRITAIN = "2.11 number of employees";
     public static final String TXT_PDF_RESPONDENT_FIELD_MOBILE_NUMBER = "2.4 mobile number";
     public static final String TXT_PDF_RESPONDENT_FIELD_NAME = "2.2 name";
