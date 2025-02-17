@@ -111,18 +111,18 @@ public final class ET3FormRespondentMapper {
                 respondentSumType.getEt3ResponseSiteEmploymentCount());
         putPdfCheckboxFieldWhenExpectedValueEqualsActualValue(pdfFields,
                 ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_HEARING_PANEL_TYPE_NO_PREFERENCE,
-                ET3FormConstants.RESPONDENT_HEARING_PANEL_PREFERENCE_NO,
                 ET3FormConstants.YES_CAPITALISED,
+                ET3FormConstants.RESPONDENT_HEARING_PANEL_PREFERENCE_NO,
                 respondentSumType.getRespondentHearingPanelPreference());
         putPdfCheckboxFieldWhenExpectedValueEqualsActualValue(pdfFields,
                 ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_HEARING_PANEL_TYPE_JUDGE,
-                ET3FormConstants.RESPONDENT_HEARING_PANEL_PREFERENCE_JUDGE,
                 ET3FormConstants.YES_CAPITALISED,
+                ET3FormConstants.RESPONDENT_HEARING_PANEL_PREFERENCE_JUDGE,
                 respondentSumType.getRespondentHearingPanelPreference());
         putPdfCheckboxFieldWhenExpectedValueEqualsActualValue(pdfFields,
                 ET3FormConstants.CHECKBOX_PDF_RESPONDENT_FIELD_HEARING_PANEL_TYPE_PANEL,
-                ET3FormConstants.RESPONDENT_HEARING_PANEL_PREFERENCE_PANEL,
                 ET3FormConstants.YES_CAPITALISED,
+                ET3FormConstants.RESPONDENT_HEARING_PANEL_PREFERENCE_PANEL,
                 respondentSumType.getRespondentHearingPanelPreference());
         putPdfTextField(pdfFields,
                 ET3FormConstants.TXT_PDF_RESPONDENT_FIELD_HEARING_PANEL_TYPE_REASON,
