@@ -81,6 +81,11 @@ public final class TestConstants {
     public static final String STRING_NUMERIC_FOUR = "4";
     public static final String STRING_NUMERIC_FIVE = "5";
     public static final String STRING_NUMERIC_SIX = "6";
+    public static final String STRING_NUMERIC_SEVEN = "7";
+    public static final String STRING_NUMERIC_EIGHT = "8";
+    public static final String STRING_NUMERIC_NINE = "9";
+    public static final String STRING_NUMERIC_TEN = "10";
+    public static final String STRING_NUMERIC_ELEVEN = "11";
     public static final String POSTCODE = "SW1A 1AA";
     public static final String REPRESENTATIVE_NAME = "Michael Mercury";
     public static final String REPRESENTATIVE_REFERENCE = "Test Reference";
@@ -116,6 +121,10 @@ public final class TestConstants {
     public static final String HEARING_ASSISTANCE = "Hearing Assistance";
     public static final String VIDEO = "Video";
     public static final String PHONE = "Phone";
+    public static final String HEARING_PANEL_NO_PREFERENCE = "No preference";
+    public static final String HEARING_PANEL_PREFERENCE_JUDGE = "Judge";
+    public static final String HEARING_PANEL_PREFERENCE_PANEL = "Panel";
+    public static final String HEARING_PANEL_PREFERENCE_REASON = "Hearing Panel Preference reason provided";
     public static final String TEST_CASE_DATA_JSON_FILE = "requests/caseData.json";
     public static final String TEST_ET3_CASE_DATA_JSON_FILE = "requests/et3CaseData.json";
     public static final String WEEKS = "Weeks";

@@ -35,6 +35,10 @@ public final class PdfMapperConstants {
     public static final String I_CAN_TAKE_PART_IN_PHONE_HEARINGS = "1.11 phone";
     public static final String I_CAN_TAKE_PART_IN_NO_HEARINGS = "1.11 no";
     public static final String I_CAN_TAKE_PART_IN_NO_HEARINGS_EXPLAIN = "1.11 explain";
+    public static final String CLAIMANT_HEARING_PANEL_NO_PREFERENCE = "1.12 no preference";
+    public static final String CLAIMANT_HEARING_PANEL_PREFERENCE_JUDGE = "1.12 a judge";
+    public static final String CLAIMANT_HEARING_PANEL_PREFERENCE_PANEL = "1.12 a panel";
+    public static final String CLAIMANT_HEARING_PANEL_REASON = "1.12 reasons";
     public static final String Q2_4_DIFFERENT_WORK_ADDRESS =  "2.4 Full, different working address - Number or name";
     public static final String Q3_MORE_CLAIMS_YES = "3.1 Are you aware that your claim is one of a number of "
         + "claims against the same employer arising from the same, or similar, circumstances? Yes";
@@ -337,6 +341,9 @@ public final class PdfMapperConstants {
     public static final String MONTHS = "Months";
     public static final String WEEKS = "Weeks";
     public static final String ANNUAL = "Annual";
+    public static final String HEARING_PANEL_NO_PREFERENCE = "No preference";
+    public static final String HEARING_PANEL_PREFERENCE_JUDGE = "Judge";
+    public static final String HEARING_PANEL_PREFERENCE_PANEL = "Panel";
     public static final Map<String, String> TITLES = Map.of(
         MR, PdfMapperConstants.Q1_TITLE_MR,
         MRS, PdfMapperConstants.Q1_TITLE_MRS,
