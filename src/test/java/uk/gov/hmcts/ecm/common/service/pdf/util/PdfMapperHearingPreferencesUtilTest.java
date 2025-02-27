@@ -40,6 +40,7 @@ class PdfMapperHearingPreferencesUtilTest {
                 checkReasonableAdjustments(caseData, printFields);
             }
             checkHearingPreferences(caseData, printFields);
+            checkClaimantHearingPanelPreference(caseData, printFields);
         }
     }
 
@@ -89,6 +90,35 @@ class PdfMapperHearingPreferencesUtilTest {
         }
         if (caseData.getClaimantHearingPreference().getHearingPreferences().contains(PHONE)) {
             assertThat(printFields.get(PdfMapperConstants.I_CAN_TAKE_PART_IN_PHONE_HEARINGS)).contains(YES);
+        }
+    }
+
+    private static void checkClaimantHearingPanelPreference(CaseData caseData,
+                                                          ConcurrentMap<String, Optional<String>> printFields) {
+
+        if (ObjectUtils.isEmpty(caseData) || ObjectUtils.isEmpty(caseData.getClaimantHearingPreference())
+                || StringUtils.isEmpty(caseData.getClaimantHearingPreference().getClaimantHearingPanelPreference())) {
+            assertThat(printFields.get(PdfMapperConstants.CLAIMANT_HEARING_PANEL_NO_PREFERENCE)).isNull();
+            assertThat(printFields.get(PdfMapperConstants.CLAIMANT_HEARING_PANEL_PREFERENCE_JUDGE)).isNull();
+            assertThat(printFields.get(PdfMapperConstants.CLAIMANT_HEARING_PANEL_PREFERENCE_PANEL)).isNull();
+            assertThat(printFields.get(PdfMapperConstants.CLAIMANT_HEARING_PANEL_REASON)).isNull();
+        } else {
+            if (caseData.getClaimantHearingPreference().getClaimantHearingPanelPreference()
+                    .contains(PdfMapperConstants.HEARING_PANEL_NO_PREFERENCE)) {
+                assertThat(printFields.get(PdfMapperConstants.CLAIMANT_HEARING_PANEL_NO_PREFERENCE)).contains(YES);
+            }
+            if (caseData.getClaimantHearingPreference().getClaimantHearingPanelPreference()
+                    .contains(PdfMapperConstants.HEARING_PANEL_PREFERENCE_JUDGE)) {
+                assertThat(printFields.get(PdfMapperConstants.CLAIMANT_HEARING_PANEL_PREFERENCE_JUDGE)).contains(YES);
+            }
+            if (caseData.getClaimantHearingPreference().getClaimantHearingPanelPreference()
+                    .contains(PdfMapperConstants.HEARING_PANEL_PREFERENCE_PANEL)) {
+                assertThat(printFields.get(PdfMapperConstants.CLAIMANT_HEARING_PANEL_PREFERENCE_PANEL)).contains(YES);
+            }
+            if (StringUtils.isNotBlank(caseData.getClaimantHearingPreference().getClaimantHearingPanelPreferenceWhy())) {
+                assertThat(printFields.get(PdfMapperConstants.CLAIMANT_HEARING_PANEL_REASON))
+                        .contains(caseData.getClaimantHearingPreference().getClaimantHearingPanelPreferenceWhy());
+            }
         }
     }
 }
