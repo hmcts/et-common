@@ -4,5 +4,5 @@ launchdarkly:
   env: ${LAUNCH_DARKLY_ENV:default}
 
 pdf:
-  english: "ET1_0224.pdf"
-  welsh: "CY_ET1_0224.pdf"
+  english: "ET1_0125.pdf"
+  welsh: "CY_ET1_0125.pdf"
