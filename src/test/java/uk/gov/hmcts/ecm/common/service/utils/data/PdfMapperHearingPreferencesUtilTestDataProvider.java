@@ -51,8 +51,10 @@ public final class PdfMapperHearingPreferencesUtilTestDataProvider {
         CaseData caseDataHearingPreferenceVideoPhoneSelected = new CaseData();
         caseDataHearingPreferenceVideoPhoneSelected.setClaimantHearingPreference(
             generateClaimantHearingPreference(TestConstants.FALSE, YES, TestConstants.REASONABLE_ADJUSTMENT_DETAILS,
-                                              new String[]{VIDEO, TestConstants.PHONE}, TestConstants.HEARING_ASSISTANCE,
-                                              TestConstants.NULL_STRING, TestConstants.NULL_STRING));
+                    new String[]{ VIDEO, TestConstants.PHONE },
+                    TestConstants.HEARING_ASSISTANCE,
+                    TestConstants.NULL_STRING,
+                    TestConstants.NULL_STRING));
         caseDataHearingPreferenceVideoPhoneSelected.setEthosCaseReference(TestConstants.STRING_NUMERIC_FIVE);
         // Invalid Hearing Preference Selected
         CaseData caseDataInvalidHearingPreferenceSelected = new CaseData();
@@ -61,19 +63,19 @@ public final class PdfMapperHearingPreferencesUtilTestDataProvider {
                                               new String[]{"Dummy", "String"}, TestConstants.HEARING_ASSISTANCE,
                                               TestConstants.NULL_STRING, TestConstants.NULL_STRING));
         caseDataHearingPreferenceVideoPhoneSelected.setEthosCaseReference(TestConstants.STRING_NUMERIC_SIX);
-        // Empty Hearing Preferences
-        CaseData caseDataClaimantHearingPreferencesEmpty = new CaseData();
         // No Hearing Panel Preference Selected
         CaseData caseDataNoHearingPanelPreferenceSelected = new CaseData();
         caseDataNoHearingPanelPreferenceSelected.setClaimantHearingPreference(
-                generateClaimantHearingPreference(TestConstants.FALSE, YES, TestConstants.REASONABLE_ADJUSTMENT_DETAILS,
+                generateClaimantHearingPreference(TestConstants.FALSE, YES,
+                        TestConstants.REASONABLE_ADJUSTMENT_DETAILS,
                         new String[]{"Dummy", "String"}, TestConstants.HEARING_ASSISTANCE,
                         TestConstants.NULL_STRING, TestConstants.NULL_STRING));
         caseDataNoHearingPanelPreferenceSelected.setEthosCaseReference(TestConstants.STRING_NUMERIC_SEVEN);
         // NO_PREFERENCE Hearing Panel Preference Selected
         CaseData caseDataNoPreferenceHearingPanelPreferenceSelected = new CaseData();
         caseDataNoPreferenceHearingPanelPreferenceSelected.setClaimantHearingPreference(
-                generateClaimantHearingPreference(TestConstants.FALSE, YES, TestConstants.REASONABLE_ADJUSTMENT_DETAILS,
+                generateClaimantHearingPreference(TestConstants.FALSE, YES,
+                        TestConstants.REASONABLE_ADJUSTMENT_DETAILS,
                         new String[]{"Dummy", "String"}, TestConstants.HEARING_ASSISTANCE,
                         TestConstants.HEARING_PANEL_NO_PREFERENCE, TestConstants.NULL_STRING));
         caseDataNoPreferenceHearingPanelPreferenceSelected.setEthosCaseReference(TestConstants.STRING_NUMERIC_EIGHT);
@@ -97,9 +99,10 @@ public final class PdfMapperHearingPreferencesUtilTestDataProvider {
                 generateClaimantHearingPreference(TestConstants.FALSE, YES, TestConstants.REASONABLE_ADJUSTMENT_DETAILS,
                         new String[]{"Dummy", "String"}, TestConstants.HEARING_ASSISTANCE,
                         TestConstants.HEARING_PANEL_PREFERENCE_JUDGE, TestConstants.EMPTY_STRING));
-        caseDataHearingPanelPreferenceSelectedNoReasonProvided.setEthosCaseReference(TestConstants.STRING_NUMERIC_ELEVEN);
-
-
+        caseDataHearingPanelPreferenceSelectedNoReasonProvided.setEthosCaseReference(
+                TestConstants.STRING_NUMERIC_ELEVEN);
+        // Empty Hearing Preferences
+        CaseData caseDataClaimantHearingPreferencesEmpty = new CaseData();
         return Stream.of(Arguments.of(caseDataClaimantHearingPreferencesEmpty),
                          Arguments.of(caseDataEmptyReasonableAdjustment),
                          Arguments.of(caseDataYesReasonableAdjustments),

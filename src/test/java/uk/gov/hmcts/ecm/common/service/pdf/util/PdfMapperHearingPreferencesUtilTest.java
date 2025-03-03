@@ -115,7 +115,8 @@ class PdfMapperHearingPreferencesUtilTest {
                     .contains(PdfMapperConstants.HEARING_PANEL_PREFERENCE_PANEL)) {
                 assertThat(printFields.get(PdfMapperConstants.CLAIMANT_HEARING_PANEL_PREFERENCE_PANEL)).contains(YES);
             }
-            if (StringUtils.isNotBlank(caseData.getClaimantHearingPreference().getClaimantHearingPanelPreferenceWhy())) {
+            if (StringUtils.isNotBlank(caseData.getClaimantHearingPreference()
+                    .getClaimantHearingPanelPreferenceWhy())) {
                 assertThat(printFields.get(PdfMapperConstants.CLAIMANT_HEARING_PANEL_REASON))
                         .contains(caseData.getClaimantHearingPreference().getClaimantHearingPanelPreferenceWhy());
             }

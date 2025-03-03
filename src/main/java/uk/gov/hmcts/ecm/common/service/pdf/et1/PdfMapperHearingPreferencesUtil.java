@@ -10,7 +10,15 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentMap;
 
 import static java.util.Optional.ofNullable;
-import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.*;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.CLAIMANT_HEARING_PANEL_PREFERENCE_JUDGE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.CLAIMANT_HEARING_PANEL_PREFERENCE_PANEL;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.CLAIMANT_HEARING_PANEL_REASON;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.HEARING_PANEL_NO_PREFERENCE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.HEARING_PANEL_PREFERENCE_JUDGE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.HEARING_PANEL_PREFERENCE_PANEL;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.NO_LOWERCASE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.PHONE;
+import static uk.gov.hmcts.ecm.common.constants.PdfMapperConstants.VIDEO;
 import static uk.gov.hmcts.ecm.common.model.helper.Constants.YES;
 
 @Slf4j
@@ -104,30 +112,24 @@ public final class PdfMapperHearingPreferencesUtil {
     private static void setClaimantHearingPanelPreference(CaseData caseData,
                                                   ConcurrentMap<String, Optional<String>> printFields) {
         if (ObjectUtils.isNotEmpty(caseData.getClaimantHearingPreference())
-                && StringUtils.isNotBlank(caseData.getClaimantHearingPreference().getClaimantHearingPanelPreference())) {
-            if (caseData.getClaimantHearingPreference().getClaimantHearingPanelPreference().contains(HEARING_PANEL_NO_PREFERENCE)) {
-                printFields.put(
-                        PdfMapperConstants.CLAIMANT_HEARING_PANEL_NO_PREFERENCE,
-                        Optional.of(YES)
-                );
+                && StringUtils.isNotBlank(caseData.getClaimantHearingPreference()
+                .getClaimantHearingPanelPreference())) {
+            if (caseData.getClaimantHearingPreference().getClaimantHearingPanelPreference()
+                    .contains(HEARING_PANEL_NO_PREFERENCE)) {
+                printFields.put(PdfMapperConstants.CLAIMANT_HEARING_PANEL_NO_PREFERENCE, Optional.of(YES));
             }
-            if (caseData.getClaimantHearingPreference().getClaimantHearingPanelPreference().contains(HEARING_PANEL_PREFERENCE_JUDGE)) {
-                printFields.put(
-                        CLAIMANT_HEARING_PANEL_PREFERENCE_JUDGE,
-                        Optional.of(YES)
-                );
+            if (caseData.getClaimantHearingPreference().getClaimantHearingPanelPreference()
+                    .contains(HEARING_PANEL_PREFERENCE_JUDGE)) {
+                printFields.put(CLAIMANT_HEARING_PANEL_PREFERENCE_JUDGE, Optional.of(YES));
             }
-            if (caseData.getClaimantHearingPreference().getClaimantHearingPanelPreference().contains(HEARING_PANEL_PREFERENCE_PANEL)) {
-                printFields.put(
-                        CLAIMANT_HEARING_PANEL_PREFERENCE_PANEL,
-                        Optional.of(YES)
-                );
+            if (caseData.getClaimantHearingPreference().getClaimantHearingPanelPreference()
+                    .contains(HEARING_PANEL_PREFERENCE_PANEL)) {
+                printFields.put(CLAIMANT_HEARING_PANEL_PREFERENCE_PANEL, Optional.of(YES));
             }
-            if (StringUtils.isNotBlank(caseData.getClaimantHearingPreference().getClaimantHearingPanelPreferenceWhy())) {
-                printFields.put(
-                        CLAIMANT_HEARING_PANEL_REASON,
-                        Optional.of(caseData.getClaimantHearingPreference().getClaimantHearingPanelPreferenceWhy())
-                );
+            if (StringUtils.isNotBlank(caseData.getClaimantHearingPreference()
+                    .getClaimantHearingPanelPreferenceWhy())) {
+                printFields.put(CLAIMANT_HEARING_PANEL_REASON,
+                        Optional.of(caseData.getClaimantHearingPreference().getClaimantHearingPanelPreferenceWhy()));
             }
         }
     }
