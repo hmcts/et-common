@@ -68,10 +68,10 @@ public final class ET3FormRepresentativeMapper {
                     representative.getRepresentativeReference());
             putPdfCheckboxFieldWhenExpectedValueEqualsActualValue(pdfFields,
                     CHECKBOX_PDF_REPRESENTATIVE_FIELD_COMMUNICATION_PREFERENCE_EMAIL, EMAIL_LOWERCASE,
-                    EMAIL_CAPITALISED, representative.getRepresentativePreference());
+                    EMAIL_CAPITALISED, representative.getRepresentativeContactPreference());
             putPdfCheckboxFieldWhenExpectedValueEqualsActualValue(pdfFields,
                     CHECKBOX_PDF_REPRESENTATIVE_FIELD_COMMUNICATION_PREFERENCE_POST, POST_LOWERCASE, POST_CAPITALISED,
-                    representative.getRepresentativePreference());
+                    representative.getRepresentativeContactPreference());
             putPdfTextField(pdfFields, TXT_PDF_REPRESENTATIVE_FIELD_EMAIL_ADDRESS,
                     representative.getRepresentativeEmailAddress());
             putPdfCheckboxFieldWhenActualValueContainsExpectedValue(pdfFields,
