@@ -136,6 +136,32 @@ public class CcdClient {
             uk.gov.hmcts.ecm.common.model.ccd.CCDRequest.class).getBody();
     }
 
+    public uk.gov.hmcts.ecm.common.model.ccd.CCDRequest startEventForEcmCase(String authToken, String caseTypeId,
+                                                                             String jurisdiction, String cid,
+                                        String eventId) throws IOException {
+        HttpEntity<String> request = new HttpEntity<>(buildHeaders(authToken));
+        String uri = ccdClientConfig.buildStartEventUrlForCaseWorker(userService.getUserDetails(authToken).getUid(),
+                jurisdiction,
+                caseTypeId, cid, eventId);
+        return restTemplate.exchange(uri, HttpMethod.GET, request,
+                uk.gov.hmcts.ecm.common.model.ccd.CCDRequest.class).getBody();
+    }
+
+    public uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent submitEventForEcmCase(String authToken,
+                                                           uk.gov.hmcts.ecm.common.model.ccd.CaseDetails caseDetails,
+                                                           uk.gov.hmcts.ecm.common.model.ccd.CCDRequest req)
+            throws IOException {
+        log.error("ECM Case Details {}", caseDetails);
+        uk.gov.hmcts.ecm.common.model.ccd.CaseDataContent ecmCaseDataContent = ecmCaseDataBuilder
+                .buildCaseDataContent(caseDetails.getCaseData(), req, null);
+        HttpEntity<uk.gov.hmcts.ecm.common.model.ccd.CaseDataContent> request = new HttpEntity<>(ecmCaseDataContent,
+                buildHeaders(authToken));
+        String uri = ccdClientConfig.buildSubmitEventForCaseUrl(userService.getUserDetails(authToken).getUid(),
+                caseDetails.getJurisdiction(), caseDetails.getCaseTypeId(), caseDetails.getCaseId());
+        return restTemplate.exchange(uri, HttpMethod.POST, request,
+                uk.gov.hmcts.ecm.common.model.ccd.SubmitEvent.class).getBody();
+    }
+
     public CCDRequest startCaseTransfer(String authToken, String caseTypeId, String jurisdiction, String cid)
             throws IOException {
         String uri = ccdClientConfig.buildStartCaseTransferUrl(userService.getUserDetails(authToken).getUid(),
