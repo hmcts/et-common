@@ -61,11 +61,11 @@ class ET3FormRepresentativeMapperTest {
                         : ET3FormConstants.STRING_EMPTY);
         assertThat(pdfFields.get(ET3FormConstants.CHECKBOX_PDF_REPRESENTATIVE_FIELD_COMMUNICATION_PREFERENCE_EMAIL))
                 .contains(getCheckboxValue(
-                        caseData.getRepCollection().get(0).getValue().getRepresentativeContactPreference(),
+                        caseData.getRepCollection().get(0).getValue().getRepresentativePreference(),
                         ET3FormConstants.EMAIL_CAPITALISED, ET3FormConstants.EMAIL_LOWERCASE));
         assertThat(pdfFields.get(ET3FormConstants.CHECKBOX_PDF_REPRESENTATIVE_FIELD_COMMUNICATION_PREFERENCE_POST))
                 .contains(getCheckboxValue(
-                        caseData.getRepCollection().get(0).getValue().getRepresentativeContactPreference(),
+                        caseData.getRepCollection().get(0).getValue().getRepresentativePreference(),
                         ET3FormConstants.POST_CAPITALISED, ET3FormConstants.POST_LOWERCASE));
         assertThat(pdfFields.get(ET3FormConstants.TXT_PDF_REPRESENTATIVE_FIELD_EMAIL_ADDRESS)).contains(isNotBlank(
                 caseData.getRepCollection().get(0).getValue().getRepresentativeEmailAddress())
@@ -106,12 +106,12 @@ class ET3FormRepresentativeMapperTest {
         CaseData caseDataRepresentativeContactPreferenceEmail =
                 ResourceLoader.fromString(ET3FormTestConstants.TEST_ET3_FORM_CASE_DATA_FILE, CaseData.class);
         caseDataRepresentativeContactPreferenceEmail.getRepCollection().get(0).getValue()
-                .setRepresentativeContactPreference(ET3FormConstants.EMAIL_CAPITALISED);
+                .setRepresentativePreference(ET3FormConstants.EMAIL_CAPITALISED);
 
         CaseData caseDataRepresentativeContactPreferencePost =
                 ResourceLoader.fromString(ET3FormTestConstants.TEST_ET3_FORM_CASE_DATA_FILE, CaseData.class);
         caseDataRepresentativeContactPreferencePost.getRepCollection().get(0).getValue()
-                .setRepresentativeContactPreference(ET3FormConstants.POST_CAPITALISED);
+                .setRepresentativePreference(ET3FormConstants.POST_CAPITALISED);
         CaseData caseData = ResourceLoader
                 .fromString(ET3FormTestConstants.TEST_ET3_FORM_CASE_DATA_FILE, CaseData.class);
         RespondentSumType respondentSumTypeAllValues =
