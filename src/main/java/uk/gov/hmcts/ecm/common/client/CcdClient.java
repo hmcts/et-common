@@ -151,7 +151,6 @@ public class CcdClient {
                                                            uk.gov.hmcts.ecm.common.model.ccd.CaseDetails caseDetails,
                                                            uk.gov.hmcts.ecm.common.model.ccd.CCDRequest req)
             throws IOException {
-        log.error("ECM Case Details {}", caseDetails);
         uk.gov.hmcts.ecm.common.model.ccd.CaseDataContent ecmCaseDataContent = ecmCaseDataBuilder
                 .buildCaseDataContent(caseDetails.getCaseData(), req, null);
         HttpEntity<uk.gov.hmcts.ecm.common.model.ccd.CaseDataContent> request = new HttpEntity<>(ecmCaseDataContent,
