@@ -58,6 +58,7 @@ import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.JUDGMENT_AN
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.JUDGMENT_WITH_REASONS;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.LEGACY_DOCUMENT_NAMES;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.MISC;
+import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.NEEDS_UPDATING;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.NOTICE_OF_CLAIM;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.NOTICE_OF_HEARING;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.OTHER;
@@ -114,7 +115,7 @@ public class DocumentHelper {
             case APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_C,
                     APP_TO_HAVE_A_LEGAL_OFFICER_DECISION_CONSIDERED_AFRESH_R, APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_C,
                     APP_FOR_A_JUDGMENT_TO_BE_RECONSIDERED_R -> RECONSIDERATION;
-            case CERTIFICATE_OF_CORRECTION, TRIBUNAL_CASE_FILE, OTHER -> MISC;
+            case CERTIFICATE_OF_CORRECTION, TRIBUNAL_CASE_FILE, OTHER, NEEDS_UPDATING -> MISC;
             default -> LEGACY_DOCUMENT_NAMES;
         };
     }
@@ -183,7 +184,9 @@ public class DocumentHelper {
             } else if (!isNullOrEmpty(documentType.getReconsiderationDocuments())) {
                 documentType.setDocumentType(documentType.getReconsiderationDocuments());
             } else if (!isNullOrEmpty(documentType.getMiscDocuments())) {
-                documentType.setDocumentType(documentType.getMiscDocuments());
+                // Request to put this in all caps so it's more visible to the user
+                documentType.setDocumentType(NEEDS_UPDATING.equals(documentType.getMiscDocuments())
+                        ? "NEEDS UPDATING" : documentType.getMiscDocuments());
             } else {
                 documentType.setDocumentType(documentType.getTypeOfDocument());
             }

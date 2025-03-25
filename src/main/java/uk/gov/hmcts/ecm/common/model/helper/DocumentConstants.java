@@ -102,6 +102,7 @@ public class DocumentConstants {
 
     public static final String CONTACT_THE_TRIBUNAL_C = "Contact the tribunal about something else - C";
     public static final String CONTACT_THE_TRIBUNAL_R = "Contact the tribunal about something else - R";
+    public static final String NEEDS_UPDATING = "Needs updating";
 
     public static final List<String> TYPE_OF_DOCUMENT = List.of(
         ET1,
