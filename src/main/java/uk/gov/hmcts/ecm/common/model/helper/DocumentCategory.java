@@ -88,7 +88,8 @@ public enum DocumentCategory {
     ET1_VETTING("C71", "ET1 Vetting", "C1"),
     ET3_PROCESSING("C72", "ET3 Processing", "C2"),
     CONTACT_THE_TRIBUNAL_C("C76", "Contact the tribunal about something else - C", "C4"),
-    CONTACT_THE_TRIBUNAL_R("C77", "Contact the tribunal about something else - R", "C4");
+    CONTACT_THE_TRIBUNAL_R("C77", "Contact the tribunal about something else - R", "C4"),
+    NEEDS_UPDATING("C79", "Needs updating", "C9");
 
     private final String id;
     private final String category;
