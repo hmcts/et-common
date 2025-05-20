@@ -372,6 +372,7 @@ public final class PdfMapperConstants {
     public static final String STRING_ZERO = "0";
     public static final String CURRENCY_DECIMAL_ZERO_WITH_DOT = ".00";
     public static final String SUBMIT_ET1 = "submitEt1";
+    public static final String CREATE_PDF = "createPdf";
 
     private PdfMapperConstants() {
         // private due to being class of constants

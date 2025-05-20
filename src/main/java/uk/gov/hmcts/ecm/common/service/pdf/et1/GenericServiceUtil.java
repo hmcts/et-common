@@ -28,9 +28,8 @@ public final class GenericServiceUtil {
                 + "\nERROR MESSAGE: " + errorMessage
                 + "\nCLASS NAME: " + className
                 + "\nMETHOD NAME: " + methodName
-                + "\n*****************END OF EXCEPTION MESSAGE***********************";
+                + "\n*****************END OF EXCEPTION MESSAGE***********************\n";
         log.error(error);
-        System.out.println(error);
     }
 
 }
