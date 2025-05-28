@@ -375,7 +375,7 @@ public final class PdfMapperConstants {
     public static final String CREATE_PDF = "createPdf";
 
     private PdfMapperConstants() {
-        // private due to being class of constants
+        // private due to being a class of constants
     }
 
 }

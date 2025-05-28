@@ -69,12 +69,8 @@ public class PdfService {
      * @return a byte array of the generated PDF file.
      * @throws IOException if there is an issue reading the PDF template
      */
-    public byte[] createPdf(CaseData caseData,
-                            String pdfSource,
-                            String pdfType,
-                            String clientType,
-                            String event) throws IOException,
-            PdfServiceException {
+    public byte[] createPdf(CaseData caseData, String pdfSource, String pdfType,
+                            String clientType, String event) throws IOException, PdfServiceException {
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
         File pdfFile = new File(requireNonNull(cl.getResource(pdfSource)).getFile());
 
@@ -133,6 +129,9 @@ public class PdfService {
                     }
                 }
             });
+            // Set the needAppearances flag to true to ensure that the fields are rendered correctly
+            pdfForm.setNeedAppearances(true);
+
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             pdfDocument.save(byteArrayOutputStream);
             return byteArrayOutputStream.toByteArray();
