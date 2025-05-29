@@ -72,7 +72,12 @@ public class PdfService {
     public byte[] createPdf(CaseData caseData, String pdfSource, String pdfType,
                             String clientType, String event) throws IOException, PdfServiceException {
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
-        File pdfFile = new File(requireNonNull(cl.getResource(pdfSource)).getFile());
+        File pdfFile = null;
+        try {
+            pdfFile = new File(requireNonNull(cl.getResource(pdfSource)).getFile());
+        } catch (Exception e) {
+            log.error("Error while loading PDF file", e);
+        }
 
         if (ObjectUtils.isEmpty(pdfFile)) {
             return new byte[0];
