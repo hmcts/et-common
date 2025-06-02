@@ -130,6 +130,7 @@ public class PdfService {
                     }
                 }
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                pdfForm.setNeedAppearances(true);
                 pdfDocument.save(byteArrayOutputStream);
                 return byteArrayOutputStream.toByteArray();
             } finally {
