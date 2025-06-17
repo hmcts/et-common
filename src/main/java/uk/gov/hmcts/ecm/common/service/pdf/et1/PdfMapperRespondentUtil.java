@@ -97,7 +97,7 @@ public final class PdfMapperRespondentUtil {
                                           RespondentPdfFieldModel firstRespondentPdfFieldModel,
                                           ConcurrentMap<String, Optional<String>> printFields)
         throws PdfServiceException {
-        RespondentSumType firstRespondent = caseData.getRespondentCollection().get(0).getValue();
+        RespondentSumType firstRespondent = caseData.getRespondentCollection().getFirst().getValue();
         printFields.put(
             firstRespondentPdfFieldModel.respondentNameFieldName(), ofNullable(firstRespondent.getRespondentName()));
         putAddress(firstRespondent.getRespondentAddress(),

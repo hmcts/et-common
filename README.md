@@ -5,7 +5,7 @@ Re-usable features for all Employment Tribunals Java Projects
 
 ### Prerequisites
 
-- [JDK 17](https://www.oracle.com/java)
+- [JDK 21](https://www.oracle.com/java)
 
 ## Usage
 

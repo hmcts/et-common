@@ -870,7 +870,7 @@ public class CcdClient {
         MultipleCaseSearchResult resultBody = response.getBody();
 
         if (resultBody != null && CollectionUtils.isNotEmpty(resultBody.getCases())) {
-            return resultBody.getCases().get(0);
+            return resultBody.getCases().getFirst();
         }
 
         throw new NameNotFoundException("Multiple with name: " + multipleName + " not found.");
