@@ -60,10 +60,12 @@ class ET3FormRepresentativeMapperTest {
                 ? ET3FormTestConstants.TEST_PDF_REPRESENTATIVE_REFERENCE_FOR_CORRESPONDENCE
                         : ET3FormConstants.STRING_EMPTY);
         assertThat(pdfFields.get(ET3FormConstants.CHECKBOX_PDF_REPRESENTATIVE_FIELD_COMMUNICATION_PREFERENCE_EMAIL))
-                .contains(getCheckboxValue(caseData.getRepCollection().get(0).getValue().getRepresentativePreference(),
+                .contains(getCheckboxValue(
+                        caseData.getRepCollection().get(0).getValue().getRepresentativePreference(),
                         ET3FormConstants.EMAIL_CAPITALISED, ET3FormConstants.EMAIL_LOWERCASE));
         assertThat(pdfFields.get(ET3FormConstants.CHECKBOX_PDF_REPRESENTATIVE_FIELD_COMMUNICATION_PREFERENCE_POST))
-                .contains(getCheckboxValue(caseData.getRepCollection().get(0).getValue().getRepresentativePreference(),
+                .contains(getCheckboxValue(
+                        caseData.getRepCollection().get(0).getValue().getRepresentativePreference(),
                         ET3FormConstants.POST_CAPITALISED, ET3FormConstants.POST_LOWERCASE));
         assertThat(pdfFields.get(ET3FormConstants.TXT_PDF_REPRESENTATIVE_FIELD_EMAIL_ADDRESS)).contains(isNotBlank(
                 caseData.getRepCollection().get(0).getValue().getRepresentativeEmailAddress())
