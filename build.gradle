@@ -10,7 +10,7 @@ plugins {
 }
 
 group 'com.github.hmcts'
-version '3.0.0'
+version System.getenv('RELEASE_VERSION') ?: "DEV-SNAPSHOT-${new Date().format('yyyyMMdd-HHmmss')}"
 
 java {
     toolchain {
