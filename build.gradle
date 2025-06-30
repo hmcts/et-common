@@ -10,11 +10,11 @@ plugins {
 }
 
 group 'com.github.hmcts'
-version '2.5.7'
+version System.getenv('RELEASE_VERSION') ?: "DEV-SNAPSHOT-${new Date().format('yyyyMMdd-HHmmss')}"
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -42,12 +42,14 @@ checkstyle {
 
 // region publishing
 
-task sourcesJar(type: Jar, dependsOn: classes) {
+tasks.register('sourcesJar', Jar) {
+    dependsOn classes
     archiveClassifier.set("sources")
     from sourceSets.main.allSource
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
+tasks.register('javadocJar', Jar) {
+    dependsOn javadoc
     archiveClassifier.set("javadoc")
     from javadoc.destinationDir
 }
@@ -68,6 +70,17 @@ publishing {
             version project.version
         }
     }
+
+    repositories {
+        maven {
+            name = "AzureArtifacts"
+            url = uri("https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1")
+            credentials {
+                username = System.getenv("AZURE_DEVOPS_ARTIFACT_USERNAME")
+                password = System.getenv("AZURE_DEVOPS_ARTIFACT_TOKEN")
+            }
+        }
+    }
 }
 
 test {
@@ -75,7 +88,7 @@ test {
 }
 
 ext {
-    reformLoggingVersion = '6.1.8'
+    reformLoggingVersion = '6.1.9'
     log4JVersion = '2.24.3'
     lombokVersion = '1.18.38'
     junitJupiterVersion = '5.11.4'
@@ -96,7 +109,7 @@ dependencies {
 
     implementation group: 'com.github.hmcts', name: 'et-data-model', version: 'bce53bbf52'
     implementation group: 'com.github.hmcts', name: 'ecm-common', version: '2.1.4'
-    implementation group: 'com.github.hmcts', name: 'ecm-data-model', version: '1.3.14'
+    implementation group: 'com.github.hmcts', name: 'ecm-data-model', version: '1.14.2'
 
     implementation 'org.apache.tika:tika-core:3.1.0'
 
@@ -109,18 +122,18 @@ dependencies {
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-    implementation group: 'com.launchdarkly', name: 'launchdarkly-java-server-sdk', version: '7.7.0'
+    implementation group: 'com.launchdarkly', name: 'launchdarkly-java-server-sdk', version: '7.9.0'
 
     testImplementation(platform('org.junit:junit-bom:5.11.4'))
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: junitJupiterVersion
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: junitJupiterVersion
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junitJupiterVersion
     testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-commons', version: '1.11.4'
-    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.5.1'
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.5.5'
     testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.27.3'
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.16.1'
     testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.16.1'
-    testImplementation group: 'org.springframework', name: 'spring-test', version: '6.2.5'
+    testImplementation group: 'org.springframework', name: 'spring-test', version: '6.2.8'
     testImplementation group: 'pl.pragmatists', name: 'JUnitParams', version: '1.1.1'
     testCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
