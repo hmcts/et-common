@@ -4,6 +4,7 @@ plugins {
     id 'maven-publish'
     id 'checkstyle'
     id 'jacoco'
+    id 'org.springframework.boot' version '3.3.0'
     id 'io.spring.dependency-management' version '1.1.7'
     id 'org.owasp.dependencycheck' version '12.1.0'
     id 'com.github.ben-manes.versions' version '0.52.0'
@@ -108,8 +109,8 @@ dependencies {
     api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.28'
 
     implementation group: 'com.github.hmcts', name: 'et-data-model', version: 'noc-b7609bf'
-    implementation group: 'com.github.hmcts', name: 'ecm-common', version: '2.1.4'
-    implementation group: 'com.github.hmcts', name: 'ecm-data-model', version: '1.14.2'
+    implementation group: 'com.github.hmcts', name: 'ecm-common', version: '3.0.1'
+    implementation group: 'com.github.hmcts', name: 'ecm-data-model', version: '2.0.2'
 
     implementation 'org.apache.tika:tika-core:3.1.0'
 
