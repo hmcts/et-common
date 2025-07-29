@@ -21,7 +21,7 @@ java {
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url 'https://jitpack.io' }
+    maven { url "https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1" }
 }
 
 // region test coverage
@@ -107,7 +107,7 @@ dependencies {
 
     api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.28'
 
-    implementation group: 'com.github.hmcts', name: 'et-data-model', version: '4.2.5'
+    implementation group: 'com.github.hmcts', name: 'et-data-model', version: 'noc-b7609bf'
     implementation group: 'com.github.hmcts', name: 'ecm-common', version: '2.1.4'
     implementation group: 'com.github.hmcts', name: 'ecm-data-model', version: '1.14.2'
 
