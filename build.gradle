@@ -25,6 +25,12 @@ repositories {
     maven { url "https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1" }
 }
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:3.4.2"
+    }
+}
+
 // region test coverage
 
 jacocoTestReport {
@@ -98,7 +104,19 @@ ext {
 // endregion
 
 dependencies {
-    api group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '4.0.3'
+    // Spring Framework dependencies (needed for Spring classes)
+    implementation 'org.springframework:spring-web'
+    implementation 'org.springframework:spring-context'
+    implementation 'org.springframework:spring-webmvc'
+    
+    // AspectJ dependencies (for @Aspect annotation)
+    implementation 'org.aspectj:aspectjrt'
+    implementation 'org.aspectj:aspectjweaver'
+    
+    // Jakarta Annotation API (for @PreDestroy)
+    implementation 'jakarta.annotation:jakarta.annotation-api'
+    
+    api group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '4.1.2'
     implementation group: 'uk.gov.dwp.regex', name: 'postcode-validation', version: '1.1.0'
 
     api group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.6.7'

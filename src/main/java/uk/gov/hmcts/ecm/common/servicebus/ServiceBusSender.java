@@ -8,12 +8,12 @@ import com.microsoft.azure.servicebus.Message;
 import com.microsoft.azure.servicebus.MessageBody;
 import com.microsoft.azure.servicebus.primitives.ServiceBusException;
 import com.microsoft.azure.servicebus.primitives.TimeoutException;
+import jakarta.annotation.PreDestroy;
 import uk.gov.hmcts.ecm.common.exceptions.InvalidMessageException;
 import uk.gov.hmcts.ecm.common.exceptions.ServiceBusConnectionTimeoutException;
 import uk.gov.hmcts.ecm.common.model.servicebus.Msg;
 
 import java.util.concurrent.CompletableFuture;
-import javax.annotation.PreDestroy;
 
 import static java.util.Collections.singletonList;
 
