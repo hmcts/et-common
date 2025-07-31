@@ -67,3 +67,12 @@ jobs:
           AZURE_DEVOPS_ARTIFACT_TOKEN: ${{ secrets.AZURE_DEVOPS_ARTIFACT_TOKEN }}
           RELEASE_VERSION: ${{ steps.set_release_version.outputs.release_version }}
         shell: bash
+
+      - name: Comment Release Version
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "Release version for this PR is: ${{ steps.set_release_version.outputs.release_version }}"
+          gh pr comment ${{ github.event.pull_request.number }} --body "Release version for this PR is: ${{ steps.set_release_version.outputs.release_version }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
