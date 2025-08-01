@@ -25,6 +25,12 @@ repositories {
     maven { url "https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1" }
 }
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:3.4.2"
+    }
+}
+
 // region test coverage
 
 jacocoTestReport {
@@ -98,17 +104,30 @@ ext {
 // endregion
 
 dependencies {
-    api group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '4.0.3'
+    // Spring Framework dependencies (needed for Spring classes)
+    implementation 'org.springframework:spring-web'
+    implementation 'org.springframework:spring-context'
+    implementation 'org.springframework:spring-webmvc'
+
+    // AspectJ dependencies (for @Aspect annotation)
+    implementation 'org.aspectj:aspectjrt'
+    implementation 'org.aspectj:aspectjweaver'
+
+    // Jakarta Annotation API (for @PreDestroy)
+    implementation 'jakarta.annotation:jakarta.annotation-api'
+
+    api group: 'com.github.hmcts', name: 'service-auth-provider-java-client', version: '4.1.2'
     implementation group: 'uk.gov.dwp.regex', name: 'postcode-validation', version: '1.1.0'
 
     api group: 'com.microsoft.azure', name: 'azure-servicebus', version: '3.6.7'
     api group: 'org.apache.poi', name: 'poi-ooxml', version: '5.4.0'
 
-    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.17.0'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.18.0'
 
-    api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.28'
+    api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.29'
 
-    implementation group: 'com.github.hmcts', name: 'et-data-model', version: 'noc-33a1a56'
+
+    implementation group: 'com.github.hmcts', name: 'et-data-model', version: '4.2.14'
     implementation group: 'com.github.hmcts', name: 'ecm-common', version: '3.0.1'
     implementation group: 'com.github.hmcts', name: 'ecm-data-model', version: '2.0.2'
 
@@ -123,7 +142,7 @@ dependencies {
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-    implementation group: 'com.launchdarkly', name: 'launchdarkly-java-server-sdk', version: '7.9.0'
+    implementation group: 'com.launchdarkly', name: 'launchdarkly-java-server-sdk', version: '7.10.1'
 
     testImplementation(platform('org.junit:junit-bom:5.11.4'))
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: junitJupiterVersion
@@ -134,7 +153,7 @@ dependencies {
     testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.27.3'
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.16.1'
     testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.16.1'
-    testImplementation group: 'org.springframework', name: 'spring-test', version: '6.2.8'
+    testImplementation group: 'org.springframework', name: 'spring-test', version: '6.2.9'
     testImplementation group: 'pl.pragmatists', name: 'JUnitParams', version: '1.1.1'
     testCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
