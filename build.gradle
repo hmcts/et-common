@@ -110,7 +110,6 @@ dependencies {
     // AspectJ dependencies (for @Aspect annotation)
     implementation 'org.aspectj:aspectjrt'
     implementation 'org.aspectj:aspectjweaver'
-
     // Jakarta Annotation API (for @PreDestroy)
     implementation 'jakarta.annotation:jakarta.annotation-api'
 
