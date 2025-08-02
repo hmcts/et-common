@@ -125,7 +125,7 @@ dependencies {
 
     api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.29'
 
-    implementation group: 'com.github.hmcts', name: 'et-data-model', version: 'noc-33a1a56'
+    implementation group: 'com.github.hmcts', name: 'et-data-model', version: 'noc-b5b1e4e'
     implementation group: 'com.github.hmcts', name: 'ecm-common', version: '3.0.1'
     implementation group: 'com.github.hmcts', name: 'ecm-data-model', version: '2.0.2'
 
