@@ -149,8 +149,8 @@ dependencies {
     testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-commons', version: '1.11.4'
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.5.6'
     testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.27.4'
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.18.0'
-    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.18.0'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.19.0'
+    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.19.0'
     testImplementation group: 'org.springframework', name: 'spring-test', version: '6.2.10'
     testImplementation group: 'pl.pragmatists', name: 'JUnitParams', version: '1.1.1'
     testCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
