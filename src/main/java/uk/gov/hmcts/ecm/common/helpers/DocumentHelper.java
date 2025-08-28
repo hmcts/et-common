@@ -183,6 +183,8 @@ public class DocumentHelper {
                 documentType.setDocumentType(documentType.getInitialConsiderationDocuments());
             } else if (!isNullOrEmpty(documentType.getCaseManagementDocuments())) {
                 documentType.setDocumentType(documentType.getCaseManagementDocuments());
+            } else if (!isNullOrEmpty(documentType.getEccDocuments())) {
+                documentType.setDocumentType(documentType.getEccDocuments());
             } else if (!isNullOrEmpty(documentType.getWithdrawalSettledDocuments())) {
                 documentType.setDocumentType(documentType.getWithdrawalSettledDocuments());
             } else if (!isNullOrEmpty(documentType.getHearingsDocuments())) {
