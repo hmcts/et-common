@@ -160,3 +160,11 @@ dependencies {
 jar {
     enabled = true
 }
+
+tasks.register('printVersion') {
+    doLast {
+        println "Publishing version: ${project.version}"
+    }
+}
+
+publishToMavenLocal.dependsOn printVersion
