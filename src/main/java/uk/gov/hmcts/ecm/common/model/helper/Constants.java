@@ -22,6 +22,8 @@ public class Constants {
     public static final String DEFAULT_FLAGS_IMAGE_FILE_NAME = "EMP-TRIB-0000000.jpg";
     public static final String ADDRESS_LABELS_TEMPLATE = "EM-TRB-LET-ENG-00544";
     public static final int ADDRESS_LABELS_PAGE_SIZE = 14;
+    public static final String ECC_DOCUMENT_ENG_TEMPLATE = "EM-TRB-EGW-ENG-00028";
+    public static final String ECC_DOCUMENT_SCOT_TEMPLATE = "EM-TRB-SCO-ENG-00044";
 
     public static final String SERVICE_AUTHORIZATION = "ServiceAuthorization";
 

@@ -12,6 +12,7 @@ public class DocumentConstants {
     public static final String RESPONSE_TO_A_CLAIM = "Response to a Claim";
     public static final String INITIAL_CONSIDERATION = "Initial Consideration";
     public static final String CASE_MANAGEMENT = "Case Management";
+    public static final String EMPLOYER_CONTRACT_CLAIM = "Employer Contract Claim";
     public static final String WITHDRAWAL_SETTLED = "Withdrawal/Settled";
     public static final String HEARINGS = "Hearings";
     public static final String JUDGMENT_AND_REASONS = "Judgment and Reasons";
@@ -63,6 +64,9 @@ public class DocumentConstants {
                                                                                + "response";
     public static final String REFERRAL_JUDICIAL_DIRECTION = "Referral/Judicial Direction";
     public static final String CHANGE_OF_PARTYS_DETAILS = "Change of party’s details";
+    public static final String ECC_NOTICE = "Notice of Employer Contract Claim";
+    public static final String ECC_ACCEPTANCE = "Acceptance of ECC response";
+    public static final String ECC_REJECTION = "Rejection of ECC response";
     public static final String WITHDRAWAL_OF_ENTIRE_CLAIM = "Withdrawal of entire claim";
     public static final String WITHDRAWAL_OF_PART_OF_CLAIM = "Withdrawal of part of claim";
     public static final String WITHDRAWAL_OF_ALL_OR_PART_CLAIM = "Withdrawal of all or part of claim";

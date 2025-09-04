@@ -89,7 +89,11 @@ public enum DocumentCategory {
     ET3_PROCESSING("C72", "ET3 Processing", "C2"),
     CONTACT_THE_TRIBUNAL_C("C76", "Contact the tribunal about something else - C", "C4"),
     CONTACT_THE_TRIBUNAL_R("C77", "Contact the tribunal about something else - R", "C4"),
-    NEEDS_UPDATING("C79", "Needs updating", "C9");
+    NEEDS_UPDATING("C79", "Needs updating", "C9"),
+    EMPLOYMENT_CONTRACT_CLAIM("C80", "Employer Contract Claim"),
+    NOTICE_EMPLOYMENT_CONTRACT_CLAIM("C81", "Notice of Employer Contract Claim", "C80"),
+    ACCEPTANCE_EMPLOYMENT_CONTRACT_CLAIM("C82", "Acceptance of ECC response", "C80"),
+    REJECTION_EMPLOYMENT_CONTRACT_CLAIM("C83", "Rejection of ECC response", "C80");
 
     private final String id;
     private final String category;
