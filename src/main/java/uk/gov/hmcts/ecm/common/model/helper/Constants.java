@@ -249,6 +249,8 @@ public class Constants {
     public static final String HEARING_NUMBER_MISMATCH_ERROR_MESSAGE = "The hearing number provided did not match with "
         + "any of the hearing numbers contained within this case";
     public static final String DUPLICATE_JURISDICTION_CODE_ERROR_MESSAGE = "Duplicate Jurisdiction Code(s) : ";
+    public static final String ECC_JURISDICTION_CODE_REQUIRES_BOC_JURISDICTION_CODE_ERROR_MESSAGE = "ECC jurisdiction "
+        + "code can only be added if there's a corresponding BOC jurisdiction code";
     public static final String MISSING_JURISDICTION_OUTCOME_ERROR_MESSAGE = "A Jurisdiction outcome is required before "
         + "the case can be closed";
     public static final String MISSING_JUDGEMENT_JURISDICTION_MESSAGE = "This case contains a Judgment which does not "
