@@ -669,6 +669,7 @@
   "multipleRefNumber" : null,
   "caseRefECC" : null,
   "respondentECC" : null,
+  "respondentECCReply" : null,
   "ccdID" : null,
   "flagsImageFileName" : "EMP-TRIB-00000000010.jpg",
   "flagsImageAltText" : "<font color='DarkSlateBlue' size='5'> REASONABLE ADJUSTMENT </font>",
