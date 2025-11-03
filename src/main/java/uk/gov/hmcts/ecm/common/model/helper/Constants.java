@@ -22,6 +22,8 @@ public class Constants {
     public static final String DEFAULT_FLAGS_IMAGE_FILE_NAME = "EMP-TRIB-0000000.jpg";
     public static final String ADDRESS_LABELS_TEMPLATE = "EM-TRB-LET-ENG-00544";
     public static final int ADDRESS_LABELS_PAGE_SIZE = 14;
+    public static final String ECC_DOCUMENT_ENG_TEMPLATE = "EM-TRB-EGW-ENG-00028";
+    public static final String ECC_DOCUMENT_SCOT_TEMPLATE = "EM-TRB-SCO-ENG-00044";
 
     public static final String SERVICE_AUTHORIZATION = "ServiceAuthorization";
 
@@ -247,6 +249,8 @@ public class Constants {
     public static final String HEARING_NUMBER_MISMATCH_ERROR_MESSAGE = "The hearing number provided did not match with "
         + "any of the hearing numbers contained within this case";
     public static final String DUPLICATE_JURISDICTION_CODE_ERROR_MESSAGE = "Duplicate Jurisdiction Code(s) : ";
+    public static final String ECC_JURISDICTION_CODE_REQUIRES_BOC_JURISDICTION_CODE_ERROR_MESSAGE = "ECC jurisdiction "
+        + "code can only be added if there's a corresponding BOC jurisdiction code";
     public static final String MISSING_JURISDICTION_OUTCOME_ERROR_MESSAGE = "A Jurisdiction outcome is required before "
         + "the case can be closed";
     public static final String MISSING_JUDGEMENT_JURISDICTION_MESSAGE = "This case contains a Judgment which does not "
