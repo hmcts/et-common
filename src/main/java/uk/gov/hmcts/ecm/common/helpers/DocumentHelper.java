@@ -43,6 +43,10 @@ import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.COUNTER_SCH
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.C_HAS_NOT_COMPLIED_WITH_AN_ORDER_R;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.DEPOSIT_ORDER;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.DISABILITY_IMPACT_STATEMENT;
+import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.ECC_ACCEPTANCE;
+import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.ECC_NOTICE;
+import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.ECC_REJECTION;
+import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.EMPLOYER_CONTRACT_CLAIM;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.ET1;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.ET1_ATTACHMENT;
 import static uk.gov.hmcts.ecm.common.model.helper.DocumentConstants.ET1_VETTING;
@@ -106,6 +110,8 @@ public class DocumentHelper {
                     APP_TO_STRIKE_OUT_ALL_OR_PART_OF_THE_RESPONSE, REFERRAL_JUDICIAL_DIRECTION,
                     CHANGE_OF_PARTYS_DETAILS, APP_TO_VARY_OR_REVOKE_AN_ORDER_R, APP_TO_VARY_OR_REVOKE_AN_ORDER_C,
                     CONTACT_THE_TRIBUNAL_C, CONTACT_THE_TRIBUNAL_R, APP_FOR_A_WITNESS_ORDER_R -> CASE_MANAGEMENT;
+            case ECC_NOTICE, ECC_ACCEPTANCE, ECC_REJECTION
+                    -> EMPLOYER_CONTRACT_CLAIM;
             case WITHDRAWAL_OF_ENTIRE_CLAIM, WITHDRAWAL_OF_PART_OF_CLAIM, COT3, WITHDRAWAL_OF_ALL_OR_PART_CLAIM
                     -> WITHDRAWAL_SETTLED;
             case APP_TO_RESTRICT_PUBLICITY_C, APP_TO_RESTRICT_PUBLICITY_R, ANONYMITY_ORDER, NOTICE_OF_HEARING,
@@ -143,6 +149,8 @@ public class DocumentHelper {
                     CHANGE_OF_PARTYS_DETAILS, APP_TO_VARY_OR_REVOKE_AN_ORDER_R, APP_TO_VARY_OR_REVOKE_AN_ORDER_C,
                     CONTACT_THE_TRIBUNAL_C, CONTACT_THE_TRIBUNAL_R, APP_FOR_A_WITNESS_ORDER_R
                     -> documentType.setCaseManagementDocuments(typeOfDocument);
+            case ECC_NOTICE, ECC_ACCEPTANCE, ECC_REJECTION
+                    -> documentType.setEccDocuments(typeOfDocument);
             case WITHDRAWAL_OF_ENTIRE_CLAIM, WITHDRAWAL_OF_PART_OF_CLAIM, COT3, WITHDRAWAL_OF_ALL_OR_PART_CLAIM
                     -> documentType.setWithdrawalSettledDocuments(typeOfDocument);
             case APP_TO_RESTRICT_PUBLICITY_C, APP_TO_RESTRICT_PUBLICITY_R, ANONYMITY_ORDER, NOTICE_OF_HEARING,
@@ -175,6 +183,8 @@ public class DocumentHelper {
                 documentType.setDocumentType(documentType.getInitialConsiderationDocuments());
             } else if (!isNullOrEmpty(documentType.getCaseManagementDocuments())) {
                 documentType.setDocumentType(documentType.getCaseManagementDocuments());
+            } else if (!isNullOrEmpty(documentType.getEccDocuments())) {
+                documentType.setDocumentType(documentType.getEccDocuments());
             } else if (!isNullOrEmpty(documentType.getWithdrawalSettledDocuments())) {
                 documentType.setDocumentType(documentType.getWithdrawalSettledDocuments());
             } else if (!isNullOrEmpty(documentType.getHearingsDocuments())) {
