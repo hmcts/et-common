@@ -84,18 +84,15 @@ public class PdfService {
                     pdfEntriesMap = this.et1PdfMapperService.mapHeadersToPdf(caseData).entrySet();
                 }
                 if (PDF_TYPE_ET3.equals(pdfType)) {
-                    Map<String, Optional<String>> pdfMap;
                     try {
-                        pdfMap = ET3FormMapper.mapEt3Form(caseData, event, clientType);
+                        pdfEntriesMap = ET3FormMapper.mapEt3Form(caseData, event, clientType).entrySet();
                     } catch (GenericServiceException e) {
                         GenericServiceUtil.logException(UNABLE_TO_MAP_RESPONDENT_TO_ET3_FORM,
                                 caseData.getEthosCaseReference(),
                                 UNABLE_TO_MAP_RESPONDENT_TO_ET3_FORM,
                                 "PdfService",
                                 "createPdf");
-                        throw new PdfServiceException("Failed to convert to PDF", e);
                     }
-                    pdfEntriesMap = pdfMap.entrySet();
                 }
                 if (pdfEntriesMap == null) {
                     GenericServiceUtil.logException(UNABLE_TO_MAP_RESPONDENT_TO_ET3_FORM,
