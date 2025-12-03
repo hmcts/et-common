@@ -123,7 +123,7 @@ dependencies {
 
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.18.0'
 
-    api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.29'w
+    api group: 'org.elasticsearch', name: 'elasticsearch', version: '7.17.29'
 
     implementation group: 'com.github.hmcts', name: 'et-data-model', version: 'RET-6074-cfafb9f'
     implementation group: 'com.github.hmcts', name: 'ecm-common', version: '3.0.1'
