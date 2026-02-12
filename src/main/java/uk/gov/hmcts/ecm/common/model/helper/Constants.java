@@ -163,6 +163,7 @@ public class Constants {
 
     public static final String HEARING_TYPE_JUDICIAL_COSTS_HEARING = "Costs Hearing";
     public static final String HEARING_TYPE_JUDICIAL_HEARING = "Hearing";
+    public static final String HEARING_TYPE_FINAL_HEARING = "Final Hearing";
     public static final String HEARING_TYPE_JUDICIAL_MEDIATION = "Judicial Mediation";
     public static final String HEARING_TYPE_JUDICIAL_MEDIATION_TCC = "Judicial Mediation - TCC";
     public static final String HEARING_TYPE_PERLIMINARY_HEARING = "Preliminary Hearing";
